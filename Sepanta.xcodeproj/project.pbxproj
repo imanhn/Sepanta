@@ -1,0 +1,589 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9A8220355F000C868C3 /* AppDelegate.swift */; };
+		0FE8B9AB220355F000C868C3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9AA220355F000C868C3 /* ViewController.swift */; };
+		0FE8B9AE220355F000C868C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9AC220355F000C868C3 /* Main.storyboard */; };
+		0FE8B9B0220355F100C868C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9AF220355F100C868C3 /* Assets.xcassets */; };
+		0FE8B9B3220355F100C868C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9B1220355F100C868C3 /* LaunchScreen.storyboard */; };
+		0FE8B9BE220355F200C868C3 /* SepantaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9BD220355F200C868C3 /* SepantaTests.swift */; };
+		0FE8B9C9220355F200C868C3 /* SepantaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9C8220355F200C868C3 /* SepantaUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0FE8B9BA220355F200C868C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0FE8B99D220355F000C868C3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0FE8B9A4220355F000C868C3;
+			remoteInfo = Sepanta;
+		};
+		0FE8B9C5220355F200C868C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0FE8B99D220355F000C868C3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0FE8B9A4220355F000C868C3;
+			remoteInfo = Sepanta;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0FE8B9A5220355F000C868C3 /* Sepanta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sepanta.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FE8B9A8220355F000C868C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0FE8B9AA220355F000C868C3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0FE8B9AD220355F000C868C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0FE8B9AF220355F100C868C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0FE8B9B2220355F100C868C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0FE8B9B4220355F100C868C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0FE8B9B9220355F200C868C3 /* SepantaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SepantaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FE8B9BD220355F200C868C3 /* SepantaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaTests.swift; sourceTree = "<group>"; };
+		0FE8B9BF220355F200C868C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0FE8B9C4220355F200C868C3 /* SepantaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SepantaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FE8B9C8220355F200C868C3 /* SepantaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaUITests.swift; sourceTree = "<group>"; };
+		0FE8B9CA220355F200C868C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0FE8B9A2220355F000C868C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0FE8B9B6220355F200C868C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0FE8B9C1220355F200C868C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0FE8B99C220355F000C868C3 = {
+			isa = PBXGroup;
+			children = (
+				0FE8B9A7220355F000C868C3 /* Sepanta */,
+				0FE8B9BC220355F200C868C3 /* SepantaTests */,
+				0FE8B9C7220355F200C868C3 /* SepantaUITests */,
+				0FE8B9A6220355F000C868C3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0FE8B9A6220355F000C868C3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0FE8B9A5220355F000C868C3 /* Sepanta.app */,
+				0FE8B9B9220355F200C868C3 /* SepantaTests.xctest */,
+				0FE8B9C4220355F200C868C3 /* SepantaUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0FE8B9A7220355F000C868C3 /* Sepanta */ = {
+			isa = PBXGroup;
+			children = (
+				0FE8B9A8220355F000C868C3 /* AppDelegate.swift */,
+				0FE8B9AA220355F000C868C3 /* ViewController.swift */,
+				0FE8B9AC220355F000C868C3 /* Main.storyboard */,
+				0FE8B9AF220355F100C868C3 /* Assets.xcassets */,
+				0FE8B9B1220355F100C868C3 /* LaunchScreen.storyboard */,
+				0FE8B9B4220355F100C868C3 /* Info.plist */,
+			);
+			path = Sepanta;
+			sourceTree = "<group>";
+		};
+		0FE8B9BC220355F200C868C3 /* SepantaTests */ = {
+			isa = PBXGroup;
+			children = (
+				0FE8B9BD220355F200C868C3 /* SepantaTests.swift */,
+				0FE8B9BF220355F200C868C3 /* Info.plist */,
+			);
+			path = SepantaTests;
+			sourceTree = "<group>";
+		};
+		0FE8B9C7220355F200C868C3 /* SepantaUITests */ = {
+			isa = PBXGroup;
+			children = (
+				0FE8B9C8220355F200C868C3 /* SepantaUITests.swift */,
+				0FE8B9CA220355F200C868C3 /* Info.plist */,
+			);
+			path = SepantaUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0FE8B9A4220355F000C868C3 /* Sepanta */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0FE8B9CD220355F200C868C3 /* Build configuration list for PBXNativeTarget "Sepanta" */;
+			buildPhases = (
+				0FE8B9A1220355F000C868C3 /* Sources */,
+				0FE8B9A2220355F000C868C3 /* Frameworks */,
+				0FE8B9A3220355F000C868C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Sepanta;
+			productName = Sepanta;
+			productReference = 0FE8B9A5220355F000C868C3 /* Sepanta.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0FE8B9B8220355F200C868C3 /* SepantaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0FE8B9D0220355F200C868C3 /* Build configuration list for PBXNativeTarget "SepantaTests" */;
+			buildPhases = (
+				0FE8B9B5220355F200C868C3 /* Sources */,
+				0FE8B9B6220355F200C868C3 /* Frameworks */,
+				0FE8B9B7220355F200C868C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0FE8B9BB220355F200C868C3 /* PBXTargetDependency */,
+			);
+			name = SepantaTests;
+			productName = SepantaTests;
+			productReference = 0FE8B9B9220355F200C868C3 /* SepantaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		0FE8B9C3220355F200C868C3 /* SepantaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0FE8B9D3220355F200C868C3 /* Build configuration list for PBXNativeTarget "SepantaUITests" */;
+			buildPhases = (
+				0FE8B9C0220355F200C868C3 /* Sources */,
+				0FE8B9C1220355F200C868C3 /* Frameworks */,
+				0FE8B9C2220355F200C868C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0FE8B9C6220355F200C868C3 /* PBXTargetDependency */,
+			);
+			name = SepantaUITests;
+			productName = SepantaUITests;
+			productReference = 0FE8B9C4220355F200C868C3 /* SepantaUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0FE8B99D220355F000C868C3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = Imzich;
+				TargetAttributes = {
+					0FE8B9A4220355F000C868C3 = {
+						CreatedOnToolsVersion = 9.3;
+					};
+					0FE8B9B8220355F200C868C3 = {
+						CreatedOnToolsVersion = 9.3;
+						TestTargetID = 0FE8B9A4220355F000C868C3;
+					};
+					0FE8B9C3220355F200C868C3 = {
+						CreatedOnToolsVersion = 9.3;
+						TestTargetID = 0FE8B9A4220355F000C868C3;
+					};
+				};
+			};
+			buildConfigurationList = 0FE8B9A0220355F000C868C3 /* Build configuration list for PBXProject "Sepanta" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0FE8B99C220355F000C868C3;
+			productRefGroup = 0FE8B9A6220355F000C868C3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0FE8B9A4220355F000C868C3 /* Sepanta */,
+				0FE8B9B8220355F200C868C3 /* SepantaTests */,
+				0FE8B9C3220355F200C868C3 /* SepantaUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0FE8B9A3220355F000C868C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FE8B9B3220355F100C868C3 /* LaunchScreen.storyboard in Resources */,
+				0FE8B9B0220355F100C868C3 /* Assets.xcassets in Resources */,
+				0FE8B9AE220355F000C868C3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0FE8B9B7220355F200C868C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0FE8B9C2220355F200C868C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0FE8B9A1220355F000C868C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FE8B9AB220355F000C868C3 /* ViewController.swift in Sources */,
+				0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0FE8B9B5220355F200C868C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FE8B9BE220355F200C868C3 /* SepantaTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0FE8B9C0220355F200C868C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FE8B9C9220355F200C868C3 /* SepantaUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0FE8B9BB220355F200C868C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0FE8B9A4220355F000C868C3 /* Sepanta */;
+			targetProxy = 0FE8B9BA220355F200C868C3 /* PBXContainerItemProxy */;
+		};
+		0FE8B9C6220355F200C868C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0FE8B9A4220355F000C868C3 /* Sepanta */;
+			targetProxy = 0FE8B9C5220355F200C868C3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0FE8B9AC220355F000C868C3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0FE8B9AD220355F000C868C3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0FE8B9B1220355F100C868C3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0FE8B9B2220355F100C868C3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0FE8B9CB220355F200C868C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0FE8B9CC220355F200C868C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0FE8B9CE220355F200C868C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3UL3Q223ZG;
+				INFOPLIST_FILE = Sepanta/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Imzich.Sepanta;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0FE8B9CF220355F200C868C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3UL3Q223ZG;
+				INFOPLIST_FILE = Sepanta/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Imzich.Sepanta;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0FE8B9D1220355F200C868C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3UL3Q223ZG;
+				INFOPLIST_FILE = SepantaTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Imzich.SepantaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sepanta.app/Sepanta";
+			};
+			name = Debug;
+		};
+		0FE8B9D2220355F200C868C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3UL3Q223ZG;
+				INFOPLIST_FILE = SepantaTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Imzich.SepantaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sepanta.app/Sepanta";
+			};
+			name = Release;
+		};
+		0FE8B9D4220355F200C868C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3UL3Q223ZG;
+				INFOPLIST_FILE = SepantaUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Imzich.SepantaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Sepanta;
+			};
+			name = Debug;
+		};
+		0FE8B9D5220355F200C868C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3UL3Q223ZG;
+				INFOPLIST_FILE = SepantaUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Imzich.SepantaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Sepanta;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0FE8B9A0220355F000C868C3 /* Build configuration list for PBXProject "Sepanta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0FE8B9CB220355F200C868C3 /* Debug */,
+				0FE8B9CC220355F200C868C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0FE8B9CD220355F200C868C3 /* Build configuration list for PBXNativeTarget "Sepanta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0FE8B9CE220355F200C868C3 /* Debug */,
+				0FE8B9CF220355F200C868C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0FE8B9D0220355F200C868C3 /* Build configuration list for PBXNativeTarget "SepantaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0FE8B9D1220355F200C868C3 /* Debug */,
+				0FE8B9D2220355F200C868C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0FE8B9D3220355F200C868C3 /* Build configuration list for PBXNativeTarget "SepantaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0FE8B9D4220355F200C868C3 /* Debug */,
+				0FE8B9D5220355F200C868C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0FE8B99D220355F000C868C3 /* Project object */;
+}
