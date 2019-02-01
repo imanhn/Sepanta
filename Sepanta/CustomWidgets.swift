@@ -9,6 +9,18 @@
 import Foundation
 import UIKit
 
+class UnderLinedTextField: UITextField {
+    override func draw(_ rect: CGRect) {
+        print("rect : ",rect)
+        let context = UIGraphicsGetCurrentContext()
+        context?.setLineWidth(2.0)
+        context?.setStrokeColor((UIColor( red: 0.84,     green: 0.84, blue:0.84, alpha: 1.0 )).cgColor)
+        context?.move(to: CGPoint(x: 20, y: self.bounds.height))
+        context?.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height))
+        context?.drawPath(using: CGPathDrawingMode.stroke)
+    }
+}
+
 class TabbedButton: UIButton {
     var curvSize : CGFloat = 10;
     override func draw(_ rect: CGRect) {

@@ -15,13 +15,16 @@
         <array key="BKoodakBold_1956931111.ttf">
             <string>BKoodakBold</string>
         </array>
+        <array key="BYekan_3295791680.ttf">
+            <string>BYekan</string>
+        </array>
     </customFonts>
     <scenes>
         <!--LoginViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" userLabel="LoginViewController" customClass="LoginViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" id="8bC-Xf-vdC" userLabel="PageView" customClass="PageView">
+                    <view key="view" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" id="8bC-Xf-vdC" userLabel="PageView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>
@@ -73,15 +76,31 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kec-hf-ANp" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="133" width="300" height="40"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_mobile_gray" translatesAutoresizingMaskIntoConstraints="NO" id="3dy-XG-y5x" userLabel="MobileIcon">
+                                        <rect key="frame" x="274" y="136.5" width="16" height="32"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="3dy-XG-y5x" firstAttribute="leading" secondItem="kec-hf-ANp" secondAttribute="leading" constant="10" id="3GC-tF-eXH"/>
+                                    <constraint firstItem="3dy-XG-y5x" firstAttribute="centerY" secondItem="kec-hf-ANp" secondAttribute="centerY" id="78k-LS-J2B"/>
+                                    <constraint firstItem="kec-hf-ANp" firstAttribute="height" secondItem="8gH-oj-d9h" secondAttribute="height" multiplier="0.6" id="FTB-s7-5r7"/>
                                     <constraint firstItem="8gH-oj-d9h" firstAttribute="leading" secondItem="DNk-ZY-hOZ" secondAttribute="leading" id="Gl9-zu-yfF"/>
                                     <constraint firstAttribute="trailing" secondItem="iVP-EF-w4S" secondAttribute="trailing" id="HMY-1X-zv4"/>
                                     <constraint firstItem="8gH-oj-d9h" firstAttribute="height" secondItem="DNk-ZY-hOZ" secondAttribute="height" multiplier="0.2" id="Hl2-qV-0yZ"/>
+                                    <constraint firstItem="kec-hf-ANp" firstAttribute="centerX" secondItem="DNk-ZY-hOZ" secondAttribute="centerX" id="LYm-3B-SEh"/>
                                     <constraint firstItem="iVP-EF-w4S" firstAttribute="top" secondItem="DNk-ZY-hOZ" secondAttribute="top" id="UTN-S8-Gcg"/>
                                     <constraint firstItem="8gH-oj-d9h" firstAttribute="top" secondItem="DNk-ZY-hOZ" secondAttribute="top" id="XCe-4w-tVb"/>
+                                    <constraint firstItem="3dy-XG-y5x" firstAttribute="height" secondItem="kec-hf-ANp" secondAttribute="height" multiplier="0.8" id="YHC-GW-h6l"/>
                                     <constraint firstItem="8gH-oj-d9h" firstAttribute="width" secondItem="DNk-ZY-hOZ" secondAttribute="width" multiplier="0.5" id="dZ7-kn-euh"/>
+                                    <constraint firstItem="kec-hf-ANp" firstAttribute="width" secondItem="DNk-ZY-hOZ" secondAttribute="width" id="faR-B2-jxb"/>
+                                    <constraint firstItem="kec-hf-ANp" firstAttribute="top" secondItem="8gH-oj-d9h" secondAttribute="bottom" multiplier="2" id="fnr-vG-xaL"/>
                                     <constraint firstItem="iVP-EF-w4S" firstAttribute="height" secondItem="8gH-oj-d9h" secondAttribute="height" id="hGn-KM-VaD"/>
                                     <constraint firstItem="iVP-EF-w4S" firstAttribute="width" secondItem="8gH-oj-d9h" secondAttribute="width" id="luW-JD-25X"/>
                                 </constraints>
@@ -106,6 +125,7 @@
                     <connections>
                         <outlet property="EnterButton" destination="8gH-oj-d9h" id="gO3-Ye-bE9"/>
                         <outlet property="LoginPanelView" destination="DNk-ZY-hOZ" id="Xib-Gr-Rzl"/>
+                        <outlet property="MobileTextField" destination="kec-hf-ANp" id="aVq-uO-4Ce"/>
                         <outlet property="PageView" destination="8bC-Xf-vdC" id="qbK-Tr-ns8"/>
                         <outlet property="SignupButton" destination="iVP-EF-w4S" id="ZlS-hy-HKk"/>
                     </connections>
@@ -118,6 +138,7 @@
     <resources>
         <image name="icon_edit" width="18" height="16"/>
         <image name="icon_login" width="20" height="20"/>
+        <image name="icon_mobile_gray" width="16" height="26"/>
         <image name="logo_all_login" width="157" height="64"/>
     </resources>
 </document>

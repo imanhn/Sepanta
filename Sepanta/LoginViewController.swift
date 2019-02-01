@@ -13,13 +13,12 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var LoginPanelView: TabbedView!
     @IBOutlet weak var SignupButton: TabbedButton!
     @IBOutlet weak var EnterButton: UIButton!
-    func initCurves() {
-//        let maskView = UIView(frame: CGRect(x: 0, y: 0, width: LoginPanelView.bounds.width/2, height: LoginPanelView.bounds.height/3))
-    }
+    @IBOutlet weak var MobileTextField: UnderLinedTextField!
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.initCurves()
+
         // Do any additional setup after loading the view, tßypically from a nib.
     }
 
