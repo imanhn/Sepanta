@@ -1,24 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="BKoodakBold_1956931111.ttf">
+            <string>BKoodakBold</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--LoginViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController id="BYZ-38-t0r" userLabel="LoginViewController" customClass="LoginViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" id="8bC-Xf-vdC" userLabel="PageView" customClass="PageView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBv-Rq-9Kc" userLabel="LogoView">
+                                <rect key="frame" x="-1" y="120" width="375" height="133.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_all_login" translatesAutoresizingMaskIntoConstraints="NO" id="jYh-vn-AWc">
+                                        <rect key="frame" x="41.5" y="13.5" width="293" height="107"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="jYh-vn-AWc" secondAttribute="height" multiplier="175:64" id="sN4-PV-Ial"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="jYh-vn-AWc" firstAttribute="centerX" secondItem="qBv-Rq-9Kc" secondAttribute="centerX" id="7r6-Mm-kXk"/>
+                                    <constraint firstItem="jYh-vn-AWc" firstAttribute="centerY" secondItem="qBv-Rq-9Kc" secondAttribute="centerY" id="MRo-ol-jGq"/>
+                                    <constraint firstItem="jYh-vn-AWc" firstAttribute="height" secondItem="qBv-Rq-9Kc" secondAttribute="height" multiplier="0.8" id="MzD-9Z-HgN"/>
+                                </constraints>
+                            </view>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" translatesAutoresizingMaskIntoConstraints="NO" id="DNk-ZY-hOZ" userLabel="LoginPanelView" customClass="TabbedView" customModule="Sepanta" customModuleProvider="target">
+                                <rect key="frame" x="37.5" y="303.5" width="300" height="333.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8gH-oj-d9h" userLabel="Enter">
+                                        <rect key="frame" x="150" y="0.0" width="150" height="66.5"/>
+                                        <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="20"/>
+                                        <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="ورود" image="icon_login">
+                                            <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iVP-EF-w4S" userLabel="Signup" customClass="TabbedButton" customModule="Sepanta" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="0.0" width="134" height="64"/>
+                                        <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="20"/>
+                                        <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="ثبت نام" image="icon_edit">
+                                            <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                <color key="value" red="0.84004039119999996" green="0.20921024659863946" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="8gH-oj-d9h" firstAttribute="leading" secondItem="DNk-ZY-hOZ" secondAttribute="leading" id="Gl9-zu-yfF"/>
+                                    <constraint firstAttribute="trailing" secondItem="iVP-EF-w4S" secondAttribute="trailing" id="HMY-1X-zv4"/>
+                                    <constraint firstItem="8gH-oj-d9h" firstAttribute="height" secondItem="DNk-ZY-hOZ" secondAttribute="height" multiplier="0.2" id="Hl2-qV-0yZ"/>
+                                    <constraint firstItem="iVP-EF-w4S" firstAttribute="top" secondItem="DNk-ZY-hOZ" secondAttribute="top" id="UTN-S8-Gcg"/>
+                                    <constraint firstItem="8gH-oj-d9h" firstAttribute="top" secondItem="DNk-ZY-hOZ" secondAttribute="top" id="XCe-4w-tVb"/>
+                                    <constraint firstItem="8gH-oj-d9h" firstAttribute="width" secondItem="DNk-ZY-hOZ" secondAttribute="width" multiplier="0.5" id="dZ7-kn-euh"/>
+                                    <constraint firstItem="iVP-EF-w4S" firstAttribute="height" secondItem="8gH-oj-d9h" secondAttribute="height" id="hGn-KM-VaD"/>
+                                    <constraint firstItem="iVP-EF-w4S" firstAttribute="width" secondItem="8gH-oj-d9h" secondAttribute="width" id="luW-JD-25X"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="DNk-ZY-hOZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3Ac-du-54q"/>
+                            <constraint firstItem="DNk-ZY-hOZ" firstAttribute="top" secondItem="qBv-Rq-9Kc" secondAttribute="bottom" constant="50" id="5AU-P1-tqn"/>
+                            <constraint firstItem="qBv-Rq-9Kc" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.2" id="5ML-9d-Tdx"/>
+                            <constraint firstItem="DNk-ZY-hOZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BYU-5F-VqL"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="qBv-Rq-9Kc" secondAttribute="top" constant="-100" id="RRf-b7-EIQ"/>
+                            <constraint firstItem="DNk-ZY-hOZ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" id="SB5-u3-CmM"/>
+                            <constraint firstItem="qBv-Rq-9Kc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-1" id="Zfb-bx-wC0"/>
+                            <constraint firstItem="DNk-ZY-hOZ" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="mis-gh-hCA"/>
+                            <constraint firstItem="qBv-Rq-9Kc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-1" id="nUY-c6-sXl"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="EnterButton" destination="8gH-oj-d9h" id="gO3-Ye-bE9"/>
+                        <outlet property="LoginPanelView" destination="DNk-ZY-hOZ" id="Xib-Gr-Rzl"/>
+                        <outlet property="PageView" destination="8bC-Xf-vdC" id="qbK-Tr-ns8"/>
+                        <outlet property="SignupButton" destination="iVP-EF-w4S" id="ZlS-hy-HKk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="33.733133433283363"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_edit" width="18" height="16"/>
+        <image name="icon_login" width="20" height="20"/>
+        <image name="logo_all_login" width="157" height="64"/>
+    </resources>
 </document>

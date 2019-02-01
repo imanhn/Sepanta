@@ -8,12 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9A8220355F000C868C3 /* AppDelegate.swift */; };
-		0FE8B9AB220355F000C868C3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9AA220355F000C868C3 /* ViewController.swift */; };
+		0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9AA220355F000C868C3 /* LoginViewController.swift */; };
 		0FE8B9AE220355F000C868C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9AC220355F000C868C3 /* Main.storyboard */; };
 		0FE8B9B0220355F100C868C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9AF220355F100C868C3 /* Assets.xcassets */; };
 		0FE8B9B3220355F100C868C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9B1220355F100C868C3 /* LaunchScreen.storyboard */; };
 		0FE8B9BE220355F200C868C3 /* SepantaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9BD220355F200C868C3 /* SepantaTests.swift */; };
 		0FE8B9C9220355F200C868C3 /* SepantaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9C8220355F200C868C3 /* SepantaUITests.swift */; };
+		0FE8B9EE2203BCC000C868C3 /* BArshia_2770251553.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9DB2203BCBD00C868C3 /* BArshia_2770251553.ttf */; };
+		0FE8B9EF2203BCC000C868C3 /* BRoyaBold_3595828071.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9DC2203BCBE00C868C3 /* BRoyaBold_3595828071.ttf */; };
+		0FE8B9F02203BCC000C868C3 /* IranNastaliq_23990227.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9DD2203BCBE00C868C3 /* IranNastaliq_23990227.ttf */; };
+		0FE8B9F12203BCC000C868C3 /* BTanin_2726705346.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9DE2203BCBE00C868C3 /* BTanin_2726705346.ttf */; };
+		0FE8B9F22203BCC000C868C3 /* BNazaninBold_3646201758.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9DF2203BCBE00C868C3 /* BNazaninBold_3646201758.ttf */; };
+		0FE8B9F32203BCC000C868C3 /* BTrafficBold_4126700430.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E02203BCBE00C868C3 /* BTrafficBold_4126700430.ttf */; };
+		0FE8B9F42203BCC000C868C3 /* BHoma_638648140.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E12203BCBE00C868C3 /* BHoma_638648140.ttf */; };
+		0FE8B9F52203BCC000C868C3 /* BKoodakBold_1956931111.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E22203BCBF00C868C3 /* BKoodakBold_1956931111.ttf */; };
+		0FE8B9F62203BCC000C868C3 /* BYekan_3295791680.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E32203BCBF00C868C3 /* BYekan_3295791680.ttf */; };
+		0FE8B9F72203BCC000C868C3 /* BMitra_2340326021.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E42203BCBF00C868C3 /* BMitra_2340326021.ttf */; };
+		0FE8B9F82203BCC000C868C3 /* BYagutBold_1027807191.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E52203BCBF00C868C3 /* BYagutBold_1027807191.ttf */; };
+		0FE8B9F92203BCC000C868C3 /* BMitraBold_2046406346.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E62203BCBF00C868C3 /* BMitraBold_2046406346.ttf */; };
+		0FE8B9FA2203BCC000C868C3 /* BRoya_1945398306.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E72203BCBF00C868C3 /* BRoya_1945398306.ttf */; };
+		0FE8B9FB2203BCC000C868C3 /* BTitrBold_3196199023.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E82203BCBF00C868C3 /* BTitrBold_3196199023.ttf */; };
+		0FE8B9FC2203BCC000C868C3 /* BMehrBold_1898999128.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E92203BCBF00C868C3 /* BMehrBold_1898999128.ttf */; };
+		0FE8B9FD2203BCC000C868C3 /* BTraffic_1505769225.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9EA2203BCC000C868C3 /* BTraffic_1505769225.ttf */; };
+		0FE8B9FE2203BCC000C868C3 /* BNarm_3969145717.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9EB2203BCC000C868C3 /* BNarm_3969145717.ttf */; };
+		0FE8B9FF2203BCC000C868C3 /* BElham_561726703.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9EC2203BCC000C868C3 /* BElham_561726703.ttf */; };
+		0FE8BA002203BCC000C868C3 /* BYagut_3160526546.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9ED2203BCC000C868C3 /* BYagut_3160526546.ttf */; };
+		0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +56,7 @@
 /* Begin PBXFileReference section */
 		0FE8B9A5220355F000C868C3 /* Sepanta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sepanta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FE8B9A8220355F000C868C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0FE8B9AA220355F000C868C3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0FE8B9AA220355F000C868C3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0FE8B9AD220355F000C868C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0FE8B9AF220355F100C868C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0FE8B9B2220355F100C868C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +67,26 @@
 		0FE8B9C4220355F200C868C3 /* SepantaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SepantaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FE8B9C8220355F200C868C3 /* SepantaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaUITests.swift; sourceTree = "<group>"; };
 		0FE8B9CA220355F200C868C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0FE8B9DB2203BCBD00C868C3 /* BArshia_2770251553.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BArshia_2770251553.ttf; sourceTree = "<group>"; };
+		0FE8B9DC2203BCBE00C868C3 /* BRoyaBold_3595828071.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BRoyaBold_3595828071.ttf; sourceTree = "<group>"; };
+		0FE8B9DD2203BCBE00C868C3 /* IranNastaliq_23990227.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IranNastaliq_23990227.ttf; sourceTree = "<group>"; };
+		0FE8B9DE2203BCBE00C868C3 /* BTanin_2726705346.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BTanin_2726705346.ttf; sourceTree = "<group>"; };
+		0FE8B9DF2203BCBE00C868C3 /* BNazaninBold_3646201758.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BNazaninBold_3646201758.ttf; sourceTree = "<group>"; };
+		0FE8B9E02203BCBE00C868C3 /* BTrafficBold_4126700430.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BTrafficBold_4126700430.ttf; sourceTree = "<group>"; };
+		0FE8B9E12203BCBE00C868C3 /* BHoma_638648140.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BHoma_638648140.ttf; sourceTree = "<group>"; };
+		0FE8B9E22203BCBF00C868C3 /* BKoodakBold_1956931111.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BKoodakBold_1956931111.ttf; sourceTree = "<group>"; };
+		0FE8B9E32203BCBF00C868C3 /* BYekan_3295791680.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BYekan_3295791680.ttf; sourceTree = "<group>"; };
+		0FE8B9E42203BCBF00C868C3 /* BMitra_2340326021.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMitra_2340326021.ttf; sourceTree = "<group>"; };
+		0FE8B9E52203BCBF00C868C3 /* BYagutBold_1027807191.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BYagutBold_1027807191.ttf; sourceTree = "<group>"; };
+		0FE8B9E62203BCBF00C868C3 /* BMitraBold_2046406346.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMitraBold_2046406346.ttf; sourceTree = "<group>"; };
+		0FE8B9E72203BCBF00C868C3 /* BRoya_1945398306.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BRoya_1945398306.ttf; sourceTree = "<group>"; };
+		0FE8B9E82203BCBF00C868C3 /* BTitrBold_3196199023.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BTitrBold_3196199023.ttf; sourceTree = "<group>"; };
+		0FE8B9E92203BCBF00C868C3 /* BMehrBold_1898999128.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMehrBold_1898999128.ttf; sourceTree = "<group>"; };
+		0FE8B9EA2203BCC000C868C3 /* BTraffic_1505769225.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BTraffic_1505769225.ttf; sourceTree = "<group>"; };
+		0FE8B9EB2203BCC000C868C3 /* BNarm_3969145717.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BNarm_3969145717.ttf; sourceTree = "<group>"; };
+		0FE8B9EC2203BCC000C868C3 /* BElham_561726703.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BElham_561726703.ttf; sourceTree = "<group>"; };
+		0FE8B9ED2203BCC000C868C3 /* BYagut_3160526546.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BYagut_3160526546.ttf; sourceTree = "<group>"; };
+		0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWidgets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,9 +137,11 @@
 		0FE8B9A7220355F000C868C3 /* Sepanta */ = {
 			isa = PBXGroup;
 			children = (
+				0FE8B9DA2203BCAA00C868C3 /* Fonts */,
 				0FE8B9A8220355F000C868C3 /* AppDelegate.swift */,
-				0FE8B9AA220355F000C868C3 /* ViewController.swift */,
+				0FE8B9AA220355F000C868C3 /* LoginViewController.swift */,
 				0FE8B9AC220355F000C868C3 /* Main.storyboard */,
+				0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */,
 				0FE8B9AF220355F100C868C3 /* Assets.xcassets */,
 				0FE8B9B1220355F100C868C3 /* LaunchScreen.storyboard */,
 				0FE8B9B4220355F100C868C3 /* Info.plist */,
@@ -123,6 +165,32 @@
 				0FE8B9CA220355F200C868C3 /* Info.plist */,
 			);
 			path = SepantaUITests;
+			sourceTree = "<group>";
+		};
+		0FE8B9DA2203BCAA00C868C3 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0FE8B9DB2203BCBD00C868C3 /* BArshia_2770251553.ttf */,
+				0FE8B9EC2203BCC000C868C3 /* BElham_561726703.ttf */,
+				0FE8B9E12203BCBE00C868C3 /* BHoma_638648140.ttf */,
+				0FE8B9E22203BCBF00C868C3 /* BKoodakBold_1956931111.ttf */,
+				0FE8B9E92203BCBF00C868C3 /* BMehrBold_1898999128.ttf */,
+				0FE8B9E42203BCBF00C868C3 /* BMitra_2340326021.ttf */,
+				0FE8B9E62203BCBF00C868C3 /* BMitraBold_2046406346.ttf */,
+				0FE8B9EB2203BCC000C868C3 /* BNarm_3969145717.ttf */,
+				0FE8B9DF2203BCBE00C868C3 /* BNazaninBold_3646201758.ttf */,
+				0FE8B9E72203BCBF00C868C3 /* BRoya_1945398306.ttf */,
+				0FE8B9DC2203BCBE00C868C3 /* BRoyaBold_3595828071.ttf */,
+				0FE8B9DE2203BCBE00C868C3 /* BTanin_2726705346.ttf */,
+				0FE8B9E82203BCBF00C868C3 /* BTitrBold_3196199023.ttf */,
+				0FE8B9EA2203BCC000C868C3 /* BTraffic_1505769225.ttf */,
+				0FE8B9E02203BCBE00C868C3 /* BTrafficBold_4126700430.ttf */,
+				0FE8B9ED2203BCC000C868C3 /* BYagut_3160526546.ttf */,
+				0FE8B9E52203BCBF00C868C3 /* BYagutBold_1027807191.ttf */,
+				0FE8B9E32203BCBF00C868C3 /* BYekan_3295791680.ttf */,
+				0FE8B9DD2203BCBE00C868C3 /* IranNastaliq_23990227.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,8 +298,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FE8B9B3220355F100C868C3 /* LaunchScreen.storyboard in Resources */,
+				0FE8B9EF2203BCC000C868C3 /* BRoyaBold_3595828071.ttf in Resources */,
+				0FE8B9F52203BCC000C868C3 /* BKoodakBold_1956931111.ttf in Resources */,
+				0FE8B9F42203BCC000C868C3 /* BHoma_638648140.ttf in Resources */,
+				0FE8B9FE2203BCC000C868C3 /* BNarm_3969145717.ttf in Resources */,
 				0FE8B9B0220355F100C868C3 /* Assets.xcassets in Resources */,
+				0FE8B9FA2203BCC000C868C3 /* BRoya_1945398306.ttf in Resources */,
+				0FE8B9F32203BCC000C868C3 /* BTrafficBold_4126700430.ttf in Resources */,
 				0FE8B9AE220355F000C868C3 /* Main.storyboard in Resources */,
+				0FE8BA002203BCC000C868C3 /* BYagut_3160526546.ttf in Resources */,
+				0FE8B9FF2203BCC000C868C3 /* BElham_561726703.ttf in Resources */,
+				0FE8B9F92203BCC000C868C3 /* BMitraBold_2046406346.ttf in Resources */,
+				0FE8B9EE2203BCC000C868C3 /* BArshia_2770251553.ttf in Resources */,
+				0FE8B9F62203BCC000C868C3 /* BYekan_3295791680.ttf in Resources */,
+				0FE8B9F82203BCC000C868C3 /* BYagutBold_1027807191.ttf in Resources */,
+				0FE8B9FB2203BCC000C868C3 /* BTitrBold_3196199023.ttf in Resources */,
+				0FE8B9FD2203BCC000C868C3 /* BTraffic_1505769225.ttf in Resources */,
+				0FE8B9F72203BCC000C868C3 /* BMitra_2340326021.ttf in Resources */,
+				0FE8B9F22203BCC000C868C3 /* BNazaninBold_3646201758.ttf in Resources */,
+				0FE8B9FC2203BCC000C868C3 /* BMehrBold_1898999128.ttf in Resources */,
+				0FE8B9F12203BCC000C868C3 /* BTanin_2726705346.ttf in Resources */,
+				0FE8B9F02203BCC000C868C3 /* IranNastaliq_23990227.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,8 +343,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FE8B9AB220355F000C868C3 /* ViewController.swift in Sources */,
+				0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */,
 				0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */,
+				0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
