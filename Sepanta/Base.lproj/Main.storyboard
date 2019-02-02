@@ -465,18 +465,20 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="icon_login" translatesAutoresizingMaskIntoConstraints="NO" id="wSA-6P-5KH" userLabel="UsernameIcon">
                                         <rect key="frame" x="294.5" y="145.5" width="16" height="28"/>
                                     </imageView>
-                                    <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ozi-MG-lDf" userLabel="GenderPicker" customClass="GenderPicker">
-                                        <rect key="frame" x="19" y="192" width="302" height="55"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ozi-MG-lDf" userLabel="GenderPicker">
+                                        <rect key="frame" x="17" y="192" width="304" height="48.5"/>
                                     </pickerView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="yI0-wD-DaW" firstAttribute="centerX" secondItem="Skr-GI-hdH" secondAttribute="centerX" id="0OF-yz-Cgy"/>
+                                    <constraint firstItem="ozi-MG-lDf" firstAttribute="width" secondItem="idx-Fs-RNY" secondAttribute="width" id="0sF-lf-FTY"/>
                                     <constraint firstItem="LdK-XH-fZW" firstAttribute="height" secondItem="8z5-tl-h7d" secondAttribute="height" id="9jw-5w-J06"/>
+                                    <constraint firstItem="ozi-MG-lDf" firstAttribute="height" secondItem="idx-Fs-RNY" secondAttribute="height" id="APj-Ah-8OY"/>
                                     <constraint firstItem="idx-Fs-RNY" firstAttribute="centerX" secondItem="Skr-GI-hdH" secondAttribute="centerX" id="Foc-eg-hmj"/>
                                     <constraint firstItem="8z5-tl-h7d" firstAttribute="leading" secondItem="Skr-GI-hdH" secondAttribute="leading" id="HRQ-Bz-QE0"/>
                                     <constraint firstItem="MlL-rB-l1f" firstAttribute="height" secondItem="yI0-wD-DaW" secondAttribute="height" multiplier="0.8" id="Ivy-dU-VfZ"/>
+                                    <constraint firstItem="ozi-MG-lDf" firstAttribute="top" secondItem="8z5-tl-h7d" secondAttribute="bottom" multiplier="2.4" id="Kzv-1c-A7c"/>
                                     <constraint firstItem="LdK-XH-fZW" firstAttribute="top" secondItem="Skr-GI-hdH" secondAttribute="top" id="QM1-5C-uIb"/>
                                     <constraint firstItem="idx-Fs-RNY" firstAttribute="height" secondItem="yI0-wD-DaW" secondAttribute="height" id="RtG-0r-fhy"/>
                                     <constraint firstItem="idx-Fs-RNY" firstAttribute="top" secondItem="8z5-tl-h7d" secondAttribute="bottom" multiplier="1.7" id="Sz2-R4-xma"/>
@@ -486,6 +488,7 @@
                                     <constraint firstItem="8z5-tl-h7d" firstAttribute="top" secondItem="Skr-GI-hdH" secondAttribute="top" id="YlA-PV-TqE"/>
                                     <constraint firstItem="8z5-tl-h7d" firstAttribute="height" secondItem="Skr-GI-hdH" secondAttribute="height" multiplier="0.2" id="Zeb-La-8x6"/>
                                     <constraint firstItem="yI0-wD-DaW" firstAttribute="height" secondItem="8z5-tl-h7d" secondAttribute="height" multiplier="0.6" id="ZmU-k2-NQE"/>
+                                    <constraint firstItem="ozi-MG-lDf" firstAttribute="centerX" secondItem="Skr-GI-hdH" secondAttribute="centerX" id="c5h-PV-zEO"/>
                                     <constraint firstItem="wSA-6P-5KH" firstAttribute="centerY" secondItem="idx-Fs-RNY" secondAttribute="centerY" id="l15-SP-OA5"/>
                                     <constraint firstItem="MlL-rB-l1f" firstAttribute="leading" secondItem="yI0-wD-DaW" secondAttribute="leading" constant="10" id="l8Z-7U-fJd"/>
                                     <constraint firstItem="MlL-rB-l1f" firstAttribute="centerY" secondItem="yI0-wD-DaW" secondAttribute="centerY" id="lWP-TK-PUn"/>
@@ -511,9 +514,6 @@
                                                 <integer key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="SendClicked:" destination="MG4-my-GWf" eventType="touchUpInside" id="vel-Kc-uIx"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.8565688776" green="0.2257254132" blue="0.36172668870000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

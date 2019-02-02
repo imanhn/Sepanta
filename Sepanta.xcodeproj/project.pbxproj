@@ -122,15 +122,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0F7FDA782205E78F00703792 /* SignUp */ = {
-			isa = PBXGroup;
-			children = (
-				0F512C042205B5C300B99C9E /* SignupViewController.swift */,
-				0F7FDA792205E7D000703792 /* GenderPickerDelegateSource.swift */,
-			);
-			path = SignUp;
-			sourceTree = "<group>";
-		};
 		0FE8B99C220355F000C868C3 = {
 			isa = PBXGroup;
 			children = (
@@ -154,8 +145,8 @@
 		0FE8B9A7220355F000C868C3 /* Sepanta */ = {
 			isa = PBXGroup;
 			children = (
-				0F7FDA782205E78F00703792 /* SignUp */,
-				0FE8B9DA2203BCAA00C868C3 /* Fonts */,
+				0F512C042205B5C300B99C9E /* SignupViewController.swift */,
+				0F7FDA792205E7D000703792 /* GenderPickerDelegateSource.swift */,
 				0FE8B9A8220355F000C868C3 /* AppDelegate.swift */,
 				0FE8B9AA220355F000C868C3 /* LoginViewController.swift */,
 				0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */,
@@ -165,6 +156,7 @@
 				0FE8B9AF220355F100C868C3 /* Assets.xcassets */,
 				0FE8B9B1220355F100C868C3 /* LaunchScreen.storyboard */,
 				0FE8B9B4220355F100C868C3 /* Info.plist */,
+				0FE8B9DA2203BCAA00C868C3 /* Fonts */,
 			);
 			path = Sepanta;
 			sourceTree = "<group>";
