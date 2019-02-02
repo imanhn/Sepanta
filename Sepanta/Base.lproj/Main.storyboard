@@ -466,7 +466,7 @@
                                         <rect key="frame" x="294.5" y="145.5" width="16" height="28"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="جنسیت" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PE5-oh-OTo" userLabel="GenderSelectText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="17" y="200" width="304" height="48.5"/>
+                                        <rect key="frame" x="17" y="192" width="304" height="48.5"/>
                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -474,15 +474,43 @@
                                             <action selector="GenderTextTouchDown:" destination="MG4-my-GWf" eventType="touchDown" id="Lbu-Os-CSt"/>
                                         </connections>
                                     </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="انتخاب استان" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rk0-qe-jxg" userLabel="ProvinceText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
+                                        <rect key="frame" x="169" y="240" width="152" height="48.5"/>
+                                        <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="GenderTextTouchDown:" destination="MG4-my-GWf" eventType="touchDown" id="Xcr-MF-V44"/>
+                                        </connections>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="icon_gen_gray" translatesAutoresizingMaskIntoConstraints="NO" id="qH8-UE-WEo" userLabel="GenderIcon">
+                                        <rect key="frame" x="295" y="202" width="16" height="28"/>
+                                    </imageView>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="انتخاب شهر" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ovn-bR-1Bu" userLabel="CityText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
+                                        <rect key="frame" x="17" y="240" width="162" height="48.5"/>
+                                        <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="GenderTextTouchDown:" destination="MG4-my-GWf" eventType="touchDown" id="Grg-Sk-jia"/>
+                                        </connections>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="yI0-wD-DaW" firstAttribute="centerX" secondItem="Skr-GI-hdH" secondAttribute="centerX" id="0OF-yz-Cgy"/>
+                                    <constraint firstItem="ovn-bR-1Bu" firstAttribute="height" secondItem="PE5-oh-OTo" secondAttribute="height" id="4Q0-v7-pkB"/>
+                                    <constraint firstItem="Rk0-qe-jxg" firstAttribute="top" secondItem="8z5-tl-h7d" secondAttribute="bottom" multiplier="3" id="5Fd-Sh-ngT"/>
+                                    <constraint firstItem="Rk0-qe-jxg" firstAttribute="height" secondItem="PE5-oh-OTo" secondAttribute="height" id="77b-PN-DZm"/>
+                                    <constraint firstItem="ovn-bR-1Bu" firstAttribute="trailing" secondItem="PE5-oh-OTo" secondAttribute="trailing" id="79v-jf-920"/>
                                     <constraint firstItem="LdK-XH-fZW" firstAttribute="height" secondItem="8z5-tl-h7d" secondAttribute="height" id="9jw-5w-J06"/>
-                                    <constraint firstItem="PE5-oh-OTo" firstAttribute="top" secondItem="8z5-tl-h7d" secondAttribute="bottom" multiplier="2.4" constant="8" symbolic="YES" id="F2E-4v-w5C"/>
+                                    <constraint firstItem="wSA-6P-5KH" firstAttribute="centerX" secondItem="MlL-rB-l1f" secondAttribute="centerX" id="A4i-N9-87h"/>
+                                    <constraint firstItem="PE5-oh-OTo" firstAttribute="top" secondItem="8z5-tl-h7d" secondAttribute="bottom" multiplier="2.3" constant="8" symbolic="YES" id="F2E-4v-w5C"/>
                                     <constraint firstItem="idx-Fs-RNY" firstAttribute="centerX" secondItem="Skr-GI-hdH" secondAttribute="centerX" id="Foc-eg-hmj"/>
                                     <constraint firstItem="8z5-tl-h7d" firstAttribute="leading" secondItem="Skr-GI-hdH" secondAttribute="leading" id="HRQ-Bz-QE0"/>
                                     <constraint firstItem="MlL-rB-l1f" firstAttribute="height" secondItem="yI0-wD-DaW" secondAttribute="height" multiplier="0.8" id="Ivy-dU-VfZ"/>
+                                    <constraint firstItem="qH8-UE-WEo" firstAttribute="centerX" secondItem="wSA-6P-5KH" secondAttribute="centerX" id="KRI-Qh-1J3"/>
+                                    <constraint firstItem="qH8-UE-WEo" firstAttribute="centerY" secondItem="PE5-oh-OTo" secondAttribute="centerY" id="Knx-Pa-zca"/>
                                     <constraint firstItem="LdK-XH-fZW" firstAttribute="top" secondItem="Skr-GI-hdH" secondAttribute="top" id="QM1-5C-uIb"/>
                                     <constraint firstItem="idx-Fs-RNY" firstAttribute="height" secondItem="yI0-wD-DaW" secondAttribute="height" id="RtG-0r-fhy"/>
                                     <constraint firstItem="idx-Fs-RNY" firstAttribute="top" secondItem="8z5-tl-h7d" secondAttribute="bottom" multiplier="1.7" id="Sz2-R4-xma"/>
@@ -491,15 +519,19 @@
                                     <constraint firstItem="PE5-oh-OTo" firstAttribute="height" secondItem="idx-Fs-RNY" secondAttribute="height" id="Vwx-9E-PxT"/>
                                     <constraint firstItem="idx-Fs-RNY" firstAttribute="width" secondItem="yI0-wD-DaW" secondAttribute="width" id="Wnl-xg-MiT"/>
                                     <constraint firstItem="8z5-tl-h7d" firstAttribute="top" secondItem="Skr-GI-hdH" secondAttribute="top" id="YlA-PV-TqE"/>
+                                    <constraint firstItem="ovn-bR-1Bu" firstAttribute="top" secondItem="8z5-tl-h7d" secondAttribute="bottom" multiplier="3" id="Z7H-pM-btN"/>
                                     <constraint firstItem="8z5-tl-h7d" firstAttribute="height" secondItem="Skr-GI-hdH" secondAttribute="height" multiplier="0.2" id="Zeb-La-8x6"/>
                                     <constraint firstItem="yI0-wD-DaW" firstAttribute="height" secondItem="8z5-tl-h7d" secondAttribute="height" multiplier="0.6" id="ZmU-k2-NQE"/>
+                                    <constraint firstItem="Rk0-qe-jxg" firstAttribute="trailing" secondItem="ovn-bR-1Bu" secondAttribute="leading" constant="10" id="aVK-aY-7oW"/>
+                                    <constraint firstItem="qH8-UE-WEo" firstAttribute="height" secondItem="PE5-oh-OTo" secondAttribute="height" multiplier="0.6" id="bZa-vu-fvf"/>
                                     <constraint firstItem="PE5-oh-OTo" firstAttribute="centerX" secondItem="Skr-GI-hdH" secondAttribute="centerX" id="eSb-xp-KGw"/>
                                     <constraint firstItem="wSA-6P-5KH" firstAttribute="centerY" secondItem="idx-Fs-RNY" secondAttribute="centerY" id="l15-SP-OA5"/>
                                     <constraint firstItem="MlL-rB-l1f" firstAttribute="leading" secondItem="yI0-wD-DaW" secondAttribute="leading" constant="10" id="l8Z-7U-fJd"/>
                                     <constraint firstItem="MlL-rB-l1f" firstAttribute="centerY" secondItem="yI0-wD-DaW" secondAttribute="centerY" id="lWP-TK-PUn"/>
                                     <constraint firstAttribute="trailing" secondItem="LdK-XH-fZW" secondAttribute="trailing" id="lYt-JE-YMY"/>
-                                    <constraint firstItem="wSA-6P-5KH" firstAttribute="leading" secondItem="idx-Fs-RNY" secondAttribute="leading" constant="10" id="ohb-4u-DHx"/>
+                                    <constraint firstItem="Rk0-qe-jxg" firstAttribute="leading" secondItem="PE5-oh-OTo" secondAttribute="leading" id="odL-ss-B4R"/>
                                     <constraint firstItem="8z5-tl-h7d" firstAttribute="width" secondItem="Skr-GI-hdH" secondAttribute="width" multiplier="0.5" id="rGz-p9-AKf"/>
+                                    <constraint firstItem="Rk0-qe-jxg" firstAttribute="width" secondItem="PE5-oh-OTo" secondAttribute="width" multiplier="0.5" id="s2S-IN-6KU"/>
                                     <constraint firstItem="LdK-XH-fZW" firstAttribute="width" secondItem="8z5-tl-h7d" secondAttribute="width" id="v8J-6f-QNW"/>
                                     <constraint firstItem="PE5-oh-OTo" firstAttribute="width" secondItem="idx-Fs-RNY" secondAttribute="width" id="xBK-h5-qHV"/>
                                     <constraint firstItem="yI0-wD-DaW" firstAttribute="width" secondItem="Skr-GI-hdH" secondAttribute="width" multiplier="0.9" id="zJm-iF-utN"/>
@@ -512,6 +544,7 @@
                                         <rect key="frame" x="94" y="3" width="188" height="10.5"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="20"/>
+                                        <inset key="imageEdgeInsets" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="تایید" image="icon_tik_dark">
                                             <color key="titleColor" red="0.8565688776" green="0.2257254132" blue="0.36172668870000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -579,6 +612,7 @@
     </scenes>
     <resources>
         <image name="icon_edit" width="18" height="16"/>
+        <image name="icon_gen_gray" width="23" height="26"/>
         <image name="icon_lock_gray" width="18" height="23"/>
         <image name="icon_login" width="20" height="20"/>
         <image name="icon_mobile_gray" width="16" height="26"/>
