@@ -78,6 +78,9 @@
                                                 <integer key="value" value="3"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="MG4-my-GWf" kind="show" id="xia-Gr-1le"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kec-hf-ANp" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
                                         <rect key="frame" x="17" y="157.5" width="304" height="32"/>
@@ -184,7 +187,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32.799999999999997" y="33.733133433283363"/>
+            <point key="canvasLocation" x="46" y="28"/>
         </scene>
         <!--SMSConfirmViewController-->
         <scene sceneID="WhV-oZ-2Iz">
@@ -387,6 +390,185 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NlC-4i-r3A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2321" y="29"/>
+        </scene>
+        <!--SignupViewController-->
+        <scene sceneID="cpN-JO-42Q">
+            <objects>
+                <viewController storyboardIdentifier="SignupViewController" id="MG4-my-GWf" userLabel="SignupViewController" customClass="SignupViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" id="WxP-Kg-AGN" userLabel="PageView">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tib-Sl-1uS" userLabel="LogoView">
+                                <rect key="frame" x="-1" y="86.5" width="375" height="66.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_all_login" translatesAutoresizingMaskIntoConstraints="NO" id="N6L-LI-EOk">
+                                        <rect key="frame" x="106" y="4" width="164" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="N6L-LI-EOk" secondAttribute="height" multiplier="175:64" id="AbU-bS-G9V"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="N6L-LI-EOk" firstAttribute="height" secondItem="Tib-Sl-1uS" secondAttribute="height" multiplier="0.9" id="5jd-kz-UGS"/>
+                                    <constraint firstItem="N6L-LI-EOk" firstAttribute="centerY" secondItem="Tib-Sl-1uS" secondAttribute="centerY" id="m1K-al-cXb"/>
+                                    <constraint firstItem="N6L-LI-EOk" firstAttribute="centerX" secondItem="Tib-Sl-1uS" secondAttribute="centerX" id="reZ-t2-FZY"/>
+                                </constraints>
+                            </view>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" translatesAutoresizingMaskIntoConstraints="NO" id="Skr-GI-hdH" userLabel="LoginPanelView" customClass="TabbedView" customModule="Sepanta" customModuleProvider="target">
+                                <rect key="frame" x="18.5" y="186.5" width="338" height="400"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8z5-tl-h7d" userLabel="Enter">
+                                        <rect key="frame" x="169" y="0.0" width="169" height="80"/>
+                                        <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="20"/>
+                                        <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="ورود" image="icon_login">
+                                            <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LdK-XH-fZW" userLabel="Signup" customClass="TabbedButton" customModule="Sepanta" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="0.0" width="134" height="64"/>
+                                        <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="20"/>
+                                        <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="ثبت نام" image="icon_edit">
+                                            <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                <color key="value" red="0.84004039119999996" green="0.20921024660000001" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yI0-wD-DaW" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
+                                        <rect key="frame" x="17" y="80" width="304" height="48.5"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_mobile_gray" translatesAutoresizingMaskIntoConstraints="NO" id="MlL-rB-l1f" userLabel="MobileIcon">
+                                        <rect key="frame" x="295" y="84.5" width="16" height="38.5"/>
+                                    </imageView>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="نام کاربری" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="idx-Fs-RNY" userLabel="UsernameText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
+                                        <rect key="frame" x="17" y="136" width="304" height="48.5"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="icon_login" translatesAutoresizingMaskIntoConstraints="NO" id="wSA-6P-5KH" userLabel="UsernameIcon">
+                                        <rect key="frame" x="294.5" y="145.5" width="16" height="28"/>
+                                    </imageView>
+                                    <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ozi-MG-lDf" userLabel="GenderPicker" customClass="GenderPicker">
+                                        <rect key="frame" x="19" y="192" width="302" height="55"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    </pickerView>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="yI0-wD-DaW" firstAttribute="centerX" secondItem="Skr-GI-hdH" secondAttribute="centerX" id="0OF-yz-Cgy"/>
+                                    <constraint firstItem="LdK-XH-fZW" firstAttribute="height" secondItem="8z5-tl-h7d" secondAttribute="height" id="9jw-5w-J06"/>
+                                    <constraint firstItem="idx-Fs-RNY" firstAttribute="centerX" secondItem="Skr-GI-hdH" secondAttribute="centerX" id="Foc-eg-hmj"/>
+                                    <constraint firstItem="8z5-tl-h7d" firstAttribute="leading" secondItem="Skr-GI-hdH" secondAttribute="leading" id="HRQ-Bz-QE0"/>
+                                    <constraint firstItem="MlL-rB-l1f" firstAttribute="height" secondItem="yI0-wD-DaW" secondAttribute="height" multiplier="0.8" id="Ivy-dU-VfZ"/>
+                                    <constraint firstItem="LdK-XH-fZW" firstAttribute="top" secondItem="Skr-GI-hdH" secondAttribute="top" id="QM1-5C-uIb"/>
+                                    <constraint firstItem="idx-Fs-RNY" firstAttribute="height" secondItem="yI0-wD-DaW" secondAttribute="height" id="RtG-0r-fhy"/>
+                                    <constraint firstItem="idx-Fs-RNY" firstAttribute="top" secondItem="8z5-tl-h7d" secondAttribute="bottom" multiplier="1.7" id="Sz2-R4-xma"/>
+                                    <constraint firstItem="yI0-wD-DaW" firstAttribute="top" secondItem="8z5-tl-h7d" secondAttribute="bottom" id="UOw-HN-jug"/>
+                                    <constraint firstItem="wSA-6P-5KH" firstAttribute="height" secondItem="idx-Fs-RNY" secondAttribute="height" multiplier="0.6" id="VCM-Np-C2S"/>
+                                    <constraint firstItem="idx-Fs-RNY" firstAttribute="width" secondItem="yI0-wD-DaW" secondAttribute="width" id="Wnl-xg-MiT"/>
+                                    <constraint firstItem="8z5-tl-h7d" firstAttribute="top" secondItem="Skr-GI-hdH" secondAttribute="top" id="YlA-PV-TqE"/>
+                                    <constraint firstItem="8z5-tl-h7d" firstAttribute="height" secondItem="Skr-GI-hdH" secondAttribute="height" multiplier="0.2" id="Zeb-La-8x6"/>
+                                    <constraint firstItem="yI0-wD-DaW" firstAttribute="height" secondItem="8z5-tl-h7d" secondAttribute="height" multiplier="0.6" id="ZmU-k2-NQE"/>
+                                    <constraint firstItem="wSA-6P-5KH" firstAttribute="centerY" secondItem="idx-Fs-RNY" secondAttribute="centerY" id="l15-SP-OA5"/>
+                                    <constraint firstItem="MlL-rB-l1f" firstAttribute="leading" secondItem="yI0-wD-DaW" secondAttribute="leading" constant="10" id="l8Z-7U-fJd"/>
+                                    <constraint firstItem="MlL-rB-l1f" firstAttribute="centerY" secondItem="yI0-wD-DaW" secondAttribute="centerY" id="lWP-TK-PUn"/>
+                                    <constraint firstAttribute="trailing" secondItem="LdK-XH-fZW" secondAttribute="trailing" id="lYt-JE-YMY"/>
+                                    <constraint firstItem="wSA-6P-5KH" firstAttribute="leading" secondItem="idx-Fs-RNY" secondAttribute="leading" constant="10" id="ohb-4u-DHx"/>
+                                    <constraint firstItem="8z5-tl-h7d" firstAttribute="width" secondItem="Skr-GI-hdH" secondAttribute="width" multiplier="0.5" id="rGz-p9-AKf"/>
+                                    <constraint firstItem="LdK-XH-fZW" firstAttribute="width" secondItem="8z5-tl-h7d" secondAttribute="width" id="v8J-6f-QNW"/>
+                                    <constraint firstItem="yI0-wD-DaW" firstAttribute="width" secondItem="Skr-GI-hdH" secondAttribute="width" multiplier="0.9" id="zJm-iF-utN"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gio-EG-J1b" userLabel="SendView">
+                                <rect key="frame" x="0.0" y="606.5" width="375" height="16.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sFd-mZ-n8V" userLabel="SendButton">
+                                        <rect key="frame" x="94" y="3" width="188" height="10.5"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="20"/>
+                                        <state key="normal" title="تایید" image="icon_tik_dark">
+                                            <color key="titleColor" red="0.8565688776" green="0.2257254132" blue="0.36172668870000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="SendClicked:" destination="MG4-my-GWf" eventType="touchUpInside" id="vel-Kc-uIx"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.8565688776" green="0.2257254132" blue="0.36172668870000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="sFd-mZ-n8V" firstAttribute="height" secondItem="Gio-EG-J1b" secondAttribute="height" multiplier="0.6" id="EHW-85-STZ"/>
+                                    <constraint firstItem="sFd-mZ-n8V" firstAttribute="centerY" secondItem="Gio-EG-J1b" secondAttribute="centerY" id="MGU-Z5-xv1"/>
+                                    <constraint firstItem="sFd-mZ-n8V" firstAttribute="width" secondItem="Gio-EG-J1b" secondAttribute="width" multiplier="0.5" id="lRw-Cc-Nfe"/>
+                                    <constraint firstItem="sFd-mZ-n8V" firstAttribute="centerX" secondItem="Gio-EG-J1b" secondAttribute="centerX" id="w7C-S5-ZMk"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dIo-f5-aut" userLabel="EmptyMiddlePanel">
+                                <rect key="frame" x="0.0" y="153" width="375" height="33.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xfg-lv-fkQ" userLabel="EmptyHeader">
+                                <rect key="frame" x="0.0" y="20" width="375" height="66.5"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Skr-GI-hdH" firstAttribute="width" secondItem="WxP-Kg-AGN" secondAttribute="width" multiplier="0.9" id="7Wg-WF-3CP"/>
+                            <constraint firstItem="dIo-f5-aut" firstAttribute="top" secondItem="Tib-Sl-1uS" secondAttribute="bottom" id="80v-Aq-T4h"/>
+                            <constraint firstItem="Gio-EG-J1b" firstAttribute="centerX" secondItem="Iqs-sc-W2f" secondAttribute="centerX" id="9bK-wy-ZKX"/>
+                            <constraint firstItem="Skr-GI-hdH" firstAttribute="centerX" secondItem="WxP-Kg-AGN" secondAttribute="centerX" id="DTQ-Bm-xRR"/>
+                            <constraint firstItem="dIo-f5-aut" firstAttribute="leading" secondItem="xfg-lv-fkQ" secondAttribute="leading" id="DUO-wj-X3z"/>
+                            <constraint firstItem="Tib-Sl-1uS" firstAttribute="leading" secondItem="WxP-Kg-AGN" secondAttribute="leading" constant="-1" id="EIb-UV-Nlu"/>
+                            <constraint firstItem="Gio-EG-J1b" firstAttribute="top" secondItem="Skr-GI-hdH" secondAttribute="bottom" constant="20" id="IK3-h7-cHT"/>
+                            <constraint firstItem="xfg-lv-fkQ" firstAttribute="centerX" secondItem="Skr-GI-hdH" secondAttribute="centerX" id="JOs-6O-LvZ"/>
+                            <constraint firstItem="xfg-lv-fkQ" firstAttribute="leading" secondItem="WxP-Kg-AGN" secondAttribute="leading" id="Lbh-7T-7jK"/>
+                            <constraint firstItem="xfg-lv-fkQ" firstAttribute="height" secondItem="WxP-Kg-AGN" secondAttribute="height" multiplier="0.1" id="ZOw-cr-ePI"/>
+                            <constraint firstItem="xfg-lv-fkQ" firstAttribute="width" secondItem="WxP-Kg-AGN" secondAttribute="width" id="aII-V0-RvI"/>
+                            <constraint firstItem="Skr-GI-hdH" firstAttribute="top" secondItem="dIo-f5-aut" secondAttribute="bottom" id="e3a-tt-lb4"/>
+                            <constraint firstItem="Skr-GI-hdH" firstAttribute="height" secondItem="WxP-Kg-AGN" secondAttribute="height" multiplier="0.6" id="fNh-68-tEh"/>
+                            <constraint firstItem="Gio-EG-J1b" firstAttribute="leading" secondItem="Iqs-sc-W2f" secondAttribute="leading" id="fTq-Ir-Bag"/>
+                            <constraint firstItem="Skr-GI-hdH" firstAttribute="centerX" secondItem="WxP-Kg-AGN" secondAttribute="centerX" id="ftj-c1-BDt"/>
+                            <constraint firstItem="Tib-Sl-1uS" firstAttribute="height" secondItem="WxP-Kg-AGN" secondAttribute="height" multiplier="0.1" id="gid-Or-JJf"/>
+                            <constraint firstItem="Tib-Sl-1uS" firstAttribute="centerX" secondItem="WxP-Kg-AGN" secondAttribute="centerX" constant="-1" id="ms1-kg-3PN"/>
+                            <constraint firstItem="Gio-EG-J1b" firstAttribute="width" secondItem="WxP-Kg-AGN" secondAttribute="width" id="rBO-4t-1E6"/>
+                            <constraint firstItem="xfg-lv-fkQ" firstAttribute="top" secondItem="Iqs-sc-W2f" secondAttribute="top" id="sMO-w4-81H"/>
+                            <constraint firstItem="dIo-f5-aut" firstAttribute="height" secondItem="WxP-Kg-AGN" secondAttribute="height" multiplier="0.05" id="siX-I2-3aP"/>
+                            <constraint firstItem="dIo-f5-aut" firstAttribute="width" secondItem="WxP-Kg-AGN" secondAttribute="width" id="tRf-h4-jZF"/>
+                            <constraint firstItem="Gio-EG-J1b" firstAttribute="bottom" secondItem="Iqs-sc-W2f" secondAttribute="bottom" id="xKV-1J-fuA"/>
+                            <constraint firstItem="Tib-Sl-1uS" firstAttribute="top" secondItem="xfg-lv-fkQ" secondAttribute="bottom" id="yoG-PB-Ivp"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Iqs-sc-W2f"/>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="GenderPicker" destination="ozi-MG-lDf" id="IkJ-6U-H1E"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BT5-kD-GTV" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="176.80000000000001" y="769.56521739130437"/>
         </scene>
     </scenes>
     <resources>
