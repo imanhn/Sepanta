@@ -34,6 +34,8 @@
 		0FE8B9FF2203BCC000C868C3 /* BElham_561726703.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9EC2203BCC000C868C3 /* BElham_561726703.ttf */; };
 		0FE8BA002203BCC000C868C3 /* BYagut_3160526546.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9ED2203BCC000C868C3 /* BYagut_3160526546.ttf */; };
 		0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */; };
+		0FE8BA042205082100C868C3 /* SMSConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */; };
+		0FE8BA062205239E00C868C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA052205239E00C868C3 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,8 @@
 		0FE8B9EC2203BCC000C868C3 /* BElham_561726703.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BElham_561726703.ttf; sourceTree = "<group>"; };
 		0FE8B9ED2203BCC000C868C3 /* BYagut_3160526546.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BYagut_3160526546.ttf; sourceTree = "<group>"; };
 		0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWidgets.swift; sourceTree = "<group>"; };
+		0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmViewController.swift; sourceTree = "<group>"; };
+		0FE8BA052205239E00C868C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +144,8 @@
 				0FE8B9DA2203BCAA00C868C3 /* Fonts */,
 				0FE8B9A8220355F000C868C3 /* AppDelegate.swift */,
 				0FE8B9AA220355F000C868C3 /* LoginViewController.swift */,
+				0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */,
+				0FE8BA052205239E00C868C3 /* MainViewController.swift */,
 				0FE8B9AC220355F000C868C3 /* Main.storyboard */,
 				0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */,
 				0FE8B9AF220355F100C868C3 /* Assets.xcassets */,
@@ -344,6 +350,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */,
+				0FE8BA042205082100C868C3 /* SMSConfirmViewController.swift in Sources */,
+				0FE8BA062205239E00C868C3 /* MainViewController.swift in Sources */,
 				0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */,
 				0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */,
 			);
