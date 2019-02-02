@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F512C042205B5C300B99C9E /* SignupViewController.swift */; };
-		0F7FDA7A2205E7D000703792 /* GenderPickerDelegateSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA792205E7D000703792 /* GenderPickerDelegateSource.swift */; };
+		0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */; };
+		0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */; };
 		0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9A8220355F000C868C3 /* AppDelegate.swift */; };
 		0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9AA220355F000C868C3 /* LoginViewController.swift */; };
 		0FE8B9AE220355F000C868C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9AC220355F000C868C3 /* Main.storyboard */; };
@@ -59,7 +60,8 @@
 
 /* Begin PBXFileReference section */
 		0F512C042205B5C300B99C9E /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
-		0F7FDA792205E7D000703792 /* GenderPickerDelegateSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderPickerDelegateSource.swift; sourceTree = "<group>"; };
+		0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysShowPopup.swift; sourceTree = "<group>"; };
+		0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayChoiceTableViewController.swift; sourceTree = "<group>"; };
 		0FE8B9A5220355F000C868C3 /* Sepanta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sepanta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FE8B9A8220355F000C868C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0FE8B9AA220355F000C868C3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +124,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F7FDA7B2205FAD100703792 /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+				0F512C042205B5C300B99C9E /* SignupViewController.swift */,
+				0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */,
+				0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */,
+			);
+			path = Signup;
+			sourceTree = "<group>";
+		};
 		0FE8B99C220355F000C868C3 = {
 			isa = PBXGroup;
 			children = (
@@ -145,8 +157,7 @@
 		0FE8B9A7220355F000C868C3 /* Sepanta */ = {
 			isa = PBXGroup;
 			children = (
-				0F512C042205B5C300B99C9E /* SignupViewController.swift */,
-				0F7FDA792205E7D000703792 /* GenderPickerDelegateSource.swift */,
+				0F7FDA7B2205FAD100703792 /* Signup */,
 				0FE8B9A8220355F000C868C3 /* AppDelegate.swift */,
 				0FE8B9AA220355F000C868C3 /* LoginViewController.swift */,
 				0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */,
@@ -355,9 +366,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */,
 				0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */,
 				0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */,
-				0F7FDA7A2205E7D000703792 /* GenderPickerDelegateSource.swift in Sources */,
+				0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */,
 				0FE8BA042205082100C868C3 /* SMSConfirmViewController.swift in Sources */,
 				0FE8BA062205239E00C868C3 /* MainViewController.swift in Sources */,
 				0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */,
