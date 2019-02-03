@@ -47,7 +47,7 @@
                                     <constraint firstItem="jYh-vn-AWc" firstAttribute="height" secondItem="qBv-Rq-9Kc" secondAttribute="height" multiplier="0.9" id="MzD-9Z-HgN"/>
                                 </constraints>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" translatesAutoresizingMaskIntoConstraints="NO" id="DNk-ZY-hOZ" userLabel="LoginPanelView" customClass="TabbedView" customModule="Sepanta" customModuleProvider="target">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" translatesAutoresizingMaskIntoConstraints="NO" id="DNk-ZY-hOZ" userLabel="LoginPanelView" customClass="RightTabbedView" customModule="Sepanta" customModuleProvider="target">
                                 <rect key="frame" x="18.5" y="320" width="338" height="267"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8gH-oj-d9h" userLabel="Enter">
@@ -213,7 +213,7 @@
                                     <constraint firstItem="EPP-gL-p4N" firstAttribute="height" secondItem="Ov8-kr-Fpg" secondAttribute="height" multiplier="0.9" id="X4g-V7-uLO"/>
                                 </constraints>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" translatesAutoresizingMaskIntoConstraints="NO" id="zsk-8b-beF" userLabel="LoginPanelView" customClass="TabbedView" customModule="Sepanta" customModuleProvider="target">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" translatesAutoresizingMaskIntoConstraints="NO" id="zsk-8b-beF" userLabel="LoginPanelView" customClass="RightTabbedView" customModule="Sepanta" customModuleProvider="target">
                                 <rect key="frame" x="19" y="321" width="338" height="267"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDa-B2-0b9" userLabel="Enter">
@@ -244,6 +244,9 @@
                                                 <integer key="value" value="3"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="MG4-my-GWf" kind="show" id="fAa-kA-JXe"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0mb-wF-v4k" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
                                         <rect key="frame" x="17" y="106" width="304" height="32"/>
@@ -400,10 +403,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tib-Sl-1uS" userLabel="LogoView">
-                                <rect key="frame" x="-1" y="86.5" width="375" height="66.5"/>
+                                <rect key="frame" x="-1" y="86.5" width="375" height="67"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_all_login" translatesAutoresizingMaskIntoConstraints="NO" id="N6L-LI-EOk">
-                                        <rect key="frame" x="106" y="4" width="164" height="60"/>
+                                        <rect key="frame" x="105.5" y="4" width="165" height="60.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="N6L-LI-EOk" secondAttribute="height" multiplier="175:64" id="AbU-bS-G9V"/>
                                         </constraints>
@@ -415,24 +418,11 @@
                                     <constraint firstItem="N6L-LI-EOk" firstAttribute="centerX" secondItem="Tib-Sl-1uS" secondAttribute="centerX" id="reZ-t2-FZY"/>
                                 </constraints>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" translatesAutoresizingMaskIntoConstraints="NO" id="Skr-GI-hdH" userLabel="LoginPanelView" customClass="TabbedView" customModule="Sepanta" customModuleProvider="target">
-                                <rect key="frame" x="18.5" y="186.5" width="338" height="400"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" translatesAutoresizingMaskIntoConstraints="NO" id="Skr-GI-hdH" userLabel="LoginPanelView" customClass="LeftTabbedView" customModule="Sepanta" customModuleProvider="target">
+                                <rect key="frame" x="19" y="187" width="337.5" height="400"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8z5-tl-h7d" userLabel="Enter">
-                                        <rect key="frame" x="169" y="0.0" width="169" height="80"/>
-                                        <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="20"/>
-                                        <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="ورود" image="icon_login">
-                                            <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="3"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LdK-XH-fZW" userLabel="Signup" customClass="TabbedButton" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="0.0" width="134" height="64"/>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LdK-XH-fZW" userLabel="Signup">
+                                        <rect key="frame" x="0.0" y="0.0" width="164" height="60"/>
                                         <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="ثبت نام" image="icon_edit">
@@ -448,25 +438,25 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yI0-wD-DaW" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="17" y="80" width="304" height="48.5"/>
+                                        <rect key="frame" x="16.5" y="80" width="304" height="40.5"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_mobile_gray" translatesAutoresizingMaskIntoConstraints="NO" id="MlL-rB-l1f" userLabel="MobileIcon">
-                                        <rect key="frame" x="295" y="84.5" width="16" height="38.5"/>
+                                        <rect key="frame" x="294.5" y="84" width="16" height="32.5"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="نام کاربری" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="idx-Fs-RNY" userLabel="UsernameText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="17" y="136" width="304" height="48.5"/>
+                                        <rect key="frame" x="16.5" y="140.5" width="304" height="40"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="icon_login" translatesAutoresizingMaskIntoConstraints="NO" id="wSA-6P-5KH" userLabel="UsernameIcon">
-                                        <rect key="frame" x="294.5" y="145.5" width="16" height="28"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_login" translatesAutoresizingMaskIntoConstraints="NO" id="wSA-6P-5KH" userLabel="UsernameIcon">
+                                        <rect key="frame" x="292.5" y="148.5" width="20" height="23.5"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="جنسیت" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PE5-oh-OTo" userLabel="GenderSelectText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="17" y="192" width="304" height="48.5"/>
+                                        <rect key="frame" x="16.5" y="200.5" width="304" height="40.5"/>
                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -475,7 +465,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="انتخاب استان" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rk0-qe-jxg" userLabel="ProvinceText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="169" y="240" width="152" height="48.5"/>
+                                        <rect key="frame" x="168.5" y="261" width="152" height="40.5"/>
                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -483,11 +473,11 @@
                                             <action selector="GenderTextTouchDown:" destination="MG4-my-GWf" eventType="touchDown" id="Xcr-MF-V44"/>
                                         </connections>
                                     </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="icon_gen_gray" translatesAutoresizingMaskIntoConstraints="NO" id="qH8-UE-WEo" userLabel="GenderIcon">
-                                        <rect key="frame" x="295" y="202" width="16" height="28"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_gen_gray" translatesAutoresizingMaskIntoConstraints="NO" id="qH8-UE-WEo" userLabel="GenderIcon">
+                                        <rect key="frame" x="287.5" y="208.5" width="31" height="24.5"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="انتخاب شهر" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ovn-bR-1Bu" userLabel="CityText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="17" y="240" width="162" height="48.5"/>
+                                        <rect key="frame" x="16.5" y="261" width="162" height="40"/>
                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -495,34 +485,76 @@
                                             <action selector="GenderTextTouchDown:" destination="MG4-my-GWf" eventType="touchDown" id="Grg-Sk-jia"/>
                                         </connections>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8z5-tl-h7d" userLabel="Enter" customClass="TabbedButton" customModule="Sepanta" customModuleProvider="target">
+                                        <rect key="frame" x="174" y="0.0" width="163.5" height="60"/>
+                                        <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="20"/>
+                                        <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="ورود" image="icon_login">
+                                            <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="h73-aN-KX7" kind="show" id="qJQ-jh-eMD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgY-1J-Ktr" userLabel="TermsCheck">
+                                        <rect key="frame" x="292.5" y="321.5" width="25" height="25"/>
+                                        <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="1kb-Vq-rCU"/>
+                                            <constraint firstAttribute="width" constant="25" id="7Aj-HW-RhP"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="bLD-EC-6uz"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="mbk-9l-IeT"/>
+                                        </constraints>
+                                        <state key="normal" image="icon_tik_gray"/>
+                                        <connections>
+                                            <action selector="termsClicked:" destination="MG4-my-GWf" eventType="touchUpInside" id="YyX-rM-P6f"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="قوانین و مقررات را خوانده ام و موافقم." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80h-aI-T9g">
+                                        <rect key="frame" x="43" y="322" width="241" height="21"/>
+                                        <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="17"/>
+                                        <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="yI0-wD-DaW" firstAttribute="centerX" secondItem="Skr-GI-hdH" secondAttribute="centerX" id="0OF-yz-Cgy"/>
+                                    <constraint firstItem="8z5-tl-h7d" firstAttribute="trailing" secondItem="LdK-XH-fZW" secondAttribute="leading" constant="-10" id="2EK-2P-uAc"/>
                                     <constraint firstItem="ovn-bR-1Bu" firstAttribute="height" secondItem="PE5-oh-OTo" secondAttribute="height" id="4Q0-v7-pkB"/>
-                                    <constraint firstItem="Rk0-qe-jxg" firstAttribute="top" secondItem="8z5-tl-h7d" secondAttribute="bottom" multiplier="3" id="5Fd-Sh-ngT"/>
                                     <constraint firstItem="Rk0-qe-jxg" firstAttribute="height" secondItem="PE5-oh-OTo" secondAttribute="height" id="77b-PN-DZm"/>
                                     <constraint firstItem="ovn-bR-1Bu" firstAttribute="trailing" secondItem="PE5-oh-OTo" secondAttribute="trailing" id="79v-jf-920"/>
                                     <constraint firstItem="LdK-XH-fZW" firstAttribute="height" secondItem="8z5-tl-h7d" secondAttribute="height" id="9jw-5w-J06"/>
                                     <constraint firstItem="wSA-6P-5KH" firstAttribute="centerX" secondItem="MlL-rB-l1f" secondAttribute="centerX" id="A4i-N9-87h"/>
-                                    <constraint firstItem="PE5-oh-OTo" firstAttribute="top" secondItem="8z5-tl-h7d" secondAttribute="bottom" multiplier="2.3" constant="8" symbolic="YES" id="F2E-4v-w5C"/>
+                                    <constraint firstItem="pgY-1J-Ktr" firstAttribute="trailing" secondItem="80h-aI-T9g" secondAttribute="leading" constant="-20" id="EMc-fq-lSy"/>
                                     <constraint firstItem="idx-Fs-RNY" firstAttribute="centerX" secondItem="Skr-GI-hdH" secondAttribute="centerX" id="Foc-eg-hmj"/>
                                     <constraint firstItem="8z5-tl-h7d" firstAttribute="leading" secondItem="Skr-GI-hdH" secondAttribute="leading" id="HRQ-Bz-QE0"/>
                                     <constraint firstItem="MlL-rB-l1f" firstAttribute="height" secondItem="yI0-wD-DaW" secondAttribute="height" multiplier="0.8" id="Ivy-dU-VfZ"/>
+                                    <constraint firstItem="pgY-1J-Ktr" firstAttribute="leading" secondItem="Skr-GI-hdH" secondAttribute="leading" constant="20" id="KES-XB-PqP"/>
                                     <constraint firstItem="qH8-UE-WEo" firstAttribute="centerX" secondItem="wSA-6P-5KH" secondAttribute="centerX" id="KRI-Qh-1J3"/>
                                     <constraint firstItem="qH8-UE-WEo" firstAttribute="centerY" secondItem="PE5-oh-OTo" secondAttribute="centerY" id="Knx-Pa-zca"/>
+                                    <constraint firstItem="PE5-oh-OTo" firstAttribute="top" secondItem="idx-Fs-RNY" secondAttribute="bottom" constant="20" id="LT3-ym-477"/>
+                                    <constraint firstItem="qH8-UE-WEo" firstAttribute="leading" secondItem="pgY-1J-Ktr" secondAttribute="trailing" constant="-26" id="MQ6-t2-FdO"/>
+                                    <constraint firstItem="80h-aI-T9g" firstAttribute="centerY" secondItem="pgY-1J-Ktr" secondAttribute="centerY" id="Ns2-AO-hSs"/>
+                                    <constraint firstItem="PE5-oh-OTo" firstAttribute="bottom" secondItem="Rk0-qe-jxg" secondAttribute="top" constant="-20" id="OXG-ge-f3b"/>
                                     <constraint firstItem="LdK-XH-fZW" firstAttribute="top" secondItem="Skr-GI-hdH" secondAttribute="top" id="QM1-5C-uIb"/>
                                     <constraint firstItem="idx-Fs-RNY" firstAttribute="height" secondItem="yI0-wD-DaW" secondAttribute="height" id="RtG-0r-fhy"/>
-                                    <constraint firstItem="idx-Fs-RNY" firstAttribute="top" secondItem="8z5-tl-h7d" secondAttribute="bottom" multiplier="1.7" id="Sz2-R4-xma"/>
-                                    <constraint firstItem="yI0-wD-DaW" firstAttribute="top" secondItem="8z5-tl-h7d" secondAttribute="bottom" id="UOw-HN-jug"/>
+                                    <constraint firstItem="yI0-wD-DaW" firstAttribute="top" secondItem="8z5-tl-h7d" secondAttribute="bottom" constant="20" id="UOw-HN-jug"/>
                                     <constraint firstItem="wSA-6P-5KH" firstAttribute="height" secondItem="idx-Fs-RNY" secondAttribute="height" multiplier="0.6" id="VCM-Np-C2S"/>
                                     <constraint firstItem="PE5-oh-OTo" firstAttribute="height" secondItem="idx-Fs-RNY" secondAttribute="height" id="Vwx-9E-PxT"/>
                                     <constraint firstItem="idx-Fs-RNY" firstAttribute="width" secondItem="yI0-wD-DaW" secondAttribute="width" id="Wnl-xg-MiT"/>
                                     <constraint firstItem="8z5-tl-h7d" firstAttribute="top" secondItem="Skr-GI-hdH" secondAttribute="top" id="YlA-PV-TqE"/>
-                                    <constraint firstItem="ovn-bR-1Bu" firstAttribute="top" secondItem="8z5-tl-h7d" secondAttribute="bottom" multiplier="3" id="Z7H-pM-btN"/>
-                                    <constraint firstItem="8z5-tl-h7d" firstAttribute="height" secondItem="Skr-GI-hdH" secondAttribute="height" multiplier="0.2" id="Zeb-La-8x6"/>
-                                    <constraint firstItem="yI0-wD-DaW" firstAttribute="height" secondItem="8z5-tl-h7d" secondAttribute="height" multiplier="0.6" id="ZmU-k2-NQE"/>
+                                    <constraint firstItem="PE5-oh-OTo" firstAttribute="bottom" secondItem="ovn-bR-1Bu" secondAttribute="top" constant="-20" id="Z9y-g2-AGc"/>
+                                    <constraint firstItem="8z5-tl-h7d" firstAttribute="height" secondItem="Skr-GI-hdH" secondAttribute="height" multiplier="0.15" id="Zeb-La-8x6"/>
+                                    <constraint firstItem="yI0-wD-DaW" firstAttribute="height" secondItem="Skr-GI-hdH" secondAttribute="height" multiplier="0.1" id="ZmU-k2-NQE"/>
                                     <constraint firstItem="Rk0-qe-jxg" firstAttribute="trailing" secondItem="ovn-bR-1Bu" secondAttribute="leading" constant="10" id="aVK-aY-7oW"/>
+                                    <constraint firstItem="pgY-1J-Ktr" firstAttribute="top" secondItem="Rk0-qe-jxg" secondAttribute="bottom" constant="20" id="asy-Ah-02m"/>
+                                    <constraint firstItem="idx-Fs-RNY" firstAttribute="top" secondItem="yI0-wD-DaW" secondAttribute="bottom" constant="20" id="bRc-P2-UqY"/>
                                     <constraint firstItem="qH8-UE-WEo" firstAttribute="height" secondItem="PE5-oh-OTo" secondAttribute="height" multiplier="0.6" id="bZa-vu-fvf"/>
                                     <constraint firstItem="PE5-oh-OTo" firstAttribute="centerX" secondItem="Skr-GI-hdH" secondAttribute="centerX" id="eSb-xp-KGw"/>
                                     <constraint firstItem="wSA-6P-5KH" firstAttribute="centerY" secondItem="idx-Fs-RNY" secondAttribute="centerY" id="l15-SP-OA5"/>
@@ -530,18 +562,18 @@
                                     <constraint firstItem="MlL-rB-l1f" firstAttribute="centerY" secondItem="yI0-wD-DaW" secondAttribute="centerY" id="lWP-TK-PUn"/>
                                     <constraint firstAttribute="trailing" secondItem="LdK-XH-fZW" secondAttribute="trailing" id="lYt-JE-YMY"/>
                                     <constraint firstItem="Rk0-qe-jxg" firstAttribute="leading" secondItem="PE5-oh-OTo" secondAttribute="leading" id="odL-ss-B4R"/>
-                                    <constraint firstItem="8z5-tl-h7d" firstAttribute="width" secondItem="Skr-GI-hdH" secondAttribute="width" multiplier="0.5" id="rGz-p9-AKf"/>
                                     <constraint firstItem="Rk0-qe-jxg" firstAttribute="width" secondItem="PE5-oh-OTo" secondAttribute="width" multiplier="0.5" id="s2S-IN-6KU"/>
-                                    <constraint firstItem="LdK-XH-fZW" firstAttribute="width" secondItem="8z5-tl-h7d" secondAttribute="width" id="v8J-6f-QNW"/>
                                     <constraint firstItem="PE5-oh-OTo" firstAttribute="width" secondItem="idx-Fs-RNY" secondAttribute="width" id="xBK-h5-qHV"/>
                                     <constraint firstItem="yI0-wD-DaW" firstAttribute="width" secondItem="Skr-GI-hdH" secondAttribute="width" multiplier="0.9" id="zJm-iF-utN"/>
+                                    <constraint firstItem="LdK-XH-fZW" firstAttribute="width" secondItem="8z5-tl-h7d" secondAttribute="width" id="zSG-bx-iqR"/>
+                                    <constraint firstItem="80h-aI-T9g" firstAttribute="height" secondItem="pgY-1J-Ktr" secondAttribute="height" id="zo9-OF-2KT"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gio-EG-J1b" userLabel="SendView">
-                                <rect key="frame" x="0.0" y="606.5" width="375" height="16.5"/>
+                                <rect key="frame" x="0.0" y="607" width="375" height="16"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sFd-mZ-n8V" userLabel="SendButton">
-                                        <rect key="frame" x="94" y="3" width="188" height="10.5"/>
+                                        <rect key="frame" x="93.5" y="2.5" width="188" height="10"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -553,6 +585,9 @@
                                                 <integer key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="SubmitSignupFormClicked:" destination="MG4-my-GWf" eventType="touchUpInside" id="FAz-8s-xC8"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.8565688776" green="0.2257254132" blue="0.36172668870000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -564,7 +599,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dIo-f5-aut" userLabel="EmptyMiddlePanel">
-                                <rect key="frame" x="0.0" y="153" width="375" height="33.5"/>
+                                <rect key="frame" x="0.0" y="153.5" width="375" height="33.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xfg-lv-fkQ" userLabel="EmptyHeader">
@@ -602,7 +637,14 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="checkTerms" destination="pgY-1J-Ktr" id="iDy-sO-xCD"/>
+                        <outlet property="enterButton" destination="8z5-tl-h7d" id="Tzn-M0-kYf"/>
                         <outlet property="genderTextField" destination="PE5-oh-OTo" id="Adp-i6-NZf"/>
+                        <outlet property="mobileNoText" destination="yI0-wD-DaW" id="Jpu-5E-tow"/>
+                        <outlet property="selectCity" destination="ovn-bR-1Bu" id="Ozv-pP-VmS"/>
+                        <outlet property="selectProvince" destination="Rk0-qe-jxg" id="YOR-zI-giL"/>
+                        <outlet property="signupButton" destination="LdK-XH-fZW" id="OGz-rc-vFG"/>
+                        <outlet property="usernameText" destination="idx-Fs-RNY" id="tZT-d6-b1f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BT5-kD-GTV" sceneMemberID="firstResponder"/>
@@ -617,6 +659,11 @@
         <image name="icon_login" width="20" height="20"/>
         <image name="icon_mobile_gray" width="16" height="26"/>
         <image name="icon_tik_dark" width="20" height="14"/>
+        <image name="icon_tik_gray" width="20" height="14"/>
         <image name="logo_all_login" width="157" height="64"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="qJQ-jh-eMD"/>
+        <segue reference="fAa-kA-JXe"/>
+    </inferredMetricsTieBreakers>
 </document>

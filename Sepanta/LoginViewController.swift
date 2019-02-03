@@ -10,7 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     @IBOutlet var PageView: UIView!
-    @IBOutlet weak var LoginPanelView: TabbedView!
+    @IBOutlet weak var LoginPanelView: RightTabbedView!
     @IBOutlet weak var SignupButton: TabbedButton!
     @IBOutlet weak var EnterButton: UIButton!
     @IBOutlet weak var MobileTextField: UnderLinedTextField!
