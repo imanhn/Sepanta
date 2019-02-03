@@ -11,13 +11,34 @@ import UIKit
 
 class UnderLinedTextField: UITextField {
     override func draw(_ rect: CGRect) {
-        print("rect : ",rect)
         let context = UIGraphicsGetCurrentContext()
         context?.setLineWidth(2.0)
         context?.setStrokeColor((UIColor( red: 0.84,     green: 0.84, blue:0.84, alpha: 1.0 )).cgColor)
         context?.move(to: CGPoint(x: 20, y: self.bounds.height))
         context?.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height))
         context?.drawPath(using: CGPathDrawingMode.stroke)
+
+    }
+}
+
+class UnderLinedSelectableTextField: UITextField {
+    override func draw(_ rect: CGRect) {
+        let sizeOfTriangle = rect.height/4;
+        let context = UIGraphicsGetCurrentContext()
+        context?.setLineWidth(2.0)
+        context?.setStrokeColor((UIColor( red: 0.84,     green: 0.84, blue:0.84, alpha: 1.0 )).cgColor)
+        context?.move(to: CGPoint(x: 20, y: self.bounds.height))
+        context?.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height))
+        context?.drawPath(using: CGPathDrawingMode.stroke)
+        
+        let contextTriangle = UIGraphicsGetCurrentContext()
+        contextTriangle?.setLineWidth(2.0)
+        contextTriangle?.setStrokeColor((UIColor( red: 0.2,     green: 0.2, blue:0.2, alpha: 1.0 )).cgColor)
+        contextTriangle?.move(to: CGPoint(x: 20, y: self.bounds.height-5))
+        contextTriangle?.addLine(to: CGPoint(x: 20+sizeOfTriangle, y: self.bounds.height-5))
+        contextTriangle?.addLine(to: CGPoint(x: 20, y: self.bounds.height-5-sizeOfTriangle))
+        contextTriangle?.closePath()
+        contextTriangle?.fillPath()
     }
 }
 

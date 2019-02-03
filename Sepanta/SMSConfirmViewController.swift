@@ -19,9 +19,12 @@ class SMSConfirmViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view, tßypically from a nib.
+        
     }
     
+    @IBAction func MobileTextEditEnd(_ sender: Any) {
+        startTimer()
+    }
     func startTimer() {
         countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
