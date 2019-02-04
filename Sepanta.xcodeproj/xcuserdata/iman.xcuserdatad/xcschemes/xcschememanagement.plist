@@ -4,10 +4,33 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Sepanta.xcscheme</key>
+		<key>PlaygroundFrameWork.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
+		</dict>
+		<key>SepantaPlaygroundTarget.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>0FE8B9A4220355F000C868C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0FE8B9B8220355F200C868C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0FE8B9C3220355F200C868C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
