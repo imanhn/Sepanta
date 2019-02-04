@@ -7,9 +7,9 @@
 //
 
 import Foundation
-
 import UIKit
-
+import Alamofire
+import SwiftyJSON
 
 struct genders {
     var type : String = "جنسیت"
@@ -24,7 +24,11 @@ struct cities {
 }
 
 class SignupViewController: UIViewController  {
-
+    var provincesCache : [String] = []
+    var provinceDict : Dictionary = ["TEST":"TEST"];
+    var cityDict : Dictionary = ["TEST":"TEST"];
+    var cityCache : [String] = []
+    var currentStateCode : String = ""
     var genderModel = genders() {
         didSet {
             updateGender()
@@ -74,26 +78,147 @@ class SignupViewController: UIViewController  {
     func updateCity(){
         self.selectCity.text = cityModel.type
     }
-    func getAllProvinceList() -> Array<String> {
-        return ["آذربایجان","تهران","البرز","اصفهان","کرمان"]
+    func getAllProvince() {
+        var provinceList : [String]=[];
+        /*let parameters = [
+         "username": "foo",
+         "password": "123456"
+         ]*/
+        let urlAddress = NSURL(string: "http://www.favecard.ir/api/takamad/get-state-and-city")
+        let aMethod : HTTPMethod = HTTPMethod.get
+        print("Calling API")
+        Alamofire.request(urlAddress! as URL, method: aMethod, parameters: nil, encoding: JSONEncoding.default,  headers: nil).responseJSON { (response:DataResponse<Any>) in
+            print("Processing Response....")
+            switch(response.result) {
+            case .success(_):
+                
+                if response.result.value != nil
+                {
+                    let jsonResult = JSON(response.result.value!)
+                    provinceList = Array<String>(repeating: "", count: jsonResult["states"].count)
+                    for aProv in jsonResult["states"]
+                    {
+                        print(aProv.0," ",aProv.1)
+                        let provName : String = aProv.0
+                        let idx = Int(aProv.1.rawString()!)!
+                        //self.provinceDict.setValue(aProv.1.rawString(), forKey: provName)
+                        self.provinceDict[provName] = aProv.1.rawString()!
+                        //setValue(provName, forKey: aProv.1.rawString()!)
+                        provinceList[idx] = provName
+                        
+                    }
+                    
+                    print("Fetched : ",provinceList.count," record")
+                    //print("Provinces : ",provinceList)
+                    print("Successful")
+                    self.provincesCache = provinceList
+                }
+                break
+                
+            case .failure(_):
+                if response.result.error != nil
+                {
+                    print("Not Successful")
+                    print(response.result.error!)
+                }
+                break
+            }
+            
+        }
     }
+    
+    func getAllProvinceList() -> Array<String> {
+        if provincesCache.count == 0 {
+            print("Province list not ready yet")
+            getAllProvince()
+            return ["مجدد تلاش کنید"];
+        }else{
+            return provincesCache
+        }
+    }
+    func getAllCity(_ stateCode : String) {
+        var cityList : [String]=[];
+        let parameters = [
+         "state%20code": stateCode
+         ]
+        let urlAddress = NSURL(string: "http://www.favecard.ir/api/takamad/get-state-and-city")
+        let aMethod : HTTPMethod = HTTPMethod.post
+        print("Calling City API")
+        Alamofire.request(urlAddress! as URL, method: aMethod, parameters: parameters, encoding: JSONEncoding.default,  headers: parameters).responseJSON { (response:DataResponse<Any>) in
+            print("Processing City Response....")
+            switch(response.result) {
+            case .success(_):
+                
+                if response.result.value != nil
+                {
+                    let jsonResult = JSON(response.result.value!)
+                    cityList = Array<String>(repeating: "", count: jsonResult["cities"].count)
+                    for aCity in jsonResult["cities"]
+                    {
+                        print(aCity.0," ",aCity.1)
+                        let cityName : String = aCity.0
+                        let idx = Int(aCity.1.rawString()!)!
+                        self.cityDict[cityName] = aCity.1.rawString()!
+                        cityList[idx] = cityName
+                        
+                    }
+                    
+                    print("Fetched : ",cityList.count," record")
+                    //print("Cities : ",cityList)
+                    print("Successful")
+                    self.cityCache = cityList
+                }
+                break
+                
+            case .failure(_):
+                if response.result.error != nil
+                {
+                    print("Not Successful")
+                    print(response.result.error!)
+                }
+                break
+            }
+            
+        }
+    }
+    
+    func getAllCityList() -> Array<String> {
+        if cityCache.count == 0 {
+            print("City list not ready yet for ",currentStateCode)
+            getAllCity(currentStateCode)
+           return ["مجدد تلاش کنید"];
+        }else{
+            return cityCache
+        }
+    }
+    func findStateCodeFor(provinceName : String) -> String! {
+        for aprov in provinceDict {
+            if aprov.value == provinceName {
+                return aprov.key
+            }
+        }
+        return nil
+    }
+    
     func getGendersList() -> Array<String> {
         return ["زن","مرد"]
     }
-    func getCitiesList(_ aProvince : String) -> Array<String> {
-        return ["رودهن","دماوند","شهریار"]
-    }
+
     @IBAction func provinceTextTouchDown(_ sender: Any) {
         let controller = ArrayChoiceTableViewController(getAllProvinceList()) {
             (type) in self.provinceModel.type = type
+            print("stateCode : ",self.provinceDict[type])
+            self.currentStateCode = self.provinceDict[type] as! String
+            //self.getAllCity(self.provinceDict[type]!)
+            self.getAllCity("23")
+            //print("State-code : ",self.findStateCodeFor(provinceName : type))
         }
-        controller.preferredContentSize = CGSize(width: (sender as! UITextField).bounds.width, height: 300)
+        controller.preferredContentSize = CGSize(width: 250, height: 300)
         showPopup(controller, sourceView: sender as! UIView)
         
     }
     @IBAction func cityTextTouchDown(_ sender: Any) {
-        let aprovince = provinceModel.type
-        let controller = ArrayChoiceTableViewController(getCitiesList(aprovince)) {
+        let controller = ArrayChoiceTableViewController(getAllCityList()) {
             (type) in self.cityModel.type = type
         }
         controller.preferredContentSize = CGSize(width: (sender as! UITextField).bounds.width, height: 200)
@@ -122,7 +247,7 @@ class SignupViewController: UIViewController  {
     }
     
     override func viewDidLoad() {
-    
+        getAllProvince()
         super.viewDidLoad()
 
     }

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class LoginViewController: UIViewController {
     @IBOutlet var PageView: UIView!
@@ -16,7 +18,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var MobileTextField: UnderLinedTextField!
     
     @IBAction func SendClicked(_ sender: Any) {
-        print("Button pressed")
         if !(MobileTextField.text!.isEmpty)  {
             // REQUEST SENDING SMS and GET the CODE
             //
@@ -57,9 +58,12 @@ class LoginViewController: UIViewController {
         vc.setMobileNumber(self.MobileTextField.text!)
         
     }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+        
 
         // Do any additional setup after loading the view, tßypically from a nib.
     }
