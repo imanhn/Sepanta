@@ -111,7 +111,9 @@ class SMSConfirmViewController: UIViewController {
                 }}))
             return
         }
+        
         countdownTimer.invalidate()
+        
         gotoMainViewController()
     }
     

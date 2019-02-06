@@ -656,12 +656,12 @@
         <scene sceneID="Q40-9h-T4U">
             <objects>
                 <viewController id="I4W-Vv-3RO" userLabel="SepantaGroupsViewController" customClass="SepantaGroupsViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ZCg-04-fbg">
+                    <view key="view" contentMode="scaleToFill" id="ZCg-04-fbg" userLabel="PageView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z2a-7O-hzv" userLabel="HeaderView">
-                                <rect key="frame" x="0.0" y="33" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="40" width="375" height="30"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_text" translatesAutoresizingMaskIntoConstraints="NO" id="Xr1-Et-qWv" userLabel="TopRightLogo">
                                         <rect key="frame" x="296" y="0.0" width="69" height="30"/>
@@ -669,46 +669,86 @@
                                             <constraint firstAttribute="width" secondItem="Xr1-Et-qWv" secondAttribute="height" multiplier="23:10" id="KUK-6p-rvx"/>
                                         </constraints>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="مراکز سپنتایی" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKg-wA-Ses" userLabel="HeaderText">
+                                        <rect key="frame" x="135" y="-1" width="104" height="31"/>
+                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Bg-Zr-66j" userLabel="BackToMainView">
+                                        <rect key="frame" x="20" y="0.0" width="10" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="7Bg-Zr-66j" secondAttribute="height" multiplier="1:3" id="ws7-ah-6Q2"/>
+                                        </constraints>
+                                        <state key="normal" image="icon_back_black"/>
+                                        <connections>
+                                            <segue destination="jPv-Ez-8v9" kind="show" id="6fO-n3-MLW"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="58I-us-nHk"/>
+                                    <constraint firstItem="7Bg-Zr-66j" firstAttribute="leading" secondItem="z2a-7O-hzv" secondAttribute="leading" constant="20" id="B2K-4i-hpb"/>
                                     <constraint firstItem="Xr1-Et-qWv" firstAttribute="height" secondItem="z2a-7O-hzv" secondAttribute="height" id="KTp-Rl-2IQ"/>
                                     <constraint firstAttribute="trailing" secondItem="Xr1-Et-qWv" secondAttribute="trailing" constant="10" id="gCG-i5-eN5"/>
+                                    <constraint firstItem="sKg-wA-Ses" firstAttribute="centerX" secondItem="z2a-7O-hzv" secondAttribute="centerX" id="kTk-bD-OC4"/>
+                                    <constraint firstItem="7Bg-Zr-66j" firstAttribute="centerY" secondItem="z2a-7O-hzv" secondAttribute="centerY" id="vHQ-oe-87C"/>
+                                    <constraint firstItem="sKg-wA-Ses" firstAttribute="centerY" secondItem="z2a-7O-hzv" secondAttribute="centerY" id="wPQ-z9-zt0"/>
                                     <constraint firstItem="Xr1-Et-qWv" firstAttribute="centerY" secondItem="z2a-7O-hzv" secondAttribute="centerY" id="zGd-S0-8ah"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="مراکز سپنتایی" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKg-wA-Ses" userLabel="HeaderText">
-                                <rect key="frame" x="135.5" y="33" width="104" height="30"/>
-                                <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
-                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Bg-Zr-66j" userLabel="BackToMainView">
-                                <rect key="frame" x="20" y="33" width="10" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O8P-MV-X94" userLabel="LocationView">
+                                <rect key="frame" x="0.0" y="78" width="375" height="45"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="انتخاب استان" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jqw-mm-317" customClass="UnderLinedSelectableTextField" customModule="Sepanta" customModuleProvider="target">
+                                        <rect key="frame" x="196" y="0.0" width="169" height="45"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="provincePressed:" destination="I4W-Vv-3RO" eventType="touchDown" id="R5C-qJ-9nS"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="انتخاب شهر" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PD2-xW-7oj" userLabel="SelectCity" customClass="UnderLinedSelectableTextField" customModule="Sepanta" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="-0.5" width="176" height="45"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="cityPressed:" destination="I4W-Vv-3RO" eventType="touchDown" id="m59-Qf-HpW"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="7Bg-Zr-66j" secondAttribute="height" multiplier="1:3" id="ws7-ah-6Q2"/>
+                                    <constraint firstItem="PD2-xW-7oj" firstAttribute="centerY" secondItem="O8P-MV-X94" secondAttribute="centerY" id="1CQ-So-aMY"/>
+                                    <constraint firstItem="jqw-mm-317" firstAttribute="centerY" secondItem="O8P-MV-X94" secondAttribute="centerY" id="7ev-QK-ZKq"/>
+                                    <constraint firstItem="PD2-xW-7oj" firstAttribute="leading" secondItem="O8P-MV-X94" secondAttribute="leading" constant="10" id="Cya-vo-dpB"/>
+                                    <constraint firstAttribute="trailing" secondItem="jqw-mm-317" secondAttribute="trailing" constant="10" id="Gh7-XG-SHb"/>
+                                    <constraint firstItem="jqw-mm-317" firstAttribute="height" secondItem="O8P-MV-X94" secondAttribute="height" id="hh5-Qz-vcW"/>
+                                    <constraint firstItem="jqw-mm-317" firstAttribute="leading" secondItem="PD2-xW-7oj" secondAttribute="trailing" constant="10" id="i0j-Oa-ANf"/>
+                                    <constraint firstItem="PD2-xW-7oj" firstAttribute="height" secondItem="O8P-MV-X94" secondAttribute="height" id="k2r-Zu-gPx"/>
+                                    <constraint firstItem="jqw-mm-317" firstAttribute="width" secondItem="O8P-MV-X94" secondAttribute="width" multiplier="0.45" id="oHC-5A-wLH"/>
                                 </constraints>
-                                <state key="normal" image="icon_back_black"/>
-                                <connections>
-                                    <segue destination="jPv-Ez-8v9" kind="show" id="6fO-n3-MLW"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="z2a-7O-hzv" firstAttribute="width" secondItem="ZCg-04-fbg" secondAttribute="width" id="BTZ-wN-dDo"/>
-                            <constraint firstItem="sKg-wA-Ses" firstAttribute="centerX" secondItem="z2a-7O-hzv" secondAttribute="centerX" id="M38-bS-C17"/>
-                            <constraint firstItem="z2a-7O-hzv" firstAttribute="top" secondItem="5uQ-ID-QV2" secondAttribute="top" constant="13" id="U50-ZY-RPE"/>
+                            <constraint firstItem="O8P-MV-X94" firstAttribute="centerX" secondItem="5uQ-ID-QV2" secondAttribute="centerX" id="Ngb-Ke-PVn"/>
+                            <constraint firstItem="O8P-MV-X94" firstAttribute="top" secondItem="z2a-7O-hzv" secondAttribute="bottom" constant="8" id="T7V-vY-wj9"/>
+                            <constraint firstItem="z2a-7O-hzv" firstAttribute="top" secondItem="5uQ-ID-QV2" secondAttribute="top" constant="20" id="U50-ZY-RPE"/>
+                            <constraint firstItem="O8P-MV-X94" firstAttribute="width" secondItem="ZCg-04-fbg" secondAttribute="width" id="Uoi-R2-6tQ"/>
                             <constraint firstItem="z2a-7O-hzv" firstAttribute="centerX" secondItem="5uQ-ID-QV2" secondAttribute="centerX" id="VVa-aS-wsr"/>
-                            <constraint firstItem="7Bg-Zr-66j" firstAttribute="leading" secondItem="z2a-7O-hzv" secondAttribute="leading" constant="20" id="YS7-Gd-dJ4"/>
-                            <constraint firstItem="sKg-wA-Ses" firstAttribute="centerY" secondItem="z2a-7O-hzv" secondAttribute="centerY" id="jk8-Uc-Kg9"/>
-                            <constraint firstItem="sKg-wA-Ses" firstAttribute="height" secondItem="z2a-7O-hzv" secondAttribute="height" id="nyJ-LB-2rr"/>
-                            <constraint firstItem="7Bg-Zr-66j" firstAttribute="height" secondItem="z2a-7O-hzv" secondAttribute="height" id="tSl-JZ-yNj"/>
-                            <constraint firstItem="7Bg-Zr-66j" firstAttribute="centerY" secondItem="z2a-7O-hzv" secondAttribute="centerY" id="vyG-BC-Och"/>
+                            <constraint firstItem="O8P-MV-X94" firstAttribute="height" secondItem="z2a-7O-hzv" secondAttribute="height" multiplier="1.5" id="rW7-QS-7QJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5uQ-ID-QV2"/>
                     </view>
+                    <connections>
+                        <outlet property="selectCity" destination="PD2-xW-7oj" id="rc0-5Q-L0w"/>
+                        <outlet property="selectProvince" destination="jqw-mm-317" id="PcL-la-azX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IHt-OM-fBY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
