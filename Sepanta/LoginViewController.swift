@@ -18,6 +18,12 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var MobileTextField: UnderLinedTextField!
     
     @IBAction func SendClicked(_ sender: Any) {
+        // Jump to MainView
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc : MainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+        self.present(vc, animated: false, completion: nil)
+        return
+        
         if !(MobileTextField.text!.isEmpty)  {
             // REQUEST SENDING SMS and GET the CODE
             //
@@ -51,6 +57,7 @@ class LoginViewController: UIViewController {
     }
     
     func presentSMSConfirmViewController() {
+ 
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let vc : SMSConfirmViewController = mainStoryboard.instantiateViewController(withIdentifier: "SMSConfirmViewController") as! SMSConfirmViewController
         print(" Entered : ",self.MobileTextField.text!)

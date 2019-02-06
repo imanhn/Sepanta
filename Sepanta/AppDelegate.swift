@@ -9,6 +9,7 @@
 import UIKit
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -43,4 +44,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
+
+struct Page {
+    var title: String
+    var image: String
+}
+
+
+let PAGES = [
+    Page(title: "Explore", image: "https://i.imgur.com/FGknouw.png"),
+    Page(title: "Today Widget", image: "https://i.imgur.com/feuwhEc.png"),
+]
+
 

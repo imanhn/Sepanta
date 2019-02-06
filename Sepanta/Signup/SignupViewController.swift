@@ -472,8 +472,6 @@ class SignupViewController: UIViewController,UITextFieldDelegate   {
         registerUser(MobileNumber: "09121325452", GenderCode: "1", Username: "iman2")
         return
  */
-        showSuccessfullSignupAndGoToMainView()
-        return
         var validationResult = validateForm();
         var genderCode : String = "1"
         if validationResult[0] as! Bool == false
