@@ -20,6 +20,60 @@ class UnderLinedTextField: UITextField {
 
     }
 }
+class AdImageView : UIImageView{
+    
+    func getCutPath() -> UIBezierPath{
+        let MBB = self.layer.bounds
+        let curvSize : CGFloat = 25;
+        let smallCurvSize : CGFloat = 10;
+        let sinus : CGFloat = sin(60.0 * 3.141592 / 180) //0.86
+        let cosinus : CGFloat = cos(60.0 * 3.141592 / 180) // 0.5
+        let tangent : CGFloat = tan(60.0 * 3.141592 / 180) // 1.732
+        let leftMarginPorportion : CGFloat = 0.1
+        
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: MBB.width, y: 0))
+        
+        path.addLine(to: CGPoint(x: MBB.width, y: MBB.height))
+        path.addLine(to: CGPoint(x: (MBB.width * leftMarginPorportion)+curvSize, y: MBB.height))
+        
+        
+        path.addQuadCurve(to: CGPoint(x: (MBB.width * leftMarginPorportion)+curvSize*cosinus, y: MBB.height-curvSize*sinus), controlPoint: CGPoint(x: (MBB.width * leftMarginPorportion), y: MBB.height))
+        
+        path.addLine(to: CGPoint(x: (MBB.width * leftMarginPorportion)+(MBB.height/tangent)-(smallCurvSize*cosinus), y: smallCurvSize*sinus))
+        
+        path.addQuadCurve(to: CGPoint(x: (MBB.width * leftMarginPorportion)+(MBB.height/tangent)+smallCurvSize, y: 0), controlPoint: CGPoint(x: (MBB.width * leftMarginPorportion)+(MBB.height/tangent), y: 0))
+        path.close()
+        return path
+        
+    }
+    /*
+    override init(image: UIImage?) {
+        super.init(image: image)
+        print("Initing")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        print("init required")
+       // self.cutImage()
+        //self.contentMode = UIViewContentMode.scaleToFill
+        
+        //fatalError("init(coder:) has not been implemented")
+    }
+ */
+    func cutImage(){
+        print("Cutting...")
+        let shapeLayer = CAShapeLayer()
+//        shapeLayer.frame = self.bounds
+        //shapeLayer.path = self.getCutPath().cgPath
+        let path = CGPath(rect: self.bounds, transform: nil)
+        shapeLayer.path = path
+        self.layer.mask = shapeLayer;
+        self.layer.masksToBounds = false
+    }
+    
+}
 
 class UnderLinedSelectableTextField: UITextField {
     override func draw(_ rect: CGRect) {

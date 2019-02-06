@@ -10,8 +10,7 @@ import Foundation
 import UIKit
 
 class MainViewController: UIViewController {
-    var pageViewController: UIPageViewController!
-    var slides : [UIImage] = [UIImage(named: "slide1")!,UIImage(named: "slide4")!,UIImage(named: "slide3")!,UIImage(named: "slide2")!]
+    var slides : [UIImage] = [UIImage(named: "slide1")!,UIImage(named: "blank")!,UIImage(named: "slide3")!,UIImage(named: "slide4")!]
     let blankImage = UIImage(named: "blank")
     @IBOutlet weak var settingButton: CircularButton!
     @IBOutlet weak var profileButton: CircularButton!
@@ -26,7 +25,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var jadidtarinha: MainButton!
     @IBOutlet weak var nazdikeman: MainButton!
     @IBOutlet weak var sepantaie: MainButton!
-    @IBOutlet weak var currentImageView: UIImageView!
+    @IBOutlet var currentImageView: UIImageView!
     
   
     @IBOutlet weak var leftImageView: UIImageView!
@@ -35,18 +34,15 @@ class MainViewController: UIViewController {
     var startLocation = CGPoint(x: 0, y: 0)
     var endLocation = CGPoint(x: 0, y: 0)
     
-    func updateAdsImage(){
-        currentImageView.image = slides[adsPage]
-    }
-    
     @objc func handlePan(_ sender:UISwipeGestureRecognizer) {
         if (sender.state == UIGestureRecognizerState.began) {
             startLocation = sender.location(in: self.view)
-            print("Start X : ",startLocation.x," Y : ",startLocation.y)
+            //print("Start X : ",startLocation.x," Y : ",startLocation.y)
         } else if (sender.state == UIGestureRecognizerState.ended) {
             endLocation = sender.location(in: self.view)
             let deltaX = endLocation.x - startLocation.x
             if (deltaX > 100) && (adsPage > 0)  {
+                print("Sliding to left ",self.adsPage)
                 UIView.animate(withDuration: 0.5, animations: {
                     self.currentImageView.layer.frame = CGRect(x: UIScreen.main.bounds.width, y: self.currentImageView.layer.frame.origin.y, width: self.currentImageView.layer.bounds.width, height: self.currentImageView.layer.bounds.height)
                     self.leftImageView.layer.frame = CGRect(x: 0, y: self.leftImageView.layer.frame.origin.y, width: self.leftImageView.layer.bounds.width, height: self.leftImageView.layer.bounds.height)
@@ -61,6 +57,7 @@ class MainViewController: UIViewController {
                 }
 
             } else if (deltaX < -100) && (adsPage < slides.count-1) {
+                print("Sliding to right ",self.adsPage)
                 UIView.animate(withDuration: 0.5, animations: {
                     self.currentImageView.layer.frame = CGRect(x: -1 * UIScreen.main.bounds.width, y: self.currentImageView.layer.frame.origin.y, width: self.currentImageView.layer.bounds.width, height: self.currentImageView.layer.bounds.height)
                     self.rightImageView.layer.frame = CGRect(x: 0, y: self.rightImageView.layer.frame.origin.y, width: self.rightImageView.layer.bounds.width, height: self.rightImageView.layer.bounds.height)
@@ -75,43 +72,55 @@ class MainViewController: UIViewController {
                 }
             }else{
                 // Moving Back to their locations
+                print("Rolling Back ",self.adsPage)
                 UIView.animate(withDuration: 0.2, animations: {
                     self.currentImageView.layer.frame = CGRect(x: 0, y: self.currentImageView.layer.frame.origin.y, width: self.currentImageView.layer.bounds.width, height: self.currentImageView.layer.bounds.height)
                     self.rightImageView.layer.frame = CGRect(x: UIScreen.main.bounds.width, y: self.rightImageView.layer.frame.origin.y, width: self.rightImageView.layer.bounds.width, height: self.rightImageView.layer.bounds.height)
                     self.leftImageView.layer.frame = CGRect(x: -1 * UIScreen.main.bounds.width, y: self.leftImageView.layer.frame.origin.y, width: self.leftImageView.layer.bounds.width, height: self.leftImageView.layer.bounds.height)
-
                 }) { _ in
                 }
             }
-            print("END X : ",endLocation.x," Y : ",endLocation.y)
+            //print("END X : ",endLocation.x," Y : ",endLocation.y)
         } else if (sender.state == UIGestureRecognizerState.changed) {
             let midLocation = sender.location(in: self.view)
             var deltaX = midLocation.x - startLocation.x
             if (deltaX < 0) && (adsPage == slides.count-1) ||  (deltaX > 0) && (adsPage == 0){
                    deltaX = deltaX / 4
             }
-            currentImageView.layer.frame = CGRect(x: deltaX, y: currentImageView.layer.frame.origin.y, width: currentImageView.layer.bounds.width, height: currentImageView.layer.bounds.height)
+            print("Moving Images ",self.adsPage," ",deltaX)
+            self.currentImageView.layer.frame = CGRect(x: deltaX, y: self.currentImageView.layer.frame.origin.y, width: self.currentImageView.layer.bounds.width, height: self.currentImageView.layer.bounds.height)
             rightImageView.layer.frame = CGRect(x: UIScreen.main.bounds.width + deltaX, y: rightImageView.layer.frame.origin.y, width: rightImageView.layer.bounds.width, height: rightImageView.layer.bounds.height)
-            leftImageView.layer.frame = CGRect(x: deltaX - UIScreen.main.bounds.width, y: rightImageView.layer.frame.origin.y, width: rightImageView.layer.bounds.width, height: rightImageView.layer.bounds.height)
+            leftImageView.layer.frame = CGRect(x: deltaX - UIScreen.main.bounds.width, y: leftImageView.layer.frame.origin.y, width: leftImageView.layer.bounds.width, height: leftImageView.layer.bounds.height)
+ 
         }
     }
     
     func setupLeftAndRightImages(){
         if adsPage < 1 {
             //leftImageView.image = slides[adsPage] // No left! get the current for left
-            leftImageView.image = blankImage // No left! get a blank logo for left
+            leftImageView.image = slides.last // No left! get a blank logo for left
             rightImageView.image = slides[adsPage+1]
+            currentImageView.image = slides[adsPage] // Current page
         } else if adsPage > slides.count-2 {
             leftImageView.image = slides[adsPage-1]
-            //rightImageView.image = slides[adsPage] // No right get the current for right
-            rightImageView.image = blankImage // No right! get a blank logo for right
+            rightImageView.image = slides.first // No right! get a blank logo for right
+             currentImageView.image = slides[adsPage] // Current page
         } else {
             leftImageView.image = slides[adsPage-1]
             rightImageView.image = slides[adsPage+1]
+             currentImageView.image = slides[adsPage] // Current page
         }
         currentImageView.image = slides[adsPage] // Current page
+        currentImageView.setNeedsDisplay()
         print("Page : ",adsPage)
         pageControl.currentPage = adsPage
+        /*
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.frame = currentImageView.bounds
+        shapeLayer.path = currentImageView.getCutPath().cgPath
+        currentImageView.layer.mask = shapeLayer;
+        currentImageView.layer.masksToBounds = true;
+        */
         
         /*
         print("ORI-Right : X: ",rightImageView.layer.frame.origin.x,"  Y: ",rightImageView.frame.origin.y,"  W: ", rightImageView.bounds.width," H: ", rightImageView.bounds.height)
@@ -119,15 +128,18 @@ class MainViewController: UIViewController {
         print("ORI-Curn : X: ",currentImageView.layer.frame.origin.x,"  Y: ",currentImageView.frame.origin.y,"  W: ", currentImageView.bounds.width," H: ", currentImageView.bounds.height)
   */
     }
+
     
     override func viewDidLoad() {
+       setupLeftAndRightImages()
         super.viewDidLoad()
         pageControl.numberOfPages = slides.count
-        setupLeftAndRightImages()
+       
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         view.addGestureRecognizer(pan)
+        currentImageView.image = slides[adsPage] // Current page
+        currentImageView.setNeedsDisplay()
 
-        //setupSlides()
     }
     
     override func didReceiveMemoryWarning() {
