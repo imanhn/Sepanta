@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class MainViewController: UIViewController {
-    var slides : [UIImage] = [UIImage(named: "slide1")!,UIImage(named: "blank")!,UIImage(named: "slide3")!,UIImage(named: "slide4")!]
+    var slides : [UIImage] = [UIImage(named: "slide1")!,UIImage(named: "slide2")!,UIImage(named: "slide3")!,UIImage(named: "slide4")!]
     let blankImage = UIImage(named: "blank")
     @IBOutlet weak var settingButton: CircularButton!
     @IBOutlet weak var profileButton: CircularButton!
@@ -25,11 +25,11 @@ class MainViewController: UIViewController {
     @IBOutlet weak var jadidtarinha: MainButton!
     @IBOutlet weak var nazdikeman: MainButton!
     @IBOutlet weak var sepantaie: MainButton!
-    @IBOutlet var currentImageView: UIImageView!
     
-  
-    @IBOutlet weak var leftImageView: UIImageView!
-    @IBOutlet weak var rightImageView: UIImageView!
+    @IBOutlet var currentImageView: AdImageView!
+    @IBOutlet weak var leftImageView: AdImageView!
+    @IBOutlet weak var rightImageView: AdImageView!
+    
     var adsPage = 1;
     var startLocation = CGPoint(x: 0, y: 0)
     var endLocation = CGPoint(x: 0, y: 0)
@@ -42,7 +42,7 @@ class MainViewController: UIViewController {
             endLocation = sender.location(in: self.view)
             let deltaX = endLocation.x - startLocation.x
             if (deltaX > 100) && (adsPage > 0)  {
-                print("Sliding to left ",self.adsPage)
+                //print("Sliding to left ",self.adsPage)
                 UIView.animate(withDuration: 0.5, animations: {
                     self.currentImageView.layer.frame = CGRect(x: UIScreen.main.bounds.width, y: self.currentImageView.layer.frame.origin.y, width: self.currentImageView.layer.bounds.width, height: self.currentImageView.layer.bounds.height)
                     self.leftImageView.layer.frame = CGRect(x: 0, y: self.leftImageView.layer.frame.origin.y, width: self.leftImageView.layer.bounds.width, height: self.leftImageView.layer.bounds.height)
@@ -57,7 +57,7 @@ class MainViewController: UIViewController {
                 }
 
             } else if (deltaX < -100) && (adsPage < slides.count-1) {
-                print("Sliding to right ",self.adsPage)
+                //print("Sliding to right ",self.adsPage)
                 UIView.animate(withDuration: 0.5, animations: {
                     self.currentImageView.layer.frame = CGRect(x: -1 * UIScreen.main.bounds.width, y: self.currentImageView.layer.frame.origin.y, width: self.currentImageView.layer.bounds.width, height: self.currentImageView.layer.bounds.height)
                     self.rightImageView.layer.frame = CGRect(x: 0, y: self.rightImageView.layer.frame.origin.y, width: self.rightImageView.layer.bounds.width, height: self.rightImageView.layer.bounds.height)
@@ -72,7 +72,7 @@ class MainViewController: UIViewController {
                 }
             }else{
                 // Moving Back to their locations
-                print("Rolling Back ",self.adsPage)
+                //print("Rolling Back ",self.adsPage)
                 UIView.animate(withDuration: 0.2, animations: {
                     self.currentImageView.layer.frame = CGRect(x: 0, y: self.currentImageView.layer.frame.origin.y, width: self.currentImageView.layer.bounds.width, height: self.currentImageView.layer.bounds.height)
                     self.rightImageView.layer.frame = CGRect(x: UIScreen.main.bounds.width, y: self.rightImageView.layer.frame.origin.y, width: self.rightImageView.layer.bounds.width, height: self.rightImageView.layer.bounds.height)
@@ -87,7 +87,7 @@ class MainViewController: UIViewController {
             if (deltaX < 0) && (adsPage == slides.count-1) ||  (deltaX > 0) && (adsPage == 0){
                    deltaX = deltaX / 4
             }
-            print("Moving Images ",self.adsPage," ",deltaX)
+            //print("Moving Images ",self.adsPage," ",deltaX)
             self.currentImageView.layer.frame = CGRect(x: deltaX, y: self.currentImageView.layer.frame.origin.y, width: self.currentImageView.layer.bounds.width, height: self.currentImageView.layer.bounds.height)
             rightImageView.layer.frame = CGRect(x: UIScreen.main.bounds.width + deltaX, y: rightImageView.layer.frame.origin.y, width: rightImageView.layer.bounds.width, height: rightImageView.layer.bounds.height)
             leftImageView.layer.frame = CGRect(x: deltaX - UIScreen.main.bounds.width, y: leftImageView.layer.frame.origin.y, width: leftImageView.layer.bounds.width, height: leftImageView.layer.bounds.height)
@@ -112,7 +112,7 @@ class MainViewController: UIViewController {
         }
         currentImageView.image = slides[adsPage] // Current page
         currentImageView.setNeedsDisplay()
-        print("Page : ",adsPage)
+        //print("Page : ",adsPage)
         pageControl.currentPage = adsPage
         /*
         let shapeLayer = CAShapeLayer()

@@ -543,14 +543,14 @@
                                     <constraint firstItem="KHn-Nf-Ayy" firstAttribute="leading" secondItem="uMB-5N-YVt" secondAttribute="leading" constant="-20" id="xWg-tP-aZM"/>
                                 </constraints>
                             </view>
-                            <imageView autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bna-xO-99a" userLabel="rightView">
+                            <imageView autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bna-xO-99a" userLabel="rightView" customClass="AdImageView" customModule="Sepanta" customModuleProvider="target">
                                 <rect key="frame" x="375" y="415" width="375" height="172"/>
                             </imageView>
-                            <imageView autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GhD-8q-b8B" userLabel="CurrentImage(Ads)">
+                            <imageView autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GhD-8q-b8B" userLabel="CurrentImage(Ads)" customClass="AdImageView" customModule="Sepanta" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="415" width="375" height="172"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <imageView autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1CJ-xS-cn6" userLabel="leftView">
+                            <imageView autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1CJ-xS-cn6" userLabel="leftView" customClass="AdImageView" customModule="Sepanta" customModuleProvider="target">
                                 <rect key="frame" x="-375" y="415" width="375" height="172"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="172" id="1M0-OT-idF"/>
