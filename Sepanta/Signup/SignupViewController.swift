@@ -74,12 +74,22 @@ class SignupViewController: UIViewController,UITextFieldDelegate   {
     }
     func updateGender(){
         self.genderTextField.text = genderModel.type
+        genderTextField.resignFirstResponder()
     }
     func updateProvince(){
         self.selectProvince.text = provinceModel.type
+        selectProvince.resignFirstResponder()
     }
     func updateCity(){
         self.selectCity.text = cityModel.type
+        selectCity.resignFirstResponder()
+    }
+    @IBAction func mobileNoTypeDone(_ sender: Any) {
+        (sender as AnyObject).resignFirstResponder()
+    }
+    
+    @IBAction func usernameTypeDone(_ sender: Any) {
+        (sender as AnyObject).resignFirstResponder()
     }
     func getAllProvince() {
         var provinceList : [String]=[];

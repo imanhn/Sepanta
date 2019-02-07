@@ -164,7 +164,7 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate{
             print("City Code : ",self.cityDict[type]!)
             self.currentCityCode = self.cityDict[type] as! String
         }
-        controller.preferredContentSize = CGSize(width: (sender as! UITextField).bounds.width, height: 200)
+        controller.preferredContentSize = CGSize(width: (sender as! UITextField).bounds.width, height: 400)
         showPopup(controller, sourceView: sender as! UIView)
         selectCity.resignFirstResponder()
     }
@@ -178,7 +178,7 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate{
             self.getAllCity(self.provinceDict[type]!)
             
         }
-        controller.preferredContentSize = CGSize(width: 250, height: 300)
+        controller.preferredContentSize = CGSize(width: 250, height: 400)
         showPopup(controller, sourceView: sender as! UIView)
     }
     override func viewDidLoad() {
