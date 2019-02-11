@@ -33,17 +33,29 @@ class MainViewController: UIViewController {
     var adsPage = 1;
     var startLocation = CGPoint(x: 0, y: 0)
     var endLocation = CGPoint(x: 0, y: 0)
+    var token : String?
+    var userID : String?
     
-    @objc func handlePan(_ sender:UISwipeGestureRecognizer) {
+    func setUserID(anID : String){
+        self.userID = anID
+    }
+    
+    func setToken(aToken : String){
+        self.token = aToken
+    }
+    
+    @objc func handlePan(_ sender:UIPanGestureRecognizer) {
         if (sender.state == UIGestureRecognizerState.began) {
             startLocation = sender.location(in: self.view)
             //print("Start X : ",startLocation.x," Y : ",startLocation.y)
         } else if (sender.state == UIGestureRecognizerState.ended) {
             endLocation = sender.location(in: self.view)
+            let animDurationInterval = TimeInterval(1/(abs(sender.velocity(in: self.view).x/1000)))
+            //print("Velocity : ",sender.velocity(in: self.view))
             let deltaX = endLocation.x - startLocation.x
             if (deltaX > 100) && (adsPage > 0)  {
                 //print("Sliding to left ",self.adsPage)
-                UIView.animate(withDuration: 0.5, animations: {
+                UIView.animate(withDuration: animDurationInterval, animations: {
                     self.currentImageView.layer.frame = CGRect(x: UIScreen.main.bounds.width, y: self.currentImageView.layer.frame.origin.y, width: self.currentImageView.layer.bounds.width, height: self.currentImageView.layer.bounds.height)
                     self.leftImageView.layer.frame = CGRect(x: 0, y: self.leftImageView.layer.frame.origin.y, width: self.leftImageView.layer.bounds.width, height: self.leftImageView.layer.bounds.height)
                 }) { _ in
@@ -58,7 +70,7 @@ class MainViewController: UIViewController {
 
             } else if (deltaX < -100) && (adsPage < slides.count-1) {
                 //print("Sliding to right ",self.adsPage)
-                UIView.animate(withDuration: 0.5, animations: {
+                UIView.animate(withDuration: animDurationInterval, animations: {
                     self.currentImageView.layer.frame = CGRect(x: -1 * UIScreen.main.bounds.width, y: self.currentImageView.layer.frame.origin.y, width: self.currentImageView.layer.bounds.width, height: self.currentImageView.layer.bounds.height)
                     self.rightImageView.layer.frame = CGRect(x: 0, y: self.rightImageView.layer.frame.origin.y, width: self.rightImageView.layer.bounds.width, height: self.rightImageView.layer.bounds.height)
                 }) { _ in

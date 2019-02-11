@@ -255,6 +255,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate   {
     override func viewDidLoad() {
         getAllProvince()
         super.viewDidLoad()
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
         definesPresentationContext = true
         selectCity.delegate = self
         selectProvince.delegate = self

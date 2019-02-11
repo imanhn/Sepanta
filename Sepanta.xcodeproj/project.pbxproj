@@ -17,6 +17,9 @@
 		0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */; };
 		0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */; };
 		0F984E29220B727B004AFB06 /* SepantaGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */; };
+		0FD7BEB6221073AE007B7244 /* Shabnam-Light-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB3221073AA007B7244 /* Shabnam-Light-FD.ttf */; };
+		0FD7BEB7221073AE007B7244 /* Shabnam-Bold-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB4221073AB007B7244 /* Shabnam-Bold-FD.ttf */; };
+		0FD7BEB8221073AE007B7244 /* Shabnam-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB5221073AD007B7244 /* Shabnam-FD.ttf */; };
 		0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9A8220355F000C868C3 /* AppDelegate.swift */; };
 		0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9AA220355F000C868C3 /* LoginViewController.swift */; };
 		0FE8B9AE220355F000C868C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9AC220355F000C868C3 /* Main.storyboard */; };
@@ -87,6 +90,9 @@
 		0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysShowPopup.swift; sourceTree = "<group>"; };
 		0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayChoiceTableViewController.swift; sourceTree = "<group>"; };
 		0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaGroupsViewController.swift; sourceTree = "<group>"; };
+		0FD7BEB3221073AA007B7244 /* Shabnam-Light-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-Light-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-Light-FD.ttf"; sourceTree = "<group>"; };
+		0FD7BEB4221073AB007B7244 /* Shabnam-Bold-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-Bold-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-Bold-FD.ttf"; sourceTree = "<group>"; };
+		0FD7BEB5221073AD007B7244 /* Shabnam-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-FD.ttf"; sourceTree = "<group>"; };
 		0FE8B9A5220355F000C868C3 /* Sepanta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sepanta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FE8B9A8220355F000C868C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0FE8B9AA220355F000C868C3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -233,6 +239,9 @@
 		0FE8B9DA2203BCAA00C868C3 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				0FD7BEB4221073AB007B7244 /* Shabnam-Bold-FD.ttf */,
+				0FD7BEB5221073AD007B7244 /* Shabnam-FD.ttf */,
+				0FD7BEB3221073AA007B7244 /* Shabnam-Light-FD.ttf */,
 				0FE8B9DB2203BCBD00C868C3 /* BArshia_2770251553.ttf */,
 				0FE8B9EC2203BCC000C868C3 /* BElham_561726703.ttf */,
 				0FE8B9E12203BCBE00C868C3 /* BHoma_638648140.ttf */,
@@ -364,14 +373,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FE8B9B3220355F100C868C3 /* LaunchScreen.storyboard in Resources */,
+				0FD7BEB7221073AE007B7244 /* Shabnam-Bold-FD.ttf in Resources */,
 				0FE8B9EF2203BCC000C868C3 /* BRoyaBold_3595828071.ttf in Resources */,
 				0FE8B9F52203BCC000C868C3 /* BKoodakBold_1956931111.ttf in Resources */,
 				0FE8B9F42203BCC000C868C3 /* BHoma_638648140.ttf in Resources */,
 				0FE8B9FE2203BCC000C868C3 /* BNarm_3969145717.ttf in Resources */,
 				0FE8B9B0220355F100C868C3 /* Assets.xcassets in Resources */,
 				0FE8B9FA2203BCC000C868C3 /* BRoya_1945398306.ttf in Resources */,
+				0FD7BEB6221073AE007B7244 /* Shabnam-Light-FD.ttf in Resources */,
 				0FE8B9F32203BCC000C868C3 /* BTrafficBold_4126700430.ttf in Resources */,
 				0FE8B9AE220355F000C868C3 /* Main.storyboard in Resources */,
+				0FD7BEB8221073AE007B7244 /* Shabnam-FD.ttf in Resources */,
 				0FE8BA002203BCC000C868C3 /* BYagut_3160526546.ttf in Resources */,
 				0FE8B9FF2203BCC000C868C3 /* BElham_561726703.ttf in Resources */,
 				0FE8B9F92203BCC000C868C3 /* BMitraBold_2046406346.ttf in Resources */,

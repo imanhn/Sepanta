@@ -15,11 +15,11 @@
         <array key="BKoodakBold_1956931111.ttf">
             <string>BKoodakBold</string>
         </array>
-        <array key="BNazaninBold_3646201758.ttf">
-            <string>BNazaninBold</string>
+        <array key="Shabnam-Bold-FD.ttf">
+            <string>Shabnam-Bold-FD</string>
         </array>
-        <array key="BYekan_3295791680.ttf">
-            <string>BYekan</string>
+        <array key="Shabnam-FD.ttf">
+            <string>Shabnam-FD</string>
         </array>
     </customFonts>
     <scenes>
@@ -52,7 +52,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8gH-oj-d9h" userLabel="Enter">
                                         <rect key="frame" x="169" y="0.0" width="169" height="52.5"/>
-                                        <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="ورود" image="icon_login">
                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -65,7 +65,7 @@
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iVP-EF-w4S" userLabel="Signup" customClass="TabbedButton" customModule="Sepanta" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="169" height="52.5"/>
-                                        <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="ثبت نام" image="icon_edit">
                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -82,11 +82,15 @@
                                             <segue destination="MG4-my-GWf" kind="show" animates="NO" id="xia-Gr-1le"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kec-hf-ANp" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kec-hf-ANp" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
                                         <rect key="frame" x="17" y="157.5" width="304" height="32"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="phonePad" textContentType="tel"/>
+                                        <connections>
+                                            <action selector="MobileTypeEnded:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="Vcx-hk-sly"/>
+                                            <action selector="mobileNoTypeDone:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="1yK-Y5-ODf"/>
+                                        </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_mobile_gray" translatesAutoresizingMaskIntoConstraints="NO" id="3dy-XG-y5x" userLabel="MobileIcon">
                                         <rect key="frame" x="295" y="161" width="16" height="25"/>
@@ -119,7 +123,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9k-r4-p4l" userLabel="SendButton">
                                         <rect key="frame" x="94" y="3" width="188" height="10"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <state key="normal" title="تایید" image="icon_tik_dark">
                                             <color key="titleColor" red="0.8565688776" green="0.2257254132" blue="0.36172668870000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -220,7 +224,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDa-B2-0b9" userLabel="Enter">
                                         <rect key="frame" x="169" y="0.0" width="169" height="53"/>
-                                        <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="ورود" image="icon_login">
                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -233,7 +237,7 @@
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ow8-uB-LLC" userLabel="Signup" customClass="TabbedButton" customModule="Sepanta" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="169" height="53"/>
-                                        <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="ثبت نام" image="icon_edit">
                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -253,17 +257,21 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0mb-wF-v4k" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
                                         <rect key="frame" x="17" y="106" width="304" height="32"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="phonePad" enablesReturnKeyAutomatically="YES" textContentType="tel"/>
                                         <connections>
+                                            <action selector="MobileNoTypeDoen:" destination="h73-aN-KX7" eventType="primaryActionTriggered" id="JpZ-53-OUY"/>
                                             <action selector="MobileTextEditEnd:" destination="h73-aN-KX7" eventType="editingDidEnd" id="9u9-MF-5iD"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ورود کد ارسال شده" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ron-c6-HyJ" userLabel="SMSCodeText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
                                         <rect key="frame" x="17" y="158" width="304" height="32"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="phonePad" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="SMSCodeTypeDone:" destination="h73-aN-KX7" eventType="primaryActionTriggered" id="hdR-k2-VMu"/>
+                                        </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_mobile_gray" translatesAutoresizingMaskIntoConstraints="NO" id="24U-I8-eec" userLabel="MobileIcon">
                                         <rect key="frame" x="295" y="110" width="16" height="25"/>
@@ -273,7 +281,7 @@
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۰۱:۰۰" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAM-oe-oMT" userLabel="TimerLabel">
                                         <rect key="frame" x="17" y="210" width="304" height="32"/>
-                                        <fontDescription key="fontDescription" name="BNazaninBold" family="B Nazanin" pointSize="24"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="24"/>
                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -315,7 +323,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gF1-k4-AfP" userLabel="SendButton">
                                         <rect key="frame" x="94" y="3" width="188" height="9"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <state key="normal" title="تایید" image="icon_tik_dark">
                                             <color key="titleColor" red="0.8565688776" green="0.2257254132" blue="0.36172668870000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -568,13 +576,13 @@
                                         <color key="currentPageIndicatorTintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </pageControl>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="جای تبلیغ شما اینجاست !!!" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ss4-8X-m5a" userLabel="CommentAds">
-                                        <rect key="frame" x="92" y="0.0" width="263" height="26.5"/>
-                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="17"/>
+                                        <rect key="frame" x="92" y="0.0" width="263" height="23.5"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yKJ-mr-pJv" userLabel="Menu">
-                                        <rect key="frame" x="170.5" y="36.5" width="35.5" height="35.5"/>
+                                        <rect key="frame" x="169" y="33.5" width="38.5" height="38.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="yKJ-mr-pJv" secondAttribute="height" multiplier="1:1" id="hbh-UP-VLC"/>
                                         </constraints>
@@ -670,8 +678,8 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="مراکز سپنتایی" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKg-wA-Ses" userLabel="HeaderText">
-                                        <rect key="frame" x="135" y="-1" width="104" height="31"/>
-                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
+                                        <rect key="frame" x="131" y="1" width="112" height="27.5"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -704,7 +712,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="انتخاب استان" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jqw-mm-317" customClass="UnderLinedSelectableTextField" customModule="Sepanta" customModuleProvider="target">
                                         <rect key="frame" x="196" y="0.0" width="169" height="45"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="provincePressed:" destination="I4W-Vv-3RO" eventType="touchDown" id="R5C-qJ-9nS"/>
@@ -713,7 +721,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="انتخاب شهر" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PD2-xW-7oj" userLabel="SelectCity" customClass="UnderLinedSelectableTextField" customModule="Sepanta" customModuleProvider="target">
                                         <rect key="frame" x="10" y="-0.5" width="176" height="45"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="cityPressed:" destination="I4W-Vv-3RO" eventType="touchDown" id="m59-Qf-HpW"/>
@@ -732,16 +740,35 @@
                                     <constraint firstItem="jqw-mm-317" firstAttribute="width" secondItem="O8P-MV-X94" secondAttribute="width" multiplier="0.45" id="oHC-5A-wLH"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFc-jt-RQL" userLabel="SepantaGroupsView">
+                                <rect key="frame" x="0.0" y="131" width="375" height="667"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="mYG-Qz-BRa" userLabel="SepantaScroll">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    </scrollView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="mYG-Qz-BRa" firstAttribute="width" secondItem="zFc-jt-RQL" secondAttribute="width" id="RCW-Lr-EVV"/>
+                                    <constraint firstItem="mYG-Qz-BRa" firstAttribute="centerX" secondItem="zFc-jt-RQL" secondAttribute="centerX" id="RDZ-Uo-HhV"/>
+                                    <constraint firstItem="mYG-Qz-BRa" firstAttribute="centerY" secondItem="zFc-jt-RQL" secondAttribute="centerY" id="geB-h3-1BS"/>
+                                    <constraint firstItem="mYG-Qz-BRa" firstAttribute="height" secondItem="zFc-jt-RQL" secondAttribute="height" id="ijP-4L-rj1"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="zFc-jt-RQL" firstAttribute="height" secondItem="ZCg-04-fbg" secondAttribute="height" id="129-No-aTY"/>
+                            <constraint firstItem="zFc-jt-RQL" firstAttribute="width" secondItem="ZCg-04-fbg" secondAttribute="width" id="9vB-c8-1OM"/>
                             <constraint firstItem="z2a-7O-hzv" firstAttribute="width" secondItem="ZCg-04-fbg" secondAttribute="width" id="BTZ-wN-dDo"/>
+                            <constraint firstItem="zFc-jt-RQL" firstAttribute="top" secondItem="O8P-MV-X94" secondAttribute="bottom" constant="8" id="Doh-BC-ZEv"/>
                             <constraint firstItem="O8P-MV-X94" firstAttribute="centerX" secondItem="5uQ-ID-QV2" secondAttribute="centerX" id="Ngb-Ke-PVn"/>
                             <constraint firstItem="O8P-MV-X94" firstAttribute="top" secondItem="z2a-7O-hzv" secondAttribute="bottom" constant="8" id="T7V-vY-wj9"/>
                             <constraint firstItem="z2a-7O-hzv" firstAttribute="top" secondItem="5uQ-ID-QV2" secondAttribute="top" constant="20" id="U50-ZY-RPE"/>
                             <constraint firstItem="O8P-MV-X94" firstAttribute="width" secondItem="ZCg-04-fbg" secondAttribute="width" id="Uoi-R2-6tQ"/>
                             <constraint firstItem="z2a-7O-hzv" firstAttribute="centerX" secondItem="5uQ-ID-QV2" secondAttribute="centerX" id="VVa-aS-wsr"/>
                             <constraint firstItem="O8P-MV-X94" firstAttribute="height" secondItem="z2a-7O-hzv" secondAttribute="height" multiplier="1.5" id="rW7-QS-7QJ"/>
+                            <constraint firstItem="zFc-jt-RQL" firstAttribute="leading" secondItem="5uQ-ID-QV2" secondAttribute="leading" id="x7A-Td-3MK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5uQ-ID-QV2"/>
                     </view>
@@ -783,7 +810,7 @@
                                 <subviews>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LdK-XH-fZW" userLabel="Signup">
                                         <rect key="frame" x="0.0" y="0.0" width="164" height="60"/>
-                                        <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="ثبت نام" image="icon_edit">
                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -800,7 +827,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yI0-wD-DaW" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
                                         <rect key="frame" x="16.5" y="80" width="304" height="40.5"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" returnKeyType="continue" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                         <connections>
                                             <action selector="mobileNoTypeDone:" destination="MG4-my-GWf" eventType="primaryActionTriggered" id="UjV-x3-8Cl"/>
@@ -812,7 +839,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="نام کاربری" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="idx-Fs-RNY" userLabel="UsernameText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
                                         <rect key="frame" x="16.5" y="140.5" width="304" height="40"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="continue" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                         <connections>
                                             <action selector="usernameTypeDone:" destination="MG4-my-GWf" eventType="primaryActionTriggered" id="cGX-rC-z3r"/>
@@ -824,7 +851,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="جنسیت" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PE5-oh-OTo" userLabel="GenderSelectText" customClass="UnderLinedSelectableTextField" customModule="Sepanta" customModuleProvider="target">
                                         <rect key="frame" x="16.5" y="200.5" width="304" height="40.5"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <action selector="GenderTextTouchDown:" destination="MG4-my-GWf" eventType="touchDown" id="Lbu-Os-CSt"/>
@@ -833,7 +860,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="انتخاب استان" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rk0-qe-jxg" userLabel="ProvinceText" customClass="UnderLinedSelectableTextField" customModule="Sepanta" customModuleProvider="target">
                                         <rect key="frame" x="168.5" y="261" width="152" height="40.5"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="provinceTextTouchDown:" destination="MG4-my-GWf" eventType="touchDown" id="bH3-yM-T4W"/>
@@ -845,7 +872,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="انتخاب شهر" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ovn-bR-1Bu" userLabel="CityText" customClass="UnderLinedSelectableTextField" customModule="Sepanta" customModuleProvider="target">
                                         <rect key="frame" x="16.5" y="261" width="162" height="40"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="cityTextTouchDown:" destination="MG4-my-GWf" eventType="touchDown" id="ftg-9F-VSA"/>
@@ -853,7 +880,7 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8z5-tl-h7d" userLabel="Enter" customClass="TabbedButton" customModule="Sepanta" customModuleProvider="target">
                                         <rect key="frame" x="174" y="0.0" width="163.5" height="60"/>
-                                        <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="ورود" image="icon_login">
                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -879,9 +906,9 @@
                                             <action selector="termsClicked:" destination="MG4-my-GWf" eventType="touchUpInside" id="YyX-rM-P6f"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="قوانین و مقررات را خوانده ام و موافقم." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80h-aI-T9g">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="قوانین و مقررات را خوانده ام و موافقم." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80h-aI-T9g">
                                         <rect key="frame" x="16.5" y="321.5" width="251" height="30"/>
-                                        <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="16"/>
                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -940,7 +967,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sFd-mZ-n8V" userLabel="SendButton">
                                         <rect key="frame" x="93.5" y="2.5" width="188" height="10"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="تایید" image="icon_tik_dark">
                                             <color key="titleColor" red="0.8565688776" green="0.2257254132" blue="0.36172668870000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1041,6 +1068,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6fO-n3-MLW"/>
-        <segue reference="xia-Gr-1le"/>
+        <segue reference="fAa-kA-JXe"/>
     </inferredMetricsTieBreakers>
 </document>

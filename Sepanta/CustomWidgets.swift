@@ -50,12 +50,12 @@ class AdImageView : UIImageView{
     
     override init(image: UIImage?) {
         super.init(image: image)
-        print("Initing")
+        //print("Initing")
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        print("init required")
+        //print("init required")
         self.cutImage()
         //self.contentMode = UIViewContentMode.scaleToFill
         
@@ -63,12 +63,12 @@ class AdImageView : UIImageView{
     }
  
     func cutImage(){
-        print("Cutting...")
+        //print("Cutting...")
         let shapeLayer = CAShapeLayer()
         shapeLayer.frame = self.bounds
         shapeLayer.path = self.getCutPath().cgPath
-        print("Bounds W/H : ",self.bounds.width,"  ",self.bounds.height)
-        print("Frame W/H : ",self.frame.width,"  ",self.frame.height)
+        //print("Bounds W/H : ",self.bounds.width,"  ",self.bounds.height)
+        //print("Frame W/H : ",self.frame.width,"  ",self.frame.height)
         
 //        self.bounds = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: self.bounds.height)
  //       let path = CGPath(rect: self.bounds, transform: nil)
@@ -150,7 +150,7 @@ class TriangularButton: UIButton {
         let w = self.bounds.width
         let h = self.bounds.height
         let l = min(w,h)
-        print("w : ",w,"  h : ",h, "  l : ",l)
+        //print("w : ",w,"  h : ",h, "  l : ",l)
         let sinus : CGFloat = sin(60.0 * 3.141592 / 180)
         let cosinus : CGFloat = cos(60.0 * 3.141592 / 180)
         

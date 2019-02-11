@@ -16,15 +16,34 @@ class SMSConfirmViewController: UIViewController {
     @IBOutlet weak var TimerLabel: UILabel!
     var countdownTimer: Timer!
     var totalTime = 10
+    var token : String?
+    var userID : String?
     override func viewDidLoad() {
         super.viewDidLoad()
+         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
         
-        
+    }
+    func setUserID(anID : String){
+        self.userID = anID
+    }
+
+    func setToken(aToken : String){
+        self.token = aToken
+    }
+
+    @IBAction func MobileNoTypeDoen(_ sender: Any) {
+        (sender as AnyObject).resignFirstResponder()
+    }
+    
+    @IBAction func SMSCodeTypeDone(_ sender: Any) {
+        (sender as AnyObject).resignFirstResponder()
     }
     
     @IBAction func MobileTextEditEnd(_ sender: Any) {
+        (sender as AnyObject).resignFirstResponder()
         startTimer()
     }
+    
     func startTimer() {
         countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
@@ -85,6 +104,13 @@ class SMSConfirmViewController: UIViewController {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let vc : MainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
         self.present(vc, animated: false, completion: nil)
+        if token != nil {
+            vc.setToken(aToken: token!)
+        }
+        if userID != nil {
+            vc.setUserID(anID: userID!)
+        }
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -111,9 +137,11 @@ class SMSConfirmViewController: UIViewController {
                 }}))
             return
         }
-        
-        countdownTimer.invalidate()
-        
+        if (countdownTimer) != nil {
+            countdownTimer.invalidate()
+        } else {
+            print("Timer is already stoped")
+        }
         gotoMainViewController()
     }
     
