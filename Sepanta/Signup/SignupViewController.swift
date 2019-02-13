@@ -23,7 +23,7 @@ struct cities {
     var type : String = "انتخاب شهر"
 }
 
-class SignupViewController: UIViewController,UITextFieldDelegate   {
+class SignupViewController: UIViewController,UITextFieldDelegate,Storyboarded   {
     var userID : String = ""
     var smsVerificationCode : String = ""
     var provincesCache : [String] = []
@@ -51,7 +51,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate   {
         }
     }
     var TermsAgreed = false;
-    
+    weak var coordinator: LoginCoordinator?
     @IBOutlet weak var mobileNoText: UnderLinedTextField!
     @IBOutlet weak var usernameText: UnderLinedTextField!
     @IBOutlet weak var genderTextField: UnderLinedSelectableTextField!

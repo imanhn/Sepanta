@@ -16,6 +16,11 @@
 		0F6F39C42207952200393CD7 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F6F39C222078DC900393CD7 /* Alamofire.framework */; };
 		0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */; };
 		0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */; };
+		0F890CF2221220B60091FA2E /* ErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F890CF1221220B60091FA2E /* ErrorHandler.m */; };
+		0F890CFE2214B4CD0091FA2E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890CFD2214B4CD0091FA2E /* Coordinator.swift */; };
+		0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890CFF2214B4E90091FA2E /* Storyboarded.swift */; };
+		0F890D022214B5310091FA2E /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D012214B5310091FA2E /* MainCoordinator.swift */; };
+		0F890D042214BF300091FA2E /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D032214BF300091FA2E /* LoginCoordinator.swift */; };
 		0F984E29220B727B004AFB06 /* SepantaGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */; };
 		0FD7BEB6221073AE007B7244 /* Shabnam-Light-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB3221073AA007B7244 /* Shabnam-Light-FD.ttf */; };
 		0FD7BEB7221073AE007B7244 /* Shabnam-Bold-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB4221073AB007B7244 /* Shabnam-Bold-FD.ttf */; };
@@ -49,6 +54,7 @@
 		0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */; };
 		0FE8BA042205082100C868C3 /* SMSConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */; };
 		0FE8BA062205239E00C868C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA052205239E00C868C3 /* MainViewController.swift */; };
+		A0E43AFB14B3646ACC5DEF7E /* libPods-Sepanta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D37D8EF9355EA00873B2EE55 /* libPods-Sepanta.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,10 +95,18 @@
 		0F6F39C722079FB600393CD7 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysShowPopup.swift; sourceTree = "<group>"; };
 		0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayChoiceTableViewController.swift; sourceTree = "<group>"; };
+		0F890CEE22121EF90091FA2E /* Sepanta-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Sepanta-Bridging-Header.h"; sourceTree = "<group>"; };
+		0F890CF1221220B60091FA2E /* ErrorHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorHandler.m; sourceTree = "<group>"; };
+		0F890CFD2214B4CD0091FA2E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		0F890CFF2214B4E90091FA2E /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
+		0F890D012214B5310091FA2E /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		0F890D032214BF300091FA2E /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaGroupsViewController.swift; sourceTree = "<group>"; };
 		0FD7BEB3221073AA007B7244 /* Shabnam-Light-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-Light-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-Light-FD.ttf"; sourceTree = "<group>"; };
 		0FD7BEB4221073AB007B7244 /* Shabnam-Bold-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-Bold-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-Bold-FD.ttf"; sourceTree = "<group>"; };
 		0FD7BEB5221073AD007B7244 /* Shabnam-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-FD.ttf"; sourceTree = "<group>"; };
+		0FD7BEB922120820007B7244 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Pods/FirebaseInstanceID/Frameworks/FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		0FD7BEBB221208A4007B7244 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Pods/FirebaseCore/Frameworks/FirebaseCore.framework; sourceTree = "<group>"; };
 		0FE8B9A5220355F000C868C3 /* Sepanta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sepanta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FE8B9A8220355F000C868C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0FE8B9AA220355F000C868C3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +142,9 @@
 		0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWidgets.swift; sourceTree = "<group>"; };
 		0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmViewController.swift; sourceTree = "<group>"; };
 		0FE8BA052205239E00C868C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		5F42A23EF520BF93C6F192BB /* Pods-Sepanta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sepanta.debug.xcconfig"; path = "Target Support Files/Pods-Sepanta/Pods-Sepanta.debug.xcconfig"; sourceTree = "<group>"; };
+		B91029E76512835684482EFD /* Pods-Sepanta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sepanta.release.xcconfig"; path = "Target Support Files/Pods-Sepanta/Pods-Sepanta.release.xcconfig"; sourceTree = "<group>"; };
+		D37D8EF9355EA00873B2EE55 /* libPods-Sepanta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Sepanta.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +156,7 @@
 				0F6F39C42207952200393CD7 /* Alamofire.framework in Frameworks */,
 				0F0DF57A220A30BA0055FACB /* SwiftyJSON.framework in Frameworks */,
 				0F0DF57C220A30BA0055FACB /* Alamofire.framework in Frameworks */,
+				A0E43AFB14B3646ACC5DEF7E /* libPods-Sepanta.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,8 +180,11 @@
 		0F6F39C122078DC900393CD7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0FD7BEBB221208A4007B7244 /* FirebaseCore.framework */,
+				0FD7BEB922120820007B7244 /* FirebaseInstanceID.framework */,
 				0F6F39C722079FB600393CD7 /* SwiftyJSON.framework */,
 				0F6F39C222078DC900393CD7 /* Alamofire.framework */,
+				D37D8EF9355EA00873B2EE55 /* libPods-Sepanta.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -178,14 +199,28 @@
 			path = Signup;
 			sourceTree = "<group>";
 		};
+		0F890CFC2214B4B40091FA2E /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				0F890CFD2214B4CD0091FA2E /* Coordinator.swift */,
+				0F890CFF2214B4E90091FA2E /* Storyboarded.swift */,
+				0F890D012214B5310091FA2E /* MainCoordinator.swift */,
+				0F890D032214BF300091FA2E /* LoginCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
 		0FE8B99C220355F000C868C3 = {
 			isa = PBXGroup;
 			children = (
+				0F890CF1221220B60091FA2E /* ErrorHandler.m */,
+				0F890CEE22121EF90091FA2E /* Sepanta-Bridging-Header.h */,
 				0FE8B9A7220355F000C868C3 /* Sepanta */,
 				0FE8B9BC220355F200C868C3 /* SepantaTests */,
 				0FE8B9C7220355F200C868C3 /* SepantaUITests */,
 				0FE8B9A6220355F000C868C3 /* Products */,
 				0F6F39C122078DC900393CD7 /* Frameworks */,
+				E9218B4B66C5DBC179ECCFF0 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -202,6 +237,7 @@
 		0FE8B9A7220355F000C868C3 /* Sepanta */ = {
 			isa = PBXGroup;
 			children = (
+				0F890CFC2214B4B40091FA2E /* Coordinators */,
 				0F7FDA7B2205FAD100703792 /* Signup */,
 				0FE8B9A8220355F000C868C3 /* AppDelegate.swift */,
 				0FE8B9AA220355F000C868C3 /* LoginViewController.swift */,
@@ -265,6 +301,15 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		E9218B4B66C5DBC179ECCFF0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5F42A23EF520BF93C6F192BB /* Pods-Sepanta.debug.xcconfig */,
+				B91029E76512835684482EFD /* Pods-Sepanta.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -272,6 +317,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0FE8B9CD220355F200C868C3 /* Build configuration list for PBXNativeTarget "Sepanta" */;
 			buildPhases = (
+				5F5CFBC2A329D0407AE42EEB /* [CP] Check Pods Manifest.lock */,
 				0FE8B9A1220355F000C868C3 /* Sources */,
 				0FE8B9A2220355F000C868C3 /* Frameworks */,
 				0FE8B9A3220355F000C868C3 /* Resources */,
@@ -336,6 +382,7 @@
 				TargetAttributes = {
 					0FE8B9A4220355F000C868C3 = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 0940;
 					};
 					0FE8B9B8220355F200C868C3 = {
 						CreatedOnToolsVersion = 9.3;
@@ -447,6 +494,24 @@
 			shellPath = /bin/sh;
 			shellScript = "";
 		};
+		5F5CFBC2A329D0407AE42EEB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Sepanta-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -456,13 +521,18 @@
 			files = (
 				0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */,
 				0F984E29220B727B004AFB06 /* SepantaGroupsViewController.swift in Sources */,
+				0F890D042214BF300091FA2E /* LoginCoordinator.swift in Sources */,
 				0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */,
 				0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */,
 				0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */,
 				0FE8BA042205082100C868C3 /* SMSConfirmViewController.swift in Sources */,
+				0F890CFE2214B4CD0091FA2E /* Coordinator.swift in Sources */,
 				0FE8BA062205239E00C868C3 /* MainViewController.swift in Sources */,
 				0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */,
 				0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */,
+				0F890D022214B5310091FA2E /* MainCoordinator.swift in Sources */,
+				0F890CF2221220B60091FA2E /* ErrorHandler.m in Sources */,
+				0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -633,13 +703,17 @@
 		};
 		0FE8B9CE220355F200C868C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F42A23EF520BF93C6F192BB /* Pods-Sepanta.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3UL3Q223ZG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Pods/FirebaseInstanceID/Frameworks",
+					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks",
 				);
 				INFOPLIST_FILE = Sepanta/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
@@ -649,6 +723,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Imzich.Sepanta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sepanta-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -656,13 +732,17 @@
 		};
 		0FE8B9CF220355F200C868C3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B91029E76512835684482EFD /* Pods-Sepanta.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3UL3Q223ZG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Pods/FirebaseInstanceID/Frameworks",
+					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks",
 				);
 				INFOPLIST_FILE = Sepanta/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
@@ -672,6 +752,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Imzich.Sepanta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sepanta-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

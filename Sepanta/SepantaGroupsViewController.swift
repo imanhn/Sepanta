@@ -12,13 +12,14 @@ import Alamofire
 import SwiftyJSON
 
 
-class SepantaGroupsViewController : UIViewController,UITextFieldDelegate{
+class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storyboarded{
     var provincesCache : [String] = []
     var provinceDict : Dictionary = ["TEST":"TEST"];
     var cityDict : Dictionary = ["TEST":"TEST"];
     var cityCache : [String] = []
     var currentStateCode : String = ""
     var currentCityCode : String = ""
+    weak var coordinator: MainCoordinator?
     @IBOutlet weak var selectCity: UnderLinedSelectableTextField!
     @IBOutlet weak var selectProvince: UnderLinedSelectableTextField!
     var provinceModel = provinces() {

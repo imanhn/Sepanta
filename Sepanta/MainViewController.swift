@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController,Storyboarded {
     var slides : [UIImage] = [UIImage(named: "slide1")!,UIImage(named: "slide2")!,UIImage(named: "slide3")!,UIImage(named: "slide4")!]
     let blankImage = UIImage(named: "blank")
     @IBOutlet weak var settingButton: CircularButton!
@@ -18,7 +18,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var favoriteButton: CircularButton!
     @IBOutlet weak var searchBar: UIView!
     @IBOutlet var PageView: UIView!
-    
+    weak var coordinator: MainCoordinator?
     @IBOutlet weak var pageControl: UIPageControl!
     
     @IBOutlet weak var poldarsho: MainButton!

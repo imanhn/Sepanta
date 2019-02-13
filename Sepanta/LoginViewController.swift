@@ -10,12 +10,13 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController,Storyboarded {
     @IBOutlet var PageView: UIView!
     @IBOutlet weak var LoginPanelView: RightTabbedView!
     @IBOutlet weak var SignupButton: TabbedButton!
     @IBOutlet weak var EnterButton: UIButton!
     @IBOutlet weak var MobileTextField: UnderLinedTextField!
+    weak var coordinator: LoginCoordinator?
     
     @IBAction func MobileTypeEnded(_ sender: Any) {
         (sender as AnyObject).resignFirstResponder()
@@ -34,7 +35,8 @@ class LoginViewController: UIViewController {
         if !(MobileTextField.text!.isEmpty)  {
             // REQUEST SENDING SMS and GET the CODE
             //
-            presentSMSConfirmViewController()
+            //presentSMSConfirmViewController()
+            coordinator?.gotoSMSVerification(Set : MobileTextField.text!)
         }
         else{
             let alert = UIAlertController(title: "توجه", message: "لطفاْ شماره همراه خود را وارد کنید", preferredStyle: .alert)
@@ -61,17 +63,18 @@ class LoginViewController: UIViewController {
         }
         self.MobileTextField.insertText(astring)
     }
-    
+    /*
     func presentSMSConfirmViewController() {
- 
+        self.coordinator?.SMSVerification()
+        /*
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let vc : SMSConfirmViewController = mainStoryboard.instantiateViewController(withIdentifier: "SMSConfirmViewController") as! SMSConfirmViewController
         print(" Entered : ",self.MobileTextField.text!)
         self.present(vc, animated: false, completion: nil)
         vc.setMobileNumber(self.MobileTextField.text!)
-        
+        */
     }
-    
+    */
 
     override func viewDidLoad() {
         super.viewDidLoad()

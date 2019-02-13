@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SMSConfirmViewController: UIViewController {
+class SMSConfirmViewController: UIViewController,Storyboarded {
     
     @IBOutlet weak var MobileTextField: UnderLinedTextField!
     @IBOutlet weak var SMSTextField: UnderLinedTextField!
@@ -18,10 +18,14 @@ class SMSConfirmViewController: UIViewController {
     var totalTime = 10
     var token : String?
     var userID : String?
+    var mobileNumber : String?
+    weak var coordinator: LoginCoordinator?
     override func viewDidLoad() {
         super.viewDidLoad()
          self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
-        
+        if mobileNumber != nil {
+            setMobileNumber(mobileNumber!)
+        }
     }
     func setUserID(anID : String){
         self.userID = anID
