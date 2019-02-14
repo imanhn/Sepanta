@@ -7,16 +7,14 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
 
-class LoginViewController: UIViewController,Storyboarded {
+
+class LoginViewController: UIViewControllerWithCoordinator,Storyboarded {
     @IBOutlet var PageView: UIView!
     @IBOutlet weak var LoginPanelView: RightTabbedView!
     @IBOutlet weak var SignupButton: TabbedButton!
     @IBOutlet weak var EnterButton: UIButton!
     @IBOutlet weak var MobileTextField: UnderLinedTextField!
-    weak var coordinator: LoginCoordinator?
     
     @IBAction func MobileTypeEnded(_ sender: Any) {
         (sender as AnyObject).resignFirstResponder()
@@ -36,7 +34,10 @@ class LoginViewController: UIViewController,Storyboarded {
             // REQUEST SENDING SMS and GET the CODE
             //
             //presentSMSConfirmViewController()
-            coordinator?.gotoSMSVerification(Set : MobileTextField.text!)
+            guard let acoordinator = coordinator as? LoginCoordinator else {
+                return
+            }
+            acoordinator.gotoSMSVerification(Set : MobileTextField.text!)
         }
         else{
             let alert = UIAlertController(title: "توجه", message: "لطفاْ شماره همراه خود را وارد کنید", preferredStyle: .alert)

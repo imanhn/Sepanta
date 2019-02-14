@@ -21,6 +21,8 @@
 		0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890CFF2214B4E90091FA2E /* Storyboarded.swift */; };
 		0F890D022214B5310091FA2E /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D012214B5310091FA2E /* MainCoordinator.swift */; };
 		0F890D042214BF300091FA2E /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D032214BF300091FA2E /* LoginCoordinator.swift */; };
+		0F890D0B2214D06E0091FA2E /* UIViewControllersWithCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D0A2214D06E0091FA2E /* UIViewControllersWithCoordinator.swift */; };
+		0F890D0E2215C7170091FA2E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D0D2215C7170091FA2E /* NetworkManager.swift */; };
 		0F984E29220B727B004AFB06 /* SepantaGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */; };
 		0FD7BEB6221073AE007B7244 /* Shabnam-Light-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB3221073AA007B7244 /* Shabnam-Light-FD.ttf */; };
 		0FD7BEB7221073AE007B7244 /* Shabnam-Bold-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB4221073AB007B7244 /* Shabnam-Bold-FD.ttf */; };
@@ -32,25 +34,6 @@
 		0FE8B9B3220355F100C868C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9B1220355F100C868C3 /* LaunchScreen.storyboard */; };
 		0FE8B9BE220355F200C868C3 /* SepantaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9BD220355F200C868C3 /* SepantaTests.swift */; };
 		0FE8B9C9220355F200C868C3 /* SepantaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9C8220355F200C868C3 /* SepantaUITests.swift */; };
-		0FE8B9EE2203BCC000C868C3 /* BArshia_2770251553.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9DB2203BCBD00C868C3 /* BArshia_2770251553.ttf */; };
-		0FE8B9EF2203BCC000C868C3 /* BRoyaBold_3595828071.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9DC2203BCBE00C868C3 /* BRoyaBold_3595828071.ttf */; };
-		0FE8B9F02203BCC000C868C3 /* IranNastaliq_23990227.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9DD2203BCBE00C868C3 /* IranNastaliq_23990227.ttf */; };
-		0FE8B9F12203BCC000C868C3 /* BTanin_2726705346.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9DE2203BCBE00C868C3 /* BTanin_2726705346.ttf */; };
-		0FE8B9F22203BCC000C868C3 /* BNazaninBold_3646201758.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9DF2203BCBE00C868C3 /* BNazaninBold_3646201758.ttf */; };
-		0FE8B9F32203BCC000C868C3 /* BTrafficBold_4126700430.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E02203BCBE00C868C3 /* BTrafficBold_4126700430.ttf */; };
-		0FE8B9F42203BCC000C868C3 /* BHoma_638648140.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E12203BCBE00C868C3 /* BHoma_638648140.ttf */; };
-		0FE8B9F52203BCC000C868C3 /* BKoodakBold_1956931111.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E22203BCBF00C868C3 /* BKoodakBold_1956931111.ttf */; };
-		0FE8B9F62203BCC000C868C3 /* BYekan_3295791680.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E32203BCBF00C868C3 /* BYekan_3295791680.ttf */; };
-		0FE8B9F72203BCC000C868C3 /* BMitra_2340326021.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E42203BCBF00C868C3 /* BMitra_2340326021.ttf */; };
-		0FE8B9F82203BCC000C868C3 /* BYagutBold_1027807191.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E52203BCBF00C868C3 /* BYagutBold_1027807191.ttf */; };
-		0FE8B9F92203BCC000C868C3 /* BMitraBold_2046406346.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E62203BCBF00C868C3 /* BMitraBold_2046406346.ttf */; };
-		0FE8B9FA2203BCC000C868C3 /* BRoya_1945398306.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E72203BCBF00C868C3 /* BRoya_1945398306.ttf */; };
-		0FE8B9FB2203BCC000C868C3 /* BTitrBold_3196199023.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E82203BCBF00C868C3 /* BTitrBold_3196199023.ttf */; };
-		0FE8B9FC2203BCC000C868C3 /* BMehrBold_1898999128.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9E92203BCBF00C868C3 /* BMehrBold_1898999128.ttf */; };
-		0FE8B9FD2203BCC000C868C3 /* BTraffic_1505769225.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9EA2203BCC000C868C3 /* BTraffic_1505769225.ttf */; };
-		0FE8B9FE2203BCC000C868C3 /* BNarm_3969145717.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9EB2203BCC000C868C3 /* BNarm_3969145717.ttf */; };
-		0FE8B9FF2203BCC000C868C3 /* BElham_561726703.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9EC2203BCC000C868C3 /* BElham_561726703.ttf */; };
-		0FE8BA002203BCC000C868C3 /* BYagut_3160526546.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9ED2203BCC000C868C3 /* BYagut_3160526546.ttf */; };
 		0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */; };
 		0FE8BA042205082100C868C3 /* SMSConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */; };
 		0FE8BA062205239E00C868C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA052205239E00C868C3 /* MainViewController.swift */; };
@@ -101,6 +84,8 @@
 		0F890CFF2214B4E90091FA2E /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		0F890D012214B5310091FA2E /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		0F890D032214BF300091FA2E /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		0F890D0A2214D06E0091FA2E /* UIViewControllersWithCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllersWithCoordinator.swift; sourceTree = "<group>"; };
+		0F890D0D2215C7170091FA2E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaGroupsViewController.swift; sourceTree = "<group>"; };
 		0FD7BEB3221073AA007B7244 /* Shabnam-Light-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-Light-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-Light-FD.ttf"; sourceTree = "<group>"; };
 		0FD7BEB4221073AB007B7244 /* Shabnam-Bold-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-Bold-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-Bold-FD.ttf"; sourceTree = "<group>"; };
@@ -120,25 +105,6 @@
 		0FE8B9C4220355F200C868C3 /* SepantaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SepantaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FE8B9C8220355F200C868C3 /* SepantaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaUITests.swift; sourceTree = "<group>"; };
 		0FE8B9CA220355F200C868C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0FE8B9DB2203BCBD00C868C3 /* BArshia_2770251553.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BArshia_2770251553.ttf; sourceTree = "<group>"; };
-		0FE8B9DC2203BCBE00C868C3 /* BRoyaBold_3595828071.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BRoyaBold_3595828071.ttf; sourceTree = "<group>"; };
-		0FE8B9DD2203BCBE00C868C3 /* IranNastaliq_23990227.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IranNastaliq_23990227.ttf; sourceTree = "<group>"; };
-		0FE8B9DE2203BCBE00C868C3 /* BTanin_2726705346.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BTanin_2726705346.ttf; sourceTree = "<group>"; };
-		0FE8B9DF2203BCBE00C868C3 /* BNazaninBold_3646201758.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BNazaninBold_3646201758.ttf; sourceTree = "<group>"; };
-		0FE8B9E02203BCBE00C868C3 /* BTrafficBold_4126700430.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BTrafficBold_4126700430.ttf; sourceTree = "<group>"; };
-		0FE8B9E12203BCBE00C868C3 /* BHoma_638648140.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BHoma_638648140.ttf; sourceTree = "<group>"; };
-		0FE8B9E22203BCBF00C868C3 /* BKoodakBold_1956931111.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BKoodakBold_1956931111.ttf; sourceTree = "<group>"; };
-		0FE8B9E32203BCBF00C868C3 /* BYekan_3295791680.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BYekan_3295791680.ttf; sourceTree = "<group>"; };
-		0FE8B9E42203BCBF00C868C3 /* BMitra_2340326021.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMitra_2340326021.ttf; sourceTree = "<group>"; };
-		0FE8B9E52203BCBF00C868C3 /* BYagutBold_1027807191.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BYagutBold_1027807191.ttf; sourceTree = "<group>"; };
-		0FE8B9E62203BCBF00C868C3 /* BMitraBold_2046406346.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMitraBold_2046406346.ttf; sourceTree = "<group>"; };
-		0FE8B9E72203BCBF00C868C3 /* BRoya_1945398306.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BRoya_1945398306.ttf; sourceTree = "<group>"; };
-		0FE8B9E82203BCBF00C868C3 /* BTitrBold_3196199023.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BTitrBold_3196199023.ttf; sourceTree = "<group>"; };
-		0FE8B9E92203BCBF00C868C3 /* BMehrBold_1898999128.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMehrBold_1898999128.ttf; sourceTree = "<group>"; };
-		0FE8B9EA2203BCC000C868C3 /* BTraffic_1505769225.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BTraffic_1505769225.ttf; sourceTree = "<group>"; };
-		0FE8B9EB2203BCC000C868C3 /* BNarm_3969145717.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BNarm_3969145717.ttf; sourceTree = "<group>"; };
-		0FE8B9EC2203BCC000C868C3 /* BElham_561726703.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BElham_561726703.ttf; sourceTree = "<group>"; };
-		0FE8B9ED2203BCC000C868C3 /* BYagut_3160526546.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BYagut_3160526546.ttf; sourceTree = "<group>"; };
 		0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWidgets.swift; sourceTree = "<group>"; };
 		0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmViewController.swift; sourceTree = "<group>"; };
 		0FE8BA052205239E00C868C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -189,25 +155,53 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		0F7FDA7B2205FAD100703792 /* Signup */ = {
-			isa = PBXGroup;
-			children = (
-				0F512C042205B5C300B99C9E /* SignupViewController.swift */,
-				0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */,
-				0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */,
-			);
-			path = Signup;
-			sourceTree = "<group>";
-		};
 		0F890CFC2214B4B40091FA2E /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
 				0F890CFD2214B4CD0091FA2E /* Coordinator.swift */,
-				0F890CFF2214B4E90091FA2E /* Storyboarded.swift */,
 				0F890D012214B5310091FA2E /* MainCoordinator.swift */,
 				0F890D032214BF300091FA2E /* LoginCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		0F890D072214CFAA0091FA2E /* SuperClasses */ = {
+			isa = PBXGroup;
+			children = (
+				0F890D0A2214D06E0091FA2E /* UIViewControllersWithCoordinator.swift */,
+				0F890CFF2214B4E90091FA2E /* Storyboarded.swift */,
+			);
+			path = SuperClasses;
+			sourceTree = "<group>";
+		};
+		0F890D0C2215C6FD0091FA2E /* BackEnd CallServices */ = {
+			isa = PBXGroup;
+			children = (
+				0F890D0D2215C7170091FA2E /* NetworkManager.swift */,
+			);
+			path = "BackEnd CallServices";
+			sourceTree = "<group>";
+		};
+		0F890D0F2215D0CF0091FA2E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0FE8B9AA220355F000C868C3 /* LoginViewController.swift */,
+				0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */,
+				0FE8BA052205239E00C868C3 /* MainViewController.swift */,
+				0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */,
+				0F512C042205B5C300B99C9E /* SignupViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		0F890D102215D0F20091FA2E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */,
+				0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */,
+				0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		0FE8B99C220355F000C868C3 = {
@@ -237,15 +231,13 @@
 		0FE8B9A7220355F000C868C3 /* Sepanta */ = {
 			isa = PBXGroup;
 			children = (
+				0F890D102215D0F20091FA2E /* ViewModel */,
+				0F890D0F2215D0CF0091FA2E /* ViewControllers */,
+				0F890D0C2215C6FD0091FA2E /* BackEnd CallServices */,
+				0F890D072214CFAA0091FA2E /* SuperClasses */,
 				0F890CFC2214B4B40091FA2E /* Coordinators */,
-				0F7FDA7B2205FAD100703792 /* Signup */,
 				0FE8B9A8220355F000C868C3 /* AppDelegate.swift */,
-				0FE8B9AA220355F000C868C3 /* LoginViewController.swift */,
-				0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */,
-				0FE8BA052205239E00C868C3 /* MainViewController.swift */,
 				0FE8B9AC220355F000C868C3 /* Main.storyboard */,
-				0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */,
-				0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */,
 				0FE8B9AF220355F100C868C3 /* Assets.xcassets */,
 				0FE8B9B1220355F100C868C3 /* LaunchScreen.storyboard */,
 				0FE8B9B4220355F100C868C3 /* Info.plist */,
@@ -278,25 +270,6 @@
 				0FD7BEB4221073AB007B7244 /* Shabnam-Bold-FD.ttf */,
 				0FD7BEB5221073AD007B7244 /* Shabnam-FD.ttf */,
 				0FD7BEB3221073AA007B7244 /* Shabnam-Light-FD.ttf */,
-				0FE8B9DB2203BCBD00C868C3 /* BArshia_2770251553.ttf */,
-				0FE8B9EC2203BCC000C868C3 /* BElham_561726703.ttf */,
-				0FE8B9E12203BCBE00C868C3 /* BHoma_638648140.ttf */,
-				0FE8B9E22203BCBF00C868C3 /* BKoodakBold_1956931111.ttf */,
-				0FE8B9E92203BCBF00C868C3 /* BMehrBold_1898999128.ttf */,
-				0FE8B9E42203BCBF00C868C3 /* BMitra_2340326021.ttf */,
-				0FE8B9E62203BCBF00C868C3 /* BMitraBold_2046406346.ttf */,
-				0FE8B9EB2203BCC000C868C3 /* BNarm_3969145717.ttf */,
-				0FE8B9DF2203BCBE00C868C3 /* BNazaninBold_3646201758.ttf */,
-				0FE8B9E72203BCBF00C868C3 /* BRoya_1945398306.ttf */,
-				0FE8B9DC2203BCBE00C868C3 /* BRoyaBold_3595828071.ttf */,
-				0FE8B9DE2203BCBE00C868C3 /* BTanin_2726705346.ttf */,
-				0FE8B9E82203BCBF00C868C3 /* BTitrBold_3196199023.ttf */,
-				0FE8B9EA2203BCC000C868C3 /* BTraffic_1505769225.ttf */,
-				0FE8B9E02203BCBE00C868C3 /* BTrafficBold_4126700430.ttf */,
-				0FE8B9ED2203BCC000C868C3 /* BYagut_3160526546.ttf */,
-				0FE8B9E52203BCBF00C868C3 /* BYagutBold_1027807191.ttf */,
-				0FE8B9E32203BCBF00C868C3 /* BYekan_3295791680.ttf */,
-				0FE8B9DD2203BCBE00C868C3 /* IranNastaliq_23990227.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -421,29 +394,10 @@
 			files = (
 				0FE8B9B3220355F100C868C3 /* LaunchScreen.storyboard in Resources */,
 				0FD7BEB7221073AE007B7244 /* Shabnam-Bold-FD.ttf in Resources */,
-				0FE8B9EF2203BCC000C868C3 /* BRoyaBold_3595828071.ttf in Resources */,
-				0FE8B9F52203BCC000C868C3 /* BKoodakBold_1956931111.ttf in Resources */,
-				0FE8B9F42203BCC000C868C3 /* BHoma_638648140.ttf in Resources */,
-				0FE8B9FE2203BCC000C868C3 /* BNarm_3969145717.ttf in Resources */,
 				0FE8B9B0220355F100C868C3 /* Assets.xcassets in Resources */,
-				0FE8B9FA2203BCC000C868C3 /* BRoya_1945398306.ttf in Resources */,
 				0FD7BEB6221073AE007B7244 /* Shabnam-Light-FD.ttf in Resources */,
-				0FE8B9F32203BCC000C868C3 /* BTrafficBold_4126700430.ttf in Resources */,
 				0FE8B9AE220355F000C868C3 /* Main.storyboard in Resources */,
 				0FD7BEB8221073AE007B7244 /* Shabnam-FD.ttf in Resources */,
-				0FE8BA002203BCC000C868C3 /* BYagut_3160526546.ttf in Resources */,
-				0FE8B9FF2203BCC000C868C3 /* BElham_561726703.ttf in Resources */,
-				0FE8B9F92203BCC000C868C3 /* BMitraBold_2046406346.ttf in Resources */,
-				0FE8B9EE2203BCC000C868C3 /* BArshia_2770251553.ttf in Resources */,
-				0FE8B9F62203BCC000C868C3 /* BYekan_3295791680.ttf in Resources */,
-				0FE8B9F82203BCC000C868C3 /* BYagutBold_1027807191.ttf in Resources */,
-				0FE8B9FB2203BCC000C868C3 /* BTitrBold_3196199023.ttf in Resources */,
-				0FE8B9FD2203BCC000C868C3 /* BTraffic_1505769225.ttf in Resources */,
-				0FE8B9F72203BCC000C868C3 /* BMitra_2340326021.ttf in Resources */,
-				0FE8B9F22203BCC000C868C3 /* BNazaninBold_3646201758.ttf in Resources */,
-				0FE8B9FC2203BCC000C868C3 /* BMehrBold_1898999128.ttf in Resources */,
-				0FE8B9F12203BCC000C868C3 /* BTanin_2726705346.ttf in Resources */,
-				0FE8B9F02203BCC000C868C3 /* IranNastaliq_23990227.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,10 +481,12 @@
 				0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */,
 				0FE8BA042205082100C868C3 /* SMSConfirmViewController.swift in Sources */,
 				0F890CFE2214B4CD0091FA2E /* Coordinator.swift in Sources */,
+				0F890D0B2214D06E0091FA2E /* UIViewControllersWithCoordinator.swift in Sources */,
 				0FE8BA062205239E00C868C3 /* MainViewController.swift in Sources */,
 				0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */,
 				0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */,
 				0F890D022214B5310091FA2E /* MainCoordinator.swift in Sources */,
+				0F890D0E2215C7170091FA2E /* NetworkManager.swift in Sources */,
 				0F890CF2221220B60091FA2E /* ErrorHandler.m in Sources */,
 				0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */,
 			);
