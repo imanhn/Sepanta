@@ -78,6 +78,9 @@
                                                 <integer key="value" value="3"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="signupClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="V92-1q-sog"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kec-hf-ANp" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
                                         <rect key="frame" x="17" y="126.5" width="304" height="26"/>
@@ -247,6 +250,9 @@
                                                 <integer key="value" value="3"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="signupClicked:" destination="h73-aN-KX7" eventType="touchUpInside" id="emc-8e-zru"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0mb-wF-v4k" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
                                         <rect key="frame" x="17" y="84.5" width="304" height="25.5"/>

@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 import Alamofire
 import SwiftyJSON
+import RxSwift
+import RxCocoa
+
 
 struct genders {
     var type : String = "جنسیت"
@@ -23,15 +26,16 @@ struct cities {
     var type : String = "انتخاب شهر"
 }
 
-class SignupViewController: UIViewController,UITextFieldDelegate,Storyboarded   {
+class SignupViewController: UIViewControllerWithCoordinator,UITextFieldDelegate,Storyboarded   {
     var userID : String = ""
     var smsVerificationCode : String = ""
     var provincesCache : [String] = []
-    var provinceDict : Dictionary = ["TEST":"TEST"];
+//    var provinceDict = BehaviorRelay<Dictionary<String,String>>(value : Dictionary<String,String>())
     var cityDict : Dictionary = ["TEST":"TEST"];
     var cityCache : [String] = []
     var currentStateCode : String = ""
     var currentCityCode : String = ""
+    var myDisposeBag = DisposeBag()
     var genderModel = genders() {
         didSet {
             updateGender()
@@ -51,7 +55,6 @@ class SignupViewController: UIViewController,UITextFieldDelegate,Storyboarded   
         }
     }
     var TermsAgreed = false;
-    weak var coordinator: LoginCoordinator?
     @IBOutlet weak var mobileNoText: UnderLinedTextField!
     @IBOutlet weak var usernameText: UnderLinedTextField!
     @IBOutlet weak var genderTextField: UnderLinedSelectableTextField!
@@ -91,51 +94,10 @@ class SignupViewController: UIViewController,UITextFieldDelegate,Storyboarded   
     @IBAction func usernameTypeDone(_ sender: Any) {
         (sender as AnyObject).resignFirstResponder()
     }
-    func getAllProvince() {
-        var provinceList : [String]=[];
-        let urlAddress = NSURL(string: "http://www.favecard.ir/api/takamad/get-state-and-city")
-        let aMethod : HTTPMethod = HTTPMethod.get
-        print("Calling API")
-        Alamofire.request(urlAddress! as URL, method: aMethod, parameters: nil, encoding: JSONEncoding.default,  headers: nil).responseJSON { (response:DataResponse<Any>) in
-            print("Processing Response....")
-            switch(response.result) {
-            case .success(_):
-                
-                if response.result.value != nil
-                {
-                    let jsonResult = JSON(response.result.value!)
-                    for aProv in jsonResult["states"]
-                    {
-                        print(aProv.0," ",aProv.1)
-                        let provName : String = aProv.0
-                        self.provinceDict[provName] = aProv.1.rawString()!
-                        provinceList.append(provName)
-                        
-                    }
-                    
-                    print("Fetched : ",provinceList.count," record")
-                    //print("Provinces : ",provinceList)
-                    print("Successful")
-                    self.provincesCache = provinceList.sorted()
-                }
-                break
-                
-            case .failure(_):
-                if response.result.error != nil
-                {
-                    print("Not Successful")
-                    print(response.result.error!)
-                }
-                break
-            }
-            
-        }
-    }
     
     func getAllProvinceList() -> Array<String> {
         if provincesCache.count == 0 {
             print("Province list not ready yet")
-            getAllProvince()
             return ["مجدد تلاش کنید"];
         }else{
             return provincesCache
@@ -208,18 +170,31 @@ class SignupViewController: UIViewController,UITextFieldDelegate,Storyboarded   
     }
 
     @IBAction func provinceTextTouchDown(_ sender: Any) {
-        let controller = ArrayChoiceTableViewController(getAllProvinceList()) {
-            (type) in self.provinceModel.type = type
-            self.selectCity.text = ""
-            print("State Code : ",self.provinceDict[type]!)
-            self.currentStateCode = self.provinceDict[type] as! String
-            self.getAllCity(self.provinceDict[type]!)
-            
-        }
-        controller.preferredContentSize = CGSize(width: 250, height: 300)
-        showPopup(controller, sourceView: sender as! UIView)
+        var progressCircle : UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        progressCircle.frame = self.view.frame
+        progressCircle.center = self.view.center
+        self.view.addSubview(progressCircle)
+        progressCircle.startAnimating()
+        NetworkManager.shared.run(API: "get-state-and-city",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil)
         
+        Observable.combineLatest(
+            NetworkManager.shared.provinceDictionaryObs.filter({$0.count > 0}),
+            NetworkManager.shared.provinceListObs.filter({$0.count > 0}),
+            resultSelector: { [weak self] (processedDic,processedList) in
+            let controller = ArrayChoiceTableViewController(processedList) {
+                (type) in self?.provinceModel.type = type
+                self?.selectCity.text = ""
+                print("State Code : ",processedDic[type]!)
+                self?.currentStateCode = processedDic[type]!
+                self?.getAllCity(processedDic[type]!)
+                progressCircle.stopAnimating()
+            }
+            controller.preferredContentSize = CGSize(width: 250, height: 300)
+            self?.showPopup(controller, sourceView: sender as! UIView)
+        }).subscribe(onNext: {
+        }).disposed(by: myDisposeBag)
     }
+
     @IBAction func cityTextTouchDown(_ sender: Any) {
         let controller = ArrayChoiceTableViewController(getAllCityList()) {
             (type) in self.cityModel.type = type
@@ -253,7 +228,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate,Storyboarded   
     }
     
     override func viewDidLoad() {
-        getAllProvince()
+        //getAllProvince()
         super.viewDidLoad()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
         definesPresentationContext = true

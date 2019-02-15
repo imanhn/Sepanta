@@ -120,24 +120,17 @@ class SMSConfirmViewController: UIViewControllerWithCoordinator,Storyboarded {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func signupClicked(_ sender: Any) {
+        guard let acoordinator = coordinator as? LoginCoordinator else {
+            return
+        }
+        acoordinator.gotoSignup()
+    }
     @IBAction func ConfirmCodeClicked(_ sender: Any) {
         guard SMSTextField.text != nil else {
             print("SMS Field not filled!")
             let alert = UIAlertController(title: "توجه", message: "لطفاْ کد ارسال شده را وارد نمایید", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "بلی", style: .default, handler: { action in
-                switch action.style{
-                case .default:
-                    print("default")
-                    self.backToLoginViewController()
-                    
-                case .cancel:
-                    print("cancel")
-                    
-                case .destructive:
-                    print("destructive")
-                    
-                    
-                }}))
+            alert.addAction(UIAlertAction(title: "بلی", style: .default))
             return
         }
         if (countdownTimer) != nil {
@@ -145,6 +138,7 @@ class SMSConfirmViewController: UIViewControllerWithCoordinator,Storyboarded {
         } else {
             print("Timer is already stoped")
         }
+        //Refactor To Coordinate
         gotoMainViewController()
     }
     

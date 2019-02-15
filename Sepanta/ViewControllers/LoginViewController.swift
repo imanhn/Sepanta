@@ -22,14 +22,14 @@ class LoginViewController: UIViewControllerWithCoordinator,Storyboarded {
     @IBAction func mobileNoTypeDone(_ sender: Any) {
         (sender as AnyObject).resignFirstResponder()
     }
+    
+    @IBAction func signupClicked(_ sender: Any) {
+        guard let acoordinator = coordinator as? LoginCoordinator else {
+            return
+        }
+        acoordinator.gotoSignup()
+    }
     @IBAction func SendClicked(_ sender: Any) {
-        // Jump to MainView
-        /*
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let vc : MainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-        self.present(vc, animated: false, completion: nil)
-        return
-        */
         if !(MobileTextField.text!.isEmpty)  {
             // REQUEST SENDING SMS and GET the CODE
             //
@@ -41,19 +41,7 @@ class LoginViewController: UIViewControllerWithCoordinator,Storyboarded {
         }
         else{
             let alert = UIAlertController(title: "توجه", message: "لطفاْ شماره همراه خود را وارد کنید", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "بلی", style: .default, handler: { action in
-                switch action.style{
-                case .default:
-                    print("default")
-                    
-                case .cancel:
-                    print("cancel")
-                    
-                case .destructive:
-                    print("destructive")
-                    
-                    
-                }}))
+            alert.addAction(UIAlertAction(title: "بلی", style: .default))
             self.present(alert, animated: true, completion: nil)        }
     }
     
@@ -64,25 +52,11 @@ class LoginViewController: UIViewControllerWithCoordinator,Storyboarded {
         }
         self.MobileTextField.insertText(astring)
     }
-    /*
-    func presentSMSConfirmViewController() {
-        self.coordinator?.SMSVerification()
-        /*
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let vc : SMSConfirmViewController = mainStoryboard.instantiateViewController(withIdentifier: "SMSConfirmViewController") as! SMSConfirmViewController
-        print(" Entered : ",self.MobileTextField.text!)
-        self.present(vc, animated: false, completion: nil)
-        vc.setMobileNumber(self.MobileTextField.text!)
-        */
-    }
-    */
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
-        
-
-        // Do any additional setup after loading the view, tßypically from a nib.
     }
 
     override func didReceiveMemoryWarning() {

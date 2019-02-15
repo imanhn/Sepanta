@@ -29,6 +29,10 @@ class LoginCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         if let smsViewController = fromViewController as? SMSConfirmViewController {
             SMSVerificationFinished(smsViewController)
         }
+        if let signupViewController = fromViewController as? SignupViewController {
+            SignupFinished(signupViewController)
+        }
+
     }
     
     func removeChild(_ aviewController : UIViewControllerWithCoordinator?){
@@ -45,6 +49,9 @@ class LoginCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         }
     }
     
+    func SignupFinished(_ signupViewController : SignupViewController) {
+        removeChild(signupViewController)
+    }
     func SMSVerificationFinished(_ smsViewController : SMSConfirmViewController?) {
         removeChild(smsViewController)
     }
@@ -66,5 +73,11 @@ class LoginCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.pushViewController(vc, animated: true)
         vc.mobileNumber = mobileNumber
     }
-    
+
+    func gotoSignup() {
+        let vc = SignupViewController.instantiate()
+        vc.coordinator = self
+        navigationController.pushViewController(vc, animated: false)
+    }
+
 }
