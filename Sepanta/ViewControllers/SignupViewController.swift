@@ -29,12 +29,10 @@ struct cities {
 class SignupViewController: UIViewControllerWithCoordinator,UITextFieldDelegate,Storyboarded   {
     var userID : String = ""
     var smsVerificationCode : String = ""
-    var provincesCache : [String] = []
-//    var provinceDict = BehaviorRelay<Dictionary<String,String>>(value : Dictionary<String,String>())
-    var cityDict : Dictionary = ["TEST":"TEST"];
-    var cityCache : [String] = []
     var currentStateCode : String = ""
+    var currentStateCodeObs = BehaviorRelay<String>(value : String())
     var currentCityCode : String = ""
+    var currentCityCodeObs = BehaviorRelay<String>(value : String())
     var myDisposeBag = DisposeBag()
     var genderModel = genders() {
         didSet {
@@ -95,88 +93,39 @@ class SignupViewController: UIViewControllerWithCoordinator,UITextFieldDelegate,
         (sender as AnyObject).resignFirstResponder()
     }
     
-    func getAllProvinceList() -> Array<String> {
-        if provincesCache.count == 0 {
-            print("Province list not ready yet")
-            return ["مجدد تلاش کنید"];
-        }else{
-            return provincesCache
-        }
-    }
-    func getAllCity(_ stateCode : String) {
-        var cityList : [String]=[];
-        let headers: HTTPHeaders = [
-            "Accept": "application/json",
-            "Content-Type":"application/x-www-form-urlencoded"
-        ]
-        let parameters = [
-         "state code": stateCode
-         ]
-//        let urlAddress = NSURL(string: "http://www.favecard.ir/api/takamad/get-state-and-city?state code="+stateCode)
-        let postURL = NSURL(string: "http://www.favecard.ir/api/takamad/get-state-and-city?state%20code="+stateCode)! as URL
-        let aMethod : HTTPMethod = HTTPMethod.post
-        print("Calling City API")
-        Alamofire.request(postURL, method: aMethod, parameters: parameters, encoding: JSONEncoding.default,  headers: headers).responseJSON { (response:DataResponse<Any>) in
-            print("Processing City Response....")
-            switch(response.result) {
-            case .success(_):
-                
-                if response.result.value != nil
-                {
-                    let jsonResult = JSON(response.result.value!)
-                    //cityList = Array<String>(repeating: "", count: jsonResult["cities"].count)
-                    for aCity in jsonResult["cities"]
-                    {
-                        print(aCity.0," ",aCity.1)
-                        let cityName : String = aCity.0
-                        let idx = Int(aCity.1.rawString()!)!
-                        self.cityDict[cityName] = aCity.1.rawString()!
-                        cityList.append(cityName)
-                        
-                    }
-                    
-                    print("Fetched : ",cityList.count," record")
-                    //print("Cities : ",cityList)
-                    print("Successful")
-                    self.cityCache = cityList.sorted()
-                }
-                break
-                
-            case .failure(_):
-                if response.result.error != nil
-                {
-                    print("Not Successful")
-                    print(response.result.error!)
-                }
-                break
-            }
-            
-        }
-    }
-    
-    func getAllCityList() -> Array<String> {
-        if cityCache.count == 0 {
-            print("City list not ready yet for ",currentStateCode)
-            getAllCity(currentStateCode)
-           return ["مجدد تلاش کنید"];
-        }else{
-            return cityCache
-        }
-    }
-
     
     func getGendersList() -> Array<String> {
         return ["زن","مرد"]
     }
 
     @IBAction func provinceTextTouchDown(_ sender: Any) {
-        var progressCircle : UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        progressCircle.frame = self.view.frame
-        progressCircle.center = self.view.center
-        self.view.addSubview(progressCircle)
-        progressCircle.startAnimating()
+        //var outsideController = ArrayChoiceTableViewController<String>()
+        Spinner.start()
         NetworkManager.shared.run(API: "get-state-and-city",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil)
+        NetworkManager.shared.provinceDictionaryObs
+            .debug()
+            .filter({$0.count > 0})
+            .subscribe(onNext: { [weak self] (innerProvinceDicObs) in
+                let controller = ArrayChoiceTableViewController(innerProvinceDicObs.keys.sorted(){$0 < $1}) {
+                    (type) in self?.provinceModel.type = type
+                    self?.selectCity.text = ""
+                    print("State Code : ",innerProvinceDicObs[type]!)
+                    self?.currentStateCodeObs.accept(innerProvinceDicObs[type]!)
+                }
+                controller.preferredContentSize = CGSize(width: 250, height: 300)
+                Spinner.stop()
+                print("Setting controller")
+                self?.showPopup(controller, sourceView: sender as! UIView)
+                NetworkManager.shared.provinceDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
+            }, onError: { _ in
+                
+            }, onCompleted: {
+
+            }, onDisposed: {
+                
+            }).disposed(by: myDisposeBag)
         
+/*
         Observable.combineLatest(
             NetworkManager.shared.provinceDictionaryObs.filter({$0.count > 0}),
             NetworkManager.shared.provinceListObs.filter({$0.count > 0}),
@@ -185,25 +134,70 @@ class SignupViewController: UIViewControllerWithCoordinator,UITextFieldDelegate,
                 (type) in self?.provinceModel.type = type
                 self?.selectCity.text = ""
                 print("State Code : ",processedDic[type]!)
-                self?.currentStateCode = processedDic[type]!
-                self?.getAllCity(processedDic[type]!)
-                progressCircle.stopAnimating()
+                self?.currentStateCodeObs.accept(processedDic[type]!)
             }
             controller.preferredContentSize = CGSize(width: 250, height: 300)
+            Spinner.stop()
+            print("POPING STATE")
             self?.showPopup(controller, sourceView: sender as! UIView)
+            (sender as AnyObject).resignFirstResponder()
         }).subscribe(onNext: {
+        }, onError: { _ in
+            Spinner.stop()
         }).disposed(by: myDisposeBag)
+*/
     }
 
     @IBAction func cityTextTouchDown(_ sender: Any) {
-        let controller = ArrayChoiceTableViewController(getAllCityList()) {
-            (type) in self.cityModel.type = type
-             print("City Code : ",self.cityDict[type]!)
-            self.currentCityCode = self.cityDict[type] as! String
-        }
-        controller.preferredContentSize = CGSize(width: (sender as! UITextField).bounds.width, height: 200)
-        showPopup(controller, sourceView: sender as! UIView)
-        selectCity.resignFirstResponder()
+        Spinner.start()
+        let parameters = [
+            "state code": self.currentStateCodeObs.value
+        ]
+        print("State : ",self.currentStateCodeObs.value)
+        NetworkManager.shared.run(API: "get-state-and-city",QueryString: "?state%20code="+self.currentStateCodeObs.value, Method: HTTPMethod.post, Parameters: parameters, Header: nil)
+        self.currentStateCodeObs.asObservable()
+            .subscribe(onNext: { [weak self] (stateCodeObs) in
+                print("Heelo : ",stateCodeObs)
+                Spinner.stop()
+            }, onError: {_ in
+            print("Error")
+    
+            }, onCompleted: {
+    
+            }, onDisposed: {
+            }).disposed(by: myDisposeBag)
+    
+/*
+        Observable.combineLatest(
+            NetworkManager.shared.cityDictionaryObs.filter({$0.count > 0}),
+            NetworkManager.shared.cityListObs.filter({$0.count > 0}),
+            resultSelector: { [weak self] (processedDic,processedList) in //,stateCodeObs) in
+                let controller = ArrayChoiceTableViewController(processedList) { (type) in
+                    print("In Array choice closure")
+                    self?.cityModel.type = type
+                    print(processedDic,"  ",processedList)
+                    self?.currentCityCodeObs.accept(processedDic[type]!)
+                    self?.currentCityCode = processedDic[type]!
+                    print("city : \(self?.currentCityCodeObs.value)  Province : \(self?.currentStateCodeObs.value) ")
+                    print("SUBSCRIBING.....")
+                }
+                controller.preferredContentSize = CGSize(width: 250, height: 300)
+                Spinner.stop()
+                self?.showPopup(controller, sourceView: sender as! UIView)
+
+        })
+//            .timeout(1, scheduler: MainScheduler.instance)
+           // .debug()
+        .takeLast(1)
+        //self.currentStateCodeObs.asObservable(),
+            .subscribe(onNext: {
+                print("Subscribeing")
+        }, onError: { err in
+            print("Error on Binding city list with controller : ",err)
+            Spinner.stop()
+        })
+            .disposed(by: myDisposeBag)
+ */
     }
     
     @IBAction func GenderTextTouchDown(_ sender: Any) {
@@ -220,6 +214,7 @@ class SignupViewController: UIViewControllerWithCoordinator,UITextFieldDelegate,
     }
     
     private func showPopup(_ controller: UIViewController, sourceView: UIView) {
+        //print("Showing POPUP : ",sourceView)
         let presentationController = AlwaysPresentAsPopover.configurePresentation(forController: controller)
         presentationController.sourceView = sourceView
         presentationController.sourceRect = sourceView.bounds
@@ -237,13 +232,6 @@ class SignupViewController: UIViewControllerWithCoordinator,UITextFieldDelegate,
         genderTextField.delegate = self
         mobileNoText.delegate = self
         usernameText.delegate = self
-        
-        selectCity.resignFirstResponder()
-        selectProvince.resignFirstResponder()
-        genderTextField.resignFirstResponder()
-        mobileNoText.resignFirstResponder()
-        usernameText.resignFirstResponder()
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -291,31 +279,16 @@ class SignupViewController: UIViewControllerWithCoordinator,UITextFieldDelegate,
         let parameters = [
             "phone" : MobileNumber,
             "gender" : GenderCode,
-            "state" : currentStateCode,
+            "state" : self.currentStateCodeObs.value,
             "city" : currentCityCode,
             "username" : Username
         ]
  
         var signupSucceed : Bool = false
         
-        let urlString = "http://www.favecard.ir/api/takamad/register?phone="+MobileNumber+"&gender="+GenderCode+"&state="+currentStateCode+"&city="+currentCityCode+"&username="+Username
+        let urlString = "http://www.favecard.ir/api/takamad/register?phone="+MobileNumber+"&gender="+GenderCode+"&state="+self.currentStateCodeObs.value+"&city="+self.currentCityCodeObs.value+"&username="+Username
         let postURL = NSURL(string: urlString)! as URL
 
-        
-/*
-        var request = URLRequest(url: postURL)
-         var afManager : SessionManager!
-         request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.timeoutInterval = 100
-        let postString = "phone=\(MobileNumber)&gender=\(GenderCode)&state=\(currentStateCode)&city=\(currentCityCode)&username=\(Username)"
-        request.httpBody = postString.data(using: .utf8)
-        let configuration = URLSessionConfiguration.default
-        afManager = Alamofire.SessionManager(configuration: configuration)
-        afManager.request(request).responseJSON
-          { (response:DataResponse<Any>) in
-*/
- 
         let aMethod : HTTPMethod = HTTPMethod.post
         print("Calling Register API")
         Alamofire.request(postURL, method: aMethod, parameters: parameters, encoding: JSONEncoding.default,  headers: headers).responseJSON { (response:DataResponse<Any>) in

@@ -31,6 +31,7 @@
 		0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */; };
 		0FE8BA042205082100C868C3 /* SMSConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */; };
 		0FE8BA062205239E00C868C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA052205239E00C868C3 /* MainViewController.swift */; };
+		0FFCF614221811FC0040A7DC /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF613221811FC0040A7DC /* Spinner.swift */; };
 		B94E411064EDD6ECB47C43F7 /* libPods-Sepanta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D37D8EF9355EA00873B2EE55 /* libPods-Sepanta.a */; };
 		FFAF0D1985C94CA878D9402B /* libPods-SepantaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C05E9B6E581875EFEE60FA1 /* libPods-SepantaTests.a */; };
 /* End PBXBuildFile section */
@@ -87,6 +88,7 @@
 		0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWidgets.swift; sourceTree = "<group>"; };
 		0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmViewController.swift; sourceTree = "<group>"; };
 		0FE8BA052205239E00C868C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		0FFCF613221811FC0040A7DC /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		190BC7277F7151DCE26F7E0F /* Pods-SepantaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SepantaTests.debug.xcconfig"; path = "Target Support Files/Pods-SepantaTests/Pods-SepantaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5F42A23EF520BF93C6F192BB /* Pods-Sepanta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sepanta.debug.xcconfig"; path = "Target Support Files/Pods-Sepanta/Pods-Sepanta.debug.xcconfig"; sourceTree = "<group>"; };
 		5FDD1C97609FE59B7DE39973 /* Pods-SepantaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SepantaTests.release.xcconfig"; path = "Target Support Files/Pods-SepantaTests/Pods-SepantaTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -154,13 +156,13 @@
 			path = SuperClasses;
 			sourceTree = "<group>";
 		};
-		0F890D0C2215C6FD0091FA2E /* BackEnd CallServices */ = {
+		0F890D0C2215C6FD0091FA2E /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				0F890D0D2215C7170091FA2E /* NetworkManager.swift */,
 				0F890D112215D21C0091FA2E /* JSONParser.swift */,
 			);
-			path = "BackEnd CallServices";
+			path = Model;
 			sourceTree = "<group>";
 		};
 		0F890D0F2215D0CF0091FA2E /* ViewControllers */ = {
@@ -181,6 +183,7 @@
 				0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */,
 				0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */,
 				0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */,
+				0FFCF613221811FC0040A7DC /* Spinner.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -212,7 +215,7 @@
 			children = (
 				0F890D102215D0F20091FA2E /* ViewModel */,
 				0F890D0F2215D0CF0091FA2E /* ViewControllers */,
-				0F890D0C2215C6FD0091FA2E /* BackEnd CallServices */,
+				0F890D0C2215C6FD0091FA2E /* Model */,
 				0F890D072214CFAA0091FA2E /* SuperClasses */,
 				0F890CFC2214B4B40091FA2E /* Coordinators */,
 				0FE8B9A8220355F000C868C3 /* AppDelegate.swift */,
@@ -456,6 +459,7 @@
 				0F890D022214B5310091FA2E /* MainCoordinator.swift in Sources */,
 				0F890D0E2215C7170091FA2E /* NetworkManager.swift in Sources */,
 				0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */,
+				0FFCF614221811FC0040A7DC /* Spinner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
