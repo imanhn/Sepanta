@@ -1,18 +1,18 @@
 //
-//  LoginCoordinator.swift
+//  HomePageController.swift
 //  Sepanta
 //
-//  Created by Iman on 11/25/1397 AP.
+//  Created by Iman on 11/30/1397 AP.
 //  Copyright © 1397 AP Imzich. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class LoginCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
+class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
-    weak var parentCoordinator : AppCoordinator?
+    weak var parentCoordinator : Coordinator?
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
@@ -23,16 +23,9 @@ class LoginCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         if navigationController.viewControllers.contains(fromViewController) {
             return
         }
-        if let loginViewController = fromViewController as? LoginViewController {
-            LoginFinished(loginViewController)
-        }
         if let smsViewController = fromViewController as? SMSConfirmViewController {
             SMSVerificationFinished(smsViewController)
         }
-        if let signupViewController = fromViewController as? SignupViewController {
-            SignupFinished(signupViewController)
-        }
-
     }
     
     func removeChild(_ aviewController : UIViewControllerWithCoordinator?){
@@ -49,44 +42,17 @@ class LoginCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         }
     }
     
-    func SignupFinished(_ signupViewController : SignupViewController) {
-        removeChild(signupViewController)
-    }
+
     func SMSVerificationFinished(_ smsViewController : SMSConfirmViewController?) {
         removeChild(smsViewController)
     }
     
-    func LoginFinished(_ loginViewController : LoginViewController?){
-        removeChild(loginViewController)
-    }
-    
     func start() {
-        let vc = LoginViewController.instantiate()
+        let vc = HomeViewController.instantiate()
         vc.coordinator = self
         navigationController.delegate = self
         navigationController.pushViewController(vc, animated: false)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
-    func gotoSMSVerification(Set mobileNumber : String) {
-        let vc = SMSConfirmViewController.instantiate()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: false)
-        navigationController.setNavigationBarHidden(true, animated: false)
-        vc.mobileNumber = mobileNumber
-    }
-
-    func gotoSignup() {
-        let vc = SignupViewController.instantiate()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: false)
-        navigationController.setNavigationBarHidden(true, animated: false)
-    }
-    
-    func gotoHomePage() {
-        let homeCoordinator = HomeCoordinator(navigationController: navigationController)
-        childCoordinators.append(homeCoordinator)
-        homeCoordinator.parentCoordinator = self
-        homeCoordinator.start()
-    }
 }

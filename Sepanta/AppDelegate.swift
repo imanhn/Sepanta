@@ -14,7 +14,7 @@ import UserNotifications
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    var coordinator: MainCoordinator?
+    var coordinator: AppCoordinator?
 
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navController = UINavigationController()
         
         // send that into our coordinator so that it can display view controllers
-        coordinator = MainCoordinator(navigationController: navController)
+        coordinator = AppCoordinator(navigationController: navController)
         
         // tell the coordinator to take over control
         coordinator?.start()

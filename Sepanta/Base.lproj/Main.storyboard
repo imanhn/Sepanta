@@ -26,7 +26,7 @@
         <!--LoginViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" userLabel="LoginViewController" customClass="LoginViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" hidesBottomBarWhenPushed="YES" id="BYZ-38-t0r" userLabel="LoginViewController" customClass="LoginViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" id="8bC-Xf-vdC" userLabel="PageView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -48,10 +48,10 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" translatesAutoresizingMaskIntoConstraints="NO" id="DNk-ZY-hOZ" userLabel="LoginPanelView" customClass="RightTabbedView" customModule="Sepanta" customModuleProvider="target">
-                                <rect key="frame" x="18.5" y="320" width="338" height="213.5"/>
+                                <rect key="frame" x="18.5" y="320" width="338" height="267"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8gH-oj-d9h" userLabel="Enter">
-                                        <rect key="frame" x="169" y="0.0" width="169" height="42"/>
+                                        <rect key="frame" x="169" y="0.0" width="169" height="53"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="ورود" image="icon_login">
@@ -64,7 +64,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iVP-EF-w4S" userLabel="Signup" customClass="TabbedButton" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="169" height="42"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="169" height="53"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="ثبت نام" image="icon_edit">
@@ -83,7 +83,7 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kec-hf-ANp" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="17" y="126.5" width="304" height="26"/>
+                                        <rect key="frame" x="17" y="158.5" width="304" height="32.5"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" keyboardType="phonePad" textContentType="tel"/>
@@ -93,7 +93,7 @@
                                         </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_mobile_gray" translatesAutoresizingMaskIntoConstraints="NO" id="3dy-XG-y5x" userLabel="MobileIcon">
-                                        <rect key="frame" x="295" y="128.5" width="16" height="21"/>
+                                        <rect key="frame" x="295" y="161.5" width="16" height="25.5"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -118,10 +118,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9wR-64-O54" userLabel="SendView">
-                                <rect key="frame" x="0.0" y="553.5" width="375" height="69.5"/>
+                                <rect key="frame" x="0.0" y="607" width="375" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9k-r4-p4l" userLabel="SendButton">
-                                        <rect key="frame" x="94" y="14" width="188" height="41"/>
+                                        <rect key="frame" x="94" y="12" width="188" height="36"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <state key="normal" title="تایید" image="icon_tik_dark">
@@ -172,7 +172,7 @@
                             <constraint firstItem="sN6-uU-4U6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="eTe-Qx-Jce"/>
                             <constraint firstItem="sN6-uU-4U6" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.1" id="f8c-6f-OgK"/>
                             <constraint firstItem="9wR-64-O54" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="lto-0H-okf"/>
-                            <constraint firstItem="DNk-ZY-hOZ" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.32" id="mis-gh-hCA"/>
+                            <constraint firstItem="DNk-ZY-hOZ" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.4" id="mis-gh-hCA"/>
                             <constraint firstItem="qBv-Rq-9Kc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-1" id="nUY-c6-sXl"/>
                             <constraint firstItem="IyN-es-hBL" firstAttribute="top" secondItem="qBv-Rq-9Kc" secondAttribute="bottom" id="sQ3-1e-5jl"/>
                             <constraint firstItem="sN6-uU-4U6" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="uix-ja-3RO"/>
@@ -198,7 +198,7 @@
         <!--SMSConfirmViewController-->
         <scene sceneID="WhV-oZ-2Iz">
             <objects>
-                <viewController storyboardIdentifier="SMSConfirmViewController" id="h73-aN-KX7" userLabel="SMSConfirmViewController" customClass="SMSConfirmViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SMSConfirmViewController" hidesBottomBarWhenPushed="YES" id="h73-aN-KX7" userLabel="SMSConfirmViewController" customClass="SMSConfirmViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" id="SeJ-OZ-dGT" userLabel="PageView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -220,10 +220,10 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" translatesAutoresizingMaskIntoConstraints="NO" id="zsk-8b-beF" userLabel="LoginPanelView" customClass="RightTabbedView" customModule="Sepanta" customModuleProvider="target">
-                                <rect key="frame" x="19" y="321" width="338" height="213.5"/>
+                                <rect key="frame" x="19" y="321" width="338" height="267"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDa-B2-0b9" userLabel="Enter">
-                                        <rect key="frame" x="169" y="0.0" width="169" height="42.5"/>
+                                        <rect key="frame" x="169" y="0.0" width="169" height="53"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="ورود" image="icon_login">
@@ -236,7 +236,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ow8-uB-LLC" userLabel="Signup" customClass="TabbedButton" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="169" height="42.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="169" height="53"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="ثبت نام" image="icon_edit">
@@ -255,7 +255,7 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0mb-wF-v4k" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="17" y="84.5" width="304" height="25.5"/>
+                                        <rect key="frame" x="17" y="106" width="304" height="31.5"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" keyboardType="phonePad" enablesReturnKeyAutomatically="YES" textContentType="tel"/>
@@ -265,7 +265,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ورود کد ارسال شده" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ron-c6-HyJ" userLabel="SMSCodeText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="17" y="130" width="304" height="25.5"/>
+                                        <rect key="frame" x="17" y="157.5" width="304" height="32"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" keyboardType="phonePad" enablesReturnKeyAutomatically="YES"/>
@@ -274,13 +274,13 @@
                                         </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_mobile_gray" translatesAutoresizingMaskIntoConstraints="NO" id="24U-I8-eec" userLabel="MobileIcon">
-                                        <rect key="frame" x="295" y="88" width="16" height="20"/>
+                                        <rect key="frame" x="295" y="110" width="16" height="25"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_lock_gray" translatesAutoresizingMaskIntoConstraints="NO" id="w94-6D-GwQ" userLabel="LockIcon">
-                                        <rect key="frame" x="293" y="133.5" width="18" height="20"/>
+                                        <rect key="frame" x="293" y="161" width="18" height="25"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۰۱:۰۰" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAM-oe-oMT" userLabel="TimerLabel">
-                                        <rect key="frame" x="17" y="175.5" width="304" height="26"/>
+                                        <rect key="frame" x="17" y="209.5" width="304" height="31.5"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="24"/>
                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -318,10 +318,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bGy-Ms-wuh" userLabel="SendView">
-                                <rect key="frame" x="0.0" y="554.5" width="375" height="68.5"/>
+                                <rect key="frame" x="0.0" y="608" width="375" height="59"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gF1-k4-AfP" userLabel="SendButton">
-                                        <rect key="frame" x="94" y="13.5" width="188" height="41.5"/>
+                                        <rect key="frame" x="94" y="11.5" width="188" height="35.5"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <state key="normal" title="تایید" image="icon_tik_dark">
@@ -358,7 +358,7 @@
                             <constraint firstItem="zsk-8b-beF" firstAttribute="centerX" secondItem="SeJ-OZ-dGT" secondAttribute="centerX" id="2X5-Nz-ySY"/>
                             <constraint firstItem="bGy-Ms-wuh" firstAttribute="leading" secondItem="KsZ-HT-7CH" secondAttribute="leading" id="2u5-AZ-T6t"/>
                             <constraint firstItem="nZa-vL-iXi" firstAttribute="top" secondItem="KsZ-HT-7CH" secondAttribute="top" id="4YQ-kk-xlv"/>
-                            <constraint firstItem="zsk-8b-beF" firstAttribute="height" secondItem="SeJ-OZ-dGT" secondAttribute="height" multiplier="0.32" id="54K-sI-fNY"/>
+                            <constraint firstItem="zsk-8b-beF" firstAttribute="height" secondItem="SeJ-OZ-dGT" secondAttribute="height" multiplier="0.4" id="54K-sI-fNY"/>
                             <constraint firstItem="nZa-vL-iXi" firstAttribute="width" secondItem="SeJ-OZ-dGT" secondAttribute="width" id="56W-f6-M5g"/>
                             <constraint firstItem="bGy-Ms-wuh" firstAttribute="centerX" secondItem="KsZ-HT-7CH" secondAttribute="centerX" id="5Mr-1j-RNl"/>
                             <constraint firstItem="zsk-8b-beF" firstAttribute="centerX" secondItem="SeJ-OZ-dGT" secondAttribute="centerX" id="72Y-8p-TC4"/>
@@ -393,19 +393,19 @@
             </objects>
             <point key="canvasLocation" x="759" y="27"/>
         </scene>
-        <!--MainViewController-->
+        <!--HomeViewController-->
         <scene sceneID="tQk-oV-gy1">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" id="jPv-Ez-8v9" userLabel="MainViewController" customClass="MainViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" hidesBottomBarWhenPushed="YES" id="jPv-Ez-8v9" userLabel="HomeViewController" customClass="HomeViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="D7t-mF-4dd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zrj-XO-lp6" userLabel="LogoView">
-                                <rect key="frame" x="0.0" y="20" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="79"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_shape_in" translatesAutoresizingMaskIntoConstraints="NO" id="901-7p-0YF">
-                                        <rect key="frame" x="166" y="30" width="43" height="70"/>
+                                        <rect key="frame" x="169" y="8" width="38" height="63"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="901-7p-0YF" secondAttribute="height" multiplier="43:70" id="IZS-Ax-81f"/>
                                         </constraints>
@@ -413,22 +413,22 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="901-7p-0YF" secondAttribute="bottom" id="4g1-2S-QuF"/>
                                     <constraint firstItem="901-7p-0YF" firstAttribute="centerX" secondItem="zrj-XO-lp6" secondAttribute="centerX" id="UB0-nH-B69"/>
-                                    <constraint firstItem="901-7p-0YF" firstAttribute="height" secondItem="zrj-XO-lp6" secondAttribute="height" multiplier="0.7" id="t3z-PT-PQM"/>
+                                    <constraint firstItem="901-7p-0YF" firstAttribute="height" secondItem="zrj-XO-lp6" secondAttribute="height" multiplier="0.8" id="Xzf-eG-Q8x"/>
+                                    <constraint firstItem="901-7p-0YF" firstAttribute="centerY" secondItem="zrj-XO-lp6" secondAttribute="centerY" id="ZFP-zK-aY9"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PIk-e2-YqD" userLabel="ToolbarView">
-                                <rect key="frame" x="0.0" y="120" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="99" width="375" height="51"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_text" translatesAutoresizingMaskIntoConstraints="NO" id="3eX-mI-6En">
-                                        <rect key="frame" x="147" y="18" width="81" height="24"/>
+                                        <rect key="frame" x="153" y="15" width="70" height="20.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="3eX-mI-6En" secondAttribute="height" multiplier="17:5" id="thW-QS-gyb"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tDR-hr-9RR" userLabel="SettingButton" customClass="CircularButton" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="40" y="12" width="36" height="36"/>
+                                        <rect key="frame" x="40" y="10" width="30.5" height="30.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="tDR-hr-9RR" secondAttribute="height" multiplier="1:1" id="bK7-sE-U6Z"/>
                                         </constraints>
@@ -436,7 +436,7 @@
                                         <state key="normal" image="icon_setting"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1YO-L0-ocg" userLabel="ProfileButton" customClass="CircularButton" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="299" y="12" width="36" height="36"/>
+                                        <rect key="frame" x="304.5" y="10" width="30.5" height="30.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="1YO-L0-ocg" secondAttribute="height" multiplier="1:1" id="cAf-5h-LJL"/>
                                         </constraints>
@@ -444,14 +444,14 @@
                                         <state key="normal" image="icon_login"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vTv-Xq-5UY" userLabel="NewsButton" customClass="CircularButton" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="111" y="12" width="36" height="36"/>
+                                        <rect key="frame" x="105.5" y="10" width="31" height="30.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="vTv-Xq-5UY" secondAttribute="height" multiplier="1:1" id="0vj-JC-Psy"/>
                                         </constraints>
                                         <state key="normal" image="icon_news"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MKE-fw-eA9" userLabel="FavoriteButton" customClass="CircularButton" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="228" y="12" width="36" height="36"/>
+                                        <rect key="frame" x="238.5" y="10" width="31" height="30.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="MKE-fw-eA9" secondAttribute="height" multiplier="1:1" id="Ukc-R6-hN9"/>
                                         </constraints>
@@ -481,10 +481,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qee-mR-dqf" userLabel="SearchBarView">
-                                <rect key="frame" x="0.0" y="188" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="150" width="375" height="56.5"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" semanticContentAttribute="forceRightToLeft" searchBarStyle="minimal" placeholder="جستجو" showsSearchResultsButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v1T-uf-lb5">
-                                        <rect key="frame" x="25" y="3" width="325" height="54"/>
+                                        <rect key="frame" x="25" y="7" width="325" height="42.5"/>
                                         <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <scopeButtonTitles>
@@ -502,81 +502,81 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uMB-5N-YVt" userLabel="MainButtonsToolbar">
-                                <rect key="frame" x="0.0" y="265" width="375" height="120"/>
+                                <rect key="frame" x="-19" y="199.5" width="413" height="113.5"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHn-Nf-Ayy" userLabel="poldarsho" customClass="MainButton" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="-20" y="-5.5" width="132" height="132"/>
+                                    <stackView autoresizesSubviews="NO" opaque="NO" contentMode="scaleAspectFit" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="qAK-8N-dDa">
+                                        <rect key="frame" x="-20.5" y="0.5" width="454" height="113.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHn-Nf-Ayy" userLabel="poldarsho" customClass="MainButton" customModule="Sepanta" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="113.5" height="113.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="KHn-Nf-Ayy" secondAttribute="height" multiplier="1:1" id="o4n-Ma-2EH"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="17"/>
+                                                <state key="normal" image="poldarsho">
+                                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZN-32-Pua" userLabel="jadidtarinha" customClass="MainButton" customModule="Sepanta" customModuleProvider="target">
+                                                <rect key="frame" x="113.5" y="0.0" width="113.5" height="113.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="YZN-32-Pua" secondAttribute="height" multiplier="1:1" id="3JM-ue-O7l"/>
+                                                </constraints>
+                                                <state key="normal" image="jadidtarinha"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sQX-oo-QGk" userLabel="nazdikeman" customClass="MainButton" customModule="Sepanta" customModuleProvider="target">
+                                                <rect key="frame" x="227" y="0.0" width="113.5" height="113.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="sQX-oo-QGk" secondAttribute="height" multiplier="1:1" id="ssB-vd-qlQ"/>
+                                                </constraints>
+                                                <state key="normal" image="nazdikeman"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v1R-68-FFj" userLabel="sepantaie" customClass="MainButton" customModule="Sepanta" customModuleProvider="target">
+                                                <rect key="frame" x="340.5" y="0.0" width="113.5" height="113.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="v1R-68-FFj" secondAttribute="height" multiplier="1:1" id="UOW-ka-4ij"/>
+                                                </constraints>
+                                                <state key="normal" image="sepantaie"/>
+                                            </button>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="KHn-Nf-Ayy" secondAttribute="height" multiplier="1:1" id="o4n-Ma-2EH"/>
+                                            <constraint firstItem="YZN-32-Pua" firstAttribute="height" secondItem="qAK-8N-dDa" secondAttribute="height" id="X6v-X4-XED"/>
+                                            <constraint firstItem="v1R-68-FFj" firstAttribute="height" secondItem="qAK-8N-dDa" secondAttribute="height" id="qfX-Wt-Stc"/>
+                                            <constraint firstItem="sQX-oo-QGk" firstAttribute="height" secondItem="qAK-8N-dDa" secondAttribute="height" id="ssk-SB-JeY"/>
+                                            <constraint firstItem="KHn-Nf-Ayy" firstAttribute="height" secondItem="qAK-8N-dDa" secondAttribute="height" id="xr4-7w-qDV"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="BKoodakBold" family="B Koodak" pointSize="17"/>
-                                        <state key="normal" image="poldarsho">
-                                            <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZN-32-Pua" userLabel="jadidtarinha" customClass="MainButton" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="72" y="-5.5" width="132" height="132"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="YZN-32-Pua" secondAttribute="height" multiplier="1:1" id="3JM-ue-O7l"/>
-                                        </constraints>
-                                        <state key="normal" image="jadidtarinha"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v1R-68-FFj" userLabel="sepantaie" customClass="MainButton" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="256" y="-6.5" width="132" height="132"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="v1R-68-FFj" secondAttribute="height" multiplier="1:1" id="UOW-ka-4ij"/>
-                                        </constraints>
-                                        <state key="normal" image="sepantaie"/>
-                                        <connections>
-                                            <segue destination="I4W-Vv-3RO" kind="show" id="qOS-Uu-KsZ"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sQX-oo-QGk" userLabel="nazdikeman" customClass="MainButton" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="164" y="-6.5" width="132" height="132"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="sQX-oo-QGk" secondAttribute="height" multiplier="1:1" id="ssB-vd-qlQ"/>
-                                        </constraints>
-                                        <state key="normal" image="nazdikeman"/>
-                                    </button>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="v1R-68-FFj" firstAttribute="centerY" secondItem="uMB-5N-YVt" secondAttribute="centerY" id="9ds-BV-gO3"/>
-                                    <constraint firstItem="KHn-Nf-Ayy" firstAttribute="width" secondItem="uMB-5N-YVt" secondAttribute="width" multiplier="0.35" id="O8I-hh-woc"/>
-                                    <constraint firstItem="sQX-oo-QGk" firstAttribute="leading" secondItem="YZN-32-Pua" secondAttribute="trailing" constant="-40" id="Pnq-na-X5R"/>
-                                    <constraint firstItem="YZN-32-Pua" firstAttribute="leading" secondItem="KHn-Nf-Ayy" secondAttribute="trailing" constant="-40" id="Riy-o2-32v"/>
-                                    <constraint firstItem="v1R-68-FFj" firstAttribute="leading" secondItem="sQX-oo-QGk" secondAttribute="trailing" constant="-40" id="Vfv-YP-IbB"/>
-                                    <constraint firstItem="sQX-oo-QGk" firstAttribute="width" secondItem="KHn-Nf-Ayy" secondAttribute="width" id="XuZ-cS-MQP"/>
-                                    <constraint firstItem="YZN-32-Pua" firstAttribute="centerY" secondItem="uMB-5N-YVt" secondAttribute="centerY" id="bgO-H2-aDZ"/>
-                                    <constraint firstItem="v1R-68-FFj" firstAttribute="width" secondItem="KHn-Nf-Ayy" secondAttribute="width" id="hSD-ED-UCx"/>
-                                    <constraint firstItem="YZN-32-Pua" firstAttribute="width" secondItem="KHn-Nf-Ayy" secondAttribute="width" id="iQW-vj-vNa"/>
-                                    <constraint firstItem="KHn-Nf-Ayy" firstAttribute="centerY" secondItem="uMB-5N-YVt" secondAttribute="centerY" id="oHY-Dx-Mxj"/>
-                                    <constraint firstItem="sQX-oo-QGk" firstAttribute="centerY" secondItem="uMB-5N-YVt" secondAttribute="centerY" id="qyg-rV-VIA"/>
-                                    <constraint firstItem="KHn-Nf-Ayy" firstAttribute="leading" secondItem="uMB-5N-YVt" secondAttribute="leading" constant="-20" id="xWg-tP-aZM"/>
+                                    <constraint firstItem="qAK-8N-dDa" firstAttribute="centerY" secondItem="uMB-5N-YVt" secondAttribute="centerY" id="R1P-9L-F5b"/>
+                                    <constraint firstItem="qAK-8N-dDa" firstAttribute="centerX" secondItem="uMB-5N-YVt" secondAttribute="centerX" id="Tji-Oq-XEL"/>
+                                    <constraint firstItem="qAK-8N-dDa" firstAttribute="height" secondItem="uMB-5N-YVt" secondAttribute="height" id="VGl-N9-afv"/>
+                                    <constraint firstItem="qAK-8N-dDa" firstAttribute="width" secondItem="uMB-5N-YVt" secondAttribute="width" multiplier="1.1" id="ca1-mO-ALh"/>
                                 </constraints>
                             </view>
                             <imageView autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bna-xO-99a" userLabel="rightView" customClass="AdImageView" customModule="Sepanta" customModuleProvider="target">
-                                <rect key="frame" x="375" y="415" width="375" height="172"/>
+                                <rect key="frame" x="375" y="313" width="375.5" height="172"/>
                             </imageView>
                             <imageView autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GhD-8q-b8B" userLabel="CurrentImage(Ads)" customClass="AdImageView" customModule="Sepanta" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="415" width="375" height="172"/>
+                                <rect key="frame" x="0.0" y="313" width="375" height="172"/>
                                 <gestureRecognizers/>
                             </imageView>
                             <imageView autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1CJ-xS-cn6" userLabel="leftView" customClass="AdImageView" customModule="Sepanta" customModuleProvider="target">
-                                <rect key="frame" x="-375" y="415" width="375" height="172"/>
+                                <rect key="frame" x="-375.5" y="313" width="375.5" height="172"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="172" id="1M0-OT-idF"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t7b-Oj-S5L" userLabel="FooterView">
-                                <rect key="frame" x="0.0" y="587" width="375" height="80"/>
+                                <rect key="frame" x="0.0" y="485" width="375" height="80"/>
                                 <subviews>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NfB-GE-XO7" userLabel="PageControl">
-                                        <rect key="frame" x="20" y="0.0" width="72" height="0.0"/>
+                                        <rect key="frame" x="20" y="0.0" width="72.5" height="0.0"/>
                                         <color key="pageIndicatorTintColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="currentPageIndicatorTintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </pageControl>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="جای تبلیغ شما اینجاست !!!" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ss4-8X-m5a" userLabel="CommentAds">
-                                        <rect key="frame" x="92" y="0.0" width="263" height="23.5"/>
+                                        <rect key="frame" x="92.5" y="0.0" width="262.5" height="23.5"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -605,35 +605,35 @@
                         <constraints>
                             <constraint firstItem="bna-xO-99a" firstAttribute="leading" secondItem="GhD-8q-b8B" secondAttribute="trailing" id="0nO-y7-bKe"/>
                             <constraint firstItem="zrj-XO-lp6" firstAttribute="leading" secondItem="5ro-eO-8c6" secondAttribute="leading" id="1eu-Vi-U32"/>
-                            <constraint firstItem="qee-mR-dqf" firstAttribute="height" secondItem="PIk-e2-YqD" secondAttribute="height" id="3FY-Vq-koT"/>
+                            <constraint firstItem="PIk-e2-YqD" firstAttribute="height" secondItem="D7t-mF-4dd" secondAttribute="height" multiplier="0.09" id="30y-YU-8PD"/>
                             <constraint firstItem="PIk-e2-YqD" firstAttribute="leading" secondItem="zrj-XO-lp6" secondAttribute="leading" id="8AP-k4-gsg"/>
                             <constraint firstItem="bna-xO-99a" firstAttribute="width" secondItem="GhD-8q-b8B" secondAttribute="width" id="8Jx-Vp-ex5"/>
                             <constraint firstItem="GhD-8q-b8B" firstAttribute="leading" secondItem="t7b-Oj-S5L" secondAttribute="leading" id="8t9-GT-D6L"/>
                             <constraint firstItem="NfB-GE-XO7" firstAttribute="top" secondItem="GhD-8q-b8B" secondAttribute="bottom" id="8xH-dy-Be6"/>
+                            <constraint firstItem="qee-mR-dqf" firstAttribute="height" secondItem="D7t-mF-4dd" secondAttribute="height" multiplier="0.1" id="A1D-Vq-heP"/>
                             <constraint firstItem="qee-mR-dqf" firstAttribute="leading" secondItem="PIk-e2-YqD" secondAttribute="leading" id="Aip-34-y4L"/>
                             <constraint firstItem="uMB-5N-YVt" firstAttribute="height" secondItem="qee-mR-dqf" secondAttribute="height" multiplier="2" id="BUw-eH-BHp"/>
                             <constraint firstItem="GhD-8q-b8B" firstAttribute="width" secondItem="D7t-mF-4dd" secondAttribute="width" id="CW4-QG-YNp"/>
                             <constraint firstItem="1CJ-xS-cn6" firstAttribute="height" secondItem="GhD-8q-b8B" secondAttribute="height" id="G0Y-Bd-fj8"/>
                             <constraint firstItem="bna-xO-99a" firstAttribute="centerY" secondItem="GhD-8q-b8B" secondAttribute="centerY" id="H6U-ZU-7Yn"/>
                             <constraint firstItem="t7b-Oj-S5L" firstAttribute="top" secondItem="GhD-8q-b8B" secondAttribute="bottom" id="PkE-8q-YGn"/>
-                            <constraint firstItem="qee-mR-dqf" firstAttribute="top" secondItem="PIk-e2-YqD" secondAttribute="bottom" constant="8" id="UWP-Z0-age"/>
+                            <constraint firstItem="qee-mR-dqf" firstAttribute="top" secondItem="PIk-e2-YqD" secondAttribute="bottom" id="UWP-Z0-age"/>
                             <constraint firstItem="bna-xO-99a" firstAttribute="height" secondItem="GhD-8q-b8B" secondAttribute="height" id="Xoj-80-Kah"/>
-                            <constraint firstItem="zrj-XO-lp6" firstAttribute="height" secondItem="D7t-mF-4dd" secondAttribute="height" multiplier="0.15" id="YJN-Zp-KZN"/>
+                            <constraint firstItem="zrj-XO-lp6" firstAttribute="height" secondItem="D7t-mF-4dd" secondAttribute="height" multiplier="0.14" id="YJN-Zp-KZN"/>
                             <constraint firstItem="t7b-Oj-S5L" firstAttribute="width" secondItem="D7t-mF-4dd" secondAttribute="width" id="aYI-86-V7l"/>
                             <constraint firstItem="zrj-XO-lp6" firstAttribute="width" secondItem="D7t-mF-4dd" secondAttribute="width" id="b3M-tB-gvd"/>
-                            <constraint firstItem="uMB-5N-YVt" firstAttribute="width" secondItem="D7t-mF-4dd" secondAttribute="width" id="e9L-cY-ASu"/>
+                            <constraint firstItem="uMB-5N-YVt" firstAttribute="width" secondItem="D7t-mF-4dd" secondAttribute="width" multiplier="1.1" id="e9L-cY-ASu"/>
                             <constraint firstItem="1CJ-xS-cn6" firstAttribute="centerY" secondItem="GhD-8q-b8B" secondAttribute="centerY" id="gU5-qK-aAL"/>
                             <constraint firstItem="t7b-Oj-S5L" firstAttribute="bottom" secondItem="5ro-eO-8c6" secondAttribute="bottom" id="iNF-bP-RrY"/>
                             <constraint firstItem="PIk-e2-YqD" firstAttribute="top" secondItem="zrj-XO-lp6" secondAttribute="bottom" id="isC-SS-D8I"/>
                             <constraint firstItem="uMB-5N-YVt" firstAttribute="centerX" secondItem="5ro-eO-8c6" secondAttribute="centerX" id="npd-JC-aVz"/>
                             <constraint firstItem="PIk-e2-YqD" firstAttribute="width" secondItem="zrj-XO-lp6" secondAttribute="width" id="oEC-xm-MF4"/>
                             <constraint firstItem="GhD-8q-b8B" firstAttribute="leading" secondItem="1CJ-xS-cn6" secondAttribute="trailing" id="p3f-ij-nhM"/>
-                            <constraint firstItem="PIk-e2-YqD" firstAttribute="height" secondItem="zrj-XO-lp6" secondAttribute="height" multiplier="0.6" id="pXj-ie-f7Z"/>
-                            <constraint firstItem="uMB-5N-YVt" firstAttribute="top" secondItem="v1T-uf-lb5" secondAttribute="bottom" constant="20" id="qob-Sm-1mm"/>
+                            <constraint firstItem="uMB-5N-YVt" firstAttribute="top" secondItem="v1T-uf-lb5" secondAttribute="bottom" id="qob-Sm-1mm"/>
                             <constraint firstItem="qee-mR-dqf" firstAttribute="width" secondItem="PIk-e2-YqD" secondAttribute="width" id="sm8-R0-0lQ"/>
                             <constraint firstItem="1CJ-xS-cn6" firstAttribute="width" secondItem="GhD-8q-b8B" secondAttribute="width" id="vPZ-9W-faN"/>
                             <constraint firstItem="zrj-XO-lp6" firstAttribute="top" secondItem="5ro-eO-8c6" secondAttribute="top" id="wHL-x0-skO"/>
-                            <constraint firstItem="GhD-8q-b8B" firstAttribute="top" secondItem="uMB-5N-YVt" secondAttribute="bottom" constant="30" id="xxh-1Z-nUo"/>
+                            <constraint firstItem="GhD-8q-b8B" firstAttribute="top" secondItem="uMB-5N-YVt" secondAttribute="bottom" id="xxh-1Z-nUo"/>
                             <constraint firstItem="t7b-Oj-S5L" firstAttribute="centerX" secondItem="5ro-eO-8c6" secondAttribute="centerX" id="yY3-fk-wND"/>
                             <constraint firstItem="Ss4-8X-m5a" firstAttribute="top" secondItem="GhD-8q-b8B" secondAttribute="bottom" id="zzx-Ti-VDh"/>
                         </constraints>
@@ -663,7 +663,7 @@
         <!--SepantaGroupsViewController-->
         <scene sceneID="Q40-9h-T4U">
             <objects>
-                <viewController id="I4W-Vv-3RO" userLabel="SepantaGroupsViewController" customClass="SepantaGroupsViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="I4W-Vv-3RO" userLabel="SepantaGroupsViewController" customClass="SepantaGroupsViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZCg-04-fbg" userLabel="PageView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -678,7 +678,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="مراکز سپنتایی" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKg-wA-Ses" userLabel="HeaderText">
-                                        <rect key="frame" x="136.5" y="3" width="101.5" height="23.5"/>
+                                        <rect key="frame" x="131.5" y="1" width="112" height="27.5"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -689,9 +689,6 @@
                                             <constraint firstAttribute="width" secondItem="7Bg-Zr-66j" secondAttribute="height" multiplier="1:3" id="ws7-ah-6Q2"/>
                                         </constraints>
                                         <state key="normal" image="icon_back_black"/>
-                                        <connections>
-                                            <segue destination="jPv-Ez-8v9" kind="show" id="6fO-n3-MLW"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -779,12 +776,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IHt-OM-fBY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4248.8000000000002" y="-64.31784107946028"/>
+            <point key="canvasLocation" x="3610" y="27"/>
         </scene>
         <!--SignupViewController-->
         <scene sceneID="cpN-JO-42Q">
             <objects>
-                <viewController storyboardIdentifier="SignupViewController" id="MG4-my-GWf" userLabel="SignupViewController" customClass="SignupViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignupViewController" hidesBottomBarWhenPushed="YES" id="MG4-my-GWf" userLabel="SignupViewController" customClass="SignupViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" id="WxP-Kg-AGN" userLabel="PageView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -806,10 +803,10 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" translatesAutoresizingMaskIntoConstraints="NO" id="Skr-GI-hdH" userLabel="LoginPanelView" customClass="LeftTabbedView" customModule="Sepanta" customModuleProvider="target">
-                                <rect key="frame" x="19" y="187" width="337.5" height="347"/>
+                                <rect key="frame" x="19" y="187" width="337.5" height="400"/>
                                 <subviews>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LdK-XH-fZW" userLabel="Signup">
-                                        <rect key="frame" x="0.0" y="0.0" width="164" height="52"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="164" height="60"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="ثبت نام" image="icon_edit">
@@ -825,7 +822,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yI0-wD-DaW" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="16.5" y="72" width="304" height="35"/>
+                                        <rect key="frame" x="16.5" y="80" width="304" height="40.5"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" returnKeyType="continue" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
@@ -834,10 +831,10 @@
                                         </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_mobile_gray" translatesAutoresizingMaskIntoConstraints="NO" id="MlL-rB-l1f" userLabel="MobileIcon">
-                                        <rect key="frame" x="292.5" y="75.5" width="18" height="28"/>
+                                        <rect key="frame" x="292.5" y="84" width="18" height="32.5"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="نام کاربری" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="idx-Fs-RNY" userLabel="UsernameText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="16.5" y="127" width="304" height="35"/>
+                                        <rect key="frame" x="16.5" y="140.5" width="304" height="40"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="continue" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
@@ -846,10 +843,10 @@
                                         </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_login" translatesAutoresizingMaskIntoConstraints="NO" id="wSA-6P-5KH" userLabel="UsernameIcon">
-                                        <rect key="frame" x="291.5" y="134" width="20" height="20.5"/>
+                                        <rect key="frame" x="291.5" y="148.5" width="20" height="23.5"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="جنسیت" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PE5-oh-OTo" userLabel="GenderSelectText" customClass="UnderLinedSelectableTextField" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="16.5" y="182" width="304" height="35"/>
+                                        <rect key="frame" x="16.5" y="200.5" width="304" height="40.5"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
@@ -858,7 +855,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="انتخاب استان" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rk0-qe-jxg" userLabel="ProvinceText" customClass="UnderLinedSelectableTextField" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="168.5" y="237" width="152" height="35.5"/>
+                                        <rect key="frame" x="168.5" y="261" width="152" height="41"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -867,10 +864,10 @@
                                         </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_gen_gray" translatesAutoresizingMaskIntoConstraints="NO" id="qH8-UE-WEo" userLabel="GenderIcon">
-                                        <rect key="frame" x="290.5" y="189" width="23" height="21"/>
+                                        <rect key="frame" x="290.5" y="208.5" width="23" height="24.5"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="انتخاب شهر" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ovn-bR-1Bu" userLabel="CityText" customClass="UnderLinedSelectableTextField" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="16.5" y="237" width="162" height="35"/>
+                                        <rect key="frame" x="16.5" y="261" width="162" height="40.5"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -879,7 +876,7 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8z5-tl-h7d" userLabel="Enter" customClass="TabbedButton" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="174" y="0.0" width="163.5" height="52"/>
+                                        <rect key="frame" x="174" y="0.0" width="163.5" height="60"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="ورود" image="icon_login">
@@ -892,7 +889,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgY-1J-Ktr" userLabel="TermsCheck">
-                                        <rect key="frame" x="287.5" y="292.5" width="30" height="30"/>
+                                        <rect key="frame" x="287.5" y="322" width="30" height="30"/>
                                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="bLD-EC-6uz"/>
@@ -904,7 +901,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="قوانین و مقررات را خوانده ام و موافقم." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80h-aI-T9g">
-                                        <rect key="frame" x="16.5" y="292.5" width="251" height="30"/>
+                                        <rect key="frame" x="16.5" y="322" width="251" height="30"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="16"/>
                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -959,10 +956,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gio-EG-J1b" userLabel="SendView">
-                                <rect key="frame" x="0.0" y="554" width="375" height="69"/>
+                                <rect key="frame" x="0.0" y="607" width="375" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sFd-mZ-n8V" userLabel="SendButton">
-                                        <rect key="frame" x="93.5" y="13" width="188" height="42"/>
+                                        <rect key="frame" x="93.5" y="11.5" width="188" height="36"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -1009,7 +1006,7 @@
                             <constraint firstItem="xfg-lv-fkQ" firstAttribute="height" secondItem="WxP-Kg-AGN" secondAttribute="height" multiplier="0.1" id="ZOw-cr-ePI"/>
                             <constraint firstItem="xfg-lv-fkQ" firstAttribute="width" secondItem="WxP-Kg-AGN" secondAttribute="width" id="aII-V0-RvI"/>
                             <constraint firstItem="Skr-GI-hdH" firstAttribute="top" secondItem="dIo-f5-aut" secondAttribute="bottom" id="e3a-tt-lb4"/>
-                            <constraint firstItem="Skr-GI-hdH" firstAttribute="height" secondItem="WxP-Kg-AGN" secondAttribute="height" multiplier="0.52" id="fNh-68-tEh"/>
+                            <constraint firstItem="Skr-GI-hdH" firstAttribute="height" secondItem="WxP-Kg-AGN" secondAttribute="height" multiplier="0.6" id="fNh-68-tEh"/>
                             <constraint firstItem="Gio-EG-J1b" firstAttribute="leading" secondItem="Iqs-sc-W2f" secondAttribute="leading" id="fTq-Ir-Bag"/>
                             <constraint firstItem="Skr-GI-hdH" firstAttribute="centerX" secondItem="WxP-Kg-AGN" secondAttribute="centerX" id="ftj-c1-BDt"/>
                             <constraint firstItem="Tib-Sl-1uS" firstAttribute="height" secondItem="WxP-Kg-AGN" secondAttribute="height" multiplier="0.1" id="gid-Or-JJf"/>
@@ -1063,7 +1060,4 @@
         <image name="poldarsho" width="621" height="567"/>
         <image name="sepantaie" width="621" height="567"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="qOS-Uu-KsZ"/>
-    </inferredMetricsTieBreakers>
 </document>

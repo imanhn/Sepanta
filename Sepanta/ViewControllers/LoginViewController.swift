@@ -7,9 +7,13 @@
 //
 
 import UIKit
-
+import Alamofire
+import RxAlamofire
+import RxSwift
+import RxCocoa
 
 class LoginViewController: UIViewControllerWithCoordinator,Storyboarded {
+    var myDisposeBag  = DisposeBag()
     @IBOutlet var PageView: UIView!
     @IBOutlet weak var LoginPanelView: RightTabbedView!
     @IBOutlet weak var SignupButton: TabbedButton!
@@ -29,20 +33,33 @@ class LoginViewController: UIViewControllerWithCoordinator,Storyboarded {
         }
         acoordinator.gotoSignup()
     }
+    
     @IBAction func SendClicked(_ sender: Any) {
         if !(MobileTextField.text!.isEmpty)  {
-            // REQUEST SENDING SMS and GET the CODE
-            //
-            //presentSMSConfirmViewController()
             guard let acoordinator = coordinator as? LoginCoordinator else {
+                print("Wrong Coordinator for SendClick in LoginViewController")
                 return
             }
-            acoordinator.gotoSMSVerification(Set : MobileTextField.text!)
+            LoginKey.shared.getUserID(MobileTextField.text!)
+            LoginKey.shared.userIDObs
+                //.debug()
+                .subscribe(onNext: { [weak self] (innerUserIDObs) in
+                    LoginKey.shared.userID = innerUserIDObs
+                    Spinner.stop()
+                    LoginKey.shared.userIDObs = BehaviorRelay<String>(value: String())
+                    acoordinator.gotoSMSVerification(Set : (self?.MobileTextField.text)!)
+                    }, onError: { _ in
+                        Spinner.stop()
+                }, onCompleted: {
+                }, onDisposed: {
+                }).disposed(by: myDisposeBag)
         }
-        else{
+        else {
             let alert = UIAlertController(title: "توجه", message: "لطفاْ شماره همراه خود را وارد کنید", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "بلی", style: .default))
-            self.present(alert, animated: true, completion: nil)        }
+            self.present(alert, animated: true, completion: nil)
+            
+        }
     }
     
     func setMobileNumber(_ astring : String){

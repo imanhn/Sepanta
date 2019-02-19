@@ -29,9 +29,7 @@ struct cities {
 class SignupViewController: UIViewControllerWithCoordinator,UITextFieldDelegate,Storyboarded   {
     var userID : String = ""
     var smsVerificationCode : String = ""
-    var currentStateCode : String = ""
     var currentStateCodeObs = BehaviorRelay<String>(value : String())
-    var currentCityCode : String = ""
     var currentCityCodeObs = BehaviorRelay<String>(value : String())
     var myDisposeBag = DisposeBag()
     var genderModel = genders() {
@@ -103,9 +101,10 @@ class SignupViewController: UIViewControllerWithCoordinator,UITextFieldDelegate,
         Spinner.start()
         NetworkManager.shared.run(API: "get-state-and-city",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil)
         NetworkManager.shared.provinceDictionaryObs
-            .debug()
+            //.debug()
             .filter({$0.count > 0})
             .subscribe(onNext: { [weak self] (innerProvinceDicObs) in
+                print("innerProvinceDicObs : ",innerProvinceDicObs.count)
                 let controller = ArrayChoiceTableViewController(innerProvinceDicObs.keys.sorted(){$0 < $1}) {
                     (type) in self?.provinceModel.type = type
                     self?.selectCity.text = ""
@@ -118,86 +117,40 @@ class SignupViewController: UIViewControllerWithCoordinator,UITextFieldDelegate,
                 self?.showPopup(controller, sourceView: sender as! UIView)
                 NetworkManager.shared.provinceDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
             }, onError: { _ in
-                
+                print("Province Call Raised Error")
+                Spinner.stop()
             }, onCompleted: {
-
+                print("Province Call Completed")
             }, onDisposed: {
-                
             }).disposed(by: myDisposeBag)
-        
-/*
-        Observable.combineLatest(
-            NetworkManager.shared.provinceDictionaryObs.filter({$0.count > 0}),
-            NetworkManager.shared.provinceListObs.filter({$0.count > 0}),
-            resultSelector: { [weak self] (processedDic,processedList) in
-            let controller = ArrayChoiceTableViewController(processedList) {
-                (type) in self?.provinceModel.type = type
-                self?.selectCity.text = ""
-                print("State Code : ",processedDic[type]!)
-                self?.currentStateCodeObs.accept(processedDic[type]!)
-            }
-            controller.preferredContentSize = CGSize(width: 250, height: 300)
-            Spinner.stop()
-            print("POPING STATE")
-            self?.showPopup(controller, sourceView: sender as! UIView)
-            (sender as AnyObject).resignFirstResponder()
-        }).subscribe(onNext: {
-        }, onError: { _ in
-            Spinner.stop()
-        }).disposed(by: myDisposeBag)
-*/
     }
 
     @IBAction func cityTextTouchDown(_ sender: Any) {
-        Spinner.start()
         let parameters = [
             "state code": self.currentStateCodeObs.value
         ]
-        print("State : ",self.currentStateCodeObs.value)
-        NetworkManager.shared.run(API: "get-state-and-city",QueryString: "?state%20code="+self.currentStateCodeObs.value, Method: HTTPMethod.post, Parameters: parameters, Header: nil)
-        self.currentStateCodeObs.asObservable()
-            .subscribe(onNext: { [weak self] (stateCodeObs) in
-                print("Heelo : ",stateCodeObs)
-                Spinner.stop()
-            }, onError: {_ in
-            print("Error")
-    
-            }, onCompleted: {
-    
-            }, onDisposed: {
-            }).disposed(by: myDisposeBag)
-    
-/*
-        Observable.combineLatest(
-            NetworkManager.shared.cityDictionaryObs.filter({$0.count > 0}),
-            NetworkManager.shared.cityListObs.filter({$0.count > 0}),
-            resultSelector: { [weak self] (processedDic,processedList) in //,stateCodeObs) in
-                let controller = ArrayChoiceTableViewController(processedList) { (type) in
-                    print("In Array choice closure")
-                    self?.cityModel.type = type
-                    print(processedDic,"  ",processedList)
-                    self?.currentCityCodeObs.accept(processedDic[type]!)
-                    self?.currentCityCode = processedDic[type]!
-                    print("city : \(self?.currentCityCodeObs.value)  Province : \(self?.currentStateCodeObs.value) ")
-                    print("SUBSCRIBING.....")
+        let queryString = "?state%20code=\(self.currentStateCodeObs.value)"
+        Spinner.start()
+        NetworkManager.shared.run(API: "get-state-and-city",QueryString: queryString, Method: HTTPMethod.post, Parameters: parameters, Header: nil)
+        NetworkManager.shared.cityDictionaryObs
+            //.debug()
+            .filter({$0.count > 0})
+            .subscribe(onNext: { [weak self] (innerCityDicObs) in
+                let controller = ArrayChoiceTableViewController(innerCityDicObs.keys.sorted(){$0 < $1}) {
+                    (type) in self?.cityModel.type = type
+                    print("City Code : ",innerCityDicObs[type]!)
+                    self?.currentCityCodeObs.accept(innerCityDicObs[type]!)
                 }
                 controller.preferredContentSize = CGSize(width: 250, height: 300)
                 Spinner.stop()
+                print("Setting controller")
                 self?.showPopup(controller, sourceView: sender as! UIView)
-
-        })
-//            .timeout(1, scheduler: MainScheduler.instance)
-           // .debug()
-        .takeLast(1)
-        //self.currentStateCodeObs.asObservable(),
-            .subscribe(onNext: {
-                print("Subscribeing")
-        }, onError: { err in
-            print("Error on Binding city list with controller : ",err)
-            Spinner.stop()
-        })
-            .disposed(by: myDisposeBag)
- */
+                NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
+                }, onError: { _ in
+                    Spinner.stop()
+            }, onCompleted: {
+            }, onDisposed: {
+            }).disposed(by: myDisposeBag)
     }
     
     @IBAction func GenderTextTouchDown(_ sender: Any) {
@@ -280,7 +233,7 @@ class SignupViewController: UIViewControllerWithCoordinator,UITextFieldDelegate,
             "phone" : MobileNumber,
             "gender" : GenderCode,
             "state" : self.currentStateCodeObs.value,
-            "city" : currentCityCode,
+            "city" : self.currentCityCodeObs.value,
             "username" : Username
         ]
  
@@ -393,7 +346,7 @@ class SignupViewController: UIViewControllerWithCoordinator,UITextFieldDelegate,
             case .default:
                 // Goto Main Page to show businesses
                 let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-                let vc : MainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+                let vc : HomeViewController = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
                 self.present(vc, animated: false, completion: nil)
                 
             case .cancel:

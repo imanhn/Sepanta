@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F052ED9221AE8C5009175EA /* LoginKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F052ED8221AE8C5009175EA /* LoginKey.swift */; };
+		0F052EDB221C0790009175EA /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F052EDA221C0790009175EA /* HomeCoordinator.swift */; };
 		0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F512C042205B5C300B99C9E /* SignupViewController.swift */; };
 		0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */; };
 		0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */; };
 		0F890CFE2214B4CD0091FA2E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890CFD2214B4CD0091FA2E /* Coordinator.swift */; };
 		0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890CFF2214B4E90091FA2E /* Storyboarded.swift */; };
-		0F890D022214B5310091FA2E /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D012214B5310091FA2E /* MainCoordinator.swift */; };
+		0F890D022214B5310091FA2E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D012214B5310091FA2E /* AppCoordinator.swift */; };
 		0F890D042214BF300091FA2E /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D032214BF300091FA2E /* LoginCoordinator.swift */; };
 		0F890D0B2214D06E0091FA2E /* UIViewControllersWithCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D0A2214D06E0091FA2E /* UIViewControllersWithCoordinator.swift */; };
 		0F890D0E2215C7170091FA2E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D0D2215C7170091FA2E /* NetworkManager.swift */; };
@@ -30,7 +32,7 @@
 		0FE8B9C9220355F200C868C3 /* SepantaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9C8220355F200C868C3 /* SepantaUITests.swift */; };
 		0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */; };
 		0FE8BA042205082100C868C3 /* SMSConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */; };
-		0FE8BA062205239E00C868C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA052205239E00C868C3 /* MainViewController.swift */; };
+		0FE8BA062205239E00C868C3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA052205239E00C868C3 /* HomeViewController.swift */; };
 		0FFCF614221811FC0040A7DC /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF613221811FC0040A7DC /* Spinner.swift */; };
 		B94E411064EDD6ECB47C43F7 /* libPods-Sepanta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D37D8EF9355EA00873B2EE55 /* libPods-Sepanta.a */; };
 		FFAF0D1985C94CA878D9402B /* libPods-SepantaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C05E9B6E581875EFEE60FA1 /* libPods-SepantaTests.a */; };
@@ -54,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F052ED8221AE8C5009175EA /* LoginKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginKey.swift; sourceTree = "<group>"; };
+		0F052EDA221C0790009175EA /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		0F512C042205B5C300B99C9E /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		0F6F39C222078DC900393CD7 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		0F6F39C722079FB600393CD7 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
@@ -61,7 +65,7 @@
 		0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayChoiceTableViewController.swift; sourceTree = "<group>"; };
 		0F890CFD2214B4CD0091FA2E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		0F890CFF2214B4E90091FA2E /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
-		0F890D012214B5310091FA2E /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		0F890D012214B5310091FA2E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		0F890D032214BF300091FA2E /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		0F890D0A2214D06E0091FA2E /* UIViewControllersWithCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllersWithCoordinator.swift; sourceTree = "<group>"; };
 		0F890D0D2215C7170091FA2E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -87,7 +91,7 @@
 		0FE8B9CA220355F200C868C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWidgets.swift; sourceTree = "<group>"; };
 		0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmViewController.swift; sourceTree = "<group>"; };
-		0FE8BA052205239E00C868C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		0FE8BA052205239E00C868C3 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0FFCF613221811FC0040A7DC /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		190BC7277F7151DCE26F7E0F /* Pods-SepantaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SepantaTests.debug.xcconfig"; path = "Target Support Files/Pods-SepantaTests/Pods-SepantaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5F42A23EF520BF93C6F192BB /* Pods-Sepanta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sepanta.debug.xcconfig"; path = "Target Support Files/Pods-Sepanta/Pods-Sepanta.debug.xcconfig"; sourceTree = "<group>"; };
@@ -141,7 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				0F890CFD2214B4CD0091FA2E /* Coordinator.swift */,
-				0F890D012214B5310091FA2E /* MainCoordinator.swift */,
+				0F890D012214B5310091FA2E /* AppCoordinator.swift */,
+				0F052EDA221C0790009175EA /* HomeCoordinator.swift */,
 				0F890D032214BF300091FA2E /* LoginCoordinator.swift */,
 			);
 			path = Coordinators;
@@ -161,6 +166,7 @@
 			children = (
 				0F890D0D2215C7170091FA2E /* NetworkManager.swift */,
 				0F890D112215D21C0091FA2E /* JSONParser.swift */,
+				0F052ED8221AE8C5009175EA /* LoginKey.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -171,7 +177,7 @@
 				0FE8B9AA220355F000C868C3 /* LoginViewController.swift */,
 				0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */,
 				0F512C042205B5C300B99C9E /* SignupViewController.swift */,
-				0FE8BA052205239E00C868C3 /* MainViewController.swift */,
+				0FE8BA052205239E00C868C3 /* HomeViewController.swift */,
 				0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */,
 			);
 			path = ViewControllers;
@@ -444,19 +450,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */,
+				0F052ED9221AE8C5009175EA /* LoginKey.swift in Sources */,
 				0F984E29220B727B004AFB06 /* SepantaGroupsViewController.swift in Sources */,
 				0F890D122215D21C0091FA2E /* JSONParser.swift in Sources */,
 				0F890D042214BF300091FA2E /* LoginCoordinator.swift in Sources */,
 				0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */,
 				0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */,
 				0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */,
+				0F052EDB221C0790009175EA /* HomeCoordinator.swift in Sources */,
 				0FE8BA042205082100C868C3 /* SMSConfirmViewController.swift in Sources */,
 				0F890CFE2214B4CD0091FA2E /* Coordinator.swift in Sources */,
 				0F890D0B2214D06E0091FA2E /* UIViewControllersWithCoordinator.swift in Sources */,
-				0FE8BA062205239E00C868C3 /* MainViewController.swift in Sources */,
+				0FE8BA062205239E00C868C3 /* HomeViewController.swift in Sources */,
 				0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */,
 				0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */,
-				0F890D022214B5310091FA2E /* MainCoordinator.swift in Sources */,
+				0F890D022214B5310091FA2E /* AppCoordinator.swift in Sources */,
 				0F890D0E2215C7170091FA2E /* NetworkManager.swift in Sources */,
 				0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */,
 				0FFCF614221811FC0040A7DC /* Spinner.swift in Sources */,

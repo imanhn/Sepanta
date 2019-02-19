@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import RxCocoa
+import RxSwift
 
 class SMSConfirmViewController: UIViewControllerWithCoordinator,Storyboarded {
     
@@ -15,23 +17,15 @@ class SMSConfirmViewController: UIViewControllerWithCoordinator,Storyboarded {
     @IBOutlet weak var SMSTextField: UnderLinedTextField!
     @IBOutlet weak var TimerLabel: UILabel!
     var countdownTimer: Timer!
-    var totalTime = 10
-    var token : String?
-    var userID : String?
+    var totalTime = 60
     var mobileNumber : String?
+    var myDisposeBag = DisposeBag()
     override func viewDidLoad() {
         super.viewDidLoad()
          self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
         if mobileNumber != nil {
             setMobileNumber(mobileNumber!)
         }
-    }
-    func setUserID(anID : String){
-        self.userID = anID
-    }
-
-    func setToken(aToken : String){
-        self.token = aToken
     }
 
     @IBAction func MobileNoTypeDoen(_ sender: Any) {
@@ -103,18 +97,12 @@ class SMSConfirmViewController: UIViewControllerWithCoordinator,Storyboarded {
         self.present(vc, animated: false, completion: nil)
          vc.setMobileNumber(self.MobileTextField.text!)
     }
-    func gotoMainViewController() {
+    func gotoHomeViewController() {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let vc : MainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+        let vc : HomeViewController = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         self.present(vc, animated: false, completion: nil)
-        if token != nil {
-            vc.setToken(aToken: token!)
-        }
-        if userID != nil {
-            vc.setUserID(anID: userID!)
-        }
-
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -126,7 +114,9 @@ class SMSConfirmViewController: UIViewControllerWithCoordinator,Storyboarded {
         }
         acoordinator.gotoSignup()
     }
+    
     @IBAction func ConfirmCodeClicked(_ sender: Any) {
+        print("Confirm Clicked")
         guard SMSTextField.text != nil else {
             print("SMS Field not filled!")
             let alert = UIAlertController(title: "توجه", message: "لطفاْ کد ارسال شده را وارد نمایید", preferredStyle: .alert)
@@ -138,8 +128,34 @@ class SMSConfirmViewController: UIViewControllerWithCoordinator,Storyboarded {
         } else {
             print("Timer is already stoped")
         }
-        //Refactor To Coordinate
-        gotoMainViewController()
+        guard let acoordinator = coordinator as? LoginCoordinator else {
+            print("Wrong Coordinator for Confirm SMS Code Clicked")
+            return
+        }
+        Spinner.start()
+        print("Getting Token")
+        LoginKey.shared.getToken(self.SMSTextField.text!)
+        LoginKey.shared.tokenObs
+            .debug()
+            .subscribe(onNext: { (innerTokenObs) in
+                print("Token Received")
+                var loginDataRegistered = false
+                loginDataRegistered = LoginKey.shared.registerTokenAndUserID()
+                if loginDataRegistered
+                {
+                    print("Login Token and UserID Saved....")
+                } else {
+                    print("Login Token and UserID did not saved..")
+                }
+                LoginKey.shared.token = innerTokenObs
+                Spinner.stop()
+                LoginKey.shared.tokenObs = BehaviorRelay<String>(value: String())
+                acoordinator.gotoHomePage()
+                }, onError: { _ in
+                    Spinner.stop()
+            }, onCompleted: {
+            }, onDisposed: {
+            }).disposed(by: myDisposeBag)
     }
     
 }

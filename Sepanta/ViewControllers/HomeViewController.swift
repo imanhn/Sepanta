@@ -1,5 +1,5 @@
 //
-//  mainViewController.swift
+//  HomeViewController.swift
 //  Sepanta
 //
 //  Created by Iman on 11/13/1397 AP.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MainViewController: UIViewControllerWithCoordinator,Storyboarded {
+class HomeViewController: UIViewControllerWithCoordinator,Storyboarded {
     var slides : [UIImage] = [UIImage(named: "slide1")!,UIImage(named: "slide2")!,UIImage(named: "slide3")!,UIImage(named: "slide4")!]
     let blankImage = UIImage(named: "blank")
     @IBOutlet weak var settingButton: CircularButton!

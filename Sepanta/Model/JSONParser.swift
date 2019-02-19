@@ -31,14 +31,11 @@ class JSONParser {
                 if (apiName == "get-state-and-city") && (aMethod == HTTPMethod.get){
                     var processedDic = Dictionary<String,String>()
                     (processedDic) = (self?.processAsProvinceList(Result: aDic))!
-                    //NetworkManager.shared.provinceDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: processedDic)                    
                     NetworkManager.shared.provinceDictionaryObs.accept(processedDic)//onNext(processedDic)//
                 } else if (apiName == "get-state-and-city") && (aMethod == HTTPMethod.post) {
                     var processedDic = Dictionary<String,String>()
-                    var processedlist = [String]()
-                    (processedDic,processedlist) = (self?.processAsCityList(Result: aDic))!
+                    processedDic = (self?.processAsCityList(Result: aDic))!
                     NetworkManager.shared.cityDictionaryObs.accept(processedDic)
-                    NetworkManager.shared.cityListObs.accept(processedlist)
                 }
                 }, onDisposed: {
                     print("Parser Disposed")
@@ -60,34 +57,29 @@ class JSONParser {
         } else {
             
         }
-        //print("Fetched : ",provinceList.count," record")
+        print("Province Fetched : ",provinceDict," record")
         //print("Parsing State List Successful")
 
         return provinceDict
         
     }
     
-    func processAsCityList(Result aResult : NSDictionary) -> (Dictionary<String,String>,[String]) {
+    func processAsCityList(Result aResult : NSDictionary) -> (Dictionary<String,String>) {
         var cityDict = Dictionary<String,String>()
-        var cityList = [String]()
         var cityName : String
         if let aDic = aResult["cities"] as? NSDictionary {
             for aCity in aDic
             {
-                
                 if let aName = aCity.key as? String {cityName = aName} else { print("Parser : Error in City data from Backend");continue}
                 if let idx = aCity.value as? String {cityDict[cityName] = idx} else { print("Parser : Error in City data from Backend");continue}
-                cityList.append(cityName)
                 //print("Adding : ",cityName)
-                
             }
         } else {
             print("Parser : Result for cities is empty!")
         }
-        //print("Fetched : ",cityList.count," record")
+        print("City Fetched : ",cityDict.count," record")
         //print("Parsing City List Successful")
-        
-        return (cityDict,cityList)
+        return cityDict
         
     }
 
