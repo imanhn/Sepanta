@@ -453,20 +453,27 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lB3-P9-L47" userLabel="SearchView">
                                 <rect key="frame" x="0.0" y="191.5" width="375" height="66.5"/>
                                 <subviews>
-                                    <searchBar contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" searchBarStyle="minimal" placeholder="جستجو" translatesAutoresizingMaskIntoConstraints="NO" id="sk2-cX-r65" userLabel="searchBar" customClass="CustomSearchBar" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="28" y="13.5" width="319" height="39.5"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
-                                        <scopeButtonTitles>
-                                            <string>Title</string>
-                                            <string>Title</string>
-                                        </scopeButtonTitles>
-                                    </searchBar>
+                                    <textField opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="جستجو" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="DlX-a3-BK0" userLabel="searchText" customClass="CustomSearchBar" customModule="Sepanta" customModuleProvider="target">
+                                        <rect key="frame" x="19" y="10" width="337.5" height="46.5"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search" smartDashesType="no"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XqB-sP-FKS" userLabel="searchButton">
+                                        <rect key="frame" x="39" y="22" width="22" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="XqB-sP-FKS" secondAttribute="height" multiplier="1:1" id="X6i-2i-O3E"/>
+                                        </constraints>
+                                        <state key="normal" image="icon_search"/>
+                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="sk2-cX-r65" firstAttribute="height" secondItem="lB3-P9-L47" secondAttribute="height" multiplier="0.6" id="Sxs-nY-wLq"/>
-                                    <constraint firstItem="sk2-cX-r65" firstAttribute="width" secondItem="lB3-P9-L47" secondAttribute="width" multiplier="0.85" id="Ztt-Iv-2Sd"/>
-                                    <constraint firstItem="sk2-cX-r65" firstAttribute="centerY" secondItem="lB3-P9-L47" secondAttribute="centerY" id="bex-b0-LdB"/>
-                                    <constraint firstItem="sk2-cX-r65" firstAttribute="centerX" secondItem="lB3-P9-L47" secondAttribute="centerX" id="sdE-xH-qNN"/>
+                                    <constraint firstItem="DlX-a3-BK0" firstAttribute="width" secondItem="lB3-P9-L47" secondAttribute="width" multiplier="0.9" id="5td-gI-HdT"/>
+                                    <constraint firstItem="DlX-a3-BK0" firstAttribute="centerX" secondItem="lB3-P9-L47" secondAttribute="centerX" id="GLn-D6-aWA"/>
+                                    <constraint firstItem="XqB-sP-FKS" firstAttribute="centerY" secondItem="DlX-a3-BK0" secondAttribute="centerY" id="aWh-tq-KbN"/>
+                                    <constraint firstItem="XqB-sP-FKS" firstAttribute="leading" secondItem="DlX-a3-BK0" secondAttribute="leading" constant="20" id="i4U-hw-9cP"/>
+                                    <constraint firstItem="DlX-a3-BK0" firstAttribute="height" secondItem="lB3-P9-L47" secondAttribute="height" multiplier="0.7" id="vG2-lT-ufV"/>
+                                    <constraint firstItem="DlX-a3-BK0" firstAttribute="centerY" secondItem="lB3-P9-L47" secondAttribute="centerY" id="wC0-KB-yWU"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ix2-Oq-HJW" userLabel="BigMenuView">
@@ -545,12 +552,12 @@
                     </view>
                     <connections>
                         <outlet property="PageView" destination="D7t-mF-4dd" id="k9m-7s-ZMx"/>
-                        <outlet property="searchBar" destination="sk2-cX-r65" id="z2c-Lv-rVa"/>
+                        <outlet property="searchTextField" destination="DlX-a3-BK0" id="tQ2-Bj-CKj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NlC-4i-r3A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2813.5999999999999" y="26.53673163418291"/>
+            <point key="canvasLocation" x="2919" y="27"/>
         </scene>
         <!--SepantaGroupsViewController-->
         <scene sceneID="Q40-9h-T4U">
@@ -949,7 +956,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WtF-QB-Zx8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3462" y="27"/>
+            <point key="canvasLocation" x="4209" y="27"/>
         </scene>
     </scenes>
     <resources>
@@ -965,6 +972,7 @@
         <image name="icon_mobile_gray" width="16" height="26"/>
         <image name="icon_news_resized" width="40" height="40"/>
         <image name="icon_profile_03_resized" width="40" height="40"/>
+        <image name="icon_search" width="20" height="21"/>
         <image name="icon_tik_dark" width="20" height="14"/>
         <image name="icon_tik_gray" width="20" height="14"/>
         <image name="jadidtarinha" width="621" height="567"/>

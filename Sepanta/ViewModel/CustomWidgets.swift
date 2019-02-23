@@ -117,7 +117,7 @@ class TabbedButton: UIButton {
         
         let context = UIGraphicsGetCurrentContext()
         let downScaling : CGAffineTransform = CGAffineTransform(scaleX: 1, y: 0.9);
-        let bezPath = UIBezierPath(roundedRect: self.bounds.applying(downScaling), byRoundingCorners: [.allCorners], cornerRadii: CGSize(width: 10, height: 10)).cgPath
+        let bezPath = UIBezierPath(roundedRect: self.bounds.applying(downScaling), byRoundingCorners: [.allCorners], cornerRadii: CGSize(width: curvSize, height: curvSize)).cgPath
         
         context?.setLineWidth(1.0)
         context?.setStrokeColor((UIColor( red: 0.84,     green: 0.84, blue:0.84, alpha: 1.0 )).cgColor)
@@ -127,22 +127,36 @@ class TabbedButton: UIButton {
 }
 
 
-class CustomSearchBar: UISearchBar {
-    var curvSize : CGFloat = 10;
+class CustomSearchBar: UITextField {
+    var curvSize : CGFloat = 20;
     override func draw(_ rect: CGRect) {
-        print("Drawing Search bar")
-        /*
+        
         let context = UIGraphicsGetCurrentContext()
+
+        let BB = CGRect(x: 4, y: 4, width: self.bounds.width-8, height: self.bounds.height-8)
+        let boundPath = UIBezierPath(roundedRect: BB, byRoundingCorners: [.allCorners], cornerRadii: CGSize(width: curvSize, height: curvSize)).cgPath
+
+        let shadow1 = CGRect(x: 3, y: 3, width: self.bounds.width-6, height: self.bounds.height-6)
+        let shadow1Path = UIBezierPath(roundedRect: shadow1, byRoundingCorners: [.allCorners], cornerRadii: CGSize(width: curvSize, height: curvSize)).cgPath
         
-        let insideCGRec : CGRect = CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height)
-        //let bezPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: [.allCorners], cornerRadii: CGSize(width: self.bounds.width/2, height: self.bounds.height/2)).cgPath
-        let bezPath = UIBezierPath(roundedRect: insideCGRec, byRoundingCorners: [.allCorners], cornerRadii: CGSize(width: insideCGRec.width/2, height: insideCGRec.height/2)).cgPath
-        
-        context?.setLineWidth(1.0)
-        context?.setStrokeColor((UIColor( red: 0.84,     green: 0.84, blue:0.84, alpha: 1.0 )).cgColor)
-        context?.addPath(bezPath)
+        let shadow2 = CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height)
+        let shadow2Path = UIBezierPath(roundedRect: shadow2, byRoundingCorners: [.allCorners], cornerRadii: CGSize(width: curvSize, height: curvSize)).cgPath
+
+        context?.setLineWidth(3.0)
+        context?.setStrokeColor((UIColor( red: 0.99,     green: 0.98, blue:0.99, alpha: 0.5 )).cgColor)
+        context?.addPath(shadow2Path)
         context?.drawPath(using: CGPathDrawingMode.stroke)
- */
+
+        context?.setLineWidth(3.0)
+        context?.setStrokeColor((UIColor( red: 0.968,     green: 0.968, blue:0.968, alpha: 0.5 )).cgColor)
+        context?.addPath(shadow1Path)
+        context?.drawPath(using: CGPathDrawingMode.stroke)
+
+        context?.setLineWidth(1.0)
+        context?.setStrokeColor((UIColor( red: 0.9,     green: 0.9, blue:0.9, alpha: 0.5 )).cgColor)
+        context?.addPath(boundPath)
+        context?.drawPath(using: CGPathDrawingMode.stroke)
+
     }
 }
 /*

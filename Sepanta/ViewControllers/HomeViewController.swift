@@ -19,7 +19,7 @@ class HomeViewController: UIViewControllerWithCoordinator,Storyboarded {
     @IBOutlet weak var leftImageView: AdImageView!
     @IBOutlet weak var rightImageView: AdImageView!
     
-    @IBOutlet weak var searchBar: CustomSearchBar!
+    @IBOutlet weak var searchTextField: CustomSearchBar!
     
     var adsPage = 1;
     var startLocation = CGPoint(x: 0, y: 0)
@@ -114,21 +114,6 @@ class HomeViewController: UIViewControllerWithCoordinator,Storyboarded {
     override func viewDidLoad() {
        //setupLeftAndRightImages()
         super.viewDidLoad()
-        /*
-        searchBar.layer.borderColor = UIColor(red: 0.84, green: 0.84, blue: 0.84, alpha: 1).cgColor
-        searchBar.layer.borderWidth = 1
-        searchBar.layer.cornerRadius = 20
-        searchBar.layer.shadowColor = UIColor(red: 0.84, green: 0.84, blue: 0.84, alpha: 1).cgColor
-        searchBar.layer.shadowOpacity = 1
-        searchBar.layer.shadowOffset = CGSize.zero
-        searchBar.layer.shadowPath = UIBezierPath(rect: searchBar.bounds).cgPath
-        searchBar.layer.shadowRadius = 4
-        searchBar.layer.rasterizationScale = 1
-        searchBar.layer.masksToBounds = false
-        //searchBar.clipsToBounds = true
-        searchBar.setImage(UIImage(named: "icon_search"), for: .search, state: .normal)
-         */
-
         
 /*
         pageControl.numberOfPages = slides.count
