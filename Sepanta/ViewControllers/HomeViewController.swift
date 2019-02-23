@@ -12,12 +12,12 @@ import UIKit
 class HomeViewController: UIViewControllerWithCoordinator,Storyboarded {
     var slides : [UIImage] = [UIImage(named: "slide1")!,UIImage(named: "slide2")!,UIImage(named: "slide3")!,UIImage(named: "slide4")!]
     let blankImage = UIImage(named: "blank")
-    @IBOutlet var PageView: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
     
-    @IBOutlet var currentImageView: AdImageView!
+    @IBOutlet weak var currentImageView: AdImageView!
     @IBOutlet weak var leftImageView: AdImageView!
     @IBOutlet weak var rightImageView: AdImageView!
+    
     
     @IBOutlet weak var searchTextField: CustomSearchBar!
     
@@ -112,17 +112,17 @@ class HomeViewController: UIViewControllerWithCoordinator,Storyboarded {
 
     
     override func viewDidLoad() {
-       //setupLeftAndRightImages()
+       setupLeftAndRightImages()
         super.viewDidLoad()
         
-/*
+
         pageControl.numberOfPages = slides.count
        
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         view.addGestureRecognizer(pan)
         currentImageView.image = slides[adsPage] // Current page
         currentImageView.setNeedsDisplay()
- */
+ 
     }
     
     override func didReceiveMemoryWarning() {
