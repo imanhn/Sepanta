@@ -12,36 +12,19 @@ import UIKit
 class HomeViewController: UIViewControllerWithCoordinator,Storyboarded {
     var slides : [UIImage] = [UIImage(named: "slide1")!,UIImage(named: "slide2")!,UIImage(named: "slide3")!,UIImage(named: "slide4")!]
     let blankImage = UIImage(named: "blank")
-    @IBOutlet weak var settingButton: CircularButton!
-    @IBOutlet weak var profileButton: CircularButton!
-    @IBOutlet weak var newsButton: CircularButton!
-    @IBOutlet weak var favoriteButton: CircularButton!
-    @IBOutlet weak var searchBar: UIView!
     @IBOutlet var PageView: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
-    
-    @IBOutlet weak var poldarsho: MainButton!
-    @IBOutlet weak var jadidtarinha: MainButton!
-    @IBOutlet weak var nazdikeman: MainButton!
-    @IBOutlet weak var sepantaie: MainButton!
     
     @IBOutlet var currentImageView: AdImageView!
     @IBOutlet weak var leftImageView: AdImageView!
     @IBOutlet weak var rightImageView: AdImageView!
     
+    @IBOutlet weak var searchBar: CustomSearchBar!
+    
     var adsPage = 1;
     var startLocation = CGPoint(x: 0, y: 0)
     var endLocation = CGPoint(x: 0, y: 0)
-    var token : String?
-    var userID : String?
-    
-    func setUserID(anID : String){
-        self.userID = anID
-    }
-    
-    func setToken(aToken : String){
-        self.token = aToken
-    }
+
     
     @objc func handlePan(_ sender:UIPanGestureRecognizer) {
         if (sender.state == UIGestureRecognizerState.began) {
@@ -125,32 +108,36 @@ class HomeViewController: UIViewControllerWithCoordinator,Storyboarded {
         currentImageView.setNeedsDisplay()
         //print("Page : ",adsPage)
         pageControl.currentPage = adsPage
-        /*
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.frame = currentImageView.bounds
-        shapeLayer.path = currentImageView.getCutPath().cgPath
-        currentImageView.layer.mask = shapeLayer;
-        currentImageView.layer.masksToBounds = true;
-        */
-        
-        /*
-        print("ORI-Right : X: ",rightImageView.layer.frame.origin.x,"  Y: ",rightImageView.frame.origin.y,"  W: ", rightImageView.bounds.width," H: ", rightImageView.bounds.height)
-        print("ORI-Left : X: ",leftImageView.layer.frame.origin.x,"  Y: ",leftImageView.frame.origin.y,"  W: ", leftImageView.bounds.width," H: ", leftImageView.bounds.height)
-        print("ORI-Curn : X: ",currentImageView.layer.frame.origin.x,"  Y: ",currentImageView.frame.origin.y,"  W: ", currentImageView.bounds.width," H: ", currentImageView.bounds.height)
-  */
     }
 
     
     override func viewDidLoad() {
-       setupLeftAndRightImages()
+       //setupLeftAndRightImages()
         super.viewDidLoad()
+        /*
+        searchBar.layer.borderColor = UIColor(red: 0.84, green: 0.84, blue: 0.84, alpha: 1).cgColor
+        searchBar.layer.borderWidth = 1
+        searchBar.layer.cornerRadius = 20
+        searchBar.layer.shadowColor = UIColor(red: 0.84, green: 0.84, blue: 0.84, alpha: 1).cgColor
+        searchBar.layer.shadowOpacity = 1
+        searchBar.layer.shadowOffset = CGSize.zero
+        searchBar.layer.shadowPath = UIBezierPath(rect: searchBar.bounds).cgPath
+        searchBar.layer.shadowRadius = 4
+        searchBar.layer.rasterizationScale = 1
+        searchBar.layer.masksToBounds = false
+        //searchBar.clipsToBounds = true
+        searchBar.setImage(UIImage(named: "icon_search"), for: .search, state: .normal)
+         */
+
+        
+/*
         pageControl.numberOfPages = slides.count
        
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         view.addGestureRecognizer(pan)
         currentImageView.image = slides[adsPage] // Current page
         currentImageView.setNeedsDisplay()
-
+ */
     }
     
     override func didReceiveMemoryWarning() {

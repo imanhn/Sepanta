@@ -126,6 +126,26 @@ class TabbedButton: UIButton {
     }
 }
 
+
+class CustomSearchBar: UISearchBar {
+    var curvSize : CGFloat = 10;
+    override func draw(_ rect: CGRect) {
+        print("Drawing Search bar")
+        /*
+        let context = UIGraphicsGetCurrentContext()
+        
+        let insideCGRec : CGRect = CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height)
+        //let bezPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: [.allCorners], cornerRadii: CGSize(width: self.bounds.width/2, height: self.bounds.height/2)).cgPath
+        let bezPath = UIBezierPath(roundedRect: insideCGRec, byRoundingCorners: [.allCorners], cornerRadii: CGSize(width: insideCGRec.width/2, height: insideCGRec.height/2)).cgPath
+        
+        context?.setLineWidth(1.0)
+        context?.setStrokeColor((UIColor( red: 0.84,     green: 0.84, blue:0.84, alpha: 1.0 )).cgColor)
+        context?.addPath(bezPath)
+        context?.drawPath(using: CGPathDrawingMode.stroke)
+ */
+    }
+}
+/*
 class CircularButton: UIButton {
     var curvSize : CGFloat = 10;
     override func draw(_ rect: CGRect) {
@@ -175,7 +195,7 @@ class TriangularButton: UIButton {
         context?.drawPath(using: CGPathDrawingMode.stroke)
     }
 }
-
+*/
 class RightTabbedView: UIView {
     var curvSize : CGFloat = 10;
     let movRight : CGFloat = 5;
@@ -248,5 +268,34 @@ class LeftTabbedView: UIView {
         context?.closePath()
         context?.drawPath(using: CGPathDrawingMode.stroke)
         
+    }
+}
+
+extension UISearchBar {
+    
+    // OUTPUT 1
+    func dropShadow(scale: Bool = true) {
+        layer.masksToBounds = false
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: -1, height: 1)
+        layer.shadowRadius = 1
+        
+        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
+       // layer.shouldRasterize = true
+        layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+    }
+    
+    // OUTPUT 2
+    func dropShadow(color: UIColor, opacity: Float = 0.5, offSet: CGSize, radius: CGFloat = 1, scale: Bool = true) {
+        layer.masksToBounds = false
+        layer.shadowColor = color.cgColor
+        layer.shadowOpacity = opacity
+        layer.shadowOffset = offSet
+        layer.shadowRadius = radius
+        
+        layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+        layer.shouldRasterize = true
+        layer.rasterizationScale = scale ? UIScreen.main.scale : 1
     }
 }

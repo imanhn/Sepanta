@@ -41,6 +41,7 @@ class LoginKey {
     }
     
     func isLoggedIn() -> Bool{
+        return true
         let loginDataSaved : String? = KeychainWrapper.standard.string(forKey: "LOGIN")
         print("loginDataSaved : ",loginDataSaved)
         if loginDataSaved != nil {
@@ -51,6 +52,7 @@ class LoginKey {
     }
     
     func retrieveTokenAndUserID() -> Bool {
+        return true 
         // need refactor
 //        let loginDataSaved : String? = KeychainWrapper.standard.string(forKey: "LOGIN")
 //        if loginDataSaved == "YES" {
