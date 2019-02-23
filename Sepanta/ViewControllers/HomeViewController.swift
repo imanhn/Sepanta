@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class HomeViewController: UIViewControllerWithCoordinator,Storyboarded {
-    var slides : [UIImage] = [UIImage(named: "slide1")!,UIImage(named: "slide2")!,UIImage(named: "slide3")!,UIImage(named: "slide4")!]
-    let blankImage = UIImage(named: "blank")
+
+    var slideControl : SlideController?
     @IBOutlet weak var pageControl: UIPageControl!
     
     @IBOutlet weak var currentImageView: AdImageView!
@@ -20,110 +20,27 @@ class HomeViewController: UIViewControllerWithCoordinator,Storyboarded {
 
     @IBOutlet weak var searchTextField: CustomSearchBar!
     
-    var adsPage = 1;
-    var startLocation = CGPoint(x: 0, y: 0)
-    var endLocation = CGPoint(x: 0, y: 0)
 
     @IBAction func searchOnKeyboardPressed(_ sender: Any) {
         (sender as AnyObject).resignFirstResponder()
     }
 
+    //Passes events to delegate class
     @objc func handlePan(_ sender:UIPanGestureRecognizer) {
-        if (sender.state == UIGestureRecognizerState.began) {
-            startLocation = sender.location(in: self.view)
-            //print("Start X : ",startLocation.x," Y : ",startLocation.y)
-        } else if (sender.state == UIGestureRecognizerState.ended) {
-            endLocation = sender.location(in: self.view)
-            let animDurationInterval = TimeInterval(1/(abs(sender.velocity(in: self.view).x/1000)))
-            //print("Velocity : ",sender.velocity(in: self.view))
-            let deltaX = endLocation.x - startLocation.x
-            if (deltaX > 100) && (adsPage > 0)  {
-                //print("Sliding to left ",self.adsPage)
-                UIView.animate(withDuration: animDurationInterval, animations: {
-                    self.currentImageView.layer.frame = CGRect(x: UIScreen.main.bounds.width, y: self.currentImageView.layer.frame.origin.y, width: self.currentImageView.layer.bounds.width, height: self.currentImageView.layer.bounds.height)
-                    self.leftImageView.layer.frame = CGRect(x: 0, y: self.leftImageView.layer.frame.origin.y, width: self.leftImageView.layer.bounds.width, height: self.leftImageView.layer.bounds.height)
-                }) { _ in
-                    self.adsPage = self.adsPage - 1
-                    //Temporary make current the left image so when moving back the frames it would be felt by the user
-                    self.currentImageView.image = self.leftImageView.image
-                    //Moving back frames to their original location
-                    self.currentImageView.layer.frame = CGRect(x: 0, y: self.currentImageView.layer.frame.origin.y, width: self.currentImageView.layer.bounds.width, height: self.currentImageView.layer.bounds.height)
-                    self.leftImageView.layer.frame = CGRect(x: -1 * UIScreen.main.bounds.width, y: self.leftImageView.layer.frame.origin.y, width: self.leftImageView.layer.bounds.width, height: self.leftImageView.layer.bounds.height)
-                    self.setupLeftAndRightImages()
-                }
-
-            } else if (deltaX < -100) && (adsPage < slides.count-1) {
-                //print("Sliding to right ",self.adsPage)
-                UIView.animate(withDuration: animDurationInterval, animations: {
-                    self.currentImageView.layer.frame = CGRect(x: -1 * UIScreen.main.bounds.width, y: self.currentImageView.layer.frame.origin.y, width: self.currentImageView.layer.bounds.width, height: self.currentImageView.layer.bounds.height)
-                    self.rightImageView.layer.frame = CGRect(x: 0, y: self.rightImageView.layer.frame.origin.y, width: self.rightImageView.layer.bounds.width, height: self.rightImageView.layer.bounds.height)
-                }) { _ in
-                    self.adsPage = self.adsPage + 1
-                    //Temporary make current the right image so when moving back the frames it would be felt by the user
-                    self.currentImageView.image = self.rightImageView.image
-                    //Moving back frames to their original location
-                    self.currentImageView.layer.frame = CGRect(x: 0, y: self.currentImageView.layer.frame.origin.y, width: self.currentImageView.layer.bounds.width, height: self.currentImageView.layer.bounds.height)
-                    self.rightImageView.layer.frame = CGRect(x: UIScreen.main.bounds.width, y: self.rightImageView.layer.frame.origin.y, width: self.rightImageView.layer.bounds.width, height: self.rightImageView.layer.bounds.height)
-                    self.setupLeftAndRightImages()
-                }
-            }else{
-                // Moving Back to their locations
-                //print("Rolling Back ",self.adsPage)
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.currentImageView.layer.frame = CGRect(x: 0, y: self.currentImageView.layer.frame.origin.y, width: self.currentImageView.layer.bounds.width, height: self.currentImageView.layer.bounds.height)
-                    self.rightImageView.layer.frame = CGRect(x: UIScreen.main.bounds.width, y: self.rightImageView.layer.frame.origin.y, width: self.rightImageView.layer.bounds.width, height: self.rightImageView.layer.bounds.height)
-                    self.leftImageView.layer.frame = CGRect(x: -1 * UIScreen.main.bounds.width, y: self.leftImageView.layer.frame.origin.y, width: self.leftImageView.layer.bounds.width, height: self.leftImageView.layer.bounds.height)
-                }) { _ in
-                }
-            }
-            //print("END X : ",endLocation.x," Y : ",endLocation.y)
-        } else if (sender.state == UIGestureRecognizerState.changed) {
-            let midLocation = sender.location(in: self.view)
-            var deltaX = midLocation.x - startLocation.x
-            if (deltaX < 0) && (adsPage == slides.count-1) ||  (deltaX > 0) && (adsPage == 0){
-                   deltaX = deltaX / 4
-            }
-            //print("Moving Images ",self.adsPage," ",deltaX)
-            self.currentImageView.layer.frame = CGRect(x: deltaX, y: self.currentImageView.layer.frame.origin.y, width: self.currentImageView.layer.bounds.width, height: self.currentImageView.layer.bounds.height)
-            rightImageView.layer.frame = CGRect(x: UIScreen.main.bounds.width + deltaX, y: rightImageView.layer.frame.origin.y, width: rightImageView.layer.bounds.width, height: rightImageView.layer.bounds.height)
-            leftImageView.layer.frame = CGRect(x: deltaX - UIScreen.main.bounds.width, y: leftImageView.layer.frame.origin.y, width: leftImageView.layer.bounds.width, height: leftImageView.layer.bounds.height)
- 
+        if slideControl != nil {
+            slideControl?.handlePan(sender)
         }
     }
-    
-    func setupLeftAndRightImages(){
-        if adsPage < 1 {
-            //leftImageView.image = slides[adsPage] // No left! get the current for left
-            leftImageView.image = slides.last // No left! get a blank logo for left
-            rightImageView.image = slides[adsPage+1]
-            currentImageView.image = slides[adsPage] // Current page
-        } else if adsPage > slides.count-2 {
-            leftImageView.image = slides[adsPage-1]
-            rightImageView.image = slides.first // No right! get a blank logo for right
-             currentImageView.image = slides[adsPage] // Current page
-        } else {
-            leftImageView.image = slides[adsPage-1]
-            rightImageView.image = slides[adsPage+1]
-             currentImageView.image = slides[adsPage] // Current page
-        }
-        currentImageView.image = slides[adsPage] // Current page
-        currentImageView.setNeedsDisplay()
-        //print("Page : ",adsPage)
-        pageControl.currentPage = adsPage
-    }
-
     
     override func viewDidLoad() {
-       setupLeftAndRightImages()
+        slideControl = SlideController(parentController: self)
         super.viewDidLoad()
+       
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
 
-        pageControl.numberOfPages = slides.count
-       
+       // Handles Slide Events and delivers them to self.handle_pan
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         view.addGestureRecognizer(pan)
-        currentImageView.image = slides[adsPage] // Current page
-        currentImageView.setNeedsDisplay()
  
     }
     
@@ -131,6 +48,14 @@ class HomeViewController: UIViewControllerWithCoordinator,Storyboarded {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func sepantaieClicked(_ sender: Any) {
+        guard let acoordinator = coordinator as? HomeCoordinator else {
+            return
+        }
+        acoordinator.gotoSepantaieGroups()
+    }
+    
 }
 
 

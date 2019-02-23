@@ -180,7 +180,6 @@
 				0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */,
 				0F512C042205B5C300B99C9E /* SignupViewController.swift */,
 				0FE8BA052205239E00C868C3 /* HomeViewController.swift */,
-				0F9BCFC42221FCCF00C87706 /* SlideControl.swift */,
 				0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */,
 			);
 			path = ViewControllers;
@@ -191,10 +190,18 @@
 			children = (
 				0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */,
 				0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0F9BCFC6222201B600C87706 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F9BCFC42221FCCF00C87706 /* SlideControl.swift */,
 				0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */,
 				0FFCF613221811FC0040A7DC /* Spinner.swift */,
 			);
-			path = ViewModel;
+			path = View;
 			sourceTree = "<group>";
 		};
 		0FE8B99C220355F000C868C3 = {
@@ -222,6 +229,7 @@
 		0FE8B9A7220355F000C868C3 /* Sepanta */ = {
 			isa = PBXGroup;
 			children = (
+				0F9BCFC6222201B600C87706 /* View */,
 				0F890D102215D0F20091FA2E /* ViewModel */,
 				0F890D0F2215D0CF0091FA2E /* ViewControllers */,
 				0F890D0C2215C6FD0091FA2E /* Model */,

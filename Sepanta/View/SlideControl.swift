@@ -18,6 +18,11 @@ class SlideController {
     
     init(parentController : HomeViewController){
         self.delegate = parentController
+        setupLeftAndRightImages()
+        self.delegate.pageControl.numberOfPages = slides.count
+        self.delegate.currentImageView.image = slides[adsPage] // Current page
+        self.delegate.currentImageView.setNeedsDisplay()
+
     }
     
     @objc func handlePan(_ sender:UIPanGestureRecognizer) {

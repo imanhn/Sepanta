@@ -16,6 +16,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
+    
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
             return
@@ -23,8 +24,8 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         if navigationController.viewControllers.contains(fromViewController) {
             return
         }
-        if let smsViewController = fromViewController as? SMSConfirmViewController {
-            SMSVerificationFinished(smsViewController)
+        if let homeViewController = fromViewController as? HomeViewController {
+            HomeViewFinsihed(homeViewController)
         }
     }
     
@@ -43,10 +44,17 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
 
-    func SMSVerificationFinished(_ smsViewController : SMSConfirmViewController?) {
-        removeChild(smsViewController)
+    func HomeViewFinsihed(_ homeViewController : HomeViewController?) {
+        removeChild(homeViewController)
     }
-    
+
+    func gotoSepantaieGroups (){
+        let vc = SepantaGroupsViewController.instantiate()
+        vc.coordinator = self
+        navigationController.pushViewController(vc, animated: false)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+
     func start() {
         let vc = HomeViewController.instantiate()
         vc.coordinator = self

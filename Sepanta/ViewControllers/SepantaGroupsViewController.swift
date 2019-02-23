@@ -34,6 +34,13 @@ class SepantaGroupsViewController : UIViewControllerWithCoordinator,UITextFieldD
         }
     }
     
+    @IBAction func backToHomePage(_ sender: Any) {
+        guard let acoordinator = coordinator as? HomeCoordinator else {
+            return
+        }
+        acoordinator.start()
+    }
+    
     
     func updateProvince(){
         
