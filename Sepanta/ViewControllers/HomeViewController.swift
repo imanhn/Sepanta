@@ -17,15 +17,17 @@ class HomeViewController: UIViewControllerWithCoordinator,Storyboarded {
     @IBOutlet weak var currentImageView: AdImageView!
     @IBOutlet weak var leftImageView: AdImageView!
     @IBOutlet weak var rightImageView: AdImageView!
-    
-    
+
     @IBOutlet weak var searchTextField: CustomSearchBar!
     
     var adsPage = 1;
     var startLocation = CGPoint(x: 0, y: 0)
     var endLocation = CGPoint(x: 0, y: 0)
 
-    
+    @IBAction func searchOnKeyboardPressed(_ sender: Any) {
+        (sender as AnyObject).resignFirstResponder()
+    }
+
     @objc func handlePan(_ sender:UIPanGestureRecognizer) {
         if (sender.state == UIGestureRecognizerState.began) {
             startLocation = sender.location(in: self.view)
@@ -114,7 +116,7 @@ class HomeViewController: UIViewControllerWithCoordinator,Storyboarded {
     override func viewDidLoad() {
        setupLeftAndRightImages()
         super.viewDidLoad()
-        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
 
         pageControl.numberOfPages = slides.count
        

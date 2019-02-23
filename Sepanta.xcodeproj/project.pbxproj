@@ -20,6 +20,7 @@
 		0F890D0E2215C7170091FA2E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D0D2215C7170091FA2E /* NetworkManager.swift */; };
 		0F890D122215D21C0091FA2E /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D112215D21C0091FA2E /* JSONParser.swift */; };
 		0F984E29220B727B004AFB06 /* SepantaGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */; };
+		0F9BCFC52221FCCF00C87706 /* SlideControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9BCFC42221FCCF00C87706 /* SlideControl.swift */; };
 		0FD7BEB6221073AE007B7244 /* Shabnam-Light-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB3221073AA007B7244 /* Shabnam-Light-FD.ttf */; };
 		0FD7BEB7221073AE007B7244 /* Shabnam-Bold-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB4221073AB007B7244 /* Shabnam-Bold-FD.ttf */; };
 		0FD7BEB8221073AE007B7244 /* Shabnam-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB5221073AD007B7244 /* Shabnam-FD.ttf */; };
@@ -71,6 +72,7 @@
 		0F890D0D2215C7170091FA2E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0F890D112215D21C0091FA2E /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
 		0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaGroupsViewController.swift; sourceTree = "<group>"; };
+		0F9BCFC42221FCCF00C87706 /* SlideControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideControl.swift; sourceTree = "<group>"; };
 		0FD7BEB3221073AA007B7244 /* Shabnam-Light-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-Light-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-Light-FD.ttf"; sourceTree = "<group>"; };
 		0FD7BEB4221073AB007B7244 /* Shabnam-Bold-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-Bold-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-Bold-FD.ttf"; sourceTree = "<group>"; };
 		0FD7BEB5221073AD007B7244 /* Shabnam-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-FD.ttf"; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */,
 				0F512C042205B5C300B99C9E /* SignupViewController.swift */,
 				0FE8BA052205239E00C868C3 /* HomeViewController.swift */,
+				0F9BCFC42221FCCF00C87706 /* SlideControl.swift */,
 				0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */,
 			);
 			path = ViewControllers;
@@ -468,6 +471,7 @@
 				0F890D0E2215C7170091FA2E /* NetworkManager.swift in Sources */,
 				0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */,
 				0FFCF614221811FC0040A7DC /* Spinner.swift in Sources */,
+				0F9BCFC52221FCCF00C87706 /* SlideControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
