@@ -8,17 +8,15 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
 import Alamofire
-import SwiftyJSON
-
 
 class SepantaGroupsViewController : UIViewControllerWithCoordinator,UITextFieldDelegate,Storyboarded{
-    var provincesCache : [String] = []
-    var provinceDict : Dictionary = ["TEST":"TEST"];
-    var cityDict : Dictionary = ["TEST":"TEST"];
-    var cityCache : [String] = []
-    var currentStateCode : String = ""
-    var currentCityCode : String = ""
+    var currentStateCodeObs = BehaviorRelay<String>(value : String())
+    var currentCityCodeObs = BehaviorRelay<String>(value : String())
+    var myDisposeBag = DisposeBag()
+    @IBOutlet weak var sepantaScrollView: UIScrollView!
     @IBOutlet weak var selectCity: UnderLinedSelectableTextField!
     @IBOutlet weak var selectProvince: UnderLinedSelectableTextField!
     var provinceModel = provinces() {
@@ -43,162 +41,94 @@ class SepantaGroupsViewController : UIViewControllerWithCoordinator,UITextFieldD
     
     
     func updateProvince(){
-        
         self.selectProvince.text = provinceModel.type
-        
+        selectProvince.resignFirstResponder()
     }
     
     func updateCity(){
-        
         self.selectCity.text = cityModel.type
-        
-    }
-    
-    func getAllProvince() {
-        var provinceList : [String]=[];
-        let urlAddress = NSURL(string: "http://www.favecard.ir/api/takamad/get-state-and-city")
-        let aMethod : HTTPMethod = HTTPMethod.get
-        print("Calling API")
-        Alamofire.request(urlAddress! as URL, method: aMethod, parameters: nil, encoding: JSONEncoding.default,  headers: nil).responseJSON { (response:DataResponse<Any>) in
-            print("Processing Response....")
-            switch(response.result) {
-            case .success(_):
-                
-                if response.result.value != nil
-                {
-                    let jsonResult = JSON(response.result.value!)
-                    for aProv in jsonResult["states"]
-                    {
-                        print(aProv.0," ",aProv.1)
-                        let provName : String = aProv.0
-                        self.provinceDict[provName] = aProv.1.rawString()!
-                        provinceList.append(provName)
-                        
-                    }
-                    
-                    print("Fetched : ",provinceList.count," record")
-                    //print("Provinces : ",provinceList)
-                    print("Successful")
-                    self.provincesCache = provinceList.sorted()
-                }
-                break
-                
-            case .failure(_):
-                if response.result.error != nil
-                {
-                    print("Not Successful")
-                    print(response.result.error!)
-                }
-                break
-            }
-            
-        }
-    }
-    
-    func getAllProvinceList() -> Array<String> {
-        if provincesCache.count == 0 {
-            print("Province list not ready yet")
-            getAllProvince()
-            return ["مجدد تلاش کنید"];
-        }else{
-            return provincesCache
-        }
-    }
-    func getAllCity(_ stateCode : String) {
-        var cityList : [String]=[];
-        let headers: HTTPHeaders = [
-            "Accept": "application/json",
-            "Content-Type":"application/x-www-form-urlencoded"
-        ]
-        let parameters = [
-            "state code": stateCode
-        ]
-        //        let urlAddress = NSURL(string: "http://www.favecard.ir/api/takamad/get-state-and-city?state code="+stateCode)
-        let postURL = NSURL(string: "http://www.favecard.ir/api/takamad/get-state-and-city?state%20code="+stateCode)! as URL
-        let aMethod : HTTPMethod = HTTPMethod.post
-        print("Calling City API")
-        Alamofire.request(postURL, method: aMethod, parameters: parameters, encoding: JSONEncoding.default,  headers: headers).responseJSON { (response:DataResponse<Any>) in
-            print("Processing City Response....")
-            switch(response.result) {
-            case .success(_):
-                
-                if response.result.value != nil
-                {
-                    let jsonResult = JSON(response.result.value!)
-                    //cityList = Array<String>(repeating: "", count: jsonResult["cities"].count)
-                    for aCity in jsonResult["cities"]
-                    {
-                        print(aCity.0," ",aCity.1)
-                        let cityName : String = aCity.0
-                        let idx = Int(aCity.1.rawString()!)!
-                        self.cityDict[cityName] = aCity.1.rawString()!
-                        cityList.append(cityName)
-                        
-                    }
-                    
-                    print("Fetched : ",cityList.count," record")
-                    //print("Cities : ",cityList)
-                    print("Successful")
-                    self.cityCache = cityList.sorted()
-                }
-                break
-                
-            case .failure(_):
-                if response.result.error != nil
-                {
-                    print("Not Successful")
-                    print(response.result.error!)
-                }
-                break
-            }
-            
-        }
-    }
-    
-    func getAllCityList() -> Array<String> {
-        if cityCache.count == 0 {
-            print("City list not ready yet for ",currentStateCode)
-            getAllCity(currentStateCode)
-            return ["مجدد تلاش کنید"];
-        }else{
-            return cityCache
-        }
-    }
-    
-    @IBAction func cityPressed(_ sender: Any) {
-        let controller = ArrayChoiceTableViewController(getAllCityList()) {
-            (type) in self.cityModel.type = type
-            print("City Code : ",self.cityDict[type]!)
-            self.currentCityCode = self.cityDict[type] as! String
-        }
-        controller.preferredContentSize = CGSize(width: (sender as! UITextField).bounds.width, height: 400)
-        showPopup(controller, sourceView: sender as! UIView)
         selectCity.resignFirstResponder()
     }
     
-    @IBAction func provincePressed(_ sender: Any) {
-        let controller = ArrayChoiceTableViewController(getAllProvinceList()) {
-            (type) in self.provinceModel.type = type
-            self.selectCity.text = ""
-            print("State Code : ",self.provinceDict[type]!)
-            self.currentStateCode = self.provinceDict[type] as! String
-            self.getAllCity(self.provinceDict[type]!)
-            
-        }
-        controller.preferredContentSize = CGSize(width: 250, height: 400)
-        showPopup(controller, sourceView: sender as! UIView)
+  
+    @IBAction func cityPressed(_ sender: Any) {
+        let parameters = [
+            "state code": self.currentStateCodeObs.value
+        ]
+        self.view.endEditing(true)
+        (sender as AnyObject).resignFirstResponder()
+        let queryString = "?state%20code=\(self.currentStateCodeObs.value)"
+        Spinner.start()
+        NetworkManager.shared.run(API: "get-state-and-city",QueryString: queryString, Method: HTTPMethod.post, Parameters: parameters, Header: nil)
+        NetworkManager.shared.cityDictionaryObs
+            //.debug()
+            .filter({$0.count > 0})
+            .subscribe(onNext: { [weak self] (innerCityDicObs) in
+                let controller = ArrayChoiceTableViewController(innerCityDicObs.keys.sorted(){$0 < $1}) {
+                    (type) in self?.cityModel.type = type
+                    print("City Code : ",innerCityDicObs[type]!)
+                    self?.currentCityCodeObs.accept(innerCityDicObs[type]!)
+                }
+                controller.preferredContentSize = CGSize(width: 250, height: 300)
+                Spinner.stop()
+                print("Setting controller")
+                self?.showPopup(controller, sourceView: sender as! UIView)
+                NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
+                }, onError: { _ in
+                    Spinner.stop()
+            }, onCompleted: {
+            }, onDisposed: {
+            }).disposed(by: myDisposeBag)
     }
+
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == selectProvince || textField == selectCity {
+            return false
+        } else {
+            return true
+        }
+    }
+
+    @IBAction func provincePressed(_ sender: Any) {
+        selectProvince.isEnabled = false
+        selectProvince.isEnabled = true
+        Spinner.start()
+        NetworkManager.shared.run(API: "get-state-and-city",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil)
+        NetworkManager.shared.provinceDictionaryObs
+            //.debug()
+            .filter({$0.count > 0})
+            .subscribe(onNext: { [weak self] (innerProvinceDicObs) in
+                print("innerProvinceDicObs : ",innerProvinceDicObs.count)
+                let controller = ArrayChoiceTableViewController(innerProvinceDicObs.keys.sorted(){$0 < $1}) {
+                    (type) in self?.provinceModel.type = type
+                    self?.selectCity.text = ""
+                    print("State Code : ",innerProvinceDicObs[type]!)
+                    self?.currentStateCodeObs.accept(innerProvinceDicObs[type]!)
+                }
+                controller.preferredContentSize = CGSize(width: 250, height: 300)
+                Spinner.stop()
+                print("Setting controller")
+                self?.showPopup(controller, sourceView: sender as! UIView)
+                NetworkManager.shared.provinceDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
+                }, onError: { _ in
+                    print("Province Call Raised Error")
+                    Spinner.stop()
+            }, onCompleted: {
+                print("Province Call Completed")
+            }, onDisposed: {
+            }).disposed(by: myDisposeBag)
+    }
+    
     override func viewDidLoad() {
-        //        getAllProvince()
         super.viewDidLoad()
         definesPresentationContext = true
         selectCity.delegate = self
         selectProvince.delegate = self
-        
-        selectCity.resignFirstResponder()
-        selectProvince.resignFirstResponder()
-        
+       // self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+        _ = SepantaGroupButtons(self)
     }
+
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
     }

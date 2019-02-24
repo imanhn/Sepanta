@@ -95,7 +95,15 @@ class SignupViewController: UIViewControllerWithCoordinator,UITextFieldDelegate,
     func getGendersList() -> Array<String> {
         return ["زن","مرد"]
     }
-
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == selectProvince || textField == selectCity || textField == genderTextField {
+            return false
+        } else {
+            return true
+        }
+    }
+    
     @IBAction func provinceTextTouchDown(_ sender: Any) {
         //var outsideController = ArrayChoiceTableViewController<String>()
         Spinner.start()

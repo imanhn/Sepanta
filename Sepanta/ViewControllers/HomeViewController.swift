@@ -23,6 +23,7 @@ class HomeViewController: UIViewControllerWithCoordinator,Storyboarded {
 
     @IBAction func searchOnKeyboardPressed(_ sender: Any) {
         (sender as AnyObject).resignFirstResponder()
+        
     }
 
     //Passes events to delegate class
@@ -36,11 +37,10 @@ class HomeViewController: UIViewControllerWithCoordinator,Storyboarded {
         slideControl = SlideController(parentController: self)
         super.viewDidLoad()
        
+        //Handle Tap to End Editing
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
-
        // Handles Slide Events and delivers them to self.handle_pan
-        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-        view.addGestureRecognizer(pan)
+        self.view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:))))
  
     }
     

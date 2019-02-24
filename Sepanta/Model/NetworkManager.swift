@@ -70,7 +70,7 @@ class NetworkManager {
         }
         RxAlamofire.requestJSON(aMethod, urlAddress , parameters: aParameter, encoding: JSONEncoding.default, headers: headerToSend)
         .observeOn(MainScheduler.instance)
-        .timeout(1, scheduler: MainScheduler.instance)
+        .timeout(2, scheduler: MainScheduler.instance)
         .retry(4)
         //.debug()
         .subscribe(onNext: { [weak self] (ahttpURLRes,jsonResult) in
