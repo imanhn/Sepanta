@@ -31,6 +31,12 @@ class SepantaGroupsViewController : UIViewControllerWithCoordinator,UITextFieldD
             self.view.setNeedsLayout()
         }
     }
+    @IBAction func menuClicked(_ sender: Any) {
+        let alert = UIAlertController(title: "توجه", message: "منو باز شد", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "بلی", style: .default))
+        self.present(alert, animated: true, completion: nil)
+
+    }
     
     @IBAction func backToHomePage(_ sender: Any) {
         guard let acoordinator = coordinator as? HomeCoordinator else {
