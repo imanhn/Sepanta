@@ -15,6 +15,8 @@ import SwiftKeychainWrapper
 class LoginKey {
     var token = String()
     var userID = String()
+    var username = String()
+    var role = String()
     var myDisposeBag = DisposeBag()
     static let shared = LoginKey()
     var userIDObs = BehaviorRelay<String>(value: String())
@@ -41,28 +43,26 @@ class LoginKey {
     }
     
     func isLoggedIn() -> Bool{
-        return true
         let loginDataSaved : String? = KeychainWrapper.standard.string(forKey: "LOGIN")
+        let tokenSaved : String? = KeychainWrapper.standard.string(forKey: "TOKEN")
         print("loginDataSaved : ",loginDataSaved)
-        if loginDataSaved != nil {
-            if loginDataSaved! == "YES" { return true} else {return false}
+        if loginDataSaved != nil && tokenSaved != nil{
+            if loginDataSaved! == "YES" && tokenSaved!.count > 2 { return true} else {return false}
         }else {
             return false
         }
     }
     
     func retrieveTokenAndUserID() -> Bool {
-        return true 
-        // need refactor
-//        let loginDataSaved : String? = KeychainWrapper.standard.string(forKey: "LOGIN")
-//        if loginDataSaved == "YES" {
+        let loginDataSaved : String? = KeychainWrapper.standard.string(forKey: "LOGIN")
+        if loginDataSaved == "YES" {
             self.token = KeychainWrapper.standard.string(forKey: "TOKEN")!
             self.userID = KeychainWrapper.standard.string(forKey: "USERID")!
             return true
-/*        } else {
+        } else {
             return false
         }
- */
+
     }
 
     func getUserID(_ phoneNumber : String){

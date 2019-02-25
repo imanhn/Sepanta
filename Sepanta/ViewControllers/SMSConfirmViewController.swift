@@ -138,16 +138,9 @@ class SMSConfirmViewController: UIViewControllerWithCoordinator,Storyboarded {
         LoginKey.shared.tokenObs
             .debug()
             .subscribe(onNext: { (innerTokenObs) in
-                print("Token Received")
-                var loginDataRegistered = false
-                loginDataRegistered = LoginKey.shared.registerTokenAndUserID()
-                if loginDataRegistered
-                {
-                    print("Login Token and UserID Saved....")
-                } else {
-                    print("Login Token and UserID did not saved..")
-                }
+                print("Token Received : ",innerTokenObs)
                 LoginKey.shared.token = innerTokenObs
+                _ = LoginKey.shared.registerTokenAndUserID()
                 Spinner.stop()
                 LoginKey.shared.tokenObs = BehaviorRelay<String>(value: String())
                 acoordinator.gotoHomePage()

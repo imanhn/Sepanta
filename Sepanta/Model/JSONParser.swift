@@ -27,7 +27,7 @@ class JSONParser {
             //.debug()
             .filter{ $0.count > 0 }
             .subscribe(onNext: { [weak self] (aDic) in
-                print("Dictionary Received : ",aDic.count)
+                //print("Dictionary Received : ",aDic.count,"  ",aDic)
                 if (apiName == "get-state-and-city") && (aMethod == HTTPMethod.get){
                     var processedDic = Dictionary<String,String>()
                     (processedDic) = (self?.processAsProvinceList(Result: aDic))!
@@ -36,6 +36,23 @@ class JSONParser {
                     var processedDic = Dictionary<String,String>()
                     processedDic = (self?.processAsCityList(Result: aDic))!
                     NetworkManager.shared.cityDictionaryObs.accept(processedDic)
+                } else if (apiName == "login") && (aMethod == HTTPMethod.post) {
+                    if let aUserID = aDic["userId"] {
+                        LoginKey.shared.userID = String(describing: aUserID)
+                        LoginKey.shared.userIDObs.accept(LoginKey.shared.userID)
+                    }
+                } else if (apiName == "check-sms-code") && (aMethod == HTTPMethod.post) {
+                    if let aToken = aDic["token"] {
+                        LoginKey.shared.token = String(describing: aToken)
+                        LoginKey.shared.username = String(describing: aDic["username"] )
+                        LoginKey.shared.role = String(describing: aDic["role"] )
+                        LoginKey.shared.tokenObs.accept(LoginKey.shared.token)
+                        _ = LoginKey.shared.registerTokenAndUserID()
+                    }
+                } else if (apiName == "category-state-list") && (aMethod == HTTPMethod.get) {
+                    var processedDic = Dictionary<String,String>()
+                    (processedDic) = (self?.processAsProvinceList(Result: aDic))!
+                    NetworkManager.shared.provinceDictionaryObs.accept(processedDic)//onNext(processedDic)//
                 }
                 }, onDisposed: {
                     print("Parser Disposed")
@@ -57,7 +74,7 @@ class JSONParser {
         } else {
             
         }
-        print("Province Fetched : ",provinceDict," record")
+        print("Province Fetched : ",provinceDict.count," record")
         //print("Parsing State List Successful")
 
         return provinceDict

@@ -17,11 +17,16 @@ class AppCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
+    func mountTokenToHeaders() {
+        NetworkManager.shared.headers["Authorization"] = "Bearer "+LoginKey.shared.token
+    }
+    
     func start() {
         if LoginKey.shared.isLoggedIn() {
             // Go to HomeViewController
             LoginKey.shared.retrieveTokenAndUserID()
-            print("Already Logged in")
+            //print("Already Logged in with token : ",LoginKey.shared.token)
+            mountTokenToHeaders()
             let homeCoordinator = HomeCoordinator(navigationController: navigationController)
             childCoordinators.append(homeCoordinator)
             homeCoordinator.parentCoordinator = self

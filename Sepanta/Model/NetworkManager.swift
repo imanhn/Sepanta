@@ -52,22 +52,19 @@ class NetworkManager {
         ]
         
     }
-    /*
-    func getStatus() -> Observable<CallStatus> {
-        return Observable.create{ observer in
-            observer.on(.next(self.status))
-            return Disposables.create {
-            }
-        }
-    }*/
     
     func run(API apiName : String, QueryString aQuery : String, Method aMethod : HTTPMethod, Parameters aParameter : Dictionary<String, String>?, Header  aHeader : HTTPHeaders?  ) {
         self.status = CallStatus.inprogress
-        let urlAddress = self.baseURLString + apiName+aQuery
+        let urlAddress = self.baseURLString + apiName + aQuery
+        
         var headerToSend = self.headers
         if (aHeader) != nil{
             headerToSend = aHeader!
         }
+        //print("Calling Alamofire with Header : ",headerToSend.count,"  Tok :",LoginKey.shared.token,"  ID : ",LoginKey.shared.userID)
+        //print("Header : ",headerToSend)
+        
+        print("URL CONV : ",urlAddress)
         RxAlamofire.requestJSON(aMethod, urlAddress , parameters: aParameter, encoding: JSONEncoding.default, headers: headerToSend)
         .observeOn(MainScheduler.instance)
         .timeout(2, scheduler: MainScheduler.instance)
@@ -84,6 +81,9 @@ class NetworkManager {
                 self?.status = CallStatus.error
             }
             if let amessage = self?.result["message"] as? String {
+                if amessage == "Unauthenticated." {
+                    print("User is not authorized")
+                }
                 self?.message = amessage
             }
             if let astatus = self?.result["status"] as? String {

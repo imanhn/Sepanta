@@ -45,6 +45,8 @@ class LoginViewController: UIViewControllerWithCoordinator,Storyboarded {
                 //.debug()
                 .subscribe(onNext: { [weak self] (innerUserIDObs) in
                     LoginKey.shared.userID = innerUserIDObs
+                    print("USERID : ",LoginKey.shared.userID)
+                    print("inner USERID : ",innerUserIDObs)
                     Spinner.stop()
                     LoginKey.shared.userIDObs = BehaviorRelay<String>(value: String())
                     acoordinator.gotoSMSVerification(Set : (self?.MobileTextField.text)!)

@@ -96,10 +96,16 @@ class SepantaGroupsViewController : UIViewControllerWithCoordinator,UITextFieldD
     }
 
     @IBAction func provincePressed(_ sender: Any) {
+        let headers = [
+//            "Accept": "application/json",
+            "Authorization" : "Bearer "+LoginKey.shared.token
+            //"Content-Type":"application/x-www-form-urlencoded"
+        ]
+        print("Catagory Headers : ",headers)
         selectProvince.isEnabled = false
         selectProvince.isEnabled = true
         Spinner.start()
-        NetworkManager.shared.run(API: "get-state-and-city",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil)
+        NetworkManager.shared.run(API: "category-state-list",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: headers)
         NetworkManager.shared.provinceDictionaryObs
             //.debug()
             .filter({$0.count > 0})
@@ -108,7 +114,7 @@ class SepantaGroupsViewController : UIViewControllerWithCoordinator,UITextFieldD
                 let controller = ArrayChoiceTableViewController(innerProvinceDicObs.keys.sorted(){$0 < $1}) {
                     (type) in self?.provinceModel.type = type
                     self?.selectCity.text = ""
-                    print("State Code : ",innerProvinceDicObs[type]!)
+                    print("Catagory State Code : ",innerProvinceDicObs[type]!)
                     self?.currentStateCodeObs.accept(innerProvinceDicObs[type]!)
                 }
                 controller.preferredContentSize = CGSize(width: 250, height: 300)
