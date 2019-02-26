@@ -41,6 +41,16 @@ class JSONParser {
                         LoginKey.shared.userID = String(describing: aUserID)
                         LoginKey.shared.userIDObs.accept(LoginKey.shared.userID)
                     }
+                } else if (apiName == "categories-filter") && (aMethod == HTTPMethod.get) {
+                    if let cities = aDic["cities"] {
+                        if let castedCities = cities as? NSDictionary
+                        {
+                            NetworkManager.shared.cityDictionaryObs.accept(castedCities.toStringDictionary)
+                        }
+                    }
+                    if let cat = aDic["categories"] {
+                        NetworkManager.shared.catagoriesObs.accept([cat])
+                    }
                 } else if (apiName == "check-sms-code") && (aMethod == HTTPMethod.post) {
                     if let aToken = aDic["token"] {
                         LoginKey.shared.token = String(describing: aToken)
@@ -52,10 +62,10 @@ class JSONParser {
                 } else if (apiName == "category-state-list") && (aMethod == HTTPMethod.get) {
                     var processedDic = Dictionary<String,String>()
                     (processedDic) = (self?.processAsProvinceList(Result: aDic))!
-                    NetworkManager.shared.provinceDictionaryObs.accept(processedDic)//onNext(processedDic)//
+                    NetworkManager.shared.provinceDictionaryObs.accept(processedDic)
                 }
                 }, onDisposed: {
-                    print("Parser Disposed")
+                    //print("Parser Disposed")
                 }
             ).disposed(by: netObjectsDispose)
     }

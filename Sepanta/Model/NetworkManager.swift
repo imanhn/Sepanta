@@ -38,6 +38,7 @@ class NetworkManager {
     // Result of Parser :
     var provinceDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
     var cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
+    var catagoriesObs = BehaviorRelay<[Any]>(value: [Any]())
     
     // Initialization
     
@@ -64,7 +65,7 @@ class NetworkManager {
         //print("Calling Alamofire with Header : ",headerToSend.count,"  Tok :",LoginKey.shared.token,"  ID : ",LoginKey.shared.userID)
         //print("Header : ",headerToSend)
         
-        print("URL CONV : ",urlAddress)
+        print("RXAlamofire : Requesting JSON over URL : ",urlAddress)
         RxAlamofire.requestJSON(aMethod, urlAddress , parameters: aParameter, encoding: JSONEncoding.default, headers: headerToSend)
         .observeOn(MainScheduler.instance)
         .timeout(2, scheduler: MainScheduler.instance)
@@ -96,15 +97,18 @@ class NetworkManager {
                 if err.localizedDescription == "The Internet connection appears to be offline." {
                     print("No Internet")
                 }
-                print("NetworkManager rxAlamo On Error : >",err.localizedDescription,"<")
+                if err.localizedDescription == "Could not connect to the server." {
+                    print("No Server Connection")
+                }
+                print("NetworkManager RXAlamofire Raised an Error : >",err.localizedDescription,"<")
                 Spinner.stop()
                 self.status = CallStatus.error
             }, onCompleted: {
                 self.status = CallStatus.ready
-                print("Completed")
+                //print("Completed")
                 self.parser = nil
             }, onDisposed: {
-                print("NetworkManager Disposed")
+                //print("NetworkManager Disposed")
         }).disposed(by: netObjectsDispose)
     }
     

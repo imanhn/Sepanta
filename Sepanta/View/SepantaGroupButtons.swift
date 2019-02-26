@@ -35,6 +35,23 @@ class SepantaGroupButtons {
         self.delegate.sepantaScrollView.addSubview(but)
     }
     
+    func buttonImage(direction : Bool)->UIImage{
+        let bottomImage = UIImage(named: "bottom.png")
+        let topImage = UIImage(named: "top.png")
+        
+        let size = CGSize(width: buttonsDim*1.3, height: buttonsDim*1.3)
+        UIGraphicsBeginImageContext(size)
+        
+        let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        bottomImage!.draw(in: areaSize)
+        
+        topImage!.draw(in: areaSize, blendMode: .normal, alpha: 0.8)
+        
+        var newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+    
     func createAllButtons(){
         createButton(Row: 0, Col: 0, Tag: 3)
         createButton(Row: 0, Col: 1, Tag: 2)

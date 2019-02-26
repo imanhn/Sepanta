@@ -121,7 +121,7 @@ class SignupViewController: UIViewControllerWithCoordinator,UITextFieldDelegate,
                 }
                 controller.preferredContentSize = CGSize(width: 250, height: 300)
                 Spinner.stop()
-                print("Setting controller")
+                //print("Setting controller")
                 self?.showPopup(controller, sourceView: sender as! UIView)
                 NetworkManager.shared.provinceDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
             }, onError: { _ in
@@ -151,7 +151,7 @@ class SignupViewController: UIViewControllerWithCoordinator,UITextFieldDelegate,
                 }
                 controller.preferredContentSize = CGSize(width: 250, height: 300)
                 Spinner.stop()
-                print("Setting controller")
+                //print("Setting controller")
                 self?.showPopup(controller, sourceView: sender as! UIView)
                 NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
                 }, onError: { _ in
