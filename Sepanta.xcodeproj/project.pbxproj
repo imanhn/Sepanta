@@ -22,6 +22,7 @@
 		0F984E29220B727B004AFB06 /* SepantaGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */; };
 		0F9BCFC52221FCCF00C87706 /* SlideControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9BCFC42221FCCF00C87706 /* SlideControl.swift */; };
 		0F9BCFC8222317E900C87706 /* SepantaGroupButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9BCFC7222317E900C87706 /* SepantaGroupButtons.swift */; };
+		0FA307DE222700B100EDA829 /* Shops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA307DD222700B100EDA829 /* Shops.swift */; };
 		0FD7BEB6221073AE007B7244 /* Shabnam-Light-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB3221073AA007B7244 /* Shabnam-Light-FD.ttf */; };
 		0FD7BEB7221073AE007B7244 /* Shabnam-Bold-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB4221073AB007B7244 /* Shabnam-Bold-FD.ttf */; };
 		0FD7BEB8221073AE007B7244 /* Shabnam-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB5221073AD007B7244 /* Shabnam-FD.ttf */; };
@@ -79,6 +80,7 @@
 		0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaGroupsViewController.swift; sourceTree = "<group>"; };
 		0F9BCFC42221FCCF00C87706 /* SlideControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideControl.swift; sourceTree = "<group>"; };
 		0F9BCFC7222317E900C87706 /* SepantaGroupButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaGroupButtons.swift; sourceTree = "<group>"; };
+		0FA307DD222700B100EDA829 /* Shops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shops.swift; sourceTree = "<group>"; };
 		0FD7BEB3221073AA007B7244 /* Shabnam-Light-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-Light-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-Light-FD.ttf"; sourceTree = "<group>"; };
 		0FD7BEB4221073AB007B7244 /* Shabnam-Bold-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-Bold-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-Bold-FD.ttf"; sourceTree = "<group>"; };
 		0FD7BEB5221073AD007B7244 /* Shabnam-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-FD.ttf"; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				0F890D112215D21C0091FA2E /* JSONParser.swift */,
 				0F052ED8221AE8C5009175EA /* LoginKey.swift */,
 				0FDA55D42225C02800E7C889 /* Catagory.swift */,
+				0FA307DD222700B100EDA829 /* Shops.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */,
 				0FDA55D92226109200E7C889 /* GroupsCoordinator.swift in Sources */,
 				0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */,
+				0FA307DE222700B100EDA829 /* Shops.swift in Sources */,
 				0FDA55D32225A0A000E7C889 /* NSDictionaryToDictionary.swift in Sources */,
 				0FDA55D52225C02800E7C889 /* Catagory.swift in Sources */,
 				0F890D022214B5310091FA2E /* AppCoordinator.swift in Sources */,

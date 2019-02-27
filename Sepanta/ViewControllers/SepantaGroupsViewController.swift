@@ -42,10 +42,10 @@ class SepantaGroupsViewController : UIViewControllerWithCoordinator,UITextFieldD
     }
     
     @IBAction func backToHomePage(_ sender: Any) {
-        guard let acoordinator = coordinator as? HomeCoordinator else {
+        guard let acoordinator = coordinator as? GroupsCoordinator else {
             return
         }
-        acoordinator.start()
+        acoordinator.parentCoordinator?.start()
     }
     
     
