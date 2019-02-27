@@ -31,23 +31,20 @@ class Catagory : NSObject {
     }
     
     init(Content acontent : String, Id anId : Int, ShopNumber aShopNumber : Int, Title aTitle : String, Image anImage : String) {
+        super.init()
         self.content = acontent
         self.id = anId
         self.shop_number = aShopNumber
         self.title = aTitle
         self.image = anImage
+        downloadImage()
     }
     
-    func downloadImage(imageSuffix : String) {
-        let imageUrl = "http://www.favecard.ir/"+imageSuffix
+    func downloadImage() {
+        let imageUrl = "http://www.favecard.ir/"+self.image
         Alamofire.request(imageUrl).responseImage { [weak self] response in
-            debugPrint(response)
-            print(response.request)
-            print(response.response)
-            debugPrint(response.result)
-            
             if let image = response.result.value {
-                print("image downloaded: \(image)")
+                //print("image downloaded: \(image)")
                 self?.anUIImage.accept(image)
             }
         }

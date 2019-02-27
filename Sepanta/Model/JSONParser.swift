@@ -49,6 +49,12 @@ class JSONParser {
                         }
                     }
                     if let cat = aDic["categories"] {
+                        print("Setting Catagories for CITY")
+                        NetworkManager.shared.catagoriesObs.accept([cat])
+                    }
+                } else if (apiName == "categories-filter") && (aMethod == HTTPMethod.post) {
+                    if let cat = aDic["categories"] {
+                        print("Setting Catagories for CITY")
                         NetworkManager.shared.catagoriesObs.accept([cat])
                     }
                 } else if (apiName == "check-sms-code") && (aMethod == HTTPMethod.post) {
@@ -63,6 +69,10 @@ class JSONParser {
                     var processedDic = Dictionary<String,String>()
                     (processedDic) = (self?.processAsProvinceList(Result: aDic))!
                     NetworkManager.shared.provinceDictionaryObs.accept(processedDic)
+                    if let cat = aDic["categories"] {
+                        NetworkManager.shared.catagoriesObs.accept([cat])
+                    }
+
                 }
                 }, onDisposed: {
                     //print("Parser Disposed")

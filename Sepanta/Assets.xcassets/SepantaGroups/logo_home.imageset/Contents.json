@@ -2,8 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "g6.png",
-      "scale" : "1x"
+      "filename" : "@3xlogo_home.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

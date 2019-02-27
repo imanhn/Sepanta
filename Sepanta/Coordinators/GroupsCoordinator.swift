@@ -1,18 +1,20 @@
 //
-//  HomePageController.swift
+//  GroupsController.swift
 //  Sepanta
 //
-//  Created by Iman on 11/30/1397 AP.
+//  Created by Iman on 12/8/1397 AP.
 //  Copyright © 1397 AP Imzich. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
+class GroupsCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
+    
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
-    weak var parentCoordinator : Coordinator?
+    weak var parentCoordinator : HomeCoordinator?
+    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
@@ -27,6 +29,18 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         if let homeViewController = fromViewController as? HomeViewController {
             HomeViewFinsihed(homeViewController)
         }
+        if let sepantaGroupsViewController = fromViewController as? SepantaGroupsViewController {
+            SepantaGroupsViewFinsihed(sepantaGroupsViewController)
+        }
+
+    }
+    
+    func HomeViewFinsihed(_ homeViewController : HomeViewController?) {
+        removeChild(homeViewController)
+    }
+    
+    func SepantaGroupsViewFinsihed(_ sepantaGroupsViewController : SepantaGroupsViewController?) {
+        removeChild(sepantaGroupsViewController)
     }
     
     func removeChild(_ aviewController : UIViewControllerWithCoordinator?){
@@ -43,30 +57,19 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         }
     }
     
-
-    func HomeViewFinsihed(_ homeViewController : HomeViewController?) {
-        removeChild(homeViewController)
+    func gotoAGroup(){
+         let vc = GroupViewController.instantiate()
+         vc.coordinator = self
+         navigationController.pushViewController(vc, animated: false)
+         navigationController.setNavigationBarHidden(true, animated: false)
     }
-
-    func gotoSepantaieGroups (){
-        let groupsCoordinator = GroupsCoordinator(navigationController: navigationController)
-        childCoordinators.append(groupsCoordinator)
-        groupsCoordinator.parentCoordinator = self
-        groupsCoordinator.start()
-        /*
-        let vc = SepantaGroupsViewController.instantiate()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: false)
-        navigationController.setNavigationBarHidden(true, animated: false)
-         */
-    }
-
+    
     func start() {
-        let vc = HomeViewController.instantiate()
+        let vc = SepantaGroupsViewController.instantiate()
         vc.coordinator = self
         navigationController.delegate = self
         navigationController.pushViewController(vc, animated: false)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
-    
+
 }

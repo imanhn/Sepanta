@@ -27,6 +27,8 @@
 		0FD7BEB8221073AE007B7244 /* Shabnam-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB5221073AD007B7244 /* Shabnam-FD.ttf */; };
 		0FDA55D32225A0A000E7C889 /* NSDictionaryToDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDA55D22225A0A000E7C889 /* NSDictionaryToDictionary.swift */; };
 		0FDA55D52225C02800E7C889 /* Catagory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDA55D42225C02800E7C889 /* Catagory.swift */; };
+		0FDA55D722260FFE00E7C889 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDA55D622260FFE00E7C889 /* GroupViewController.swift */; };
+		0FDA55D92226109200E7C889 /* GroupsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDA55D82226109200E7C889 /* GroupsCoordinator.swift */; };
 		0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9A8220355F000C868C3 /* AppDelegate.swift */; };
 		0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9AA220355F000C868C3 /* LoginViewController.swift */; };
 		0FE8B9AE220355F000C868C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9AC220355F000C868C3 /* Main.storyboard */; };
@@ -84,6 +86,8 @@
 		0FD7BEBB221208A4007B7244 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Pods/FirebaseCore/Frameworks/FirebaseCore.framework; sourceTree = "<group>"; };
 		0FDA55D22225A0A000E7C889 /* NSDictionaryToDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDictionaryToDictionary.swift; sourceTree = "<group>"; };
 		0FDA55D42225C02800E7C889 /* Catagory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catagory.swift; sourceTree = "<group>"; };
+		0FDA55D622260FFE00E7C889 /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
+		0FDA55D82226109200E7C889 /* GroupsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsCoordinator.swift; sourceTree = "<group>"; };
 		0FE8B9A5220355F000C868C3 /* Sepanta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sepanta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FE8B9A8220355F000C868C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0FE8B9AA220355F000C868C3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +159,7 @@
 				0F890CFD2214B4CD0091FA2E /* Coordinator.swift */,
 				0F890D012214B5310091FA2E /* AppCoordinator.swift */,
 				0F052EDA221C0790009175EA /* HomeCoordinator.swift */,
+				0FDA55D82226109200E7C889 /* GroupsCoordinator.swift */,
 				0F890D032214BF300091FA2E /* LoginCoordinator.swift */,
 			);
 			path = Coordinators;
@@ -183,6 +188,7 @@
 		0F890D0F2215D0CF0091FA2E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0FDA55D622260FFE00E7C889 /* GroupViewController.swift */,
 				0FE8B9AA220355F000C868C3 /* LoginViewController.swift */,
 				0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */,
 				0F512C042205B5C300B99C9E /* SignupViewController.swift */,
@@ -477,6 +483,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FDA55D722260FFE00E7C889 /* GroupViewController.swift in Sources */,
 				0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */,
 				0F052ED9221AE8C5009175EA /* LoginKey.swift in Sources */,
 				0F984E29220B727B004AFB06 /* SepantaGroupsViewController.swift in Sources */,
@@ -491,6 +498,7 @@
 				0F890D0B2214D06E0091FA2E /* UIViewControllersWithCoordinator.swift in Sources */,
 				0FE8BA062205239E00C868C3 /* HomeViewController.swift in Sources */,
 				0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */,
+				0FDA55D92226109200E7C889 /* GroupsCoordinator.swift in Sources */,
 				0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */,
 				0FDA55D32225A0A000E7C889 /* NSDictionaryToDictionary.swift in Sources */,
 				0FDA55D52225C02800E7C889 /* Catagory.swift in Sources */,
