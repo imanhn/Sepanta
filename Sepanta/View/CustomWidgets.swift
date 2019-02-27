@@ -249,13 +249,24 @@ class RightTabbedView: UIView {
     }
 }
 class UIViewWithDash: UIView {
+    /*
+    override init(frame:CGRect) {
+        super.init(frame:frame)
+        self.isOpaque = false
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+ */
     override func draw(_ rect: CGRect) {
+        
         let context = UIGraphicsGetCurrentContext()
         
         context?.setLineWidth(1.0)
-        context?.setStrokeColor((UIColor( red: 0.99,     green: 0.98, blue:0.99, alpha: 0.5 )).cgColor)
+        //context?.setStrokeColor((UIColor( red: 0.99,     green: 0.98, blue:0.99, alpha: 1.0 )).cgColor)
         
-        //context?.setStrokeColor((UIColor( red: 0.84,     green: 0.84, blue:0.84, alpha: 1.0 )).cgColor)
+        context?.setStrokeColor((UIColor( red: 0.84,     green: 0.84, blue:0.84, alpha: 1.0 )).cgColor)
 
         context?.move(to: CGPoint(x: 0, y: self.bounds.height/2))
         context?.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height/2))

@@ -57,11 +57,14 @@ class GroupsCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         }
     }
     
-    func gotoAGroup(){
-         let vc = GroupViewController.instantiate()
-         vc.coordinator = self
-         navigationController.pushViewController(vc, animated: false)
-         navigationController.setNavigationBarHidden(true, animated: false)
+    func gotoAGroup(GroupID anID:Int,GroupImage anImage:UIImage,GroupName aName : String){
+        let vc = GroupViewController.instantiate()
+        vc.coordinator = self
+        vc.currentID = anID
+        vc.currentGroupName = aName
+        vc.currentGroupImage = anImage
+        navigationController.pushViewController(vc, animated: false)
+        navigationController.setNavigationBarHidden(true, animated: false)
     }
     
     func start() {

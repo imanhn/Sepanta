@@ -31,9 +31,19 @@ class GroupViewController :  UIViewControllerWithCoordinator,UITextFieldDelegate
     let myDisopseBag = DisposeBag()
     let shops : BehaviorRelay<[Shop]> = BehaviorRelay(value: [])
 
+    @IBOutlet weak var groupLogoImage: UIImageView!
     @IBOutlet weak var shopTable: UITableView!
     @IBOutlet weak var HeaderLabel: UILabel!
+    @IBOutlet weak var groupLabel: UILabel!
+    var currentGroupImage = UIImage()
+    var currentID = Int()
+    var currentGroupName = String()
     
+    func updateGroupHeaders(){
+        self.HeaderLabel.text = currentGroupName
+        self.groupLabel.text = currentGroupName
+        self.groupLogoImage.image = currentGroupImage        
+    }
     func fetchData() {
         var fetchedShops = [Shop]()
         fetchedShops.append(Shop(name: "فست فود جو", image: "cat_img/icon_menu_02.png", stars: 1.4, followers: 16005, dicount: 15))
@@ -72,6 +82,7 @@ class GroupViewController :  UIViewControllerWithCoordinator,UITextFieldDelegate
         super.viewDidLoad()
         bindToTableView()
         fetchData()
+        updateGroupHeaders()
     }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()

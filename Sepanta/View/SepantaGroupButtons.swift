@@ -22,12 +22,23 @@ class SepantaGroupButtons {
         self.delegate = sepantaGroupViewController
         //createAllButtons()
     }
+    
     @objc func aGroupTapped(_ sender: Any){
         let theButton = (sender as AnyObject)
         print("TAG : ",theButton.tag)
-        (self.delegate.coordinator as! GroupsCoordinator).gotoAGroup()
-        
+        if let groupCoordinator = self.delegate.coordinator as? GroupsCoordinator {
+            let targetCatagory = self.getCatagory(ByID: theButton.tag!)
+            groupCoordinator.gotoAGroup(GroupID: targetCatagory.id, GroupImage: targetCatagory.anUIImage.value, GroupName: targetCatagory.title)
+        }
     }
+        
+    func getCatagory(ByID  anID : Int)->Catagory{
+        for aCat in self.delegate.catagories {
+            if aCat.id == anID {return aCat}
+        }
+        return Catagory()
+    }
+    
     func updateScrollView(NumberOfIcons noOfIcons : Int){
         let rows = Int(noOfIcons / 3)
         self.delegate.sepantaScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: CGFloat(rows+1)*buttonsDim*1.3)
