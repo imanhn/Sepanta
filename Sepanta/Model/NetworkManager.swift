@@ -29,6 +29,7 @@ class NetworkManager {
     var content = NSDictionary()
     //var resultSubject = BehaviorRelay<NSDictionary>(value : NSDictionary())
     let baseURLString: String
+    let websiteRootAddress = "http://www.favecard.ir"
     var status : CallStatus //No used Yet
     
     let netObjectsDispose = DisposeBag()
@@ -43,7 +44,7 @@ class NetworkManager {
     // Initialization
     
     private init() {
-        self.baseURLString = "http://www.favecard.ir/api/takamad/"
+        self.baseURLString = websiteRootAddress + "/api/takamad/"
         self.status = .ready
         self.message = ""
         self.statusMessage = ""
