@@ -20,16 +20,23 @@ class GroupsCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        print("GroupsCoordinator : didShow ",viewController)
+        print("All ViewControllers in NavigationViewController : ",navigationController.viewControllers)
+        print(" Transition : ",navigationController.transitionCoordinator)
         guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
+            print("NO FROM!")
             return
         }
         if navigationController.viewControllers.contains(fromViewController) {
+            print("GroupCoord : from view : " ,fromViewController)
             return
         }
         if let homeViewController = fromViewController as? HomeViewController {
+            print("GroupCoordinator : Removing HomeViewCoordinator")
             HomeViewFinsihed(homeViewController)
         }
         if let sepantaGroupsViewController = fromViewController as? SepantaGroupsViewController {
+            print("GroupCoordinator : Removing Sepanta Coordinator..")
             SepantaGroupsViewFinsihed(sepantaGroupsViewController)
         }
 
@@ -50,6 +57,7 @@ class GroupsCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         if let aCoordinator = aviewController?.coordinator! {
             for (index,coordinator) in childCoordinators.enumerated() {
                 if (coordinator === aCoordinator) {
+                    print("     Remving ",aCoordinator)
                     childCoordinators.remove(at: index)
                     break
                 }
@@ -66,7 +74,7 @@ class GroupsCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.pushViewController(vc, animated: false)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
-    
+
     func start() {
         let vc = SepantaGroupsViewController.instantiate()
         vc.coordinator = self

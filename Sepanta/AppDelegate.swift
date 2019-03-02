@@ -39,13 +39,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
         
-        return true
         // [END add_token_refresh_observer]
-//        print("Configuring...")
-//        let result = try? ObjC.catchException( {
-//            FirebaseApp.configure()
-//        })
 /*
+        print("Configuring...")
+        let result = try? ObjC.catchException( {
+            FirebaseApp.configure()
+        })
+
         print("Configured")
         let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
         application.registerUserNotificationSettings(settings)

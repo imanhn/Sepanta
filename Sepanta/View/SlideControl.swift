@@ -26,6 +26,7 @@ class SlideController {
     }
     
     @objc func handlePan(_ sender:UIPanGestureRecognizer) {
+        print("State : ",sender.state)
         if (sender.state == UIGestureRecognizerState.began) {
             startLocation = sender.location(in: self.delegate.view)
             //print("Start X : ",startLocation.x," Y : ",startLocation.y)

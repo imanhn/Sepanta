@@ -39,6 +39,12 @@ class GroupViewController :  UIViewControllerWithCoordinator,UITextFieldDelegate
     var currentID = Int()
     var currentGroupName = String()
     
+    @IBAction func openButtomMenu(_ sender: Any) {
+        let alert = UIAlertController(title: "توجه", message: "منو باز شد", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "بلی", style: .default))
+        self.present(alert, animated: true, completion: nil)
+
+    }
     func updateGroupHeaders(){
         self.HeaderLabel.text = currentGroupName
         self.groupLabel.text = currentGroupName

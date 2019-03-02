@@ -18,8 +18,15 @@ class HomeViewController: UIViewControllerWithCoordinator,Storyboarded {
     @IBOutlet weak var leftImageView: AdImageView!
     @IBOutlet weak var rightImageView: AdImageView!
 
+
     @IBOutlet weak var searchTextField: CustomSearchBar!
     
+    @IBAction func menuClicked(_ sender: Any) {
+        guard let acoordinator = coordinator as? HomeCoordinator else {
+            return
+        }
+        acoordinator.popMenu(self)
+    }
 
     @IBAction func searchOnKeyboardPressed(_ sender: Any) {
         (sender as AnyObject).resignFirstResponder()
@@ -36,7 +43,7 @@ class HomeViewController: UIViewControllerWithCoordinator,Storyboarded {
     override func viewDidLoad() {
         slideControl = SlideController(parentController: self)
         super.viewDidLoad()
-       
+        
         //Handle Tap to End Editing
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
        // Handles Slide Events and delivers them to self.handle_pan

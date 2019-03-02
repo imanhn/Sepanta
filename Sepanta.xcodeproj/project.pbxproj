@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		0F052ED9221AE8C5009175EA /* LoginKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F052ED8221AE8C5009175EA /* LoginKey.swift */; };
 		0F052EDB221C0790009175EA /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F052EDA221C0790009175EA /* HomeCoordinator.swift */; };
+		0F066F87222B177D00C8871C /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F86222B177D00C8871C /* ContainerViewController.swift */; };
+		0F066F89222B181D00C8871C /* CenterViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F88222B181D00C8871C /* CenterViewControllerDelegate.swift */; };
+		0F066F8B222B187900C8871C /* SideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F8A222B187900C8871C /* SideViewController.swift */; };
+		0F066F8D222B18B000C8871C /* MenuItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F8C222B18B000C8871C /* MenuItems.swift */; };
+		0F066F8F222B18DF00C8871C /* CollapsibleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F8E222B18DF00C8871C /* CollapsibleTableViewCell.swift */; };
+		0F066F91222B195600C8871C /* CollapsibleTableViewHeaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F90222B195600C8871C /* CollapsibleTableViewHeaderDelegate.swift */; };
+		0F066F93222B198900C8871C /* UIColorFromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F92222B198900C8871C /* UIColorFromHex.swift */; };
+		0F066F95222B19AB00C8871C /* UIViewRotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F94222B19AB00C8871C /* UIViewRotate.swift */; };
+		0F066F97222B20BB00C8871C /* UIStoryboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F96222B20BB00C8871C /* UIStoryboardViewController.swift */; };
 		0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F512C042205B5C300B99C9E /* SignupViewController.swift */; };
 		0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */; };
 		0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */; };
@@ -66,6 +75,15 @@
 /* Begin PBXFileReference section */
 		0F052ED8221AE8C5009175EA /* LoginKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginKey.swift; sourceTree = "<group>"; };
 		0F052EDA221C0790009175EA /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		0F066F86222B177D00C8871C /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		0F066F88222B181D00C8871C /* CenterViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewControllerDelegate.swift; sourceTree = "<group>"; };
+		0F066F8A222B187900C8871C /* SideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideViewController.swift; sourceTree = "<group>"; };
+		0F066F8C222B18B000C8871C /* MenuItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItems.swift; sourceTree = "<group>"; };
+		0F066F8E222B18DF00C8871C /* CollapsibleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewCell.swift; sourceTree = "<group>"; };
+		0F066F90222B195600C8871C /* CollapsibleTableViewHeaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeaderDelegate.swift; sourceTree = "<group>"; };
+		0F066F92222B198900C8871C /* UIColorFromHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorFromHex.swift; sourceTree = "<group>"; };
+		0F066F94222B19AB00C8871C /* UIViewRotate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewRotate.swift; sourceTree = "<group>"; };
+		0F066F96222B20BB00C8871C /* UIStoryboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardViewController.swift; sourceTree = "<group>"; };
 		0F512C042205B5C300B99C9E /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		0F6F39C222078DC900393CD7 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		0F6F39C722079FB600393CD7 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
@@ -144,6 +162,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F066F85222B175E00C8871C /* ButtomMenu */ = {
+			isa = PBXGroup;
+			children = (
+				0F066F86222B177D00C8871C /* ContainerViewController.swift */,
+				0F066F8A222B187900C8871C /* SideViewController.swift */,
+				0F066F88222B181D00C8871C /* CenterViewControllerDelegate.swift */,
+				0F066F8C222B18B000C8871C /* MenuItems.swift */,
+				0F066F8E222B18DF00C8871C /* CollapsibleTableViewCell.swift */,
+				0F066F90222B195600C8871C /* CollapsibleTableViewHeaderDelegate.swift */,
+				0F066F96222B20BB00C8871C /* UIStoryboardViewController.swift */,
+			);
+			path = ButtomMenu;
+			sourceTree = "<group>";
+		};
 		0F6F39C122078DC900393CD7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,7 +259,9 @@
 			isa = PBXGroup;
 			children = (
 				0FDA55D22225A0A000E7C889 /* NSDictionaryToDictionary.swift */,
+				0F066F94222B19AB00C8871C /* UIViewRotate.swift */,
 				0FA307DF2227330700EDA829 /* EnglishNumbersToPersian.swift */,
+				0F066F92222B198900C8871C /* UIColorFromHex.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -257,6 +291,7 @@
 		0FE8B9A7220355F000C868C3 /* Sepanta */ = {
 			isa = PBXGroup;
 			children = (
+				0F066F85222B175E00C8871C /* ButtomMenu */,
 				0FDA55D12225A08100E7C889 /* Extensions */,
 				0F9BCFC6222201B600C87706 /* View */,
 				0F890D102215D0F20091FA2E /* ViewModel */,
@@ -491,7 +526,14 @@
 			files = (
 				0FDA55D722260FFE00E7C889 /* GroupViewController.swift in Sources */,
 				0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */,
+				0F066F87222B177D00C8871C /* ContainerViewController.swift in Sources */,
 				0F052ED9221AE8C5009175EA /* LoginKey.swift in Sources */,
+				0F066F89222B181D00C8871C /* CenterViewControllerDelegate.swift in Sources */,
+				0F066F91222B195600C8871C /* CollapsibleTableViewHeaderDelegate.swift in Sources */,
+				0F066F8B222B187900C8871C /* SideViewController.swift in Sources */,
+				0F066F95222B19AB00C8871C /* UIViewRotate.swift in Sources */,
+				0F066F93222B198900C8871C /* UIColorFromHex.swift in Sources */,
+				0F066F8F222B18DF00C8871C /* CollapsibleTableViewCell.swift in Sources */,
 				0F984E29220B727B004AFB06 /* SepantaGroupsViewController.swift in Sources */,
 				0F890D122215D21C0091FA2E /* JSONParser.swift in Sources */,
 				0F890D042214BF300091FA2E /* LoginCoordinator.swift in Sources */,
@@ -508,10 +550,12 @@
 				0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */,
 				0FA307DE222700B100EDA829 /* Shops.swift in Sources */,
 				0FDA55D32225A0A000E7C889 /* NSDictionaryToDictionary.swift in Sources */,
+				0F066F8D222B18B000C8871C /* MenuItems.swift in Sources */,
 				0FA307E02227330700EDA829 /* EnglishNumbersToPersian.swift in Sources */,
 				0FDA55D52225C02800E7C889 /* Catagory.swift in Sources */,
 				0F890D022214B5310091FA2E /* AppCoordinator.swift in Sources */,
 				0F890D0E2215C7170091FA2E /* NetworkManager.swift in Sources */,
+				0F066F97222B20BB00C8871C /* UIStoryboardViewController.swift in Sources */,
 				0F9BCFC8222317E900C87706 /* SepantaGroupButtons.swift in Sources */,
 				0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */,
 				0FFCF614221811FC0040A7DC /* Spinner.swift in Sources */,

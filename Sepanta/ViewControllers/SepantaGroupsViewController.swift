@@ -45,6 +45,8 @@ class SepantaGroupsViewController : UIViewControllerWithCoordinator,UITextFieldD
         guard let acoordinator = coordinator as? GroupsCoordinator else {
             return
         }
+        //navigationController?.popViewController(animated: false )
+        //acoordinator.start()
         acoordinator.parentCoordinator?.start()
     }
     
