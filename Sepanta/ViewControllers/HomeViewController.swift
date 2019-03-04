@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-class HomeViewController: UIViewControllerWithCoordinator,Storyboarded {
-
+class HomeViewController: UIViewController,Storyboarded {
+    weak var coordinator : HomeCoordinator?
     var slideControl : SlideController?
     @IBOutlet weak var pageControl: UIPageControl!
     
@@ -21,11 +21,17 @@ class HomeViewController: UIViewControllerWithCoordinator,Storyboarded {
 
     @IBOutlet weak var searchTextField: CustomSearchBar!
     
+    private func showPopup(_ controller: UIViewController, sourceView: UIView) {
+        //print("Showing POPUP : ",sourceView)
+        let presentationController = PresentAsMenu.configurePresentation(forController: controller)
+        presentationController.sourceView = sourceView
+        presentationController.sourceRect = sourceView.bounds
+        presentationController.permittedArrowDirections = [.down, .up]
+        self.present(controller, animated: true)
+    }
+    
     @IBAction func menuClicked(_ sender: Any) {
-        guard let acoordinator = coordinator as? HomeCoordinator else {
-            return
-        }
-        acoordinator.popMenu(self)
+        (self.coordinator as! HomeCoordinator).openButtomMenu()
     }
 
     @IBAction func searchOnKeyboardPressed(_ sender: Any) {
@@ -57,6 +63,7 @@ class HomeViewController: UIViewControllerWithCoordinator,Storyboarded {
     }
     
     @IBAction func sepantaieClicked(_ sender: Any) {
+        print("HomeViewController.Coordinator : ",coordinator)
         guard let acoordinator = coordinator as? HomeCoordinator else {
             return
         }

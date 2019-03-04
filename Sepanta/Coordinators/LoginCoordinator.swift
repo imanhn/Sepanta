@@ -23,42 +23,31 @@ class LoginCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         if navigationController.viewControllers.contains(fromViewController) {
             return
         }
+        
         if let loginViewController = fromViewController as? LoginViewController {
-            LoginFinished(loginViewController)
+            removeChild(loginViewController.coordinator!)
         }
         if let smsViewController = fromViewController as? SMSConfirmViewController {
-            SMSVerificationFinished(smsViewController)
+            removeChild(smsViewController.coordinator!)
         }
         if let signupViewController = fromViewController as? SignupViewController {
-            SignupFinished(signupViewController)
+            removeChild(signupViewController.coordinator!)
         }
 
     }
     
-    func removeChild(_ aviewController : UIViewControllerWithCoordinator?){
-        guard aviewController != nil else{
-            return
-        }
-        if let aCoordinator = aviewController?.coordinator! {
-            for (index,coordinator) in childCoordinators.enumerated() {
-                if (coordinator === aCoordinator) {
-                    childCoordinators.remove(at: index)
-                    break
-                }
+    func removeChild(_ aCoordinator : Coordinator){
+        
+        for (index,coordinator) in childCoordinators.enumerated() {
+            if (coordinator === aCoordinator) {
+                childCoordinators.remove(at: index)
+                print("     Remving ",aCoordinator)
+                break
             }
         }
+        
     }
-    
-    func SignupFinished(_ signupViewController : SignupViewController) {
-        removeChild(signupViewController)
-    }
-    func SMSVerificationFinished(_ smsViewController : SMSConfirmViewController?) {
-        removeChild(smsViewController)
-    }
-    
-    func LoginFinished(_ loginViewController : LoginViewController?){
-        removeChild(loginViewController)
-    }
+
     
     func start() {
         let vc = LoginViewController.instantiate()

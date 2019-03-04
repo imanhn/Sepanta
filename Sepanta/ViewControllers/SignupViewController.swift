@@ -26,7 +26,8 @@ struct cities {
     var type : String = "انتخاب شهر"
 }
 
-class SignupViewController: UIViewControllerWithCoordinator,UITextFieldDelegate,Storyboarded   {
+class SignupViewController: UIViewController,UITextFieldDelegate,Storyboarded   {
+    weak var coordinator : LoginCoordinator?
     var userID : String = ""
     var smsVerificationCode : String = ""
     var currentStateCodeObs = BehaviorRelay<String>(value : String())

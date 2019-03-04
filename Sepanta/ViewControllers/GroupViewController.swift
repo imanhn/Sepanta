@@ -27,8 +27,9 @@ class ShopCell : UITableViewCell {
     
 }
 
-class GroupViewController :  UIViewControllerWithCoordinator,UITextFieldDelegate,Storyboarded{
-    let myDisopseBag = DisposeBag()
+class GroupViewController :  UIViewController,UITextFieldDelegate,Storyboarded{
+    weak var coordinator : GroupsCoordinator?
+    let myDisposeBag = DisposeBag()
     let shops : BehaviorRelay<[Shop]> = BehaviorRelay(value: [])
 
     @IBOutlet weak var groupLogoImage: UIImageView!
@@ -45,11 +46,13 @@ class GroupViewController :  UIViewControllerWithCoordinator,UITextFieldDelegate
         self.present(alert, animated: true, completion: nil)
 
     }
+    
     func updateGroupHeaders(){
         self.HeaderLabel.text = currentGroupName
         self.groupLabel.text = currentGroupName
         self.groupLogoImage.image = currentGroupImage        
     }
+    
     func fetchData() {
         var fetchedShops = [Shop]()
         fetchedShops.append(Shop(name: "فست فود جو", image: "cat_img/icon_menu_02.png", stars: 1.4, followers: 16005, dicount: 15))
@@ -82,7 +85,7 @@ class GroupViewController :  UIViewControllerWithCoordinator,UITextFieldDelegate
                     shopImage.af_setImage(withURL: imageUrl, filter: filter,imageTransition: .crossDissolve(0.4))
                 }
             }
-            }.disposed(by: myDisopseBag)
+            }.disposed(by: myDisposeBag)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,12 +98,17 @@ class GroupViewController :  UIViewControllerWithCoordinator,UITextFieldDelegate
     }
     
     @IBAction func gotoHomePage(_ sender: Any) {
-        if let coord = coordinator as? GroupsCoordinator {
-            coord.parentCoordinator?.start()
+        
+        guard coordinator != nil else {
+            print("Coordinator in nil in GroupViewController")
+            return 
         }
+        coordinator?.gotoHomeFromAGroups()
     }
+    
     @IBAction func backButtonPressed(_ sender: Any) {
-        coordinator?.start()
+        coordinator?.goBack()
+        //coordinator?.start()
     }
     
 }

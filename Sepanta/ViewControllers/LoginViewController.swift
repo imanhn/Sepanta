@@ -12,8 +12,9 @@ import RxAlamofire
 import RxSwift
 import RxCocoa
 
-class LoginViewController: UIViewControllerWithCoordinator,Storyboarded {
+class LoginViewController: UIViewController,Storyboarded {
     var myDisposeBag  = DisposeBag()
+    weak var coordinator : LoginCoordinator?
     @IBOutlet var PageView: UIView!
     @IBOutlet weak var LoginPanelView: RightTabbedView!
     @IBOutlet weak var SignupButton: TabbedButton!

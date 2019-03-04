@@ -12,7 +12,8 @@ import RxSwift
 import RxCocoa
 import Alamofire
 
-class SepantaGroupsViewController : UIViewControllerWithCoordinator,UITextFieldDelegate,Storyboarded{
+class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storyboarded{
+    weak var coordinator : GroupsCoordinator?
     var currentStateCodeObs = BehaviorRelay<String>(value : String())
     var currentCityCodeObs = BehaviorRelay<String>(value : String())
     var cityPressed = BehaviorRelay<Bool>(value: false)
@@ -42,12 +43,10 @@ class SepantaGroupsViewController : UIViewControllerWithCoordinator,UITextFieldD
     }
     
     @IBAction func backToHomePage(_ sender: Any) {
-        guard let acoordinator = coordinator as? GroupsCoordinator else {
-            return
-        }
-        //navigationController?.popViewController(animated: false )
-        //acoordinator.start()
-        acoordinator.parentCoordinator?.start()
+        print("Making groupbuttons NIL")
+        self.groupButtons = nil
+        print("BH SepantaGroup self.coordinator : ",self.coordinator)
+        self.coordinator!.gotoHomeFromSepantaieGroups()
     }
     
     
@@ -89,7 +88,7 @@ class SepantaGroupsViewController : UIViewControllerWithCoordinator,UITextFieldD
                 let controller = ArrayChoiceTableViewController(innerProvinceDicObs.keys.sorted(){$0 < $1}) {
                     (type) in self?.provinceModel.type = type
                     self?.selectCity.text = ""
-                    print("Catagory State Code : ",innerProvinceDicObs[type]!)
+                    //print("Catagory State Code : ",innerProvinceDicObs[type]!)
                     self?.currentStateCodeObs.accept(innerProvinceDicObs[type]!)
                 }
                 controller.preferredContentSize = CGSize(width: 250, height: innerProvinceDicObs.count*60)
@@ -106,30 +105,30 @@ class SepantaGroupsViewController : UIViewControllerWithCoordinator,UITextFieldD
                 print("Province Disposed")
             }).disposed(by: myDisposeBag)
         
-        Observable.combineLatest(self.cityPressed, NetworkManager.shared.cityDictionaryObs, resultSelector: { [weak self] (innercityPressed,innerCityDicObs) in
-            print("COMBINE : ",innercityPressed,innerCityDicObs)
+        Observable.combineLatest(self.cityPressed, NetworkManager.shared.cityDictionaryObs, resultSelector: { [unowned self] (innercityPressed,innerCityDicObs) in
+            //print("COMBINE : ",innercityPressed,innerCityDicObs)
             if innercityPressed == true {
                 let controller = ArrayChoiceTableViewController(innerCityDicObs.keys.sorted(){$0 < $1}) {
-                    (type) in self?.cityModel.type = type
-                    print("City Code : ",innerCityDicObs[type]!)
-                    self?.currentCityCodeObs.accept(innerCityDicObs[type]!)
+                    (type) in self.cityModel.type = type
+                    //print("City Code : ",innerCityDicObs[type]!)
+                    self.currentCityCodeObs.accept(innerCityDicObs[type]!)
                 }
                 controller.preferredContentSize = CGSize(width: 250, height: 300)
                 Spinner.stop()
-                self?.showPopup(controller, sourceView: (self?.selectCity)!)
-                //self?.cityPressed.accept(false)
+                self.showPopup(controller, sourceView: (self.selectCity)!)
+                //self.cityPressed.accept(false)
             }
-        }).observeOn(MainScheduler.asyncInstance)
+        }).observeOn(MainScheduler.instance)
         .subscribe()
         .disposed(by: myDisposeBag)
 
         self.currentStateCodeObs
             .filter({$0 != ""})
-            .subscribe(onNext: { [weak self] (innerCurrentState) in
+            .subscribe(onNext: { [unowned self] (innerCurrentState) in
                 //NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
                 
                 NetworkManager.shared.run(API: "categories-filter",QueryString: "/\(innerCurrentState)", Method: HTTPMethod.get, Parameters: nil, Header: nil)
-                print("Registered and listended : ",innerCurrentState)
+                //print("Registered and listended : ",innerCurrentState)
             }, onError: { _ in
                 print("Error in listening to province in Sepanta groups")
                 
@@ -149,7 +148,7 @@ class SepantaGroupsViewController : UIViewControllerWithCoordinator,UITextFieldD
                 ]
                 let queryString = "?state_code=\(self?.currentStateCodeObs.value ?? "00")&city_code=\(innerCurrentCity)"
                 NetworkManager.shared.run(API: "categories-filter",QueryString: queryString, Method: HTTPMethod.post, Parameters: aParameter, Header: nil)
-                print("Registered and listended : ",innerCurrentCity)
+                //print("Registered and listended : ",innerCurrentCity)
                 }, onError: { _ in
                     print("Error in listening to province in Sepanta groups")
                     
@@ -161,12 +160,13 @@ class SepantaGroupsViewController : UIViewControllerWithCoordinator,UITextFieldD
 
       NetworkManager.shared.catagoriesObs
         //.filter({$0.count > 0})
-        .subscribe(onNext: { [weak self] (innerCatagories) in
+        .subscribe(onNext: { [unowned self] (innerCatagories) in
             if innerCatagories.count > 0 {
+                self.groupButtons = SepantaGroupButtons(self)
                 //print("innerCatagories : ",innerCatagories,"  ",innerCatagories.count)
                 var relayCollection = [BehaviorRelay<UIImage>]()
                 let catagories = innerCatagories[0] as! NSArray
-                self?.catagories = [Catagory]()
+                self.catagories = [Catagory]()
                 for i in 0..<catagories.count {
                     let catDic = catagories[i] as! NSDictionary
                     //print(catDic)
@@ -179,23 +179,18 @@ class SepantaGroupsViewController : UIViewControllerWithCoordinator,UITextFieldD
                     {
                         let newCatagory = Catagory(Content: aContent, Id: anId, ShopNumber: aShopsNumber, Title: aTitle, Image: anImage)
                         relayCollection.append(newCatagory.anUIImage)
-                        self?.catagories.append(newCatagory)
+                        self.catagories.append(newCatagory)
                         
                     }
                 }
-                //Resetting JSON Catagories Observer...
-                //NetworkManager.shared.catagoriesObs = BehaviorRelay<[Any]>(value: [Any]())
-                if (self?.catagories.count)! > 0 {Spinner.start()}
-                self?.groupButtons?.counter = 0
-                self?.groupButtons?.buttons = [UIButton]()
-                for aSubView in (self?.sepantaScrollView.subviews)!{
+                if (self.catagories.count) > 0 {Spinner.start()}
+                self.groupButtons?.counter = 0
+                self.groupButtons?.buttons = [UIButton]()
+                for aSubView in (self.sepantaScrollView.subviews){
                     aSubView.removeFromSuperview()
                 }
-                print("Total Catagory Loaded : ",self?.catagories.count)
-                if let allCatagories = self?.catagories,
-                    let groupBut = self?.groupButtons {
-                    groupBut.createGroups(Catagories: allCatagories)
-                }
+                //print("Total Catagory Loaded : ",self?.catagories.count)
+                self.groupButtons?.createGroups(Catagories: self.catagories)
                 /*
                 Observable.combineLatest(relayCollection)
                     .subscribe({ innerRelayCol in
@@ -215,6 +210,7 @@ class SepantaGroupsViewController : UIViewControllerWithCoordinator,UITextFieldD
     }
     
     override func viewDidLoad() {
+         print("VL SepantaGroup self.coordinator : ",self.coordinator)
         super.viewDidLoad()
         NetworkManager.shared.provinceDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
         NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
@@ -222,11 +218,15 @@ class SepantaGroupsViewController : UIViewControllerWithCoordinator,UITextFieldD
         selectCity.delegate = self
         selectProvince.delegate = self
        // self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
-        groupButtons = SepantaGroupButtons(self)
+        
         
         registerProvinceChangeListener()
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+    }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
