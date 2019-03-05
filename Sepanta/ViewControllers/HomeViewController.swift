@@ -70,6 +70,14 @@ class HomeViewController: UIViewController,Storyboarded {
         acoordinator.gotoSepantaieGroups()
     }
     
+    @IBAction func poldarshoClicked(_ sender: Any) {
+        print("HomeViewController.Coordinator : ",coordinator)
+        guard let acoordinator = coordinator as? HomeCoordinator else {
+            return
+        }
+        acoordinator.gotoGetRich()
+    }
+    
 }
 
 

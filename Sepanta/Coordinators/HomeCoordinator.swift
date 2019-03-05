@@ -74,13 +74,30 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         case 1:
             gotoSepantaieGroups()
             break
-            
+        case 4:
+            gotoGetRich()
+            break
         default:
             print("Wrong Menu Number")
             fatalError()
         }
 
     }
+    func openButtomMenu (){
+        let menuCoordinator = MenuCoordinator(navigationController: navigationController)
+        childCoordinators.append(menuCoordinator)
+        menuCoordinator.parentCoordinator = self
+        menuCoordinator.start()
+    }
+    
+    func gotoGetRich() {
+        let getRichCoordinator = GetRichCoordinator(navigationController: navigationController)
+        childCoordinators.append(getRichCoordinator)
+        getRichCoordinator.parentCoordinator = self
+        getRichCoordinator.start()
+        
+    }
+    
     func gotoSepantaieGroups (){
         let groupsCoordinator = GroupsCoordinator(navigationController: navigationController)
         childCoordinators.append(groupsCoordinator)
@@ -89,13 +106,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
 
     }
     
-    func openButtomMenu (){
-        let menuCoordinator = MenuCoordinator(navigationController: navigationController)
-        childCoordinators.append(menuCoordinator)
-        menuCoordinator.parentCoordinator = self
-        menuCoordinator.start()
-    }
-    
+
     func start() {
         
         let vc = HomeViewController.instantiate()

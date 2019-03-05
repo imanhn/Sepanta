@@ -13,12 +13,23 @@ class MenuCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
-    weak var parentCoordinator : HomeCoordinator?
+    weak var parentCoordinator : Coordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
+    func removeChild(_ aCoordinator : Coordinator){
+        
+        for (index,coordinator) in childCoordinators.enumerated() {
+            if (coordinator === aCoordinator) {
+                childCoordinators.remove(at: index)
+                print("     Remving ",aCoordinator)
+                break
+            }
+        }        
+    }
+
     func menuDismissed() {        
         guard self.parentCoordinator != nil else {
             print("Menu Coordinator : Parent is nil : ",self.parentCoordinator)
@@ -33,7 +44,11 @@ class MenuCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
             return
         }
         self.parentCoordinator?.removeChild(self)
-        self.parentCoordinator?.launchMenuSelection(anIndexPath.row)
+        if let parent = self.parentCoordinator! as? HomeCoordinator {
+            parent.launchMenuSelection(anIndexPath.row)
+        }else if let parent = self.parentCoordinator! as? GetRichCoordinator {
+            parent.launchMenuSelection(anIndexPath.row)
+        }
     }
     
     func start(){

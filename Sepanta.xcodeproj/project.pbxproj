@@ -29,6 +29,8 @@
 		0FA307DE222700B100EDA829 /* Shops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA307DD222700B100EDA829 /* Shops.swift */; };
 		0FA307E02227330700EDA829 /* EnglishNumbersToPersian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA307DF2227330700EDA829 /* EnglishNumbersToPersian.swift */; };
 		0FB3ECD0222C8AF8009A89F7 /* MenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB3ECCF222C8AF8009A89F7 /* MenuCoordinator.swift */; };
+		0FB3ECD2222DC48F009A89F7 /* GetRichViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB3ECD1222DC48F009A89F7 /* GetRichViewController.swift */; };
+		0FB3ECD4222DC8DC009A89F7 /* GetRichCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB3ECD3222DC8DC009A89F7 /* GetRichCoordinator.swift */; };
 		0FD7BEB6221073AE007B7244 /* Shabnam-Light-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB3221073AA007B7244 /* Shabnam-Light-FD.ttf */; };
 		0FD7BEB7221073AE007B7244 /* Shabnam-Bold-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB4221073AB007B7244 /* Shabnam-Bold-FD.ttf */; };
 		0FD7BEB8221073AE007B7244 /* Shabnam-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB5221073AD007B7244 /* Shabnam-FD.ttf */; };
@@ -93,6 +95,8 @@
 		0FA307DD222700B100EDA829 /* Shops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shops.swift; sourceTree = "<group>"; };
 		0FA307DF2227330700EDA829 /* EnglishNumbersToPersian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishNumbersToPersian.swift; sourceTree = "<group>"; };
 		0FB3ECCF222C8AF8009A89F7 /* MenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCoordinator.swift; sourceTree = "<group>"; };
+		0FB3ECD1222DC48F009A89F7 /* GetRichViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRichViewController.swift; sourceTree = "<group>"; };
+		0FB3ECD3222DC8DC009A89F7 /* GetRichCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRichCoordinator.swift; sourceTree = "<group>"; };
 		0FD7BEB3221073AA007B7244 /* Shabnam-Light-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-Light-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-Light-FD.ttf"; sourceTree = "<group>"; };
 		0FD7BEB4221073AB007B7244 /* Shabnam-Bold-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-Bold-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-Bold-FD.ttf"; sourceTree = "<group>"; };
 		0FD7BEB5221073AD007B7244 /* Shabnam-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-FD.ttf"; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 				0F890D012214B5310091FA2E /* AppCoordinator.swift */,
 				0F052EDA221C0790009175EA /* HomeCoordinator.swift */,
 				0FB3ECCF222C8AF8009A89F7 /* MenuCoordinator.swift */,
+				0FB3ECD3222DC8DC009A89F7 /* GetRichCoordinator.swift */,
 				0FDA55D82226109200E7C889 /* GroupsCoordinator.swift */,
 				0F890D032214BF300091FA2E /* LoginCoordinator.swift */,
 			);
@@ -210,6 +215,7 @@
 				0FE8BA052205239E00C868C3 /* HomeViewController.swift */,
 				0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */,
 				0F066F9E222C704B00C8871C /* MenuViewController.swift */,
+				0FB3ECD1222DC48F009A89F7 /* GetRichViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -514,10 +520,12 @@
 				0FB3ECD0222C8AF8009A89F7 /* MenuCoordinator.swift in Sources */,
 				0F066F9F222C704B00C8871C /* MenuViewController.swift in Sources */,
 				0F890D042214BF300091FA2E /* LoginCoordinator.swift in Sources */,
+				0FB3ECD2222DC48F009A89F7 /* GetRichViewController.swift in Sources */,
 				0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */,
 				0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */,
 				0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */,
 				0F052EDB221C0790009175EA /* HomeCoordinator.swift in Sources */,
+				0FB3ECD4222DC8DC009A89F7 /* GetRichCoordinator.swift in Sources */,
 				0FE8BA042205082100C868C3 /* SMSConfirmViewController.swift in Sources */,
 				0F890CFE2214B4CD0091FA2E /* Coordinator.swift in Sources */,
 				0FE8BA062205239E00C868C3 /* HomeViewController.swift in Sources */,

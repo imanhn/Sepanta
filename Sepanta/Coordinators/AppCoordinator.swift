@@ -16,7 +16,18 @@ class AppCoordinator: Coordinator {
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
-    
+    func removeChild(_ aCoordinator : Coordinator){
+        
+        for (index,coordinator) in childCoordinators.enumerated() {
+            if (coordinator === aCoordinator) {
+                childCoordinators.remove(at: index)
+                print("     Remving ",aCoordinator)
+                break
+            }
+        }
+        
+    }
+
     func mountTokenToHeaders() {
         NetworkManager.shared.headers["Authorization"] = "Bearer "+LoginKey.shared.token
     }
