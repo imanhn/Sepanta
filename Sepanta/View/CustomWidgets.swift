@@ -39,7 +39,7 @@ class RoundedButton: UIButton {
         let bezPath = UIBezierPath(roundedRect: insideCGRec, byRoundingCorners: [.allCorners], cornerRadii: CGSize(width: curvSize, height: curvSize)).cgPath
         
         context?.setLineWidth(1.0)
-        context?.setStrokeColor((UIColor(hex: 0xF7F7F7)).cgColor)
+        context?.setStrokeColor((UIColor(hex: 0xD6D7D9)).cgColor)
         context?.addPath(bezPath)
         context?.drawPath(using: CGPathDrawingMode.stroke)
     }

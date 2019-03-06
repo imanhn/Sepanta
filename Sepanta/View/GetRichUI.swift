@@ -67,11 +67,21 @@ class GetRichUI {
         formView.addSubview(nameView)
         cursurY = cursurY + formView.getHeight() + marginY
 
-        let locationView = buildARowView(CGRect: CGRect(x: marginX+buttonHeight+marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_05", Selectable: true, PlaceHolderText: "محدوده")
+        let locationView = buildARowView(CGRect: CGRect(x: marginX+buttonHeight+marginX, y: cursurY, width: textFieldWidth-(buttonHeight+marginX), height: buttonHeight), Image: "icon_profile_05", Selectable: true, PlaceHolderText: "محدوده")
         formView.addSubview(locationView)
+        let locationButton = RoundedButton(frame: CGRect(x: marginX, y: cursurY, width: buttonHeight, height: buttonHeight))
+        locationButton.setImage(UIImage(named: "icon_profile_06"), for: .normal)
+        formView.addSubview(locationButton)
         cursurY = cursurY + formView.getHeight() + marginY
 
-        
+        let mobileNoView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_07", Selectable: false, PlaceHolderText: "شماره همراه")
+        formView.addSubview(mobileNoView)
+        cursurY = cursurY + formView.getHeight() + marginY
+
+        let discountRateView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_08", Selectable: false, PlaceHolderText: "درصد تخفیف پیشنهادی")
+        formView.addSubview(discountRateView)
+        cursurY = cursurY + formView.getHeight() + marginY
+
         self.delegate.scrollView.addSubview(formView)
     }
     
@@ -85,8 +95,9 @@ class GetRichUI {
         let icondim = rect.height / 3
         let spaceIconText : CGFloat = 20
         let imageRect = CGRect(x: (rect.width-icondim), y: (rect.height - icondim)/2, width: icondim, height: icondim)
-        let anIcon = UIImageView(frame: imageRect)
+        let anIcon = UIImageView(frame: imageRect)        
         anIcon.image = UIImage(named: anImageName)
+        anIcon.contentMode = .scaleAspectFit
         
         let aText = EmptyTextField(frame: CGRect(x: 0, y: 0, width: (rect.width-icondim-spaceIconText), height: rect.height))
         aText.font = UIFont(name: "Shabnam-FD", size: 14)
