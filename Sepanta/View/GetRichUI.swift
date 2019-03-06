@@ -22,7 +22,42 @@ class GetRichUI {
     var awareLabel : UILabel?
     var termsAgreed : Bool = false
     var shopAwareness : Bool = false
-
+    var shopView : UIView?
+    var shopText : UITextField?
+    var serviceView : UIView?
+    var serviceText : UITextField?
+    var familyView : UIView?
+    var familyText : UITextField?
+    var nameView : UIView?
+    var nameText : UITextField?
+    var locationView : UIView?
+    var locationText : UITextField?
+    var mobileNoView : UIView?
+    var mobileText : UITextField?
+    var discountRateView : UIView?
+    var discountText : UITextField?
+    var nationalCodeView : UIView?
+    var nationalCodeText : UITextField?
+    var birthDateView : UIView?
+    var birthDateText : UITextField?
+    var genderView : UIView?
+    var genderText : UITextField?
+    var maritalStatusView : UIView?
+    var maritalStatusText : UITextField?
+    var emailView : UIView?
+    var emailText : UITextField?
+    var stateView : UIView?
+    var stateText : UITextField?
+    var cityView : UIView?
+    var cityText : UITextField?
+    var regionView : UIView?
+    var regionText : UITextField?
+    var orgView : UIView?
+    var orgText : UITextField?
+    var cardNoView : UIView?
+    var cardNoText : UITextField?
+    var bankView : UIView?
+    var bankText : UITextField?
     init(_ avc : GetRichViewController) {
         self.delegate = avc
         resellerRequestTapped(nil)
@@ -56,7 +91,7 @@ class GetRichUI {
         leftButton = UIButton(frame: CGRect(x: 0, y: 0, width: rightFormView.bounds.width/2, height: buttonHeight))
         leftButton.setTitle("درخواست کارت", for: .normal)
         leftButton.titleLabel?.font = buttonsFont
-        leftButton.addTarget(self, action: #selector(self.cardRequestTapped(_:)), for: .touchUpInside)
+        leftButton.addTarget(self.delegate, action: #selector(self.delegate.cardRequestTapped(_:)), for: .touchUpInside)
         leftButton.setTitleColor(UIColor(hex: 0x515152), for: .normal)
 
         rightButton = UIButton(frame: CGRect(x: rightFormView.bounds.width/2, y: 0, width: rightFormView.bounds.width/2, height: buttonHeight))
@@ -68,33 +103,33 @@ class GetRichUI {
         rightFormView.addSubview(rightButton)
         cursurY = cursurY + rightFormView.getHeight() + marginY
         
-        let shopView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_01", Selectable: false, PlaceHolderText: "نام فروشگاه")
-        rightFormView.addSubview(shopView)
+        (shopView,shopText) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_01", Selectable: false, PlaceHolderText: "نام فروشگاه")
+        rightFormView.addSubview(shopView!)
         cursurY = cursurY + rightFormView.getHeight() + marginY
         
-        let serviceView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_02", Selectable: true, PlaceHolderText: "نوع خدمت")
-        rightFormView.addSubview(serviceView)
+        (serviceView,serviceText) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_02", Selectable: true, PlaceHolderText: "نوع خدمت")
+        rightFormView.addSubview(serviceView!)
         cursurY = cursurY + rightFormView.getHeight() + marginY
         
-        let familyView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: (textFieldWidth / 2)-(marginX/4), height: buttonHeight), Image: "icon_profile_04", Selectable: false, PlaceHolderText: "نام خانوادگی")
-        rightFormView.addSubview(familyView)
-        let nameView = buildARowView(CGRect: CGRect(x: (textFieldWidth / 2)+(marginX/4)+marginX, y: cursurY, width: (textFieldWidth / 2)-marginX/4, height: buttonHeight), Image: "icon_profile_03", Selectable: false, PlaceHolderText: "نام")
-        rightFormView.addSubview(nameView)
+        (familyView,familyText) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: (textFieldWidth / 2)-(marginX/4), height: buttonHeight), Image: "icon_profile_04", Selectable: false, PlaceHolderText: "نام خانوادگی")
+        rightFormView.addSubview(familyView!)
+        (nameView,nameText) = buildARowView(CGRect: CGRect(x: (textFieldWidth / 2)+(marginX/4)+marginX, y: cursurY, width: (textFieldWidth / 2)-marginX/4, height: buttonHeight), Image: "icon_profile_03", Selectable: false, PlaceHolderText: "نام")
+        rightFormView.addSubview(nameView!)
         cursurY = cursurY + rightFormView.getHeight() + marginY
 
-        let locationView = buildARowView(CGRect: CGRect(x: marginX+buttonHeight+marginX, y: cursurY, width: textFieldWidth-(buttonHeight+marginX), height: buttonHeight), Image: "icon_profile_05", Selectable: true, PlaceHolderText: "محدوده")
-        rightFormView.addSubview(locationView)
+        (locationView,locationText) = buildARowView(CGRect: CGRect(x: marginX+buttonHeight+marginX, y: cursurY, width: textFieldWidth-(buttonHeight+marginX), height: buttonHeight), Image: "icon_profile_05", Selectable: true, PlaceHolderText: "محدوده")
+        rightFormView.addSubview(locationView!)
         let locationButton = RoundedButton(frame: CGRect(x: marginX, y: cursurY, width: buttonHeight, height: buttonHeight))
         locationButton.setImage(UIImage(named: "icon_profile_06"), for: .normal)
         rightFormView.addSubview(locationButton)
         cursurY = cursurY + rightFormView.getHeight() + marginY
 
-        let mobileNoView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_07", Selectable: false, PlaceHolderText: "شماره همراه")
-        rightFormView.addSubview(mobileNoView)
+        (mobileNoView,mobileText) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_07", Selectable: false, PlaceHolderText: "شماره همراه")
+        rightFormView.addSubview(mobileNoView!)
         cursurY = cursurY + rightFormView.getHeight() + marginY
 
-        let discountRateView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_08", Selectable: false, PlaceHolderText: "درصد تخفیف پیشنهادی")
-        rightFormView.addSubview(discountRateView)
+        (discountRateView,discountText) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_08", Selectable: false, PlaceHolderText: "درصد تخفیف پیشنهادی")
+        rightFormView.addSubview(discountRateView!)
         cursurY = cursurY + rightFormView.getHeight() + (2 * marginY)
 
         awareCheckButton = UIButton(type: .custom)
@@ -148,7 +183,7 @@ class GetRichUI {
     }
     
     
-    func buildARowView(CGRect rect : CGRect,Image anImageName : String,Selectable selectable:Bool,PlaceHolderText aPlaceHolder : String)->UIView{
+    func buildARowView(CGRect rect : CGRect,Image anImageName : String,Selectable selectable:Bool,PlaceHolderText aPlaceHolder : String)->(UIView?,UITextField?){
         let aView = UIView(frame: rect)
         let lineView = UIView(frame: CGRect(x: 0, y: rect.height-1, width: rect.width, height: 1))
         lineView.backgroundColor = UIColor(hex: 0xD6D7D9)
@@ -174,7 +209,7 @@ class GetRichUI {
         aView.addSubview(aText)
         aView.addSubview(anIcon)
         
-        return aView
+        return (aView,aText)
     }
     
     @objc func termsButtonTapped(_ sender : Any){
@@ -199,9 +234,9 @@ class GetRichUI {
         }
     }
     
-    @objc func cardRequestTapped(_ sender : Any?) {
-        print("Card Request rightFormView : ",rightFormView,"  SuperView : ",rightFormView.superview)
-        if rightFormView != nil && rightFormView.superview != nil { rightFormView.removeFromSuperview()}
+    func showCardRequest() {
+        print("Card Request rightFormView : ",rightFormView,"  SuperView : ",rightFormView.superview ?? "Nil")
+        if rightFormView.superview != nil { rightFormView.removeFromSuperview()}
         var cursurY : CGFloat = 0
         let marginY : CGFloat = 10
         let marginX : CGFloat = 20
@@ -229,58 +264,58 @@ class GetRichUI {
         leftFormView.addSubview(rightButton)
         cursurY = cursurY + leftFormView.getHeight() + marginY
         
-        let familyView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: (textFieldWidth / 2)-(marginX/4), height: buttonHeight), Image: "icon_profile_04", Selectable: false, PlaceHolderText: "نام خانوادگی")
-        leftFormView.addSubview(familyView)
-        let nameView = buildARowView(CGRect: CGRect(x: (textFieldWidth / 2)+(marginX/4)+marginX, y: cursurY, width: (textFieldWidth / 2)-marginX/4, height: buttonHeight), Image: "icon_profile_03", Selectable: false, PlaceHolderText: "نام")
-        leftFormView.addSubview(nameView)
+        (familyView,familyText) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: (textFieldWidth / 2)-(marginX/4), height: buttonHeight), Image: "icon_profile_04", Selectable: false, PlaceHolderText: "نام خانوادگی")
+        leftFormView.addSubview(familyView!)
+        (nameView,nameText) = buildARowView(CGRect: CGRect(x: (textFieldWidth / 2)+(marginX/4)+marginX, y: cursurY, width: (textFieldWidth / 2)-marginX/4, height: buttonHeight), Image: "icon_profile_03", Selectable: false, PlaceHolderText: "نام")
+        leftFormView.addSubview(nameView!)
         cursurY = cursurY + leftFormView.getHeight() + marginY
 
-        let nationalCodeView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "identity-card", Selectable: false, PlaceHolderText: "کد ملی")
-        leftFormView.addSubview(nationalCodeView)
+        (nationalCodeView,nationalCodeText) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "identity-card", Selectable: false, PlaceHolderText: "کد ملی")
+        leftFormView.addSubview(nationalCodeView!)
         cursurY = cursurY + leftFormView.getHeight() + marginY
 
-        let birthDateView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "calendar-page-empty", Selectable: false, PlaceHolderText: "تاریخ تولد")
-        leftFormView.addSubview(birthDateView)
+        (birthDateView,birthDateText) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "calendar-page-empty", Selectable: false, PlaceHolderText: "تاریخ تولد")
+        leftFormView.addSubview(birthDateView!)
         cursurY = cursurY + leftFormView.getHeight() + marginY
 
-        let genderView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "genders", Selectable: true, PlaceHolderText: "جنسیت")
-        leftFormView.addSubview(genderView)
+        (genderView,genderText) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "genders", Selectable: true, PlaceHolderText: "جنسیت")
+        leftFormView.addSubview(genderView!)
         cursurY = cursurY + leftFormView.getHeight() + marginY
 
-        let maritalStatusView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "marriage-rings-couple-with-a-heart", Selectable: true, PlaceHolderText: "وضعیت تاهل")
-        leftFormView.addSubview(maritalStatusView)
+        (maritalStatusView,maritalStatusText) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "marriage-rings-couple-with-a-heart", Selectable: true, PlaceHolderText: "وضعیت تاهل")
+        leftFormView.addSubview(maritalStatusView!)
         cursurY = cursurY + leftFormView.getHeight() + marginY
 
-        let mobileNoView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_07", Selectable: false, PlaceHolderText: "شماره همراه")
-        leftFormView.addSubview(mobileNoView)
+        (mobileNoView,mobileText) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_07", Selectable: false, PlaceHolderText: "شماره همراه")
+        leftFormView.addSubview(mobileNoView!)
         cursurY = cursurY + leftFormView.getHeight() + marginY
 
-        let emailView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "black-back-closed-envelope-shape", Selectable: false, PlaceHolderText: "ایمیل")
-        leftFormView.addSubview(emailView)
+        (emailView,emailText) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "black-back-closed-envelope-shape", Selectable: false, PlaceHolderText: "ایمیل")
+        leftFormView.addSubview(emailView!)
         cursurY = cursurY + leftFormView.getHeight() + marginY
 
-        let stateView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "map", Selectable: true, PlaceHolderText: "استان")
-        leftFormView.addSubview(stateView)
+        (stateView,stateText) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "map", Selectable: true, PlaceHolderText: "استان")
+        leftFormView.addSubview(stateView!)
         cursurY = cursurY + leftFormView.getHeight() + marginY
 
-        let cityView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "NOIMAGE", Selectable: true, PlaceHolderText: "شهر")
-        leftFormView.addSubview(cityView)
+        (cityView,cityText) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "NOIMAGE", Selectable: true, PlaceHolderText: "شهر")
+        leftFormView.addSubview(cityView!)
         cursurY = cursurY + leftFormView.getHeight() + marginY
 
-        let regionView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "NOIMAGE", Selectable: true, PlaceHolderText: "منطقه")
-        leftFormView.addSubview(regionView)
+        (regionView,regionText) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "NOIMAGE", Selectable: true, PlaceHolderText: "منطقه")
+        leftFormView.addSubview(regionView!)
         cursurY = cursurY + leftFormView.getHeight() + marginY
 
-        let orgView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "three-buildings", Selectable: false, PlaceHolderText: "نام سازمان")
-        leftFormView.addSubview(orgView)
+        (orgView,orgText) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "three-buildings", Selectable: false, PlaceHolderText: "نام سازمان")
+        leftFormView.addSubview(orgView!)
         cursurY = cursurY + leftFormView.getHeight() + marginY
 
-        let cardNoView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "credit-card", Selectable: false, PlaceHolderText: "شماره کارت")
-        leftFormView.addSubview(cardNoView)
+        (cardNoView,cardNoText) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "credit-card", Selectable: false, PlaceHolderText: "شماره کارت")
+        leftFormView.addSubview(cardNoView!)
         cursurY = cursurY + leftFormView.getHeight() + marginY
 
-        let bankView = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "bank-building", Selectable: false, PlaceHolderText: "بانک")
-        leftFormView.addSubview(bankView)
+        (bankView,bankText) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "bank-building", Selectable: false, PlaceHolderText: "بانک")
+        leftFormView.addSubview(bankView!)
         cursurY = cursurY + leftFormView.getHeight() + marginY
 
         termsCheckButton = UIButton(type: .custom)
@@ -315,8 +350,9 @@ class GetRichUI {
         self.delegate.scrollView.contentSize = formSize
         leftFormView.frame = CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: cursurY*1.2)
         self.delegate.scrollView.addSubview(leftFormView)
-
-        print("Left First Item : ",leftFormView.subviews.first)
         
     }
+}
+extension GetRichViewController {
+
 }

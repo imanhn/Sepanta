@@ -27,7 +27,12 @@ class GetRichViewController : UIViewController,UITextFieldDelegate,Storyboarded{
     var getRichUI : GetRichUI?
     
     weak var coordinator : GetRichCoordinator?
-   
+    @objc func cardRequestTapped(_ sender : Any) {
+        print("CardRequest Tapped!",sender)
+        print("getRichUI : ",getRichUI)
+        self.getRichUI!.showCardRequest()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))

@@ -25,13 +25,13 @@ class SepantaGroupButtons {
     
     @objc func aGroupTapped(_ sender: Any){
         let theButton = (sender as AnyObject)
-        print("TAG : ",theButton.tag," delegate Coordinator : ",self.delegate.coordinator)
+        //print("TAG : ",theButton.tag," delegate Coordinator : ",self.delegate.coordinator ?? "is Nil")
+        let groupCoordinator = self.delegate.coordinator
+        let targetCatagory = self.getCatagory(ByID: theButton.tag!)
+        print("Casted->groupCoordinator : ",groupCoordinator ?? "Nil!")
+        groupCoordinator?.gotoAGroup(GroupID: targetCatagory.id, GroupImage: targetCatagory.anUIImage.value, GroupName: targetCatagory.title)
+
         
-        if let groupCoordinator = self.delegate.coordinator as? GroupsCoordinator {
-            let targetCatagory = self.getCatagory(ByID: theButton.tag!)
-            print("Casted->groupCoordinator : ",groupCoordinator)
-            groupCoordinator.gotoAGroup(GroupID: targetCatagory.id, GroupImage: targetCatagory.anUIImage.value, GroupName: targetCatagory.title)
-        }
     }
         
     func getCatagory(ByID  anID : Int)->Catagory{
