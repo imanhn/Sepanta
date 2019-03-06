@@ -9,23 +9,41 @@
 import Foundation
 import UIKit
 
-extension  GetRichViewController {
-    
+//extension  GetRichViewController {
+class GetRichUI {
+    var delegate : GetRichViewController
+    var awareCheckButton = UIButton(type: .custom)
+    var termsCheckButton = UIButton(type: .custom)
+    var leftButton = UIButton(type: .custom)
+    var rightButton = UIButton(type: .custom)
+    var rightFormView = RightTabbedViewWithWhitePanel()
+    var leftFormView = LeftTabbedViewWithWhitePanel()
+    var termsLabel : UILabel?
+    var awareLabel : UILabel?
+    var termsAgreed : Bool = false
+    var shopAwareness : Bool = false
+
+    init(_ avc : GetRichViewController) {
+        self.delegate = avc
+        resellerRequestTapped(nil)
+    }
+
     //Create Gradient on PageView
     @objc func resellerRequestTapped(_ sender : Any?) {
-        if leftFormView != nil && leftFormView.superview != nil { leftFormView.removeFromSuperview()}
+        print("reseller Request : ",leftFormView)
+        if leftFormView.superview != nil { leftFormView.removeFromSuperview()}
         var cursurY : CGFloat = 0
         let marginY : CGFloat = 10
         let marginX : CGFloat = 20
         let gradient = CAGradientLayer()
-        gradient.frame = self.view.bounds
+        gradient.frame = self.delegate.view.bounds
         gradient.colors = [UIColor(hex: 0xF7F7F7).cgColor, UIColor.white.cgColor]
-        self.scrollView.layer.insertSublayer(gradient, at: 0)
+        self.delegate.scrollView.layer.insertSublayer(gradient, at: 0)
 
         let backgroundFormView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 2))
         backgroundFormView.layer.insertSublayer(gradient, at: 0)
-        self.scrollView.addSubview(backgroundFormView)
-        self.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: (UIScreen.main.bounds.height * 2)+40)
+        self.delegate.scrollView.addSubview(backgroundFormView)
+        self.delegate.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: (UIScreen.main.bounds.height * 2)+40)
         
         rightFormView = RightTabbedViewWithWhitePanel(frame: CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: UIScreen.main.bounds.height * 2))
         rightFormView.backgroundColor = UIColor.clear
@@ -124,9 +142,9 @@ extension  GetRichViewController {
         cursurY = cursurY + rightFormView.getHeight() + (1 * marginY)
         
         let formSize = CGSize(width: UIScreen.main.bounds.width, height: cursurY*1.2)
-        self.scrollView.contentSize = formSize
+        self.delegate.scrollView.contentSize = formSize
         rightFormView.frame = CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: cursurY*1.2)
-        self.scrollView.addSubview(rightFormView)
+        self.delegate.scrollView.addSubview(rightFormView)
     }
     
     
@@ -182,6 +200,7 @@ extension  GetRichViewController {
     }
     
     @objc func cardRequestTapped(_ sender : Any?) {
+        print("Card Request rightFormView : ",rightFormView,"  SuperView : ",rightFormView.superview)
         if rightFormView != nil && rightFormView.superview != nil { rightFormView.removeFromSuperview()}
         var cursurY : CGFloat = 0
         let marginY : CGFloat = 10
@@ -293,9 +312,9 @@ extension  GetRichViewController {
         cursurY = cursurY + leftFormView.getHeight() + (1 * marginY)
         
         let formSize = CGSize(width: UIScreen.main.bounds.width, height: cursurY*1.2)
-        self.scrollView.contentSize = formSize
+        self.delegate.scrollView.contentSize = formSize
         leftFormView.frame = CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: cursurY*1.2)
-        self.scrollView.addSubview(leftFormView)
+        self.delegate.scrollView.addSubview(leftFormView)
 
         print("Left First Item : ",leftFormView.subviews.first)
         

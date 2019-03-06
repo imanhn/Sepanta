@@ -35,6 +35,9 @@ class GetRichCoordinator : NSObject,Coordinator,UINavigationControllerDelegate {
         switch aRow {
         case 0:
             navigationController.popViewController(animated: false)
+            if self.parentCoordinator != nil {
+                self.parentCoordinator?.removeChild(self)
+            }
             print("Dashboard Coordinator")
             break
         case 1:

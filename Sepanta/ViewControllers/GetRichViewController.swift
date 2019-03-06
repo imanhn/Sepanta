@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class GetRichViewController : UIViewController,UITextFieldDelegate,Storyboarded{
+    /*
     var awareCheckButton = UIButton(type: .custom)
     var termsCheckButton = UIButton(type: .custom)
     var leftButton = UIButton(type: .custom)
@@ -20,20 +21,25 @@ class GetRichViewController : UIViewController,UITextFieldDelegate,Storyboarded{
     var awareLabel : UILabel?
     var termsAgreed : Bool = false
     var shopAwareness : Bool = false
-
+*/
+    
     @IBOutlet weak var scrollView: UIScrollView!
-    var contentView = UIView()
+    var getRichUI : GetRichUI?
+    
     weak var coordinator : GetRichCoordinator?
    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
-        resellerRequestTapped(nil)
+        getRichUI = GetRichUI(self)
+        //resellerRequestTapped(nil)
         
     }
     @IBAction func menuClicked(_ sender: Any) {
         print("self.coordinator : ",self.coordinator ?? "was Nil in GetRichViewController")
         self.coordinator!.openButtomMenu()
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        self.getRichUI = nil
+    }
 }
