@@ -14,13 +14,9 @@ class GetRichViewController : UIViewController,UITextFieldDelegate,Storyboarded{
     @IBOutlet weak var scrollView: UIScrollView!
     var contentView = UIView()
     weak var coordinator : GetRichCoordinator?
-    
+    weak var getRichUI : GetRichUI?
     func setupUI() {
-        //Create Gradient on PageView
-        let gradient = CAGradientLayer()
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor(hex: 0xF7F7F7).cgColor, UIColor.white.cgColor]
-        scrollView.layer.insertSublayer(gradient, at: 0)        
+        getRichUI = GetRichUI(self)
     }
     
     override func viewDidLoad() {

@@ -9,17 +9,58 @@
 import Foundation
 import UIKit
 
+class UnderLinedSelectableUIView: UIView {
+    override func draw(_ rect: CGRect) {
+        let sizeOfTriangle = rect.height/4;
+        let context = UIGraphicsGetCurrentContext()
+        context?.setLineWidth(2.0)
+        context?.setStrokeColor((UIColor( red: 0.84,     green: 0.84, blue:0.84, alpha: 1.0 )).cgColor)
+        context?.move(to: CGPoint(x: 0, y: self.bounds.height))
+        context?.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height))
+        context?.drawPath(using: CGPathDrawingMode.stroke)
+        
+        let contextTriangle = UIGraphicsGetCurrentContext()
+        contextTriangle?.setLineWidth(2.0)
+        contextTriangle?.setStrokeColor((UIColor( red: 0.2,     green: 0.2, blue:0.2, alpha: 1.0 )).cgColor)
+        contextTriangle?.move(to: CGPoint(x: 0, y: self.bounds.height-5))
+        contextTriangle?.addLine(to: CGPoint(x: sizeOfTriangle, y: self.bounds.height-5))
+        contextTriangle?.addLine(to: CGPoint(x: 0, y: self.bounds.height-5-sizeOfTriangle))
+        contextTriangle?.closePath()
+        contextTriangle?.fillPath()
+    }
+}
+
+class RoundedButton: UIButton {
+    var curvSize : CGFloat = 5;
+    override func draw(_ rect: CGRect) {
+        let context = UIGraphicsGetCurrentContext()
+        
+        let insideCGRec : CGRect = CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height)
+        let bezPath = UIBezierPath(roundedRect: insideCGRec, byRoundingCorners: [.allCorners], cornerRadii: CGSize(width: curvSize, height: curvSize)).cgPath
+        
+        context?.setLineWidth(1.0)
+        context?.setStrokeColor((UIColor(hex: 0xF7F7F7)).cgColor)
+        context?.addPath(bezPath)
+        context?.drawPath(using: CGPathDrawingMode.stroke)
+    }
+}
+class EmptyTextField: UITextField {
+    override func draw(_ rect: CGRect) {
+    }
+}
+
 class UnderLinedTextField: UITextField {
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         context?.setLineWidth(2.0)
         context?.setStrokeColor((UIColor( red: 0.84,     green: 0.84, blue:0.84, alpha: 1.0 )).cgColor)
-        context?.move(to: CGPoint(x: 20, y: self.bounds.height))
+        context?.move(to: CGPoint(x: 0, y: self.bounds.height))
         context?.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height))
         context?.drawPath(using: CGPathDrawingMode.stroke)
 
     }
 }
+
 class AdImageView : UIImageView{
     
     func getCutPath() -> UIBezierPath{
@@ -55,11 +96,7 @@ class AdImageView : UIImageView{
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        //print("init required")
         self.cutImage()
-        //self.contentMode = UIViewContentMode.scaleToFill
-        
-        //fatalError("init(coder:) has not been implemented")
     }
  
     func cutImage(){
@@ -67,12 +104,6 @@ class AdImageView : UIImageView{
         let shapeLayer = CAShapeLayer()
         shapeLayer.frame = self.bounds
         shapeLayer.path = self.getCutPath().cgPath
-        //print("Bounds W/H : ",self.bounds.width,"  ",self.bounds.height)
-        //print("Frame W/H : ",self.frame.width,"  ",self.frame.height)
-        
-//        self.bounds = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: self.bounds.height)
- //       let path = CGPath(rect: self.bounds, transform: nil)
-//        shapeLayer.path = path
         self.layer.mask = shapeLayer;
         self.layer.masksToBounds = false
     }
@@ -253,9 +284,15 @@ class RightTabbedViewWithWhitePanel: UIView {
     var curvSize : CGFloat = 10;
     let movRight : CGFloat = 5;
     let viewToButtonRatio : CGFloat = 5;
+    let heightRatio :CGFloat = 6
+    
+    func getHeight()-> CGFloat {
+        return self.bounds.width / self.heightRatio
+    }
+    
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()//UIGraphicsBeginImageContext(self.bounds.size)//
-        let tabbedButtonHeight :CGFloat = self.bounds.width / 6 //self.bounds.height/viewToButtonRatio
+        let tabbedButtonHeight :CGFloat = self.bounds.width / heightRatio //self.bounds.height/viewToButtonRatio
 
         context?.setLineWidth(1.0)
         context?.setStrokeColor((UIColor( red: 0.84,     green: 0.84, blue:0.84, alpha: 1.0 )).cgColor)
@@ -290,29 +327,14 @@ class RightTabbedViewWithWhitePanel: UIView {
     }
 }
 
+// is being used in A Group - Shops View which is the header of a UITableView
 class UIViewWithDash: UIView {
-    /*
-    override init(frame:CGRect) {
-        super.init(frame:frame)
-        self.isOpaque = false
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
- */
     override func draw(_ rect: CGRect) {
-        
         let context = UIGraphicsGetCurrentContext()
-        
         context?.setLineWidth(1.0)
-        //context?.setStrokeColor((UIColor( red: 0.99,     green: 0.98, blue:0.99, alpha: 1.0 )).cgColor)
-        
         context?.setStrokeColor((UIColor( red: 0.84,     green: 0.84, blue:0.84, alpha: 1.0 )).cgColor)
-
         context?.move(to: CGPoint(x: 0, y: self.bounds.height/2))
         context?.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height/2))
-        
         context?.drawPath(using: CGPathDrawingMode.stroke)
         
     }

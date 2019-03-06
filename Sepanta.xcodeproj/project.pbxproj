@@ -28,6 +28,7 @@
 		0F9BCFC8222317E900C87706 /* SepantaGroupButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9BCFC7222317E900C87706 /* SepantaGroupButtons.swift */; };
 		0FA307DE222700B100EDA829 /* Shops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA307DD222700B100EDA829 /* Shops.swift */; };
 		0FA307E02227330700EDA829 /* EnglishNumbersToPersian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA307DF2227330700EDA829 /* EnglishNumbersToPersian.swift */; };
+		0FAEEDE5222F29C600A9178F /* GetRichUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAEEDE4222F29C600A9178F /* GetRichUI.swift */; };
 		0FB3ECD0222C8AF8009A89F7 /* MenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB3ECCF222C8AF8009A89F7 /* MenuCoordinator.swift */; };
 		0FB3ECD2222DC48F009A89F7 /* GetRichViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB3ECD1222DC48F009A89F7 /* GetRichViewController.swift */; };
 		0FB3ECD4222DC8DC009A89F7 /* GetRichCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB3ECD3222DC8DC009A89F7 /* GetRichCoordinator.swift */; };
@@ -94,6 +95,7 @@
 		0F9BCFC7222317E900C87706 /* SepantaGroupButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaGroupButtons.swift; sourceTree = "<group>"; };
 		0FA307DD222700B100EDA829 /* Shops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shops.swift; sourceTree = "<group>"; };
 		0FA307DF2227330700EDA829 /* EnglishNumbersToPersian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishNumbersToPersian.swift; sourceTree = "<group>"; };
+		0FAEEDE4222F29C600A9178F /* GetRichUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRichUI.swift; sourceTree = "<group>"; };
 		0FB3ECCF222C8AF8009A89F7 /* MenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCoordinator.swift; sourceTree = "<group>"; };
 		0FB3ECD1222DC48F009A89F7 /* GetRichViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRichViewController.swift; sourceTree = "<group>"; };
 		0FB3ECD3222DC8DC009A89F7 /* GetRichCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRichCoordinator.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 			children = (
 				0F9BCFC42221FCCF00C87706 /* SlideControl.swift */,
 				0F9BCFC7222317E900C87706 /* SepantaGroupButtons.swift */,
+				0FAEEDE4222F29C600A9178F /* GetRichUI.swift */,
 				0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */,
 				0FFCF613221811FC0040A7DC /* Spinner.swift */,
 			);
@@ -539,6 +542,7 @@
 				0F066F9D222C2D5600C8871C /* MenuPopUpConfiguration.swift in Sources */,
 				0F066F99222C22EE00C8871C /* MenuController.swift in Sources */,
 				0F890D022214B5310091FA2E /* AppCoordinator.swift in Sources */,
+				0FAEEDE5222F29C600A9178F /* GetRichUI.swift in Sources */,
 				0F890D0E2215C7170091FA2E /* NetworkManager.swift in Sources */,
 				0F9BCFC8222317E900C87706 /* SepantaGroupButtons.swift in Sources */,
 				0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */,
