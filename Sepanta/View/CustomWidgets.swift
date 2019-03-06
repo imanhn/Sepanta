@@ -377,6 +377,49 @@ class LeftTabbedView: UIView {
     }
 }
 
+class LeftTabbedViewWithWhitePanel: UIView {
+    var curvSize : CGFloat = 10;
+    let movLeft : CGFloat = 5;
+    let viewToButtonRatio : CGFloat = 5;
+    let heightRatio :CGFloat = 6
+    
+    func getHeight()-> CGFloat {
+        return self.bounds.width / self.heightRatio
+    }
+    
+    override func draw(_ rect: CGRect) {
+        let context = UIGraphicsGetCurrentContext()//UIGraphicsBeginImageContext(self.bounds.size)//
+        let tabbedButtonHeight :CGFloat = self.bounds.width / heightRatio //self.bounds.height/viewToButtonRatio
+        context?.setLineWidth(1.0)
+        context?.setStrokeColor((UIColor( red: 0.84,     green: 0.84, blue:0.84, alpha: 1.0 )).cgColor)
+        context?.setFillColor((UIColor( red: 1.0,     green: 1.0, blue:1.0, alpha: 1.0 )).cgColor)
+
+        context?.move(to: CGPoint(x: curvSize, y: 0))
+        
+        context?.addLine(to: CGPoint(x: (self.bounds.width/2)-curvSize-movLeft, y: 0))
+        context?.addQuadCurve(to: CGPoint(x: (self.bounds.width/2)-movLeft, y: curvSize), control: CGPoint(x: (self.bounds.width/2)-movLeft, y: 0))
+        
+        context?.addLine(to: CGPoint(x: (self.bounds.width/2)-movLeft, y: tabbedButtonHeight - curvSize))
+        context?.addQuadCurve(to: CGPoint(x: self.bounds.width/2+curvSize-movLeft, y: tabbedButtonHeight), control: CGPoint(x: (self.bounds.width/2)-movLeft, y: tabbedButtonHeight))
+        
+        context?.addLine(to: CGPoint(x: (self.bounds.width)-curvSize, y: tabbedButtonHeight))
+        context?.addQuadCurve(to: CGPoint(x: self.bounds.width, y: tabbedButtonHeight+curvSize), control: CGPoint(x: self.bounds.width, y: tabbedButtonHeight))
+        
+        context?.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height-2*curvSize))
+        context?.addQuadCurve(to: CGPoint(x: self.bounds.width-2*curvSize, y: self.bounds.height), control: CGPoint(x: self.bounds.width, y: self.bounds.height))
+        
+        context?.addLine(to: CGPoint(x: 2*curvSize, y: self.bounds.height))
+        context?.addQuadCurve(to: CGPoint(x: 0, y: self.bounds.height-2*curvSize), control: CGPoint(x: 0, y: self.bounds.height))
+        
+        context?.addLine(to: CGPoint(x: 0, y: curvSize))
+        context?.addQuadCurve(to: CGPoint(x: curvSize, y: 0), control: CGPoint(x: 0, y: 0))
+        
+        context?.closePath()
+
+        context?.drawPath(using: CGPathDrawingMode.fillStroke)
+        
+    }
+}
 extension UISearchBar {
     
     // OUTPUT 1
