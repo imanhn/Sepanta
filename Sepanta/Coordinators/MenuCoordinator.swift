@@ -46,8 +46,8 @@ class MenuCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         self.parentCoordinator?.removeChild(self)
         if let parent = self.parentCoordinator! as? HomeCoordinator {
             parent.launchMenuSelection(anIndexPath.row)
-        }else if let parent = self.parentCoordinator! as? GetRichCoordinator {
-            parent.launchMenuSelection(anIndexPath.row)
+        }else{
+            print("MenuCoordinator : my parent can not be casted to HomeCoordinator!")
         }
     }
     

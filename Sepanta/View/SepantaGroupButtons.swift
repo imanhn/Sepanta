@@ -29,9 +29,7 @@ class SepantaGroupButtons {
         let groupCoordinator = self.delegate.coordinator
         let targetCatagory = self.getCatagory(ByID: theButton.tag!)
         print("Casted->groupCoordinator : ",groupCoordinator ?? "Nil!")
-        groupCoordinator?.gotoAGroup(GroupID: targetCatagory.id, GroupImage: targetCatagory.anUIImage.value, GroupName: targetCatagory.title)
-
-        
+        self.delegate.coordinator!.pushAGroup(GroupID: targetCatagory.id, GroupImage: targetCatagory.anUIImage.value, GroupName: targetCatagory.title)
     }
         
     func getCatagory(ByID  anID : Int)->Catagory{

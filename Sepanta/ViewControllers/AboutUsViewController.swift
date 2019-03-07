@@ -15,10 +15,10 @@ class AboutUsViewController : UIViewController,UITextFieldDelegate,Storyboarded{
     @IBOutlet weak var scrollView: UIScrollView!
     var aboutUsUI : AboutUsUI?
     
-    weak var coordinator : AboutUsCoordinator?
+    weak var coordinator : HomeCoordinator?
     
     @IBAction func backToParent(_ sender: Any) {
-        self.coordinator?.goBack()
+        self.coordinator!.popOneLevel()
     }
     override func viewDidLoad() {
         
@@ -29,10 +29,9 @@ class AboutUsViewController : UIViewController,UITextFieldDelegate,Storyboarded{
     }
     
     @IBAction func menuClicked(_ sender: Any) {
-        print("self.coordinator : ",self.coordinator ?? "was Nil in AboutUSViewController")
-        coordinator?.openButtomMenu()
-        
+        coordinator!.openButtomMenu()
     }
+    
     override func viewDidDisappear(_ animated: Bool) {
         print("View DID Disapear!")
         self.aboutUsUI = nil

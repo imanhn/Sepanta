@@ -14,7 +14,7 @@ class GetRichViewController : UIViewController,UITextFieldDelegate,Storyboarded{
     @IBOutlet weak var scrollView: UIScrollView!
     var getRichUI : GetRichUI?
     
-    weak var coordinator : GetRichCoordinator?
+    weak var coordinator : HomeCoordinator?
 
     @objc func cardRequestTapped(_ sender : Any) {
         getRichUI!.showCardRequest(self)

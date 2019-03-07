@@ -13,7 +13,7 @@ import RxCocoa
 import Alamofire
 
 class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storyboarded{
-    weak var coordinator : GroupsCoordinator?
+    weak var coordinator : HomeCoordinator?
     var currentStateCodeObs = BehaviorRelay<String>(value : String())
     var currentCityCodeObs = BehaviorRelay<String>(value : String())
     var cityPressed = BehaviorRelay<Bool>(value: false)
@@ -37,15 +37,15 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storybo
     }
     @IBAction func menuClicked(_ sender: Any) {
 
-        self.coordinator?.openButtomMenu()
+        self.coordinator!.openButtomMenu()
         
     }
     
     @IBAction func backToHomePage(_ sender: Any) {
         print("Making groupbuttons NIL")
         self.groupButtons = nil
-        print("BH SepantaGroup self.coordinator : ",self.coordinator)
-        self.coordinator!.gotoHomeFromSepantaieGroups()
+        //print("BH SepantaGroup self.coordinator : ",self.coordinator ?? "Nil")
+        self.coordinator!.popHome()
     }
     
     
@@ -123,7 +123,7 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storybo
 
         self.currentStateCodeObs
             .filter({$0 != ""})
-            .subscribe(onNext: { [unowned self] (innerCurrentState) in
+            .subscribe(onNext: { (innerCurrentState) in
                 //NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
                 
                 NetworkManager.shared.run(API: "categories-filter",QueryString: "/\(innerCurrentState)", Method: HTTPMethod.get, Parameters: nil, Header: nil)
@@ -209,7 +209,7 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storybo
     }
     
     override func viewDidLoad() {
-         print("VL SepantaGroup self.coordinator : ",self.coordinator)
+        //print("VL SepantaGroup self.coordinator : ",self.coordinator ?? "nil")
         super.viewDidLoad()
         NetworkManager.shared.provinceDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
         NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())

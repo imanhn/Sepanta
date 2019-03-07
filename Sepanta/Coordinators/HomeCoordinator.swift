@@ -20,7 +20,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         self.navigationController = navigationController
     }
     
-    //UINavigationControllerDelegate.navigationController Called after a new view is shown, So I am going to remove current Coordinator
+/*    //UINavigationControllerDelegate.navigationController Called after a new view is shown, So I am going to remove current Coordinator
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         //self.navigationController =  UINavigationController()
         print("HomeCoordinator : didShow ",viewController)
@@ -50,7 +50,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         }
 
     }
-    
+*/
     func removeChild(_ aCoordinator : Coordinator){
 
         for (index,coordinator) in childCoordinators.enumerated() {
@@ -66,16 +66,19 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     func launchMenuSelection(_ aRow : Int) {
         switch aRow {
         case 0:
-            print("Dashboard Coordinator")
+            popHome()
             break
         case 1:
-            gotoSepantaieGroups()
+            popHome()
+            pushSepantaieGroup()
             break
         case 4:
-            gotoGetRich()
+            popHome()
+            pushGetRich()
             break
         case 5:
-            gotoAboutUs()
+            popHome()
+            pushAboutUs()
             break
 
         default:
@@ -84,6 +87,18 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         }
 
     }
+    
+    func popOneLevel(){
+            navigationController.popViewController(animated: false)
+    }
+    
+    func popHome() {
+        while !navigationController.topViewController!.isKind(of: HomeViewController.self) {
+            print("Poping ",navigationController.topViewController ?? "Nil")
+            navigationController.popViewController(animated: false)
+        }
+    }
+    
     func openButtomMenu (){
         let menuCoordinator = MenuCoordinator(navigationController: navigationController)
         childCoordinators.append(menuCoordinator)
@@ -91,32 +106,41 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         menuCoordinator.start()
     }
     
-    func gotoAboutUs() {
-        let aboutUsCoordinator = AboutUsCoordinator(navigationController: navigationController)
-        childCoordinators.append(aboutUsCoordinator)
-        aboutUsCoordinator.parentCoordinator = self
-        aboutUsCoordinator.start()
+    func pushAboutUs() {
+        let vc = AboutUsViewController.instantiate()
+        vc.coordinator = self
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: false)
+        navigationController.setNavigationBarHidden(true, animated: false)
     }
     
-    func gotoGetRich() {
-        let getRichCoordinator = GetRichCoordinator(navigationController: navigationController)
-        childCoordinators.append(getRichCoordinator)
-        getRichCoordinator.parentCoordinator = self
-        getRichCoordinator.start()
-        
+    
+    func pushSepantaieGroup (){
+        let vc = SepantaGroupsViewController.instantiate()
+        vc.coordinator = self
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: false)
+        navigationController.setNavigationBarHidden(true, animated: false)
     }
     
-    func gotoSepantaieGroups (){
-        let groupsCoordinator = GroupsCoordinator(navigationController: navigationController)
-        childCoordinators.append(groupsCoordinator)
-        groupsCoordinator.parentCoordinator = self
-        groupsCoordinator.start()
-
+    func pushAGroup(GroupID anID:Int,GroupImage anImage:UIImage,GroupName aName : String){
+        let vc = GroupViewController.instantiate()
+        vc.coordinator = self
+        vc.currentID = anID
+        vc.currentGroupName = aName
+        vc.currentGroupImage = anImage
+        navigationController.pushViewController(vc, animated: false)
+        navigationController.setNavigationBarHidden(true, animated: false)
     }
-    
+    func pushGetRich(){
+        let vc = GetRichViewController.instantiate()
+        vc.coordinator = self
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: false)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
 
     func start() {
-        
         let vc = HomeViewController.instantiate()
         vc.coordinator = self
         navigationController.delegate = self

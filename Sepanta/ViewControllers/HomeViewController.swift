@@ -63,19 +63,13 @@ class HomeViewController: UIViewController,Storyboarded {
     }
     
     @IBAction func sepantaieClicked(_ sender: Any) {
-        print("HomeViewController.Coordinator : ",coordinator)
-        guard let acoordinator = coordinator as? HomeCoordinator else {
-            return
-        }
-        acoordinator.gotoSepantaieGroups()
+        self.coordinator!.pushSepantaieGroup()
     }
     
     @IBAction func poldarshoClicked(_ sender: Any) {
         print("HomeViewController.Coordinator : ",coordinator)
-        guard let acoordinator = coordinator as? HomeCoordinator else {
-            return
-        }
-        acoordinator.gotoGetRich()
+        self.coordinator!.pushGetRich()
+        
     }
     
 }

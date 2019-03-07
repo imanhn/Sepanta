@@ -28,7 +28,7 @@ class ShopCell : UITableViewCell {
 }
 
 class GroupViewController :  UIViewController,UITextFieldDelegate,Storyboarded{
-    weak var coordinator : GroupsCoordinator?
+    weak var coordinator : HomeCoordinator?
     let myDisposeBag = DisposeBag()
     let shops : BehaviorRelay<[Shop]> = BehaviorRelay(value: [])
 
@@ -95,17 +95,12 @@ class GroupViewController :  UIViewController,UITextFieldDelegate,Storyboarded{
     }
     
     @IBAction func gotoHomePage(_ sender: Any) {
-        
-        guard coordinator != nil else {
-            print("Coordinator in nil in GroupViewController")
-            return 
-        }
-        coordinator?.gotoHomeFromAGroups()
+        coordinator!.popHome()        
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
-        coordinator?.goBack()
-        //coordinator?.start()
+        coordinator!.popOneLevel()
+
     }
     
 }
