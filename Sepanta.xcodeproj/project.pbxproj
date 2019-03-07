@@ -15,6 +15,7 @@
 		0F066F9D222C2D5600C8871C /* MenuPopUpConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F9C222C2D5600C8871C /* MenuPopUpConfiguration.swift */; };
 		0F066F9F222C704B00C8871C /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F9E222C704B00C8871C /* MenuViewController.swift */; };
 		0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F512C042205B5C300B99C9E /* SignupViewController.swift */; };
+		0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */; };
 		0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */; };
 		0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */; };
 		0F890CFE2214B4CD0091FA2E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890CFD2214B4CD0091FA2E /* Coordinator.swift */; };
@@ -80,6 +81,7 @@
 		0F066F9C222C2D5600C8871C /* MenuPopUpConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPopUpConfiguration.swift; sourceTree = "<group>"; };
 		0F066F9E222C704B00C8871C /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		0F512C042205B5C300B99C9E /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringWithFontSizeCalc.swift; sourceTree = "<group>"; };
 		0F6F39C222078DC900393CD7 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		0F6F39C722079FB600393CD7 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysShowPopup.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				0F066F94222B19AB00C8871C /* UIViewRotate.swift */,
 				0FA307DF2227330700EDA829 /* EnglishNumbersToPersian.swift */,
 				0F066F92222B198900C8871C /* UIColorFromHex.swift */,
+				0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				0FDA55D722260FFE00E7C889 /* GroupViewController.swift in Sources */,
 				0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */,
 				0F052ED9221AE8C5009175EA /* LoginKey.swift in Sources */,
+				0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */,
 				0F066F95222B19AB00C8871C /* UIViewRotate.swift in Sources */,
 				0F066F93222B198900C8871C /* UIColorFromHex.swift in Sources */,
 				0F984E29220B727B004AFB06 /* SepantaGroupsViewController.swift in Sources */,

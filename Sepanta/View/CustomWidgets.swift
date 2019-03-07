@@ -44,6 +44,24 @@ class RoundedButton: UIButton {
         context?.drawPath(using: CGPathDrawingMode.stroke)
     }
 }
+
+class RoundedButtonWithDarkBackground: UIButton {
+    var curvSize : CGFloat = 5;
+    override func draw(_ rect: CGRect) {
+        let context = UIGraphicsGetCurrentContext()
+        
+        let insideCGRec : CGRect = CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height)
+        let bezPath = UIBezierPath(roundedRect: insideCGRec, byRoundingCorners: [.allCorners], cornerRadii: CGSize(width: curvSize, height: curvSize)).cgPath
+        
+        context?.setLineWidth(1.0)
+        context?.setStrokeColor((UIColor(hex: 0xD6D7D9)).cgColor)
+        context?.setFillColor(UIColor(hex: 0x515152).cgColor)
+        
+        context?.addPath(bezPath)
+        context?.drawPath(using: CGPathDrawingMode.fillStroke)
+    }
+}
+
 class EmptyTextField: UITextField {
     override func draw(_ rect: CGRect) {
     }
