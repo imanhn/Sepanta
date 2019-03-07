@@ -1,21 +1,21 @@
 //
-//  HomePageController.swift
+//  AboutUs.swift
 //  Sepanta
 //
-//  Created by Iman on 11/30/1397 AP.
+//  Created by Iman on 12/16/1397 AP.
 //  Copyright © 1397 AP Imzich. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
+class AboutUsCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     var childCoordinators = [Coordinator]()
     var menuOpened = false
     var navigationController: UINavigationController
     weak var parentCoordinator : Coordinator?
-
-
+    
+    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
@@ -48,11 +48,11 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
             removeChild(sepantaGroupsViewController.coordinator!)
             //SepantaGroupsViewControllerFinished(sepantaGroupsViewController.coordinator)
         }
-
+        
     }
     
     func removeChild(_ aCoordinator : Coordinator){
-
+        
         for (index,coordinator) in childCoordinators.enumerated() {
             if (coordinator === aCoordinator) {
                 childCoordinators.remove(at: index)
@@ -60,13 +60,13 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
                 break
             }
         }
-
+        
     }
     
     func launchMenuSelection(_ aRow : Int) {
         switch aRow {
         case 0:
-            print("Dashboard Coordinator")
+            gotoHome()
             break
         case 1:
             gotoSepantaieGroups()
@@ -75,14 +75,19 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
             gotoGetRich()
             break
         case 5:
-            gotoAboutUs()
+            print("Already there!")
             break
-
+            
         default:
             print("Wrong Menu Number")
             fatalError()
         }
-
+        
+    }
+    
+    func goBack(){
+        self.navigationController.popViewController(animated: true)
+        self.parentCoordinator?.removeChild(self)
     }
     func openButtomMenu (){
         let menuCoordinator = MenuCoordinator(navigationController: navigationController)
@@ -91,12 +96,6 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         menuCoordinator.start()
     }
     
-    func gotoAboutUs() {
-        let aboutUsCoordinator = AboutUsCoordinator(navigationController: navigationController)
-        childCoordinators.append(aboutUsCoordinator)
-        aboutUsCoordinator.parentCoordinator = self
-        aboutUsCoordinator.start()
-    }
     
     func gotoGetRich() {
         let getRichCoordinator = GetRichCoordinator(navigationController: navigationController)
@@ -106,18 +105,25 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         
     }
     
+    func gotoHome() {
+        let homeCoordinator = HomeCoordinator(navigationController: navigationController)
+        childCoordinators.append(homeCoordinator)
+        homeCoordinator.parentCoordinator = self
+        homeCoordinator.start()
+        
+    }
     func gotoSepantaieGroups (){
         let groupsCoordinator = GroupsCoordinator(navigationController: navigationController)
         childCoordinators.append(groupsCoordinator)
         groupsCoordinator.parentCoordinator = self
         groupsCoordinator.start()
-
+        
     }
     
-
+    
     func start() {
         
-        let vc = HomeViewController.instantiate()
+        let vc = AboutUsViewController.instantiate()
         vc.coordinator = self
         navigationController.delegate = self
         navigationController.pushViewController(vc, animated: false)

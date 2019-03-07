@@ -29,6 +29,9 @@
 		0FA307DE222700B100EDA829 /* Shops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA307DD222700B100EDA829 /* Shops.swift */; };
 		0FA307E02227330700EDA829 /* EnglishNumbersToPersian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA307DF2227330700EDA829 /* EnglishNumbersToPersian.swift */; };
 		0FAEEDE5222F29C600A9178F /* GetRichUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAEEDE4222F29C600A9178F /* GetRichUI.swift */; };
+		0FAEEDE72230949C00A9178F /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAEEDE62230949C00A9178F /* AboutUsViewController.swift */; };
+		0FAEEDE92230957100A9178F /* AboutUsUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAEEDE82230957100A9178F /* AboutUsUI.swift */; };
+		0FAEEDEB22309CDC00A9178F /* AboutUsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAEEDEA22309CDC00A9178F /* AboutUsCoordinator.swift */; };
 		0FB3ECD0222C8AF8009A89F7 /* MenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB3ECCF222C8AF8009A89F7 /* MenuCoordinator.swift */; };
 		0FB3ECD2222DC48F009A89F7 /* GetRichViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB3ECD1222DC48F009A89F7 /* GetRichViewController.swift */; };
 		0FB3ECD4222DC8DC009A89F7 /* GetRichCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB3ECD3222DC8DC009A89F7 /* GetRichCoordinator.swift */; };
@@ -96,6 +99,9 @@
 		0FA307DD222700B100EDA829 /* Shops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shops.swift; sourceTree = "<group>"; };
 		0FA307DF2227330700EDA829 /* EnglishNumbersToPersian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishNumbersToPersian.swift; sourceTree = "<group>"; };
 		0FAEEDE4222F29C600A9178F /* GetRichUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRichUI.swift; sourceTree = "<group>"; };
+		0FAEEDE62230949C00A9178F /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
+		0FAEEDE82230957100A9178F /* AboutUsUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsUI.swift; sourceTree = "<group>"; };
+		0FAEEDEA22309CDC00A9178F /* AboutUsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsCoordinator.swift; sourceTree = "<group>"; };
 		0FB3ECCF222C8AF8009A89F7 /* MenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCoordinator.swift; sourceTree = "<group>"; };
 		0FB3ECD1222DC48F009A89F7 /* GetRichViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRichViewController.swift; sourceTree = "<group>"; };
 		0FB3ECD3222DC8DC009A89F7 /* GetRichCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRichCoordinator.swift; sourceTree = "<group>"; };
@@ -179,6 +185,7 @@
 				0F890CFD2214B4CD0091FA2E /* Coordinator.swift */,
 				0F890D012214B5310091FA2E /* AppCoordinator.swift */,
 				0F052EDA221C0790009175EA /* HomeCoordinator.swift */,
+				0FAEEDEA22309CDC00A9178F /* AboutUsCoordinator.swift */,
 				0FB3ECCF222C8AF8009A89F7 /* MenuCoordinator.swift */,
 				0FB3ECD3222DC8DC009A89F7 /* GetRichCoordinator.swift */,
 				0FDA55D82226109200E7C889 /* GroupsCoordinator.swift */,
@@ -217,6 +224,7 @@
 				0FE8BA052205239E00C868C3 /* HomeViewController.swift */,
 				0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */,
 				0F066F9E222C704B00C8871C /* MenuViewController.swift */,
+				0FAEEDE62230949C00A9178F /* AboutUsViewController.swift */,
 				0FB3ECD1222DC48F009A89F7 /* GetRichViewController.swift */,
 			);
 			path = ViewControllers;
@@ -238,6 +246,7 @@
 			children = (
 				0F9BCFC42221FCCF00C87706 /* SlideControl.swift */,
 				0F9BCFC7222317E900C87706 /* SepantaGroupButtons.swift */,
+				0FAEEDE82230957100A9178F /* AboutUsUI.swift */,
 				0FAEEDE4222F29C600A9178F /* GetRichUI.swift */,
 				0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */,
 				0FFCF613221811FC0040A7DC /* Spinner.swift */,
@@ -525,6 +534,7 @@
 				0F890D042214BF300091FA2E /* LoginCoordinator.swift in Sources */,
 				0FB3ECD2222DC48F009A89F7 /* GetRichViewController.swift in Sources */,
 				0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */,
+				0FAEEDE92230957100A9178F /* AboutUsUI.swift in Sources */,
 				0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */,
 				0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */,
 				0F052EDB221C0790009175EA /* HomeCoordinator.swift in Sources */,
@@ -535,12 +545,14 @@
 				0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */,
 				0FDA55D92226109200E7C889 /* GroupsCoordinator.swift in Sources */,
 				0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */,
+				0FAEEDEB22309CDC00A9178F /* AboutUsCoordinator.swift in Sources */,
 				0FA307DE222700B100EDA829 /* Shops.swift in Sources */,
 				0FDA55D32225A0A000E7C889 /* NSDictionaryToDictionary.swift in Sources */,
 				0FA307E02227330700EDA829 /* EnglishNumbersToPersian.swift in Sources */,
 				0FDA55D52225C02800E7C889 /* Catagory.swift in Sources */,
 				0F066F9D222C2D5600C8871C /* MenuPopUpConfiguration.swift in Sources */,
 				0F066F99222C22EE00C8871C /* MenuController.swift in Sources */,
+				0FAEEDE72230949C00A9178F /* AboutUsViewController.swift in Sources */,
 				0F890D022214B5310091FA2E /* AppCoordinator.swift in Sources */,
 				0FAEEDE5222F29C600A9178F /* GetRichUI.swift in Sources */,
 				0F890D0E2215C7170091FA2E /* NetworkManager.swift in Sources */,

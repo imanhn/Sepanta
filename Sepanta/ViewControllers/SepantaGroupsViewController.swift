@@ -36,10 +36,9 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storybo
         }
     }
     @IBAction func menuClicked(_ sender: Any) {
-        let alert = UIAlertController(title: "توجه", message: "منو باز شد", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "بلی", style: .default))
-        self.present(alert, animated: true, completion: nil)
 
+        self.coordinator?.openButtomMenu()
+        
     }
     
     @IBAction func backToHomePage(_ sender: Any) {

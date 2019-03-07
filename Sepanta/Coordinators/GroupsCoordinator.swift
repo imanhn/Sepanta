@@ -13,7 +13,7 @@ class GroupsCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
-    weak var parentCoordinator : HomeCoordinator?
+    weak var parentCoordinator : Coordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -52,6 +52,50 @@ class GroupsCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         }
         
     }
+    func launchMenuSelection(_ aRow : Int) {
+        switch aRow {
+        case 0:
+            gotoHomeFromAGroups()
+            print("Dashboard Coordinator")
+            break
+        case 1:
+            print("Already in Group Sepantaie")
+            break
+        case 4:
+            gotoGetRich()
+            break
+        case 5:
+            gotoAboutUs()
+            break
+            
+        default:
+            print("Wrong Menu Number")
+            fatalError()
+        }
+        
+    }
+    
+    func gotoAboutUs() {
+        let aboutUsCoordinator = AboutUsCoordinator(navigationController: navigationController)
+        childCoordinators.append(aboutUsCoordinator)
+        aboutUsCoordinator.parentCoordinator = self
+        aboutUsCoordinator.start()
+    }
+    
+    func gotoGetRich() {
+        let getRichCoordinator = GetRichCoordinator(navigationController: navigationController)
+        childCoordinators.append(getRichCoordinator)
+        getRichCoordinator.parentCoordinator = self
+        getRichCoordinator.start()
+        
+    }
+    func openButtomMenu (){
+        let menuCoordinator = MenuCoordinator(navigationController: navigationController)
+        childCoordinators.append(menuCoordinator)
+        menuCoordinator.parentCoordinator = self
+        menuCoordinator.start()
+    }
+    
     func goBack(){
         navigationController.popViewController(animated: false)
     }

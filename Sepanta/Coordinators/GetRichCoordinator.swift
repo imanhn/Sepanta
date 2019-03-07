@@ -44,7 +44,10 @@ class GetRichCoordinator : NSObject,Coordinator,UINavigationControllerDelegate {
             gotoSepantaieGroups()
             break
         case 4:
-            gotoGetRich()
+            print("Already in Rich")
+            break
+        case 5:
+            gotoAboutUs()
             break
         default:
             print("Wrong Menu Number")
@@ -52,10 +55,11 @@ class GetRichCoordinator : NSObject,Coordinator,UINavigationControllerDelegate {
         }
         
     }
-    
-    func gotoGetRich() {
-        // Do Nothing! Just Close the menu!
-        
+    func gotoAboutUs() {
+        let aboutUsCoordinator = AboutUsCoordinator(navigationController: navigationController)
+        childCoordinators.append(aboutUsCoordinator)
+        aboutUsCoordinator.parentCoordinator = self
+        aboutUsCoordinator.start()
     }
     
     func gotoSepantaieGroups (){
