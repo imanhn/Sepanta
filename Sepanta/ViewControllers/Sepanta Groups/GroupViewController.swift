@@ -53,8 +53,8 @@ class GroupViewController :  UIViewController,UITextFieldDelegate,Storyboarded{
     
     func fetchData() {
         var fetchedShops = [Shop]()
-        fetchedShops.append(Shop(name: "فست فود جو", image: "cat_img/icon_menu_02.png", stars: 1.4, followers: 16005, dicount: 15))
-        fetchedShops.append(Shop(name: "تهران برگر", image: "profile_img/2074-2018-08-28_09-59-03.jpg", stars: 3.4, followers: 1501, dicount: 10))
+        fetchedShops.append(Shop(user_id: 1,name: "فست فود جو", image: "cat_img/icon_menu_02.png", stars: 1.4, followers: 16005, dicount: 15))
+        fetchedShops.append(Shop(user_id: 2,name: "تهران برگر", image: "profile_img/2074-2018-08-28_09-59-03.jpg", stars: 3.4, followers: 1501, dicount: 10))
         
         shops.accept(fetchedShops)
     }

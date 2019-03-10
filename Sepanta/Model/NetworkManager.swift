@@ -39,6 +39,7 @@ class NetworkManager {
     var provinceDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
     var cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
     var catagoriesObs = BehaviorRelay<[Any]>(value: [Any]())
+    var shopObs = BehaviorRelay<[Any]>(value: [Any]())
     
     // Initialization
     

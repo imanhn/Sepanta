@@ -73,12 +73,49 @@ class JSONParser {
                     if let cat = aDic["categories"] {
                         NetworkManager.shared.catagoriesObs.accept([cat])
                     }
-
+                } else if (apiName == "new-shops") && (aMethod == HTTPMethod.get) {
+                    print("Starting NewShops Parser...")
+                    let parsedShops = self?.processShopList(Result: aDic)
+                    NetworkManager.shared.shopObs.accept(parsedShops!)
                 }
                 }, onDisposed: {
                     //print("Parser Disposed")
                 }
             ).disposed(by: netObjectsDispose)
+    }
+    
+    func processShopList(Result aResult : NSDictionary) -> [Shop] {
+        var shops = [Shop]()
+        if aResult["error"] != nil {
+            print("ERROR in Shop List Parsing : ",aResult["error"]!)
+        }
+        if aResult["message"] != nil {
+            print("Message Parsed : ",aResult["message"]!)
+        }
+        
+        print("Shop Result keys : ",aResult.allKeys)
+        //print("Shops : ",aResult["shops"])
+        if let aDic = aResult["shops"] as? NSArray {
+            for shopDic in aDic
+            {
+                if let shopElemAsNSDic = shopDic as? NSDictionary{
+                    // print("shopElem : ",shopElem)
+                    if let shopElem = shopElemAsNSDic as? Dictionary<String, Any>{
+                        let aNewShop = Shop(user_id: shopElem["user_id"] as! Int, name: shopElem["shop_name"] as! String, image: "", stars: 0, followers: 0, dicount: shopElem["shop_off"] as! Int)
+                    shops.append(aNewShop)
+                    }
+                }else{
+                    print("shopElm not casted.")
+                }
+            }
+        } else {
+            print("Couldnt cast Result[shops] " )
+        }
+        print("Shops Fetched : ",shops.count," record")
+        //print("Parsing State List Successful")
+        
+        return shops
+
     }
     
     func processAsProvinceList(Result aResult : NSDictionary) -> (Dictionary<String,String>) {

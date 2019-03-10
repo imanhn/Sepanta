@@ -9,9 +9,10 @@
 import Foundation
 
 struct Shop : Decodable {
-    let name : String
-    let image : String
-    let stars : Float
-    let followers : Int
-    let dicount : Int
+    let user_id : Int
+    var name : String
+    var image : String
+    var stars : Float
+    var followers : Int
+    var dicount : Int
 }

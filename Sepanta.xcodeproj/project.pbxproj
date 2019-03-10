@@ -14,6 +14,7 @@
 		0F066F99222C22EE00C8871C /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F98222C22EE00C8871C /* MenuController.swift */; };
 		0F066F9D222C2D5600C8871C /* MenuPopUpConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F9C222C2D5600C8871C /* MenuPopUpConfiguration.swift */; };
 		0F066F9F222C704B00C8871C /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F9E222C704B00C8871C /* MenuViewController.swift */; };
+		0F1B755B223580C80087C0DB /* NewShopsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B755A223580C80087C0DB /* NewShopsDataSource.swift */; };
 		0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F512C042205B5C300B99C9E /* SignupViewController.swift */; };
 		0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */; };
 		0F71A38B2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F71A38A2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift */; };
@@ -88,6 +89,7 @@
 		0F066F98222C22EE00C8871C /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		0F066F9C222C2D5600C8871C /* MenuPopUpConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPopUpConfiguration.swift; sourceTree = "<group>"; };
 		0F066F9E222C704B00C8871C /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		0F1B755A223580C80087C0DB /* NewShopsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewShopsDataSource.swift; sourceTree = "<group>"; };
 		0F512C042205B5C300B99C9E /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringWithFontSizeCalc.swift; sourceTree = "<group>"; };
 		0F6F39C222078DC900393CD7 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				0F066F9C222C2D5600C8871C /* MenuPopUpConfiguration.swift */,
 				0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */,
 				0F066F98222C22EE00C8871C /* MenuController.swift */,
+				0F1B755A223580C80087C0DB /* NewShopsDataSource.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				0FB3ECD0222C8AF8009A89F7 /* MenuCoordinator.swift in Sources */,
 				0F066F9F222C704B00C8871C /* MenuViewController.swift in Sources */,
 				0F890D042214BF300091FA2E /* LoginCoordinator.swift in Sources */,
+				0F1B755B223580C80087C0DB /* NewShopsDataSource.swift in Sources */,
 				0FB3ECD2222DC48F009A89F7 /* GetRichViewController.swift in Sources */,
 				0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */,
 				0F817A6B2234635A00F1738E /* EditProfileViewController.swift in Sources */,
