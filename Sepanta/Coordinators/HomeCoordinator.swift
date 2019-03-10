@@ -20,37 +20,6 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         self.navigationController = navigationController
     }
     
-/*    //UINavigationControllerDelegate.navigationController Called after a new view is shown, So I am going to remove current Coordinator
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        //self.navigationController =  UINavigationController()
-        print("HomeCoordinator : didShow ",viewController)
-        //navigationController.viewControllers.remove(at: 0)
-        print("All ViewControllers in NavigationViewController : ",navigationController.viewControllers)
-        print("All childcoordinators : ",childCoordinators)
-        //print(" Transition : ",navigationController.transitionCoordinator)
-        
-        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
-            //print("Unknown fromViewController!")
-            return
-        }
-        if navigationController.viewControllers.contains(fromViewController) {
-            //print("HOMECoord : from view : " ,fromViewController)
-            return
-        }
-        
-        if let aSMSConfirmViewController = fromViewController as? SMSConfirmViewController {
-            print("HomeCoordinator : Removing aSMSConfirmViewController")
-            removeChild(aSMSConfirmViewController.coordinator!)
-            //SMSConfirmViewControllerFinsihed(aSMSConfirmViewController.coordinator)
-        }
-        if let sepantaGroupsViewController = fromViewController as? SepantaGroupsViewController {
-            print("HomeCoordinator : Removing sepantaGroupsViewController")
-            removeChild(sepantaGroupsViewController.coordinator!)
-            //SepantaGroupsViewControllerFinished(sepantaGroupsViewController.coordinator)
-        }
-
-    }
-*/
     func removeChild(_ aCoordinator : Coordinator){
 
         for (index,coordinator) in childCoordinators.enumerated() {
@@ -71,6 +40,10 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         case 1:
             popHome()
             pushSepantaieGroup()
+            break
+        case 3:
+            popHome()
+            pushNewShops()
             break
         case 4:
             popHome()
@@ -110,7 +83,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         let vc = AboutUsViewController.instantiate()
         vc.coordinator = self
         navigationController.delegate = self
-        navigationController.pushViewController(vc, animated: false)
+        navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
@@ -118,7 +91,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         let vc = ProfileViewController.instantiate()
         vc.coordinator = self
         navigationController.delegate = self
-        navigationController.pushViewController(vc, animated: false)
+        navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
@@ -126,7 +99,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         let vc = EditProfileViewController.instantiate()
         vc.coordinator = self
         navigationController.delegate = self
-        navigationController.pushViewController(vc, animated: false)
+        navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
@@ -135,7 +108,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         let vc = SepantaGroupsViewController.instantiate()
         vc.coordinator = self
         navigationController.delegate = self
-        navigationController.pushViewController(vc, animated: false)
+        navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
@@ -145,14 +118,14 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         vc.currentID = anID
         vc.currentGroupName = aName
         vc.currentGroupImage = anImage
-        navigationController.pushViewController(vc, animated: false)
+        navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     func pushGetRich(){
         let vc = GetRichViewController.instantiate()
         vc.coordinator = self
         navigationController.delegate = self
-        navigationController.pushViewController(vc, animated: false)
+        navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
@@ -180,7 +153,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         let vc = HomeViewController.instantiate()
         vc.coordinator = self
         navigationController.delegate = self
-        navigationController.pushViewController(vc, animated: false)
+        navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     

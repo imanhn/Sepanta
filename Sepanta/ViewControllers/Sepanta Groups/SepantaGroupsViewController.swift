@@ -41,11 +41,8 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storybo
         
     }
     
-    @IBAction func backToHomePage(_ sender: Any) {
-        print("Making groupbuttons NIL")
-        self.groupButtons = nil
-        //print("BH SepantaGroup self.coordinator : ",self.coordinator ?? "Nil")
-        self.coordinator!.popHome()
+    @IBAction func backButtonTapped(_ sender: Any) {
+        self.coordinator!.popOneLevel()
     }
     
     
@@ -235,6 +232,7 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storybo
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+         self.groupButtons = nil
         
     }
     

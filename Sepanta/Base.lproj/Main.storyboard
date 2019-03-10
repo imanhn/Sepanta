@@ -853,7 +853,7 @@
                                         </constraints>
                                         <state key="normal" image="icon_back_black"/>
                                         <connections>
-                                            <action selector="backToHomePage:" destination="I4W-Vv-3RO" eventType="touchUpInside" id="AJk-Hf-pZM"/>
+                                            <action selector="backButtonTapped:" destination="I4W-Vv-3RO" eventType="touchUpInside" id="jkh-xe-smC"/>
                                         </connections>
                                     </button>
                                 </subviews>

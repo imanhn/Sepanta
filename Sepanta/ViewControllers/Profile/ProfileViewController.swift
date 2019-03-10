@@ -30,7 +30,7 @@ class ProfileViewController : UIViewController,Storyboarded {
     }
     
     @IBAction func backPressed(_ sender: Any) {
-        self.coordinator!.popHome()
+        self.coordinator!.popOneLevel()
     }
     
     @objc func myClubTapped(_ sender : Any) {
