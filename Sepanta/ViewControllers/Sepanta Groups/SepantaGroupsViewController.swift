@@ -42,6 +42,7 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storybo
     }
     
     @IBAction func backButtonTapped(_ sender: Any) {
+        self.groupButtons = nil
         self.coordinator!.popOneLevel()
     }
     
@@ -168,7 +169,7 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storybo
                 self.catagories = [Catagory]()
                 for i in 0..<catagories.count {
                     let catDic = catagories[i] as! NSDictionary
-                    print(catDic)
+                    //print(catDic)
                     if
 //                        let aContent = catDic.value(forKey: "content") as? String,
                         let anId = catDic.value(forKey: "id") as? Int,
@@ -232,7 +233,7 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storybo
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-         self.groupButtons = nil
+         //self.groupButtons = nil
         
     }
     

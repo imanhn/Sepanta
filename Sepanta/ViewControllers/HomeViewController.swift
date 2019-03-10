@@ -52,8 +52,7 @@ class HomeViewController: UIViewController,Storyboarded {
         if slideControl != nil {
             slideControl?.handlePan(sender)
         }
-    }
-    
+    }    
     override func viewDidLoad() {
         slideControl = SlideController(parentController: self)
         super.viewDidLoad()

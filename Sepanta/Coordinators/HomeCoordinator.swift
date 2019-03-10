@@ -150,6 +150,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func start() {
+        _ = SlidesAndPaths.shared
         let vc = HomeViewController.instantiate()
         vc.coordinator = self
         navigationController.delegate = self

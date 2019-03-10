@@ -57,8 +57,8 @@ class NewShopsDataSource {
                                     print("Error : ",aProfileAsNS["error"])
                                     print("Header : ",aHeader)
                                 }else {
-                                    print("aProfileAsNS Keys : ",aProfileAsNS.allKeys)
-                                    print("message : ",aProfileAsNS["message"])
+                                    //print("aProfileAsNS Keys : ",aProfileAsNS.allKeys)
+                                    //print("message : ",aProfileAsNS["message"])
                                     
                                     self.updateFetchedShops(aProfileAsNS)
                                 }
@@ -79,7 +79,6 @@ class NewShopsDataSource {
                             //print("NetworkManager Disposed")
                         }).disposed(by: self.myDisposeBag)
                 }
-                
                 }, onError: { _ in
                     print("NewShops Call Raised Error")
                     Spinner.stop()

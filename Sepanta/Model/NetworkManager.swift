@@ -28,7 +28,7 @@ class NetworkManager {
     var content = NSDictionary()
     //var resultSubject = BehaviorRelay<NSDictionary>(value : NSDictionary())
     let baseURLString: String
-    let websiteRootAddress = "http://www.panel.ipsepanta.ir/api/v1/" 
+    let websiteRootAddress = "http://www.panel.ipsepanta.ir"
     var status = BehaviorRelay<CallStatus>(value: CallStatus.ready) //No used Yet
     
     let netObjectsDispose = DisposeBag()
@@ -44,7 +44,7 @@ class NetworkManager {
     // Initialization
     
     private init() {
-        self.baseURLString = websiteRootAddress //+ "/api/takamad/"
+        self.baseURLString = websiteRootAddress + "/api/v1/"
         self.message = ""
         self.statusMessage = ""
         self.headers = [

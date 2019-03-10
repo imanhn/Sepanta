@@ -77,11 +77,41 @@ class JSONParser {
                     print("Starting NewShops Parser...")
                     let parsedShops = self?.processShopList(Result: aDic)
                     NetworkManager.shared.shopObs.accept(parsedShops!)
-                }
+                } else if (apiName == "home") && (aMethod == HTTPMethod.get) {
+                print("Starting Home Parser...")
+                self?.processAndSetHomeData(Result: aDic)
+        }
+
                 }, onDisposed: {
                     //print("Parser Disposed")
                 }
             ).disposed(by: netObjectsDispose)
+    }
+    
+    func processAndSetHomeData(Result aResult : NSDictionary) {
+        if let post_image = aResult["path_post_image"] as? String{
+            SlidesAndPaths.shared.fetched = true
+            SlidesAndPaths.shared.path_post_image = post_image
+            SlidesAndPaths.shared.path_profile_image = (aResult["path_profile_image"] as? String) ?? SlidesAndPaths.shared.path_profile_image
+            SlidesAndPaths.shared.path_slider_image = (aResult["path_slider_image"] as? String) ?? SlidesAndPaths.shared.path_slider_image
+            SlidesAndPaths.shared.path_category_image = (aResult["path_category_image"] as? String) ?? SlidesAndPaths.shared.path_category_image
+            SlidesAndPaths.shared.path_bank_logo_image = (aResult["path_bank_logo_image"] as? String) ?? SlidesAndPaths.shared.path_bank_logo_image
+            if let slides = aResult["sliders"] as? NSArray{
+                for aSlide in slides {
+                    if let aSlideAsNsDic = aSlide as? NSDictionary{
+                        let anId = aSlideAsNsDic["id"] as? Int ?? 0
+                        let aTitle = aSlideAsNsDic["title"] as? String ?? "بدون نام"
+                        let aLink = aSlideAsNsDic["link"] as? String ?? ""
+                        let aUserId = aSlideAsNsDic["user_id"] as? Int ?? 0
+                        let anImage = aSlideAsNsDic["image"] as? String ?? ""
+                        SlidesAndPaths.shared.slides.append(Slide(id: anId, title: aTitle, link: aLink, user_id: aUserId, images: anImage))
+                    }else{
+                        print("Error : Slide element is not a NSDictionary")
+                    }
+                }
+            }
+            print("Home data updated....")
+        }
     }
     
     func processShopList(Result aResult : NSDictionary) -> [Shop] {

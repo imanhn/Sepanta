@@ -26,9 +26,7 @@ class SepantaGroupButtons {
     @objc func aGroupTapped(_ sender: Any){
         let theButton = (sender as AnyObject)
         //print("TAG : ",theButton.tag," delegate Coordinator : ",self.delegate.coordinator ?? "is Nil")
-        let groupCoordinator = self.delegate.coordinator
         let targetCatagory = self.getCatagory(ByID: theButton.tag!)
-        print("Casted->groupCoordinator : ",groupCoordinator ?? "Nil!")
         self.delegate.coordinator!.pushAGroup(GroupID: targetCatagory.id, GroupImage: targetCatagory.anUIImage.value, GroupName: targetCatagory.title)
     }
         
@@ -60,16 +58,24 @@ class SepantaGroupButtons {
             catagories[i].anUIImage
                 .filter({$0.size.width > 0})
                 .subscribe(onNext: { [weak self] innerImage in
-                    let col = (self?.counter)! % 3
-                    let row = Int((self?.counter)! / 3)
-                    let but = UIButton(frame: CGRect(x: xMargin+CGFloat(col)*buttonsDim*0.9, y: CGFloat(row) * buttonsDim * 1.2, width: buttonsDim*1.3, height: buttonsDim*1.3))
-                    let mergedImage = self?.buttonImage(Image: innerImage, Label : catagories[i].title)
-                    but.setImage(mergedImage, for: .normal)
-                    but.tag = catagories[i].id
-                    but.addTarget(self, action: #selector(self?.aGroupTapped), for: .touchUpInside)
-                    self?.counter += 1
-                    self?.buttons.append(but)
-                    self?.delegate.sepantaScrollView.addSubview(but)
+                    let foundButton = self?.buttons.filter({$0.tag == catagories[i].id}) ?? [UIButton]()
+                    if foundButton.count == 0 {
+                        print("Addin image ",catagories[i].title)
+                        let col = (self?.counter)! % 3
+                        let row = Int((self?.counter)! / 3)
+                        let but = UIButton(frame: CGRect(x: xMargin+CGFloat(col)*buttonsDim*0.9, y: CGFloat(row) * buttonsDim * 1.2, width: buttonsDim*1.3, height: buttonsDim*1.3))
+                        let mergedImage = self?.buttonImage(Image: innerImage, Label : catagories[i].title)
+                        but.setImage(mergedImage, for: .normal)
+                        but.tag = catagories[i].id
+                        but.addTarget(self, action: #selector(self?.aGroupTapped), for: .touchUpInside)
+                        self?.counter += 1
+                        self?.buttons.append(but)
+                        self?.delegate.sepantaScrollView.addSubview(but)
+                    } else {
+                        print("Updating Image",catagories[i].title)
+                        let mergedImage = self?.buttonImage(Image: innerImage, Label : catagories[i].title)
+                        foundButton[0].setImage(mergedImage, for: .normal)
+                    }
                     if self?.counter == catagories.count-1 {Spinner.stop()}
                     //print("Image Received : ",self?.counter,"  ",catagories[i].title,"  ",catagories[i].id,"  ",catagories[i].image,"  ",innerImage)
                 }, onError: { _ in
