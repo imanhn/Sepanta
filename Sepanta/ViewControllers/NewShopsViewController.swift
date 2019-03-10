@@ -32,4 +32,28 @@ class NewShopsViewController :  UIViewController,UITextFieldDelegate,Storyboarde
     weak var coordinator : HomeCoordinator?
     let myDisposeBag = DisposeBag()
     let shops : BehaviorRelay<[Shop]> = BehaviorRelay(value: [])
+    
+    @IBAction func backTapped(_ sender: Any) {
+        self.coordinator!.popOneLevel()
+    }
+    
+    @IBAction func homeTapped(_ sender: Any) {
+        self.coordinator!.popHome()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+    
 }
+
+
+
+
+
+
+
