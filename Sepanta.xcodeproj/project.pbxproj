@@ -16,8 +16,14 @@
 		0F066F9F222C704B00C8871C /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F9E222C704B00C8871C /* MenuViewController.swift */; };
 		0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F512C042205B5C300B99C9E /* SignupViewController.swift */; };
 		0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */; };
+		0F71A38B2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F71A38A2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift */; };
+		0F71A38F22319A2000F4EB6B /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F71A38E22319A2000F4EB6B /* Alert.swift */; };
 		0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */; };
 		0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */; };
+		0F817A672232D89C00F1738E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A662232D89C00F1738E /* ProfileViewController.swift */; };
+		0F817A6922341D8E00F1738E /* ShowProfileUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A6822341D8E00F1738E /* ShowProfileUI.swift */; };
+		0F817A6B2234635A00F1738E /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A6A2234635A00F1738E /* EditProfileViewController.swift */; };
+		0F817A6D22346BAF00F1738E /* EditProfileUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A6C22346BAF00F1738E /* EditProfileUI.swift */; };
 		0F890CFE2214B4CD0091FA2E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890CFD2214B4CD0091FA2E /* Coordinator.swift */; };
 		0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890CFF2214B4E90091FA2E /* Storyboarded.swift */; };
 		0F890D022214B5310091FA2E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D012214B5310091FA2E /* AppCoordinator.swift */; };
@@ -84,8 +90,14 @@
 		0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringWithFontSizeCalc.swift; sourceTree = "<group>"; };
 		0F6F39C222078DC900393CD7 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		0F6F39C722079FB600393CD7 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		0F71A38A2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerWithKeyboardNotification.swift; sourceTree = "<group>"; };
+		0F71A38E22319A2000F4EB6B /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysShowPopup.swift; sourceTree = "<group>"; };
 		0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayChoiceTableViewController.swift; sourceTree = "<group>"; };
+		0F817A662232D89C00F1738E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		0F817A6822341D8E00F1738E /* ShowProfileUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowProfileUI.swift; sourceTree = "<group>"; };
+		0F817A6A2234635A00F1738E /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		0F817A6C22346BAF00F1738E /* EditProfileUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileUI.swift; sourceTree = "<group>"; };
 		0F890CFD2214B4CD0091FA2E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		0F890CFF2214B4E90091FA2E /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		0F890D012214B5310091FA2E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -191,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				0F890CFF2214B4E90091FA2E /* Storyboarded.swift */,
+				0F71A38A2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift */,
 			);
 			path = SuperClasses;
 			sourceTree = "<group>";
@@ -219,6 +232,8 @@
 				0F066F9E222C704B00C8871C /* MenuViewController.swift */,
 				0FAEEDE62230949C00A9178F /* AboutUsViewController.swift */,
 				0FB3ECD1222DC48F009A89F7 /* GetRichViewController.swift */,
+				0F817A662232D89C00F1738E /* ProfileViewController.swift */,
+				0F817A6A2234635A00F1738E /* EditProfileViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -241,8 +256,10 @@
 				0F9BCFC7222317E900C87706 /* SepantaGroupButtons.swift */,
 				0FAEEDE82230957100A9178F /* AboutUsUI.swift */,
 				0FAEEDE4222F29C600A9178F /* GetRichUI.swift */,
+				0F817A6C22346BAF00F1738E /* EditProfileUI.swift */,
 				0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */,
 				0FFCF613221811FC0040A7DC /* Spinner.swift */,
+				0F817A6822341D8E00F1738E /* ShowProfileUI.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -255,6 +272,7 @@
 				0FA307DF2227330700EDA829 /* EnglishNumbersToPersian.swift */,
 				0F066F92222B198900C8871C /* UIColorFromHex.swift */,
 				0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */,
+				0F71A38E22319A2000F4EB6B /* Alert.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -522,6 +540,7 @@
 				0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */,
 				0F066F95222B19AB00C8871C /* UIViewRotate.swift in Sources */,
 				0F066F93222B198900C8871C /* UIColorFromHex.swift in Sources */,
+				0F71A38B2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift in Sources */,
 				0F984E29220B727B004AFB06 /* SepantaGroupsViewController.swift in Sources */,
 				0F890D122215D21C0091FA2E /* JSONParser.swift in Sources */,
 				0FB3ECD0222C8AF8009A89F7 /* MenuCoordinator.swift in Sources */,
@@ -529,7 +548,10 @@
 				0F890D042214BF300091FA2E /* LoginCoordinator.swift in Sources */,
 				0FB3ECD2222DC48F009A89F7 /* GetRichViewController.swift in Sources */,
 				0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */,
+				0F817A6B2234635A00F1738E /* EditProfileViewController.swift in Sources */,
+				0F817A6922341D8E00F1738E /* ShowProfileUI.swift in Sources */,
 				0FAEEDE92230957100A9178F /* AboutUsUI.swift in Sources */,
+				0F817A6D22346BAF00F1738E /* EditProfileUI.swift in Sources */,
 				0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */,
 				0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */,
 				0F052EDB221C0790009175EA /* HomeCoordinator.swift in Sources */,
@@ -539,6 +561,7 @@
 				0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */,
 				0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */,
 				0FA307DE222700B100EDA829 /* Shops.swift in Sources */,
+				0F71A38F22319A2000F4EB6B /* Alert.swift in Sources */,
 				0FDA55D32225A0A000E7C889 /* NSDictionaryToDictionary.swift in Sources */,
 				0FA307E02227330700EDA829 /* EnglishNumbersToPersian.swift in Sources */,
 				0FDA55D52225C02800E7C889 /* Catagory.swift in Sources */,
@@ -550,6 +573,7 @@
 				0F890D0E2215C7170091FA2E /* NetworkManager.swift in Sources */,
 				0F9BCFC8222317E900C87706 /* SepantaGroupButtons.swift in Sources */,
 				0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */,
+				0F817A672232D89C00F1738E /* ProfileViewController.swift in Sources */,
 				0FFCF614221811FC0040A7DC /* Spinner.swift in Sources */,
 				0F9BCFC52221FCCF00C87706 /* SlideControl.swift in Sources */,
 			);

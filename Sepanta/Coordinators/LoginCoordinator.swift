@@ -65,6 +65,23 @@ class LoginCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         vc.mobileNumber = mobileNumber
     }
 
+    func gotoLogin(Set mobileNumber : String) {
+        var foundLoginInStack = false
+        while !navigationController.topViewController!.isKind(of: LoginViewController.self) {
+            print("Poping ",navigationController.topViewController ?? "Nil")
+            navigationController.popViewController(animated: false)
+            foundLoginInStack = true
+        }
+        
+        if !foundLoginInStack {
+            let vc = LoginViewController.instantiate()
+            vc.coordinator = self
+            navigationController.pushViewController(vc, animated: false)
+            navigationController.setNavigationBarHidden(true, animated: false)
+            vc.setMobileNumber(mobileNumber)
+        }
+    }
+
     func gotoSignup() {
         let vc = SignupViewController.instantiate()
         vc.coordinator = self

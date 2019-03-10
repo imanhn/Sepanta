@@ -33,6 +33,5 @@ open class Spinner {
             spinner = nil
         }
     }
-    
-    
+        
 }

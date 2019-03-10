@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import Alamofire
 import AlamofireImage
-
+import RxAlamofire
 
 class Catagory : NSObject {
     var content = String()
@@ -30,23 +30,26 @@ class Catagory : NSObject {
         super.init()
     }
     
-    init(Content acontent : String, Id anId : Int, ShopNumber aShopNumber : Int, Title aTitle : String, Image anImage : String) {
+    init(Id anId : Int, Title aTitle : String, Image anImage : String) {
         super.init()
-        self.content = acontent
         self.id = anId
-        self.shop_number = aShopNumber
         self.title = aTitle
         self.image = anImage
         downloadImage()
     }
     
     func downloadImage() {
-        let imageUrl = "http://www.favecard.ir/"+self.image
+        var imageUrl = "http://www.panel.ipsepanta.ir/"+self.image
+        
+        //print("Default Image as placeholder so the subscribers work and GUI starts!")
+        self.anUIImage.accept(UIImage(named: "icon_sepantaei")!)
+        
         Alamofire.request(imageUrl).responseImage { [weak self] response in
             if let image = response.result.value {
                 //print("image downloaded: \(image)")
                 self?.anUIImage.accept(image)
             }
         }
+         
     }
 }

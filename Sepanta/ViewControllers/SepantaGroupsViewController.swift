@@ -125,8 +125,12 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storybo
             .filter({$0 != ""})
             .subscribe(onNext: { (innerCurrentState) in
                 //NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
-                
-                NetworkManager.shared.run(API: "categories-filter",QueryString: "/\(innerCurrentState)", Method: HTTPMethod.get, Parameters: nil, Header: nil)
+                let aParameter : Dictionary<String,String> = [
+                    "state code" : innerCurrentState
+                ]
+                let queryString = "?state_code=\(innerCurrentState)"
+                NetworkManager.shared.run(API: "get-state-and-city",QueryString: queryString, Method: HTTPMethod.post, Parameters: aParameter, Header: nil)
+                NetworkManager.shared.run(API: "categories-filter",QueryString: queryString, Method: HTTPMethod.post, Parameters: aParameter, Header: nil)
                 //print("Registered and listended : ",innerCurrentState)
             }, onError: { _ in
                 print("Error in listening to province in Sepanta groups")
@@ -139,13 +143,12 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storybo
         
         self.currentCityCodeObs
             .filter({$0 != ""})
-            .subscribe(onNext: { [weak self] (innerCurrentCity) in
+            .subscribe(onNext: {  (innerCurrentCity) in
                 //NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
                 let aParameter : Dictionary<String, String> = [
-                    "state_code": (self?.currentStateCodeObs.value)!,
                     "city_code": innerCurrentCity
                 ]
-                let queryString = "?state_code=\(self?.currentStateCodeObs.value ?? "00")&city_code=\(innerCurrentCity)"
+                let queryString = "?city_code=\(innerCurrentCity)"
                 NetworkManager.shared.run(API: "categories-filter",QueryString: queryString, Method: HTTPMethod.post, Parameters: aParameter, Header: nil)
                 //print("Registered and listended : ",innerCurrentCity)
                 }, onError: { _ in
@@ -163,21 +166,22 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storybo
             if innerCatagories.count > 0 {
                 self.groupButtons = SepantaGroupButtons(self)
                 //print("innerCatagories : ",innerCatagories,"  ",innerCatagories.count)
-                var relayCollection = [BehaviorRelay<UIImage>]()
+                //var relayCollection = [BehaviorRelay<UIImageView>]()
                 let catagories = innerCatagories[0] as! NSArray
                 self.catagories = [Catagory]()
                 for i in 0..<catagories.count {
                     let catDic = catagories[i] as! NSDictionary
-                    //print(catDic)
+                    print(catDic)
                     if
-                        let aContent = catDic.value(forKey: "content") as? String,
+//                        let aContent = catDic.value(forKey: "content") as? String,
                         let anId = catDic.value(forKey: "id") as? Int,
-                        let aShopsNumber = catDic.value(forKey: "shops_number") as? Int,
+//                        let aShopsNumber = catDic.value(forKey: "shops_number") as? Int,
                         let aTitle = catDic.value(forKey: "title") as? String,
                         let anImage = catDic.value(forKey: "image") as? String
                     {
-                        let newCatagory = Catagory(Content: aContent, Id: anId, ShopNumber: aShopsNumber, Title: aTitle, Image: anImage)
-                        relayCollection.append(newCatagory.anUIImage)
+                        let newCatagory = Catagory(Id: anId, Title: aTitle, Image: anImage)
+                        //relayCollection.append(newCatagory.anUIImage)
+                        //print("ADDING CAT ",newCatagory)
                         self.catagories.append(newCatagory)
                         
                     }
@@ -190,6 +194,7 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storybo
                 }
                 //print("Total Catagory Loaded : ",self?.catagories.count)
                 self.groupButtons?.createGroups(Catagories: self.catagories)
+                Spinner.stop()
                 /*
                 Observable.combineLatest(relayCollection)
                     .subscribe({ innerRelayCol in
@@ -208,6 +213,10 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storybo
         }).disposed(by: myDisposeBag)
     }
     
+    func fetchAllCatagories(){
+        NetworkManager.shared.run(API: "categories-filter",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil)
+    }
+    
     override func viewDidLoad() {
         //print("VL SepantaGroup self.coordinator : ",self.coordinator ?? "nil")
         super.viewDidLoad()
@@ -216,6 +225,8 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storybo
         definesPresentationContext = true
         selectCity.delegate = self
         selectProvince.delegate = self
+        fetchAllCatagories()
+        
        // self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
         
         

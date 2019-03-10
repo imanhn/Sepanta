@@ -53,6 +53,11 @@ class LoginKey {
         }
     }
     
+    func deleteTokenAndUserID(){
+        let deleteSucceed = KeychainWrapper.standard.set("NO", forKey:"LOGIN")
+        if deleteSucceed {print("Logout registered in KeyChain")}else{print("Logout Unsuccessfull")}
+    }
+    
     func retrieveTokenAndUserID() -> Bool {
         let loginDataSaved : String? = KeychainWrapper.standard.string(forKey: "LOGIN")
         if loginDataSaved == "YES" {
@@ -68,9 +73,9 @@ class LoginKey {
 
     func getUserID(_ phoneNumber : String){
         let parameters = [
-            "phone": phoneNumber
+            "cellphone": phoneNumber
         ]
-        let queryString = "?phone=\(phoneNumber)"
+        let queryString = "?cellphone=\(phoneNumber)"
         Spinner.start()
         NetworkManager.shared.run(API: "login",QueryString: queryString, Method: HTTPMethod.post, Parameters: parameters, Header: nil)
     }

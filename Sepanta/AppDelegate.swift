@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 import UserNotifications
 
 @UIApplicationMain
@@ -18,10 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("Register for remote noti...")
-        if let refreshedToken = InstanceID.instanceID().token() {
-            print("2InstanceID token: \(refreshedToken)")
-        }
+
     }
 
     func application(_ application: UIApplication,

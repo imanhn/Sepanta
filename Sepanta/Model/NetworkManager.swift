@@ -11,7 +11,6 @@ import RxSwift
 import RxCocoa
 import Alamofire
 import RxAlamofire
-import SwiftyJSON
 
 enum CallStatus {
     case ready
@@ -29,8 +28,8 @@ class NetworkManager {
     var content = NSDictionary()
     //var resultSubject = BehaviorRelay<NSDictionary>(value : NSDictionary())
     let baseURLString: String
-    let websiteRootAddress = "http://www.panel.ipsepanta.ir/api/v1/"  //"http://www.favecard.ir"
-    var status : CallStatus //No used Yet
+    let websiteRootAddress = "http://www.panel.ipsepanta.ir/api/v1/" 
+    var status = BehaviorRelay<CallStatus>(value: CallStatus.ready) //No used Yet
     
     let netObjectsDispose = DisposeBag()
     var headers : HTTPHeaders
@@ -44,8 +43,7 @@ class NetworkManager {
     // Initialization
     
     private init() {
-        self.baseURLString = websiteRootAddress + "/api/takamad/"
-        self.status = .ready
+        self.baseURLString = websiteRootAddress //+ "/api/takamad/"
         self.message = ""
         self.statusMessage = ""
         self.headers = [
@@ -56,7 +54,7 @@ class NetworkManager {
     }
     
     func run(API apiName : String, QueryString aQuery : String, Method aMethod : HTTPMethod, Parameters aParameter : Dictionary<String, String>?, Header  aHeader : HTTPHeaders?  ) {
-        self.status = CallStatus.inprogress
+        self.status.accept(CallStatus.inprogress)
         let urlAddress = self.baseURLString + apiName + aQuery
         
         var headerToSend = self.headers
@@ -72,27 +70,28 @@ class NetworkManager {
         .timeout(2, scheduler: MainScheduler.instance)
         .retry(4)
         //.debug()
-        .subscribe(onNext: { [weak self] (ahttpURLRes,jsonResult) in
+        .subscribe(onNext: { [unowned self] (ahttpURLRes,jsonResult) in
             if let aresult = jsonResult as? NSDictionary {
-                self?.result = aresult
-                self?.parser = JSONParser(API: apiName,Method : aMethod)
-                if let aparser = self?.parser! {
+                self.result = aresult
+                self.parser = JSONParser(API: apiName,Method : aMethod)
+                if let aparser = self.parser {
                     aparser.resultSubject.accept(aresult)
                 }
             } else {
-                self?.status = CallStatus.error
+                
+                self.status.accept(CallStatus.error)
             }
-            if let amessage = self?.result["message"] as? String {
+            if let amessage = self.result["message"] as? String {
                 if amessage == "Unauthenticated." {
                     print("User is not authorized")
                 }
-                self?.message = amessage
+                self.message = amessage
             }
-            if let astatus = self?.result["status"] as? String {
-                self?.message = astatus
+            if let astatus = self.result["status"] as? String {
+                self.message = astatus
             }
-            if let acontent = self?.result["content"] as? NSDictionary {
-                self?.content = acontent
+            if let acontent = self.result["content"] as? NSDictionary {
+                self.content = acontent
             }
             }, onError: { (err) in
                 if err.localizedDescription == "The Internet connection appears to be offline." {
@@ -103,9 +102,9 @@ class NetworkManager {
                 }
                 print("NetworkManager RXAlamofire Raised an Error : >",err.localizedDescription,"<")
                 Spinner.stop()
-                self.status = CallStatus.error
+                self.status.accept(CallStatus.error)
             }, onCompleted: {
-                self.status = CallStatus.ready
+                self.status.accept(CallStatus.ready)
                 //print("Completed")
                 self.parser = nil
             }, onDisposed: {

@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import Alamofire
-import SwiftyJSON
 import RxSwift
 import RxCocoa
 
@@ -26,7 +25,7 @@ struct cities {
     var type : String = "انتخاب شهر"
 }
 
-class SignupViewController: UIViewController,UITextFieldDelegate,Storyboarded   {
+class SignupViewController: UIViewControllerWithKeyboardNotification,UITextFieldDelegate,Storyboarded   {
     weak var coordinator : LoginCoordinator?
     var userID : String = ""
     var smsVerificationCode : String = ""
@@ -62,6 +61,9 @@ class SignupViewController: UIViewController,UITextFieldDelegate,Storyboarded   
     @IBOutlet weak var selectCity: UnderLinedSelectableTextField!
     @IBOutlet weak var termsLabel: UILabel!
     
+    @IBAction func enterTapped(_ sender: Any) {
+        self.coordinator!.gotoLogin(Set: self.mobileNoText.text ?? "")
+    }
     @IBAction func termsClicked(_ sender: Any) {
         TermsAgreed = !TermsAgreed;
         if TermsAgreed {
@@ -248,11 +250,12 @@ class SignupViewController: UIViewController,UITextFieldDelegate,Storyboarded   
  
         var signupSucceed : Bool = false
         
-        let urlString = "http://www.favecard.ir/api/takamad/register?phone="+MobileNumber+"&gender="+GenderCode+"&state="+self.currentStateCodeObs.value+"&city="+self.currentCityCodeObs.value+"&username="+Username
+        let urlString = "http://www.panel.ipsepanta.ir/api/v1/register?phone="+MobileNumber+"&gender="+GenderCode+"&state="+self.currentStateCodeObs.value+"&city="+self.currentCityCodeObs.value+"&username="+Username
         let postURL = NSURL(string: urlString)! as URL
 
         let aMethod : HTTPMethod = HTTPMethod.post
         print("Calling Register API")
+        /*
         Alamofire.request(postURL, method: aMethod, parameters: parameters, encoding: JSONEncoding.default,  headers: headers).responseJSON { (response:DataResponse<Any>) in
  
             print("Processing Register Response....")
@@ -345,6 +348,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate,Storyboarded   
             }
             
         }
+ */
     }
     
     func showSuccessfullSignupAndGoToMainView(){
@@ -422,6 +426,13 @@ class SignupViewController: UIViewController,UITextFieldDelegate,Storyboarded   
         }
         registerUser(MobileNumber: mobileNoText.text!, GenderCode: genderCode, Username: usernameText.text!)
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+
 }
 
 

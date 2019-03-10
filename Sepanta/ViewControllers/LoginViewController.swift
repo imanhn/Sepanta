@@ -12,7 +12,7 @@ import RxAlamofire
 import RxSwift
 import RxCocoa
 
-class LoginViewController: UIViewController,Storyboarded {
+class LoginViewController: UIViewControllerWithKeyboardNotification,Storyboarded {
     var myDisposeBag  = DisposeBag()
     weak var coordinator : LoginCoordinator?
     @IBOutlet var PageView: UIView!
@@ -22,37 +22,47 @@ class LoginViewController: UIViewController,Storyboarded {
     @IBOutlet weak var MobileTextField: UnderLinedTextField!
     
     @IBAction func MobileTypeEnded(_ sender: Any) {
-        (sender as AnyObject).resignFirstResponder()
+        _ = (sender as AnyObject).resignFirstResponder()
     }
     @IBAction func mobileNoTypeDone(_ sender: Any) {
-        (sender as AnyObject).resignFirstResponder()
+        _ = (sender as AnyObject).resignFirstResponder()
     }
     
     @IBAction func signupClicked(_ sender: Any) {
-        guard let acoordinator = coordinator as? LoginCoordinator else {
-            return
-        }
-        acoordinator.gotoSignup()
+        coordinator!.gotoSignup()
     }
     
     @IBAction func SendClicked(_ sender: Any) {
+        NetworkManager.shared.status
+            .filter({$0 == CallStatus.error})
+            .subscribe(onNext: { [unowned self] (innerNetworkCallStatus) in
+                Spinner.stop()
+                self.alert(Message: "دسترسی به سرور امکان پذیر نیست یا سیستم با مشکل مواجه شده است"+"\n"+NetworkManager.shared.message)
+            }, onError: { _ in
+                
+            }, onCompleted: {
+                
+            }, onDisposed: {
+                
+            }).disposed(by: myDisposeBag)
+        
         if !(MobileTextField.text!.isEmpty)  {
-            guard let acoordinator = coordinator as? LoginCoordinator else {
-                print("Wrong Coordinator for SendClick in LoginViewController")
-                return
-            }
+            // Convert to English
+            //MobileTextField.insertText(MobileTextField.text!.toEnglishNumbers())
+            MobileTextField.text = MobileTextField.text!.toEnglishNumbers()
+            
             LoginKey.shared.getUserID(MobileTextField.text!)
             LoginKey.shared.userIDObs
                 //.debug()
-                .subscribe(onNext: { [weak self] (innerUserIDObs) in
+                .subscribe(onNext: { [unowned self] (innerUserIDObs) in
                     LoginKey.shared.userID = innerUserIDObs
                     print("USERID : ",LoginKey.shared.userID)
                     print("inner USERID : ",innerUserIDObs)
                     Spinner.stop()
                     LoginKey.shared.userIDObs = BehaviorRelay<String>(value: String())
-                    acoordinator.gotoSMSVerification(Set : (self?.MobileTextField.text)!)
+                    self.coordinator!.gotoSMSVerification(Set : (self.MobileTextField.text)!)
                     }, onError: { _ in
-                        Spinner.stop()
+                        
                 }, onCompleted: {
                 }, onDisposed: {
                 }).disposed(by: myDisposeBag)
@@ -70,18 +80,28 @@ class LoginViewController: UIViewController,Storyboarded {
             print("LoginViewController is nil. Not loaded yet!")
             return
         }
-        self.MobileTextField.insertText(astring)
+        //self.MobileTextField.insertText(astring.toEnglishNumbers())
+        self.MobileTextField.text =  astring.toEnglishNumbers()
     }
 
 
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+    
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
 
 

@@ -11,7 +11,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class SMSConfirmViewController: UIViewController,Storyboarded {
+class SMSConfirmViewController: UIViewControllerWithKeyboardNotification,Storyboarded {
     weak var coordinator : LoginCoordinator?
     @IBOutlet weak var MobileTextField: UnderLinedTextField!
     @IBOutlet weak var SMSTextField: UnderLinedTextField!
@@ -29,15 +29,15 @@ class SMSConfirmViewController: UIViewController,Storyboarded {
     }
 
     @IBAction func MobileNoTypeDoen(_ sender: Any) {
-        (sender as AnyObject).resignFirstResponder()
+        _ = (sender as AnyObject).resignFirstResponder()
     }
     
     @IBAction func SMSCodeTypeDone(_ sender: Any) {
-        (sender as AnyObject).resignFirstResponder()
+        _ = (sender as AnyObject).resignFirstResponder()
     }
     
     @IBAction func MobileTextEditEnd(_ sender: Any) {
-        (sender as AnyObject).resignFirstResponder()
+        _ = (sender as AnyObject).resignFirstResponder()
         startTimer()
     }
     
@@ -56,23 +56,7 @@ class SMSConfirmViewController: UIViewController,Storyboarded {
     
     func endTimer() {
         countdownTimer.invalidate()
-        let alert = UIAlertController(title: "توجه", message: "وقت شما تمام شد لطفا مجددا تلاش کنید", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "بلی", style: .default, handler: { action in
-            switch action.style{
-            case .default:
-                print("default")
-                self.backToLoginViewController()
-                
-            case .cancel:
-                print("cancel")
-                
-            case .destructive:
-                print("destructive")
-                
-                
-            }}))
-        self.present(alert, animated: true, completion: nil)
-       
+        alert(Message: "وقت شما تمام شد لطفا مجددا تلاش کنید")
     }
     
     func timeFormatted(_ totalSeconds: Int) -> String {
@@ -86,21 +70,17 @@ class SMSConfirmViewController: UIViewController,Storyboarded {
                 return
         }
          self.MobileTextField.insertText(astring)
+        self.MobileTextField.text = astring.toEnglishNumbers()
         startTimer()
         //self.MobileTextField.text = astring
     }
     
     func backToLoginViewController() {
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let vc : LoginViewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        print(" Entered : ",self.MobileTextField.text!)
-        self.present(vc, animated: false, completion: nil)
-         vc.setMobileNumber(self.MobileTextField.text!)
+        self.coordinator?.gotoLogin(Set: self.MobileTextField.text!)
     }
+    
     func gotoHomeViewController() {
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let vc : HomeViewController = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-        self.present(vc, animated: false, completion: nil)
+        self.coordinator!.gotoHomePage()
     }
     
     override func didReceiveMemoryWarning() {
@@ -109,47 +89,48 @@ class SMSConfirmViewController: UIViewController,Storyboarded {
     }
     
     @IBAction func signupClicked(_ sender: Any) {
-        guard let acoordinator = coordinator as? LoginCoordinator else {
-            return
-        }
-        acoordinator.gotoSignup()
+        self.coordinator!.gotoSignup()
     }
     
     @IBAction func ConfirmCodeClicked(_ sender: Any) {
         print("Confirm Clicked")
         guard SMSTextField.text != nil else {
-            print("SMS Field not filled!")
-            let alert = UIAlertController(title: "توجه", message: "لطفاْ کد ارسال شده را وارد نمایید", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "بلی", style: .default))
+            alert(Message: "لطفاْ کد ارسال شده را وارد نمایید")
             return
         }
+        SMSTextField.text = SMSTextField.text!.toEnglishNumbers()
+        //SMSTextField.insertText(SMSTextField.text!.toEnglishNumbers())
         if (countdownTimer) != nil {
             countdownTimer.invalidate()
         } else {
             print("Timer is already stoped")
         }
-        guard let acoordinator = coordinator as? LoginCoordinator else {
-            print("Wrong Coordinator for Confirm SMS Code Clicked")
-            return
-        }
         Spinner.start()
         print("Getting Token")
         LoginKey.shared.getToken(self.SMSTextField.text!)
         LoginKey.shared.tokenObs
+            .filter({$0.count > 0})
             .debug()
-            .subscribe(onNext: { (innerTokenObs) in
+            .subscribe(onNext: { [unowned self] (innerTokenObs) in
                 print("Token Received : ",innerTokenObs)
                 LoginKey.shared.token = innerTokenObs
                 _ = LoginKey.shared.registerTokenAndUserID()
                 Spinner.stop()
                 LoginKey.shared.tokenObs = BehaviorRelay<String>(value: String())
-                acoordinator.gotoHomePage()
+                self.coordinator!.gotoHomePage()
                 }, onError: { _ in
                     Spinner.stop()
             }, onCompleted: {
             }, onDisposed: {
             }).disposed(by: myDisposeBag)
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+
     
 }
 

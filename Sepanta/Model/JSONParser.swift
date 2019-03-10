@@ -42,19 +42,20 @@ class JSONParser {
                         LoginKey.shared.userIDObs.accept(LoginKey.shared.userID)
                     }
                 } else if (apiName == "categories-filter") && (aMethod == HTTPMethod.get) {
+                    /*
                     if let cities = aDic["cities"] {
                         if let castedCities = cities as? NSDictionary
                         {
                             NetworkManager.shared.cityDictionaryObs.accept(castedCities.toStringDictionary)
                         }
-                    }
+                    }*/
                     if let cat = aDic["categories"] {
-                        print("Setting Catagories for CITY")
+                        //print("Setting All Catagories  : ",[cat])
                         NetworkManager.shared.catagoriesObs.accept([cat])
                     }
                 } else if (apiName == "categories-filter") && (aMethod == HTTPMethod.post) {
                     if let cat = aDic["categories"] {
-                        print("Setting Catagories for CITY")
+                        //print("Setting Catagories for a state/city : ",[cat])
                         NetworkManager.shared.catagoriesObs.accept([cat])
                     }
                 } else if (apiName == "check-sms-code") && (aMethod == HTTPMethod.post) {
@@ -83,12 +84,22 @@ class JSONParser {
     func processAsProvinceList(Result aResult : NSDictionary) -> (Dictionary<String,String>) {
         var provinceDict = Dictionary<String,String>()
         var provName : String
+        if aResult["error"] != nil {
+            print("ERROR in Province List Parsing : ",aResult["error"]!)
+        }
+        if aResult["message"] != nil {
+            print("Message Parsed : ",aResult["message"]!)
+        }
+
+        //print("aResult states : ",aResult["states"])
         if let aDic = aResult["states"] as? NSDictionary {
             for aProv in aDic
             {
                 //print(aProv.key," ",aProv.value)
-                if let aName = aProv.key as? String {provName = aName} else { print("Error in State data from Backend");continue}
-                if let idx = aProv.value as? String {provinceDict[provName] = idx} else { print("Error in State data from Backend");continue}
+                provName = "\(aProv.key)"
+                provinceDict[provName] = "\(aProv.value)"
+                //if let aName = aProv.key as? String {provName = aName} else { print("Error in Key of State data from Backend");continue}
+                //if let idx = aProv.value as? String {provinceDict[provName] = idx} else { print("Error in Value of State data from Backend");continue}
                 
             }
         } else {
@@ -104,11 +115,26 @@ class JSONParser {
     func processAsCityList(Result aResult : NSDictionary) -> (Dictionary<String,String>) {
         var cityDict = Dictionary<String,String>()
         var cityName : String
-        if let aDic = aResult["cities"] as? NSDictionary {
+        print("Result AllKeys : ",aResult.allKeys)
+        if aResult["error"] != nil {
+            print("ERROR in Cities List Parsing : ",aResult["error"]!)
+        }
+        if aResult["message"] != nil {
+            print("Message Parsed : ",aResult["message"]!)
+        }
+        
+        //print("aResult cities : ",aResult["state"])
+
+        if let aDic = aResult["state"] as? NSDictionary {
             for aCity in aDic
             {
+                //print(aCity.key," ",aCity.value)
+                cityName = "\(aCity.key)"
+                cityDict[cityName] = "\(aCity.value)"
+                /*
                 if let aName = aCity.key as? String {cityName = aName} else { print("Parser : Error in City data from Backend");continue}
                 if let idx = aCity.value as? String {cityDict[cityName] = idx} else { print("Parser : Error in City data from Backend");continue}
+ */
                 //print("Adding : ",cityName)
             }
         } else {

@@ -114,7 +114,23 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
+    func pushShowProfile (){
+        let vc = ProfileViewController.instantiate()
+        vc.coordinator = self
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: false)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
     
+    func pushEditProfile (){
+        let vc = EditProfileViewController.instantiate()
+        vc.coordinator = self
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: false)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+    
+
     func pushSepantaieGroup (){
         let vc = SepantaGroupsViewController.instantiate()
         vc.coordinator = self
@@ -139,7 +155,19 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.pushViewController(vc, animated: false)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
+    
+    func logout() {
+        LoginKey.shared.deleteTokenAndUserID()
+        let loginCoordinator = LoginCoordinator(navigationController: navigationController)
+        if self.parentCoordinator != nil{
+            self.parentCoordinator?.removeChild(self)
+        }
+        childCoordinators.append(loginCoordinator)
+        loginCoordinator.parentCoordinator = nil
+        loginCoordinator.start()
 
+    }
+    
     func start() {
         let vc = HomeViewController.instantiate()
         vc.coordinator = self
