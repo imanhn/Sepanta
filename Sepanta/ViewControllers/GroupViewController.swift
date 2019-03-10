@@ -47,7 +47,8 @@ class GroupViewController :  UIViewController,UITextFieldDelegate,Storyboarded{
     func updateGroupHeaders(){
         self.HeaderLabel.text = currentGroupName
         self.groupLabel.text = currentGroupName
-        self.groupLogoImage.image = currentGroupImage        
+        self.groupLogoImage.image = currentGroupImage
+        self.groupLogoImage.contentMode = .scaleAspectFit
     }
     
     func fetchData() {

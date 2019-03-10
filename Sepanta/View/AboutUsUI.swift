@@ -75,8 +75,9 @@ class AboutUsUI {
         self.delegate.scrollView.addSubview(sepantaLabel)
         cursurY = cursurY + sepantaLabel.frame.height + marginY
 
-        let cardImage = UIImageView(frame: CGRect(x: UIScreen.main.bounds.width*2/5, y: cursurY, width: UIScreen.main.bounds.width/5, height: UIScreen.main.bounds.width/10))
-        cardImage.image = UIImage(named: "logo_slong")
+        
+        let cardImage = UIImageView(frame: CGRect(x: 0, y: cursurY, width: self.delegate.scrollView.frame.width, height: UIScreen.main.bounds.width*2/5))
+        cardImage.image = UIImage(named: "sepantaCard")
         cardImage.contentMode = .scaleAspectFit
         self.delegate.scrollView.addSubview(cardImage)
         cursurY = cursurY + cardImage.frame.height + 10

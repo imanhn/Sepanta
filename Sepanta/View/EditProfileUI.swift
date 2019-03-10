@@ -81,14 +81,21 @@ class EditProfileUI {
         cursurY = cursurY + buttonHeight + buttonHeight
 
         
-        submitButton = RoundedButton(type: .custom)
+        submitButton = RoundedButtonWithDarkBackground(type: .custom)
         submitButton.frame = CGRect(x: marginX+(textFieldWidth/2)-1.5*buttonHeight, y: cursurY, width: 3*buttonHeight, height: buttonHeight)
         //submitButton.backgroundColor = UIColor.white
-        submitButton.setTitleColor(UIColor(hex: 0xD6D7D9), for: .normal)
-        submitButton.setTitle("ارسال", for: .normal)
+        
+        //submitButton.setImage(UIImage(named: "icon_tick_black"), for: .normal)
+        //submitButton.setTitleColor(UIColor(hex: 0xD6D7D9), for: .normal)
+        
+        submitButton.setTitleColor(UIColor.white, for: .normal)
+        submitButton.setImage(UIImage(named: "icon_tick_white"), for: .normal)
+        
+        submitButton.setTitle("تایید", for: .normal)
         submitButton.semanticContentAttribute = .forceRightToLeft
         submitButton.titleLabel?.font = UIFont(name: "Shabnam-FD", size: 16)
-        submitButton.setImage(UIImage(named: "icon_tick_black"), for: .normal)
+        
+        
         submitButton.contentMode = .scaleAspectFit
         submitButton.imageEdgeInsets = UIEdgeInsetsMake(0, buttonHeight/2, 0, 0)
         views["rightFormView"]?.addSubview(submitButton)

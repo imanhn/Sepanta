@@ -24,6 +24,8 @@
 		0F817A6922341D8E00F1738E /* ShowProfileUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A6822341D8E00F1738E /* ShowProfileUI.swift */; };
 		0F817A6B2234635A00F1738E /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A6A2234635A00F1738E /* EditProfileViewController.swift */; };
 		0F817A6D22346BAF00F1738E /* EditProfileUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A6C22346BAF00F1738E /* EditProfileUI.swift */; };
+		0F817A6F22354F8600F1738E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A6E22354F8600F1738E /* Profile.swift */; };
+		0F817A71223567E200F1738E /* NewShopsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A70223567E200F1738E /* NewShopsViewController.swift */; };
 		0F890CFE2214B4CD0091FA2E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890CFD2214B4CD0091FA2E /* Coordinator.swift */; };
 		0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890CFF2214B4E90091FA2E /* Storyboarded.swift */; };
 		0F890D022214B5310091FA2E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D012214B5310091FA2E /* AppCoordinator.swift */; };
@@ -98,6 +100,8 @@
 		0F817A6822341D8E00F1738E /* ShowProfileUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowProfileUI.swift; sourceTree = "<group>"; };
 		0F817A6A2234635A00F1738E /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		0F817A6C22346BAF00F1738E /* EditProfileUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileUI.swift; sourceTree = "<group>"; };
+		0F817A6E22354F8600F1738E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		0F817A70223567E200F1738E /* NewShopsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewShopsViewController.swift; sourceTree = "<group>"; };
 		0F890CFD2214B4CD0091FA2E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		0F890CFF2214B4E90091FA2E /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		0F890D012214B5310091FA2E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -216,6 +220,7 @@
 				0F052ED8221AE8C5009175EA /* LoginKey.swift */,
 				0FDA55D42225C02800E7C889 /* Catagory.swift */,
 				0FA307DD222700B100EDA829 /* Shops.swift */,
+				0F817A6E22354F8600F1738E /* Profile.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -224,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				0FDA55D622260FFE00E7C889 /* GroupViewController.swift */,
+				0F817A70223567E200F1738E /* NewShopsViewController.swift */,
 				0FE8B9AA220355F000C868C3 /* LoginViewController.swift */,
 				0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */,
 				0F512C042205B5C300B99C9E /* SignupViewController.swift */,
@@ -535,6 +541,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FDA55D722260FFE00E7C889 /* GroupViewController.swift in Sources */,
+				0F817A71223567E200F1738E /* NewShopsViewController.swift in Sources */,
 				0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */,
 				0F052ED9221AE8C5009175EA /* LoginKey.swift in Sources */,
 				0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */,
@@ -543,6 +550,7 @@
 				0F71A38B2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift in Sources */,
 				0F984E29220B727B004AFB06 /* SepantaGroupsViewController.swift in Sources */,
 				0F890D122215D21C0091FA2E /* JSONParser.swift in Sources */,
+				0F817A6F22354F8600F1738E /* Profile.swift in Sources */,
 				0FB3ECD0222C8AF8009A89F7 /* MenuCoordinator.swift in Sources */,
 				0F066F9F222C704B00C8871C /* MenuViewController.swift in Sources */,
 				0F890D042214BF300091FA2E /* LoginCoordinator.swift in Sources */,
