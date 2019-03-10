@@ -89,7 +89,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func popOneLevel(){
-            navigationController.popViewController(animated: false)
+            navigationController.popViewController(animated: true)
     }
     
     func popHome() {
@@ -153,6 +153,14 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         vc.coordinator = self
         navigationController.delegate = self
         navigationController.pushViewController(vc, animated: false)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+    
+    func pushNewShops(){
+        let vc = NewShopsViewController.instantiate()
+        vc.coordinator = self
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     

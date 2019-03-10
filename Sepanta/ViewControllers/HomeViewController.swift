@@ -20,9 +20,13 @@ class HomeViewController: UIViewController,Storyboarded {
 
 
     @IBOutlet weak var searchTextField: CustomSearchBar!
+    
     @IBAction func gotoProfile(_ sender: Any) {
         self.coordinator!.pushShowProfile()
         //self.coordinator!.logout()
+    }
+    @IBAction func gotoNewShops(_ sender: Any) {
+        self.coordinator!.pushNewShops()
     }
     
     private func showPopup(_ controller: UIViewController, sourceView: UIView) {
