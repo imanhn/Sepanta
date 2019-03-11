@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import UIKit
 
-struct Shop : Decodable {
+struct Shop  {
     let user_id : Int
     var name : String
     var image : String

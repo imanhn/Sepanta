@@ -17,6 +17,9 @@
 		0F1B755B223580C80087C0DB /* NewShopsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B755A223580C80087C0DB /* NewShopsDataSource.swift */; };
 		0F1B755D2235C1080087C0DB /* SlidesAndPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B755C2235C1080087C0DB /* SlidesAndPaths.swift */; };
 		0F1B755F2235C8460087C0DB /* Slide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B755E2235C8460087C0DB /* Slide.swift */; };
+		0F1B75612236BA610087C0DB /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B75602236BA610087C0DB /* CacheManager.swift */; };
+		0F1B75632236E39B0087C0DB /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B75622236E39B0087C0DB /* ShopViewController.swift */; };
+		0F1B75652236E42A0087C0DB /* ShopUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B75642236E42A0087C0DB /* ShopUI.swift */; };
 		0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F512C042205B5C300B99C9E /* SignupViewController.swift */; };
 		0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */; };
 		0F71A38B2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F71A38A2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift */; };
@@ -94,6 +97,9 @@
 		0F1B755A223580C80087C0DB /* NewShopsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewShopsDataSource.swift; sourceTree = "<group>"; };
 		0F1B755C2235C1080087C0DB /* SlidesAndPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidesAndPaths.swift; sourceTree = "<group>"; };
 		0F1B755E2235C8460087C0DB /* Slide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slide.swift; sourceTree = "<group>"; };
+		0F1B75602236BA610087C0DB /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
+		0F1B75622236E39B0087C0DB /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		0F1B75642236E42A0087C0DB /* ShopUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopUI.swift; sourceTree = "<group>"; };
 		0F512C042205B5C300B99C9E /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringWithFontSizeCalc.swift; sourceTree = "<group>"; };
 		0F6F39C222078DC900393CD7 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
@@ -257,6 +263,7 @@
 				0FDA55D42225C02800E7C889 /* Catagory.swift */,
 				0FA307DD222700B100EDA829 /* Shops.swift */,
 				0F817A6E22354F8600F1738E /* Profile.swift */,
+				0F1B75602236BA610087C0DB /* CacheManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -272,6 +279,7 @@
 				0F066F9E222C704B00C8871C /* MenuViewController.swift */,
 				0FAEEDE62230949C00A9178F /* AboutUsViewController.swift */,
 				0FB3ECD1222DC48F009A89F7 /* GetRichViewController.swift */,
+				0F1B75622236E39B0087C0DB /* ShopViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -299,6 +307,7 @@
 				0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */,
 				0FFCF613221811FC0040A7DC /* Spinner.swift */,
 				0F817A6822341D8E00F1738E /* ShowProfileUI.swift */,
+				0F1B75642236E42A0087C0DB /* ShopUI.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -578,6 +587,7 @@
 				0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */,
 				0F052ED9221AE8C5009175EA /* LoginKey.swift in Sources */,
 				0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */,
+				0F1B75632236E39B0087C0DB /* ShopViewController.swift in Sources */,
 				0F066F95222B19AB00C8871C /* UIViewRotate.swift in Sources */,
 				0F066F93222B198900C8871C /* UIColorFromHex.swift in Sources */,
 				0F1B755F2235C8460087C0DB /* Slide.swift in Sources */,
@@ -587,6 +597,7 @@
 				0F817A6F22354F8600F1738E /* Profile.swift in Sources */,
 				0FB3ECD0222C8AF8009A89F7 /* MenuCoordinator.swift in Sources */,
 				0F066F9F222C704B00C8871C /* MenuViewController.swift in Sources */,
+				0F1B75652236E42A0087C0DB /* ShopUI.swift in Sources */,
 				0F890D042214BF300091FA2E /* LoginCoordinator.swift in Sources */,
 				0F1B755B223580C80087C0DB /* NewShopsDataSource.swift in Sources */,
 				0FB3ECD2222DC48F009A89F7 /* GetRichViewController.swift in Sources */,
@@ -601,6 +612,7 @@
 				0FE8BA042205082100C868C3 /* SMSConfirmViewController.swift in Sources */,
 				0F890CFE2214B4CD0091FA2E /* Coordinator.swift in Sources */,
 				0F1B755D2235C1080087C0DB /* SlidesAndPaths.swift in Sources */,
+				0F1B75612236BA610087C0DB /* CacheManager.swift in Sources */,
 				0FE8BA062205239E00C868C3 /* HomeViewController.swift in Sources */,
 				0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */,
 				0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */,

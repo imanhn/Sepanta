@@ -7,15 +7,6 @@
 //
 
 import Foundation
-//
-//  GetRichUI.swift
-//  Sepanta
-//
-//  Created by Iman on 12/15/1397 AP.
-//  Copyright © 1397 AP Imzich. All rights reserved.
-//
-
-import Foundation
 import UIKit
 
 

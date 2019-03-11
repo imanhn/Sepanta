@@ -61,11 +61,34 @@ class NewShopsViewController :  UIViewController,Storyboarded{
                 if model.stars > 3.5 {aCell.star4.image = UIImage(named: "icon_star_on")}
                 if model.stars > 4.5 {aCell.star5.image = UIImage(named: "icon_star_on")}
                 if let shopImage = aCell.shopImage {
+                    let defaultImage = UIImage(named: "logo_shape_in")
+                    
                     let imageSize = CGSize(width: shopImage.frame.size.width*0.8, height: shopImage.frame.size.height*0.8)
                     let filter = AspectScaledToFitSizeFilter(size: imageSize)
                     
-                    let imageUrl = URL(string: NetworkManager.shared.websiteRootAddress+"/"+model.image)!
-                    shopImage.af_setImage(withURL: imageUrl, filter: filter,imageTransition: .crossDissolve(0.4))
+                    let imageUrl = URL(string: NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_profile_image+model.image)!
+                    var cachedData : NSData?
+                    if model.image.count > 0
+                    {
+                        cachedData = CacheManager.shared.readFile(Filename:model.image)
+                        if cachedData != nil {
+                            //print("Image is already cached ")
+                            let cachedImage = UIImage(data: cachedData! as Data)
+                            shopImage.image = cachedImage
+                        }else{
+                            //print("Downloading....")
+                            shopImage.af_setImage(withURL: imageUrl, placeholderImage: defaultImage, filter: filter,completion:
+                                { (response) in
+                                    //print("Image Downloaded,Saving...")
+                                    let downloadedImage = shopImage.image!// UIImage(data: response.data!)!
+                                    let imageData = UIImagePNGRepresentation(downloadedImage) as NSData?
+                                    if imageData != nil {
+                                        CacheManager.shared.saveFile(Data:imageData!, Filename:model.image)
+                                    }
+                                    
+                            })
+                        }
+                    }
                 }
             }
             }.disposed(by: myDisposeBag)
