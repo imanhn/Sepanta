@@ -18,6 +18,9 @@
         <array key="Shabnam-FD.ttf">
             <string>Shabnam-FD</string>
         </array>
+        <array key="Shabnam-Light-FD.ttf">
+            <string>Shabnam-Light-FD</string>
+        </array>
     </customFonts>
     <scenes>
         <!--GetRichViewController-->
@@ -2074,24 +2077,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bR5-Ll-2lf" userLabel="HeaderView">
-                                <rect key="frame" x="0.0" y="20" width="375" height="67"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="53.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QNx-mI-Nj0" userLabel="HeaderToolbar">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="67"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="53.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="sNe-ef-z1t">
-                                                <rect key="frame" x="0.0" y="0.0" width="150" height="67"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="53.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pRX-14-oKc" userLabel="Back">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="67"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="53.5"/>
                                                         <state key="normal" image="icon_back_black"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7gl-VR-Tci" userLabel="location">
-                                                        <rect key="frame" x="50" y="0.0" width="50" height="67"/>
+                                                        <rect key="frame" x="50" y="0.0" width="50" height="53.5"/>
                                                         <state key="normal" image="icon_place_black"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FA8-GZ-Ios" userLabel="favorite">
-                                                        <rect key="frame" x="100" y="0.0" width="50" height="67"/>
+                                                        <rect key="frame" x="100" y="0.0" width="50" height="53.5"/>
                                                         <state key="normal" image="icon_fav"/>
                                                     </button>
                                                 </subviews>
@@ -2105,7 +2108,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6JN-jc-89E" userLabel="HomeButton">
-                                        <rect key="frame" x="306" y="0.0" width="59" height="67"/>
+                                        <rect key="frame" x="306" y="0.0" width="59" height="53.5"/>
                                         <state key="normal" image="logo_text_in"/>
                                     </button>
                                 </subviews>
@@ -2120,34 +2123,34 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kdx-2V-44e" userLabel="shopImage">
-                                <rect key="frame" x="0.0" y="87" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="73.5" width="375" height="200"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wIE-Rh-6ar" userLabel="shopLogo">
-                                <rect key="frame" x="285" y="272" width="75" height="75"/>
+                                <rect key="frame" x="285" y="258.5" width="75" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="wIE-Rh-6ar" secondAttribute="height" multiplier="1:1" id="hrQ-az-MOZ"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="نام و یا عنوان کامل" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tof-jN-Exq" userLabel="shopTitle">
-                                <rect key="frame" x="163" y="297" width="114" height="21"/>
+                                <rect key="frame" x="161" y="283.5" width="114" height="21"/>
                                 <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="15"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۵٪" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4i-zK-2T7" userLabel="offLabel">
-                                <rect key="frame" x="30" y="297" width="25.5" height="22"/>
+                                <rect key="frame" x="30" y="283.5" width="25.5" height="22"/>
                                 <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="16"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۲۳۴۵۶۷ امتیاز" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Zr-hI-ckl" userLabel="scoreLabel">
-                                <rect key="frame" x="30" y="324" width="81.5" height="18"/>
+                                <rect key="frame" x="30" y="310.5" width="81.5" height="18"/>
                                 <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="13"/>
                                 <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z3j-0i-tz3" userLabel="starsView">
-                                <rect key="frame" x="0.0" y="323" width="285" height="22.5"/>
+                                <rect key="frame" x="0.0" y="309.5" width="285" height="22.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_star_gray" translatesAutoresizingMaskIntoConstraints="NO" id="FIO-r7-hHa" userLabel="star1">
                                         <rect key="frame" x="263.5" y="6" width="11.5" height="11.5"/>
@@ -2215,7 +2218,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bvO-fp-oC8" userLabel="followersView">
-                                <rect key="frame" x="0.0" y="345.5" width="285" height="22.5"/>
+                                <rect key="frame" x="0.0" y="332" width="285" height="22.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_profile_04" translatesAutoresizingMaskIntoConstraints="NO" id="ZMk-KR-gRE" userLabel="followersIcon">
                                         <rect key="frame" x="257" y="3" width="18" height="18"/>
@@ -2225,7 +2228,7 @@
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۲۳۴۵" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pvT-of-2uq" userLabel="followersNumberLabel">
                                         <rect key="frame" x="208.5" y="4" width="38.5" height="19.5"/>
-                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-Light-FD" family="Shabnam FD" pointSize="14"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -2239,34 +2242,60 @@
                                     <constraint firstAttribute="trailing" secondItem="ZMk-KR-gRE" secondAttribute="trailing" constant="10" id="say-4v-QGT"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="right" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="لوازم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگر و متون ..." textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOg-GD-0Rk" userLabel="shopDescription">
+                                <rect key="frame" x="30" y="362.5" width="247" height="75"/>
+                                <fontDescription key="fontDescription" name="Shabnam-Light-FD" family="Shabnam FD" pointSize="13"/>
+                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V2O-um-KIy" userLabel="TabPaneView">
+                                <rect key="frame" x="15" y="447.5" width="345" height="143"/>
+                                <color key="backgroundColor" red="1" green="0.74389589580000004" blue="0.2140932093" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zsw-D0-1PL" userLabel="FooterView">
+                                <rect key="frame" x="0.0" y="600.5" width="375" height="66.5"/>
+                                <color key="backgroundColor" red="0.8565688776" green="0.2257254132" blue="0.36172668870000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="bvO-fp-oC8" firstAttribute="top" secondItem="Z3j-0i-tz3" secondAttribute="bottom" id="0yI-hp-aEk"/>
                             <constraint firstItem="wIE-Rh-6ar" firstAttribute="top" secondItem="kdx-2V-44e" secondAttribute="bottom" constant="-15" id="5Wc-15-am4"/>
                             <constraint firstItem="bvO-fp-oC8" firstAttribute="width" secondItem="Z3j-0i-tz3" secondAttribute="width" id="8yM-Zp-x3Y"/>
-                            <constraint firstItem="wIE-Rh-6ar" firstAttribute="leading" secondItem="Tof-jN-Exq" secondAttribute="trailing" constant="8" symbolic="YES" id="94g-P9-Hna"/>
+                            <constraint firstItem="wIE-Rh-6ar" firstAttribute="leading" secondItem="Tof-jN-Exq" secondAttribute="trailing" constant="10" id="94g-P9-Hna"/>
                             <constraint firstItem="Z3j-0i-tz3" firstAttribute="leading" secondItem="ipm-QH-KTe" secondAttribute="leading" id="AGg-eE-f2B"/>
                             <constraint firstItem="wIE-Rh-6ar" firstAttribute="leading" secondItem="Z3j-0i-tz3" secondAttribute="trailing" id="BJa-XA-Yuy"/>
                             <constraint firstItem="bR5-Ll-2lf" firstAttribute="trailing" secondItem="ipm-QH-KTe" secondAttribute="trailing" id="F2d-2Z-dHd"/>
                             <constraint firstItem="1Zr-hI-ckl" firstAttribute="leading" secondItem="ipm-QH-KTe" secondAttribute="leading" constant="30" id="F3k-4j-1J0"/>
                             <constraint firstItem="wIE-Rh-6ar" firstAttribute="width" secondItem="Ikm-BI-QVp" secondAttribute="width" multiplier="0.2" id="Hap-cX-jiG"/>
                             <constraint firstItem="Z3j-0i-tz3" firstAttribute="height" secondItem="wIE-Rh-6ar" secondAttribute="height" multiplier="0.3" id="Ip3-16-84e"/>
+                            <constraint firstItem="zsw-D0-1PL" firstAttribute="leading" secondItem="ipm-QH-KTe" secondAttribute="leading" id="JZJ-x8-52R"/>
+                            <constraint firstItem="zsw-D0-1PL" firstAttribute="height" secondItem="Ikm-BI-QVp" secondAttribute="height" multiplier="0.1" id="MOf-RK-SUo"/>
+                            <constraint firstItem="bOg-GD-0Rk" firstAttribute="top" secondItem="bvO-fp-oC8" secondAttribute="bottom" constant="8" id="Oaf-Jd-eYw"/>
                             <constraint firstItem="kdx-2V-44e" firstAttribute="height" secondItem="Ikm-BI-QVp" secondAttribute="height" multiplier="0.3" id="OqC-95-eTQ"/>
                             <constraint firstItem="Z3j-0i-tz3" firstAttribute="top" secondItem="Tof-jN-Exq" secondAttribute="bottom" constant="5" id="P8W-6G-ZJQ"/>
                             <constraint firstItem="Tof-jN-Exq" firstAttribute="top" secondItem="kdx-2V-44e" secondAttribute="bottom" constant="10" id="Tsu-hG-03s"/>
+                            <constraint firstItem="ipm-QH-KTe" firstAttribute="trailing" secondItem="V2O-um-KIy" secondAttribute="trailing" constant="15" id="XtH-hK-cyt"/>
+                            <constraint firstItem="bOg-GD-0Rk" firstAttribute="height" secondItem="wIE-Rh-6ar" secondAttribute="height" id="YUR-0h-jtD"/>
                             <constraint firstItem="bvO-fp-oC8" firstAttribute="centerX" secondItem="Z3j-0i-tz3" secondAttribute="centerX" id="YZJ-K9-jqa"/>
+                            <constraint firstItem="zsw-D0-1PL" firstAttribute="top" secondItem="V2O-um-KIy" secondAttribute="bottom" constant="10" id="ZHh-dW-pfa"/>
+                            <constraint firstItem="wIE-Rh-6ar" firstAttribute="leading" secondItem="bOg-GD-0Rk" secondAttribute="trailing" constant="8" id="Zum-t2-9rs"/>
                             <constraint firstItem="bR5-Ll-2lf" firstAttribute="width" secondItem="Ikm-BI-QVp" secondAttribute="width" id="b7e-ls-u26"/>
                             <constraint firstItem="kdx-2V-44e" firstAttribute="width" secondItem="Ikm-BI-QVp" secondAttribute="width" id="bXD-SU-cMh"/>
                             <constraint firstItem="z4i-zK-2T7" firstAttribute="top" secondItem="kdx-2V-44e" secondAttribute="bottom" constant="10" id="blM-7b-jOb"/>
+                            <constraint firstItem="V2O-um-KIy" firstAttribute="leading" secondItem="ipm-QH-KTe" secondAttribute="leading" constant="15" id="c8B-Ap-K7p"/>
+                            <constraint firstItem="zsw-D0-1PL" firstAttribute="bottom" secondItem="ipm-QH-KTe" secondAttribute="bottom" id="can-0i-NTP"/>
+                            <constraint firstItem="V2O-um-KIy" firstAttribute="top" secondItem="bOg-GD-0Rk" secondAttribute="bottom" constant="10" id="e5a-eQ-n0a"/>
                             <constraint firstItem="kdx-2V-44e" firstAttribute="top" secondItem="bR5-Ll-2lf" secondAttribute="bottom" id="eCb-oj-FpH"/>
-                            <constraint firstItem="bR5-Ll-2lf" firstAttribute="height" secondItem="Ikm-BI-QVp" secondAttribute="height" multiplier="0.1" id="hqw-Rl-ga2"/>
+                            <constraint firstItem="bR5-Ll-2lf" firstAttribute="height" secondItem="Ikm-BI-QVp" secondAttribute="height" multiplier="0.08" id="hqw-Rl-ga2"/>
                             <constraint firstItem="z4i-zK-2T7" firstAttribute="leading" secondItem="ipm-QH-KTe" secondAttribute="leading" constant="30" id="iUV-Ib-REK"/>
                             <constraint firstItem="kdx-2V-44e" firstAttribute="centerX" secondItem="ipm-QH-KTe" secondAttribute="centerX" id="jwf-df-AZB"/>
+                            <constraint firstItem="ipm-QH-KTe" firstAttribute="leading" secondItem="bOg-GD-0Rk" secondAttribute="leading" constant="-30" id="kSE-lG-fhk"/>
                             <constraint firstItem="1Zr-hI-ckl" firstAttribute="top" secondItem="z4i-zK-2T7" secondAttribute="bottom" constant="5" id="khr-5P-qCs"/>
                             <constraint firstItem="ipm-QH-KTe" firstAttribute="trailing" secondItem="wIE-Rh-6ar" secondAttribute="trailing" constant="15" id="mFQ-sf-md8"/>
                             <constraint firstItem="bR5-Ll-2lf" firstAttribute="top" secondItem="ipm-QH-KTe" secondAttribute="top" id="mqx-72-ADl"/>
                             <constraint firstItem="bvO-fp-oC8" firstAttribute="height" secondItem="Z3j-0i-tz3" secondAttribute="height" id="nuC-Ag-YNl"/>
+                            <constraint firstItem="zsw-D0-1PL" firstAttribute="trailing" secondItem="ipm-QH-KTe" secondAttribute="trailing" id="qCL-gf-YwY"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1Zr-hI-ckl" secondAttribute="trailing" constant="50" id="rqL-7V-pm0"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="z4i-zK-2T7" secondAttribute="trailing" constant="20" symbolic="YES" id="sQO-bz-4ID"/>
                             <constraint firstItem="Tof-jN-Exq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ikm-BI-QVp" secondAttribute="leading" constant="75" id="uTq-UD-xd2"/>
