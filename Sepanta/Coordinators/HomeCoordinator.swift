@@ -103,6 +103,15 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
+    func pushShop(Shop ashop : Shop){
+        let vc = ShopViewController.instantiate()
+        vc.coordinator = self
+        vc.shop = ashop
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+
+    }
 
     func pushSepantaieGroup (){
         let vc = SepantaGroupsViewController.instantiate()

@@ -20,7 +20,10 @@
 		0F1B75612236BA610087C0DB /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B75602236BA610087C0DB /* CacheManager.swift */; };
 		0F1B75632236E39B0087C0DB /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B75622236E39B0087C0DB /* ShopViewController.swift */; };
 		0F1B75652236E42A0087C0DB /* ShopUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B75642236E42A0087C0DB /* ShopUI.swift */; };
+		0F1B7567223714720087C0DB /* ShopDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B7566223714720087C0DB /* ShopDataSource.swift */; };
+		0F1B75692238498E0087C0DB /* CacheImageForViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B75682238498E0087C0DB /* CacheImageForViews.swift */; };
 		0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F512C042205B5C300B99C9E /* SignupViewController.swift */; };
+		0F67F75A224CD00300659842 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67F759224CD00300659842 /* Post.swift */; };
 		0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */; };
 		0F71A38B2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F71A38A2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift */; };
 		0F71A38F22319A2000F4EB6B /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F71A38E22319A2000F4EB6B /* Alert.swift */; };
@@ -100,7 +103,10 @@
 		0F1B75602236BA610087C0DB /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		0F1B75622236E39B0087C0DB /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		0F1B75642236E42A0087C0DB /* ShopUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopUI.swift; sourceTree = "<group>"; };
+		0F1B7566223714720087C0DB /* ShopDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDataSource.swift; sourceTree = "<group>"; };
+		0F1B75682238498E0087C0DB /* CacheImageForViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImageForViews.swift; sourceTree = "<group>"; };
 		0F512C042205B5C300B99C9E /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		0F67F759224CD00300659842 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringWithFontSizeCalc.swift; sourceTree = "<group>"; };
 		0F6F39C222078DC900393CD7 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		0F6F39C722079FB600393CD7 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
@@ -263,7 +269,9 @@
 				0FDA55D42225C02800E7C889 /* Catagory.swift */,
 				0FA307DD222700B100EDA829 /* Shops.swift */,
 				0F817A6E22354F8600F1738E /* Profile.swift */,
+				0F67F759224CD00300659842 /* Post.swift */,
 				0F1B75602236BA610087C0DB /* CacheManager.swift */,
+				0F1B7566223714720087C0DB /* ShopDataSource.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -321,6 +329,7 @@
 				0F066F92222B198900C8871C /* UIColorFromHex.swift */,
 				0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */,
 				0F71A38E22319A2000F4EB6B /* Alert.swift */,
+				0F1B75682238498E0087C0DB /* CacheImageForViews.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -594,8 +603,10 @@
 				0F71A38B2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift in Sources */,
 				0F984E29220B727B004AFB06 /* SepantaGroupsViewController.swift in Sources */,
 				0F890D122215D21C0091FA2E /* JSONParser.swift in Sources */,
+				0F1B7567223714720087C0DB /* ShopDataSource.swift in Sources */,
 				0F817A6F22354F8600F1738E /* Profile.swift in Sources */,
 				0FB3ECD0222C8AF8009A89F7 /* MenuCoordinator.swift in Sources */,
+				0F1B75692238498E0087C0DB /* CacheImageForViews.swift in Sources */,
 				0F066F9F222C704B00C8871C /* MenuViewController.swift in Sources */,
 				0F1B75652236E42A0087C0DB /* ShopUI.swift in Sources */,
 				0F890D042214BF300091FA2E /* LoginCoordinator.swift in Sources */,
@@ -606,6 +617,7 @@
 				0F817A6922341D8E00F1738E /* ShowProfileUI.swift in Sources */,
 				0FAEEDE92230957100A9178F /* AboutUsUI.swift in Sources */,
 				0F817A6D22346BAF00F1738E /* EditProfileUI.swift in Sources */,
+				0F67F75A224CD00300659842 /* Post.swift in Sources */,
 				0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */,
 				0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */,
 				0F052EDB221C0790009175EA /* HomeCoordinator.swift in Sources */,
