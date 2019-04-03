@@ -17,7 +17,7 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storybo
     var currentStateCodeObs = BehaviorRelay<String>(value : String())
     var currentCityCodeObs = BehaviorRelay<String>(value : String())
     var cityPressed = BehaviorRelay<Bool>(value: false)
-    var myDisposeBag = DisposeBag()
+    let myDisposeBag  = DisposeBag()
     var groupButtons : SepantaGroupButtons?
     var catagories = [Catagory]()
     @IBOutlet weak var sepantaScrollView: UIScrollView!
@@ -233,6 +233,7 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storybo
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
          //self.groupButtons = nil
         
     }

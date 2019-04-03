@@ -41,18 +41,10 @@ class Catagory : NSObject {
     func downloadImage() {
         let imageUrl = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_category_image + self.image
         
-        //print("Default Image as placeholder so the subscribers work and GUI starts!")
-        /*
-        let av = UIImageView()
-        av.af_setImage(withURL: URL(string: imageUrl)!, placeholderImage: UIImage(named: "icon_sepantaei")!)
-        self.anUIImage.accept(av)
-        */
-        
-        //self.anUIImage.accept(UIImageView(image: UIImage(named: "icon_sepantaei")!))
-        print("ImageURL : ",imageUrl)
+        //print("ImageURL : ",imageUrl)
         Alamofire.request(imageUrl).responseImage { [unowned self] response in
             if let image = response.result.value {
-                print("image downloaded: \(self.image)")
+                //print("image downloaded: \(self.image)")
                 self.anUIImage.accept(image)
             }
         }

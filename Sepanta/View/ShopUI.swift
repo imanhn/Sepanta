@@ -13,7 +13,21 @@ import RxCocoa
 import RxSwift
 
 class PostCell : UICollectionViewCell {
-    var aPost : UIButton!
+    var aPost: UIButton = {
+        let aButton = UIButton(frame: .zero)
+        return aButton
+    }()
+    //var aPost : UIButton = UIButton(frame: .zero)
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubviews()
+    }
+    
+    private func addSubviews() {
+        contentView.addSubview(aPost)
+    }
+    required init?(coder _: NSCoder) { return nil }
 }
 
 class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
@@ -21,10 +35,11 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     var views = Dictionary<String,UIView>()
     var buttons = Dictionary<String,UIButton>()
     var postsView = UIView()
-    var myDisposeBag = DisposeBag()
+    let myDisposeBag = DisposeBag()
     var rightPanelscrollView = UIScrollView()
-    var collectionView: UICollectionView!
+    var collectionView : UICollectionView!
     var posts = BehaviorRelay<[Post]>(value: [Post]())
+    
     init(_ vc : ShopViewController) {
         self.delegate = vc
         super.init()
@@ -32,7 +47,15 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         bindUIwithDataSource()
     }
 
-
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let width = collectionView.bounds.width
+        let cellWidth = (width - 30) / 3 // compute your cell width
+        print("WOW Calling layout width : ",width," index : ",indexPath)
+        return CGSize(width: 50 , height: 50)
+        //return CGSize(width: cellWidth, height: cellWidth / 0.6)
+    }
+    
     func bindUIwithDataSource(){
         self.delegate.profileRelay.subscribe(onNext: { [unowned self] aProfile in
             self.delegate.shopTitle.text = aProfile.shop_name
@@ -47,51 +70,41 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
             }
             if aProfile.image != nil {
                 let imageURL = URL(string: NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_profile_image + aProfile.image!)
-                print("Shop Image : ",imageURL)
+                print("Shop Image : ",imageURL ?? "Nil")
                 if imageURL != nil {
                     self.delegate.shopImage.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!)
                     
                 }
             }
-            let margin : CGFloat = 10
-            let buttonDim = self.postsView.frame.height - (2 * margin)
-            let frameWidth = self.postsView.frame.width
-            let frameHeight = self.postsView.frame.height
-            let row : CGFloat = 1
-            var col : CGFloat = 1
-            for acontent in aProfile.content {
-                print("Adding a button ")
-                let aPostButton = UIButton(type: .custom)
-                //aPostButton.frame = CGRect(x: (frameWidth - (col * (buttonDim+margin))), y: ((row * margin) + (row-1) * buttonDim), width: buttonDim, height: buttonDim)
-                aPostButton.frame = CGRect(x: ( (col-1) * buttonDim + col*margin), y: ((row * margin) + (row-1) * buttonDim), width: buttonDim, height: buttonDim)
-                let imageURL = URL(string: NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + acontent.image)
-                //aPostButton.backgroundColor = UIColor(hex: 0x515151)
-                aPostButton.layer.cornerRadius = 5
-                aPostButton.layer.masksToBounds = true
-                print("Adding a button URL : ",aPostButton.frame)
-                //aPostButton.imageView?.setImageFromCache(PlaceHolderName: "logo_shapein_boxed", Scale: 1.0, ImageURL: imageURL!, ImageName: acontent.image)
-                aPostButton.af_setBackgroundImage(for: .normal, url: imageURL!)
-                aPostButton.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 1.0, ImageURL: imageURL!, ImageName: acontent.image)
-                //aPostButton.setTitle("HELO", for: .normal)
-                self.postsView.addSubview(aPostButton)
-                col = col + 1
-            }
-            self.rightPanelscrollView.contentSize = CGSize(width: self.postsView.frame.width*2, height: self.postsView.frame.height)
-            //self.rightPanelscrollView.frame = CGRect(x: (frameWidth - (col * (buttonDim+margin)))-30, y: 0, width: self.postsView.frame.width*2, height: self.postsView.frame.height)
         })
         
-        self.posts.bind(to: collectionView.rx.items(cellIdentifier: "cell")) { row, model, cell in
+        self.posts.bind(to: collectionView.rx.items(cellIdentifier: "postcell")) { row, model, cell in
             if let aCell = cell as? PostCell {
-//                aCell.shopName.text = model.name
                 let strURL = NetworkManager.shared.baseURLString + SlidesAndPaths.shared.path_post_image + model.image
                 let imageURL = URL(string: strURL)
+                //print("ROW:\(row) UICollectionView binding : ",imageURL ?? "NIL"," Cell : ",aCell,"  model : ",model)
+                print("ROW:\(row) UICollectionView binding")
+                aCell.aPost = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+                aCell.aPost.setBackgroundImage(UIImage(named: "logo_shape"), for: .normal)
+                aCell.aPost.backgroundColor = UIColor.black
+
                 if imageURL != nil {
-                    aCell.aPost.af_setImage(for: .normal, url: imageURL!)
+                    aCell.aPost = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+                    //aCell.aPost.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1, ImageURL: imageURL!, ImageName: model.image)
+                    aCell.aPost.setBackgroundImage(UIImage(named: "logo_shape"), for: .normal)
+                    aCell.aPost.backgroundColor = UIColor.black
+                    aCell.aPost.titleLabel?.text = "text"
+                    aCell.aPost.titleLabel?.font = UIFont(name: "FD Shabnam", size: 12)
+                    aCell.aPost.titleLabel?.textColor = UIColor(hex: 0x515151)
+                    
                 }else{
-                    print("Error parsing Image URL for Post in Bind section of ShopUI")
+                    //print("Error parsing Image URL for Post in Bind section of ShopUI")
                 }
+            }else{
+                print("\(cell) can not be casted to PostCell")
             }
             }.disposed(by: myDisposeBag)
+        
 
     }
     //Create Gradient on PageView
@@ -108,7 +121,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         views["rightFormView"]!.backgroundColor = UIColor.clear
         let buttonsFont = UIFont(name: "Shabnam-Bold-FD", size: 14)
         let buttonHeight = (views["rightFormView"] as! RightTabbedView).getHeight()
-        let textFieldWidth = (views["rightFormView"]?.bounds.width)! - (2 * marginX)
+        //let textFieldWidth = (views["rightFormView"]?.bounds.width)! - (2 * marginX)
         
         buttons["leftButton"] = UIButton(frame: CGRect(x: 0, y: 0, width: (views["rightFormView"]?.bounds.width)!/2, height: buttonHeight))
         buttons["leftButton"]!.setTitle("اطلاعات ارتباطی", for: .normal)
@@ -137,7 +150,9 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         
         let flowLayout = UICollectionViewFlowLayout()
         collectionView = UICollectionView(frame: CGRect(x: 0, y: cursurY, width: views["rightFormView"]!.frame.width, height: views["rightFormView"]!.frame.height-cursurY), collectionViewLayout: flowLayout)
-        self.collectionView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.0)
+        collectionView.register(PostCell.self, forCellWithReuseIdentifier: "postcell")
+        collectionView.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0)
+        collectionView.rx.setDelegate(self) //Delegate method to call
         views["rightFormView"]!.addSubview(collectionView)
         self.delegate.paneView.addSubview(views["rightFormView"]!)
     }
@@ -156,7 +171,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         
         let buttonsFont = UIFont(name: "Shabnam-Bold-FD", size: 14)
         let buttonHeight = (views["leftFormView"] as! LeftTabbedView).getHeight()
-        let textFieldWidth = (views["leftFormView"]!.bounds.width) - (2 * marginX)
+        //let textFieldWidth = (views["leftFormView"]!.bounds.width) - (2 * marginX)
         
         buttons["leftButton"] = UIButton(frame: CGRect(x: 0, y: 0, width: views["leftFormView"]!.bounds.width/2, height: buttonHeight))
         buttons["leftButton"]!.setTitle("اطلاعات ارتباطی", for: .normal)

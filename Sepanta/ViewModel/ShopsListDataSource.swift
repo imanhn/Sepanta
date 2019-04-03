@@ -13,8 +13,8 @@ import RxAlamofire
 import Alamofire
 import AlamofireImage
 
-class NewShopsDataSource {
-    var delegate : NewShopsViewController
+class ShopsListDataSource {
+    var delegate : ShopListViewControllerProtocol
     let myDisposeBag = DisposeBag()
     var fetchedShops = [Shop]()
     var shopProfiles = BehaviorRelay<[Profile]>(value: [])
@@ -32,16 +32,30 @@ class NewShopsDataSource {
         self.delegate.shops.accept(self.fetchedShops)
     }
     
+    func getShopListForACatagory(Catagory catagoryID:String,State state : String?,City city:String?){
+        var aParameter : Dictionary<String, String> = [:]
+        if (state == nil || state == "") && (city == nil || state == "") {
+           // "http://panel.ipsepanta.ir/api/v1/category-shops-list?slug=3&category_id=4"
+            aParameter = ["slug":"3","category_id":"\(catagoryID)"]
+        }
+        print("Running network request category-shops-list... \(aParameter)  state : \(state)  City : \(city)")
+        NetworkManager.shared.run(API: "category-shops-list", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil)
+    }
+    
     func getNewShopsFromServer(){
         NetworkManager.shared.run(API: "new-shops", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil)
+    }
+    
+    func subscribeToShop(){
         NetworkManager.shared.shopObs
             //.debug()
             .filter({$0.count > 0})
             .subscribe(onNext: { [unowned self] (innerShops) in
-                print("innerShops : ",innerShops.count)
-                print("Shops : ",innerShops)
+                //print("innerShops : ",innerShops.count)
+                //print("Shops : ",innerShops)
                 self.fetchedShops = innerShops as! [Shop]
                 self.delegate.shops.accept(self.fetchedShops)
+                /*
                 for ashop in self.fetchedShops {
                     let urlAddress = "http://www.panel.ipsepanta.ir/api/v1/profile?user%20id=\(ashop.user_id)"
                     let aParameter = ["user id":"\(ashop.user_id)"]
@@ -59,7 +73,7 @@ class NewShopsDataSource {
                                 }else {
                                     //print("aProfileAsNS Keys : ",aProfileAsNS.allKeys)
                                     //print("message : ",aProfileAsNS["message"])
-                                    
+                                    //print("UPDATE FETCHED SHOPS : ",aProfileAsNS)
                                     self.updateFetchedShops(aProfileAsNS)
                                 }
                             } else {
@@ -79,6 +93,7 @@ class NewShopsDataSource {
                             //print("NetworkManager Disposed")
                         }).disposed(by: self.myDisposeBag)
                 }
+                */
                 }, onError: { _ in
                     print("NewShops Call Raised Error")
                     Spinner.stop()
@@ -87,7 +102,7 @@ class NewShopsDataSource {
             }, onDisposed: {
                 print("NewShops Disposed")
             }).disposed(by: myDisposeBag)
-
+        
         self.shopProfiles.subscribe(onNext: { (innerProfiles) in
             
         }, onError: {_ in
@@ -99,17 +114,8 @@ class NewShopsDataSource {
         }).disposed(by: myDisposeBag)
     }
     
-    func fetchData() {
-        getNewShopsFromServer()
-        /*
-        var fetchedShops = [Shop]()
-        fetchedShops.append(Shop(user_id: 1,name: "فست فود جو", image: "cat_img/icon_menu_02.png", stars: 1.4, followers: 16005, dicount: 15))
-        fetchedShops.append(Shop(user_id:2,name: "تهران برگر", image: "profile_img/2074-2018-08-28_09-59-03.jpg", stars: 3.4, followers: 1501, dicount: 10))
-         self.delegate.shops.accept(self.fetchedShops)
-         */
-    }
-    
-    init (_ vc : NewShopsViewController){
+    init (_ vc : ShopListViewControllerProtocol){
         self.delegate = vc
+        subscribeToShop()
     }
 }

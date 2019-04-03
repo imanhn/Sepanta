@@ -27,7 +27,9 @@ class SepantaGroupButtons {
         let theButton = (sender as AnyObject)
         //print("TAG : ",theButton.tag," delegate Coordinator : ",self.delegate.coordinator ?? "is Nil")
         let targetCatagory = self.getCatagory(ByID: theButton.tag!)
-        self.delegate.coordinator!.pushAGroup(GroupID: targetCatagory.id, GroupImage: targetCatagory.anUIImage.value, GroupName: targetCatagory.title)
+        let selectedCity = self.delegate.selectCity.text
+        let selectedState = self.delegate.selectProvince.text
+        self.delegate.coordinator!.pushAGroup(GroupID: targetCatagory.id, GroupImage: targetCatagory.anUIImage.value, GroupName: targetCatagory.title,State: selectedState,City: selectedCity )
     }
         
     func getCatagory(ByID  anID : Int)->Catagory{
@@ -60,7 +62,7 @@ class SepantaGroupButtons {
                 .subscribe(onNext: { [weak self] innerImage in
                     let foundButton = self?.buttons.filter({$0.tag == catagories[i].id}) ?? [UIButton]()
                     if foundButton.count == 0 {
-                        print("Addin image ",catagories[i].title)
+                        //print("Addin image ",catagories[i].title)
                         let col = (self?.counter)! % 3
                         let row = Int((self?.counter)! / 3)
                         let but = UIButton(frame: CGRect(x: xMargin+CGFloat(col)*buttonsDim*0.9, y: CGFloat(row) * buttonsDim * 1.2, width: buttonsDim*1.3, height: buttonsDim*1.3))

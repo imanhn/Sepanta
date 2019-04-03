@@ -121,12 +121,14 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
-    func pushAGroup(GroupID anID:Int,GroupImage anImage:UIImage,GroupName aName : String){
+    func pushAGroup(GroupID anID:Int,GroupImage anImage:UIImage,GroupName aName : String,State astate : String?,City acity : String?){
         let vc = GroupViewController.instantiate()
         vc.coordinator = self
-        vc.currentID = anID
+        vc.catagoryId = anID
         vc.currentGroupName = aName
         vc.currentGroupImage = anImage
+        vc.selectedCity = acity
+        vc.selectedState = astate
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }

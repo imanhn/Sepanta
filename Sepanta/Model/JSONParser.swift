@@ -73,6 +73,10 @@ class JSONParser {
                     if let cat = aDic["categories"] {
                         NetworkManager.shared.catagoriesObs.accept([cat])
                     }
+                } else if (apiName == "category-shops-list") && (aMethod == HTTPMethod.post) {
+                    print("Starting category-shops-list Parser...")
+                    let parsedShops = self?.processShopList(Result: aDic)
+                    NetworkManager.shared.shopObs.accept(parsedShops!)
                 } else if (apiName == "new-shops") && (aMethod == HTTPMethod.get) {
                     print("Starting NewShops Parser...")
                     let parsedShops = self?.processShopList(Result: aDic)
@@ -125,14 +129,14 @@ class JSONParser {
         
         print("Shop Result keys : ",aResult.allKeys)
         //print("Shops : ",aResult["shops"])
-        if let aDic = aResult["shops"] as? NSArray {
+        if let aDic = aResult["shops"] as? NSArray ?? aResult["categoryShops"] as? NSArray{
             for shopDic in aDic
             {
                 if let shopElemAsNSDic = shopDic as? NSDictionary{
                     // print("shopElem : ",shopElem)
                     if let shopElem = shopElemAsNSDic as? Dictionary<String, Any>{
-                        let aNewShop = Shop(user_id: shopElem["user_id"] as! Int, name: shopElem["shop_name"] as! String, image: "", stars: 0, followers: 0, dicount: shopElem["shop_off"] as! Int)
-                    shops.append(aNewShop)
+                        let aNewShop = Shop(user_id: shopElem["user_id"] as! Int, name: shopElem["shop_name"] as! String, image: shopElem["image"] as! String , stars: shopElem["rate"] as! Float , followers: shopElem["follower_count"] as! Int, dicount: shopElem["shop_off"] as! Int)
+                        shops.append(aNewShop)
                     }
                 }else{
                     print("shopElm not casted.")

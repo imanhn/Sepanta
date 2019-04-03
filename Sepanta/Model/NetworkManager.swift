@@ -44,7 +44,7 @@ class NetworkManager {
     // Initialization
     
     private init() {
-        self.baseURLString = websiteRootAddress + "/api/v1/"
+        self.baseURLString = websiteRootAddress + "/api/v1"
         self.message = ""
         self.statusMessage = ""
         self.headers = [
@@ -53,17 +53,31 @@ class NetworkManager {
         ]
         
     }
+    func buildQueryStringSuffix(_ aDic : Dictionary<String,String>) -> String{
+        if aDic.count == 0 {return ""}
+        var queryString : String = "?"
+        for akey in aDic.keys {
+            queryString = queryString + "\(akey)=\(aDic[akey]!)&"
+        }
+        _ = queryString.removeLast()
+        return queryString
+    }
     
     func run(API apiName : String, QueryString aQuery : String, Method aMethod : HTTPMethod, Parameters aParameter : Dictionary<String, String>?, Header  aHeader : HTTPHeaders?  ) {
         self.status.accept(CallStatus.inprogress)
-        let urlAddress = self.baseURLString + apiName + aQuery
+        var urlAddress = self.baseURLString + "/" + apiName + aQuery
         
         var headerToSend = self.headers
         if (aHeader) != nil{
             headerToSend = aHeader!
         }
         //print("Calling Alamofire with Header : ",headerToSend.count,"  Tok :",LoginKey.shared.token,"  ID : ",LoginKey.shared.userID)
-        //print("Header : ",headerToSend)
+        
+        if aParameter != nil {
+            let queryString = buildQueryStringSuffix(aParameter!)
+            urlAddress = self.baseURLString + "/" + apiName + queryString
+            print("Built urlAddress : ",urlAddress)
+        }
         
         print("RXAlamofire : Requesting JSON over URL : ",urlAddress)
         RxAlamofire.requestJSON(aMethod, urlAddress , parameters: aParameter, encoding: JSONEncoding.default, headers: headerToSend)

@@ -14,7 +14,7 @@
 		0F066F99222C22EE00C8871C /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F98222C22EE00C8871C /* MenuController.swift */; };
 		0F066F9D222C2D5600C8871C /* MenuPopUpConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F9C222C2D5600C8871C /* MenuPopUpConfiguration.swift */; };
 		0F066F9F222C704B00C8871C /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F9E222C704B00C8871C /* MenuViewController.swift */; };
-		0F1B755B223580C80087C0DB /* NewShopsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B755A223580C80087C0DB /* NewShopsDataSource.swift */; };
+		0F1B755B223580C80087C0DB /* ShopsListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B755A223580C80087C0DB /* ShopsListDataSource.swift */; };
 		0F1B755D2235C1080087C0DB /* SlidesAndPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B755C2235C1080087C0DB /* SlidesAndPaths.swift */; };
 		0F1B755F2235C8460087C0DB /* Slide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B755E2235C8460087C0DB /* Slide.swift */; };
 		0F1B75612236BA610087C0DB /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B75602236BA610087C0DB /* CacheManager.swift */; };
@@ -24,6 +24,7 @@
 		0F1B75692238498E0087C0DB /* CacheImageForViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B75682238498E0087C0DB /* CacheImageForViews.swift */; };
 		0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F512C042205B5C300B99C9E /* SignupViewController.swift */; };
 		0F67F75A224CD00300659842 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67F759224CD00300659842 /* Post.swift */; };
+		0F67F75C224E1B4600659842 /* ShopListViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67F75B224E1B4600659842 /* ShopListViewControllerProtocol.swift */; };
 		0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */; };
 		0F71A38B2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F71A38A2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift */; };
 		0F71A38F22319A2000F4EB6B /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F71A38E22319A2000F4EB6B /* Alert.swift */; };
@@ -97,7 +98,7 @@
 		0F066F98222C22EE00C8871C /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		0F066F9C222C2D5600C8871C /* MenuPopUpConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPopUpConfiguration.swift; sourceTree = "<group>"; };
 		0F066F9E222C704B00C8871C /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		0F1B755A223580C80087C0DB /* NewShopsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewShopsDataSource.swift; sourceTree = "<group>"; };
+		0F1B755A223580C80087C0DB /* ShopsListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopsListDataSource.swift; sourceTree = "<group>"; };
 		0F1B755C2235C1080087C0DB /* SlidesAndPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidesAndPaths.swift; sourceTree = "<group>"; };
 		0F1B755E2235C8460087C0DB /* Slide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slide.swift; sourceTree = "<group>"; };
 		0F1B75602236BA610087C0DB /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
@@ -107,6 +108,7 @@
 		0F1B75682238498E0087C0DB /* CacheImageForViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImageForViews.swift; sourceTree = "<group>"; };
 		0F512C042205B5C300B99C9E /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		0F67F759224CD00300659842 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		0F67F75B224E1B4600659842 /* ShopListViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListViewControllerProtocol.swift; sourceTree = "<group>"; };
 		0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringWithFontSizeCalc.swift; sourceTree = "<group>"; };
 		0F6F39C222078DC900393CD7 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		0F6F39C722079FB600393CD7 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
@@ -249,13 +251,14 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
-		0F890D072214CFAA0091FA2E /* SuperClasses */ = {
+		0F890D072214CFAA0091FA2E /* SuperClasses and Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				0F890CFF2214B4E90091FA2E /* Storyboarded.swift */,
 				0F71A38A2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift */,
+				0F67F75B224E1B4600659842 /* ShopListViewControllerProtocol.swift */,
 			);
-			path = SuperClasses;
+			path = "SuperClasses and Protocols";
 			sourceTree = "<group>";
 		};
 		0F890D0C2215C6FD0091FA2E /* Model */ = {
@@ -271,7 +274,6 @@
 				0F817A6E22354F8600F1738E /* Profile.swift */,
 				0F67F759224CD00300659842 /* Post.swift */,
 				0F1B75602236BA610087C0DB /* CacheManager.swift */,
-				0F1B7566223714720087C0DB /* ShopDataSource.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -299,7 +301,8 @@
 				0F066F9C222C2D5600C8871C /* MenuPopUpConfiguration.swift */,
 				0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */,
 				0F066F98222C22EE00C8871C /* MenuController.swift */,
-				0F1B755A223580C80087C0DB /* NewShopsDataSource.swift */,
+				0F1B755A223580C80087C0DB /* ShopsListDataSource.swift */,
+				0F1B7566223714720087C0DB /* ShopDataSource.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -364,7 +367,7 @@
 				0F890D102215D0F20091FA2E /* ViewModel */,
 				0F890D0F2215D0CF0091FA2E /* ViewControllers */,
 				0F890D0C2215C6FD0091FA2E /* Model */,
-				0F890D072214CFAA0091FA2E /* SuperClasses */,
+				0F890D072214CFAA0091FA2E /* SuperClasses and Protocols */,
 				0F890CFC2214B4B40091FA2E /* Coordinators */,
 				0FE8B9A8220355F000C868C3 /* AppDelegate.swift */,
 				0FE8B9AC220355F000C868C3 /* Main.storyboard */,
@@ -603,6 +606,7 @@
 				0F71A38B2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift in Sources */,
 				0F984E29220B727B004AFB06 /* SepantaGroupsViewController.swift in Sources */,
 				0F890D122215D21C0091FA2E /* JSONParser.swift in Sources */,
+				0F67F75C224E1B4600659842 /* ShopListViewControllerProtocol.swift in Sources */,
 				0F1B7567223714720087C0DB /* ShopDataSource.swift in Sources */,
 				0F817A6F22354F8600F1738E /* Profile.swift in Sources */,
 				0FB3ECD0222C8AF8009A89F7 /* MenuCoordinator.swift in Sources */,
@@ -610,7 +614,7 @@
 				0F066F9F222C704B00C8871C /* MenuViewController.swift in Sources */,
 				0F1B75652236E42A0087C0DB /* ShopUI.swift in Sources */,
 				0F890D042214BF300091FA2E /* LoginCoordinator.swift in Sources */,
-				0F1B755B223580C80087C0DB /* NewShopsDataSource.swift in Sources */,
+				0F1B755B223580C80087C0DB /* ShopsListDataSource.swift in Sources */,
 				0FB3ECD2222DC48F009A89F7 /* GetRichViewController.swift in Sources */,
 				0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */,
 				0F817A6B2234635A00F1738E /* EditProfileViewController.swift in Sources */,

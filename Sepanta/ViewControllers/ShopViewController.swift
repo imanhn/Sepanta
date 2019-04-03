@@ -71,6 +71,7 @@ class ShopViewController :  UIViewController,Storyboarded{
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         shopUI = nil
+        shopDataSource = nil
     }
     
 }

@@ -36,6 +36,7 @@ class GetRichViewController : UIViewController,UITextFieldDelegate,Storyboarded{
         self.coordinator!.openButtomMenu()
     }
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         print("View DID Disapear!")
         self.getRichUI = nil
     }

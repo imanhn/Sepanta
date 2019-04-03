@@ -33,6 +33,7 @@ class AboutUsViewController : UIViewController,UITextFieldDelegate,Storyboarded{
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         print("View DID Disapear!")
         self.aboutUsUI = nil
     }

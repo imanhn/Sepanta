@@ -6,11 +6,11 @@
 //  Copyright © 1397 AP Imzich. All rights reserved.
 //
 
-import XCTest
+
 import Foundation
 import UIKit
 import Alamofire
-import SwiftyJSON
+
 
 @testable import Sepanta
 

@@ -28,11 +28,11 @@ class NewShopCell : UITableViewCell {
     
 }
 
-class NewShopsViewController :  UIViewController,Storyboarded{
+class NewShopsViewController :  UIViewController,Storyboarded,ShopListViewControllerProtocol{
     weak var coordinator : HomeCoordinator?
     let myDisposeBag = DisposeBag()
-    let shops : BehaviorRelay<[Shop]> = BehaviorRelay(value: [])
-    var newShopsDataSource : NewShopsDataSource!
+    var shops : BehaviorRelay<[Shop]> = BehaviorRelay(value: [])
+    var newShopsDataSource : ShopsListDataSource!
     
     @IBOutlet weak var shopTable: UITableView!
     
@@ -44,8 +44,8 @@ class NewShopsViewController :  UIViewController,Storyboarded{
         self.coordinator!.popHome()
     }
 
+    
     func bindToTableView() {
-        
         shops.bind(to: shopTable.rx.items(cellIdentifier: "cell")) { row, model, cell in
             if let aCell = cell as? NewShopCell {
                 aCell.shopName.text = model.name
@@ -61,26 +61,28 @@ class NewShopsViewController :  UIViewController,Storyboarded{
                 if model.stars > 3.5 {aCell.star4.image = UIImage(named: "icon_star_on")}
                 if model.stars > 4.5 {aCell.star5.image = UIImage(named: "icon_star_on")}
                 if let shopImage = aCell.shopImage {
-                    let imageUrl = URL(string: NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_profile_image+model.image)!
-                    shopImage.setImageFromCache(PlaceHolderName :"logo_shape_in", Scale : 0.8 ,ImageURL : imageUrl ,ImageName : model.image)
+                    if let imageUrl = URL(string: NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_profile_image+model.image)
+                    {
+                        shopImage.setImageFromCache(PlaceHolderName :"logo_shape_in", Scale : 0.8 ,ImageURL : imageUrl ,ImageName : model.image)
+                    }else{
+                        print("model.image path could not be cast to URL  : ",model.image)
+                        
+                    }
                 }
             }
             }.disposed(by: myDisposeBag)
-        
         shopTable.rx.modelSelected(Shop.self)
             .subscribe(onNext: { [unowned self] selectedShop in
                 print("Pushing ShopVC with : ", selectedShop)
                 self.coordinator!.pushShop(Shop: selectedShop)
-                
-                
             })
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         bindToTableView()
-        newShopsDataSource = NewShopsDataSource(self)
-        newShopsDataSource.fetchData()
+        newShopsDataSource = ShopsListDataSource(self)
+        newShopsDataSource.getNewShopsFromServer()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
