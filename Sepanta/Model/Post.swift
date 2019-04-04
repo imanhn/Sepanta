@@ -7,10 +7,14 @@
 //
 
 import Foundation
+import RxDataSources
 
-struct Post : Decodable {
+struct Post : Decodable,IdentifiableType, Equatable {
     var id : Int
     var title : String
     var content : String
     var image : String
+    var identity: Int {
+        return id
+    }
 }
