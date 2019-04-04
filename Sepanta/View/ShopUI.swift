@@ -28,6 +28,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     var rightPanelscrollView = UIScrollView()
     var collectionView : UICollectionView!
     var posts = BehaviorRelay<[Post]>(value: [Post]())
+    let numberOfPostInARow : CGFloat = 4
     /*
     {
         didSet {
@@ -47,15 +48,15 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         showShopPosts()
         bindUIwithDataSource()
     }
-/*
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width
-        let cellWidth = (width - 30) / 3 // compute your cell width
+        let cellWidth = (width - 30) / numberOfPostInARow // compute your cell width
         print("WOW Calling layout cell width : ",cellWidth," index : ",indexPath)
-        return CGSize(width: 50 , height: 50)
-        //return CGSize(width: cellWidth, height: cellWidth / 0.6)
+        //return CGSize(width: 50 , height: 50)
+        return CGSize(width: cellWidth, height: cellWidth)
     }
-*/
+
     func bindUIwithDataSource(){
         self.delegate.profileRelay.subscribe(onNext: { [unowned self] aProfile in
             self.delegate.shopTitle.text = aProfile.shop_name
@@ -77,8 +78,8 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 }
             }
         })
-        
     }
+    
     func bindCollectionView(){
         self.posts.bind(to: collectionView.rx.items(cellIdentifier: "postcell")) { [unowned self] row, model, cell in
             if let aCell = cell as? PostCell {
@@ -88,24 +89,19 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 print("ROW:\(row) UICollectionView binding")
                 self.collectionView.addSubview(aCell)
                 aCell.addSubview(aCell.aPost)
-                //aCell.aPost = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-                aCell.aPost.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-                //aCell.aPost.setBackgroundImage(UIImage(named: "logo_shape"), for: .normal)
+                let dim = (self.collectionView.bounds.width * 0.8) / self.numberOfPostInARow
+                aCell.aPost.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
+                
                 aCell.aPost.setImage(UIImage(named: "logo_shape"), for: .normal)
-                //aCell.aPost.backgroundColor = UIColor.green
-                aCell.aPost.isHidden = false
+                
+                
                 print("Frame : ",aCell.aPost.frame)
                 print("SuperView  : ",aCell.aPost.superview)
 
-                if false && imageURL != nil {
-                    aCell.aPost = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-                    //aCell.aPost.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1, ImageURL: imageURL!, ImageName: model.image)
-                    aCell.aPost.setBackgroundImage(UIImage(named: "logo_shape"), for: .normal)
-                    aCell.aPost.backgroundColor = UIColor.black
-                    aCell.aPost.titleLabel?.text = "text"
-                    aCell.aPost.titleLabel?.font = UIFont(name: "FD Shabnam", size: 12)
-                    aCell.aPost.titleLabel?.textColor = UIColor(hex: 0x515151)
-                    
+                if imageURL != nil {
+                    //aCell.aPost.setImage(UIImage(named: "logo_shape"), for: .normal)
+                    print("Downloading Post Image : ")
+                    aCell.aPost.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1, ImageURL: imageURL!, ImageName: model.image)
                 }else{
                     //print("Error parsing Image URL for Post in Bind section of ShopUI")
                 }
@@ -147,7 +143,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         
         views["rightFormView"]!.addSubview(buttons["leftButton"]!)
         views["rightFormView"]!.addSubview(buttons["rightButton"]!)
-        cursurY = cursurY + buttonHeight + marginY
+        cursurY = cursurY + buttonHeight + marginY+20
         
         let flowLayout = UICollectionViewFlowLayout()
         /*
@@ -157,6 +153,8 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         flowLayout.headerReferenceSize = CGSize(width: 20 , height: 20)
         flowLayout.scrollDirection = .horizontal
  */
+        flowLayout.minimumLineSpacing = 10
+        
         collectionView = UICollectionView(frame: CGRect(x: 0, y: cursurY, width: views["rightFormView"]!.frame.width, height: views["rightFormView"]!.frame.height-cursurY), collectionViewLayout: flowLayout)
         collectionView.register(PostCell.self, forCellWithReuseIdentifier: "postcell")
         collectionView.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0)
