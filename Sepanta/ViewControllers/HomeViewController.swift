@@ -14,6 +14,7 @@ class HomeViewController: UIViewController,Storyboarded {
     var slideControl : SlideController?
     @IBOutlet weak var pageControl: UIPageControl!
     
+    @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var currentImageView: AdImageView!
     @IBOutlet weak var leftImageView: AdImageView!
     @IBOutlet weak var rightImageView: AdImageView!
@@ -28,16 +29,6 @@ class HomeViewController: UIViewController,Storyboarded {
     @IBAction func gotoNewShops(_ sender: Any) {
         self.coordinator!.pushNewShops()
     }
-    
-    private func showPopup(_ controller: UIViewController, sourceView: UIView) {
-        //print("Showing POPUP : ",sourceView)
-        let presentationController = PresentAsMenu.configurePresentation(forController: controller)
-        presentationController.sourceView = sourceView
-        presentationController.sourceRect = sourceView.bounds
-        presentationController.permittedArrowDirections = [.down, .up]
-        self.present(controller, animated: true)
-    }
-    
     @IBAction func menuClicked(_ sender: Any) {
         (self.coordinator as! HomeCoordinator).openButtomMenu()
     }
@@ -52,9 +43,13 @@ class HomeViewController: UIViewController,Storyboarded {
         if slideControl != nil {
             slideControl?.handlePan(sender)
         }
-    }    
-    override func viewDidLoad() {
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         slideControl = SlideController(parentController: self)
+    }
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         //Handle Tap to End Editing

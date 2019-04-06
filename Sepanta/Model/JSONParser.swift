@@ -42,22 +42,23 @@ class JSONParser {
                         LoginKey.shared.userIDObs.accept(LoginKey.shared.userID)
                     }
                 } else if (apiName == "categories-filter") && (aMethod == HTTPMethod.get) {
-                    /*
-                    if let cities = aDic["cities"] {
-                        if let castedCities = cities as? NSDictionary
-                        {
-                            NetworkManager.shared.cityDictionaryObs.accept(castedCities.toStringDictionary)
-                        }
-                    }*/
-                    if let cat = aDic["categories"] {
+                    //Returns All Catagories (while SepantaGroupsVC pushed/No state/City has selected yet //?? aDic["categoryShops"]  is redundant but who knows!
+                    if let cat = aDic["categories"] ?? aDic["categoryShops"]  {
                         //print("Setting All Catagories  : ",[cat])
                         NetworkManager.shared.catagoriesObs.accept([cat])
                     }
                 } else if (apiName == "categories-filter") && (aMethod == HTTPMethod.post) {
-                    if let cat = aDic["categories"] {
+                    //Returns catagories after selection of a city or a state
+                    if let cat = aDic["categories"] ?? aDic["categoryShops"] {
                         //print("Setting Catagories for a state/city : ",[cat])
                         NetworkManager.shared.catagoriesObs.accept([cat])
                     }
+                    if aDic["list_city"] != nil {
+                        var processedDic = Dictionary<String,String>()
+                        processedDic = (self?.processAsCityList(Result: aDic))!
+                        NetworkManager.shared.cityDictionaryObs.accept(processedDic)
+                    }
+
                 } else if (apiName == "check-sms-code") && (aMethod == HTTPMethod.post) {
                     if let aToken = aDic["token"] {
                         LoginKey.shared.token = String(describing: aToken)
@@ -67,6 +68,7 @@ class JSONParser {
                         _ = LoginKey.shared.registerTokenAndUserID()
                     }
                 } else if (apiName == "category-state-list") && (aMethod == HTTPMethod.get) {
+                    //Returns the List of supported States (which probably have catagory
                     var processedDic = Dictionary<String,String>()
                     (processedDic) = (self?.processAsProvinceList(Result: aDic))!
                     NetworkManager.shared.provinceDictionaryObs.accept(processedDic)
@@ -74,6 +76,7 @@ class JSONParser {
                         NetworkManager.shared.catagoriesObs.accept([cat])
                     }
                 } else if (apiName == "category-shops-list") && (aMethod == HTTPMethod.post) {
+                    //Returns All shops in a Specific Catagory (Slug=3) OR Shops in a specific catagory in a state (Slug=1) OR Shops in a specific catagory in a city (Slug=2)
                     print("Starting category-shops-list Parser...")
                     let parsedShops = self?.processShopList(Result: aDic)
                     NetworkManager.shared.shopObs.accept(parsedShops!)
@@ -107,8 +110,37 @@ class JSONParser {
                         let aTitle = aSlideAsNsDic["title"] as? String ?? "بدون نام"
                         let aLink = aSlideAsNsDic["link"] as? String ?? ""
                         let aUserId = aSlideAsNsDic["user_id"] as? Int ?? 0
-                        let anImage = aSlideAsNsDic["image"] as? String ?? ""
-                        SlidesAndPaths.shared.slides.append(Slide(id: anId, title: aTitle, link: aLink, user_id: aUserId, images: anImage))
+                        let imageName = aSlideAsNsDic["images"] as? String ?? ""
+                        let img = UIImage().getImageFromCache(ImageName: imageName)
+                        if img == nil{
+                            print("Downloading slide : \(anId) with name : \(imageName)")
+                            let imageUrlStr = NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_slider_image+imageName
+                            if let imageUrl = URL(string: imageUrlStr)
+                            {
+                                print("Alamofire : ",imageUrlStr)
+                                Alamofire.request(imageUrl).responseImage { [unowned self] response in
+                                    if let image = response.result.value {
+                                        //print("image downloaded: \(self.image)")
+                                        //self.anUIImage.accept(image)
+                                        SlidesAndPaths.shared.slides.append(Slide(id: anId, title: aTitle, link: aLink, user_id: aUserId, images: imageName,aUIImage: image))
+                                        SlidesAndPaths.shared.slidesObs.accept(SlidesAndPaths.shared.slides)
+                                        let imageData = UIImagePNGRepresentation(image) as NSData?
+                                        if imageData != nil {
+                                            print("Saving slider : ",imageName)
+                                            CacheManager.shared.saveFile(Data:imageData!, Filename:imageName)
+                                        }
+                                    }else{
+                                        print("No response from alamofire requesting image")
+                                    }
+                                }
+                            }else{
+                                print("URL for Slide is invalid : ",imageUrlStr)
+                            }
+                        }else{
+                            print("Slide : ",anId," exists in cache : ",img)
+                            SlidesAndPaths.shared.slides.append(Slide(id: anId, title: aTitle, link: aLink, user_id: aUserId, images: imageName,aUIImage: img!))
+                            SlidesAndPaths.shared.slidesObs.accept(SlidesAndPaths.shared.slides)
+                        }
                     }else{
                         print("Error : Slide element is not a NSDictionary")
                     }
@@ -127,23 +159,30 @@ class JSONParser {
             print("Message Parsed : ",aResult["message"]!)
         }
         
-        print("Shop Result keys : ",aResult.allKeys)
-        //print("Shops : ",aResult["shops"])
-        if let aDic = aResult["shops"] as? NSArray ?? aResult["categoryShops"] as? NSArray{
-            for shopDic in aDic
-            {
-                if let shopElemAsNSDic = shopDic as? NSDictionary{
-                    // print("shopElem : ",shopElem)
-                    if let shopElem = shopElemAsNSDic as? Dictionary<String, Any>{
-                        let aNewShop = Shop(user_id: shopElem["user_id"] as! Int, name: shopElem["shop_name"] as! String, image: shopElem["image"] as! String , stars: shopElem["rate"] as! Float , followers: shopElem["follower_count"] as! Int, dicount: shopElem["shop_off"] as! Int)
-                        shops.append(aNewShop)
+        //print("Shop Result keys : ",aResult.allKeys)
+        //print("Result : ",aResult)
+        if let aDic = aResult["shops"] as? NSDictionary ?? aResult["categoryShops"] as? NSDictionary{
+            if let dataOfShops = aDic["data"] as? NSArray {
+                for shopDic in dataOfShops
+                {
+                    if let shopElemAsNSDic = shopDic as? NSDictionary{
+                        
+                        if let shopElem = shopElemAsNSDic as? Dictionary<String, Any>{
+                            //print("shopElem : ",shopElem)
+                            let aNewShop = Shop(user_id: shopElem["user_id"] as? Int ?? 0, name: shopElem["shop_name"] as? String ?? "", image: shopElem["image"] as? String ?? ""  , stars: shopElem["rate"] as? Float ?? 0.0 , followers: shopElem["follower_count"] as? Int ?? 0, dicount: shopElem["shop_off"] as? Int ?? 0)
+                            shops.append(aNewShop)
+                        }
+                    }else{
+                        print("shopElm not casted.")
                     }
-                }else{
-                    print("shopElm not casted.")
                 }
+            } else{
+                print("aresult[shops or categoryShops][data] is empty or can not be casted")
             }
         } else {
-            print("Couldnt cast Result[shops] " )
+            print("Couldnt cast Result[shops] or [categoryShops] ")
+            print("Shop Result keys : ",aResult.allKeys)
+            print("aResult[categoryShops] ",aResult["categoryShops"])
         }
         print("Shops Fetched : ",shops.count," record")
         //print("Parsing State List Successful")
@@ -196,7 +235,7 @@ class JSONParser {
         
         //print("aResult cities : ",aResult["state"])
 
-        if let aDic = aResult["state"] as? NSDictionary {
+        if let aDic = aResult["state"] as? NSDictionary ?? aResult["list_city"] as? NSDictionary{
             for aCity in aDic
             {
                 //print(aCity.key," ",aCity.value)

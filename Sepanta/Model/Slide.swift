@@ -7,11 +7,13 @@
 //
 
 import Foundation
+import UIKit
 
-struct Slide : Decodable {
+struct Slide  {
     var id : Int
     var title : String
     var link : String
     var user_id : Int
     var images : String
+    var aUIImage : UIImage
 }

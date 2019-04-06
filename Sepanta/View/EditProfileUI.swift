@@ -17,11 +17,21 @@ class EditProfileUI {
     var texts = Dictionary<String,UITextField>()
     var labels = Dictionary<String,UILabel>()
     var buttons = Dictionary<String,UIButton>()
+    var datePicker = UIDatePicker()
     var submitButton = UIButton(type: .custom)
     
     init() {
     }
-    
+    @objc func doneDatePicker(_ sender : Any) {
+        self.delegate.view.endEditing(true)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY/MM/DD"
+        formatter.locale = Locale(identifier: "fa_IR")
+        texts["birthDateText"]?.text = formatter.string(from: datePicker.date)
+    }
+    @objc func cancelDatePicker(_ sender : Any) {
+        self.delegate.view.endEditing(true)
+    }
     //Create Gradient on PageView
     func showForm(_ avc : EditProfileViewController) {
         self.delegate = avc
@@ -53,6 +63,20 @@ class EditProfileUI {
         cursurY = cursurY + buttonHeight + marginY
         
         (views["birthDateView"],texts["birthDateText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "calendar-page-empty", Selectable: false, PlaceHolderText: "تاریخ تولد")
+        datePicker.calendar = Calendar(identifier: Calendar.Identifier.persian)
+        datePicker.locale = Locale(identifier: "fa_IR")
+        datePicker.datePickerMode = .date
+        let toolbar = UIToolbar();
+        toolbar.sizeToFit()
+        
+        //done button & cancel button
+        let doneButton = UIBarButtonItem(title: "ثبت", style: UIBarButtonItemStyle.done, target: self, action: #selector(self.doneDatePicker(_:)))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "لغو", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.cancelDatePicker(_:)))
+        toolbar.setItems([doneButton,spaceButton,cancelButton], animated: false)
+        //adatePicker.inp
+        texts["birthDateText"]?.inputAccessoryView = toolbar
+        texts["birthDateText"]?.inputView = datePicker
         views["rightFormView"]?.addSubview(views["birthDateView"]!)
         cursurY = cursurY + buttonHeight + marginY
         

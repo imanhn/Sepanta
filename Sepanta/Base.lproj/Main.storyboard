@@ -815,6 +815,7 @@
                         <viewLayoutGuide key="safeArea" id="5ro-eO-8c6"/>
                     </view>
                     <connections>
+                        <outlet property="commentLabel" destination="syZ-L6-xEe" id="ld8-dZ-C4L"/>
                         <outlet property="currentImageView" destination="kEw-xu-kjy" id="Ccl-Yk-C9d"/>
                         <outlet property="leftImageView" destination="yrO-9s-0mm" id="EtT-gb-SMe"/>
                         <outlet property="pageControl" destination="Z97-MI-7W6" id="w14-SI-90K"/>

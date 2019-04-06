@@ -8,6 +8,8 @@
 
 import Foundation
 import Alamofire
+import RxCocoa
+import RxSwift
 
 class SlidesAndPaths {
     var fetched : Bool = false
@@ -16,7 +18,9 @@ class SlidesAndPaths {
     var path_slider_image : String = "/upload/profile/"
     var path_category_image : String = "/upload/category/"
     var path_bank_logo_image : String = "/upload/logo_bank/"
-    var slides = [Slide]()    
+    var slides = [Slide]()
+    var slidesObs = BehaviorRelay<[Slide]>(value: [])
+    
     static let shared = SlidesAndPaths()
     
     private init() {
@@ -26,6 +30,10 @@ class SlidesAndPaths {
         }else{
             print("Home data has already been fetched")
         }
+        let sub = PublishSubject.from(slides)
+        sub.subscribe(onNext: { (seq) in
+            print("Published : ",seq)
+        })
     }
 
 }

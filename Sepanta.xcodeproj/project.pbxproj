@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0F052ED9221AE8C5009175EA /* LoginKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F052ED8221AE8C5009175EA /* LoginKey.swift */; };
 		0F052EDB221C0790009175EA /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F052EDA221C0790009175EA /* HomeCoordinator.swift */; };
+		0F0661AD2257E62400A83734 /* SepantaGroupsObserverSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0661AC2257E62400A83734 /* SepantaGroupsObserverSubscription.swift */; };
 		0F066F93222B198900C8871C /* UIColorFromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F92222B198900C8871C /* UIColorFromHex.swift */; };
 		0F066F95222B19AB00C8871C /* UIViewRotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F94222B19AB00C8871C /* UIViewRotate.swift */; };
 		0F066F99222C22EE00C8871C /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066F98222C22EE00C8871C /* MenuController.swift */; };
@@ -93,6 +94,7 @@
 /* Begin PBXFileReference section */
 		0F052ED8221AE8C5009175EA /* LoginKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginKey.swift; sourceTree = "<group>"; };
 		0F052EDA221C0790009175EA /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		0F0661AC2257E62400A83734 /* SepantaGroupsObserverSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaGroupsObserverSubscription.swift; sourceTree = "<group>"; };
 		0F066F92222B198900C8871C /* UIColorFromHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorFromHex.swift; sourceTree = "<group>"; };
 		0F066F94222B19AB00C8871C /* UIViewRotate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewRotate.swift; sourceTree = "<group>"; };
 		0F066F98222C22EE00C8871C /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
@@ -198,6 +200,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F0661AE2257E7F200A83734 /* PopUp List */ = {
+			isa = PBXGroup;
+			children = (
+				0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */,
+				0F066F9C222C2D5600C8871C /* MenuPopUpConfiguration.swift */,
+				0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */,
+			);
+			path = "PopUp List";
+			sourceTree = "<group>";
+		};
 		0F1B75572235775F0087C0DB /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +234,7 @@
 			children = (
 				0FDA55D622260FFE00E7C889 /* GroupViewController.swift */,
 				0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */,
+				0F0661AC2257E62400A83734 /* SepantaGroupsObserverSubscription.swift */,
 			);
 			path = "Sepanta Groups";
 			sourceTree = "<group>";
@@ -297,9 +310,7 @@
 		0F890D102215D0F20091FA2E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */,
-				0F066F9C222C2D5600C8871C /* MenuPopUpConfiguration.swift */,
-				0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */,
+				0F0661AE2257E7F200A83734 /* PopUp List */,
 				0F066F98222C22EE00C8871C /* MenuController.swift */,
 				0F1B755A223580C80087C0DB /* ShopsListDataSource.swift */,
 				0F1B7566223714720087C0DB /* ShopDataSource.swift */,
@@ -639,6 +650,7 @@
 				0FDA55D52225C02800E7C889 /* Catagory.swift in Sources */,
 				0F066F9D222C2D5600C8871C /* MenuPopUpConfiguration.swift in Sources */,
 				0F066F99222C22EE00C8871C /* MenuController.swift in Sources */,
+				0F0661AD2257E62400A83734 /* SepantaGroupsObserverSubscription.swift in Sources */,
 				0FAEEDE72230949C00A9178F /* AboutUsViewController.swift in Sources */,
 				0F890D022214B5310091FA2E /* AppCoordinator.swift in Sources */,
 				0FAEEDE5222F29C600A9178F /* GetRichUI.swift in Sources */,

@@ -27,8 +27,8 @@ class SepantaGroupButtons {
         let theButton = (sender as AnyObject)
         //print("TAG : ",theButton.tag," delegate Coordinator : ",self.delegate.coordinator ?? "is Nil")
         let targetCatagory = self.getCatagory(ByID: theButton.tag!)
-        let selectedCity = self.delegate.selectCity.text
-        let selectedState = self.delegate.selectProvince.text
+        let selectedCity = self.delegate.currentCityCodeObs.value//self.delegate.selectCity.text
+        let selectedState = self.delegate.currentStateCodeObs.value//self.delegate.selectProvince.text
         self.delegate.coordinator!.pushAGroup(GroupID: targetCatagory.id, GroupImage: targetCatagory.anUIImage.value, GroupName: targetCatagory.title,State: selectedState,City: selectedCity )
     }
         
@@ -59,26 +59,29 @@ class SepantaGroupButtons {
         for i in 0..<catagories.count {
             catagories[i].anUIImage
                 .filter({$0.size.width > 0})
-                .subscribe(onNext: { [weak self] innerImage in
-                    let foundButton = self?.buttons.filter({$0.tag == catagories[i].id}) ?? [UIButton]()
+                .subscribe(onNext: { [unowned self] innerImage in
+                    let foundButton = self.buttons.filter({$0.tag == catagories[i].id})
+                    self.counter = i
+                    if i >= 3 { self.counter += 1}
+                    if i >= 14 { self.counter += 1}
+                    let col = self.counter % 3
+                    let row = Int(self.counter / 3)
+                    let upsideDown : Bool = (col + (row * 3)) % 2 == 0
                     if foundButton.count == 0 {
-                        //print("Addin image ",catagories[i].title)
-                        let col = (self?.counter)! % 3
-                        let row = Int((self?.counter)! / 3)
+                        //print(i," Addin image ",catagories[i].title)
                         let but = UIButton(frame: CGRect(x: xMargin+CGFloat(col)*buttonsDim*0.9, y: CGFloat(row) * buttonsDim * 1.2, width: buttonsDim*1.3, height: buttonsDim*1.3))
-                        let mergedImage = self?.buttonImage(Image: innerImage, Label : catagories[i].title)
+                        let mergedImage = self.buttonImage(Image: innerImage, Label : catagories[i].title,Up: upsideDown)
                         but.setImage(mergedImage, for: .normal)
                         but.tag = catagories[i].id
-                        but.addTarget(self, action: #selector(self?.aGroupTapped), for: .touchUpInside)
-                        self?.counter += 1
-                        self?.buttons.append(but)
-                        self?.delegate.sepantaScrollView.addSubview(but)
+                        but.addTarget(self, action: #selector(self.aGroupTapped), for: .touchUpInside)
+                        self.buttons.append(but)
+                        self.delegate.sepantaScrollView.addSubview(but)
                     } else {
-                        print("Updating Image",catagories[i].title)
-                        let mergedImage = self?.buttonImage(Image: innerImage, Label : catagories[i].title)
+                        //print(i," Updating Image",catagories[i].title)
+                        let mergedImage = self.buttonImage(Image: innerImage, Label : catagories[i].title, Up: upsideDown)
                         foundButton[0].setImage(mergedImage, for: .normal)
                     }
-                    if self?.counter == catagories.count-1 {Spinner.stop()}
+                    if self.counter == catagories.count-1 {Spinner.stop()}
                     //print("Image Received : ",self?.counter,"  ",catagories[i].title,"  ",catagories[i].id,"  ",catagories[i].image,"  ",innerImage)
                 }, onError: { _ in
                     
@@ -91,7 +94,7 @@ class SepantaGroupButtons {
             
     }
     
-    func buttonImage(Image iconImage : UIImage, Label aLabel : String)->UIImage{
+    func buttonImage(Image iconImage : UIImage, Label aLabel : String, Up upside : Bool)->UIImage{
         
         var fontSize : CGFloat = 14
         if aLabel.count < 13 { fontSize = 14}
@@ -115,7 +118,8 @@ class SepantaGroupButtons {
             ] as [NSAttributedStringKey : Any]
         var textBox = CGRect()
         let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        if self.counter % 2 == 0 {
+        //print("upside : ",upside)
+        if upside {
             backgroundImageDown?.draw(in: areaSize)
             textBox = CGRect(x: 0 , y: 0, width: size.width, height: size.height/2)
         }else{
@@ -138,37 +142,5 @@ class SepantaGroupButtons {
         var newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return newImage
-    }
-    
-    func createAllButtons(){
-        createButton(Row: 0, Col: 0, Tag: 3)
-        createButton(Row: 0, Col: 1, Tag: 2)
-        createButton(Row: 0, Col: 2, Tag: 1)
-        
-        //createButton(Row: 1, Col: 0, Tag: 0)
-        createButton(Row: 1, Col: 1, Tag: 5)
-        createButton(Row: 1, Col: 2, Tag: 4)
-        
-        createButton(Row: 2, Col: 0, Tag: 8)
-        createButton(Row: 2, Col: 1, Tag: 7)
-        createButton(Row: 2, Col: 2, Tag: 6)
-        
-        createButton(Row: 3, Col: 0, Tag: 11)
-        createButton(Row: 3, Col: 1, Tag: 10)
-        createButton(Row: 3, Col: 2, Tag: 9)
-        
-        createButton(Row: 4, Col: 0, Tag: 14)
-        createButton(Row: 4, Col: 1, Tag: 13)
-        createButton(Row: 4, Col: 2, Tag: 12)
-        
-        //createButton(Row: 5, Col: 0, Tag: 0)
-        createButton(Row: 5, Col: 1, Tag: 16)
-        createButton(Row: 5, Col: 2, Tag: 15)
-        
-        createButton(Row: 6, Col: 0, Tag: 18)
-        createButton(Row: 6, Col: 1, Tag: 17)
-        //createButton(Row: 6, Col: 2, Tag: 0)
-        
-
     }
 }

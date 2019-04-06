@@ -8,13 +8,16 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
 
 class SlideController {
     var delegate : HomeViewController
     var adsPage = 1;
     var startLocation = CGPoint(x: 0, y: 0)
     var endLocation = CGPoint(x: 0, y: 0)
-    var slides : [UIImage] = [UIImage(named: "slide1")!,UIImage(named: "slide2")!,UIImage(named: "slide3")!,UIImage(named: "slide4")!]
+    var slides : [UIImage] = [UIImage(named: "logo_shape")!,UIImage(named: "logo_shape")!,UIImage(named: "logo_shape")!,UIImage(named: "logo_shape")!]
+    let myDisposeBag = DisposeBag()
     
     init(parentController : HomeViewController){
         self.delegate = parentController
@@ -22,7 +25,20 @@ class SlideController {
         self.delegate.pageControl.numberOfPages = slides.count
         self.delegate.currentImageView.image = slides[adsPage] // Current page
         self.delegate.currentImageView.setNeedsDisplay()
-
+        SlidesAndPaths.shared.slidesObs
+            .filter({$0.count >= 3})
+            .subscribe(onNext: { [unowned self] (innerSlides) in
+                print("Setting new Slides....")
+                self.slides = innerSlides.map({$0.aUIImage})
+                print("  slides : ",self.slides)
+                self.setupLeftAndRightImages()
+            }, onError: {_ in
+                
+            }, onCompleted: {
+                
+            }, onDisposed: {
+                
+            }).disposed(by: myDisposeBag)
     }
     
     @objc func handlePan(_ sender:UIPanGestureRecognizer) {
@@ -108,5 +124,8 @@ class SlideController {
         self.delegate.currentImageView.setNeedsDisplay()
         //print("Page : ",adsPage)
         self.delegate.pageControl.currentPage = adsPage
+        if SlidesAndPaths.shared.slides.count > adsPage {
+            self.delegate.commentLabel.text = SlidesAndPaths.shared.slides[adsPage].title
+        }
     }
 }

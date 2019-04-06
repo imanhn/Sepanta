@@ -34,11 +34,24 @@ class ShopsListDataSource {
     
     func getShopListForACatagory(Catagory catagoryID:String,State state : String?,City city:String?){
         var aParameter : Dictionary<String, String> = [:]
-        if (state == nil || state == "") && (city == nil || state == "") {
+        if (state == nil || state == "") && (city == nil || city == "") {
            // "http://panel.ipsepanta.ir/api/v1/category-shops-list?slug=3&category_id=4"
             aParameter = ["slug":"3","category_id":"\(catagoryID)"]
         }
-        print("Running network request category-shops-list... \(aParameter)  state : \(state)  City : \(city)")
+        if (state != nil && state != "" ) && (city == nil || city == "") {
+            // "http://panel.ipsepanta.ir/api/v1/category-shops-list?slug=1&category_id=4&state_code=8"
+            aParameter = ["slug":"1",
+                          "category_id":"\(catagoryID)",
+                          "state_code":"\(state!)"]
+        }
+        if (state != nil && state != "" ) && (city != nil && city != "") {
+            // "http://panel.ipsepanta.ir/api/v1/category-shops-list?slug=2&category_id=4&city_code=1246"
+            aParameter = ["slug":"1",
+                          "category_id":"\(catagoryID)",
+                "city_code":"\(city!)"]
+        }
+
+        print("Running network request category-shops-list... \(aParameter)  state : \(state!)  City : \(city!)")
         NetworkManager.shared.run(API: "category-shops-list", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil)
     }
     

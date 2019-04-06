@@ -52,7 +52,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width
         let cellWidth = (width - 30) / numberOfPostInARow // compute your cell width
-        print("WOW Calling layout cell width : ",cellWidth," index : ",indexPath)
+        //print("WOW Calling layout cell width : ",cellWidth," index : ",indexPath)
         //return CGSize(width: 50 , height: 50)
         return CGSize(width: cellWidth, height: cellWidth)
     }
@@ -71,7 +71,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
             }
             if aProfile.image != nil {
                 let imageURL = URL(string: NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_profile_image + aProfile.image!)
-                print("Shop Image : ",imageURL ?? "Nil")
+                //print("Shop Image : ",imageURL ?? "Nil")
                 if imageURL != nil {
                     self.delegate.shopImage.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!)
                     
@@ -83,30 +83,24 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     func bindCollectionView(){
         self.posts.bind(to: collectionView.rx.items(cellIdentifier: "postcell")) { [unowned self] row, model, cell in
             if let aCell = cell as? PostCell {
-                let strURL = NetworkManager.shared.baseURLString + SlidesAndPaths.shared.path_post_image + model.image
+                if aCell.aPost == nil {aCell.aPost = UIButton(type: .custom)}
+                let strURL = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + model.image
                 let imageURL = URL(string: strURL)
                 //print("ROW:\(row) UICollectionView binding : ",imageURL ?? "NIL"," Cell : ",aCell,"  model : ",model)
-                print("ROW:\(row) UICollectionView binding")
+                //print("URL : ",strURL)
                 self.collectionView.addSubview(aCell)
                 aCell.addSubview(aCell.aPost)
-                let dim = (self.collectionView.bounds.width * 0.8) / self.numberOfPostInARow
-                aCell.aPost.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
-                
-                aCell.aPost.setImage(UIImage(named: "logo_shape"), for: .normal)
-                
-                
-                print("Frame : ",aCell.aPost.frame)
-                print("SuperView  : ",aCell.aPost.superview)
-
-                if imageURL != nil {
-                    //aCell.aPost.setImage(UIImage(named: "logo_shape"), for: .normal)
-                    print("Downloading Post Image : ")
-                    aCell.aPost.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1, ImageURL: imageURL!, ImageName: model.image)
+                if imageURL == nil {
+                    //print("     Post URL is not valid : ",model.image)
+                    let dim = (self.collectionView.bounds.width * 0.8) / self.numberOfPostInARow
+                    aCell.aPost.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
+                    aCell.aPost.setImage(UIImage(named: "logo_shape"), for: .normal)
                 }else{
-                    //print("Error parsing Image URL for Post in Bind section of ShopUI")
+                    let dim = (self.collectionView.bounds.width * 0.8) / self.numberOfPostInARow
+                    aCell.aPost.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
+                    //aCell.aPost.af_setImage(for: .normal, url: imageURL!) //Also Works!
+                    aCell.aPost.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1, ImageURL: imageURL!, ImageName: model.image)
                 }
-                //print("Visible : ",self.collectionView.visibleCells)
-                
             }else{
                 print("\(cell) can not be casted to PostCell")
             }
@@ -155,7 +149,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
  */
         flowLayout.minimumLineSpacing = 10
         
-        collectionView = UICollectionView(frame: CGRect(x: 0, y: cursurY, width: views["rightFormView"]!.frame.width, height: views["rightFormView"]!.frame.height-cursurY), collectionViewLayout: flowLayout)
+        collectionView = UICollectionView(frame: CGRect(x: marginX, y: cursurY, width: views["rightFormView"]!.frame.width-(2*marginX), height: views["rightFormView"]!.frame.height-cursurY), collectionViewLayout: flowLayout)
         collectionView.register(PostCell.self, forCellWithReuseIdentifier: "postcell")
         collectionView.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0)
         collectionView.rx.setDelegate(self) //Delegate method to call
