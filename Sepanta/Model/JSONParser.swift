@@ -113,11 +113,11 @@ class JSONParser {
                         let imageName = aSlideAsNsDic["images"] as? String ?? ""
                         let img = UIImage().getImageFromCache(ImageName: imageName)
                         if img == nil{
-                            print("Downloading slide : \(anId) with name : \(imageName)")
+                            //print("Downloading slide : \(anId) with name : \(imageName)")
                             let imageUrlStr = NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_slider_image+imageName
                             if let imageUrl = URL(string: imageUrlStr)
                             {
-                                print("Alamofire : ",imageUrlStr)
+                                //print("Alamofire : ",imageUrlStr)
                                 Alamofire.request(imageUrl).responseImage { [unowned self] response in
                                     if let image = response.result.value {
                                         //print("image downloaded: \(self.image)")
@@ -126,7 +126,7 @@ class JSONParser {
                                         SlidesAndPaths.shared.slidesObs.accept(SlidesAndPaths.shared.slides)
                                         let imageData = UIImagePNGRepresentation(image) as NSData?
                                         if imageData != nil {
-                                            print("Saving slider : ",imageName)
+                                            //print("Saving slider : ",imageName)
                                             CacheManager.shared.saveFile(Data:imageData!, Filename:imageName)
                                         }
                                     }else{
@@ -137,7 +137,7 @@ class JSONParser {
                                 print("URL for Slide is invalid : ",imageUrlStr)
                             }
                         }else{
-                            print("Slide : ",anId," exists in cache : ",img)
+                            //print("Slide : ",anId," exists in cache : ",img)
                             SlidesAndPaths.shared.slides.append(Slide(id: anId, title: aTitle, link: aLink, user_id: aUserId, images: imageName,aUIImage: img!))
                             SlidesAndPaths.shared.slidesObs.accept(SlidesAndPaths.shared.slides)
                         }

@@ -28,9 +28,9 @@ class SlideController {
         SlidesAndPaths.shared.slidesObs
             .filter({$0.count >= 3})
             .subscribe(onNext: { [unowned self] (innerSlides) in
-                print("Setting new Slides....")
+                //print("Setting new Slides....")
                 self.slides = innerSlides.map({$0.aUIImage})
-                print("  slides : ",self.slides)
+                //print("  slides : ",self.slides)
                 self.setupLeftAndRightImages()
             }, onError: {_ in
                 
