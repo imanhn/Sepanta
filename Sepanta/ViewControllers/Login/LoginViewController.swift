@@ -29,7 +29,11 @@ class LoginViewController: UIViewControllerWithKeyboardNotification,Storyboarded
     }
     
     @IBAction func signupClicked(_ sender: Any) {
-        coordinator!.gotoSignup()
+        if coordinator == nil {
+            
+        }else{
+            coordinator!.gotoSignup()
+        }
     }
     
     @IBAction func SendClicked(_ sender: Any) {
@@ -38,6 +42,7 @@ class LoginViewController: UIViewControllerWithKeyboardNotification,Storyboarded
             .subscribe(onNext: { [unowned self] (innerNetworkCallStatus) in
                 Spinner.stop()
                 self.alert(Message: "دسترسی به سرور امکان پذیر نیست یا سیستم با مشکل مواجه شده است"+"\n"+NetworkManager.shared.message)
+                return 
             }, onError: { _ in
                 
             }, onCompleted: {
@@ -59,6 +64,7 @@ class LoginViewController: UIViewControllerWithKeyboardNotification,Storyboarded
                     print("USERID : ",LoginKey.shared.userID)
                     print("inner USERID : ",innerUserIDObs)
                     Spinner.stop()
+                    if LoginKey.shared.userID == nil || LoginKey.shared.userID == "" {return}
                     LoginKey.shared.userIDObs = BehaviorRelay<String>(value: String())
                     self.coordinator!.gotoSMSVerification(Set : (self.MobileTextField.text)!)
                     }, onError: { _ in

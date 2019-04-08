@@ -41,7 +41,7 @@ class LoginCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         for (index,coordinator) in childCoordinators.enumerated() {
             if (coordinator === aCoordinator) {
                 childCoordinators.remove(at: index)
-                print("     Remving ",aCoordinator)
+                print("     LoginCoord Removing ",aCoordinator)
                 break
             }
         }
@@ -94,5 +94,9 @@ class LoginCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         childCoordinators.append(homeCoordinator)
         homeCoordinator.parentCoordinator = self
         homeCoordinator.start()
+    }
+    
+    func logout() {
+        self.gotoSignup()
     }
 }

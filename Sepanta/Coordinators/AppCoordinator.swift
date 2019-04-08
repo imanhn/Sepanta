@@ -21,7 +21,7 @@ class AppCoordinator: Coordinator {
         for (index,coordinator) in childCoordinators.enumerated() {
             if (coordinator === aCoordinator) {
                 childCoordinators.remove(at: index)
-                print("     Remving ",aCoordinator)
+                print("     AppCoord Removing ",aCoordinator)
                 break
             }
         }

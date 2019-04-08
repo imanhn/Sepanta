@@ -13,6 +13,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     var childCoordinators = [Coordinator]()
     var menuOpened = false
     var navigationController: UINavigationController
+    /* parentCoordinator could be either AppCoordinator or LoginCoordinator */
     weak var parentCoordinator : Coordinator?
 
 
@@ -25,7 +26,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         for (index,coordinator) in childCoordinators.enumerated() {
             if (coordinator === aCoordinator) {
                 childCoordinators.remove(at: index)
-                print("     Remving ",aCoordinator)
+                print("     HomeCoord Removing ",aCoordinator)
                 break
             }
         }
@@ -150,14 +151,22 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     
     func logout() {
         LoginKey.shared.deleteTokenAndUserID()
-        let loginCoordinator = LoginCoordinator(navigationController: navigationController)
         if self.parentCoordinator != nil{
+            print("removing \(self) from \(self.parentCoordinator)")
             self.parentCoordinator?.removeChild(self)
+            print("Running Logout on parent coordinator(loginCoord)")
+            if let appCoord = self.parentCoordinator as? AppCoordinator {
+                appCoord.start()
+            }else if let loginCoord = self.parentCoordinator as? LoginCoordinator{ // in Case : User AppCoord Logins (LoginCoord) -> Home (HomeCoord) -> Logout
+                if let appCoord = loginCoord.parentCoordinator {
+                    appCoord.removeChild(loginCoord)
+                    appCoord.start()
+                    print("HomeCoord : Program should not get here!")
+                }
+            }
+        }else{
+            print("HomeCoord : parentCoordinator is NIL!")
         }
-        childCoordinators.append(loginCoordinator)
-        loginCoordinator.parentCoordinator = nil
-        loginCoordinator.start()
-
     }
     
     func start() {

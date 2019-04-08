@@ -31,8 +31,11 @@ class LoginKey {
         
         let useridSucceed = KeychainWrapper.standard.set(self.userID, forKey:"USERID")
         if useridSucceed { print("UserID Saved Successfully") } else { print("UserID Can not be saved") }
-        
-        if tokenSucceed && useridSucceed {
+
+        let roleSucceed = KeychainWrapper.standard.set(self.role, forKey:"ROLE")
+        if roleSucceed { print("Role Saved Successfully") } else { print("Role Can not be saved") }
+
+        if tokenSucceed && useridSucceed && roleSucceed {
             let loginDataSaved = KeychainWrapper.standard.set("YES", forKey:"LOGIN")
             return loginDataSaved
         } else {
@@ -60,24 +63,25 @@ class LoginKey {
     
     func retrieveTokenAndUserID() -> Bool {
         let loginDataSaved : String? = KeychainWrapper.standard.string(forKey: "LOGIN")
+        let arole : String? = KeychainWrapper.standard.string(forKey: "ROLE")
         if loginDataSaved == "YES" {
             self.token = KeychainWrapper.standard.string(forKey: "TOKEN")!
             self.userID = KeychainWrapper.standard.string(forKey: "USERID")!
+            self.role = KeychainWrapper.standard.string(forKey: "ROLE")!
             print("Your USERID : ",self.userID)
+            print("Your role would be : ",self.role)
             return true
         } else {
             return false
         }
-
     }
 
     func getUserID(_ phoneNumber : String){
         let parameters = [
             "cellphone": phoneNumber
         ]
-        let queryString = "?cellphone=\(phoneNumber)"
         Spinner.start()
-        NetworkManager.shared.run(API: "login",QueryString: queryString, Method: HTTPMethod.post, Parameters: parameters, Header: nil)
+        NetworkManager.shared.run(API: "login",QueryString: "", Method: HTTPMethod.post, Parameters: parameters, Header: nil)
     }
     
     func getToken(_ smsCode : String){

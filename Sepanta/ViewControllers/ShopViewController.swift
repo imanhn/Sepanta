@@ -36,7 +36,11 @@ class ShopViewController :  UIViewController,Storyboarded{
     @IBOutlet weak var followersNumLabel: UILabel!
     @IBOutlet weak var shopDescription: UILabel!
     @IBOutlet weak var paneView: UIView!
-    @IBOutlet weak var followButton: UIButton!
+    @IBOutlet weak var PostToolbarView: UIView!
+    
+    @IBOutlet weak var offLabelLeading: NSLayoutConstraint!
+    @IBOutlet weak var shopLogoTrailing: NSLayoutConstraint!
+    @IBOutlet weak var shopLogoShopTitleDistance: NSLayoutConstraint!
     
     
     @IBAction func followTapped(_ sender: Any) {

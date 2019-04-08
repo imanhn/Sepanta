@@ -93,8 +93,8 @@ class SMSConfirmViewController: UIViewControllerWithKeyboardNotification,Storybo
     }
     
     @IBAction func ConfirmCodeClicked(_ sender: Any) {
-        print("Confirm Clicked")
-        guard SMSTextField.text != nil else {
+        print("Confirm Clicked : ",SMSTextField.text)
+        guard (SMSTextField.text != nil) && (SMSTextField.text != "") else {
             alert(Message: "لطفاْ کد ارسال شده را وارد نمایید")
             return
         }

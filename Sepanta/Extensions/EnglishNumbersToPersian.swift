@@ -10,6 +10,7 @@ import Foundation
 extension String {
     func toPersianNumbers()->String{
         var result : String = ""
+        var filtered = ""
         for aChar in self {
             switch aChar {
             case "1" : result = result + "۱";break
@@ -23,12 +24,14 @@ extension String {
             case "9" : result = result + "۹";break
             case "0" : result = result + "۰";break
             default:
-                result = result + "\(aChar)"
+                //print("Filtered >\(aChar)<")
+                filtered = filtered + "\(aChar)"
             }
         }
         return result
     }
     func toEnglishNumbers()->String{
+        var filtered = ""
         var result : String = ""
         for aChar in self {
             switch aChar {
@@ -42,8 +45,20 @@ extension String {
             case "۸" : result = result + "8";break
             case "۹" : result = result + "9";break
             case "۰" : result = result + "0";break
+            case "1" : result = result + "1";break
+            case "2" : result = result + "2";break
+            case "3" : result = result + "3";break
+            case "4" : result = result + "4";break
+            case "5" : result = result + "5";break
+            case "6" : result = result + "6";break
+            case "7" : result = result + "7";break
+            case "8" : result = result + "8";break
+            case "9" : result = result + "9";break
+            case "0" : result = result + "0";break
+            case "." : result = result + ".";break
             default:
-                result = result + "\(aChar)"
+                //print("Filtered >\(aChar)<")
+                filtered = filtered + "\(aChar)"
             }
         }
         return result

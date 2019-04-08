@@ -80,6 +80,11 @@ class NetworkManager {
         }
         
         print("RXAlamofire : Requesting JSON over URL : ",urlAddress)
+        /*
+        print("      Parameter : \(aParameter)")
+        print("      Header : \(headerToSend)")
+        print("      Method : \(aMethod)")
+        */
         RxAlamofire.requestJSON(aMethod, urlAddress , parameters: aParameter, encoding: JSONEncoding.default, headers: headerToSend)
         .observeOn(MainScheduler.instance)
         .timeout(2, scheduler: MainScheduler.instance)
