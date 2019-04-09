@@ -23,17 +23,22 @@ class SlidesAndPaths {
     
     static let shared = SlidesAndPaths()
     
+    func getHomeData(){
+        NetworkManager.shared.run(API: "home", QueryString: "?user_id=\(LoginKey.shared.userID)", Method: HTTPMethod.get, Parameters: nil, Header: nil)
+    }
     private init() {
         if !fetched {
             print("Fetching Home Data : ")
-            NetworkManager.shared.run(API: "home", QueryString: "?user_id=\(LoginKey.shared.userID)", Method: HTTPMethod.get, Parameters: nil, Header: nil)
+            getHomeData()
         }else{
             print("Home data has already been fetched")
         }
+        /*
         let sub = PublishSubject.from(slides)
         sub.subscribe(onNext: { (seq) in
             print("Published : ",seq)
         })
+         */
     }
 
 }

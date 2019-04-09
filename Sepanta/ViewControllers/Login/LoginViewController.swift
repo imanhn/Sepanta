@@ -12,7 +12,7 @@ import RxAlamofire
 import RxSwift
 import RxCocoa
 
-class LoginViewController: UIViewControllerWithKeyboardNotification,Storyboarded {
+class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,Storyboarded {
     var myDisposeBag  = DisposeBag()
     weak var coordinator : LoginCoordinator?
     @IBOutlet var PageView: UIView!
@@ -35,7 +35,9 @@ class LoginViewController: UIViewControllerWithKeyboardNotification,Storyboarded
             coordinator!.gotoSignup()
         }
     }
-    
+    @objc override func ReloadViewController(_ sender:Any) {
+        super.ReloadViewController(sender)
+    }
     @IBAction func SendClicked(_ sender: Any) {
         NetworkManager.shared.status
             .filter({$0 == CallStatus.error})

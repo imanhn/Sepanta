@@ -14,7 +14,7 @@ import Alamofire
 import AlamofireImage
 
 class ShopsListDataSource {
-    var delegate : ShopListViewControllerProtocol
+    var delegate : UIViewController
     let myDisposeBag = DisposeBag()
     var fetchedShops = [Shop]()
     var shopProfiles = BehaviorRelay<[Profile]>(value: [])
@@ -29,7 +29,7 @@ class ShopsListDataSource {
                 }
             }
         }
-        self.delegate.shops.accept(self.fetchedShops)
+        NetworkManager.shared.shopObs.accept(self.fetchedShops)
     }
     
     func getShopListForACatagory(Catagory catagoryID:String,State state : String?,City city:String?){
@@ -59,76 +59,8 @@ class ShopsListDataSource {
         NetworkManager.shared.run(API: "new-shops", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil)
     }
     
-    func subscribeToShop(){
-        NetworkManager.shared.shopObs
-            //.debug()
-            .filter({$0.count > 0})
-            .subscribe(onNext: { [unowned self] (innerShops) in
-                //print("innerShops : ",innerShops.count)
-                //print("Shops : ",innerShops)
-                self.fetchedShops = innerShops as! [Shop]
-                self.delegate.shops.accept(self.fetchedShops)
-                /*
-                for ashop in self.fetchedShops {
-                    let urlAddress = "http://www.panel.ipsepanta.ir/api/v1/profile?user%20id=\(ashop.user_id)"
-                    let aParameter = ["user id":"\(ashop.user_id)"]
-                    let aHeader = ["Authorization":"Bearer \(LoginKey.shared.token)" , "Accept":"application/json"]
-                    RxAlamofire.requestJSON(HTTPMethod.post, urlAddress , parameters: aParameter, encoding: JSONEncoding.default, headers: aHeader)
-                        .observeOn(MainScheduler.instance)
-                        .timeout(2, scheduler: MainScheduler.instance)
-                        .retry(4)
-                        //.debug()
-                        .subscribe(onNext: { [unowned self] (ahttpURLRes,jsonResult) in
-                            if let aProfileAsNS = jsonResult as? NSDictionary {
-                                if aProfileAsNS["error"] != nil {
-                                    print("Error : ",aProfileAsNS["error"])
-                                    print("Header : ",aHeader)
-                                }else {
-                                    //print("aProfileAsNS Keys : ",aProfileAsNS.allKeys)
-                                    //print("message : ",aProfileAsNS["message"])
-                                    //print("UPDATE FETCHED SHOPS : ",aProfileAsNS)
-                                    self.updateFetchedShops(aProfileAsNS)
-                                }
-                            } else {
-                                print("NewShopsDataSource : Error Casting Profile as NSDictionary")
-                            }
-                            }, onError: { (err) in
-                                if err.localizedDescription == "The Internet connection appears to be offline." {
-                                    print("No Internet")
-                                }
-                                if err.localizedDescription == "Could not connect to the server." {
-                                    print("No Server Connection")
-                                }
-                                print("NewShopsDataSource RXAlamofire Raised an Error : >",err.localizedDescription,"<")
-                        }, onCompleted: {
-                            //print("Completed")
-                        }, onDisposed: {
-                            //print("NetworkManager Disposed")
-                        }).disposed(by: self.myDisposeBag)
-                }
-                */
-                }, onError: { _ in
-                    print("NewShops Call Raised Error")
-                    Spinner.stop()
-            }, onCompleted: {
-                print("NewShops Call Completed")
-            }, onDisposed: {
-                print("NewShops Disposed")
-            }).disposed(by: myDisposeBag)
-        
-        self.shopProfiles.subscribe(onNext: { (innerProfiles) in
-            
-        }, onError: {_ in
-            
-        }, onCompleted: {
-            
-        }, onDisposed: {
-            
-        }).disposed(by: myDisposeBag)
-    }
-    
-    init (_ vc : ShopListViewControllerProtocol){
+    init (_ vc : UIViewController){
         self.delegate = vc
-        subscribeToShop()
+        //subscribeToShop()
     }
 }

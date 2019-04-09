@@ -11,7 +11,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class SMSConfirmViewController: UIViewControllerWithKeyboardNotification,Storyboarded {
+class SMSConfirmViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,Storyboarded {
     weak var coordinator : LoginCoordinator?
     @IBOutlet weak var MobileTextField: UnderLinedTextField!
     @IBOutlet weak var SMSTextField: UnderLinedTextField!

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class GetRichViewController : UIViewController,UITextFieldDelegate,Storyboarded{
+class GetRichViewController : UIViewControllerWithErrorBar,UITextFieldDelegate,Storyboarded{
    
     @IBOutlet weak var scrollView: UIScrollView!
     var getRichUI : GetRichUI?
@@ -22,6 +22,14 @@ class GetRichViewController : UIViewController,UITextFieldDelegate,Storyboarded{
     @objc func resellerRequestTapped(_ sender : Any) {
         getRichUI!.showResellerRequest(self)
     }
+    
+    @objc override func ReloadViewController(_ sender:Any) {
+        super.ReloadViewController(sender)
+        if getRichUI != nil {
+            getRichUI!.showResellerRequest(self)
+        }
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()

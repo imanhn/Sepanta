@@ -33,6 +33,9 @@ class EditProfileUI {
         self.delegate.view.endEditing(true)
     }
     //Create Gradient on PageView
+    @objc func sendEditedData(){
+        //Submit data to server to change profile data and them back to profile view if required
+    }
     func showForm(_ avc : EditProfileViewController) {
         self.delegate = avc
         //print("reseller Request : ",views["leftFormView"] ?? "Nil")
@@ -118,6 +121,7 @@ class EditProfileUI {
         submitButton.setTitle("تایید", for: .normal)
         submitButton.semanticContentAttribute = .forceRightToLeft
         submitButton.titleLabel?.font = UIFont(name: "Shabnam-FD", size: 16)
+        submitButton.addTarget(self, action: #selector(sendEditedData), for: .touchUpInside)
         
         
         submitButton.contentMode = .scaleAspectFit

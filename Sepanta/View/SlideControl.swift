@@ -30,6 +30,7 @@ class SlideController {
             .subscribe(onNext: { [unowned self] (innerSlides) in
                 //print("Setting new Slides....")
                 self.slides = innerSlides.map({$0.aUIImage})
+                self.delegate.pageControl.numberOfPages = innerSlides.count
                 //print("  slides : ",self.slides)
                 self.setupLeftAndRightImages()
             }, onError: {_ in
@@ -51,7 +52,7 @@ class SlideController {
             let animDurationInterval = TimeInterval(1/(abs(sender.velocity(in: self.delegate.view).x/1000)))
             //print("Velocity : ",sender.velocity(in: self.delegate.view))
             let deltaX = endLocation.x - startLocation.x
-            if (deltaX > 100) && (adsPage > 0)  {
+            if (deltaX > 40) && (adsPage > 0)  {
                 //print("Sliding to left ",self.adsPage)
                 UIView.animate(withDuration: animDurationInterval, animations: {
                     self.delegate.currentImageView.layer.frame = CGRect(x: UIScreen.main.bounds.width, y: self.delegate.currentImageView.layer.frame.origin.y, width: self.delegate.currentImageView.layer.bounds.width, height: self.delegate.currentImageView.layer.bounds.height)
@@ -66,7 +67,7 @@ class SlideController {
                     self.setupLeftAndRightImages()
                 }
                 
-            } else if (deltaX < -100) && (adsPage < slides.count-1) {
+            } else if (deltaX < -40) && (adsPage < slides.count-1) {
                 //print("Sliding to right ",self.adsPage)
                 UIView.animate(withDuration: animDurationInterval, animations: {
                     self.delegate.currentImageView.layer.frame = CGRect(x: -1 * UIScreen.main.bounds.width, y: self.delegate.currentImageView.layer.frame.origin.y, width: self.delegate.currentImageView.layer.bounds.width, height: self.delegate.currentImageView.layer.bounds.height)
@@ -115,6 +116,7 @@ class SlideController {
             self.delegate.leftImageView.image = slides[adsPage-1]
             self.delegate.rightImageView.image = slides.first // No right! get a blank logo for right
             self.delegate.currentImageView.image = slides[adsPage] // Current page
+            //adsPage = slides.count-2
         } else {
             self.delegate.leftImageView.image = slides[adsPage-1]
             self.delegate.rightImageView.image = slides[adsPage+1]

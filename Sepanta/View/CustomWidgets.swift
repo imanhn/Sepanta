@@ -47,8 +47,12 @@ class RoundedButton: UIButton {
 
 class RoundedButtonWithDarkBackground: UIButton {
     var curvSize : CGFloat = 5;
+
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
+        self.layer.cornerRadius = curvSize
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor(hex: 0xD6D7D9).cgColor
         
         let insideCGRec : CGRect = CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height)
         let bezPath = UIBezierPath(roundedRect: insideCGRec, byRoundingCorners: [.allCorners], cornerRadii: CGSize(width: curvSize, height: curvSize)).cgPath

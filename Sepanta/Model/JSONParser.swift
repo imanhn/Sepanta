@@ -75,6 +75,11 @@ class JSONParser {
                     if let cat = aDic["categories"] {
                         NetworkManager.shared.catagoriesObs.accept([cat])
                     }
+                } else if (apiName == "post-details") && (aMethod == HTTPMethod.post) {
+                    //Returns the List of supported States (which probably have catagory
+                    var processedDic = Dictionary<String,String>()
+                    let aPost = (self?.processAsPostDetails(Result: aDic))!
+                    NetworkManager.shared.postDetailObs.accept(aPost)
                 } else if (apiName == "category-shops-list") && (aMethod == HTTPMethod.post) {
                     //Returns All shops in a Specific Catagory (Slug=3) OR Shops in a specific catagory in a state (Slug=1) OR Shops in a specific catagory in a city (Slug=2)
                     print("Starting category-shops-list Parser...")
@@ -93,6 +98,31 @@ class JSONParser {
                     //print("Parser Disposed")
                 }
             ).disposed(by: netObjectsDispose)
+    }
+    
+    func processAsPostDetails(Result aResult : NSDictionary) -> Post {
+        var aPost = NetworkManager.shared.postDetailObs.value
+        if let postDet = aResult["postDetail"] as? NSDictionary {
+            if postDet != nil {
+                if let aContent = postDet["content"] as? String {aPost.content = aContent}
+                if let aShopId = postDet["shop_id"] as? Int {aPost.shopId = aShopId}
+                if let aShopId = postDet["shop_id"] as? Int {aPost.shopId = aShopId}
+                if let aTitle = postDet["title"] as? String {aPost.title = aTitle}
+                if let aContent = postDet["content"] as? String {aPost.content = aContent}
+                if let anImage = postDet["image"] as? String {aPost.image = anImage}
+                if let aViewCount = postDet["viewCount"] as? Int {aPost.viewCount = aViewCount}
+                if let aLike = postDet["is_like"] as? Bool {aPost.isLiked = aLike}
+                if let aCountLike = postDet["count_like"] as? Int {aPost.countLike = aCountLike}
+                if let someComments = postDet["comments"] as? NSArray {
+                    aPost.comments = [Comment]()
+                    for aComment in someComments {
+                        let newComment = Comment(id: 0, userID: 0, comment: "")
+                        aPost.comments!.append(newComment)
+                    }
+                }
+            }
+        }
+        return aPost
     }
     
     func processAndSetHomeData(Result aResult : NSDictionary) {

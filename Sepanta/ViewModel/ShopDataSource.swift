@@ -59,7 +59,7 @@ class ShopDataSource {
         if let contents = aProfileDicAsNS["content"] as? NSArray {
             for aContent in contents {
                 let aPost = (aContent as! NSDictionary)
-                var newPost = Post(id: 0,title: "", content: "", image: "")
+                var newPost = Post(id: 0, shopId: 0, viewCount: 0, comments: [], isLiked: false, countLike: 0, title: "", content: "", image: "")
                 newPost.id = (aPost["id"] as? Int) ?? 0
                 newPost.title = (aPost["title"] as? String) ?? ""
                 newPost.content = (aPost["content"] as? String) ?? ""

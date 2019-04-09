@@ -149,6 +149,15 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
+    func PushAPost(PostID aPostID : Int){
+        let vc = PostViewController.instantiate()
+        vc.coordinator = self
+        vc.postID = aPostID
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+    
     func logout() {
         LoginKey.shared.deleteTokenAndUserID()
         if self.parentCoordinator != nil{

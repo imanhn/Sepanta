@@ -32,10 +32,9 @@ extension UIImageView {
         let defaultImage = UIImage(named: defaultImageName)
         self.contentMode = .scaleAspectFit
         let imageSize = CGSize(width: self.frame.size.width*aScale, height: self.frame.size.height*aScale)
-        let filter = AspectScaledToFitSizeFilter(size: imageSize)
+        let filter = AspectScaledToFillSizeFilter(size: imageSize)//AspectScaledToFitSizeFilter(size: imageSize)
         
         
-        //let imageUrl = URL(string: NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_profile_image+imageName)!
         var cachedData : NSData?
         if imageName.count > 0
         {

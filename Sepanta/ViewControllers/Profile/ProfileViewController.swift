@@ -11,7 +11,7 @@ import UIKit
 import Alamofire
 import RxAlamofire
 
-class ProfileViewController : UIViewController,Storyboarded {
+class ProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
     weak var coordinator : HomeCoordinator?
     var showProfileUI : ShowProfileUI! = ShowProfileUI()
     @IBOutlet var topView: UIView!
@@ -48,6 +48,10 @@ class ProfileViewController : UIViewController,Storyboarded {
         topView.layer.insertSublayer(gradient, at: 0)
     }
     
+    @objc override func ReloadViewController(_ sender:Any) {
+        super.ReloadViewController(sender)
+        showProfileUI!.showMyClub(self)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         gradientTopView()

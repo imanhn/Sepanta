@@ -12,7 +12,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 import RxDataSources
-
+import Alamofire
 
 class PostCell : UICollectionViewCell {
     
@@ -63,8 +63,34 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     @objc func newPostTapped(sender : Any){
         
     }
+    
     @objc func followTapped(sender : Any){
-        
+        if buttons["followButton"] == nil {
+            print("Error ShopUI: Odd!, followbutton should not be NIL here!")
+            return
+        }
+        buttons["followButton"]!.isEnabled = false
+        buttons["followButton"]!.backgroundColor = UIColor(hex: 0xD6D7D9)
+        Spinner.start()
+        var aProfile = self.delegate.profileRelay.value
+        let aParameter = ["shop%20id":"\(aProfile.shop_id ?? 0)"]
+        NetworkManager.shared.run(API: "follow-unfollow-request", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil)
+        NetworkManager.shared.status.subscribe(onNext: { [unowned self] (innerStatus) in
+            aProfile.is_follow = !(aProfile.is_follow ?? false )
+            self.delegate.profileRelay.accept(aProfile)
+            self.buttons["followButton"]!.isEnabled = true
+            self.buttons["followButton"]!.backgroundColor = UIColor(hex: 0x515152)
+            print("Done")
+            Spinner.stop()
+            NetworkManager.shared.status = BehaviorRelay<CallStatus>(value: CallStatus.ready)
+        }, onError: { _ in
+            print("Error")
+            self.buttons["followButton"]!.isEnabled = true
+            self.buttons["followButton"]!.backgroundColor = UIColor(hex: 0x515152)
+            self.delegate.alert(Message: "عضویت قابل انجام نیست، احتمالاْ شبکه قطع می باشد مجددا تلاش فرمایید.")
+            NetworkManager.shared.status = BehaviorRelay<CallStatus>(value: CallStatus.ready)
+            Spinner.stop()
+        }).disposed(by: myDisposeBag)
     }
     
     func buildPostToolbar(){
@@ -75,74 +101,75 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         let viewWidth = self.delegate.PostToolbarView.frame.width
         let viewHeight = self.delegate.PostToolbarView.frame.height
         let buttonDim = viewHeight - (2 * marginY)
-        if LoginKey.shared.role.uppercased() == "SHOP" || LoginKey.shared.role.uppercased() == "OPTIONAL(SHOP)"{
+        if LoginKey.shared.role.uppercased() == "SHOP" || LoginKey.shared.role.uppercased() == "OPTIONAL(SHOP)" ||
+            LoginKey.shared.role.uppercased() == "SELLER" || LoginKey.shared.role.uppercased() == "OPTIONAL(SELLER)"{
             
-            let shareButton = RoundedButton(type: .custom)
+            buttons["shareButton"] = RoundedButton(type: .custom)
             var xCursor = leadingMarginX
-            shareButton.frame = CGRect(x: xCursor, y: marginY, width: buttonDim, height: buttonDim)
-            shareButton.setImage(UIImage(named: "icon_share"), for: .normal)
-            shareButton.contentMode = .scaleAspectFit
-            shareButton.addTarget(self, action: #selector(shareTapped), for: .touchUpInside)
-            self.delegate.PostToolbarView.addSubview(shareButton)
+            buttons["shareButton"]!.frame = CGRect(x: xCursor, y: marginY, width: buttonDim, height: buttonDim)
+            buttons["shareButton"]!.setImage(UIImage(named: "icon_share"), for: .normal)
+            buttons["shareButton"]!.contentMode = .scaleAspectFit
+            buttons["shareButton"]!.addTarget(self, action: #selector(shareTapped), for: .touchUpInside)
+            self.delegate.PostToolbarView.addSubview(buttons["shareButton"]!)
 
             xCursor = xCursor + marginXBTWButtons + buttonDim
-            let addButton = UIButton(type: .custom)
-            addButton.frame = CGRect(x: xCursor, y: marginY, width: buttonDim, height: buttonDim)
-            addButton.layer.cornerRadius = 5
-            addButton.layer.borderColor = UIColor(hex: 0xDA3A5C).cgColor
-            addButton.setImage(UIImage(named: "icon_add_white"), for: .normal)
-            addButton.backgroundColor = UIColor(hex: 0x9FDA64)
-            addButton.contentMode = .scaleAspectFit
-            addButton.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
-            self.delegate.PostToolbarView.addSubview(addButton)
+            buttons["addButton"]! = UIButton(type: .custom)
+            buttons["addButton"]!.frame = CGRect(x: xCursor, y: marginY, width: buttonDim, height: buttonDim)
+            buttons["addButton"]!.layer.cornerRadius = 5
+            buttons["addButton"]!.layer.borderColor = UIColor(hex: 0xDA3A5C).cgColor
+            buttons["addButton"]!.setImage(UIImage(named: "icon_add_white"), for: .normal)
+            buttons["addButton"]!.backgroundColor = UIColor(hex: 0x9FDA64)
+            buttons["addButton"]!.contentMode = .scaleAspectFit
+            buttons["addButton"]!.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
+            self.delegate.PostToolbarView.addSubview(buttons["addButton"]!)
 
             xCursor = xCursor + marginXBTWButtons + buttonDim
-            let editButton = RoundedButton(type: .custom)
-            editButton.frame = CGRect(x: xCursor, y: marginY, width: buttonDim, height: buttonDim)
-            editButton.setImage(UIImage(named: "icon_edit"), for: .normal)
-            editButton.addTarget(self, action: #selector(editTapped), for: .touchUpInside)
-            self.delegate.PostToolbarView.addSubview(editButton)
+            buttons["editButton"] = RoundedButton(type: .custom)
+            buttons["editButton"]!.frame = CGRect(x: xCursor, y: marginY, width: buttonDim, height: buttonDim)
+            buttons["editButton"]!.setImage(UIImage(named: "icon_edit"), for: .normal)
+            buttons["editButton"]!.addTarget(self, action: #selector(editTapped), for: .touchUpInside)
+            self.delegate.PostToolbarView.addSubview(buttons["editButton"]!)
 
             xCursor = xCursor + marginXBTWButtons + buttonDim
             let buttonWidth = viewWidth - xCursor - trailingMarginX
-            let newPostButton = RoundedButton(type: .custom)
-            newPostButton.frame = CGRect(x: xCursor, y: marginY, width: buttonWidth, height: buttonDim)
-            newPostButton.layer.cornerRadius = 5
-            newPostButton.layer.borderColor = UIColor(hex: 0xDA3A5C).cgColor
-            newPostButton.setImage(UIImage(named: "icon_btn_add"), for: .normal)
-            newPostButton.setTitle("پست جدید", for: .normal)
-            newPostButton.setTitleColor(UIColor(hex: 0xDA3A5C), for: .normal)
-            newPostButton.titleLabel?.font = UIFont(name: "Shabnam-FD", size: 16)
-            newPostButton.semanticContentAttribute = .forceRightToLeft
-            newPostButton.imageEdgeInsets = UIEdgeInsetsMake(0, buttonDim/2, 0, 0)
-            newPostButton.addTarget(self, action: #selector(newPostTapped), for: .touchUpInside)
-            self.delegate.PostToolbarView.addSubview(newPostButton)
+            buttons["newPostButton"] = RoundedButton(type: .custom)
+            buttons["newPostButton"]!.frame = CGRect(x: xCursor, y: marginY, width: buttonWidth, height: buttonDim)
+            buttons["newPostButton"]!.layer.cornerRadius = 5
+            buttons["newPostButton"]!.layer.borderColor = UIColor(hex: 0xDA3A5C).cgColor
+            buttons["newPostButton"]!.setImage(UIImage(named: "icon_btn_add"), for: .normal)
+            buttons["newPostButton"]!.setTitle("پست جدید", for: .normal)
+            buttons["newPostButton"]!.setTitleColor(UIColor(hex: 0xDA3A5C), for: .normal)
+            buttons["newPostButton"]!.titleLabel?.font = UIFont(name: "Shabnam-FD", size: 16)
+            buttons["newPostButton"]!.semanticContentAttribute = .forceRightToLeft
+            buttons["newPostButton"]!.imageEdgeInsets = UIEdgeInsetsMake(0, buttonDim/2, 0, 0)
+            buttons["newPostButton"]!.addTarget(self, action: #selector(newPostTapped), for: .touchUpInside)
+            self.delegate.PostToolbarView.addSubview(buttons["newPostButton"]!)
             
         }else if LoginKey.shared.role.uppercased() == "USER" || LoginKey.shared.role.uppercased() == "OPTIONAL(USER)"{
-            let shareButton = RoundedButton(type: .custom)
+            buttons["shareButton"] = RoundedButton(type: .custom)
             var xCursor = leadingMarginX
-            shareButton.frame = CGRect(x: xCursor, y: marginY, width: buttonDim, height: buttonDim)
-            shareButton.setImage(UIImage(named: "icon_share"), for: .normal)
-            shareButton.contentMode = .scaleAspectFit
-            shareButton.addTarget(self, action: #selector(shareTapped), for: .touchUpInside)
-            self.delegate.PostToolbarView.addSubview(shareButton)
+            buttons["shareButton"]!.frame = CGRect(x: xCursor, y: marginY, width: buttonDim, height: buttonDim)
+            buttons["shareButton"]!.setImage(UIImage(named: "icon_share"), for: .normal)
+            buttons["shareButton"]!.contentMode = .scaleAspectFit
+            buttons["shareButton"]!.addTarget(self, action: #selector(shareTapped), for: .touchUpInside)
+            self.delegate.PostToolbarView.addSubview(buttons["shareButton"]!)
             
             xCursor = xCursor + marginXBTWButtons + buttonDim
             let totalTrailingDistanceToRight = self.delegate.shopLogoTrailing.constant + self.delegate.shopLogoShopTitleDistance.constant + self.delegate.shopLogo.frame.width
             let buttonWidth = viewWidth - xCursor - totalTrailingDistanceToRight
-            let followButton = RoundedButtonWithDarkBackground(type: .custom)
-            followButton.frame = CGRect(x: xCursor, y: marginY, width: buttonWidth, height: buttonDim)
-            followButton.setImage(UIImage(named: "icon_tick_white"), for: .normal)
-            followButton.setTitle("عضویت", for: .normal)
-            followButton.setTitleColor(UIColor(hex: 0xFFFFFF), for: .normal)
-            followButton.titleLabel?.font = UIFont(name: "Shabnam-FD", size: 16)
-            followButton.semanticContentAttribute = .forceRightToLeft
-            followButton.imageEdgeInsets = UIEdgeInsetsMake(0, buttonDim/2, 0, 0)
-            followButton.addTarget(self, action: #selector(followTapped), for: .touchUpInside)
-            self.delegate.PostToolbarView.addSubview(followButton)
+            buttons["followButton"] = RoundedButtonWithDarkBackground(type: .custom)
+            buttons["followButton"]!.frame = CGRect(x: xCursor, y: marginY, width: buttonWidth, height: buttonDim)
+            buttons["followButton"]!.setImage(UIImage(named: "icon_tick_white"), for: .normal)
+            buttons["followButton"]!.setTitle("بررسی عضویت...", for: .normal)
+            buttons["followButton"]!.setTitleColor(UIColor(hex: 0xFFFFFF), for: .normal)
+            buttons["followButton"]!.titleLabel?.font = UIFont(name: "Shabnam-FD", size: 16)
+            buttons["followButton"]!.semanticContentAttribute = .forceRightToLeft
+            buttons["followButton"]!.imageEdgeInsets = UIEdgeInsetsMake(0, buttonDim/2, 0, 0)
+            buttons["followButton"]!.addTarget(self, action: #selector(followTapped), for: .touchUpInside)
+            self.delegate.PostToolbarView.addSubview(buttons["followButton"]!)
 
         }else{
-            print("No Role Found : >\(LoginKey.shared.role.uppercased())<")
+            print("ShopUI: Code shouldn't reach here!,No Role Found : >\(LoginKey.shared.role.uppercased())<")
         }
         
     }
@@ -164,7 +191,9 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
             self.posts.accept(aProfile.content)
             if aProfile.is_follow != nil  {
                 if aProfile.is_follow! {
-                    //self.delegate.followButton.setTitle("عضو شده اید", for: .normal)
+                    self.buttons["followButton"]!.setTitle("عضو شده اید", for: .normal)
+                }else{
+                    self.buttons["followButton"]!.setTitle("عضویت", for: .normal)
                 }
             }
             if aProfile.image != nil {
@@ -172,9 +201,14 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 //print("Shop Image : ",imageURL ?? "Nil")
                 if imageURL != nil {
                     self.delegate.shopImage.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!)
-                    
+                    self.delegate.shopLogo.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!)
+                    self.delegate.shopLogo.layer.shadowColor = UIColor.black.cgColor
+                    self.delegate.shopLogo.layer.shadowOffset = CGSize(width: 3, height: 3)
+                    self.delegate.shopLogo.layer.shadowRadius = 3
+                    self.delegate.shopLogo.layer.shadowOpacity = 0.3
                 }
             }
+            //if aProfil
         })
     }
     
@@ -182,7 +216,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         self.posts.bind(to: collectionView.rx.items(cellIdentifier: "postcell")) { [unowned self] row, model, cell in
             if let aCell = cell as? PostCell {
                 if aCell.aPost == nil {aCell.aPost = UIButton(type: .custom)}
-                let strURL = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + model.image
+                let strURL = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + model.image!
                 let imageURL = URL(string: strURL)
                 //print("ROW:\(row) UICollectionView binding : ",imageURL ?? "NIL"," Cell : ",aCell,"  model : ",model)
                 //print("URL : ",strURL)
@@ -197,8 +231,10 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                     let dim = (self.collectionView.bounds.width * 0.8) / self.numberOfPostInARow
                     aCell.aPost.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
                     //aCell.aPost.af_setImage(for: .normal, url: imageURL!) //Also Works!
-                    aCell.aPost.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1, ImageURL: imageURL!, ImageName: model.image)
+                    aCell.aPost.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1, ImageURL: imageURL!, ImageName: model.image!)
                 }
+                aCell.aPost.tag = model.id ?? 0
+                aCell.aPost.addTarget(self, action: #selector(self.showPostDetail), for: .touchUpInside)
             }else{
                 print("\(cell) can not be casted to PostCell")
             }
@@ -293,5 +329,9 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         self.delegate.paneView.addSubview(views["leftFormView"]!)
         
     }
-
+    @objc func showPostDetail(_ sender : Any){
+        let postID = (sender as! UIButton).tag
+        print("ShopUI : Pushing Post with ID : ",postID)
+        self.delegate.coordinator?.PushAPost(PostID: postID)
+    }
 }

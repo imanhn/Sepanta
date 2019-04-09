@@ -28,10 +28,9 @@ class NewShopCell : UITableViewCell {
     
 }
 
-class NewShopsViewController :  UIViewController,Storyboarded,ShopListViewControllerProtocol{
+class NewShopsViewController :  UIViewControllerWithErrorBar,Storyboarded{
     weak var coordinator : HomeCoordinator?
     let myDisposeBag = DisposeBag()
-    var shops : BehaviorRelay<[Shop]> = BehaviorRelay(value: [])
     var newShopsDataSource : ShopsListDataSource!
     
     @IBOutlet weak var shopTable: UITableView!
@@ -44,10 +43,15 @@ class NewShopsViewController :  UIViewController,Storyboarded,ShopListViewContro
         self.coordinator!.popHome()
     }
 
+    @objc override func ReloadViewController(_ sender:Any) {
+        super.ReloadViewController(sender)
+        newShopsDataSource.getNewShopsFromServer()
+    }
     
     func bindToTableView() {
-        shops.bind(to: shopTable.rx.items(cellIdentifier: "cell")) { row, model, cell in
+        NetworkManager.shared.shopObs.bind(to: shopTable.rx.items(cellIdentifier: "cell")) { row, aShopAsAny, cell in
             if let aCell = cell as? NewShopCell {
+                let model = aShopAsAny as! Shop
                 aCell.shopName.text = model.name
                 let persianDiscount :String = "\(model.dicount)".toPersianNumbers()
                 aCell.discountPercentage.text = persianDiscount+"%"

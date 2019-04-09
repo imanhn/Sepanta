@@ -7,14 +7,16 @@
 //
 
 import Foundation
-import RxDataSources
 
-struct Post : Decodable,IdentifiableType, Equatable {
-    var id : Int
-    var title : String
-    var content : String
-    var image : String
-    var identity: Int {
-        return id
-    }
+struct Post : Decodable, Equatable {
+    var id : Int?
+    var shopId : Int?
+    var viewCount : Int?
+    var comments : [Comment]?
+    var isLiked : Bool?
+    var countLike : Int?
+    var title : String?
+    var content : String?
+    var image : String?
+
 }

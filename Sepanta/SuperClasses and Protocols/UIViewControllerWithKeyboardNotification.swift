@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-class UIViewControllerWithKeyboardNotification : UIViewController {
+class UIViewControllerWithKeyboardNotificationWithErrorBar : UIViewControllerWithErrorBar {
     @objc func keyboardWillChange(notification : Notification){
         guard let keyboardRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             print("Keyboard Rect is Empty!")

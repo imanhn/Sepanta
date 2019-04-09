@@ -11,7 +11,7 @@ import UIKit
 import Alamofire
 import RxAlamofire
 
-class EditProfileViewController : UIViewController,Storyboarded {
+class EditProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
     
     @IBOutlet weak var formView: UIView!
     @IBOutlet var topView: UIView!
@@ -23,6 +23,12 @@ class EditProfileViewController : UIViewController,Storyboarded {
     @IBAction func backTapped(_ sender: Any) {
         self.coordinator?.popOneLevel()
     }
+    
+    @objc override func ReloadViewController(_ sender:Any) {
+        super.ReloadViewController(sender)
+        editProfileUI.sendEditedData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         editProfileUI.showForm(self)

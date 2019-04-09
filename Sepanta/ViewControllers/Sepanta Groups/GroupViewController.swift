@@ -27,10 +27,10 @@ class ShopCell : UITableViewCell {
     
 }
 
-class GroupViewController :  UIViewController,UITextFieldDelegate,Storyboarded,ShopListViewControllerProtocol{
+class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,Storyboarded{
     weak var coordinator : HomeCoordinator?
     let myDisposeBag  = DisposeBag()
-    var shops : BehaviorRelay<[Shop]> = BehaviorRelay(value: [])
+    //var shops : BehaviorRelay<[Shop]> = BehaviorRelay(value: [])
     var selectedCity : String?
     var selectedState : String?
     var newShopsDataSource : ShopsListDataSource!
@@ -54,16 +54,11 @@ class GroupViewController :  UIViewController,UITextFieldDelegate,Storyboarded,S
         self.groupLogoImage.contentMode = .scaleAspectFit
     }
     
-    func fetchData() {
-        var fetchedShops = [Shop]()
-        fetchedShops.append(Shop(user_id: 1,name: "فست فود جو", image: "", stars: 1.4, followers: 16005, dicount: 15))
-        fetchedShops.append(Shop(user_id: 2,name: "تهران برگر", image: "", stars: 3.4, followers: 1501, dicount: 10))
-        shops.accept(fetchedShops)
-    }
 
     func bindToTableView() {
-        shops.bind(to: shopTable.rx.items(cellIdentifier: "cell")) { row, model, cell in
+        NetworkManager.shared.shopObs.bind(to: shopTable.rx.items(cellIdentifier: "cell")) { row, aShopAsAny, cell in
             if let aCell = cell as? ShopCell {
+                let model = aShopAsAny as! Shop
                 aCell.shopName.text = model.name
                 let persianDiscount :String = "\(model.dicount)".toPersianNumbers()
                 aCell.discountPercentage.text = persianDiscount+"%"
@@ -101,16 +96,24 @@ class GroupViewController :  UIViewController,UITextFieldDelegate,Storyboarded,S
             })
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        bindToTableView()
+    @objc override func ReloadViewController(_ sender:Any) {
+        super.ReloadViewController(sender)
         newShopsDataSource = ShopsListDataSource(self)
         newShopsDataSource.getShopListForACatagory(Catagory: "\(self.catagoryId)", State: selectedState, City: selectedCity)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        newShopsDataSource = ShopsListDataSource(self)
+        newShopsDataSource.getShopListForACatagory(Catagory: "\(self.catagoryId)", State: selectedState, City: selectedCity)
+        bindToTableView()
         updateGroupHeaders()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        //shops.accept([])
+        //shopTable.reloadData()
         newShopsDataSource = nil
        
     }

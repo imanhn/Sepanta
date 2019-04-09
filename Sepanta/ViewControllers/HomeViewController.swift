@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class HomeViewController: UIViewController,Storyboarded {
+class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     weak var coordinator : HomeCoordinator?
     var slideControl : SlideController?
     @IBOutlet weak var pageControl: UIPageControl!
@@ -45,13 +45,22 @@ class HomeViewController: UIViewController,Storyboarded {
         }
     }
     
+    @objc override func ReloadViewController(_ sender:Any) {
+        super.ReloadViewController(sender)
+        SlidesAndPaths.shared.getHomeData()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         slideControl = SlideController(parentController: self)
     }
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //TEST
+        //NetworkManager.shared.status.accept(CallStatus.error)
+        //alert(Message:"آزمايش نوار اطلاعات")
         //Handle Tap to End Editing
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
        // Handles Slide Events and delivers them to self.handle_pan

@@ -15,7 +15,7 @@ import Alamofire
 import AlamofireImage
 
 
-class ShopViewController :  UIViewController,Storyboarded{
+class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     weak var coordinator : HomeCoordinator?
     let myDisposeBag = DisposeBag()
     var profileRelay = BehaviorRelay<Profile>(value: Profile())
@@ -50,6 +50,8 @@ class ShopViewController :  UIViewController,Storyboarded{
     }
     
     @IBAction func backTapped(_ sender: Any) {
+        shopUI = nil
+        shopDataSource = nil
         self.coordinator!.popOneLevel()
     }
     
@@ -64,8 +66,16 @@ class ShopViewController :  UIViewController,Storyboarded{
     }
     
     @objc func contactTapped(_ sender : Any) {
+        //Refactor needed
+        //When I go to a post and come back ShopUI will be released and here is the place I get an exception!
         shopUI!.showContacts()
     }
+    
+    @objc override func ReloadViewController(_ sender:Any) {
+        super.ReloadViewController(sender)
+        self.shopDataSource.getShopFromServer()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.shopDataSource = ShopDataSource(self)
@@ -74,8 +84,6 @@ class ShopViewController :  UIViewController,Storyboarded{
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        shopUI = nil
-        shopDataSource = nil
     }
     
 }

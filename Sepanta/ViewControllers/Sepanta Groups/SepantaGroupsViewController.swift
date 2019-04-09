@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import Alamofire
 
-class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storyboarded{
+class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDelegate,Storyboarded{
     weak var coordinator : HomeCoordinator?
     var currentStateCodeObs = BehaviorRelay<String>(value : String())
     var currentCityCodeObs = BehaviorRelay<String>(value : String())
@@ -74,6 +74,13 @@ class SepantaGroupsViewController : UIViewController,UITextFieldDelegate,Storybo
     @IBAction func provincePressed(_ sender: Any) {
         Spinner.start()
         NetworkManager.shared.run(API: "category-state-list",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil)
+    }
+    
+    @objc override func ReloadViewController(_ sender:Any) {
+        super.ReloadViewController(sender)
+        selectProvince.text = ""
+        selectCity.text = ""
+        fetchAllCatagories()
     }
     
     override func viewDidLoad() {
