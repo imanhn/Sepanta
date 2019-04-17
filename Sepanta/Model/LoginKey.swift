@@ -81,7 +81,7 @@ class LoginKey {
             "cellphone": phoneNumber
         ]
         Spinner.start()
-        NetworkManager.shared.run(API: "login",QueryString: "", Method: HTTPMethod.post, Parameters: parameters, Header: nil)
+        NetworkManager.shared.run(API: "login",QueryString: "", Method: HTTPMethod.post, Parameters: parameters, Header: nil,WithRetry: false)
     }
     
     func getToken(_ smsCode : String){
@@ -92,7 +92,7 @@ class LoginKey {
         let queryString = "?sms_verification_code=\(smsCode)&userId=\(self.userID)"
         print("Getting URL : ",queryString)
         Spinner.start()
-        NetworkManager.shared.run(API: "check-sms-code",QueryString: queryString, Method: HTTPMethod.post, Parameters: parameters, Header: nil)
+        NetworkManager.shared.run(API: "check-sms-code",QueryString: queryString, Method: HTTPMethod.post, Parameters: parameters, Header: nil,WithRetry: true)
     }
 
 }

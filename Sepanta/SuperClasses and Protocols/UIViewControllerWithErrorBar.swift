@@ -63,19 +63,21 @@ class UIViewControllerWithErrorBar : UIViewController,ReloadableViewController {
         })
     }
 
-    func subscribeToInternetDisconnection(){
-        NetworkManager.shared.status
-            .filter({$0 == CallStatus.error})
+    func subscribeToInternetDisconnection()->Disposable{
+        return NetworkManager.shared.status
+            .filter({$0 == CallStatus.error || $0 == CallStatus.InternalServerError})
             .subscribe(onNext: { [unowned self] innerStatus in
-                print("Error : DC happened")
+                if innerStatus == CallStatus.InternalServerError {
+                    if (self.viewIfLoaded?.window != nil) {
+                        print("Alerting Internal Error ",self)
+                        self.alert(Message: "اشکال در سرور بوجود آمده است")
+                    }
+                }else if innerStatus == CallStatus.IncompleteData {
+                    self.alert(Message: "اطلاعات این پست کامل نیست")
+                }else if innerStatus == CallStatus.error {
+                    self.showInternetDisconnection()
+                }
                 NetworkManager.shared.status = BehaviorRelay<CallStatus>(value: CallStatus.ready)
-                self.showInternetDisconnection()
-                
             })
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        subscribeToInternetDisconnection()
-    }
-    
 }

@@ -8,9 +8,10 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 class GetRichViewController : UIViewControllerWithErrorBar,UITextFieldDelegate,Storyboarded{
-   
+   var myDisposeBag = DisposeBag()
     @IBOutlet weak var scrollView: UIScrollView!
     var getRichUI : GetRichUI?
     
@@ -31,8 +32,8 @@ class GetRichViewController : UIViewControllerWithErrorBar,UITextFieldDelegate,S
     }
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         getRichUI = GetRichUI()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
         getRichUI!.showResellerRequest(self)

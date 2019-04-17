@@ -23,6 +23,7 @@ extension UIViewController {
         aLabel.textColor = UIColor(hex: 0xF7F7F7)
         aView.addSubview(aLabel)
         UIView.animate(withDuration: 0.3, animations: {
+            //print("Animating Alert")
             aView.frame = CGRect(x: 0, y: self.view.frame.height*0.4, width: self.view.frame.width, height: self.view.frame.height*0.06)
         })
         

@@ -18,10 +18,10 @@ import AlamofireImage
 class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     weak var coordinator : HomeCoordinator?
     let myDisposeBag = DisposeBag()
-    var profileRelay = BehaviorRelay<Profile>(value: Profile())
     var shop : Shop!
     var shopUI : ShopUI!
-    var shopDataSource : ShopDataSource!
+    //var shopDataSource : ShopDataSource!
+    
     @IBOutlet weak var shopImage: UIImageView!
     @IBOutlet weak var shopLogo: UIImageView!
     @IBOutlet weak var offLabel: UILabel!
@@ -51,7 +51,8 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     
     @IBAction func backTapped(_ sender: Any) {
         shopUI = nil
-        shopDataSource = nil
+        NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: Profile())
+        //shopDataSource = nil
         self.coordinator!.popOneLevel()
     }
     
@@ -73,12 +74,26 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     
     @objc override func ReloadViewController(_ sender:Any) {
         super.ReloadViewController(sender)
-        self.shopDataSource.getShopFromServer()
+        getShopFromServer()
+    }
+    
+    func getShopFromServer() {
+        guard self.shop.user_id != 0 else {
+            alert(Message: "اظلاعات این فروشگاه کامل نیست")
+            return
+        }
+        let aParameter = ["user id":"\(self.shop.user_id!)"]
+        NetworkManager.shared.run(API: "profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getShopFromServer()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.shopDataSource = ShopDataSource(self)
+        subscribeToInternetDisconnection().disposed(by: myDisposeBag)
+        
         self.shopUI = ShopUI(self)
     }
     

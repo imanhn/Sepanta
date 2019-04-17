@@ -12,14 +12,17 @@ import Alamofire
 import RxCocoa
 import RxSwift
 
-class PostViewController :  UIViewControllerWithErrorBar,Storyboarded{
+class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar,Storyboarded{
     var postUI : PostUI!
     var coordinator : HomeCoordinator!
-    //var post = BehaviorRelay<Post>(value: Post())
+    var myDisposeBag = DisposeBag()
     var postID : Int?
+    
     @IBOutlet weak var postScrollView: UIScrollView!
+    @IBOutlet weak var postTitleLabelInHeader: UILabel!
     
     @IBAction func BackTapped(_ sender: Any) {
+        postUI = nil
         self.coordinator!.popOneLevel()
     }
     
@@ -30,14 +33,14 @@ class PostViewController :  UIViewControllerWithErrorBar,Storyboarded{
     @IBOutlet weak var BackTapped: UIButton!
     
     func getPostData(){
-        //"http://www.panel.ipsepanta.ir/api/v1/post-details?post_id=35"
         if postID == nil {
             print("Unable to get data")
             self.alert(Message: "اطلاعات این پست ناقص است")
             return
         }
+        Spinner.start()
         let aParameter = ["post_id":"\(postID!)"]
-        NetworkManager.shared.run(API: "post-details", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil)
+        NetworkManager.shared.run(API: "post-details", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
     }
     
     @objc override func ReloadViewController(_ sender:Any) {
@@ -46,14 +49,23 @@ class PostViewController :  UIViewControllerWithErrorBar,Storyboarded{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         getPostData()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+        subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         self.postUI = PostUI(self)
     }
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         NetworkManager.shared.postDetailObs.accept(Post())
         self.postUI = nil
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
 }

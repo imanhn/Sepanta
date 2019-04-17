@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "icon_add_white.png",
+      "filename" : "icon_like.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "@2xicon_like.png",
       "scale" : "2x"
     },
     {

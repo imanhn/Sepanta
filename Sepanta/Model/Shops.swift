@@ -10,10 +10,14 @@ import Foundation
 import UIKit
 
 struct Shop  {
-    let user_id : Int
-    var name : String
-    var image : String
-    var stars : Float
-    var followers : Int
-    var dicount : Int
+    let shop_id : Int?
+    let user_id : Int?
+    var shop_name : String?
+    var shop_off : Int?
+    var lat : Float?
+    var long : Float?
+    var image : String?
+    var rate : String?
+    var follower_count : Int?
+    var created_at : String?
 }

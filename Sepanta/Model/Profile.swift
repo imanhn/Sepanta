@@ -8,10 +8,6 @@
 
 import Foundation
 
-struct CreditCard : Decodable {
-    var id : Int
-}
-
 struct Profile : Decodable {
     var status : String?
     var message : String?
@@ -20,7 +16,11 @@ struct Profile : Decodable {
     var address : String?
     var shop_id : Int?
     var shop_name : String?
+    var category_title : String?
+    var rate : String?
+    var rate_count : Int?
     var shop_off: Int?
+    var url : String?
     var cellphone : String?
     var phone : String?
     var username : String?

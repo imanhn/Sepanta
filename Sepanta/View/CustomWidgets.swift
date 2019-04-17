@@ -30,9 +30,12 @@ class UnderLinedSelectableUIView: UIView {
     }
 }
 
+
 class RoundedButton: UIButton {
     var curvSize : CGFloat = 5;
     override func draw(_ rect: CGRect) {
+        self.layer.cornerRadius = curvSize
+        self.layer.masksToBounds = true
         let context = UIGraphicsGetCurrentContext()
         
         let insideCGRec : CGRect = CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height)
@@ -459,5 +462,36 @@ extension UISearchBar {
         layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
         layer.shouldRasterize = true
         layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+    }
+}
+
+extension CGRect {
+    func buildARowView(Image anImageName : String,Selectable selectable:Bool,PlaceHolderText aPlaceHolder : String)->(UIView,UITextField){
+        let aView = UIView(frame: self)
+        let lineView = UIView(frame: CGRect(x: 0, y: self.height-1, width: self.width, height: 1))
+        lineView.backgroundColor = UIColor(hex: 0xD6D7D9)
+        aView.addSubview(lineView)
+        
+        aView.backgroundColor = UIColor.white
+        let icondim = self.height / 3
+        let spaceIconText : CGFloat = 20
+        let imageRect = CGRect(x: (self.width-icondim), y: (self.height - icondim)/2, width: icondim, height: icondim)
+        let anIcon = UIImageView(frame: imageRect)
+        anIcon.image = UIImage(named: anImageName)
+        anIcon.contentMode = .scaleAspectFit
+        
+        let aText = EmptyTextField(frame: CGRect(x: 0, y: 0, width: (self.width-icondim-spaceIconText), height: self.height))
+        aText.font = UIFont(name: "Shabnam-FD", size: 14)
+        aText.attributedPlaceholder = NSAttributedString(string: aPlaceHolder , attributes: [NSAttributedStringKey.foregroundColor: UIColor(hex: 0xD6D7D9)])
+        aText.textAlignment = .right
+        if selectable {
+            let triangleImage = UIImageView(frame: CGRect(x: 0, y: self.height*3/4 - 5, width: self.height/4, height: self.height/4))
+            triangleImage.image = UIImage(named: "icon_dropdown_red")
+            aView.addSubview(triangleImage)
+        }
+        aView.addSubview(aText)
+        aView.addSubview(anIcon)
+        
+        return (aView,aText)
     }
 }

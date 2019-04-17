@@ -73,7 +73,7 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
 
     @IBAction func provincePressed(_ sender: Any) {
         Spinner.start()
-        NetworkManager.shared.run(API: "category-state-list",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil)
+        NetworkManager.shared.run(API: "category-state-list",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
     }
     
     @objc override func ReloadViewController(_ sender:Any) {
@@ -86,16 +86,13 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
     override func viewDidLoad() {
         //print("VL SepantaGroup self.coordinator : ",self.coordinator ?? "nil")
         super.viewDidLoad()
+        subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         NetworkManager.shared.provinceDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
         NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
         definesPresentationContext = true
         selectCity.delegate = self
         selectProvince.delegate = self
         fetchAllCatagories()
-        
-       // self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
-        
-        
         registerProvinceChangeListener()
     }
 

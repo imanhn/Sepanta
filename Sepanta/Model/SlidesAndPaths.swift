@@ -24,7 +24,7 @@ class SlidesAndPaths {
     static let shared = SlidesAndPaths()
     
     func getHomeData(){
-        NetworkManager.shared.run(API: "home", QueryString: "?user_id=\(LoginKey.shared.userID)", Method: HTTPMethod.get, Parameters: nil, Header: nil)
+        NetworkManager.shared.run(API: "home", QueryString: "?user_id=\(LoginKey.shared.userID)", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
     }
     private init() {
         if !fetched {

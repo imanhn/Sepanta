@@ -20,9 +20,10 @@ class SMSConfirmViewController: UIViewControllerWithKeyboardNotificationWithErro
     var totalTime = 60
     var mobileNumber : String?
     var myDisposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+        subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         if mobileNumber != nil {
             setMobileNumber(mobileNumber!)
         }

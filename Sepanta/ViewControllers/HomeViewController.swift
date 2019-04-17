@@ -8,9 +8,11 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     weak var coordinator : HomeCoordinator?
+    var myDisposeBag = DisposeBag()
     var slideControl : SlideController?
     @IBOutlet weak var pageControl: UIPageControl!
     
@@ -18,8 +20,22 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     @IBOutlet weak var currentImageView: AdImageView!
     @IBOutlet weak var leftImageView: AdImageView!
     @IBOutlet weak var rightImageView: AdImageView!
-
-
+    @IBAction func gotoFavourites(_ sender: Any) {
+        alert(Message: "علاقه مندی ها")
+    }
+    
+    @IBAction func gotoNotifications(_ sender: Any) {
+        alert(Message: "اعلانات")
+    }
+    
+    @IBAction func gotoHelp(_ sender: Any) {
+        alert(Message: "نمایش کمک")
+    }
+    
+    @IBAction func gotoMapNearestShop(_ sender: Any) {
+        alert(Message: "نمایش نقشه")
+    }
+    
     @IBOutlet weak var searchTextField: CustomSearchBar!
     
     @IBAction func gotoProfile(_ sender: Any) {
@@ -58,12 +74,13 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         //TEST
         //NetworkManager.shared.status.accept(CallStatus.error)
         //alert(Message:"آزمايش نوار اطلاعات")
         //Handle Tap to End Editing
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
        // Handles Slide Events and delivers them to self.handle_pan
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
         self.view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:))))
  
     }

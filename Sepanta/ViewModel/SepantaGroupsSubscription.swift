@@ -62,11 +62,11 @@ extension SepantaGroupsViewController {
             .subscribe(onNext: { (innerCurrentState) in
                 //NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
                 let aParameter : Dictionary<String,String> = [
-                    "state%20code" : innerCurrentState
+                    "state code" : innerCurrentState
                 ]
-                let queryString = "?state%20code=\(innerCurrentState)"
+                let queryString = "?state code=\(innerCurrentState)"
                 //NetworkManager.shared.run(API: "get-state-and-city",QueryString: queryString, Method: HTTPMethod.post, Parameters: aParameter, Header: nil)
-                NetworkManager.shared.run(API: "categories-filter",QueryString: queryString, Method: HTTPMethod.post, Parameters: aParameter, Header: nil)
+                NetworkManager.shared.run(API: "categories-filter",QueryString: queryString, Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
                 //print("Registered and listended : ",innerCurrentState)
             }, onError: { _ in
                 print("Error in listening to province in Sepanta groups")
@@ -85,7 +85,7 @@ extension SepantaGroupsViewController {
                     "city_code": innerCurrentCity
                 ]
                 let queryString = "?city_code=\(innerCurrentCity)"
-                NetworkManager.shared.run(API: "categories-filter",QueryString: queryString, Method: HTTPMethod.post, Parameters: aParameter, Header: nil)
+                NetworkManager.shared.run(API: "categories-filter",QueryString: queryString, Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
                 //print("Registered and listended : ",innerCurrentCity)
             }, onError: { _ in
                 print("Error in listening to province in Sepanta groups")
@@ -150,6 +150,6 @@ extension SepantaGroupsViewController {
     }
     
     func fetchAllCatagories(){
-        NetworkManager.shared.run(API: "categories-filter",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil)
+        NetworkManager.shared.run(API: "categories-filter",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
     }
 }

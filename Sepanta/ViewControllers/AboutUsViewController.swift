@@ -23,8 +23,7 @@ class AboutUsViewController : UIViewController,UITextFieldDelegate,Storyboarded{
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        aboutUsUI = AboutUsUI()
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+        aboutUsUI = AboutUsUI()        
         aboutUsUI!.showAboutUs(self)
     }
     

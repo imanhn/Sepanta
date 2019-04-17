@@ -69,24 +69,31 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
             print("Error ShopUI: Odd!, followbutton should not be NIL here!")
             return
         }
-        buttons["followButton"]!.isEnabled = false
-        buttons["followButton"]!.backgroundColor = UIColor(hex: 0xD6D7D9)
+        buttons["followButton"]!.setDisable()
         Spinner.start()
-        var aProfile = self.delegate.profileRelay.value
-        let aParameter = ["shop%20id":"\(aProfile.shop_id ?? 0)"]
-        NetworkManager.shared.run(API: "follow-unfollow-request", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil)
-        NetworkManager.shared.status.subscribe(onNext: { [unowned self] (innerStatus) in
-            aProfile.is_follow = !(aProfile.is_follow ?? false )
-            self.delegate.profileRelay.accept(aProfile)
-            self.buttons["followButton"]!.isEnabled = true
-            self.buttons["followButton"]!.backgroundColor = UIColor(hex: 0x515152)
-            print("Done")
+        var aProfile = NetworkManager.shared.profileObs.value
+        let aParameter = ["shop id":"\(aProfile.shop_id ?? 0)"]
+        NetworkManager.shared.run(API: "follow-unfollow-request", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: false)
+        NetworkManager.shared.status
+            .filter({$0 == CallStatus.ready})
+            .subscribe(onNext: { [unowned self] (innerStatus) in
+            print("innerStatus : ",innerStatus)
+            if innerStatus == CallStatus.ready {
+                print("Before : ",aProfile.is_follow)
+                aProfile.is_follow = !(aProfile.is_follow ?? false )
+                print("After : ",aProfile.is_follow)
+                NetworkManager.shared.profileObs.accept(aProfile)
+                self.buttons["followButton"]!.setEnable()
+                print("Done")
+            }else{
+                self.buttons["followButton"]!.setEnable()
+                print("Not Done!")
+            }
             Spinner.stop()
             NetworkManager.shared.status = BehaviorRelay<CallStatus>(value: CallStatus.ready)
         }, onError: { _ in
             print("Error")
-            self.buttons["followButton"]!.isEnabled = true
-            self.buttons["followButton"]!.backgroundColor = UIColor(hex: 0x515152)
+            self.buttons["followButton"]!.setEnable()
             self.delegate.alert(Message: "عضویت قابل انجام نیست، احتمالاْ شبکه قطع می باشد مجددا تلاش فرمایید.")
             NetworkManager.shared.status = BehaviorRelay<CallStatus>(value: CallStatus.ready)
             Spinner.stop()
@@ -157,7 +164,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
             xCursor = xCursor + marginXBTWButtons + buttonDim
             let totalTrailingDistanceToRight = self.delegate.shopLogoTrailing.constant + self.delegate.shopLogoShopTitleDistance.constant + self.delegate.shopLogo.frame.width
             let buttonWidth = viewWidth - xCursor - totalTrailingDistanceToRight
-            buttons["followButton"] = RoundedButtonWithDarkBackground(type: .custom)
+            buttons["followButton"] = RoundedButton(type: .custom)
             buttons["followButton"]!.frame = CGRect(x: xCursor, y: marginY, width: buttonWidth, height: buttonDim)
             buttons["followButton"]!.setImage(UIImage(named: "icon_tick_white"), for: .normal)
             buttons["followButton"]!.setTitle("بررسی عضویت...", for: .normal)
@@ -166,6 +173,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
             buttons["followButton"]!.semanticContentAttribute = .forceRightToLeft
             buttons["followButton"]!.imageEdgeInsets = UIEdgeInsetsMake(0, buttonDim/2, 0, 0)
             buttons["followButton"]!.addTarget(self, action: #selector(followTapped), for: .touchUpInside)
+            buttons["followButton"]!.setDisable()
             self.delegate.PostToolbarView.addSubview(buttons["followButton"]!)
 
         }else{
@@ -183,19 +191,33 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     }
 
     func bindUIwithDataSource(){
-        self.delegate.profileRelay.subscribe(onNext: { [unowned self] aProfile in
+        NetworkManager.shared.profileObs
+        .subscribe(onNext: { [unowned self] aProfile in
+            //print("SUBSCRIPTION UPDATE",aProfile)
             self.delegate.shopTitle.text = aProfile.shop_name
             self.delegate.scoreLabel.text = "امتیاز " + "\(aProfile.follower_count ?? 0)"
             self.delegate.followersNumLabel.text = "\(aProfile.follower_count ?? 0)"
             self.delegate.offLabel.text = "\(aProfile.shop_off ?? 0)%"
+            self.delegate.rateLabel.text = "(\(aProfile.rate ?? "0"))"
+            let rate : Float = Float(aProfile.rate ?? "0.0") ?? 0
+            if rate > 0.5 {self.delegate.star1.image = UIImage(named: "icon_star_on")}
+            if rate > 1.5 {self.delegate.star2.image = UIImage(named: "icon_star_on")}
+            if rate > 2.5 {self.delegate.star3.image = UIImage(named: "icon_star_on")}
+            if rate > 3.5 {self.delegate.star4.image = UIImage(named: "icon_star_on")}
+            if rate > 4.5 {self.delegate.star5.image = UIImage(named: "icon_star_on")}
+            //print("ShopUI : setting shopui.posts to  :: ",aProfile.content)
             self.posts.accept(aProfile.content)
+            //print("Profile : ",aProfile)
             if aProfile.is_follow != nil  {
                 if aProfile.is_follow! {
                     self.buttons["followButton"]!.setTitle("عضو شده اید", for: .normal)
+                    self.buttons["followButton"]!.setEnable()
                 }else{
                     self.buttons["followButton"]!.setTitle("عضویت", for: .normal)
+                    self.buttons["followButton"]!.setEnable()
                 }
             }
+            
             if aProfile.image != nil {
                 let imageURL = URL(string: NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_profile_image + aProfile.image!)
                 //print("Shop Image : ",imageURL ?? "Nil")
@@ -209,17 +231,17 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 }
             }
             //if aProfil
-        })
+        }).disposed(by: myDisposeBag)
     }
     
     func bindCollectionView(){
         self.posts.bind(to: collectionView.rx.items(cellIdentifier: "postcell")) { [unowned self] row, model, cell in
             if let aCell = cell as? PostCell {
-                if aCell.aPost == nil {aCell.aPost = UIButton(type: .custom)}
+                //if aCell.aPost == nil {aCell.aPost = UIButton(type: .custom)}
                 let strURL = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + model.image!
                 let imageURL = URL(string: strURL)
                 //print("ROW:\(row) UICollectionView binding : ",imageURL ?? "NIL"," Cell : ",aCell,"  model : ",model)
-                //print("URL : ",strURL)
+                print("ShopUI Binding Posts : ",model)
                 self.collectionView.addSubview(aCell)
                 aCell.addSubview(aCell.aPost)
                 if imageURL == nil {

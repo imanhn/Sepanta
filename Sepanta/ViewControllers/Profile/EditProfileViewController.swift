@@ -10,14 +10,14 @@ import Foundation
 import UIKit
 import Alamofire
 import RxAlamofire
-
+import RxSwift
 class EditProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
     
     @IBOutlet weak var formView: UIView!
     @IBOutlet var topView: UIView!
     weak var coordinator : HomeCoordinator?
     var editProfileUI : EditProfileUI! = EditProfileUI()
-    
+    var myDisposeBag = DisposeBag()
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBAction func backTapped(_ sender: Any) {
@@ -31,6 +31,7 @@ class EditProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         editProfileUI.showForm(self)
     }
     override func viewDidDisappear(_ animated: Bool) {

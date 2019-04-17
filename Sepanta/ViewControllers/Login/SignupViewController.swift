@@ -110,7 +110,7 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
     @IBAction func provinceTextTouchDown(_ sender: Any) {
         //var outsideController = ArrayChoiceTableViewController<String>()
         Spinner.start()
-        NetworkManager.shared.run(API: "get-state-and-city",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil)
+        NetworkManager.shared.run(API: "get-state-and-city",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
         NetworkManager.shared.provinceDictionaryObs
             //.debug()
             .filter({$0.count > 0})
@@ -140,9 +140,9 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
         let parameters = [
             "state code": self.currentStateCodeObs.value
         ]
-        let queryString = "?state%20code=\(self.currentStateCodeObs.value)"
+        let queryString = "?state code=\(self.currentStateCodeObs.value)"
         Spinner.start()
-        NetworkManager.shared.run(API: "get-state-and-city",QueryString: queryString, Method: HTTPMethod.post, Parameters: parameters, Header: nil)
+        NetworkManager.shared.run(API: "get-state-and-city",QueryString: queryString, Method: HTTPMethod.post, Parameters: parameters, Header: nil,WithRetry: true)
         NetworkManager.shared.cityDictionaryObs
             //.debug()
             .filter({$0.count > 0})
@@ -186,10 +186,9 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
         self.present(controller, animated: true)
     }
     
-    override func viewDidLoad() {
-        //getAllProvince()
+    override func viewDidLoad() {        
         super.viewDidLoad()
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+        subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         definesPresentationContext = true
         selectCity.delegate = self
         selectProvince.delegate = self
@@ -250,7 +249,7 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
  
         var signupSucceed : Bool = false
         
-        let urlString = "http://www.panel.ipsepanta.ir/api/v1/register?phone="+MobileNumber+"&gender="+GenderCode+"&state="+self.currentStateCodeObs.value+"&city="+self.currentCityCodeObs.value+"&username="+Username
+        let urlString = NetworkManager.shared.baseURLString+"/register?phone="+MobileNumber+"&gender="+GenderCode+"&state="+self.currentStateCodeObs.value+"&city="+self.currentCityCodeObs.value+"&username="+Username
         let postURL = NSURL(string: urlString)! as URL
 
         let aMethod : HTTPMethod = HTTPMethod.post

@@ -97,7 +97,7 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+        subscribeToInternetDisconnection().disposed(by: myDisposeBag)
     
     }
 

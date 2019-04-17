@@ -16,6 +16,8 @@ enum CallStatus {
     case ready
     case inprogress
     case error
+    case InternalServerError
+    case IncompleteData
 }
 
 class NetworkManager {
@@ -28,7 +30,7 @@ class NetworkManager {
     var content = NSDictionary()
     //var resultSubject = BehaviorRelay<NSDictionary>(value : NSDictionary())
     let baseURLString: String
-    let websiteRootAddress = "http://www.panel.ipsepanta.ir"
+    let websiteRootAddress = "http://www.ipsepanta.ir"
     var status = BehaviorRelay<CallStatus>(value: CallStatus.ready) //No used Yet
     
     let netObjectsDispose = DisposeBag()
@@ -41,7 +43,9 @@ class NetworkManager {
     var catagoriesObs = BehaviorRelay<[Any]>(value: [Any]())
     var shopObs = BehaviorRelay<[Any]>(value: [Any]())
     var postDetailObs = BehaviorRelay<Post>(value: Post(id: 0, shopId: 0, viewCount: 0, comments: [], isLiked: false, countLike: 0, title: "", content: "", image: ""))
-    
+    var postCommentsObs = BehaviorRelay<[Comment]>(value: [Comment]())
+    var commentSendingSuccessful = BehaviorRelay<Bool>(value: false)
+    var profileObs = BehaviorRelay<Profile>(value: Profile())
     // Initialization
     
     private init() {
@@ -61,11 +65,21 @@ class NetworkManager {
             queryString = queryString + "\(akey)=\(aDic[akey]!)&"
         }
         _ = queryString.removeLast()
-        return queryString
+        //return queryString
+        let escapedString = queryString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        //print(escapedString!)
+        return escapedString!
     }
     
-    func run(API apiName : String, QueryString aQuery : String, Method aMethod : HTTPMethod, Parameters aParameter : Dictionary<String, String>?, Header  aHeader : HTTPHeaders?  ) {
+    func run(API apiName : String, QueryString aQuery : String, Method aMethod : HTTPMethod, Parameters aParameter : Dictionary<String, String>?, Header  aHeader : HTTPHeaders? ,WithRetry : Bool) {
+        var retryTime = 4
+        if WithRetry == false {
+            print("NOT Retrying - \(apiName)")
+            retryTime = 1
+        }
+        
         self.status.accept(CallStatus.inprogress)
+        Spinner.start()
         var urlAddress = self.baseURLString + "/" + apiName + aQuery
         
         var headerToSend = self.headers
@@ -88,16 +102,20 @@ class NetworkManager {
         */
         RxAlamofire.requestJSON(aMethod, urlAddress , parameters: aParameter, encoding: JSONEncoding.default, headers: headerToSend)
         .observeOn(MainScheduler.instance)
-        .timeout(2, scheduler: MainScheduler.instance)
-        .retry(4)
+        .timeout(4, scheduler: MainScheduler.instance)
+        .retry(retryTime)
         //.debug()
         .subscribe(onNext: { [unowned self] (ahttpURLRes,jsonResult) in
+            Spinner.stop()
+            print(" Response Code : ",ahttpURLRes.statusCode)
+            if ahttpURLRes.statusCode == 500 { self.status.accept(CallStatus.InternalServerError)}
             if let aresult = jsonResult as? NSDictionary {
                 self.result = aresult
                 self.parser = JSONParser(API: apiName,Method : aMethod)
                 if let aparser = self.parser {
                     aparser.resultSubject.accept(aresult)
                 }
+                self.status.accept(CallStatus.ready)
             } else {
                 
                 self.status.accept(CallStatus.error)
@@ -121,14 +139,20 @@ class NetworkManager {
                 if err.localizedDescription == "Could not connect to the server." {
                     print("No Server Connection")
                 }
+                if err.localizedDescription == "The operation couldn’t be completed." {
+                    print("Server is too lazy to repond!")                    
+                }
                 print("NetworkManager RXAlamofire Raised an Error : >",err.localizedDescription,"<")
                 Spinner.stop()
                 self.status.accept(CallStatus.error)
             }, onCompleted: {
                 self.status.accept(CallStatus.ready)
-                //print("Completed")
+                //print("NetWorkManager Completed")
+                Spinner.stop()
                 self.parser = nil
             }, onDisposed: {
+                self.status.accept(CallStatus.ready)
+                Spinner.stop()
                 //print("NetworkManager Disposed")
         }).disposed(by: netObjectsDispose)
     }

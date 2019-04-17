@@ -10,10 +10,12 @@ import Foundation
 import UIKit
 import Alamofire
 import RxAlamofire
+import RxSwift
 
 class ProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
     weak var coordinator : HomeCoordinator?
     var showProfileUI : ShowProfileUI! = ShowProfileUI()
+    var myDisposeBag = DisposeBag()
     @IBOutlet var topView: UIView!
     @IBOutlet weak var cupLabel: UILabel!
     @IBOutlet weak var clubNumLabel: UILabel!
@@ -54,6 +56,7 @@ class ProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         gradientTopView()
         showProfileUI!.showMyClub(self)
     }

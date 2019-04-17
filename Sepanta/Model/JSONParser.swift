@@ -76,10 +76,17 @@ class JSONParser {
                         NetworkManager.shared.catagoriesObs.accept([cat])
                     }
                 } else if (apiName == "post-details") && (aMethod == HTTPMethod.post) {
-                    //Returns the List of supported States (which probably have catagory
-                    var processedDic = Dictionary<String,String>()
+                    //Returns the Post Detail
                     let aPost = (self?.processAsPostDetails(Result: aDic))!
+                    NetworkManager.shared.postCommentsObs.accept(aPost.comments ?? [Comment]())
                     NetworkManager.shared.postDetailObs.accept(aPost)
+                } else if (apiName == "profile") && (aMethod == HTTPMethod.post) {
+                    //Returns Profile Data for a user Id
+                    let aProfile = (self?.processAsProfile(Result: aDic))!
+                    NetworkManager.shared.profileObs.accept(aProfile)
+                } else if (apiName == "send-comment") && (aMethod == HTTPMethod.post) {
+                    // Sets True for commentSendingSuccessful to be observable by PostUI
+                    NetworkManager.shared.commentSendingSuccessful.accept(true)
                 } else if (apiName == "category-shops-list") && (aMethod == HTTPMethod.post) {
                     //Returns All shops in a Specific Catagory (Slug=3) OR Shops in a specific catagory in a state (Slug=1) OR Shops in a specific catagory in a city (Slug=2)
                     print("Starting category-shops-list Parser...")
@@ -100,27 +107,108 @@ class JSONParser {
             ).disposed(by: netObjectsDispose)
     }
     
+    func processAsProfile(Result aProfileDicAsNS : NSDictionary) -> Profile {
+        var profile = Profile()
+        //print("aProfileDicAsNS: ",aProfileDicAsNS)
+        //print("aProfileDicAsNS Keys : ",aProfileDicAsNS.allKeys)
+        if aProfileDicAsNS["id"] == nil || (aProfileDicAsNS["id"] as? Int) == 0 {
+            NetworkManager.shared.status.accept(.IncompleteData)
+            return Profile()
+        }
+        profile.status = (aProfileDicAsNS["status"] as? String) ?? ""
+        profile.message = (aProfileDicAsNS["message"] as? String) ?? ""
+        profile.id = (aProfileDicAsNS["id"] as? Int) ?? 0
+        profile.image = (aProfileDicAsNS["image"] as? String) ?? ""
+        profile.address = (aProfileDicAsNS["address"] as? String) ?? ""
+        profile.shop_id = (aProfileDicAsNS["shop_id"] as? Int) ?? 0
+        profile.shop_name = (aProfileDicAsNS["shop_name"] as? String) ?? ""
+        profile.category_title = (aProfileDicAsNS["category_title"] as? String) ?? ""
+        profile.rate = (aProfileDicAsNS["rate"] as? String) ?? ""
+        profile.rate_count = (aProfileDicAsNS["rate_count"] as? Int) ?? 0
+        profile.shop_off = (aProfileDicAsNS["shop_off"] as? Int) ?? 0
+        profile.url = (aProfileDicAsNS["url"] as? String) ?? ""
+        profile.cellphone = (aProfileDicAsNS["cellphone"] as? String) ?? ""
+        profile.phone = (aProfileDicAsNS["phone"] as? String) ?? ""
+        profile.username = (aProfileDicAsNS["username"] as? String) ?? ""
+        profile.fullName = (aProfileDicAsNS["fullName"] as? String) ?? ""
+        profile.role = (aProfileDicAsNS["role"] as? String) ?? ""
+        profile.lat = (aProfileDicAsNS["lat"] as? Double) ?? 0
+        profile.long = (aProfileDicAsNS["long"] as? Double) ?? 0
+        profile.is_favorite = (aProfileDicAsNS["is_favorite"] as? Bool) ?? false
+        profile.is_follow = (aProfileDicAsNS["is_follow"] as? Bool) ?? false
+        profile.follow_count = (aProfileDicAsNS["follow_count"] as? Int) ?? 0
+        profile.follower_count = (aProfileDicAsNS["follower_count"] as? Int) ?? 0
+        
+        if let contents = aProfileDicAsNS["content"] as? NSArray {
+            for aContent in contents {
+                
+                let aPost = (aContent as! NSDictionary)
+                var newPost = Post(id: 0, shopId: 0, viewCount: 0, comments: [], isLiked: false, countLike: 0, title: "", content: "", image: "")
+                newPost.id = (aPost["id"] as? Int) ?? 0
+                newPost.title = (aPost["title"] as? String) ?? ""
+                newPost.content = (aPost["content"] as? String) ?? ""
+                //print("Adding Content... with image : ",aPost)
+                if let oneImage = aPost["image"] as? String {
+                    newPost.image = oneImage
+                }else if let dicImage = aPost["image"] as? NSDictionary {
+                    newPost.image = (dicImage["image"] as? String) ?? "EmptyImage"
+                }else{
+                    print("Can not cast POST IMAGE : ",aPost["image"])
+                }
+                //print("     Profile Post : ",newPost)
+                profile.content.append(newPost)
+            }
+        }else{
+            print("Content in Profile can not be casted as NSArray")
+        }
+        
+        if let cards = aProfileDicAsNS["cards"] as? NSArray {
+            for aContent in cards {
+                let aCard = (aContent as! NSDictionary)
+                var newCard = CreditCard()
+                newCard.id = (aCard["id"] as? Int) ?? 0
+                newCard.first_name = (aCard["first_name"] as? String) ?? ""
+                newCard.last_name = (aCard["last_name"] as? String) ?? ""
+                newCard.card_number = (aCard["card_number"] as? String) ?? ""
+                newCard.status = (aCard["status"] as? Int) ?? 0
+                newCard.bank_name = (aCard["bank_name"] as? String) ?? ""
+                newCard.bank_logo = (aCard["bank_logo"] as? String) ?? ""
+                print("     Profile Card : ",newCard)
+                profile.cards.append(newCard)
+            }
+        }
+        //print("FULL Profile : ",profile)
+        return profile
+    }
+    
     func processAsPostDetails(Result aResult : NSDictionary) -> Post {
         var aPost = NetworkManager.shared.postDetailObs.value
         if let postDet = aResult["postDetail"] as? NSDictionary {
-            if postDet != nil {
-                if let aContent = postDet["content"] as? String {aPost.content = aContent}
-                if let aShopId = postDet["shop_id"] as? Int {aPost.shopId = aShopId}
-                if let aShopId = postDet["shop_id"] as? Int {aPost.shopId = aShopId}
-                if let aTitle = postDet["title"] as? String {aPost.title = aTitle}
-                if let aContent = postDet["content"] as? String {aPost.content = aContent}
-                if let anImage = postDet["image"] as? String {aPost.image = anImage}
-                if let aViewCount = postDet["viewCount"] as? Int {aPost.viewCount = aViewCount}
-                if let aLike = postDet["is_like"] as? Bool {aPost.isLiked = aLike}
-                if let aCountLike = postDet["count_like"] as? Int {aPost.countLike = aCountLike}
-                if let someComments = postDet["comments"] as? NSArray {
-                    aPost.comments = [Comment]()
-                    for aComment in someComments {
-                        let newComment = Comment(id: 0, userID: 0, comment: "")
+            if let aContent = postDet["content"] as? String {aPost.content = aContent}
+            if let anId = postDet["id"] as? Int {aPost.id = anId}
+            if let aShopId = postDet["shop_id"] as? Int {aPost.shopId = aShopId}
+            if let aTitle = postDet["title"] as? String {aPost.title = aTitle}
+            if let aContent = postDet["content"] as? String {aPost.content = aContent}
+            if let anImage = postDet["image"] as? String {aPost.image = anImage}
+            if let aViewCount = postDet["viewCount"] as? Int {aPost.viewCount = aViewCount}
+            if let aLike = postDet["is_like"] as? Bool {aPost.isLiked = aLike}
+            if let aCountLike = postDet["count_like"] as? Int {aPost.countLike = aCountLike}
+
+            if let someComments = aResult["comments"] as? NSArray {
+                aPost.comments = [Comment]()
+                for aComment in someComments {
+                    if let castedComment = aComment as? NSDictionary{
+                        let newComment = Comment(id: castedComment["id"] as? Int, username: castedComment["username"] as? String, body: castedComment["body"] as? String)
+                        print("Casted : ",newComment)
                         aPost.comments!.append(newComment)
+                    }else{
+                        print("Error : Comment is incorrect and can not be casted : ",aComment)
                     }
                 }
+            }else {
+                print("comments before case as Array : ",postDet["comments"] ?? "EMPTY Comment")
             }
+            print("JSON Parser : Parsed Post : ",aPost)
         }
         return aPost
     }
@@ -148,7 +236,7 @@ class JSONParser {
                             if let imageUrl = URL(string: imageUrlStr)
                             {
                                 //print("Alamofire : ",imageUrlStr)
-                                Alamofire.request(imageUrl).responseImage { [unowned self] response in
+                                Alamofire.request(imageUrl).responseImage {  response in
                                     if let image = response.result.value {
                                         //print("image downloaded: \(self.image)")
                                         //self.anUIImage.accept(image)
@@ -160,10 +248,12 @@ class JSONParser {
                                             CacheManager.shared.saveFile(Data:imageData!, Filename:imageName)
                                         }
                                     }else{
+                                        NetworkManager.shared.status.accept(CallStatus.error)
                                         print("No response from alamofire requesting image")
                                     }
                                 }
                             }else{
+                                NetworkManager.shared.status.accept(CallStatus.InternalServerError)
                                 print("URL for Slide is invalid : ",imageUrlStr)
                             }
                         }else{
@@ -172,6 +262,7 @@ class JSONParser {
                             SlidesAndPaths.shared.slidesObs.accept(SlidesAndPaths.shared.slides)
                         }
                     }else{
+                        NetworkManager.shared.status.accept(CallStatus.InternalServerError)
                         print("Error : Slide element is not a NSDictionary")
                     }
                 }
@@ -199,8 +290,19 @@ class JSONParser {
                         
                         if let shopElem = shopElemAsNSDic as? Dictionary<String, Any>{
                             //print("shopElem : ",shopElem)
-                            let aNewShop = Shop(user_id: shopElem["user_id"] as? Int ?? 0, name: shopElem["shop_name"] as? String ?? "", image: shopElem["image"] as? String ?? ""  , stars: shopElem["rate"] as? Float ?? 0.0 , followers: shopElem["follower_count"] as? Int ?? 0, dicount: shopElem["shop_off"] as? Int ?? 0)
-                            shops.append(aNewShop)
+                            if shopElem["user_id"] != nil && shopElem["shop_id"] != nil {
+                                let aNewShop = Shop(shop_id: shopElem["shop_id"] as? Int ?? 0,
+                                                    user_id: shopElem["user_id"] as? Int ?? 0,
+                                                    shop_name: shopElem["shop_name"] as? String ?? "",
+                                                    shop_off: shopElem["shop_off"] as? Int ?? 0,
+                                                    lat: shopElem["lat"] as? Float ?? 0.0,
+                                                    long: shopElem["long"] as? Float ?? 0.0,
+                                                    image: shopElem["image"] as? String ?? "",
+                                                    rate: shopElem["rate"] as? String ?? "" ,
+                                                    follower_count: shopElem["follower_count"] as? Int ?? 0,
+                                                    created_at: shopElem["created_at"] as? String ?? "")
+                                shops.append(aNewShop)
+                            }
                         }
                     }else{
                         print("shopElm not casted.")
@@ -212,7 +314,7 @@ class JSONParser {
         } else {
             print("Couldnt cast Result[shops] or [categoryShops] ")
             print("Shop Result keys : ",aResult.allKeys)
-            print("aResult[categoryShops] ",aResult["categoryShops"])
+            print("aResult[categoryShops] ",aResult["categoryShops"] ?? "EMPTY")
         }
         print("Shops Fetched : ",shops.count," record")
         //print("Parsing State List Successful")
