@@ -14,8 +14,8 @@ struct Shop  {
     let user_id : Int?
     var shop_name : String?
     var shop_off : Int?
-    var lat : Float?
-    var long : Float?
+    var lat : Double?
+    var long : Double?
     var image : String?
     var rate : String?
     var follower_count : Int?

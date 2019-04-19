@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Shabnam-Bold-FD.ttf">
+            <string>Shabnam-Bold-FD</string>
+        </array>
+        <array key="Shabnam-FD.ttf">
+            <string>Shabnam-FD</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--SearchViewController-->
+        <scene sceneID="Mza-hc-Wct">
+            <objects>
+                <viewController storyboardIdentifier="SearchViewController" id="Lfa-ez-xqn" userLabel="SearchViewController" customClass="SearchViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zUr-ay-K2i">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJ8-Wu-sy8" userLabel="HeaderView">
+                                <rect key="frame" x="0.0" y="28" width="375" height="46.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="جستجو " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nXj-LM-ca2" userLabel="HeaderText">
+                                        <rect key="frame" x="161" y="7" width="53" height="33.5"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="16"/>
+                                        <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QiF-bb-ACy" userLabel="HomeLogo">
+                                        <rect key="frame" x="279" y="0.0" width="86" height="46.5"/>
+                                        <state key="normal" image="logo_home"/>
+                                        <connections>
+                                            <action selector="BackToHome:" destination="Lfa-ez-xqn" eventType="touchUpInside" id="5ad-jS-AYI"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xmh-Zb-oP4" userLabel="BackToMainView">
+                                        <rect key="frame" x="20" y="0.0" width="32" height="46.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="UAI-g0-WlE"/>
+                                        </constraints>
+                                        <state key="normal" image="icon_back_black"/>
+                                        <connections>
+                                            <action selector="BackTapped:" destination="Lfa-ez-xqn" eventType="touchUpInside" id="eeh-pU-DcG"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="nXj-LM-ca2" firstAttribute="centerX" secondItem="aJ8-Wu-sy8" secondAttribute="centerX" id="4sQ-1f-xNQ"/>
+                                    <constraint firstItem="xmh-Zb-oP4" firstAttribute="top" secondItem="aJ8-Wu-sy8" secondAttribute="top" id="5MZ-3Q-eTz"/>
+                                    <constraint firstItem="xmh-Zb-oP4" firstAttribute="top" secondItem="QiF-bb-ACy" secondAttribute="top" id="GzJ-nK-VT2"/>
+                                    <constraint firstItem="nXj-LM-ca2" firstAttribute="top" secondItem="aJ8-Wu-sy8" secondAttribute="top" constant="7" id="NVv-Ih-g7m"/>
+                                    <constraint firstAttribute="bottom" secondItem="xmh-Zb-oP4" secondAttribute="bottom" id="SLi-J7-Wly"/>
+                                    <constraint firstItem="xmh-Zb-oP4" firstAttribute="bottom" secondItem="QiF-bb-ACy" secondAttribute="bottom" id="U3L-oA-yQZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="QiF-bb-ACy" secondAttribute="trailing" constant="10" id="cXG-bM-hFt"/>
+                                    <constraint firstItem="xmh-Zb-oP4" firstAttribute="leading" secondItem="aJ8-Wu-sy8" secondAttribute="leading" constant="20" id="haB-7A-Sba"/>
+                                    <constraint firstItem="xmh-Zb-oP4" firstAttribute="centerY" secondItem="nXj-LM-ca2" secondAttribute="centerY" id="tke-d1-JL6"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uge-Mb-fVK" userLabel="SearchView">
+                                <rect key="frame" x="0.0" y="74.5" width="375" height="46.5"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="جستجو" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="kfn-7o-40g" userLabel="searchText" customClass="CustomSearchBar" customModule="Sepanta" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="0.5" width="335" height="46.5"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search" enablesReturnKeyAutomatically="YES" smartDashesType="no"/>
+                                        <connections>
+                                            <action selector="returnOnKeyboardTapped:" destination="Lfa-ez-xqn" eventType="primaryActionTriggered" id="FNd-Jk-Rwt"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qjl-tL-IIS" userLabel="searchButton">
+                                        <rect key="frame" x="39" y="12" width="22" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="22" id="sTE-DE-cJK"/>
+                                        </constraints>
+                                        <state key="normal" image="icon_search"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="kfn-7o-40g" firstAttribute="leading" secondItem="uge-Mb-fVK" secondAttribute="leading" constant="20" id="9pF-XY-cP4"/>
+                                    <constraint firstItem="kfn-7o-40g" firstAttribute="centerY" secondItem="uge-Mb-fVK" secondAttribute="centerY" id="KEs-Xi-jQZ"/>
+                                    <constraint firstItem="kfn-7o-40g" firstAttribute="height" secondItem="uge-Mb-fVK" secondAttribute="height" id="NKf-JR-pmF"/>
+                                    <constraint firstItem="kfn-7o-40g" firstAttribute="centerX" secondItem="uge-Mb-fVK" secondAttribute="centerX" id="jbU-Xv-cR0"/>
+                                    <constraint firstItem="kfn-7o-40g" firstAttribute="centerY" secondItem="qjl-tL-IIS" secondAttribute="centerY" id="jt6-Mi-Dup"/>
+                                    <constraint firstItem="qjl-tL-IIS" firstAttribute="leading" secondItem="uge-Mb-fVK" secondAttribute="leading" constant="39" id="xD6-Fp-Nfg"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MC4-9T-iSo" userLabel="SearchResultTableView">
+                                <rect key="frame" x="12" y="121" width="338" height="546"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell autoresizesSubviews="NO" clipsSubviews="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" rowHeight="70" id="RxT-Lf-g40" userLabel="SearchCell" customClass="SearchCell" customModule="Sepanta">
+                                        <rect key="frame" x="0.0" y="28" width="338" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RxT-Lf-g40" id="B0H-fD-3VT">
+                                            <rect key="frame" x="0.0" y="0.0" width="338" height="69.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="نام فروشگاه" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KeM-It-M95" userLabel="shopLabel">
+                                                    <rect key="frame" x="81.5" y="0.0" width="236.5" height="69.5"/>
+                                                    <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kXz-Ug-miT" userLabel="showShop">
+                                                    <rect key="frame" x="20" y="0.0" width="32" height="69.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="32" id="NIn-x6-9ha"/>
+                                                    </constraints>
+                                                    <state key="normal" image="icon_back_black"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="KeM-It-M95" firstAttribute="width" secondItem="B0H-fD-3VT" secondAttribute="width" multiplier="0.7" id="7Jc-JE-PVU"/>
+                                                <constraint firstItem="kXz-Ug-miT" firstAttribute="top" secondItem="B0H-fD-3VT" secondAttribute="top" id="9Fo-qm-t6V"/>
+                                                <constraint firstItem="KeM-It-M95" firstAttribute="height" secondItem="B0H-fD-3VT" secondAttribute="height" id="B4D-rZ-xDb"/>
+                                                <constraint firstItem="kXz-Ug-miT" firstAttribute="leading" secondItem="B0H-fD-3VT" secondAttribute="leading" constant="20" id="VDZ-9G-yjc"/>
+                                                <constraint firstItem="KeM-It-M95" firstAttribute="top" secondItem="B0H-fD-3VT" secondAttribute="top" id="WQW-pz-TeY"/>
+                                                <constraint firstItem="kXz-Ug-miT" firstAttribute="height" secondItem="B0H-fD-3VT" secondAttribute="height" id="esH-Jc-jTj"/>
+                                                <constraint firstAttribute="bottom" secondItem="kXz-Ug-miT" secondAttribute="bottom" id="hIM-Og-4Wd"/>
+                                                <constraint firstAttribute="trailing" secondItem="KeM-It-M95" secondAttribute="trailing" constant="20" id="qLt-R0-RkI"/>
+                                                <constraint firstAttribute="bottom" secondItem="KeM-It-M95" secondAttribute="bottom" id="xAO-Ls-zIk"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="shopLabel" destination="KeM-It-M95" id="6hS-tg-UBT"/>
+                                            <outlet property="showShopButton" destination="kXz-Ug-miT" id="fQs-Jw-Wit"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="aJ8-Wu-sy8" firstAttribute="height" secondItem="zUr-ay-K2i" secondAttribute="height" multiplier="0.07" id="4aw-dD-cre"/>
+                            <constraint firstItem="MC4-9T-iSo" firstAttribute="top" secondItem="uge-Mb-fVK" secondAttribute="bottom" id="6Rb-cX-YYM"/>
+                            <constraint firstItem="aJ8-Wu-sy8" firstAttribute="leading" secondItem="zUr-ay-K2i" secondAttribute="leading" id="9J4-oZ-bmb"/>
+                            <constraint firstItem="aJ8-Wu-sy8" firstAttribute="top" secondItem="iL5-Ua-I6a" secondAttribute="top" constant="8" id="N1A-tr-aLa"/>
+                            <constraint firstItem="uge-Mb-fVK" firstAttribute="top" secondItem="aJ8-Wu-sy8" secondAttribute="bottom" id="OEJ-M1-MS2"/>
+                            <constraint firstItem="aJ8-Wu-sy8" firstAttribute="trailing" secondItem="uge-Mb-fVK" secondAttribute="trailing" id="XQv-Ml-JHW"/>
+                            <constraint firstItem="uge-Mb-fVK" firstAttribute="height" secondItem="zUr-ay-K2i" secondAttribute="height" multiplier="0.07" id="a86-aJ-bXq"/>
+                            <constraint firstItem="MC4-9T-iSo" firstAttribute="leading" secondItem="iL5-Ua-I6a" secondAttribute="leading" constant="12" id="ef4-XI-bRj"/>
+                            <constraint firstItem="aJ8-Wu-sy8" firstAttribute="leading" secondItem="uge-Mb-fVK" secondAttribute="leading" id="fGC-zF-Y0H"/>
+                            <constraint firstItem="iL5-Ua-I6a" firstAttribute="bottom" secondItem="MC4-9T-iSo" secondAttribute="bottom" id="g8u-pY-nT9"/>
+                            <constraint firstItem="iL5-Ua-I6a" firstAttribute="trailing" secondItem="MC4-9T-iSo" secondAttribute="trailing" constant="25" id="gik-RC-LBM"/>
+                            <constraint firstAttribute="trailing" secondItem="aJ8-Wu-sy8" secondAttribute="trailing" id="vA0-bq-Ugk"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="iL5-Ua-I6a"/>
+                    </view>
+                    <connections>
+                        <outlet property="searchButton" destination="qjl-tL-IIS" id="WdA-BH-fqR"/>
+                        <outlet property="searchResultTableView" destination="MC4-9T-iSo" id="cLZ-We-Qd9"/>
+                        <outlet property="searchText" destination="kfn-7o-40g" id="pSS-5s-3mg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tZQ-4a-ov8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-297" y="35"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon_back_black" width="10" height="16"/>
+        <image name="icon_search" width="20" height="21"/>
+        <image name="logo_home" width="86" height="25"/>
+    </resources>
+</document>

@@ -68,15 +68,6 @@ class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
                 self.dismiss(animated: true, completion: {})
             }
             .disposed(by: myDisposeBag)
-        
-        /*
-        menuTableView.rx.modelSelected(ButtomMenuItem.self)
-            .subscribe(onNext: { [weak self] item in
-                // other actions with Item object
-                print("item ",item.aLabel)
-                self?.dismiss(animated: true, completion: {})
-            }).addDisposableTo(myDisposeBag)
-        */
     }
 
     override func viewDidLoad() {

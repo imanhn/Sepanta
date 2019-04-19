@@ -78,7 +78,7 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     }
     
     func getShopFromServer() {
-        guard self.shop.user_id != 0 else {
+        guard self.shop.user_id != 0 && self.shop.user_id != nil else {
             alert(Message: "اظلاعات این فروشگاه کامل نیست")
             return
         }

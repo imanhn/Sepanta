@@ -25,6 +25,9 @@
 		0F1B75632236E39B0087C0DB /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B75622236E39B0087C0DB /* ShopViewController.swift */; };
 		0F1B75652236E42A0087C0DB /* ShopUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B75642236E42A0087C0DB /* ShopUI.swift */; };
 		0F1B75692238498E0087C0DB /* CacheImageForViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B75682238498E0087C0DB /* CacheImageForViews.swift */; };
+		0F237E1F2267654B004CC7BC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F237E1E2267654B004CC7BC /* SearchViewController.swift */; };
+		0F237E41226783CF004CC7BC /* Shabnam-Light-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F237E3E226783C9004CC7BC /* Shabnam-Light-FD.ttf */; };
+		0F4D29E42267617100BFD425 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F4D29E32267617100BFD425 /* Search.storyboard */; };
 		0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F512C042205B5C300B99C9E /* SignupViewController.swift */; };
 		0F67F75A224CD00300659842 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67F759224CD00300659842 /* Post.swift */; };
 		0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */; };
@@ -45,6 +48,9 @@
 		0F890D042214BF300091FA2E /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D032214BF300091FA2E /* LoginCoordinator.swift */; };
 		0F890D0E2215C7170091FA2E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D0D2215C7170091FA2E /* NetworkManager.swift */; };
 		0F890D122215D21C0091FA2E /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D112215D21C0091FA2E /* JSONParser.swift */; };
+		0F8B7D432267874B00EFAACD /* Shabnam-Bold-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F8B7D412267874600EFAACD /* Shabnam-Bold-FD.ttf */; };
+		0F8B7D442267874B00EFAACD /* Shabnam-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F8B7D422267874800EFAACD /* Shabnam-FD.ttf */; };
+		0F8B7D46226789A800EFAACD /* ShopSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8B7D45226789A800EFAACD /* ShopSearchResult.swift */; };
 		0F984E29220B727B004AFB06 /* SepantaGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */; };
 		0F9BCFC52221FCCF00C87706 /* SlideControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9BCFC42221FCCF00C87706 /* SlideControl.swift */; };
 		0F9BCFC8222317E900C87706 /* SepantaGroupButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9BCFC7222317E900C87706 /* SepantaGroupButtons.swift */; };
@@ -52,14 +58,12 @@
 		0FA307E02227330700EDA829 /* EnglishNumbersToPersian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA307DF2227330700EDA829 /* EnglishNumbersToPersian.swift */; };
 		0FAE1FF3226332D20043B077 /* CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAE1FF2226332D20043B077 /* CreditCard.swift */; };
 		0FAE1FF52265BAC70043B077 /* UIButtonDisEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAE1FF42265BAC70043B077 /* UIButtonDisEnable.swift */; };
+		0FAE1FFF226745780043B077 /* XIBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAE1FFE226745780043B077 /* XIBView.swift */; };
 		0FAEEDE5222F29C600A9178F /* GetRichUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAEEDE4222F29C600A9178F /* GetRichUI.swift */; };
 		0FAEEDE72230949C00A9178F /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAEEDE62230949C00A9178F /* AboutUsViewController.swift */; };
 		0FAEEDE92230957100A9178F /* AboutUsUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAEEDE82230957100A9178F /* AboutUsUI.swift */; };
 		0FB3ECD0222C8AF8009A89F7 /* MenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB3ECCF222C8AF8009A89F7 /* MenuCoordinator.swift */; };
 		0FB3ECD2222DC48F009A89F7 /* GetRichViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB3ECD1222DC48F009A89F7 /* GetRichViewController.swift */; };
-		0FD7BEB6221073AE007B7244 /* Shabnam-Light-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB3221073AA007B7244 /* Shabnam-Light-FD.ttf */; };
-		0FD7BEB7221073AE007B7244 /* Shabnam-Bold-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB4221073AB007B7244 /* Shabnam-Bold-FD.ttf */; };
-		0FD7BEB8221073AE007B7244 /* Shabnam-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD7BEB5221073AD007B7244 /* Shabnam-FD.ttf */; };
 		0FDA55D32225A0A000E7C889 /* NSDictionaryToDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDA55D22225A0A000E7C889 /* NSDictionaryToDictionary.swift */; };
 		0FDA55D52225C02800E7C889 /* Catagory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDA55D42225C02800E7C889 /* Catagory.swift */; };
 		0FDA55D722260FFE00E7C889 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDA55D622260FFE00E7C889 /* GroupViewController.swift */; };
@@ -114,6 +118,9 @@
 		0F1B75622236E39B0087C0DB /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		0F1B75642236E42A0087C0DB /* ShopUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopUI.swift; sourceTree = "<group>"; };
 		0F1B75682238498E0087C0DB /* CacheImageForViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImageForViews.swift; sourceTree = "<group>"; };
+		0F237E1E2267654B004CC7BC /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		0F237E3E226783C9004CC7BC /* Shabnam-Light-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shabnam-Light-FD.ttf"; sourceTree = "<group>"; };
+		0F4D29E32267617100BFD425 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		0F512C042205B5C300B99C9E /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		0F67F759224CD00300659842 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringWithFontSizeCalc.swift; sourceTree = "<group>"; };
@@ -136,6 +143,9 @@
 		0F890D032214BF300091FA2E /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		0F890D0D2215C7170091FA2E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0F890D112215D21C0091FA2E /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
+		0F8B7D412267874600EFAACD /* Shabnam-Bold-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shabnam-Bold-FD.ttf"; sourceTree = "<group>"; };
+		0F8B7D422267874800EFAACD /* Shabnam-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shabnam-FD.ttf"; sourceTree = "<group>"; };
+		0F8B7D45226789A800EFAACD /* ShopSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopSearchResult.swift; sourceTree = "<group>"; };
 		0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaGroupsViewController.swift; sourceTree = "<group>"; };
 		0F9BCFC42221FCCF00C87706 /* SlideControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideControl.swift; sourceTree = "<group>"; };
 		0F9BCFC7222317E900C87706 /* SepantaGroupButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaGroupButtons.swift; sourceTree = "<group>"; };
@@ -143,14 +153,12 @@
 		0FA307DF2227330700EDA829 /* EnglishNumbersToPersian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishNumbersToPersian.swift; sourceTree = "<group>"; };
 		0FAE1FF2226332D20043B077 /* CreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCard.swift; sourceTree = "<group>"; };
 		0FAE1FF42265BAC70043B077 /* UIButtonDisEnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonDisEnable.swift; sourceTree = "<group>"; };
+		0FAE1FFE226745780043B077 /* XIBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XIBView.swift; sourceTree = "<group>"; };
 		0FAEEDE4222F29C600A9178F /* GetRichUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRichUI.swift; sourceTree = "<group>"; };
 		0FAEEDE62230949C00A9178F /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		0FAEEDE82230957100A9178F /* AboutUsUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsUI.swift; sourceTree = "<group>"; };
 		0FB3ECCF222C8AF8009A89F7 /* MenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCoordinator.swift; sourceTree = "<group>"; };
 		0FB3ECD1222DC48F009A89F7 /* GetRichViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRichViewController.swift; sourceTree = "<group>"; };
-		0FD7BEB3221073AA007B7244 /* Shabnam-Light-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-Light-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-Light-FD.ttf"; sourceTree = "<group>"; };
-		0FD7BEB4221073AB007B7244 /* Shabnam-Bold-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-Bold-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-Bold-FD.ttf"; sourceTree = "<group>"; };
-		0FD7BEB5221073AD007B7244 /* Shabnam-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Shabnam-FD.ttf"; path = "../../../../../Downloads/shabnam-font-v4.0.0/Farsi-Digits/Shabnam-FD.ttf"; sourceTree = "<group>"; };
 		0FD7BEB922120820007B7244 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Pods/FirebaseInstanceID/Frameworks/FirebaseInstanceID.framework; sourceTree = "<group>"; };
 		0FD7BEBB221208A4007B7244 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Pods/FirebaseCore/Frameworks/FirebaseCore.framework; sourceTree = "<group>"; };
 		0FDA55D22225A0A000E7C889 /* NSDictionaryToDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDictionaryToDictionary.swift; sourceTree = "<group>"; };
@@ -275,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				0F890CFF2214B4E90091FA2E /* Storyboarded.swift */,
+				0FAE1FFE226745780043B077 /* XIBView.swift */,
 				0F71A38A2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift */,
 				0F8571EF225CC5B50056D062 /* UIViewControllerWithErrorBar.swift */,
 			);
@@ -295,6 +304,7 @@
 				0FAE1FF2226332D20043B077 /* CreditCard.swift */,
 				0F67F759224CD00300659842 /* Post.swift */,
 				0F0661B3225BF93E00A83734 /* Comment.swift */,
+				0F8B7D45226789A800EFAACD /* ShopSearchResult.swift */,
 				0F1B75602236BA610087C0DB /* CacheManager.swift */,
 			);
 			path = Model;
@@ -313,6 +323,7 @@
 				0FB3ECD1222DC48F009A89F7 /* GetRichViewController.swift */,
 				0F1B75622236E39B0087C0DB /* ShopViewController.swift */,
 				0F0661AF225BE98100A83734 /* PostViewController.swift */,
+				0F237E1E2267654B004CC7BC /* SearchViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -343,6 +354,16 @@
 				0F0661B1225BEA6A00A83734 /* PostUI.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		0FAE1FF722673F0B0043B077 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				0FE8B9B1220355F100C868C3 /* LaunchScreen.storyboard */,
+				0FE8B9AC220355F000C868C3 /* Main.storyboard */,
+				0F4D29E32267617100BFD425 /* Search.storyboard */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 		0FDA55D12225A08100E7C889 /* Extensions */ = {
@@ -385,6 +406,7 @@
 		0FE8B9A7220355F000C868C3 /* Sepanta */ = {
 			isa = PBXGroup;
 			children = (
+				0FAE1FF722673F0B0043B077 /* Storyboards */,
 				0FDA55D12225A08100E7C889 /* Extensions */,
 				0F9BCFC6222201B600C87706 /* View */,
 				0F890D102215D0F20091FA2E /* ViewModel */,
@@ -393,9 +415,7 @@
 				0F890D072214CFAA0091FA2E /* SuperClasses and Protocols */,
 				0F890CFC2214B4B40091FA2E /* Coordinators */,
 				0FE8B9A8220355F000C868C3 /* AppDelegate.swift */,
-				0FE8B9AC220355F000C868C3 /* Main.storyboard */,
 				0FE8B9AF220355F100C868C3 /* Assets.xcassets */,
-				0FE8B9B1220355F100C868C3 /* LaunchScreen.storyboard */,
 				0FE8B9B4220355F100C868C3 /* Info.plist */,
 				0FE8B9DA2203BCAA00C868C3 /* Fonts */,
 			);
@@ -423,9 +443,9 @@
 		0FE8B9DA2203BCAA00C868C3 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				0FD7BEB4221073AB007B7244 /* Shabnam-Bold-FD.ttf */,
-				0FD7BEB5221073AD007B7244 /* Shabnam-FD.ttf */,
-				0FD7BEB3221073AA007B7244 /* Shabnam-Light-FD.ttf */,
+				0F237E3E226783C9004CC7BC /* Shabnam-Light-FD.ttf */,
+				0F8B7D412267874600EFAACD /* Shabnam-Bold-FD.ttf */,
+				0F8B7D422267874800EFAACD /* Shabnam-FD.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -549,11 +569,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FE8B9B3220355F100C868C3 /* LaunchScreen.storyboard in Resources */,
-				0FD7BEB7221073AE007B7244 /* Shabnam-Bold-FD.ttf in Resources */,
 				0FE8B9B0220355F100C868C3 /* Assets.xcassets in Resources */,
-				0FD7BEB6221073AE007B7244 /* Shabnam-Light-FD.ttf in Resources */,
+				0F8B7D432267874B00EFAACD /* Shabnam-Bold-FD.ttf in Resources */,
+				0F8B7D442267874B00EFAACD /* Shabnam-FD.ttf in Resources */,
 				0FE8B9AE220355F000C868C3 /* Main.storyboard in Resources */,
-				0FD7BEB8221073AE007B7244 /* Shabnam-FD.ttf in Resources */,
+				0F237E41226783CF004CC7BC /* Shabnam-Light-FD.ttf in Resources */,
+				0F4D29E42267617100BFD425 /* Search.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,10 +642,12 @@
 				0F817A71223567E200F1738E /* NewShopsViewController.swift in Sources */,
 				0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */,
 				0F052ED9221AE8C5009175EA /* LoginKey.swift in Sources */,
+				0F8B7D46226789A800EFAACD /* ShopSearchResult.swift in Sources */,
 				0FAE1FF3226332D20043B077 /* CreditCard.swift in Sources */,
 				0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */,
 				0F1B75632236E39B0087C0DB /* ShopViewController.swift in Sources */,
 				0F066F95222B19AB00C8871C /* UIViewRotate.swift in Sources */,
+				0FAE1FFF226745780043B077 /* XIBView.swift in Sources */,
 				0F066F93222B198900C8871C /* UIColorFromHex.swift in Sources */,
 				0F1B755F2235C8460087C0DB /* Slide.swift in Sources */,
 				0F71A38B2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift in Sources */,
@@ -637,6 +660,7 @@
 				0F0661B4225BF93E00A83734 /* Comment.swift in Sources */,
 				0F066F9F222C704B00C8871C /* MenuViewController.swift in Sources */,
 				0F1B75652236E42A0087C0DB /* ShopUI.swift in Sources */,
+				0F237E1F2267654B004CC7BC /* SearchViewController.swift in Sources */,
 				0F890D042214BF300091FA2E /* LoginCoordinator.swift in Sources */,
 				0F1B755B223580C80087C0DB /* ShopsListDataSource.swift in Sources */,
 				0FB3ECD2222DC48F009A89F7 /* GetRichViewController.swift in Sources */,

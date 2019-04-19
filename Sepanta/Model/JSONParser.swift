@@ -96,6 +96,10 @@ class JSONParser {
                     print("Starting NewShops Parser...")
                     let parsedShops = self?.processShopList(Result: aDic)
                     NetworkManager.shared.shopObs.accept(parsedShops!)
+                } else if (apiName == "search-shops") && (aMethod == HTTPMethod.post) {
+                    print("Starting search-shops Parser...")
+                    let parsedShopSearchResults = self?.processShopSearchResultList(Result: aDic)
+                    NetworkManager.shared.shopSearchResultObs.accept(parsedShopSearchResults!)
                 } else if (apiName == "home") && (aMethod == HTTPMethod.get) {
                 print("Starting Home Parser...")
                 self?.processAndSetHomeData(Result: aDic)
@@ -105,6 +109,46 @@ class JSONParser {
                     //print("Parser Disposed")
                 }
             ).disposed(by: netObjectsDispose)
+    }
+    
+    func processShopSearchResultList (Result aResult : NSDictionary) -> [ShopSearchResult] {
+        var shopResults = [ShopSearchResult]()
+        if aResult["error"] != nil {
+            print("ERROR in Shop List Parsing : ",aResult["error"]!)
+        }
+        if aResult["message"] != nil {
+            print("Message Parsed : ",aResult["message"]!)
+        }
+        
+        //print("Shop Result keys : ",aResult.allKeys)
+        //print("Result : ",aResult)
+        if let shopsInResult = aResult["shops"] as? NSArray {
+            for shopResultDic in shopsInResult
+            {
+                if let shopElemAsNSDic = shopResultDic as? NSDictionary{
+                    if let shopElem = shopElemAsNSDic as? Dictionary<String, Any> {
+                        //print("shopElem : ",shopElem)
+                        if shopElem["user_id"] != nil && shopElem["shop_id"] != nil {
+                            let aShopResult = ShopSearchResult(shop_id: shopElem["shop_id"] as? Int ?? 0,
+                                                user_id: shopElem["user_id"] as? Int ?? 0,
+                                                shop_name: shopElem["shop_name"] as? String ?? "")
+                            shopResults.append(aShopResult)
+                        }else{
+                            print("Warning : Shop Result is not Complete!")
+                        }
+                    }
+                }else{
+                    print("shopElm not casted.")
+                }
+            }
+        } else {
+            print("Couldnt cast Result[shops] as Array ")
+            print("Shop Result keys : ",aResult.allKeys)
+            print("aResult[categoryShops] ",aResult["categoryShops"] ?? "EMPTY")
+        }
+        print("Shop Results Fetched : ",shopResults.count," record")
+        //print("Parsing State List Successful")
+        return shopResults
     }
     
     func processAsProfile(Result aProfileDicAsNS : NSDictionary) -> Profile {
@@ -295,8 +339,8 @@ class JSONParser {
                                                     user_id: shopElem["user_id"] as? Int ?? 0,
                                                     shop_name: shopElem["shop_name"] as? String ?? "",
                                                     shop_off: shopElem["shop_off"] as? Int ?? 0,
-                                                    lat: shopElem["lat"] as? Float ?? 0.0,
-                                                    long: shopElem["long"] as? Float ?? 0.0,
+                                                    lat: shopElem["lat"] as? Double ?? 0.0,
+                                                    long: shopElem["long"] as? Double ?? 0.0,
                                                     image: shopElem["image"] as? String ?? "",
                                                     rate: shopElem["rate"] as? String ?? "" ,
                                                     follower_count: shopElem["follower_count"] as? Int ?? 0,

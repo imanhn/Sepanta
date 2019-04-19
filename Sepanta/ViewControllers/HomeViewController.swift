@@ -16,12 +16,18 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     var slideControl : SlideController?
     @IBOutlet weak var pageControl: UIPageControl!
     
+    @IBOutlet weak var searchText: CustomSearchBar!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var currentImageView: AdImageView!
     @IBOutlet weak var leftImageView: AdImageView!
     @IBOutlet weak var rightImageView: AdImageView!
     @IBAction func gotoFavourites(_ sender: Any) {
         alert(Message: "علاقه مندی ها")
+    }
+    
+    @IBAction func searchTapped(_ sender: Any) {
+        let akeyword = self.searchText.text ?? ""       
+        self.coordinator!.PushSearch(Keyword: akeyword)
     }
     
     @IBAction func gotoNotifications(_ sender: Any) {

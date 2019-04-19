@@ -646,10 +646,11 @@
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="جستجو" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="DlX-a3-BK0" userLabel="searchText" customClass="CustomSearchBar" customModule="Sepanta" customModuleProvider="target">
                                         <rect key="frame" x="19" y="13.5" width="337.5" height="47.5"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search" enablesReturnKeyAutomatically="YES" smartDashesType="no"/>
                                         <connections>
+                                            <action selector="searchOnKeyboardPressed:" destination="jPv-Ez-8v9" eventType="editingDidEnd" id="Kif-B8-dCm"/>
                                             <action selector="searchOnKeyboardPressed:" destination="jPv-Ez-8v9" eventType="primaryActionTriggered" id="ioy-2g-DXq"/>
                                         </connections>
                                     </textField>
@@ -659,6 +660,9 @@
                                             <constraint firstAttribute="width" secondItem="XqB-sP-FKS" secondAttribute="height" multiplier="1:1" id="X6i-2i-O3E"/>
                                         </constraints>
                                         <state key="normal" image="icon_search"/>
+                                        <connections>
+                                            <action selector="searchTapped:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="8bm-Dl-gpv"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -832,6 +836,7 @@
                         <outlet property="leftImageView" destination="yrO-9s-0mm" id="EtT-gb-SMe"/>
                         <outlet property="pageControl" destination="Z97-MI-7W6" id="w14-SI-90K"/>
                         <outlet property="rightImageView" destination="Tpf-Pf-K1m" id="rS8-Re-pOd"/>
+                        <outlet property="searchText" destination="DlX-a3-BK0" id="JcN-Wc-PFx"/>
                         <outlet property="searchTextField" destination="DlX-a3-BK0" id="tQ2-Bj-CKj"/>
                     </connections>
                 </viewController>
@@ -857,7 +862,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="مراکز سپنتایی" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKg-wA-Ses" userLabel="HeaderText">
-                                        <rect key="frame" x="143.5" y="4.5" width="89.5" height="22"/>
+                                        <rect key="frame" x="143" y="4.5" width="89.5" height="22"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="16"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2518,7 +2523,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q3v-UR-c4g" userLabel="leftView">
-                                                    <rect key="frame" x="0.0" y="25.5" width="75" height="23.5"/>
+                                                    <rect key="frame" x="0.0" y="26" width="75" height="23.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۰٪" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTq-Nh-SDz" userLabel="percentLabel">
                                                             <rect key="frame" x="50" y="0.0" width="25" height="23.5"/>

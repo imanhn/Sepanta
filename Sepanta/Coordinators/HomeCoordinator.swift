@@ -111,7 +111,6 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.delegate = self
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
-
     }
 
     func pushSepantaieGroup (){
@@ -157,7 +156,19 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
-    
+
+    func PushSearch(Keyword keyword:String){
+        let storyboard = UIStoryboard(name: "Search", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
+        //var vc = SearchViewController.instantiate()
+        vc.coordinator = self
+        vc.keyword = keyword
+        
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+
     func logout() {
         LoginKey.shared.deleteTokenAndUserID()
         if self.parentCoordinator != nil{
