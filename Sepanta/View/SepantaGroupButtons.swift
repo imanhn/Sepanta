@@ -111,11 +111,6 @@ class SepantaGroupButtons {
         
         let size = CGSize(width: buttonsDim*1.3, height: buttonsDim*1.3)
         UIGraphicsBeginImageContext(size)
-        let textFontAttributes = [
-            NSAttributedStringKey.font: textFont,
-            NSAttributedStringKey.foregroundColor: textColor,
-            
-            ] as [NSAttributedStringKey : Any]
         var textBox = CGRect()
         let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         //print("upside : ",upside)
@@ -139,7 +134,7 @@ class SepantaGroupButtons {
         lab.adjustsFontSizeToFitWidth = true
         
         lab.drawText(in: textBox)
-        var newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return newImage
     }

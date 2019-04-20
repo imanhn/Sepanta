@@ -185,22 +185,48 @@ class JSONParser {
         
         if let contents = aProfileDicAsNS["content"] as? NSArray {
             for aContent in contents {
-                
-                let aPost = (aContent as! NSDictionary)
-                var newPost = Post(id: 0, shopId: 0, viewCount: 0, comments: [], isLiked: false, countLike: 0, title: "", content: "", image: "")
-                newPost.id = (aPost["id"] as? Int) ?? 0
-                newPost.title = (aPost["title"] as? String) ?? ""
-                newPost.content = (aPost["content"] as? String) ?? ""
-                //print("Adding Content... with image : ",aPost)
-                if let oneImage = aPost["image"] as? String {
-                    newPost.image = oneImage
-                }else if let dicImage = aPost["image"] as? NSDictionary {
-                    newPost.image = (dicImage["image"] as? String) ?? "EmptyImage"
+                let aPostOrShop = (aContent as! NSDictionary)
+                //print("aPostOrShop : ",aPostOrShop)
+                //print("shop_Name : ",aPostOrShop["shop_name"])
+                if aPostOrShop["shop_name"] != nil || aPostOrShop["shop_off"] != nil {
+                    //print("This is a shop")
+                    var newShop = Shop()
+                    newShop.shop_id = (aPostOrShop["shop_id"] as? Int) ?? 0
+                    newShop.user_id = (aPostOrShop["user_id"] as? Int) ?? 0
+                    newShop.shop_name = (aPostOrShop["shop_name"] as? String) ?? ""
+                    newShop.shop_off = (aPostOrShop["shop_off"] as? Int) ?? 0
+                    newShop.lat = (aPostOrShop["lat"] as? Double) ?? 0
+                    newShop.long = (aPostOrShop["long"] as? Double) ?? 0
+                    if let oneImage = aPostOrShop["image"] as? String {
+                        newShop.image = oneImage
+                    }else if let dicImage = aPostOrShop["image"] as? NSDictionary {
+                        newShop.image = (dicImage["image"] as? String) ?? "EmptyImage"
+                    }else{
+                        print("Can not cast Shop IMAGE : \(String(describing: aPostOrShop["image"]))")
+                    }
+                    newShop.rate = (aPostOrShop["rate"] as? String) ?? ""
+                    newShop.follower_count = (aPostOrShop["follower_count"] as? Int) ?? 0
+                    newShop.created_at = (aPostOrShop["created_at"] as? String) ?? ""
+                    profile.content.append(newShop)
+                }else if aPostOrShop["title"] != nil {
+                    //print("This is a Post")
+                    var newPost = Post(id: 0, shopId: 0, viewCount: 0, comments: [], isLiked: false, countLike: 0, title: "", content: "", image: "")
+                    newPost.id = (aPostOrShop["id"] as? Int) ?? 0
+                    newPost.title = (aPostOrShop["title"] as? String) ?? ""
+                    newPost.content = (aPostOrShop["content"] as? String) ?? ""
+                    //print("Adding Content... with image : ",aPost)
+                    if let oneImage = aPostOrShop["image"] as? String {
+                        newPost.image = oneImage
+                    }else if let dicImage = aPostOrShop["image"] as? NSDictionary {
+                        newPost.image = (dicImage["image"] as? String) ?? "EmptyImage"
+                    }else{
+                        print("Can not cast POST IMAGE : \(String(describing: aPostOrShop["image"]))")
+                    }
+                    //print("     Profile Post : ",newPost)
+                    profile.content.append(newPost)
                 }else{
-                    print("Can not cast POST IMAGE : ",aPost["image"])
+                    print("Error : ButtonCell[ShopUI or ProfileUI] returned Data is incomplete")
                 }
-                //print("     Profile Post : ",newPost)
-                profile.content.append(newPost)
             }
         }else{
             print("Content in Profile can not be casted as NSArray")

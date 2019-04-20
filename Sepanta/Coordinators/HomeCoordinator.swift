@@ -172,7 +172,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     func logout() {
         LoginKey.shared.deleteTokenAndUserID()
         if self.parentCoordinator != nil{
-            print("removing \(self) from \(self.parentCoordinator)")
+            //print("removing \(self) from \(self.parentCoordinator)")
             self.parentCoordinator?.removeChild(self)
             print("Running Logout on parent coordinator(loginCoord)")
             if let appCoord = self.parentCoordinator as? AppCoordinator {

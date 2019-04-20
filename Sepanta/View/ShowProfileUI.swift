@@ -8,19 +8,36 @@
 
 import Foundation
 import UIKit
+import RxCocoa
+import RxSwift
+import Alamofire
 
 
-class ShowProfileUI {
+class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
     var delegate : ProfileViewController!
     var views = Dictionary<String,UIView>()
     var buttons = Dictionary<String,UIButton>()
-
-    init() {
-    }
+    var collectionView : UICollectionView!
+    var myDisposeBag = DisposeBag()
+    var shops = BehaviorRelay<[Shop]>(value: [Shop]())
+    let numberOfFollowedShopInARow : CGFloat = 4
     
+    init(_ vc : ProfileViewController) {
+        super.init()
+        self.delegate = vc
+        showMyClub()
+        bindUIwithDataSource()
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.bounds.width
+        let cellWidth = (width - 30) / numberOfFollowedShopInARow // compute your cell width
+        //print("WOW Calling layout cell width : ",cellWidth," index : ",indexPath)
+        //return CGSize(width: 50 , height: 50)
+        return CGSize(width: cellWidth, height: cellWidth)
+    }
     //Create Gradient on PageView
-    func showMyClub(_ avc : ProfileViewController) {
-        self.delegate = avc
+    func showMyClub() {
+        
         //print("reseller Request : ",views["leftFormView"] ?? "Nil")
         if views["leftFormView"] != nil && views["leftFormView"]?.superview != nil { views["leftFormView"]?.removeFromSuperview()}
         var cursurY : CGFloat = 0
@@ -33,7 +50,7 @@ class ShowProfileUI {
         views["rightFormView"]!.backgroundColor = UIColor.clear
         let buttonsFont = UIFont(name: "Shabnam-Bold-FD", size: 14)
         let buttonHeight = (views["rightFormView"] as! RightTabbedView).getHeight()
-        let textFieldWidth = (views["rightFormView"]?.bounds.width)! - (2 * marginX)
+        //let textFieldWidth = (views["rightFormView"]?.bounds.width)! - (2 * marginX)
         
         buttons["leftButton"] = UIButton(frame: CGRect(x: 0, y: 0, width: (views["rightFormView"]?.bounds.width)!/2, height: buttonHeight))
         buttons["leftButton"]!.setTitle("اطلاعات ارتباطی", for: .normal)
@@ -54,14 +71,82 @@ class ShowProfileUI {
         views["rightFormView"]!.addSubview(scrollView)
         
         //scrollView ADDs Goes Here!
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.minimumLineSpacing = 10
         
+        collectionView = UICollectionView(frame: CGRect(x: marginX, y: cursurY, width: views["rightFormView"]!.frame.width-(2*marginX), height: views["rightFormView"]!.frame.height-cursurY), collectionViewLayout: flowLayout)
+        collectionView.register(ButtonCell.self, forCellWithReuseIdentifier: "shopcell")
+        collectionView.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0)
+        _ = collectionView.rx.setDelegate(self) //Delegate method to call
+        views["rightFormView"]!.addSubview(collectionView)
         self.delegate.paneView.addSubview(views["rightFormView"]!)
+        getProfileData()
+        bindCollectionView()
+        bindUIwithDataSource()
     }
     
+    func bindUIwithDataSource() {
+       NetworkManager.shared.profileObs
+        .subscribe(onNext: { [unowned self] aProfile in
+            if aProfile.image != nil && aProfile.image!.count > 0 {
+                let imageUrl = NetworkManager.shared.baseURLString + SlidesAndPaths.shared.path_profile_image + aProfile.image!
+                let castedUrl = URL(string: imageUrl)
+                if castedUrl != nil {
+                    self.delegate.profilePicture.setImageFromCache(PlaceHolderName: "icon_profile_img", Scale: 1, ImageURL: castedUrl!, ImageName: aProfile.image!)
+                }else{
+                    print("URL Can not be casted : ",imageUrl)
+                }
+            }
+            self.delegate.nameLabel.text =  aProfile.fullName
+            self.delegate.descLabel.text = aProfile.fullName
+            //self.delegate.cupLabel
+            self.delegate.clubNumLabel.text = "\(aProfile.follow_count ?? 0)"
+            //print("aProfile.content : ",aProfile.content)
+            self.shops.accept(aProfile.content as! [Shop])
+        }).disposed(by: myDisposeBag)
+    }
     
+    func bindCollectionView(){
+        self.shops.bind(to: collectionView.rx.items(cellIdentifier: "shopcell")) { [unowned self] row, model, cell in
+            if let aCell = cell as? ButtonCell {
+                //if aCell.aButton == nil {aCell.aButton = UIButton(type: .custom)}
+                let strURL = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + model.image!
+                let imageURL = URL(string: strURL)
+                //print("ROW:\(row) UICollectionView binding : ",imageURL ?? "NIL"," Cell : ",aCell,"  model : ",model)
+                //print("ShopUI Binding Posts : ",model)
+                self.collectionView.addSubview(aCell)
+                aCell.addSubview(aCell.aButton)
+                if imageURL == nil {
+                    print("     Post URL is not valid : ",model.image)
+                    let dim = (self.collectionView.bounds.width * 0.8) / self.numberOfFollowedShopInARow
+                    aCell.aButton.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
+                    aCell.aButton.setImage(UIImage(named: "logo_shape"), for: .normal)
+                }else{
+                    let dim = (self.collectionView.bounds.width * 0.8) / self.numberOfFollowedShopInARow
+                    aCell.aButton.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
+                    //aCell.aButton.af_setImage(for: .normal, url: imageURL!) //Also Works!
+                    aCell.aButton.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1, ImageURL: imageURL!, ImageName: model.image!)
+                }
+                aCell.aButton.layer.shadowColor = UIColor.black.cgColor
+                aCell.aButton.layer.shadowOffset = CGSize(width: 3, height: 3)
+                aCell.aButton.layer.shadowRadius = 2
+                aCell.aButton.layer.shadowOpacity = 0.2
+
+                aCell.aButton.tag = model.user_id ?? 0
+                aCell.aButton.addTarget(self, action: #selector(self.shopShopDetail), for: .touchUpInside)
+            }else{
+                print("\(cell) can not be casted to PostCell")
+            }
+            }.disposed(by: myDisposeBag)
+        
+        
+    }
     
-    func showContacts(_ avc : ProfileViewController) {
-        self.delegate = avc
+    @objc func shopShopDetail(){
+        
+    }
+    
+    func showContacts() {
         //print("Card Request  : ",views["rightFormView"]!,"  SuperView : ",views["rightFormView"]!.superview ?? "Nil")
         if views["rightFormView"]?.superview != nil { views["rightFormView"]?.removeFromSuperview()}
         var cursurY : CGFloat = 0
@@ -73,7 +158,7 @@ class ShowProfileUI {
         
         let buttonsFont = UIFont(name: "Shabnam-Bold-FD", size: 14)
         let buttonHeight = (views["leftFormView"] as! LeftTabbedView).getHeight()
-        let textFieldWidth = (views["leftFormView"]!.bounds.width) - (2 * marginX)
+        //let textFieldWidth = (views["leftFormView"]!.bounds.width) - (2 * marginX)
         
         buttons["leftButton"] = UIButton(frame: CGRect(x: 0, y: 0, width: views["leftFormView"]!.bounds.width/2, height: buttonHeight))
         buttons["leftButton"]!.setTitle("اطلاعات ارتباطی", for: .normal)
@@ -97,5 +182,10 @@ class ShowProfileUI {
 
         self.delegate.paneView.addSubview(views["leftFormView"]!)
         
+    }
+    
+    func getProfileData() {
+        let aParameter = ["user id":"\(LoginKey.shared.userID)"]
+        NetworkManager.shared.run(API: "profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
     }
 }

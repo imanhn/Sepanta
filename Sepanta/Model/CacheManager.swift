@@ -23,12 +23,13 @@ class CacheManager {
         let DocumentDirURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         let fileURL = DocumentDirURL.appendingPathComponent(fileName)
         //print("Saving File in Path: \(fileURL.path) ")
-        do {
-            // Write to the file
-            try data.write(to: fileURL, atomically: true)
-        } catch let error as NSError {
-            print("Failed writing to URL: \(fileURL), Error: " + error.localizedDescription)
-        }
+        data.write(to: fileURL, atomically: true)
+//        do {
+//            // Write to the file
+//            try
+//        } catch let error as NSError {
+//            print("Failed writing to URL: \(fileURL), Error: " + error.localizedDescription)
+//        }
         
     }
     
@@ -37,10 +38,11 @@ class CacheManager {
         let DocumentDirURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         let fileURL = DocumentDirURL.appendingPathComponent(fileName)
         //print("Reading File in Path: \(fileURL.path) ")
+        //data = NSData(contentsOf: fileURL)
         do {
-            data = try NSData(contentsOf: fileURL)
+           data = try NSData(contentsOf: fileURL)
         } catch let error as NSError{
-            //print("Failed reading: \(fileURL), Error: " + error.localizedDescription)
+            print("Failed reading: \(fileURL), Error: " + error.localizedDescription)
             return nil
         }
         return data

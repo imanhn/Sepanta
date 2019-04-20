@@ -87,7 +87,7 @@ class NewShopsViewController :  UIViewControllerWithErrorBar,Storyboarded{
             .subscribe(onNext: { [unowned self] selectedShop in
                 print("Pushing ShopVC with : ", selectedShop)
                 self.coordinator!.pushShop(Shop: selectedShop)
-            })
+            }).disposed(by: myDisposeBag)
     }
 
     override func viewDidLoad() {

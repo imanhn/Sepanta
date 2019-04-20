@@ -63,7 +63,11 @@ class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
             .bind { [unowned self] indexPath, model in
                 self.menuTableView.deselectRow(at: indexPath, animated: true)
                 print("Selected " + model.aLabel + " at \(indexPath)")
-                (self.coordinator as! MenuCoordinator).menuSelected(IndexPath: indexPath)
+                guard self.coordinator != nil else {
+                    print("MenuViewController : Coordinator for MenuViewController is nil")
+                    return
+                }
+                self.coordinator!.menuSelected(IndexPath: indexPath)
                 //MenuCoordinator.shared.itemSelected(IndexPath: indexPath)
                 self.dismiss(animated: true, completion: {})
             }

@@ -52,11 +52,15 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
         self.coordinator!.pushNewShops()
     }
     @IBAction func menuClicked(_ sender: Any) {
-        (self.coordinator as! HomeCoordinator).openButtomMenu()
+        guard self.coordinator != nil else {
+            print("HomeVC : self.coordinator is nil!")
+            return
+        }
+        self.coordinator!.openButtomMenu()
     }
 
     @IBAction func searchOnKeyboardPressed(_ sender: Any) {
-        (sender as AnyObject).resignFirstResponder()
+        _ = (sender as AnyObject).resignFirstResponder()
         
     }
 
@@ -101,7 +105,7 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     }
     
     @IBAction func poldarshoClicked(_ sender: Any) {
-        print("HomeViewController.Coordinator : ",coordinator)
+        //print("HomeViewController.Coordinator : ",coordinator)
         self.coordinator!.pushGetRich()
         
     }

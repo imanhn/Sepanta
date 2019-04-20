@@ -27,6 +27,7 @@
 		0F1B75692238498E0087C0DB /* CacheImageForViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B75682238498E0087C0DB /* CacheImageForViews.swift */; };
 		0F237E1F2267654B004CC7BC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F237E1E2267654B004CC7BC /* SearchViewController.swift */; };
 		0F237E41226783CF004CC7BC /* Shabnam-Light-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F237E3E226783C9004CC7BC /* Shabnam-Light-FD.ttf */; };
+		0F49EE42226B03DA008BED3A /* CityStateGenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49EE41226B03DA008BED3A /* CityStateGenderViewModel.swift */; };
 		0F4D29E42267617100BFD425 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F4D29E32267617100BFD425 /* Search.storyboard */; };
 		0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F512C042205B5C300B99C9E /* SignupViewController.swift */; };
 		0F67F75A224CD00300659842 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67F759224CD00300659842 /* Post.swift */; };
@@ -54,7 +55,7 @@
 		0F984E29220B727B004AFB06 /* SepantaGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */; };
 		0F9BCFC52221FCCF00C87706 /* SlideControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9BCFC42221FCCF00C87706 /* SlideControl.swift */; };
 		0F9BCFC8222317E900C87706 /* SepantaGroupButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9BCFC7222317E900C87706 /* SepantaGroupButtons.swift */; };
-		0FA307DE222700B100EDA829 /* Shops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA307DD222700B100EDA829 /* Shops.swift */; };
+		0FA307DE222700B100EDA829 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA307DD222700B100EDA829 /* Shop.swift */; };
 		0FA307E02227330700EDA829 /* EnglishNumbersToPersian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA307DF2227330700EDA829 /* EnglishNumbersToPersian.swift */; };
 		0FAE1FF3226332D20043B077 /* CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAE1FF2226332D20043B077 /* CreditCard.swift */; };
 		0FAE1FF52265BAC70043B077 /* UIButtonDisEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAE1FF42265BAC70043B077 /* UIButtonDisEnable.swift */; };
@@ -120,6 +121,7 @@
 		0F1B75682238498E0087C0DB /* CacheImageForViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImageForViews.swift; sourceTree = "<group>"; };
 		0F237E1E2267654B004CC7BC /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		0F237E3E226783C9004CC7BC /* Shabnam-Light-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shabnam-Light-FD.ttf"; sourceTree = "<group>"; };
+		0F49EE41226B03DA008BED3A /* CityStateGenderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityStateGenderViewModel.swift; sourceTree = "<group>"; };
 		0F4D29E32267617100BFD425 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		0F512C042205B5C300B99C9E /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		0F67F759224CD00300659842 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -149,7 +151,7 @@
 		0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaGroupsViewController.swift; sourceTree = "<group>"; };
 		0F9BCFC42221FCCF00C87706 /* SlideControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideControl.swift; sourceTree = "<group>"; };
 		0F9BCFC7222317E900C87706 /* SepantaGroupButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaGroupButtons.swift; sourceTree = "<group>"; };
-		0FA307DD222700B100EDA829 /* Shops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shops.swift; sourceTree = "<group>"; };
+		0FA307DD222700B100EDA829 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
 		0FA307DF2227330700EDA829 /* EnglishNumbersToPersian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishNumbersToPersian.swift; sourceTree = "<group>"; };
 		0FAE1FF2226332D20043B077 /* CreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCard.swift; sourceTree = "<group>"; };
 		0FAE1FF42265BAC70043B077 /* UIButtonDisEnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonDisEnable.swift; sourceTree = "<group>"; };
@@ -299,7 +301,7 @@
 				0F052ED8221AE8C5009175EA /* LoginKey.swift */,
 				0F1B755C2235C1080087C0DB /* SlidesAndPaths.swift */,
 				0FDA55D42225C02800E7C889 /* Catagory.swift */,
-				0FA307DD222700B100EDA829 /* Shops.swift */,
+				0FA307DD222700B100EDA829 /* Shop.swift */,
 				0F817A6E22354F8600F1738E /* Profile.swift */,
 				0FAE1FF2226332D20043B077 /* CreditCard.swift */,
 				0F67F759224CD00300659842 /* Post.swift */,
@@ -333,6 +335,7 @@
 			children = (
 				0F0661AE2257E7F200A83734 /* PopUp List */,
 				0F066F98222C22EE00C8871C /* MenuController.swift */,
+				0F49EE41226B03DA008BED3A /* CityStateGenderViewModel.swift */,
 				0F1B755A223580C80087C0DB /* ShopsListDataSource.swift */,
 				0F0661AC2257E62400A83734 /* SepantaGroupsSubscription.swift */,
 			);
@@ -681,7 +684,7 @@
 				0FE8BA062205239E00C868C3 /* HomeViewController.swift in Sources */,
 				0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */,
 				0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */,
-				0FA307DE222700B100EDA829 /* Shops.swift in Sources */,
+				0FA307DE222700B100EDA829 /* Shop.swift in Sources */,
 				0F71A38F22319A2000F4EB6B /* Alert.swift in Sources */,
 				0FDA55D32225A0A000E7C889 /* NSDictionaryToDictionary.swift in Sources */,
 				0FA307E02227330700EDA829 /* EnglishNumbersToPersian.swift in Sources */,
@@ -689,6 +692,7 @@
 				0F066F9D222C2D5600C8871C /* MenuPopUpConfiguration.swift in Sources */,
 				0F066F99222C22EE00C8871C /* MenuController.swift in Sources */,
 				0F0661AD2257E62400A83734 /* SepantaGroupsSubscription.swift in Sources */,
+				0F49EE42226B03DA008BED3A /* CityStateGenderViewModel.swift in Sources */,
 				0FAEEDE72230949C00A9178F /* AboutUsViewController.swift in Sources */,
 				0F890D022214B5310091FA2E /* AppCoordinator.swift in Sources */,
 				0FAEEDE5222F29C600A9178F /* GetRichUI.swift in Sources */,

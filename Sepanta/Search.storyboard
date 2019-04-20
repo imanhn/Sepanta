@@ -31,7 +31,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="46.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="جستجو " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nXj-LM-ca2" userLabel="HeaderText">
-                                        <rect key="frame" x="161" y="7" width="53" height="33.5"/>
+                                        <rect key="frame" x="162" y="7" width="53" height="33.5"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="16"/>
                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -44,7 +44,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xmh-Zb-oP4" userLabel="BackToMainView">
-                                        <rect key="frame" x="20" y="0.0" width="32" height="46.5"/>
+                                        <rect key="frame" x="21" y="0.0" width="32" height="46.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="32" id="UAI-g0-WlE"/>
                                         </constraints>
@@ -70,8 +70,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uge-Mb-fVK" userLabel="SearchView">
                                 <rect key="frame" x="0.0" y="74.5" width="375" height="46.5"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="جستجو" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="kfn-7o-40g" userLabel="searchText" customClass="CustomSearchBar" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="0.5" width="335" height="46.5"/>
+                                    <textField opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="جستجو" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="kfn-7o-40g" userLabel="searchText" customClass="CustomSearchBar" customModule="Sepanta" customModuleProvider="target">
+                                        <rect key="frame" x="21" y="0.5" width="335" height="46.5"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search" enablesReturnKeyAutomatically="YES" smartDashesType="no"/>
@@ -107,7 +107,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="338" height="69.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="نام فروشگاه" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KeM-It-M95" userLabel="shopLabel">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="نام فروشگاه" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KeM-It-M95" userLabel="shopLabel">
                                                     <rect key="frame" x="81.5" y="0.0" width="236.5" height="69.5"/>
                                                     <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="16"/>
                                                     <nil key="textColor"/>

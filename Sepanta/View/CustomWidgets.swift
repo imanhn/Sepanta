@@ -268,7 +268,7 @@ class RoundedUIViewWithWhitePanel: UIView {
     
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
-        let tabbedButtonHeight :CGFloat = self.bounds.width / heightRatio
+        //let tabbedButtonHeight :CGFloat = self.bounds.width / heightRatio
         
         context?.setLineWidth(1.0)
         context?.setStrokeColor((UIColor( red: 0.84,     green: 0.84, blue:0.84, alpha: 1.0 )).cgColor)

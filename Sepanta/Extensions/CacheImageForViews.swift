@@ -33,7 +33,7 @@ extension UIImageView {
         self.contentMode = .scaleAspectFit
         let imageSize = CGSize(width: self.frame.size.width*aScale, height: self.frame.size.height*aScale)
         let filter = AspectScaledToFillSizeFilter(size: imageSize)//AspectScaledToFitSizeFilter(size: imageSize)
-        
+        self.image = defaultImage
         
         var cachedData : NSData?
         if imageName.count > 0
@@ -65,9 +65,11 @@ extension UIButton {
     
     func setImageFromCache(PlaceHolderName defaultImageName : String, Scale aScale : CGFloat,ImageURL imageUrl : URL,ImageName imageName : String ){
         let defaultImage = UIImage(named: defaultImageName)
+        
         self.contentMode = .scaleAspectFit
         let imageSize = CGSize(width: self.frame.size.width*aScale, height: self.frame.size.height*aScale)
         let filter = AspectScaledToFitSizeFilter(size: imageSize)
+        self.setImage(defaultImage, for: .normal)
         
         //let imageUrl = URL(string: NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_profile_image+imageName)!
         var cachedData : NSData?
@@ -94,7 +96,7 @@ extension UIButton {
                 })
             }
         }else{
-            print("imageName is empty")
+            //print("imageName is empty")
         }
     }
 }

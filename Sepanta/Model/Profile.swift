@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Profile : Decodable {
+struct Profile {
     var status : String?
     var message : String?
     var id : Int?
@@ -32,6 +32,6 @@ struct Profile : Decodable {
     var is_follow : Bool?
     var follow_count : Int?
     var follower_count : Int?
-    var content : [Post] = [Post]()
+    var content : [CollectionCell] = [CollectionCell]()
     var cards : [CreditCard] = [CreditCard]()
 }

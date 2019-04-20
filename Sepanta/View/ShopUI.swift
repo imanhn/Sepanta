@@ -14,9 +14,9 @@ import RxSwift
 import RxDataSources
 import Alamofire
 
-class PostCell : UICollectionViewCell {
+class ButtonCell : UICollectionViewCell {
     
-    var aPost : UIButton = UIButton(type: .custom)
+    var aButton : UIButton = UIButton(type: .custom)
 }
 
 class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
@@ -79,15 +79,15 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
             .subscribe(onNext: { [unowned self] (innerStatus) in
             print("innerStatus : ",innerStatus)
             if innerStatus == CallStatus.ready {
-                print("Before : ",aProfile.is_follow)
+                //print("Before : \(String(describing: aProfile.is_follow))")
                 aProfile.is_follow = !(aProfile.is_follow ?? false )
-                print("After : ",aProfile.is_follow)
+               // print("After : \(String(describing: aProfile.is_follow))")
                 NetworkManager.shared.profileObs.accept(aProfile)
                 self.buttons["followButton"]!.setEnable()
-                print("Done")
+                //print("Done")
             }else{
                 self.buttons["followButton"]!.setEnable()
-                print("Not Done!")
+                print("Follow request Not Done! because status is not ready Status : ",innerStatus)
             }
             Spinner.stop()
             NetworkManager.shared.status = BehaviorRelay<CallStatus>(value: CallStatus.ready)
@@ -206,7 +206,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
             if rate > 3.5 {self.delegate.star4.image = UIImage(named: "icon_star_on")}
             if rate > 4.5 {self.delegate.star5.image = UIImage(named: "icon_star_on")}
             //print("ShopUI : setting shopui.posts to  :: ",aProfile.content)
-            self.posts.accept(aProfile.content)
+            self.posts.accept(aProfile.content as! [Post])
             //print("Profile : ",aProfile)
             if aProfile.is_follow != nil  {
                 if aProfile.is_follow! {
@@ -235,30 +235,34 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     }
     
     func bindCollectionView(){
-        self.posts.bind(to: collectionView.rx.items(cellIdentifier: "postcell")) { [unowned self] row, model, cell in
-            if let aCell = cell as? PostCell {
-                //if aCell.aPost == nil {aCell.aPost = UIButton(type: .custom)}
+        self.posts.bind(to: collectionView.rx.items(cellIdentifier: "buttoncell")) { [unowned self] row, model, cell in
+            if let aCell = cell as? ButtonCell {
+                //if aCell.aButton == nil {aCell.aButton = UIButton(type: .custom)}
                 let strURL = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + model.image!
                 let imageURL = URL(string: strURL)
                 //print("ROW:\(row) UICollectionView binding : ",imageURL ?? "NIL"," Cell : ",aCell,"  model : ",model)
                 print("ShopUI Binding Posts : ",model)
                 self.collectionView.addSubview(aCell)
-                aCell.addSubview(aCell.aPost)
+                aCell.addSubview(aCell.aButton)
                 if imageURL == nil {
                     //print("     Post URL is not valid : ",model.image)
                     let dim = (self.collectionView.bounds.width * 0.8) / self.numberOfPostInARow
-                    aCell.aPost.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
-                    aCell.aPost.setImage(UIImage(named: "logo_shape"), for: .normal)
+                    aCell.aButton.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
+                    aCell.aButton.setImage(UIImage(named: "logo_shape"), for: .normal)
                 }else{
                     let dim = (self.collectionView.bounds.width * 0.8) / self.numberOfPostInARow
-                    aCell.aPost.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
-                    //aCell.aPost.af_setImage(for: .normal, url: imageURL!) //Also Works!
-                    aCell.aPost.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1, ImageURL: imageURL!, ImageName: model.image!)
+                    aCell.aButton.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
+                    //aCell.aButton.af_setImage(for: .normal, url: imageURL!) //Also Works!
+                    aCell.aButton.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1, ImageURL: imageURL!, ImageName: model.image!)
                 }
-                aCell.aPost.tag = model.id ?? 0
-                aCell.aPost.addTarget(self, action: #selector(self.showPostDetail), for: .touchUpInside)
+                aCell.aButton.layer.shadowColor = UIColor.black.cgColor
+                aCell.aButton.layer.shadowOffset = CGSize(width: 3, height: 3)
+                aCell.aButton.layer.shadowRadius = 2
+                aCell.aButton.layer.shadowOpacity = 0.2
+                aCell.aButton.tag = model.id ?? 0
+                aCell.aButton.addTarget(self, action: #selector(self.showPostDetail), for: .touchUpInside)
             }else{
-                print("\(cell) can not be casted to PostCell")
+                print("\(cell) can not be casted to ButtonCell")
             }
             }.disposed(by: myDisposeBag)
         
@@ -296,19 +300,12 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         cursurY = cursurY + buttonHeight + marginY+20
         
         let flowLayout = UICollectionViewFlowLayout()
-        /*
-        flowLayout.itemSize = CGSize(width: 50, height: 50)
-        flowLayout.minimumLineSpacing = 10
-        flowLayout.headerReferenceSize = CGSize(width: 50, height: 50)
-        flowLayout.headerReferenceSize = CGSize(width: 20 , height: 20)
-        flowLayout.scrollDirection = .horizontal
- */
         flowLayout.minimumLineSpacing = 10
         
         collectionView = UICollectionView(frame: CGRect(x: marginX, y: cursurY, width: views["rightFormView"]!.frame.width-(2*marginX), height: views["rightFormView"]!.frame.height-cursurY), collectionViewLayout: flowLayout)
-        collectionView.register(PostCell.self, forCellWithReuseIdentifier: "postcell")
+        collectionView.register(ButtonCell.self, forCellWithReuseIdentifier: "buttoncell")
         collectionView.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0)
-        collectionView.rx.setDelegate(self) //Delegate method to call
+        _ = collectionView.rx.setDelegate(self) //Delegate method to call
         views["rightFormView"]!.addSubview(collectionView)
         self.delegate.paneView.addSubview(views["rightFormView"]!)
         bindCollectionView()
@@ -349,8 +346,8 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         views["rightFormView"]!.addSubview(scrollView)
         
         self.delegate.paneView.addSubview(views["leftFormView"]!)
-        
     }
+    
     @objc func showPostDetail(_ sender : Any){
         let postID = (sender as! UIButton).tag
         print("ShopUI : Pushing Post with ID : ",postID)

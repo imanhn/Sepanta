@@ -26,7 +26,7 @@ class SearchViewController : UIViewControllerWithErrorBar{
     @IBOutlet weak var searchResultTableView: UITableView!
     
     @IBAction func returnOnKeyboardTapped(_ sender: Any) {
-        (sender as AnyObject).resignFirstResponder()
+        _ = (sender as AnyObject).resignFirstResponder()
     }
     
     @IBAction func BackTapped(_ sender: Any) {
@@ -41,7 +41,7 @@ class SearchViewController : UIViewControllerWithErrorBar{
     
     @objc override func ReloadViewController(_ sender:Any) {
         super.ReloadViewController(sender)
-        
+        callNewSearch()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -59,8 +59,7 @@ class SearchViewController : UIViewControllerWithErrorBar{
 
         NetworkManager.shared.shopSearchResultObs.bind(to: searchResultTableView.rx.items(cellIdentifier: "SearchCell")) { row, aShopSearchResult, cell in
             if let aCell = cell as? SearchCell {
-                let model = aShopSearchResult as! ShopSearchResult
-                aCell.shopLabel.text = model.shop_name
+                aCell.shopLabel.text = aShopSearchResult.shop_name
             }
             }.disposed(by: myDisposeBag)
         

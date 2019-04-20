@@ -94,7 +94,7 @@ class SMSConfirmViewController: UIViewControllerWithKeyboardNotificationWithErro
     }
     
     @IBAction func ConfirmCodeClicked(_ sender: Any) {
-        print("Confirm Clicked : ",SMSTextField.text)
+        print("Confirm Clicked : ",SMSTextField.text ?? "SMS Field Empty")
         guard (SMSTextField.text != nil) && (SMSTextField.text != "") else {
             alert(Message: "لطفاْ کد ارسال شده را وارد نمایید")
             return

@@ -32,7 +32,7 @@ class MenuCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
 
     func menuDismissed() {        
         guard self.parentCoordinator != nil else {
-            print("Menu Coordinator : Parent is nil : ",self.parentCoordinator)
+            //print("Menu Coordinator : Parent is nil : ",self.parentCoordinator)
             return
         }
         self.parentCoordinator?.removeChild(self)
@@ -40,7 +40,7 @@ class MenuCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     
     func menuSelected(IndexPath anIndexPath : IndexPath){
         guard self.parentCoordinator != nil else {
-            print("Menu Coordinator : Parent is nil : ",self.parentCoordinator)
+            //print("Menu Coordinator : Parent is nil : ",self.parentCoordinator)
             return
         }
         self.parentCoordinator?.removeChild(self)

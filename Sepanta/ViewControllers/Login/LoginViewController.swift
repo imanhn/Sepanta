@@ -66,7 +66,7 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
                     print("USERID : ",LoginKey.shared.userID)
                     print("inner USERID : ",innerUserIDObs)
                     Spinner.stop()
-                    if LoginKey.shared.userID == nil || LoginKey.shared.userID == "" {return}
+                    if LoginKey.shared.userID == "" {return}
                     LoginKey.shared.userIDObs = BehaviorRelay<String>(value: String())
                     self.coordinator!.gotoSMSVerification(Set : (self.MobileTextField.text)!)
                     }, onError: { _ in

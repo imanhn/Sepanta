@@ -8,7 +8,23 @@
 
 import Foundation
 
-struct Post : Decodable, Equatable {
+protocol CollectionCell {
+    var image : String? {get set}
+}
+
+protocol PostProtocol : CollectionCell {
+    var id : Int? {get set}
+    var shopId : Int? {get set}
+    var viewCount : Int? {get set}
+    var comments : [Comment]? {get set}
+    var isLiked : Bool? {get set}
+    var countLike : Int? {get set}
+    var title : String? {get set}
+    var content : String? {get set}
+    var image : String? {get set}
+}
+
+struct Post : Decodable, Equatable,PostProtocol {
     var id : Int?
     var shopId : Int?
     var viewCount : Int?
@@ -18,5 +34,4 @@ struct Post : Decodable, Equatable {
     var title : String?
     var content : String?
     var image : String?
-
 }

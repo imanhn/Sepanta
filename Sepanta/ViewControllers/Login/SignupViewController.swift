@@ -13,18 +13,6 @@ import RxSwift
 import RxCocoa
 
 
-struct genders {
-    var type : String = "جنسیت"
-}
-
-struct provinces {
-    var type : String = "انتخاب استان"
-}
-
-struct cities {
-    var type : String = "انتخاب شهر"
-}
-
 class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,UITextFieldDelegate,Storyboarded   {
     weak var coordinator : LoginCoordinator?
     var userID : String = ""
@@ -87,11 +75,11 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
         selectCity.resignFirstResponder()
     }
     @IBAction func mobileNoTypeDone(_ sender: Any) {
-        (sender as AnyObject).resignFirstResponder()
+        _=(sender as AnyObject).resignFirstResponder()
     }
     
     @IBAction func usernameTypeDone(_ sender: Any) {
-        (sender as AnyObject).resignFirstResponder()
+        _=(sender as AnyObject).resignFirstResponder()
     }
     
     
@@ -234,26 +222,27 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
     }
     func registerUser(MobileNumber : String,GenderCode : String,Username : String){
         
-        var signupResultMessage : String = ""
-        let headers: HTTPHeaders = [
-            "Accept": "application/json",
-            "Content-Type":"application/x-www-form-urlencoded"
-        ]
-        let parameters = [
-            "phone" : MobileNumber,
-            "gender" : GenderCode,
-            "state" : self.currentStateCodeObs.value,
-            "city" : self.currentCityCodeObs.value,
-            "username" : Username
-        ]
- 
-        var signupSucceed : Bool = false
-        
-        let urlString = NetworkManager.shared.baseURLString+"/register?phone="+MobileNumber+"&gender="+GenderCode+"&state="+self.currentStateCodeObs.value+"&city="+self.currentCityCodeObs.value+"&username="+Username
-        let postURL = NSURL(string: urlString)! as URL
+//        var signupResultMessage : String = ""
+//        let headers: HTTPHeaders = [
+//            "Accept": "application/json",
+//            "Content-Type":"application/x-www-form-urlencoded"
+//        ]
+//        let parameters = [
+//            "phone" : MobileNumber,
+//            "gender" : GenderCode,
+//            "state" : self.currentStateCodeObs.value,
+//            "city" : self.currentCityCodeObs.value,
+//            "username" : Username
+//        ]
+// 
+//        var signupSucceed : Bool = false
+//        
+//        let urlString = NetworkManager.shared.baseURLString+"/register?phone="+MobileNumber+"&gender="+GenderCode+"&state="+self.currentStateCodeObs.value+"&city="+self.currentCityCodeObs.value+"&username="+Username
+//        let postURL = NSURL(string: urlString)! as URL
+//
+//        let aMethod : HTTPMethod = HTTPMethod.post
+//        print("Calling Register API")
 
-        let aMethod : HTTPMethod = HTTPMethod.post
-        print("Calling Register API")
         /*
         Alamofire.request(postURL, method: aMethod, parameters: parameters, encoding: JSONEncoding.default,  headers: headers).responseJSON { (response:DataResponse<Any>) in
  

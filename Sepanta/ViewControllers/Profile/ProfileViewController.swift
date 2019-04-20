@@ -14,12 +14,15 @@ import RxSwift
 
 class ProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
     weak var coordinator : HomeCoordinator?
-    var showProfileUI : ShowProfileUI! = ShowProfileUI()
+    var showProfileUI : ShowProfileUI!
     var myDisposeBag = DisposeBag()
-    @IBOutlet var topView: UIView!
-    @IBOutlet weak var cupLabel: UILabel!
-    @IBOutlet weak var clubNumLabel: UILabel!
-    @IBOutlet weak var paneView: UIView!
+    @IBOutlet var topView : UIView!
+    @IBOutlet weak var cupLabel : UILabel!
+    @IBOutlet weak var clubNumLabel : UILabel!
+    @IBOutlet weak var paneView : UIView!
+    @IBOutlet weak var profilePicture : UIImageView!
+    @IBOutlet weak var nameLabel : UILabel!
+    @IBOutlet weak var descLabel : UILabel!
     
     @IBAction func menuTapped(_ sender: Any) {
         self.coordinator!.openButtomMenu()
@@ -36,11 +39,11 @@ class ProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
     }
     
     @objc func myClubTapped(_ sender : Any) {
-        showProfileUI!.showMyClub(self)
+        showProfileUI!.showMyClub()
     }
     
     @objc func contactTapped(_ sender : Any) {
-        showProfileUI!.showContacts(self)
+        showProfileUI!.showContacts()
     }
     
     func gradientTopView(){
@@ -52,13 +55,15 @@ class ProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
     
     @objc override func ReloadViewController(_ sender:Any) {
         super.ReloadViewController(sender)
-        showProfileUI!.showMyClub(self)
+        showProfileUI = ShowProfileUI(self)
     }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         gradientTopView()
-        showProfileUI!.showMyClub(self)
+        showProfileUI = ShowProfileUI(self)
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)

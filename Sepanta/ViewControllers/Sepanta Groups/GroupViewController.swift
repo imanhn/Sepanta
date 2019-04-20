@@ -100,7 +100,7 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
             .subscribe(onNext: { [unowned self] selectedShop in
                 print("Pushing ShopVC with : ", selectedShop)
                 self.coordinator!.pushShop(Shop: selectedShop)
-            })
+            }).disposed(by: myDisposeBag)
     }
     
     @objc override func ReloadViewController(_ sender:Any) {
