@@ -18,6 +18,7 @@ class AboutUsViewController : UIViewController,UITextFieldDelegate,Storyboarded{
     weak var coordinator : HomeCoordinator?
     
     @IBAction func backToParent(_ sender: Any) {
+         self.aboutUsUI = nil
         self.coordinator!.popOneLevel()
     }
     override func viewDidLoad() {
@@ -31,10 +32,5 @@ class AboutUsViewController : UIViewController,UITextFieldDelegate,Storyboarded{
         coordinator!.openButtomMenu()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        print("View DID Disapear!")
-        self.aboutUsUI = nil
-    }
 }
 

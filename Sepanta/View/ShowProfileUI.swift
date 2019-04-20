@@ -117,7 +117,7 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
                 self.collectionView.addSubview(aCell)
                 aCell.addSubview(aCell.aButton)
                 if imageURL == nil {
-                    print("     Post URL is not valid : ",model.image)
+                    print("     Post URL is not valid : ",model.image ?? "Empty Image")
                     let dim = (self.collectionView.bounds.width * 0.8) / self.numberOfFollowedShopInARow
                     aCell.aButton.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
                     aCell.aButton.setImage(UIImage(named: "logo_shape"), for: .normal)

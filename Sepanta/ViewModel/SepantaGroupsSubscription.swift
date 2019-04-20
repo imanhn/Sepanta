@@ -29,47 +29,11 @@ extension SepantaGroupsViewController {
         self.currentCityCodeObs
             .filter({$0 != ""})
             .subscribe(onNext: {  (innerCurrentCity) in
-                //NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
                 let aParameter : Dictionary<String, String> = [
                     "city_code": innerCurrentCity
                 ]
                 self.fetchCatagories(aParameter)
             }).disposed(by: myDisposeBag)
-    }
-    
-    func subscribeToCityandState() {
-        NetworkManager.shared.provinceDictionaryObs
-            //.debug()
-            .filter({$0.count > 0})
-            .subscribe(onNext: { [weak self] (innerProvinceDicObs) in
-                print("innerProvinceDicObs : ",innerProvinceDicObs.count)
-                let controller = ArrayChoiceTableViewController(innerProvinceDicObs.keys.sorted(){$0 < $1}) {
-                    (selectedProvinceStr) in
-                    self?.selectProvince.text = selectedProvinceStr
-                    self?.selectCity.text = ""
-                    self?.currentStateCodeObs.accept(innerProvinceDicObs[selectedProvinceStr]!)
-                }
-                controller.preferredContentSize = CGSize(width: 250, height: innerProvinceDicObs.count*60)
-                Spinner.stop()
-                self?.showPopup(controller, sourceView: (self?.selectProvince!)!)
-                }).disposed(by: myDisposeBag)
-        
-        Observable.combineLatest(self.cityPressed, NetworkManager.shared.cityDictionaryObs, resultSelector: { [unowned self] (innercityPressed,innerCityDicObs) in
-            print("COMBINE : ",innercityPressed,innerCityDicObs)
-            if innercityPressed == true {
-                let controller = ArrayChoiceTableViewController(innerCityDicObs.keys.sorted(){$0 < $1}) {
-                    (selectedCityStr) in
-                    self.selectCity.text = selectedCityStr
-                    self.currentCityCodeObs.accept(innerCityDicObs[selectedCityStr]!)
-                }
-                controller.preferredContentSize = CGSize(width: 250, height: 300)
-                Spinner.stop()
-                self.showPopup(controller, sourceView: (self.selectCity)!)
-                //self.cityPressed.accept(false)
-            }
-        }).observeOn(MainScheduler.instance)
-            .subscribe()
-            .disposed(by: myDisposeBag)
         
         NetworkManager.shared.catagoriesObs
             //.filter({$0.count > 0})
@@ -100,6 +64,26 @@ extension SepantaGroupsViewController {
                     Spinner.stop()
                 }
             }).disposed(by: myDisposeBag)
+
+    }
+    
+    func subscribeToStateChange() {
+        NetworkManager.shared.provinceDictionaryObs
+            //.debug()
+            .filter({$0.count > 0})
+            .subscribe(onNext: { [weak self] (innerProvinceDicObs) in
+                print("innerProvinceDicObs : ",innerProvinceDicObs.count)
+                let controller = ArrayChoiceTableViewController(innerProvinceDicObs.keys.sorted(){$0 < $1}) {
+                    (selectedProvinceStr) in
+                    self?.selectProvince.text = selectedProvinceStr
+                    self?.selectCity.text = ""
+                    self?.currentStateCodeObs.accept(innerProvinceDicObs[selectedProvinceStr]!)
+                }
+                controller.preferredContentSize = CGSize(width: 250, height: innerProvinceDicObs.count*60)
+                Spinner.stop()
+                self?.showPopup(controller, sourceView: (self?.selectProvince!)!)
+                }).disposed(by: myDisposeBag)
+
     }
     
     func fetchCatagories(_ parameters : Dictionary<String,String>?){

@@ -241,7 +241,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 let strURL = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + model.image!
                 let imageURL = URL(string: strURL)
                 //print("ROW:\(row) UICollectionView binding : ",imageURL ?? "NIL"," Cell : ",aCell,"  model : ",model)
-                print("ShopUI Binding Posts : ",model)
+                //print("ShopUI Binding Posts : ",model)
                 self.collectionView.addSubview(aCell)
                 aCell.addSubview(aCell.aButton)
                 if imageURL == nil {

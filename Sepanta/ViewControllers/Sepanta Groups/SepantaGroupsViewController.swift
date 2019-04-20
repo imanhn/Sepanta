@@ -26,9 +26,7 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
 
     
     @IBAction func menuClicked(_ sender: Any) {
-
         self.coordinator!.openButtomMenu()
-        
     }
     
     @IBAction func backButtonTapped(_ sender: Any) {
@@ -37,8 +35,15 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
     }
     
     @IBAction func cityPressed(_ sender: Any) {
-        cityPressed.accept(true)
-        cityPressed.accept(false)
+        let innerCityDicObs = NetworkManager.shared.cityDictionaryObs.value
+        let controller = ArrayChoiceTableViewController(innerCityDicObs.keys.sorted(){$0 < $1}) {
+            (selectedCityStr) in
+            self.selectCity.text = selectedCityStr
+            self.currentCityCodeObs.accept(innerCityDicObs[selectedCityStr]!)
+        }
+        controller.preferredContentSize = CGSize(width: 250, height: innerCityDicObs.count*60)
+        Spinner.stop()
+        self.showPopup(controller, sourceView: self.selectCity!)
     }
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -50,7 +55,6 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
     }
 
     @IBAction func provincePressed(_ sender: Any) {
-        Spinner.start()
         NetworkManager.shared.run(API: "category-state-list",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
     }
     
@@ -71,16 +75,10 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
         selectCity.delegate = self
         selectProvince.delegate = self
         subscribeToUpdateCategories()
-        subscribeToCityandState()
+        subscribeToStateChange()
         fetchCatagories(nil)
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-         //self.groupButtons = nil
-        
-    }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -93,9 +91,5 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
         presentationController.permittedArrowDirections = [.down, .up]
         self.present(controller, animated: true)
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    
 }

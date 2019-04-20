@@ -53,6 +53,7 @@ class JSONParser {
                         //print("Setting Catagories for a state/city : ",[cat])
                         NetworkManager.shared.catagoriesObs.accept([cat])
                     }
+                    
                     if aDic["list_city"] != nil {
                         var processedDic = Dictionary<String,String>()
                         processedDic = (self?.processAsCityList(Result: aDic))!

@@ -36,6 +36,7 @@ class NewShopsViewController :  UIViewControllerWithErrorBar,Storyboarded{
     @IBOutlet weak var shopTable: UITableView!
     
     @IBAction func backTapped(_ sender: Any) {
+        newShopsDataSource = nil
         NetworkManager.shared.shopObs = BehaviorRelay<[Any]>(value: [Any]())
         self.coordinator!.popOneLevel()
     }
@@ -96,11 +97,6 @@ class NewShopsViewController :  UIViewControllerWithErrorBar,Storyboarded{
         bindToTableView()
         newShopsDataSource = ShopsListDataSource(self)
         newShopsDataSource.getNewShopsFromServer()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        newShopsDataSource = nil
     }
     
 }

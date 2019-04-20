@@ -41,9 +41,7 @@ class EditProfileViewController : UIViewControllerWithKeyboardNotificationWithEr
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         editProfileUI.showForm(self)
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
+
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)

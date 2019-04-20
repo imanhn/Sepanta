@@ -44,9 +44,14 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     var currentGroupName = String()
 
     @IBAction func backButtonPressed(_ sender: Any) {
+        newShopsDataSource = nil
         NetworkManager.shared.shopObs = BehaviorRelay<[Any]>(value: [Any]())
         coordinator!.popOneLevel()
         
+    }
+    
+    @IBAction func gotoHomePage(_ sender: Any) {
+        coordinator!.popHome()
     }
 
     @IBAction func openButtomMenu(_ sender: Any) {
@@ -119,21 +124,6 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
         updateGroupHeaders()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        //shops.accept([])
-        //shopTable.reloadData()
-        newShopsDataSource = nil
-       
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-    }
-    
-    @IBAction func gotoHomePage(_ sender: Any) {
-        coordinator!.popHome()        
-    }
     
     
 }

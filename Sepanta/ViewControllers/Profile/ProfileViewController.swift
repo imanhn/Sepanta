@@ -35,6 +35,7 @@ class ProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
     }
     
     @IBAction func backPressed(_ sender: Any) {
+        showProfileUI = nil
         self.coordinator!.popOneLevel()
     }
     
@@ -65,8 +66,5 @@ class ProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
         gradientTopView()
         showProfileUI = ShowProfileUI(self)
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        showProfileUI = nil
-    }
+
 }

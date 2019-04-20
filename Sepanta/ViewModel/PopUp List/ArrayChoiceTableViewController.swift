@@ -15,7 +15,6 @@ class ArrayChoiceTableViewController<Element> : UITableViewController {
 
     
     init(_ values : [Element], labels : @escaping LabelProvider = String.init(describing:), onSelect : SelectionHandler? = nil) {
-        print("labels : ",labels)
         self.values = values
         self.onSelect = onSelect
         self.labels = labels

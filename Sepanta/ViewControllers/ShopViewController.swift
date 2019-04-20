@@ -97,9 +97,7 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
         self.shopUI = ShopUI(self)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
+
     
 }
 
