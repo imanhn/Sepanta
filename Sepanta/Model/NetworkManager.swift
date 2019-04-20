@@ -45,8 +45,10 @@ class NetworkManager {
     var postDetailObs = BehaviorRelay<Post>(value: Post(id: 0, shopId: 0, viewCount: 0, comments: [], isLiked: false, countLike: 0, title: "", content: "", image: ""))
     var postCommentsObs = BehaviorRelay<[Comment]>(value: [Comment]())
     var commentSendingSuccessful = BehaviorRelay<Bool>(value: false)
+    var updateProfileInfoSuccessful = BehaviorRelay<Bool>(value: false)
     var shopSearchResultObs = BehaviorRelay<[ShopSearchResult]>(value: [ShopSearchResult]())
     var profileObs = BehaviorRelay<Profile>(value: Profile())
+    var profileInfoObs = BehaviorRelay<ProfileInfo>(value: ProfileInfo())
     // Initialization
     
     private init() {
@@ -71,7 +73,6 @@ class NetworkManager {
         //print(escapedString!)
         return escapedString!
     }
-    
     func run(API apiName : String, QueryString aQuery : String, Method aMethod : HTTPMethod, Parameters aParameter : Dictionary<String, String>?, Header  aHeader : HTTPHeaders? ,WithRetry : Bool) {
         var retryTime = 4
         if WithRetry == false {

@@ -89,10 +89,16 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
        NetworkManager.shared.profileObs
         .subscribe(onNext: { [unowned self] aProfile in
             if aProfile.image != nil && aProfile.image!.count > 0 {
-                let imageUrl = NetworkManager.shared.baseURLString + SlidesAndPaths.shared.path_profile_image + aProfile.image!
+                let imageUrl = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_profile_image + aProfile.image!
+                print("Profile Picture : ",imageUrl)
                 let castedUrl = URL(string: imageUrl)
                 if castedUrl != nil {
                     self.delegate.profilePicture.setImageFromCache(PlaceHolderName: "icon_profile_img", Scale: 1, ImageURL: castedUrl!, ImageName: aProfile.image!)
+                    self.delegate.profilePicture.layer.cornerRadius = self.delegate.profilePicture.frame.width/2
+                    self.delegate.profilePicture.layer.masksToBounds = true
+                    self.delegate.profilePicture.layer.borderColor = UIColor.white.cgColor
+                    self.delegate.profilePicture.layer.borderWidth = 4
+
                 }else{
                     print("URL Can not be casted : ",imageUrl)
                 }
@@ -133,7 +139,7 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
                 aCell.aButton.layer.shadowOpacity = 0.2
 
                 aCell.aButton.tag = model.user_id ?? 0
-                aCell.aButton.addTarget(self, action: #selector(self.shopShopDetail), for: .touchUpInside)
+                aCell.aButton.addTarget(self, action: #selector(self.showShopDetail), for: .touchUpInside)
             }else{
                 print("\(cell) can not be casted to PostCell")
             }
@@ -142,7 +148,7 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
         
     }
     
-    @objc func shopShopDetail(){
+    @objc func showShopDetail(){
         
     }
     

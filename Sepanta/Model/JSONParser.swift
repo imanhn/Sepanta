@@ -88,6 +88,9 @@ class JSONParser {
                 } else if (apiName == "send-comment") && (aMethod == HTTPMethod.post) {
                     // Sets True for commentSendingSuccessful to be observable by PostUI
                     NetworkManager.shared.commentSendingSuccessful.accept(true)
+                } else if (apiName == "profile-info") && (aMethod == HTTPMethod.post) {
+                    // Sets True for profile-info to be observable by PostUI
+                    NetworkManager.shared.updateProfileInfoSuccessful.accept(true)
                 } else if (apiName == "category-shops-list") && (aMethod == HTTPMethod.post) {
                     //Returns All shops in a Specific Catagory (Slug=3) OR Shops in a specific catagory in a state (Slug=1) OR Shops in a specific catagory in a city (Slug=2)
                     print("Starting category-shops-list Parser...")
@@ -97,6 +100,10 @@ class JSONParser {
                     print("Starting NewShops Parser...")
                     let parsedShops = self?.processShopList(Result: aDic)
                     NetworkManager.shared.shopObs.accept(parsedShops!)
+                } else if (apiName == "profile-info") && (aMethod == HTTPMethod.get) {
+                    print("Starting profile-info Parser...")
+                    let parsedProfileInfo = self?.processProfileInfo(Result: aDic)
+                    NetworkManager.shared.profileInfoObs.accept(parsedProfileInfo!)
                 } else if (apiName == "search-shops") && (aMethod == HTTPMethod.post) {
                     print("Starting search-shops Parser...")
                     let parsedShopSearchResults = self?.processShopSearchResultList(Result: aDic)
@@ -110,6 +117,26 @@ class JSONParser {
                     //print("Parser Disposed")
                 }
             ).disposed(by: netObjectsDispose)
+    }
+    
+    func processProfileInfo(Result aProfileDicAsNS : NSDictionary) -> ProfileInfo {
+        var profileInfo = ProfileInfo()
+        profileInfo.status = (aProfileDicAsNS["status"] as? String) ?? ""
+        profileInfo.message = (aProfileDicAsNS["message"] as? String) ?? ""
+        profileInfo.first_name = (aProfileDicAsNS["first_name"] as? String) ?? ""
+        profileInfo.last_name = (aProfileDicAsNS["last_name"] as? String) ?? ""
+        profileInfo.bio = (aProfileDicAsNS["bio"] as? String) ?? ""
+        profileInfo.address = (aProfileDicAsNS["address"] as? String) ?? ""
+        profileInfo.image = (aProfileDicAsNS["image"] as? String) ?? ""
+        profileInfo.national_code = (aProfileDicAsNS["national_code"] as? String) ?? ""
+        profileInfo.state = (aProfileDicAsNS["state"] as? String) ?? ""
+        profileInfo.city = (aProfileDicAsNS["city"] as? String) ?? ""
+        profileInfo.gender = (aProfileDicAsNS["gender"] as? String) ?? ""
+        profileInfo.birthdate = (aProfileDicAsNS["birthdate"] as? String) ?? ""
+        profileInfo.email = (aProfileDicAsNS["email"] as? String) ?? ""
+        profileInfo.marital_status = (aProfileDicAsNS["marital_status"] as? String) ?? ""
+        //print("FULL ProfileInfo : ",profileInfo)
+        return profileInfo
     }
     
     func processShopSearchResultList (Result aResult : NSDictionary) -> [ShopSearchResult] {
@@ -154,6 +181,7 @@ class JSONParser {
     
     func processAsProfile(Result aProfileDicAsNS : NSDictionary) -> Profile {
         var profile = Profile()
+        print("*** FETCHED IMAGE PROFILE : ",aProfileDicAsNS["image"])
         //print("aProfileDicAsNS: ",aProfileDicAsNS)
         //print("aProfileDicAsNS Keys : ",aProfileDicAsNS.allKeys)
         if aProfileDicAsNS["id"] == nil || (aProfileDicAsNS["id"] as? Int) == 0 {

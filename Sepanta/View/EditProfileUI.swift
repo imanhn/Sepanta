@@ -42,25 +42,126 @@ class EditProfileUI : NSObject , UITextFieldDelegate{
         }
     }
     
-    override init() {
+    init(_ vc : EditProfileViewController) {
+        self.delegate = vc
+        super.init()
+        showForm()
+        getAndSubscribeToProfileInfo()
+        handleSubmitButtonEnableOrDisable()
     }
     
+    func handleSubmitButtonEnableOrDisable(){
+        Observable.combineLatest([texts["familyText"]!.rx.text,
+                                  texts["nameText"]!.rx.text,
+                                  texts["nationalCodeText"]!.rx.text,
+                                  texts["birthDateText"]!.rx.text,
+                                  texts["maritalStatusText"]!.rx.text,
+                                  texts["emailText"]!.rx.text,
+                                  texts["stateText"]!.rx.text,
+                                  texts["cityText"]!.rx.text,
+                                  texts["regionText"]!.rx.text,
+                                  texts["genderText"]!.rx.text
+            ])
+            
+            .subscribe(onNext: { (combinedTexts) in
+                //print("combinedTexts : ",combinedTexts)
+                let mappedTextToBool = combinedTexts.map{$0 != nil && $0!.count > 0}
+                //print("mapped : ",mappedTextToBool)
+                let allTextFilled = mappedTextToBool.reduce(true, {$0 && $1})
+                if allTextFilled {
+                    if !self.submitButton.isEnabled {
+                        self.submitButton.setEnable()
+                    }
+                }else{
+                    if self.submitButton.isEnabled {
+                        self.submitButton.setDisable()
+                    }
+                }
+            }
+        ).disposed(by: self.delegate.myDisposeBag)
+    }
+    
+    func getAndSubscribeToProfileInfo(){
+        //let aParameter = ["user id":"\(LoginKey.shared.userID)"]
+        NetworkManager.shared.run(API: "profile-info", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
+        NetworkManager.shared.profileInfoObs
+            .subscribe(onNext: { [unowned self] (aProfileInfo) in
+                self.fillEditProfileForm(With: aProfileInfo)
+            }).disposed(by: self.delegate.myDisposeBag)
+    }
+    
+    func fillEditProfileForm(With aProfileInfo : ProfileInfo){
+        if aProfileInfo.image != nil && aProfileInfo.image!.count > 0 {
+            let imageUrl = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_profile_image + aProfileInfo.image!
+            print("aProfileInfo Picture : ",imageUrl)
+            let castedUrl = URL(string: imageUrl)
+            if castedUrl != nil {
+                self.delegate.profilePicture.setImageFromCache(PlaceHolderName: "icon_profile_img", Scale: 1, ImageURL: castedUrl!, ImageName: aProfileInfo.image!)
+                self.delegate.profilePicture.layer.cornerRadius = self.delegate.profilePicture.frame.width/2
+                self.delegate.profilePicture.layer.masksToBounds = true
+                self.delegate.profilePicture.layer.borderColor = UIColor.white.cgColor
+                self.delegate.profilePicture.layer.borderWidth = 4
+            }else{
+                print("URL Can not be casted : ",imageUrl)
+            }
+        }else if let aCacheImage = UIImage().getImageFromCache(ImageName: NetworkManager.shared.profileObs.value.image ?? "") {
+            self.delegate.profilePicture.image = aCacheImage
+            self.delegate.profilePicture.layer.cornerRadius = self.delegate.profilePicture.frame.width/2
+            self.delegate.profilePicture.layer.masksToBounds = true
+            self.delegate.profilePicture.layer.borderColor = UIColor.white.cgColor
+            self.delegate.profilePicture.layer.borderWidth = 4
+        }
+        
+        texts["familyText"]!.text = aProfileInfo.last_name
+        texts["nameText"]!.text = aProfileInfo.first_name
+        texts["nationalCodeText"]!.text = aProfileInfo.national_code
+        texts["birthDateText"]!.text = aProfileInfo.birthdate
+        texts["maritalStatusText"]!.text = aProfileInfo.marital_status
+        texts["emailText"]!.text = aProfileInfo.email
+        texts["stateText"]!.text = aProfileInfo.state
+        texts["cityText"]!.text = aProfileInfo.city
+        texts["regionText"]!.text = aProfileInfo.address
+        texts["genderText"]!.text = aProfileInfo.gender
+        //texts["**********"]!.text = aProfileInfo.bio
+    }
+
     @objc func doneDatePicker(_ sender : Any) {
         self.delegate.view.endEditing(true)
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY/MM/DD"
         formatter.locale = Locale(identifier: "fa_IR")
         texts["birthDateText"]?.text = formatter.string(from: datePicker.date)
+        texts["birthDateText"]?.sendActions(for: .valueChanged)
     }
+    
     @objc func cancelDatePicker(_ sender : Any) {
         self.delegate.view.endEditing(true)
     }
+    
     //Create Gradient on PageView
     @objc func sendEditedData(){
         //Submit data to server to change profile data and them back to profile view if required
+        let aParameter = [
+            "last_name":"\(texts["familyText"]!.text ?? "")",
+            "first_name":"\(texts["nameText"]!.text ?? "")",
+            "national_code":"\(texts["nationalCodeText"]!.text ?? "")",
+            "birthdate":"\(texts["birthDateText"]!.text ?? "")",
+            "marital_status":"\(texts["maritalStatusText"]!.text ?? "")",
+            "email":"\(texts["emailText"]!.text ?? "")",
+            "state":"\(texts["stateText"]!.text ?? "")",
+            "city":"\(texts["cityText"]!.text ?? "")",
+            "address":"\(texts["regionText"]!.text ?? "")"
+        ]
+        NetworkManager.shared.run(API: "profile-info", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
+        NetworkManager.shared.updateProfileInfoSuccessful
+            .filter({$0 == true})
+            .subscribe(onNext: { [unowned self] (succeed) in
+                self.delegate.alert(Message: "اطلاعات پروفایل شما بروز شد")
+                NetworkManager.shared.updateProfileInfoSuccessful = BehaviorRelay<Bool>(value: false)
+            }).disposed(by: self.delegate.myDisposeBag)
     }
-    func showForm(_ avc : EditProfileViewController) {
-        self.delegate = avc
+    
+    func showForm() {
         //print("reseller Request : ",views["leftFormView"] ?? "Nil")
         if views["leftFormView"] != nil && views["leftFormView"]?.superview != nil { views["leftFormView"]?.removeFromSuperview()}
         var cursurY : CGFloat = 10
@@ -136,8 +237,9 @@ class EditProfileUI : NSObject , UITextFieldDelegate{
         cursurY = cursurY + buttonHeight + buttonHeight
 
         
-        submitButton = RoundedButtonWithDarkBackground(type: .custom)
+        submitButton = RoundedButton(type: .custom)
         submitButton.frame = CGRect(x: marginX+(textFieldWidth/2)-1.5*buttonHeight, y: cursurY, width: 3*buttonHeight, height: buttonHeight)
+        submitButton.setEnable()
         //submitButton.backgroundColor = UIColor.white
         
         //submitButton.setImage(UIImage(named: "icon_tick_black"), for: .normal)
@@ -212,6 +314,7 @@ class EditProfileUI : NSObject , UITextFieldDelegate{
                 let controller = ArrayChoiceTableViewController(innerCityDicObs.keys.sorted(){$0 < $1}) {
                     (selectedOption) in
                     aTextField.text = selectedOption
+                    aTextField.sendActions(for: .valueChanged)
                     self.stateCode = innerCityDicObs[selectedOption]
                 }
                 controller.preferredContentSize = CGSize(width: 250, height: 300)
@@ -228,6 +331,7 @@ class EditProfileUI : NSObject , UITextFieldDelegate{
             let controller = ArrayChoiceTableViewController(options.sorted(){$0 < $1}) {
                 (selectedOption) in
                 aTextField.text = selectedOption
+                aTextField.sendActions(for: .valueChanged)
                 self.stateCode = NetworkManager.shared.provinceDictionaryObs.value[selectedOption]
             }
             controller.preferredContentSize = CGSize(width: 250, height: options.count*60)
@@ -240,6 +344,7 @@ class EditProfileUI : NSObject , UITextFieldDelegate{
                     let controller = ArrayChoiceTableViewController(innerProvinceDicObs.keys.sorted(){$0 < $1}) {
                         (selectedOption) in
                         aTextField.text = selectedOption
+                        aTextField.sendActions(for: .valueChanged)
                         self.stateCode = innerProvinceDicObs[selectedOption]
                         self.cityCode = nil
                         self.texts["cityText"]!.text = ""
@@ -257,6 +362,7 @@ class EditProfileUI : NSObject , UITextFieldDelegate{
         let controller = ArrayChoiceTableViewController(options.sorted(){$0 < $1}) {
             (selectedOption) in
             aTextField.text = selectedOption
+            aTextField.sendActions(for: .valueChanged)
         }
         controller.preferredContentSize = CGSize(width: 250, height: options.count*60)
         self.delegate.showPopup(controller, sourceView: aTextField)
@@ -269,6 +375,7 @@ class EditProfileUI : NSObject , UITextFieldDelegate{
         let controller = ArrayChoiceTableViewController(options.sorted(){$0 < $1}) {
             (selectedOption) in
             aTextField.text = selectedOption
+            aTextField.sendActions(for: .valueChanged)
         }
         controller.preferredContentSize = CGSize(width: 250, height: options.count*60)
         self.delegate.showPopup(controller, sourceView: aTextField)

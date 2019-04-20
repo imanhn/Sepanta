@@ -31,6 +31,8 @@
 		0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F512C042205B5C300B99C9E /* SignupViewController.swift */; };
 		0F67F75A224CD00300659842 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67F759224CD00300659842 /* Post.swift */; };
 		0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */; };
+		0F70A647226B97650020C33C /* EditProfileImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F70A646226B97650020C33C /* EditProfileImagePicker.swift */; };
+		0F70A649226BC7BF0020C33C /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F70A648226BC7BF0020C33C /* ProfileInfo.swift */; };
 		0F71A38B2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F71A38A2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift */; };
 		0F71A38F22319A2000F4EB6B /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F71A38E22319A2000F4EB6B /* Alert.swift */; };
 		0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */; };
@@ -127,6 +129,8 @@
 		0F6F39C222078DC900393CD7 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		0F6F39C722079FB600393CD7 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		0F70A645226B8ABB0020C33C /* Sepanta-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sepanta-Bridging-Header.h"; sourceTree = "<group>"; };
+		0F70A646226B97650020C33C /* EditProfileImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileImagePicker.swift; sourceTree = "<group>"; };
+		0F70A648226BC7BF0020C33C /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
 		0F71A38A2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerWithKeyboardNotification.swift; sourceTree = "<group>"; };
 		0F71A38E22319A2000F4EB6B /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysShowPopup.swift; sourceTree = "<group>"; };
@@ -310,6 +314,7 @@
 				0FDA55D42225C02800E7C889 /* Catagory.swift */,
 				0FA307DD222700B100EDA829 /* Shop.swift */,
 				0F817A6E22354F8600F1738E /* Profile.swift */,
+				0F70A648226BC7BF0020C33C /* ProfileInfo.swift */,
 				0FAE1FF2226332D20043B077 /* CreditCard.swift */,
 				0F67F759224CD00300659842 /* Post.swift */,
 				0F0661B3225BF93E00A83734 /* Comment.swift */,
@@ -344,6 +349,7 @@
 				0F066F98222C22EE00C8871C /* MenuController.swift */,
 				0F1B755A223580C80087C0DB /* ShopsListDataSource.swift */,
 				0F0661AC2257E62400A83734 /* SepantaGroupsSubscription.swift */,
+				0F70A646226B97650020C33C /* EditProfileImagePicker.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -676,7 +682,9 @@
 				0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */,
 				0F1B75632236E39B0087C0DB /* ShopViewController.swift in Sources */,
 				0F066F95222B19AB00C8871C /* UIViewRotate.swift in Sources */,
+				0F70A649226BC7BF0020C33C /* ProfileInfo.swift in Sources */,
 				0FAE1FFF226745780043B077 /* XIBView.swift in Sources */,
+				0F70A647226B97650020C33C /* EditProfileImagePicker.swift in Sources */,
 				0F066F93222B198900C8871C /* UIColorFromHex.swift in Sources */,
 				0F1B755F2235C8460087C0DB /* Slide.swift in Sources */,
 				0F71A38B2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift in Sources */,
