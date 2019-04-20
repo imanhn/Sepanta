@@ -7,8 +7,6 @@
 //
 
 import XCTest
-import SwiftyJSON
-import Alamofire
 
 class SepantaUITests: XCTestCase {
         

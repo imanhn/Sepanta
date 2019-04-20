@@ -20,24 +20,6 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
     var currentStateCodeObs = BehaviorRelay<String>(value : String())
     var currentCityCodeObs = BehaviorRelay<String>(value : String())
     var myDisposeBag = DisposeBag()
-    var genderModel = genders() {
-        didSet {
-            updateGender()
-            self.view.setNeedsLayout()
-        }
-    }
-    var provinceModel = provinces() {
-        didSet {
-            updateProvince()
-            self.view.setNeedsLayout()
-        }
-    }
-    var cityModel = cities() {
-        didSet {
-            updateCity()
-            self.view.setNeedsLayout()
-        }
-    }
     var TermsAgreed = false;
     @IBOutlet weak var mobileNoText: UnderLinedTextField!
     @IBOutlet weak var usernameText: UnderLinedTextField!
@@ -62,18 +44,7 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
             termsLabel.textColor = UIColor(red: 0.84, green: 0.84, blue: 0.84, alpha: 1)
         }
     }
-    func updateGender(){
-        self.genderTextField.text = genderModel.type
-        genderTextField.resignFirstResponder()
-    }
-    func updateProvince(){
-        self.selectProvince.text = provinceModel.type
-        selectProvince.resignFirstResponder()
-    }
-    func updateCity(){
-        self.selectCity.text = cityModel.type
-        selectCity.resignFirstResponder()
-    }
+
     @IBAction func mobileNoTypeDone(_ sender: Any) {
         _=(sender as AnyObject).resignFirstResponder()
     }
@@ -91,6 +62,7 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
         if textField == selectProvince || textField == selectCity || textField == genderTextField {
             return false
         } else {
+            self.edittingView = textField
             return true
         }
     }
@@ -102,18 +74,19 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
         NetworkManager.shared.provinceDictionaryObs
             //.debug()
             .filter({$0.count > 0})
-            .subscribe(onNext: { [weak self] (innerProvinceDicObs) in
+            .subscribe(onNext: { [unowned self] (innerProvinceDicObs) in
                 print("innerProvinceDicObs : ",innerProvinceDicObs.count)
                 let controller = ArrayChoiceTableViewController(innerProvinceDicObs.keys.sorted(){$0 < $1}) {
-                    (type) in self?.provinceModel.type = type
-                    self?.selectCity.text = ""
+                    (type) in
+                    self.selectProvince.text = type
+                    self.selectCity.text = ""
                     print("State Code : ",innerProvinceDicObs[type]!)
-                    self?.currentStateCodeObs.accept(innerProvinceDicObs[type]!)
+                    self.currentStateCodeObs.accept(innerProvinceDicObs[type]!)
                 }
                 controller.preferredContentSize = CGSize(width: 250, height: 300)
                 Spinner.stop()
                 //print("Setting controller")
-                self?.showPopup(controller, sourceView: sender as! UIView)
+                self.showPopup(controller, sourceView: sender as! UIView)
                 NetworkManager.shared.provinceDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
             }, onError: { _ in
                 print("Province Call Raised Error")
@@ -134,16 +107,17 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
         NetworkManager.shared.cityDictionaryObs
             //.debug()
             .filter({$0.count > 0})
-            .subscribe(onNext: { [weak self] (innerCityDicObs) in
+            .subscribe(onNext: { [unowned self] (innerCityDicObs) in
                 let controller = ArrayChoiceTableViewController(innerCityDicObs.keys.sorted(){$0 < $1}) {
-                    (type) in self?.cityModel.type = type
+                    (type) in
+                    self.selectCity.text = type
                     print("City Code : ",innerCityDicObs[type]!)
-                    self?.currentCityCodeObs.accept(innerCityDicObs[type]!)
+                    self.currentCityCodeObs.accept(innerCityDicObs[type]!)
                 }
                 controller.preferredContentSize = CGSize(width: 250, height: 300)
                 Spinner.stop()
                 //print("Setting controller")
-                self?.showPopup(controller, sourceView: sender as! UIView)
+                self.showPopup(controller, sourceView: sender as! UIView)
                 NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
                 }, onError: { _ in
                     Spinner.stop()
@@ -155,7 +129,8 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
     @IBAction func GenderTextTouchDown(_ sender: Any) {
        
         let controller = ArrayChoiceTableViewController(getGendersList()) {
-            (type) in self.genderModel.type = type
+            [unowned self] (type) in
+            self.genderTextField.text = type
         }
         controller.preferredContentSize = CGSize(width: (sender as! UITextField).bounds.width, height: 150)
         showPopup(controller, sourceView: sender as! UIView)
@@ -173,7 +148,7 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
         presentationController.permittedArrowDirections = [.down, .up]
         self.present(controller, animated: true)
     }
-    
+ 
     override func viewDidLoad() {        
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)

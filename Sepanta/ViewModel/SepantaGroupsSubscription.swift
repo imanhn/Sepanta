@@ -91,4 +91,6 @@ extension SepantaGroupsViewController {
         if parameters != nil { aMethod = HTTPMethod.post}
         NetworkManager.shared.run(API: "categories-filter",QueryString: "", Method: aMethod, Parameters: parameters, Header: nil,WithRetry: true)
     }
+    
+
 }

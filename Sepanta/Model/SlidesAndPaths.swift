@@ -28,7 +28,7 @@ class SlidesAndPaths {
     }
     private init() {
         if !fetched {
-            print("Fetching Home Data : ")
+            //print("Fetching Home Data : ")
             getHomeData()
         }else{
             print("Home data has already been fetched")

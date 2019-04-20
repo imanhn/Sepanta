@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 //extension  GetRichViewController {
-class GetRichUI {
+class GetRichUI : NSObject , UITextFieldDelegate {
     var delegate : GetRichViewController!
     var views = Dictionary<String,UIView>()
     var texts = Dictionary<String,UITextField>()
@@ -23,9 +23,25 @@ class GetRichUI {
     var shopAwareness : Bool = false
     var submitButton = UIButton(type: .custom)
 
-    init() {
+    override init() {
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        //BuildRow set 11 for tag of selectable textfield (See BuildRow function)
+        if textField.tag == 11 {
+            return false
+            
+        }else{
+            // edittingView is set for keyboard notification manageing facility to find out if we should move the keyboard up or not!
+            self.delegate.edittingView = textField
+            return true
+        }
+    }
     //Create Gradient on PageView
     func showResellerRequest(_ avc : GetRichViewController) {
         self.delegate = avc
@@ -164,6 +180,7 @@ class GetRichUI {
         aText.font = UIFont(name: "Shabnam-FD", size: 14)
         aText.attributedPlaceholder = NSAttributedString(string: aPlaceHolder , attributes: [NSAttributedStringKey.foregroundColor: UIColor(hex: 0xD6D7D9)])
         aText.textAlignment = .right
+        aText.delegate = self
         if selectable {
             let triangleImage = UIImageView(frame: CGRect(x: 0, y: rect.height*3/4 - 5, width: rect.height/4, height: rect.height/4))
             triangleImage.image = UIImage(named: "icon_dropdown_red")

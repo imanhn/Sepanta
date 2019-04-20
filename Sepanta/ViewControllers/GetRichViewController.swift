@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import RxSwift
 
-class GetRichViewController : UIViewControllerWithErrorBar,UITextFieldDelegate,Storyboarded{
+class GetRichViewController : UIViewControllerWithKeyboardNotificationWithErrorBar,UITextFieldDelegate,Storyboarded{
    var myDisposeBag = DisposeBag()
     @IBOutlet weak var scrollView: UIScrollView!
     var getRichUI : GetRichUI?
@@ -48,5 +48,11 @@ class GetRichViewController : UIViewControllerWithErrorBar,UITextFieldDelegate,S
         super.viewDidDisappear(animated)
         print("View DID Disapear!")
         self.getRichUI = nil
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
 }

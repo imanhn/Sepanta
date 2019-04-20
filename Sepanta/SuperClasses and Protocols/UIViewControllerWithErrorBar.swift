@@ -80,4 +80,5 @@ class UIViewControllerWithErrorBar : UIViewController,ReloadableViewController {
                 NetworkManager.shared.status = BehaviorRelay<CallStatus>(value: CallStatus.ready)
             })
     }
+
 }

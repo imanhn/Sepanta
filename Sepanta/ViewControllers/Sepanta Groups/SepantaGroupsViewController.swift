@@ -47,11 +47,12 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
     }
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField == selectProvince || textField == selectCity {
+        return false
+        /*if textField == selectProvince || textField == selectCity {
             return false
         } else {
             return true
-        }
+        }*/
     }
 
     @IBAction func provincePressed(_ sender: Any) {

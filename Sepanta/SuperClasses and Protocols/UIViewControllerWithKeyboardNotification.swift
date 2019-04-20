@@ -8,17 +8,33 @@
 
 import Foundation
 import UIKit
+enum ViewStatus {
+    case MovedUp
+    case Normal
+}
+
 class UIViewControllerWithKeyboardNotificationWithErrorBar : UIViewControllerWithErrorBar {
+    var edittingView : UITextField!
+    var viewState = ViewStatus.Normal
     @objc func keyboardWillChange(notification : Notification){
         guard let keyboardRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
-            print("Keyboard Rect is Empty!")
+            //print("Keyboard Rect is Empty!")
             return
         }
-        if notification.name == Notification.Name.UIKeyboardWillShow ||
-            notification.name == Notification.Name.UIKeyboardWillChangeFrame {
+        if edittingView != nil {
+            let frame = edittingView.convert(edittingView.frame, to:nil)
+            //print("Origin Y : ",frame.origin.y)
+            if frame.origin.y < (keyboardRect.height * 1.2) && viewState == ViewStatus.Normal {
+                //print("We do not move View in this case!")
+                return
+            }
+        }
+        if notification.name == Notification.Name.UIKeyboardWillShow || notification.name == Notification.Name.UIKeyboardWillChangeFrame {
             view.frame.origin.y = -keyboardRect.height
-        }else{
+            viewState = ViewStatus.MovedUp
+        }else if viewState != ViewStatus.Normal {
             view.frame.origin.y = 0
+            viewState = ViewStatus.Normal
         }
     }
     
