@@ -23,18 +23,8 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
     @IBOutlet weak var sepantaScrollView: UIScrollView!
     @IBOutlet weak var selectCity: UnderLinedSelectableTextField!
     @IBOutlet weak var selectProvince: UnderLinedSelectableTextField!
-    var provinceModel = provinces() {
-        didSet {
-            updateProvince()
-            self.view.setNeedsLayout()
-        }
-    }
-    var cityModel = cities() {
-        didSet {
-            updateCity()
-            self.view.setNeedsLayout()
-        }
-    }
+
+    
     @IBAction func menuClicked(_ sender: Any) {
 
         self.coordinator!.openButtomMenu()
@@ -46,18 +36,6 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
         self.coordinator!.popOneLevel()
     }
     
-    
-    func updateProvince(){
-        self.selectProvince.text = provinceModel.type
-        selectProvince.resignFirstResponder()
-    }
-    
-    func updateCity(){
-        self.selectCity.text = cityModel.type
-        selectCity.resignFirstResponder()
-    }
-    
-  
     @IBAction func cityPressed(_ sender: Any) {
         cityPressed.accept(true)
         cityPressed.accept(false)
@@ -80,7 +58,7 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
         super.ReloadViewController(sender)
         selectProvince.text = ""
         selectCity.text = ""
-        fetchAllCatagories()
+        fetchCatagories(nil)
     }
     
     override func viewDidLoad() {
@@ -92,8 +70,9 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
         definesPresentationContext = true
         selectCity.delegate = self
         selectProvince.delegate = self
-        fetchAllCatagories()
-        registerProvinceChangeListener()
+        subscribeToUpdateCategories()
+        subscribeToCityandState()
+        fetchCatagories(nil)
     }
 
     override func viewDidDisappear(_ animated: Bool) {

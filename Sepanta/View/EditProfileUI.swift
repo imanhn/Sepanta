@@ -83,7 +83,7 @@ class EditProfileUI {
         views["rightFormView"]?.addSubview(views["birthDateView"]!)
         cursurY = cursurY + buttonHeight + marginY
         
-        (views["genderView"],texts["genderText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "genders", Selectable: true, PlaceHolderText: "جنسیت")
+        (views["genderView"],self.delegate.genderTextField) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "genders", Selectable: true, PlaceHolderText: "جنسیت")
         views["rightFormView"]?.addSubview(views["genderView"]!)
         cursurY = cursurY + buttonHeight + marginY
         
@@ -95,11 +95,11 @@ class EditProfileUI {
         views["rightFormView"]?.addSubview(views["emailView"]!)
         cursurY = cursurY + buttonHeight + marginY
         
-        (views["stateView"],texts["stateText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "map", Selectable: true, PlaceHolderText: "استان")
+        (views["stateView"],self.delegate.selectProvince) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "map", Selectable: true, PlaceHolderText: "استان")
         views["rightFormView"]?.addSubview(views["stateView"]!)
         cursurY = cursurY + buttonHeight + marginY
         
-        (views["cityView"],texts["cityText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "NOIMAGE", Selectable: true, PlaceHolderText: "شهر")
+        (views["cityView"],self.delegate.selectCity) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "NOIMAGE", Selectable: true, PlaceHolderText: "شهر")
         views["rightFormView"]?.addSubview(views["cityView"]!)
         cursurY = cursurY + buttonHeight + marginY
         

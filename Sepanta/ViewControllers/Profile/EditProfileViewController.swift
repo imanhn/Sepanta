@@ -11,13 +11,13 @@ import UIKit
 import Alamofire
 import RxAlamofire
 import RxSwift
-class EditProfileViewController : UIViewControllerWithKeyboardNotificationWithErrorBar,Storyboarded {
+class EditProfileViewController : UIViewControllerWithKeyboardNotificationWithErrorBar,Storyboarded,VCWithCityAndState {
     
     @IBOutlet weak var formView: UIView!
     @IBOutlet var topView: UIView!
-    weak var selectProvince: UnderLinedSelectableTextField!
-    weak var selectCity: UnderLinedSelectableTextField!
-    weak var genderTextField: UnderLinedSelectableTextField!
+    var selectProvince: UITextField?
+    var selectCity: UITextField?
+    weak var genderTextField: UITextField?
     weak var coordinator : HomeCoordinator?
     var editProfileUI : EditProfileUI! = EditProfileUI()
     var myDisposeBag = DisposeBag()
