@@ -20,6 +20,7 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
     let myDisposeBag  = DisposeBag()
     var groupButtons : SepantaGroupButtons?
     var catagories = [Catagory]()
+    var disposableArray = [Disposable]()
     @IBOutlet weak var sepantaScrollView: UIScrollView!
     @IBOutlet weak var selectCity: UnderLinedSelectableTextField!
     @IBOutlet weak var selectProvince: UnderLinedSelectableTextField!
@@ -29,8 +30,14 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
         self.coordinator!.openButtomMenu()
     }
     
+    @IBAction func homeTapped(_ sender: Any) {
+        self.groupButtons = nil
+        disposableArray.forEach{$0.dispose()}
+        self.coordinator!.popHome()
+    }
     @IBAction func backButtonTapped(_ sender: Any) {
         self.groupButtons = nil
+        disposableArray.forEach{$0.dispose()}
         self.coordinator!.popOneLevel()
     }
     
@@ -48,11 +55,6 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         return false
-        /*if textField == selectProvince || textField == selectCity {
-            return false
-        } else {
-            return true
-        }*/
     }
 
     @IBAction func provincePressed(_ sender: Any) {

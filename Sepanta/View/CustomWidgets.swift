@@ -293,6 +293,82 @@ class RoundedUIViewWithWhitePanel: UIView {
         
     }
 }
+enum TabViewJustification {
+    case Right
+    case Left
+}
+
+class TabbedViewWithWhitePanel : UIView{
+    var tabJust = TabViewJustification.Right
+    var curvSize : CGFloat = 5;
+    let movRight : CGFloat = 5;
+    let movLeft : CGFloat = 5;
+    let heightRatio :CGFloat = 6
+    
+    func getHeight()-> CGFloat {
+        return self.bounds.width / self.heightRatio
+    }
+    
+    override func draw(_ rect: CGRect) {
+        let context = UIGraphicsGetCurrentContext()
+        let tabbedButtonHeight :CGFloat = self.bounds.width / heightRatio
+        
+        if tabJust == TabViewJustification.Right {
+            context?.setLineWidth(1.0)
+            context?.setStrokeColor((UIColor( red: 0.84,     green: 0.84, blue:0.84, alpha: 1.0 )).cgColor)
+            context?.setFillColor((UIColor( red: 1.0,     green: 1.0, blue:1.0, alpha: 1.0 )).cgColor)
+            context?.move(to: CGPoint(x: curvSize, y: tabbedButtonHeight))
+            
+            context?.addLine(to: CGPoint(x: (self.bounds.width/2)+movRight, y: tabbedButtonHeight))
+            
+            context?.addLine(to: CGPoint(x: movRight+self.bounds.width/2, y: curvSize))
+            context?.addQuadCurve(to: CGPoint(x: movRight+self.bounds.width/2+curvSize, y: 0), control: CGPoint(x: (movRight+self.bounds.width/2), y: 0))
+            
+            
+            context?.addLine(to: CGPoint(x: self.bounds.width-curvSize, y: 0))
+            context?.addQuadCurve(to: CGPoint(x: self.bounds.width, y: curvSize), control: CGPoint(x: self.bounds.width, y: 0))
+            
+            context?.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height-2*curvSize))
+            context?.addQuadCurve(to: CGPoint(x: self.bounds.width-2*curvSize, y: self.bounds.height), control: CGPoint(x: self.bounds.width, y: self.bounds.height))
+            
+            context?.addLine(to: CGPoint(x: 2*curvSize, y: self.bounds.height))
+            context?.addQuadCurve(to: CGPoint(x: 0, y: self.bounds.height-2*curvSize), control: CGPoint(x: 0, y: self.bounds.height))
+            
+            context?.addLine(to: CGPoint(x: 0, y: tabbedButtonHeight+curvSize))
+            context?.addQuadCurve(to: CGPoint(x: curvSize, y: tabbedButtonHeight), control: CGPoint(x: 0, y: tabbedButtonHeight))
+        } else {
+            context?.setLineWidth(1.0)
+            context?.setStrokeColor((UIColor( red: 0.84,     green: 0.84, blue:0.84, alpha: 1.0 )).cgColor)
+            context?.setFillColor((UIColor( red: 1.0,     green: 1.0, blue:1.0, alpha: 1.0 )).cgColor)
+            
+            context?.move(to: CGPoint(x: curvSize, y: 0))
+            
+            context?.addLine(to: CGPoint(x: (self.bounds.width/2)-curvSize-movLeft, y: 0))
+            context?.addQuadCurve(to: CGPoint(x: (self.bounds.width/2)-movLeft, y: curvSize), control: CGPoint(x: (self.bounds.width/2)-movLeft, y: 0))
+            
+            context?.addLine(to: CGPoint(x: (self.bounds.width/2)-movLeft, y: tabbedButtonHeight - curvSize))
+            context?.addQuadCurve(to: CGPoint(x: self.bounds.width/2+curvSize-movLeft, y: tabbedButtonHeight), control: CGPoint(x: (self.bounds.width/2)-movLeft, y: tabbedButtonHeight))
+            
+            context?.addLine(to: CGPoint(x: (self.bounds.width)-curvSize, y: tabbedButtonHeight))
+            context?.addQuadCurve(to: CGPoint(x: self.bounds.width, y: tabbedButtonHeight+curvSize), control: CGPoint(x: self.bounds.width, y: tabbedButtonHeight))
+            
+            context?.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height-2*curvSize))
+            context?.addQuadCurve(to: CGPoint(x: self.bounds.width-2*curvSize, y: self.bounds.height), control: CGPoint(x: self.bounds.width, y: self.bounds.height))
+            
+            context?.addLine(to: CGPoint(x: 2*curvSize, y: self.bounds.height))
+            context?.addQuadCurve(to: CGPoint(x: 0, y: self.bounds.height-2*curvSize), control: CGPoint(x: 0, y: self.bounds.height))
+            
+            context?.addLine(to: CGPoint(x: 0, y: curvSize))
+            context?.addQuadCurve(to: CGPoint(x: curvSize, y: 0), control: CGPoint(x: 0, y: 0))
+
+        }
+        context?.closePath()
+        //context?.drawPath(using: CGPathDrawingMode.stroke)
+        context?.drawPath(using: CGPathDrawingMode.fillStroke)
+        
+    }
+}
+
 class RightTabbedViewWithWhitePanel: UIView {
     var curvSize : CGFloat = 5;
     let movRight : CGFloat = 5;

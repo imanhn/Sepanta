@@ -35,7 +35,7 @@ class AppCoordinator: Coordinator {
     func start() {
         if LoginKey.shared.isLoggedIn() {
             // Go to HomeViewController
-            let retriveResult = LoginKey.shared.retrieveTokenAndUserID()
+            /*let retriveResult*/ _ = LoginKey.shared.retrieveTokenAndUserID()
             //print("Already Logged in with token : ",LoginKey.shared.token," Retriving : ",retriveResult)
             mountTokenToHeaders()
             let homeCoordinator = HomeCoordinator(navigationController: navigationController)

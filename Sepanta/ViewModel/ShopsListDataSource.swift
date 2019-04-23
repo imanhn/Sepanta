@@ -18,20 +18,7 @@ class ShopsListDataSource {
     let myDisposeBag = DisposeBag()
     var fetchedShops = [Shop]()
     var shopProfiles = BehaviorRelay<[Profile]>(value: [])
-    /*
-    func updateFetchedShops(_ aProfileDicAsNS : NSDictionary){
-        for i in 0..<fetchedShops.count {
-            if aProfileDicAsNS["id"] != nil {
-                if fetchedShops[i].user_id == aProfileDicAsNS["id"] as! Int {
-                    fetchedShops[i].image = (aProfileDicAsNS["image"] as? String) ?? ""
-                    fetchedShops[i].followers = (aProfileDicAsNS["follower_count"] as? Int) ?? 0
-                    fetchedShops[i].dicount = (aProfileDicAsNS["shop_off"] as? Int) ?? 0
-                }
-            }
-        }
-        NetworkManager.shared.shopObs.accept(self.fetchedShops)
-    }
-    */
+
     func getShopListForACatagory(Catagory catagoryID:String,State state : String?,City city:String?){
         var aParameter : Dictionary<String, String> = [:]
         if (state == nil || state == "") && (city == nil || city == "") {

@@ -24,6 +24,11 @@ class EditProfileViewController : UIViewControllerWithKeyboardNotificationWithEr
     var imagePickerDelegate : EditProfileImagePicker!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var profilePicture: UIImageView!
+    @IBAction func homeTapped(_ sender: Any) {
+        editProfileUI = nil
+        imagePickerDelegate = nil
+        self.coordinator?.popHome()
+    }
     
     @IBAction func selectProfileImage(_ sender: Any) {
         if PHPhotoLibrary.authorizationStatus() != PHAuthorizationStatus.authorized {

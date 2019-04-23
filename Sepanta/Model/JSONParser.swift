@@ -100,14 +100,31 @@ class JSONParser {
                     print("Starting NewShops Parser...")
                     let parsedShops = self?.processShopList(Result: aDic)
                     NetworkManager.shared.shopObs.accept(parsedShops!)
+                } else if (apiName == "favorite") && (aMethod == HTTPMethod.get) {
+                    print("Starting List of Favorite Shop  Parser...")
+                    let parsedShops = self?.processFavShopList(Result: aDic)
+                    NetworkManager.shared.shopObs.accept(parsedShops!)
+                } else if (apiName == "favorite") && (aMethod == HTTPMethod.post) {
+                    print("Starting Toggle Favorite on a shop Parser...")
+                    let aToggle = self?.processFavAShopToggle(Result: aDic)
+                    NetworkManager.shared.shopFav.accept(aToggle!)
                 } else if (apiName == "profile-info") && (aMethod == HTTPMethod.get) {
-                    print("Starting profile-info Parser...")
+                    print("Starting to get profile-info from server and parse it...")
                     let parsedProfileInfo = self?.processProfileInfo(Result: aDic)
                     NetworkManager.shared.profileInfoObs.accept(parsedProfileInfo!)
                 } else if (apiName == "search-shops") && (aMethod == HTTPMethod.post) {
                     print("Starting search-shops Parser...")
                     let parsedShopSearchResults = self?.processShopSearchResultList(Result: aDic)
                     NetworkManager.shared.shopSearchResultObs.accept(parsedShopSearchResults!)
+                } else if (apiName == "shops-location") && (aMethod == HTTPMethod.post) {
+                    print("Starting shops-location Parser...")
+                    let parsedShopLocations = self?.processShopLocationsList(Result: aDic)
+                    NetworkManager.shared.shopObs.accept(parsedShopLocations!)
+                } else if (apiName == "notifications") && (aMethod == HTTPMethod.get) {
+                    print("Starting Notification Parser...")
+                    let (generalNotif,shopNotif) = (self?.processNotifications(Result: aDic))!
+                    NetworkManager.shared.shopNotifObs.accept(shopNotif)
+                    NetworkManager.shared.generalNotifObs.accept(generalNotif)
                 } else if (apiName == "home") && (aMethod == HTTPMethod.get) {
                 print("Starting Home Parser...")
                 self?.processAndSetHomeData(Result: aDic)
@@ -119,7 +136,120 @@ class JSONParser {
             ).disposed(by: netObjectsDispose)
     }
     
+    func processNotifications(Result aResult : NSDictionary) -> ([GeneralNotification],[ShopNotification]) {
+        var generalNotif = [GeneralNotification]()
+        var shopNotif = [ShopNotification]()
+        if aResult["notifications_user"] != nil {
+            if let notifs = aResult["notifications_user"] as? NSArray {
+                for anotif in notifs {
+                    if let aNSDic = anotif as? NSDictionary{
+                        var newShopNotif = ShopNotification()
+                        if let avalue = aNSDic["post_id"] { newShopNotif.post_id = avalue as? Int ?? 0}
+                        if let avalue = aNSDic["user_id"] { newShopNotif.user_id = avalue as? Int ?? 0}
+                        if let avalue = aNSDic["created_at"] { newShopNotif.created_at = avalue as? String ?? ""}
+                        if let avalue = aNSDic["shop_name"] { newShopNotif.shop_name = avalue as? String ?? ""}
+                        if let avalue = aNSDic["shop_image"] { newShopNotif.shop_image = avalue as? String ?? ""}
+                        if let avalue = aNSDic["post_image"] { newShopNotif.post_image = avalue as? String ?? ""}
+                        if let avalue = aNSDic["body"] { newShopNotif.body = avalue as? String ?? "پست جدید ما را ببینید"}
+                        shopNotif.append(newShopNotif)
+                    }
+                }
+            } else {
+                print("notifications_user can not be casted as array")
+            }
+        }else{
+            print("@@@ ERROR : Result does not contain >notification_user<")
+        }
+
+        if aResult["notifications_manager"] != nil {
+            if let notifs = aResult["notifications_manager"] as? NSArray {
+                for anotif in notifs {
+                    if let aNSDic = anotif as? NSDictionary{
+                        var newGeneralNotif = GeneralNotification()
+                        if let avalue = aNSDic["title"] { newGeneralNotif.title = avalue as? String ?? ""}
+                        if let avalue = aNSDic["body"] { newGeneralNotif.body = avalue as? String ?? "پست جدید ما را ببینید"}
+                        if let avalue = aNSDic["image"] { newGeneralNotif.image = avalue as? String ?? ""}
+                        generalNotif.append(newGeneralNotif)
+                    }
+                }
+            } else {
+                print("notifications_user can not be casted as array")
+            }
+        }else{
+            print("@@@ ERROR : Result does not contain >notification_user<")
+        }
+        return (generalNotif,shopNotif)
+    }
+    
+    func processShopLocationsList(Result aResult : NSDictionary) -> [Shop] {
+        var shops = [Shop]()
+        if aResult["error"] != nil {
+            print("ERROR in Shop List Parsing : ",aResult["error"]!)
+        }
+        if aResult["message"] != nil {
+            print("Message Parsed : ",aResult["message"]!)
+        }
+        
+        //print("Shop Result keys : ",aResult.allKeys)
+        //print("Result : ",aResult)
+        if let dataOfShops = aResult["shops"] as? NSArray{
+                for shopDic in dataOfShops
+                {
+                    if let shopElemAsNSDic = shopDic as? NSDictionary{                        
+                        if let shopElem = shopElemAsNSDic as? Dictionary<String, Any>{
+                            //print("shopElem : ",shopElem)
+                            if let uid = shopElem["user_id"] as? Int,
+                                let shopid = shopElem["shop_id"] as? Int
+                                {
+                                    let aNewShop = Shop(shop_id: shopid,
+                                                        user_id: uid,
+                                                        shop_name: shopElem["shop_name"] as? String ?? "",
+                                                        shop_off: shopElem["shop_off"] as? Int ?? 0,
+                                                        lat: (shopElem["lat"] as? String)?.toDouble(),
+                                                        long: (shopElem["lon"] as? String)?.toDouble(),
+                                                        image: shopElem["image"] as? String ?? "",
+                                                        rate: shopElem["rate"] as? String ?? "" ,
+                                                        follower_count: shopElem["follower_count"] as? Int ?? 0,
+                                                        created_at: shopElem["created_at"] as? String ?? "")
+                                    //print("UserID : \(uid) ShopID : \(shopid) Lat : \(aNewShop.lat) Long : \(aNewShop.long)")
+                                    shops.append(aNewShop)
+                            }
+                        }
+                    }else{
+                        print("shopElm not casted.")
+                    }
+                }
+        } else {
+            print("Parser for ShopLocation : Couldnt cast Result[shops]  ")
+            print("Shop Result keys : ",aResult.allKeys)
+            print("aResult[categoryShops] ",aResult["categoryShops"] ?? "EMPTY")
+        }
+        print("Shops Fetched : ",shops.count," record")
+        //print("Parsing State List Successful")
+        
+        return shops
+        
+    }
+
+    func processFavAShopToggle(Result aProfileDicAsNS : NSDictionary) -> ToggleStatus {
+        if aProfileDicAsNS["isFave"] == nil { return ToggleStatus.UNKNOWN}
+        
+        if let isFave = aProfileDicAsNS["isFave"] as? String {
+            if isFave == "1" {
+                return ToggleStatus.YES
+            }else if isFave == "0" {
+                return ToggleStatus.NO
+            }else{
+                return ToggleStatus.UNKNOWN
+            }
+        }
+        return ToggleStatus.UNKNOWN
+    }
+    
+    
     func processProfileInfo(Result aProfileDicAsNS : NSDictionary) -> ProfileInfo {
+        var maritalStatusStr = ""
+        var genderStr = ""
         var profileInfo = ProfileInfo()
         profileInfo.status = (aProfileDicAsNS["status"] as? String) ?? ""
         profileInfo.message = (aProfileDicAsNS["message"] as? String) ?? ""
@@ -131,10 +261,23 @@ class JSONParser {
         profileInfo.national_code = (aProfileDicAsNS["national_code"] as? String) ?? ""
         profileInfo.state = (aProfileDicAsNS["state"] as? String) ?? ""
         profileInfo.city = (aProfileDicAsNS["city"] as? String) ?? ""
-        profileInfo.gender = (aProfileDicAsNS["gender"] as? String) ?? ""
+        profileInfo.email = (aProfileDicAsNS["email"] as? String) ?? ""
+        profileInfo.birthdate = (aProfileDicAsNS["birthdate"] as? String) ?? ""
+        if let genderCode = aProfileDicAsNS["gender"] as? Int
+        {
+            if genderCode == 1 {genderStr = "مرد"} else if genderCode == 0 {genderStr = "زن"}
+            //print("genderStr : \(genderStr) from \(genderCode)")
+            profileInfo.gender = genderStr
+        }
+        
         profileInfo.birthdate = (aProfileDicAsNS["birthdate"] as? String) ?? ""
         profileInfo.email = (aProfileDicAsNS["email"] as? String) ?? ""
-        profileInfo.marital_status = (aProfileDicAsNS["marital_status"] as? String) ?? ""
+        if let maritalCode = aProfileDicAsNS["marital_status"] as? Int
+        {
+            if maritalCode == 1 {maritalStatusStr = "مجرد"} else if maritalCode == 2 {maritalStatusStr = "متاهل"}
+            //print("maritalStatusStr : \(maritalStatusStr) from \(maritalCode) ")
+            profileInfo.marital_status = maritalStatusStr
+        }
         //print("FULL ProfileInfo : ",profileInfo)
         return profileInfo
     }
@@ -181,7 +324,7 @@ class JSONParser {
     
     func processAsProfile(Result aProfileDicAsNS : NSDictionary) -> Profile {
         var profile = Profile()
-        print("*** FETCHED IMAGE PROFILE : ",aProfileDicAsNS["image"])
+        //print("*** FETCHED IMAGE PROFILE : ",aProfileDicAsNS["image"] ?? "Image Profile")
         //print("aProfileDicAsNS: ",aProfileDicAsNS)
         //print("aProfileDicAsNS Keys : ",aProfileDicAsNS.allKeys)
         if aProfileDicAsNS["id"] == nil || (aProfileDicAsNS["id"] as? Int) == 0 {
@@ -205,8 +348,8 @@ class JSONParser {
         profile.username = (aProfileDicAsNS["username"] as? String) ?? ""
         profile.fullName = (aProfileDicAsNS["fullName"] as? String) ?? ""
         profile.role = (aProfileDicAsNS["role"] as? String) ?? ""
-        profile.lat = (aProfileDicAsNS["lat"] as? Double) ?? 0
-        profile.long = (aProfileDicAsNS["long"] as? Double) ?? 0
+        profile.lat = (aProfileDicAsNS["lat"] as? String)?.toDouble()
+        profile.long = (aProfileDicAsNS["lon"] as? String)?.toDouble()
         profile.is_favorite = (aProfileDicAsNS["is_favorite"] as? Bool) ?? false
         profile.is_follow = (aProfileDicAsNS["is_follow"] as? Bool) ?? false
         profile.follow_count = (aProfileDicAsNS["follow_count"] as? Int) ?? 0
@@ -224,8 +367,8 @@ class JSONParser {
                     newShop.user_id = (aPostOrShop["user_id"] as? Int) ?? 0
                     newShop.shop_name = (aPostOrShop["shop_name"] as? String) ?? ""
                     newShop.shop_off = (aPostOrShop["shop_off"] as? Int) ?? 0
-                    newShop.lat = (aPostOrShop["lat"] as? Double) ?? 0
-                    newShop.long = (aPostOrShop["long"] as? Double) ?? 0
+                    newShop.lat = (aPostOrShop["lat"] as? String)?.toDouble()
+                    newShop.long = (aPostOrShop["lon"] as? String)?.toDouble()
                     if let oneImage = aPostOrShop["image"] as? String {
                         newShop.image = oneImage
                     }else if let dicImage = aPostOrShop["image"] as? NSDictionary {
@@ -370,6 +513,50 @@ class JSONParser {
         }
     }
     
+    func processFavShopList(Result aResult : NSDictionary) -> [Shop] {
+        var shops = [Shop]()
+        if aResult["error"] != nil {
+            print("ERROR in Shop List Parsing : ",aResult["error"]!)
+        }
+        if aResult["message"] != nil {
+            print("Message Parsed : ",aResult["message"]!)
+        }
+        
+        //print("Shop Result keys : ",aResult.allKeys)
+        //print("Result : ",aResult)
+        if let favShops = aResult["favorite"] as? NSArray{
+                for shopDic in favShops
+                {
+                    if let shopElemAsNSDic = shopDic as? NSDictionary{
+                        if let shopElem = shopElemAsNSDic as? Dictionary<String, Any>{
+                            //print("shopElem : ",shopElem)
+                            if shopElem["user_id"] != nil && shopElem["shop_id"] != nil {
+                                let aNewShop = Shop(shop_id: shopElem["shop_id"] as? Int ?? 0,
+                                                    user_id: shopElem["user_id"] as? Int ?? 0,
+                                                    shop_name: shopElem["shop_name"] as? String ?? "",
+                                                    shop_off: shopElem["shop_off"] as? Int ?? 0,
+                                                    lat: (shopElem["lat"] as? String)?.toDouble(),
+                                                    long: (shopElem["lon"] as? String)?.toDouble(),
+                                                    image: shopElem["image"] as? String ?? "",
+                                                    rate: shopElem["rate"] as? String ?? "" ,
+                                                    follower_count: shopElem["follower_count"] as? Int ?? 0,
+                                                    created_at: shopElem["created_at"] as? String ?? "")
+                                shops.append(aNewShop)
+                            }
+                        }
+                    }else{
+                        print("shopElm not casted.")
+                    }
+                }
+            } else{
+                print("aresult[shops or categoryShops][data] is empty or can not be casted")
+            }
+        print("Shops Fetched : ",shops.count," record")
+        //print("Parsing State List Successful")
+        
+        return shops
+        
+    }
     func processShopList(Result aResult : NSDictionary) -> [Shop] {
         var shops = [Shop]()
         if aResult["error"] != nil {
@@ -394,8 +581,8 @@ class JSONParser {
                                                     user_id: shopElem["user_id"] as? Int ?? 0,
                                                     shop_name: shopElem["shop_name"] as? String ?? "",
                                                     shop_off: shopElem["shop_off"] as? Int ?? 0,
-                                                    lat: shopElem["lat"] as? Double ?? 0.0,
-                                                    long: shopElem["long"] as? Double ?? 0.0,
+                                                    lat: (shopElem["lat"] as? String)?.toDouble(),
+                                                    long: (shopElem["lon"] as? String)?.toDouble(),
                                                     image: shopElem["image"] as? String ?? "",
                                                     rate: shopElem["rate"] as? String ?? "" ,
                                                     follower_count: shopElem["follower_count"] as? Int ?? 0,

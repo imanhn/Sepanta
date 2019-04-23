@@ -17,6 +17,11 @@ class AboutUsViewController : UIViewController,UITextFieldDelegate,Storyboarded{
     
     weak var coordinator : HomeCoordinator?
     
+    @IBAction func homeTapped(_ sender: Any) {
+        self.aboutUsUI = nil
+        self.coordinator!.popHome()
+    }
+    
     @IBAction func backToParent(_ sender: Any) {
          self.aboutUsUI = nil
         self.coordinator!.popOneLevel()

@@ -32,7 +32,7 @@ class SepantaGroupButtons {
         self.delegate.coordinator!.pushAGroup(GroupID: targetCatagory.id, GroupImage: targetCatagory.anUIImage.value, GroupName: targetCatagory.title,State: selectedState,City: selectedCity )
     }
         
-    func getCatagory(ByID  anID : Int)->Catagory{
+    func getCatagory(ByID  anID : Int)->Catagory{        
         for aCat in self.delegate.catagories {
             if aCat.id == anID {return aCat}
         }

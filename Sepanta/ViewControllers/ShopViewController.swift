@@ -21,6 +21,7 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     var shop : Shop!
     var shopUI : ShopUI!
     //var shopDataSource : ShopDataSource!
+    @IBOutlet weak var favButton: UIButton!
     
     @IBOutlet weak var shopImage: UIImageView!
     @IBOutlet weak var shopLogo: UIImageView!
@@ -42,24 +43,37 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     @IBOutlet weak var shopLogoTrailing: NSLayoutConstraint!
     @IBOutlet weak var shopLogoShopTitleDistance: NSLayoutConstraint!
     
-    
-    @IBAction func followTapped(_ sender: Any) {
-    }
-    
-    @IBAction func shareTapped(_ sender: Any) {
+    @IBAction func homeTapped(_ sender: Any) {
+        shopUI = nil
+        NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: Profile())
+        NetworkManager.shared.shopFav = BehaviorRelay<ToggleStatus>(value: ToggleStatus.UNKNOWN)
+        //shopDataSource = nil
+        self.coordinator!.popHome()
     }
     
     @IBAction func backTapped(_ sender: Any) {
         shopUI = nil
         NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: Profile())
+        NetworkManager.shared.shopFav = BehaviorRelay<ToggleStatus>(value: ToggleStatus.UNKNOWN)
         //shopDataSource = nil
         self.coordinator!.popOneLevel()
     }
     
     @IBAction func locationTapped(_ sender: Any) {
+        self.coordinator!.pushShopMap(self.shop)
     }
     
     @IBAction func favoriteTapped(_ sender: Any) {
+        //favButton
+        guard self.shop != nil else{
+            alert(Message: "اطلاعات فروشگاه ناقص است امکان اضافه به علاقه مندی ها وجود ندارد")
+            return
+        }
+        // Toggle Favorite the shop
+        let aParameter = ["shop_id":"\(self.shop.shop_id ?? 0)"]
+        NetworkManager.shared.run(API: "favorite", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
+        // Update Favorite list
+        NetworkManager.shared.run(API: "favorite", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil, WithRetry: false)
     }
     
     @objc func showPostTapped(_ sender : Any) {

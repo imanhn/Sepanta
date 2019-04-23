@@ -21,8 +21,9 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     @IBOutlet weak var currentImageView: AdImageView!
     @IBOutlet weak var leftImageView: AdImageView!
     @IBOutlet weak var rightImageView: AdImageView!
-    @IBAction func gotoFavourites(_ sender: Any) {
-        alert(Message: "علاقه مندی ها")
+    
+    @IBAction func gotoFavorites(_ sender: Any) {
+        self.coordinator!.pushFavoriteList()
     }
     
     @IBAction func searchTapped(_ sender: Any) {
@@ -31,7 +32,7 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     }
     
     @IBAction func gotoNotifications(_ sender: Any) {
-        alert(Message: "اعلانات")
+        self.coordinator!.pushNotifications()
     }
     
     @IBAction func gotoHelp(_ sender: Any) {
@@ -39,7 +40,7 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     }
     
     @IBAction func gotoMapNearestShop(_ sender: Any) {
-        alert(Message: "نمایش نقشه")
+        self.coordinator!.pushNearest()
     }
     
     @IBOutlet weak var searchTextField: CustomSearchBar!

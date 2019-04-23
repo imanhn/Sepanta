@@ -39,6 +39,11 @@ class ProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
         self.coordinator!.popOneLevel()
     }
     
+    @IBAction func homeTapped(_ sender: Any) {
+        showProfileUI = nil
+        self.coordinator!.popHome()
+    }
+    
     @objc func myClubTapped(_ sender : Any) {
         showProfileUI!.showMyClub()
     }

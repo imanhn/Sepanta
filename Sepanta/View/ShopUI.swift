@@ -191,6 +191,16 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     }
 
     func bindUIwithDataSource(){
+        NetworkManager.shared.shopFav
+            .filter({$0 != ToggleStatus.UNKNOWN})
+            .subscribe(onNext: { [unowned self] (favShopStatus) in
+                if favShopStatus == ToggleStatus.YES {
+                    self.delegate.favButton.setImage(UIImage(named: "icon_star_fav_dark"), for: .normal)
+                }else{
+                    self.delegate.favButton.setImage(UIImage(named: "icon_star_fav_gray"), for: .normal)
+                }
+            }).disposed(by: myDisposeBag)
+        
         NetworkManager.shared.profileObs
         .subscribe(onNext: { [unowned self] aProfile in
             //print("SUBSCRIPTION UPDATE",aProfile)
@@ -206,7 +216,13 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
             if rate > 3.5 {self.delegate.star4.image = UIImage(named: "icon_star_on")}
             if rate > 4.5 {self.delegate.star5.image = UIImage(named: "icon_star_on")}
             //print("ShopUI : setting shopui.posts to  :: ",aProfile.content)
-            self.posts.accept(aProfile.content as! [Post])
+            if let postContents = aProfile.content as? [Post] {
+                self.posts.accept(aProfile.content as! [Post])
+            }else{
+                print("aProfile.content has shops but expected to have posts")
+                self.delegate.alert(Message: "خطای داخلی اتفاق افتاده است")
+                return
+            }
             //print("Profile : ",aProfile)
             if aProfile.is_follow != nil  {
                 if aProfile.is_follow! {
@@ -215,6 +231,14 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 }else{
                     self.buttons["followButton"]!.setTitle("عضویت", for: .normal)
                     self.buttons["followButton"]!.setEnable()
+                }
+            }
+            
+            if aProfile.is_favorite != nil{
+                if aProfile.is_favorite! {
+                    self.delegate.favButton.setImage(UIImage(named: "icon_star_fav_dark"), for: .normal)
+                }else{
+                    self.delegate.favButton.setImage(UIImage(named: "icon_star_fav_gray"), for: .normal)
                 }
             }
             

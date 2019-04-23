@@ -17,25 +17,30 @@ import RxAlamofire
 extension SepantaGroupsViewController {
     
     func subscribeToUpdateCategories(){
-        self.currentStateCodeObs
+        
+        let stateDisp = self.currentStateCodeObs
             .filter({$0 != ""})
             .subscribe(onNext: { (innerCurrentState) in
                 let aParameter : Dictionary<String,String> = [
                     "state code" : innerCurrentState
                 ]
                 self.fetchCatagories(aParameter)
-            }).disposed(by: myDisposeBag)
+            })
+        stateDisp.disposed(by: myDisposeBag)
+        disposableArray.append(stateDisp)
         
-        self.currentCityCodeObs
+        let cityDisp = self.currentCityCodeObs
             .filter({$0 != ""})
             .subscribe(onNext: {  (innerCurrentCity) in
                 let aParameter : Dictionary<String, String> = [
                     "city_code": innerCurrentCity
                 ]
                 self.fetchCatagories(aParameter)
-            }).disposed(by: myDisposeBag)
+            })
+        cityDisp.disposed(by: myDisposeBag)
+        disposableArray.append(cityDisp)
         
-        NetworkManager.shared.catagoriesObs
+        let catDisp = NetworkManager.shared.catagoriesObs
             //.filter({$0.count > 0})
             .subscribe(onNext: { [unowned self] (innerCatagories) in
                 if innerCatagories.count > 0 {
@@ -63,12 +68,14 @@ extension SepantaGroupsViewController {
                     self.groupButtons?.createGroups(Catagories: self.catagories)
                     Spinner.stop()
                 }
-            }).disposed(by: myDisposeBag)
+            })
+        catDisp.disposed(by: myDisposeBag)
+        disposableArray.append(catDisp)
 
     }
     
     func subscribeToStateChange() {
-        NetworkManager.shared.provinceDictionaryObs
+        let provDisp = NetworkManager.shared.provinceDictionaryObs
             //.debug()
             .filter({$0.count > 0})
             .subscribe(onNext: { [weak self] (innerProvinceDicObs) in
@@ -82,7 +89,9 @@ extension SepantaGroupsViewController {
                 controller.preferredContentSize = CGSize(width: 250, height: innerProvinceDicObs.count*60)
                 Spinner.stop()
                 self?.showPopup(controller, sourceView: (self?.selectProvince!)!)
-                }).disposed(by: myDisposeBag)
+                })
+        provDisp.disposed(by: myDisposeBag)
+        disposableArray.append(provDisp)
 
     }
     

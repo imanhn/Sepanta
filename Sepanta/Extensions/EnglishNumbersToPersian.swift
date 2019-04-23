@@ -8,6 +8,39 @@
 
 import Foundation
 extension String {
+    func toDouble()->Double{
+        var result : String = "0"
+        var filtered = ""
+        for aChar in self {
+            switch aChar {
+            case "۱" : result = result + "1";break
+            case "۲" : result = result + "2";break
+            case "۳" : result = result + "3";break
+            case "۴" : result = result + "4";break
+            case "۵" : result = result + "5";break
+            case "۶" : result = result + "6";break
+            case "۷" : result = result + "7";break
+            case "۸" : result = result + "8";break
+            case "۹" : result = result + "9";break
+            case "۰" : result = result + "0";break
+            case "1" : result = result + "1";break
+            case "2" : result = result + "2";break
+            case "3" : result = result + "3";break
+            case "4" : result = result + "4";break
+            case "5" : result = result + "5";break
+            case "6" : result = result + "6";break
+            case "7" : result = result + "7";break
+            case "8" : result = result + "8";break
+            case "9" : result = result + "9";break
+            case "0" : result = result + "0";break
+            case "." : result = result + ".";break
+            default:
+                //print("Filtered >\(aChar)<")
+                filtered = filtered + "\(aChar)"
+            }
+        }
+        return Double(result)!
+    }
     func toPersianNumbers()->String{
         var result : String = ""
         var filtered = ""

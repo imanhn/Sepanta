@@ -64,9 +64,9 @@ class EditProfileUI : NSObject , UITextFieldDelegate{
             ])
             
             .subscribe(onNext: { (combinedTexts) in
-                //print("combinedTexts : ",combinedTexts)
+                print("combinedTexts : ",combinedTexts)
                 let mappedTextToBool = combinedTexts.map{$0 != nil && $0!.count > 0}
-                //print("mapped : ",mappedTextToBool)
+                print("mapped : ",mappedTextToBool)
                 let allTextFilled = mappedTextToBool.reduce(true, {$0 && $1})
                 if allTextFilled {
                     if !self.submitButton.isEnabled {
@@ -122,6 +122,13 @@ class EditProfileUI : NSObject , UITextFieldDelegate{
         texts["cityText"]!.text = aProfileInfo.city
         texts["regionText"]!.text = aProfileInfo.address
         texts["genderText"]!.text = aProfileInfo.gender
+        for akey in texts.keys{
+            if let aTextField = texts[akey]
+            {
+                //print("Sending Value Changed : ",akey,"   ",aTextField)
+                aTextField.sendActions(for: .valueChanged)
+            }
+        }
         //texts["**********"]!.text = aProfileInfo.bio
     }
 
@@ -141,12 +148,18 @@ class EditProfileUI : NSObject , UITextFieldDelegate{
     //Create Gradient on PageView
     @objc func sendEditedData(){
         //Submit data to server to change profile data and them back to profile view if required
+        var gender_code = "1" //مرد
+        if texts["genderText"]!.text == "زن" { gender_code = "0"}
+        var marital_status_code = "2"  //متاهل
+        if texts["maritalStatusText"]!.text == "مجرد" { marital_status_code = "1"}
+
         let aParameter = [
-            "last_name":"\(texts["familyText"]!.text ?? "")",
-            "first_name":"\(texts["nameText"]!.text ?? "")",
+            "lastname":"\(texts["familyText"]!.text ?? "")",
+            "firstname":"\(texts["nameText"]!.text ?? "")",
             "national_code":"\(texts["nationalCodeText"]!.text ?? "")",
             "birthdate":"\(texts["birthDateText"]!.text ?? "")",
-            "marital_status":"\(texts["maritalStatusText"]!.text ?? "")",
+            "marital_status":"\(marital_status_code)",
+            "gender":"\(gender_code)",
             "email":"\(texts["emailText"]!.text ?? "")",
             "state":"\(texts["stateText"]!.text ?? "")",
             "city":"\(texts["cityText"]!.text ?? "")",

@@ -63,7 +63,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>لطفا مجوز دسترسی به عکسها را بدهید</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>لطفا مجوز دسترسی به عکسها را بدهید</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>برنامه نیاز به مجوز شما جهت دسترسی به موقعیت شما دارد</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>برنامه نیاز به مجوز شما جهت دسترسی به موقعیت شما دارد</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>برنامه نیاز به مجوز شما جهت دسترسی به موقعیت شما دارد</string>
 </dict>
 </plist>

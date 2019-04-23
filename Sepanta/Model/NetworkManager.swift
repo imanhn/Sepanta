@@ -20,6 +20,12 @@ enum CallStatus {
     case IncompleteData
 }
 
+enum ToggleStatus {
+    case YES
+    case NO
+    case UNKNOWN
+}
+
 class NetworkManager {
     
     // MARK: - Properties
@@ -32,7 +38,7 @@ class NetworkManager {
     let baseURLString: String
     let websiteRootAddress = "http://www.ipsepanta.ir"
     var status = BehaviorRelay<CallStatus>(value: CallStatus.ready) //No used Yet
-    
+    var shopFav = BehaviorRelay<ToggleStatus>(value: ToggleStatus.UNKNOWN)
     let netObjectsDispose = DisposeBag()
     var headers : HTTPHeaders
     var statusMessage : String
@@ -49,6 +55,8 @@ class NetworkManager {
     var shopSearchResultObs = BehaviorRelay<[ShopSearchResult]>(value: [ShopSearchResult]())
     var profileObs = BehaviorRelay<Profile>(value: Profile())
     var profileInfoObs = BehaviorRelay<ProfileInfo>(value: ProfileInfo())
+    var shopNotifObs = BehaviorRelay<[ShopNotification]>(value: [ShopNotification]())
+    var generalNotifObs = BehaviorRelay<[GeneralNotification]>(value: [GeneralNotification]())
     // Initialization
     
     private init() {

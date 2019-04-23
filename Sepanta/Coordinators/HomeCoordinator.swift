@@ -42,6 +42,10 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
             popHome()
             pushSepantaieGroup()
             break
+        case 2:
+            popHome()
+            pushNearest()
+            break
         case 3:
             popHome()
             pushNewShops()
@@ -53,6 +57,10 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         case 5:
             popHome()
             pushAboutUs()
+            break
+        case 6:
+            popHome()
+            pushContactUs()
             break
 
         default:
@@ -168,7 +176,51 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
-
+    
+    func pushFavoriteList(){
+        let storyboard = UIStoryboard(name: "Favorite", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "FavoriteViewController") as! FavoriteViewController
+        vc.coordinator = self
+        
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+    
+    func pushNotifications(){
+        let storyboard = UIStoryboard(name: "Notifications", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "NotificationsViewController") as! NotificationsViewController
+        vc.coordinator = self
+        
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+    
+    func pushNearest(){        
+        let storyboard = UIStoryboard(name: "Map", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "NearestViewController") as! NearestViewController
+        vc.coordinator = self
+        vc.mapMode = MapType.NearbyShops
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+    func pushShopMap(_ ashop : Shop){
+        let storyboard = UIStoryboard(name: "Map", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "NearestViewController") as! NearestViewController
+        vc.coordinator = self
+        vc.mapMode = MapType.SingleShop
+        vc.shopToShow = ashop
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+    
+    func pushContactUs(){
+        
+    }
+    
     func logout() {
         LoginKey.shared.deleteTokenAndUserID()
         if self.parentCoordinator != nil{
