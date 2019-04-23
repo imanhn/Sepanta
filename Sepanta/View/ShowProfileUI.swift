@@ -41,7 +41,7 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
         //print("reseller Request : ",views["leftFormView"] ?? "Nil")
         if views["leftFormView"] != nil && views["leftFormView"]?.superview != nil { views["leftFormView"]?.removeFromSuperview()}
         var cursurY : CGFloat = 0
-        let marginY : CGFloat = 20
+        let marginY : CGFloat = 10
         let marginX : CGFloat = 10
         
         //self.delegate.paneView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: (UIScreen.main.bounds.height * 2)+40)
@@ -156,7 +156,7 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
         //print("Card Request  : ",views["rightFormView"]!,"  SuperView : ",views["rightFormView"]!.superview ?? "Nil")
         if views["rightFormView"]?.superview != nil { views["rightFormView"]?.removeFromSuperview()}
         var cursurY : CGFloat = 0
-        let marginY : CGFloat = 20
+        let marginY : CGFloat = 10
         let marginX : CGFloat = 10
         views["leftFormView"] = LeftTabbedView(frame: CGRect(x: marginX, y: marginY, width: self.delegate.paneView.frame.width-2*marginX, height: self.delegate.paneView.frame.height-marginY))
         views["leftFormView"]!.backgroundColor = UIColor.clear

@@ -118,6 +118,7 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
     
     func showSingleShop(){
         print("Single Mode : ",shopToShow)
+        mapView.removeAnnotations(mapView.annotations)
         if shopToShow != nil {
             let aShopAnnotation = MapAnnotation(WithShop: shopToShow!)
             self.mapView.addAnnotation(aShopAnnotation)

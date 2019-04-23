@@ -206,6 +206,29 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
+    func pushShopMapOrPopMapVC(_ ashop : Shop){
+        var isMapLoaded = false
+        for avc in navigationController.viewControllers
+        {
+            if avc.isKind(of: NearestViewController.self) {
+                print("In Memory!")
+                isMapLoaded = true
+            }
+        }
+        if isMapLoaded {
+            while !navigationController.topViewController!.isKind(of: NearestViewController.self) {
+                print("Poping ",navigationController.topViewController ?? "Nil")
+                navigationController.popViewController(animated: true)
+            }
+            let mapVC = (navigationController.topViewController as! NearestViewController)
+            mapVC.shopToShow = ashop
+            mapVC.showSingleShop()
+        }else{
+            self.pushShopMap(ashop)
+        }
+
+    }
+    
     func pushShopMap(_ ashop : Shop){
         let storyboard = UIStoryboard(name: "Map", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "NearestViewController") as! NearestViewController

@@ -60,7 +60,7 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     }
     
     @IBAction func locationTapped(_ sender: Any) {
-        self.coordinator!.pushShopMap(self.shop)
+        self.coordinator!.pushShopMapOrPopMapVC(self.shop)
     }
     
     @IBAction func favoriteTapped(_ sender: Any) {
