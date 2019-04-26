@@ -2,7 +2,7 @@
 //  ProfileInfo.swift
 //  Sepanta
 //
-//  Created by Iman on 2/1/1398 AP.
+//  Created by Iman on 2/4/1398 AP.
 //  Copyright © 1398 AP Imzich. All rights reserved.
 //
 
@@ -22,5 +22,9 @@ struct ProfileInfo {
     var gender: String?
     var birthdate : String?
     var email : String?
+    var phone : String?
     var marital_status : String?
+    init(){
+        
+    }
 }

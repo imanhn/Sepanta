@@ -29,6 +29,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     var collectionView : UICollectionView!
     var posts = BehaviorRelay<[Post]>(value: [Post]())
     let numberOfPostInARow : CGFloat = 4
+    var isShop : Bool
     /*
     {
         didSet {
@@ -44,6 +45,14 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
    */
     init(_ vc : ShopViewController) {
         self.delegate = vc
+        if  LoginKey.shared.role.uppercased() == "SHOP" || LoginKey.shared.role.uppercased() == "OPTIONAL(SHOP)" ||
+            LoginKey.shared.role.uppercased() == "SELLER" || LoginKey.shared.role.uppercased() == "OPTIONAL(SELLER)" {
+            isShop = true
+        }else
+        {
+            isShop = false
+        }
+        isShop = true
         super.init()
         showShopPosts()
         buildPostToolbar()
@@ -108,8 +117,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         let viewWidth = self.delegate.PostToolbarView.frame.width
         let viewHeight = self.delegate.PostToolbarView.frame.height
         let buttonDim = viewHeight - (2 * marginY)
-        if LoginKey.shared.role.uppercased() == "SHOP" || LoginKey.shared.role.uppercased() == "OPTIONAL(SHOP)" ||
-            LoginKey.shared.role.uppercased() == "SELLER" || LoginKey.shared.role.uppercased() == "OPTIONAL(SELLER)"{
+        if isShop {
             
             buttons["shareButton"] = RoundedButton(type: .custom)
             var xCursor = leadingMarginX
@@ -120,7 +128,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
             self.delegate.PostToolbarView.addSubview(buttons["shareButton"]!)
 
             xCursor = xCursor + marginXBTWButtons + buttonDim
-            buttons["addButton"]! = UIButton(type: .custom)
+            buttons["addButton"] = UIButton(type: .custom)
             buttons["addButton"]!.frame = CGRect(x: xCursor, y: marginY, width: buttonDim, height: buttonDim)
             buttons["addButton"]!.layer.cornerRadius = 5
             buttons["addButton"]!.layer.borderColor = UIColor(hex: 0xDA3A5C).cgColor
@@ -152,7 +160,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
             buttons["newPostButton"]!.addTarget(self, action: #selector(newPostTapped), for: .touchUpInside)
             self.delegate.PostToolbarView.addSubview(buttons["newPostButton"]!)
             
-        }else if LoginKey.shared.role.uppercased() == "USER" || LoginKey.shared.role.uppercased() == "OPTIONAL(USER)"{
+        }else{
             buttons["shareButton"] = RoundedButton(type: .custom)
             var xCursor = leadingMarginX
             buttons["shareButton"]!.frame = CGRect(x: xCursor, y: marginY, width: buttonDim, height: buttonDim)
@@ -164,20 +172,12 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
             xCursor = xCursor + marginXBTWButtons + buttonDim
             let totalTrailingDistanceToRight = self.delegate.shopLogoTrailing.constant + self.delegate.shopLogoShopTitleDistance.constant + self.delegate.shopLogo.frame.width
             let buttonWidth = viewWidth - xCursor - totalTrailingDistanceToRight
-            buttons["followButton"] = RoundedButton(type: .custom)
+            buttons["followButton"] = SubmitButton(type: .custom)
             buttons["followButton"]!.frame = CGRect(x: xCursor, y: marginY, width: buttonWidth, height: buttonDim)
-            buttons["followButton"]!.setImage(UIImage(named: "icon_tick_white"), for: .normal)
             buttons["followButton"]!.setTitle("بررسی عضویت...", for: .normal)
-            buttons["followButton"]!.setTitleColor(UIColor(hex: 0xFFFFFF), for: .normal)
-            buttons["followButton"]!.titleLabel?.font = UIFont(name: "Shabnam-FD", size: 16)
-            buttons["followButton"]!.semanticContentAttribute = .forceRightToLeft
-            buttons["followButton"]!.imageEdgeInsets = UIEdgeInsetsMake(0, buttonDim/2, 0, 0)
             buttons["followButton"]!.addTarget(self, action: #selector(followTapped), for: .touchUpInside)
             buttons["followButton"]!.setDisable()
             self.delegate.PostToolbarView.addSubview(buttons["followButton"]!)
-
-        }else{
-            print("ShopUI: Code shouldn't reach here!,No Role Found : >\(LoginKey.shared.role.uppercased())<")
         }
         
     }
@@ -224,13 +224,15 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 return
             }
             //print("Profile : ",aProfile)
-            if aProfile.is_follow != nil  {
-                if aProfile.is_follow! {
-                    self.buttons["followButton"]!.setTitle("عضو شده اید", for: .normal)
-                    self.buttons["followButton"]!.setEnable()
-                }else{
-                    self.buttons["followButton"]!.setTitle("عضویت", for: .normal)
-                    self.buttons["followButton"]!.setEnable()
+            if !self.isShop {
+                if aProfile.is_follow != nil  {
+                    if aProfile.is_follow! {
+                        self.buttons["followButton"]!.setTitle("عضو شده اید", for: .normal)
+                        self.buttons["followButton"]!.setEnable()
+                    }else{
+                        self.buttons["followButton"]!.setTitle("عضویت", for: .normal)
+                        self.buttons["followButton"]!.setEnable()
+                    }
                 }
             }
             

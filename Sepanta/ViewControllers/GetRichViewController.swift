@@ -12,6 +12,7 @@ import RxSwift
 
 class GetRichViewController : UIViewControllerWithKeyboardNotificationWithErrorBar,UITextFieldDelegate,Storyboarded{
    var myDisposeBag = DisposeBag()
+    var profileInfo : ProfileInfo?
     @IBOutlet weak var scrollView: UIScrollView!
     var getRichUI : GetRichUI?
     
@@ -53,6 +54,14 @@ class GetRichViewController : UIViewControllerWithKeyboardNotificationWithErrorB
         self.getRichUI = nil
     }
     
+    func showPopup(_ controller: UIViewController, sourceView: UIView) {
+        //print("Showing POPUP : ",sourceView)
+        let presentationController = AlwaysPresentAsPopover.configurePresentation(forController: controller)
+        presentationController.sourceView = sourceView
+        presentationController.sourceRect = sourceView.bounds
+        presentationController.permittedArrowDirections = [.down, .up]
+        self.present(controller, animated: true)
+    }
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)

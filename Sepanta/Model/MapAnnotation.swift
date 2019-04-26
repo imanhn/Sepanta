@@ -14,11 +14,13 @@ class MapAnnotation : NSObject,MKAnnotation{
     var title: String?
     var subtitle: String?
     var userId: Int?
+    var shop : Shop?
     init(WithShop aShop : Shop){
         super.init()
         self.title = aShop.shop_name ?? "بدون نام"
         self.subtitle = aShop.shop_name ?? "بدون نام"
         self.userId = aShop.user_id ?? 0
+        self.shop = aShop
         self.coordinate = CLLocationCoordinate2D(latitude: aShop.lat ?? 35.765985, longitude: aShop.long ?? 51.546742)
         //print("NEW : ",self.coordinate,"  ",self.title)
     }

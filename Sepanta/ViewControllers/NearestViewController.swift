@@ -81,11 +81,7 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
         myLocation = manager.location!
     }
     
-    @objc func pushShop(_ sender : Any){
-        let ashop = Shop(shop_id: nil, user_id: (sender as! UIButton).tag, shop_name: nil, shop_off: nil, lat: nil, long: nil, image: nil, rate: nil, follower_count: nil, created_at: nil)
-        print("Pushing ",ashop)
-        self.coordinator!.pushShop(Shop: ashop)
-    }
+
     
     func getNearByShops(){
         let aParameter = ["lat":"\(myLocation.coordinate.latitude)",
@@ -117,12 +113,12 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
     }
     
     func showSingleShop(){
-        print("Single Mode : ",shopToShow)
+        //print("Single Mode : ",shopToShow)
         mapView.removeAnnotations(mapView.annotations)
         if shopToShow != nil {
             let aShopAnnotation = MapAnnotation(WithShop: shopToShow!)
             self.mapView.addAnnotation(aShopAnnotation)
-            print("Adding label : ",aShopAnnotation.coordinate)
+            //print("Adding label : ",aShopAnnotation.coordinate)
             centerMapOnLocation(Coordinate: aShopAnnotation.coordinate)
         }
     }
@@ -137,12 +133,12 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
         
         switch mapMode {
         case MapType.NearbyShops?:
-            print("Showing nearby Shops")
+            //print("Showing nearby Shops")
             getNearByShops()
             centerMapOnLocation(Coordinate: myLocation.coordinate)
             break
         case MapType.SingleShop?:
-            print("Showing single shop")
+            //print("Showing single shop")
             showSingleShop()
             break
         default:

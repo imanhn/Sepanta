@@ -27,6 +27,7 @@
 		0F1B75692238498E0087C0DB /* CacheImageForViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B75682238498E0087C0DB /* CacheImageForViews.swift */; };
 		0F237E1F2267654B004CC7BC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F237E1E2267654B004CC7BC /* SearchViewController.swift */; };
 		0F237E41226783CF004CC7BC /* Shabnam-Light-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F237E3E226783C9004CC7BC /* Shabnam-Light-FD.ttf */; };
+		0F3197B32270BD8F00CEF207 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3197B22270BD8F00CEF207 /* Bank.swift */; };
 		0F4D29E42267617100BFD425 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F4D29E32267617100BFD425 /* Search.storyboard */; };
 		0F50AE72226F61110028D8B6 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F50AE71226F61110028D8B6 /* MapAnnotation.swift */; };
 		0F50AE74226F66950028D8B6 /* MapViewAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F50AE73226F66950028D8B6 /* MapViewAnnotations.swift */; };
@@ -34,7 +35,7 @@
 		0F67F75A224CD00300659842 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67F759224CD00300659842 /* Post.swift */; };
 		0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */; };
 		0F70A647226B97650020C33C /* EditProfileImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F70A646226B97650020C33C /* EditProfileImagePicker.swift */; };
-		0F70A649226BC7BF0020C33C /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F70A648226BC7BF0020C33C /* ProfileInfo.swift */; };
+		0F70A649226BC7BF0020C33C /* ProfileInfoWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F70A648226BC7BF0020C33C /* ProfileInfoWrapper.swift */; };
 		0F71A38B2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F71A38A2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift */; };
 		0F71A38F22319A2000F4EB6B /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F71A38E22319A2000F4EB6B /* Alert.swift */; };
 		0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */; };
@@ -70,6 +71,7 @@
 		0FB3ECD2222DC48F009A89F7 /* GetRichViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB3ECD1222DC48F009A89F7 /* GetRichViewController.swift */; };
 		0FD094AA226E34C600E53A07 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FD094A9226E34C600E53A07 /* Map.storyboard */; };
 		0FD094AC226E370B00E53A07 /* NearestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD094AB226E370B00E53A07 /* NearestViewController.swift */; };
+		0FD32DCB227076C40092D6FC /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD32DCA227076C40092D6FC /* ProfileInfo.swift */; };
 		0FDA55D32225A0A000E7C889 /* NSDictionaryToDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDA55D22225A0A000E7C889 /* NSDictionaryToDictionary.swift */; };
 		0FDA55D52225C02800E7C889 /* Catagory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDA55D42225C02800E7C889 /* Catagory.swift */; };
 		0FDA55D722260FFE00E7C889 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDA55D622260FFE00E7C889 /* GroupViewController.swift */; };
@@ -132,6 +134,7 @@
 		0F1B75682238498E0087C0DB /* CacheImageForViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImageForViews.swift; sourceTree = "<group>"; };
 		0F237E1E2267654B004CC7BC /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		0F237E3E226783C9004CC7BC /* Shabnam-Light-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shabnam-Light-FD.ttf"; sourceTree = "<group>"; };
+		0F3197B22270BD8F00CEF207 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		0F4D29E32267617100BFD425 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		0F50AE71226F61110028D8B6 /* MapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		0F50AE73226F66950028D8B6 /* MapViewAnnotations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewAnnotations.swift; sourceTree = "<group>"; };
@@ -142,7 +145,7 @@
 		0F6F39C722079FB600393CD7 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		0F70A645226B8ABB0020C33C /* Sepanta-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sepanta-Bridging-Header.h"; sourceTree = "<group>"; };
 		0F70A646226B97650020C33C /* EditProfileImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileImagePicker.swift; sourceTree = "<group>"; };
-		0F70A648226BC7BF0020C33C /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
+		0F70A648226BC7BF0020C33C /* ProfileInfoWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoWrapper.swift; sourceTree = "<group>"; };
 		0F71A38A2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerWithKeyboardNotification.swift; sourceTree = "<group>"; };
 		0F71A38E22319A2000F4EB6B /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysShowPopup.swift; sourceTree = "<group>"; };
@@ -178,6 +181,7 @@
 		0FB3ECD1222DC48F009A89F7 /* GetRichViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRichViewController.swift; sourceTree = "<group>"; };
 		0FD094A9226E34C600E53A07 /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		0FD094AB226E370B00E53A07 /* NearestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestViewController.swift; sourceTree = "<group>"; };
+		0FD32DCA227076C40092D6FC /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
 		0FD7BEB922120820007B7244 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Pods/FirebaseInstanceID/Frameworks/FirebaseInstanceID.framework; sourceTree = "<group>"; };
 		0FD7BEBB221208A4007B7244 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Pods/FirebaseCore/Frameworks/FirebaseCore.framework; sourceTree = "<group>"; };
 		0FDA55D22225A0A000E7C889 /* NSDictionaryToDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDictionaryToDictionary.swift; sourceTree = "<group>"; };
@@ -328,6 +332,7 @@
 			children = (
 				0F890D0D2215C7170091FA2E /* NetworkManager.swift */,
 				0F890D112215D21C0091FA2E /* JSONParser.swift */,
+				0F3197B22270BD8F00CEF207 /* Bank.swift */,
 				0FFCDC53226CA96F0087BFEF /* Notifications.swift */,
 				0F1B755E2235C8460087C0DB /* Slide.swift */,
 				0F052ED8221AE8C5009175EA /* LoginKey.swift */,
@@ -335,7 +340,8 @@
 				0FDA55D42225C02800E7C889 /* Catagory.swift */,
 				0FA307DD222700B100EDA829 /* Shop.swift */,
 				0F817A6E22354F8600F1738E /* Profile.swift */,
-				0F70A648226BC7BF0020C33C /* ProfileInfo.swift */,
+				0F70A648226BC7BF0020C33C /* ProfileInfoWrapper.swift */,
+				0FD32DCA227076C40092D6FC /* ProfileInfo.swift */,
 				0FAE1FF2226332D20043B077 /* CreditCard.swift */,
 				0F67F759224CD00300659842 /* Post.swift */,
 				0F0661B3225BF93E00A83734 /* Comment.swift */,
@@ -383,12 +389,12 @@
 		0F9BCFC6222201B600C87706 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */,
 				0F9BCFC42221FCCF00C87706 /* SlideControl.swift */,
 				0F9BCFC7222317E900C87706 /* SepantaGroupButtons.swift */,
 				0FAEEDE82230957100A9178F /* AboutUsUI.swift */,
 				0FAEEDE4222F29C600A9178F /* GetRichUI.swift */,
 				0F817A6C22346BAF00F1738E /* EditProfileUI.swift */,
-				0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */,
 				0FFCF613221811FC0040A7DC /* Spinner.swift */,
 				0F817A6822341D8E00F1738E /* ShowProfileUI.swift */,
 				0F1B75642236E42A0087C0DB /* ShopUI.swift */,
@@ -717,7 +723,7 @@
 				0F1B75632236E39B0087C0DB /* ShopViewController.swift in Sources */,
 				0F066F95222B19AB00C8871C /* UIViewRotate.swift in Sources */,
 				0FFCDC4A226C77F50087BFEF /* FavoriteViewController.swift in Sources */,
-				0F70A649226BC7BF0020C33C /* ProfileInfo.swift in Sources */,
+				0F70A649226BC7BF0020C33C /* ProfileInfoWrapper.swift in Sources */,
 				0FAE1FFF226745780043B077 /* XIBView.swift in Sources */,
 				0F70A647226B97650020C33C /* EditProfileImagePicker.swift in Sources */,
 				0F066F93222B198900C8871C /* UIColorFromHex.swift in Sources */,
@@ -745,6 +751,7 @@
 				0F67F75A224CD00300659842 /* Post.swift in Sources */,
 				0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */,
 				0F8571F0225CC5B50056D062 /* UIViewControllerWithErrorBar.swift in Sources */,
+				0F3197B32270BD8F00CEF207 /* Bank.swift in Sources */,
 				0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */,
 				0F052EDB221C0790009175EA /* HomeCoordinator.swift in Sources */,
 				0FE8BA042205082100C868C3 /* SMSConfirmViewController.swift in Sources */,
@@ -763,6 +770,7 @@
 				0FDA55D52225C02800E7C889 /* Catagory.swift in Sources */,
 				0F066F9D222C2D5600C8871C /* MenuPopUpConfiguration.swift in Sources */,
 				0F066F99222C22EE00C8871C /* MenuController.swift in Sources */,
+				0FD32DCB227076C40092D6FC /* ProfileInfo.swift in Sources */,
 				0F0661AD2257E62400A83734 /* SepantaGroupsSubscription.swift in Sources */,
 				0FAEEDE72230949C00A9178F /* AboutUsViewController.swift in Sources */,
 				0F890D022214B5310091FA2E /* AppCoordinator.swift in Sources */,

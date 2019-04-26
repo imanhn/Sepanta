@@ -266,6 +266,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     
     func start() {
         _ = SlidesAndPaths.shared
+        _ = ProfileInfoWrapper.shared
         let vc = HomeViewController.instantiate()
         vc.coordinator = self
         navigationController.delegate = self

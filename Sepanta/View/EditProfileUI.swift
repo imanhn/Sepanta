@@ -13,9 +13,11 @@ import Alamofire
 import RxCocoa
 import RxSwift
 
+
 //extension  GetRichViewController {
-class EditProfileUI : NSObject , UITextFieldDelegate{
-    var delegate : EditProfileViewController!
+class EditProfileUI :  NSObject, UITextFieldDelegate{
+
+    var delegate : EditProfileViewController
     var views = Dictionary<String,UIView>()
     var texts = Dictionary<String,UITextField>()
     var labels = Dictionary<String,UILabel>()
@@ -24,6 +26,7 @@ class EditProfileUI : NSObject , UITextFieldDelegate{
     var submitButton = UIButton(type: .custom)
     var stateCode : String!
     var cityCode : String!
+    var disposeList = [Disposable]()
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -64,9 +67,9 @@ class EditProfileUI : NSObject , UITextFieldDelegate{
             ])
             
             .subscribe(onNext: { (combinedTexts) in
-                print("combinedTexts : ",combinedTexts)
+                //print("combinedTexts : ",combinedTexts)
                 let mappedTextToBool = combinedTexts.map{$0 != nil && $0!.count > 0}
-                print("mapped : ",mappedTextToBool)
+                //print("mapped : ",mappedTextToBool)
                 let allTextFilled = mappedTextToBool.reduce(true, {$0 && $1})
                 if allTextFilled {
                     if !self.submitButton.isEnabled {
@@ -84,8 +87,9 @@ class EditProfileUI : NSObject , UITextFieldDelegate{
     func getAndSubscribeToProfileInfo(){
         //let aParameter = ["user id":"\(LoginKey.shared.userID)"]
         NetworkManager.shared.run(API: "profile-info", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
-        NetworkManager.shared.profileInfoObs
+        ProfileInfoWrapper.shared.profileInfoObs
             .subscribe(onNext: { [unowned self] (aProfileInfo) in
+                //print("***FillingEDit")
                 self.fillEditProfileForm(With: aProfileInfo)
             }).disposed(by: self.delegate.myDisposeBag)
     }
@@ -170,7 +174,7 @@ class EditProfileUI : NSObject , UITextFieldDelegate{
             .filter({$0 == true})
             .subscribe(onNext: { [unowned self] (succeed) in
                 self.delegate.alert(Message: "اطلاعات پروفایل شما بروز شد")
-                NetworkManager.shared.updateProfileInfoSuccessful = BehaviorRelay<Bool>(value: false)
+                NetworkManager.shared.updateProfileInfoSuccessful = BehaviorRelay<Bool>(value: false)                
             }).disposed(by: self.delegate.myDisposeBag)
     }
     
@@ -250,25 +254,12 @@ class EditProfileUI : NSObject , UITextFieldDelegate{
         cursurY = cursurY + buttonHeight + buttonHeight
 
         
-        submitButton = RoundedButton(type: .custom)
+        submitButton = SubmitButton(type: .custom)
         submitButton.frame = CGRect(x: marginX+(textFieldWidth/2)-1.5*buttonHeight, y: cursurY, width: 3*buttonHeight, height: buttonHeight)
-        submitButton.setEnable()
-        //submitButton.backgroundColor = UIColor.white
-        
-        //submitButton.setImage(UIImage(named: "icon_tick_black"), for: .normal)
-        //submitButton.setTitleColor(UIColor(hex: 0xD6D7D9), for: .normal)
-        
-        submitButton.setTitleColor(UIColor.white, for: .normal)
-        submitButton.setImage(UIImage(named: "icon_tick_white"), for: .normal)
-        
         submitButton.setTitle("تایید", for: .normal)
-        submitButton.semanticContentAttribute = .forceRightToLeft
-        submitButton.titleLabel?.font = UIFont(name: "Shabnam-FD", size: 16)
         submitButton.addTarget(self, action: #selector(sendEditedData), for: .touchUpInside)
+        submitButton.setEnable()
         
-        
-        submitButton.contentMode = .scaleAspectFit
-        submitButton.imageEdgeInsets = UIEdgeInsetsMake(0, buttonHeight/2, 0, 0)
         views["rightFormView"]?.addSubview(submitButton)
         cursurY = cursurY + buttonHeight + (1 * marginY)
         
@@ -321,37 +312,43 @@ class EditProfileUI : NSObject , UITextFieldDelegate{
             "state code": self.stateCode!
         ]
         NetworkManager.shared.run(API: "get-state-and-city",QueryString: "", Method: HTTPMethod.post, Parameters: parameters, Header: nil,WithRetry: true)
-        NetworkManager.shared.cityDictionaryObs
+        let cityDispose = NetworkManager.shared.cityDictionaryObs
             .filter({$0.count > 0})
             .subscribe(onNext: { [unowned self] (innerCityDicObs) in
                 let controller = ArrayChoiceTableViewController(innerCityDicObs.keys.sorted(){$0 < $1}) {
                     (selectedOption) in
                     aTextField.text = selectedOption
                     aTextField.sendActions(for: .valueChanged)
-                    self.stateCode = innerCityDicObs[selectedOption]
+                    self.cityCode = innerCityDicObs[selectedOption]
                 }
                 controller.preferredContentSize = CGSize(width: 250, height: 300)
                 self.delegate.showPopup(controller, sourceView: aTextField)
-            }).disposed(by: self.delegate.myDisposeBag)
+            })
+        cityDispose.disposed(by: self.delegate.myDisposeBag)
+        disposeList.append(cityDispose)
     }
-
+    
     @objc func selectStateTapped(_ sender : Any){
         self.delegate.setEditing(false, animated: true)
         let aTextField = sender as! EmptyTextField
-        NetworkManager.shared.run(API: "get-state-and-city",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
+        
         if NetworkManager.shared.provinceDictionaryObs.value.count > 0 {
             let options = NetworkManager.shared.provinceDictionaryObs.value.keys
             let controller = ArrayChoiceTableViewController(options.sorted(){$0 < $1}) {
                 (selectedOption) in
                 aTextField.text = selectedOption
                 aTextField.sendActions(for: .valueChanged)
+                self.cityCode = nil
+                self.texts["cityText"]!.text = ""
                 self.stateCode = NetworkManager.shared.provinceDictionaryObs.value[selectedOption]
+                NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
             }
             controller.preferredContentSize = CGSize(width: 250, height: options.count*60)
             self.delegate.showPopup(controller, sourceView: aTextField)
-
+            
         }else{
-            NetworkManager.shared.provinceDictionaryObs
+            NetworkManager.shared.run(API: "get-state-and-city",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
+            let provinceDispose = NetworkManager.shared.provinceDictionaryObs
                 .filter({$0.count > 0})
                 .subscribe(onNext: { [unowned self] (innerProvinceDicObs) in
                     let controller = ArrayChoiceTableViewController(innerProvinceDicObs.keys.sorted(){$0 < $1}) {
@@ -361,13 +358,16 @@ class EditProfileUI : NSObject , UITextFieldDelegate{
                         self.stateCode = innerProvinceDicObs[selectedOption]
                         self.cityCode = nil
                         self.texts["cityText"]!.text = ""
+                        NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
                     }
                     controller.preferredContentSize = CGSize(width: 250, height: 300)
                     self.delegate.showPopup(controller, sourceView: aTextField)
-                    }).disposed(by: self.delegate.myDisposeBag)
+                })
+            provinceDispose.disposed(by: self.delegate.myDisposeBag)
+            disposeList.append(provinceDispose)
         }
     }
-
+    
     @objc func selectMaritalStatusTapped(_ sender : Any){
         self.delegate.setEditing(false, animated: true)
         let aTextField = sender as! EmptyTextField

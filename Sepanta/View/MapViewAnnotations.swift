@@ -59,4 +59,34 @@ extension NearestViewController: MKMapViewDelegate {
         UIGraphicsEndImageContext()
         return newImage
     }
+    
+    @objc func pushShop(_ sender : Any){
+        var tag : Int!
+        var ashop : Shop!
+        if let rightButton = sender as? UIButton {
+            tag = rightButton.tag
+        }
+        if tag == nil {
+            print("MapAnnotation [rightbutton] does not have a Tag,it is Nil!")
+            return
+        }
+        
+        for anAnnotation in mapView.annotations {
+            if let castedAnnotation = anAnnotation as? MapAnnotation {
+                if castedAnnotation.userId == (sender as! UIButton).tag {
+                    ashop = castedAnnotation.shop
+                }
+            }
+        }
+        if ashop == nil {
+            print("MapAnnotation does not have a Shop,it is Nil!")
+            return
+        }
+        print("Pushing ",ashop)
+        if ashop != nil {
+            self.coordinator!.pushShop(Shop: ashop!)
+        }else{
+            alert(Message: "اطلاعات این فروشگاه تکمیل نیست،بزودی!!!")
+        }
+    }
 }

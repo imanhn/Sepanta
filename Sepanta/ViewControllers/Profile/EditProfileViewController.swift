@@ -71,6 +71,7 @@ class EditProfileViewController : UIViewControllerWithKeyboardNotificationWithEr
     }
     
     func showPopup(_ controller: UIViewController, sourceView: UIView) {
+        //print("Showing POPUP : ",sourceView)
         let presentationController = AlwaysPresentAsPopover.configurePresentation(forController: controller)
         presentationController.sourceView = sourceView
         presentationController.sourceRect = sourceView.bounds

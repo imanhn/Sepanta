@@ -43,6 +43,7 @@ class NetworkManager {
     var headers : HTTPHeaders
     var statusMessage : String
     var message : String
+    var messageObs = BehaviorRelay<String>(value: "")
     // Result of Parser :
     var provinceDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
     var cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
@@ -54,7 +55,7 @@ class NetworkManager {
     var updateProfileInfoSuccessful = BehaviorRelay<Bool>(value: false)
     var shopSearchResultObs = BehaviorRelay<[ShopSearchResult]>(value: [ShopSearchResult]())
     var profileObs = BehaviorRelay<Profile>(value: Profile())
-    var profileInfoObs = BehaviorRelay<ProfileInfo>(value: ProfileInfo())
+    var bankObs = BehaviorRelay<Bank>(value: Bank())
     var shopNotifObs = BehaviorRelay<[ShopNotification]>(value: [ShopNotification]())
     var generalNotifObs = BehaviorRelay<[GeneralNotification]>(value: [GeneralNotification]())
     // Initialization
@@ -116,7 +117,7 @@ class NetworkManager {
         .retry(retryTime)
         //.debug()
         .subscribe(onNext: { [unowned self] (ahttpURLRes,jsonResult) in
-            Spinner.stop()
+            
             print(" Response Code : ",ahttpURLRes.statusCode)
             if ahttpURLRes.statusCode == 500 { self.status.accept(CallStatus.InternalServerError)}
             if let aresult = jsonResult as? NSDictionary {
@@ -142,6 +143,7 @@ class NetworkManager {
             if let acontent = self.result["content"] as? NSDictionary {
                 self.content = acontent
             }
+            Spinner.stop()
             }, onError: { (err) in
                 if err.localizedDescription == "The Internet connection appears to be offline." {
                     print("No Internet")

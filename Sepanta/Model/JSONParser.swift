@@ -111,7 +111,7 @@ class JSONParser {
                 } else if (apiName == "profile-info") && (aMethod == HTTPMethod.get) {
                     print("Starting to get profile-info from server and parse it...")
                     let parsedProfileInfo = self?.processProfileInfo(Result: aDic)
-                    NetworkManager.shared.profileInfoObs.accept(parsedProfileInfo!)
+                    ProfileInfoWrapper.shared.profileInfoObs.accept(parsedProfileInfo!)
                 } else if (apiName == "search-shops") && (aMethod == HTTPMethod.post) {
                     print("Starting search-shops Parser...")
                     let parsedShopSearchResults = self?.processShopSearchResultList(Result: aDic)
@@ -120,6 +120,16 @@ class JSONParser {
                     print("Starting shops-location Parser...")
                     let parsedShopLocations = self?.processShopLocationsList(Result: aDic)
                     NetworkManager.shared.shopObs.accept(parsedShopLocations!)
+                } else if (apiName == "check-bank") && (aMethod == HTTPMethod.post) {
+                    print("Starting Check-Bank Parser...")
+                    let parsedBankNumber = self?.processBankNumber(Result: aDic)
+                    NetworkManager.shared.bankObs.accept(parsedBankNumber!)
+                } else if (apiName == "card-request") && (aMethod == HTTPMethod.post) {
+                    print("Starting card-request Parser...")
+                    self?.processCardRequest(Result: aDic)
+                } else if (apiName == "selling-request") && (aMethod == HTTPMethod.post) {
+                    print("Starting selling-request Parser...")
+                    self?.processSellRequest(Result: aDic)
                 } else if (apiName == "notifications") && (aMethod == HTTPMethod.get) {
                     print("Starting Notification Parser...")
                     let (generalNotif,shopNotif) = (self?.processNotifications(Result: aDic))!
@@ -134,6 +144,45 @@ class JSONParser {
                     //print("Parser Disposed")
                 }
             ).disposed(by: netObjectsDispose)
+    }
+    
+    func processSellRequest(Result aResult : NSDictionary)  {
+        if aResult["error"] != nil {
+            print("ERROR in Card Request Parsing : ",aResult["error"]!)
+        }
+        if let aMessage = aResult["message"] {
+            if let castedMessage = aMessage as? String{
+                NetworkManager.shared.messageObs.accept(castedMessage)
+            }else{
+                NetworkManager.shared.messageObs.accept("نتیجه عملیات نامشخص بود،لطفاْ مجدداْ تلاش فرمایید")
+            }
+        }
+    }
+    
+    func processCardRequest(Result aResult : NSDictionary)  {
+        if aResult["error"] != nil {
+            print("ERROR in Card Request Parsing : ",aResult["error"]!)
+        }
+        if let aMessage = aResult["message"] {
+            if let castedMessage = aMessage as? String{
+                NetworkManager.shared.messageObs.accept(castedMessage)
+            }else{
+                NetworkManager.shared.messageObs.accept("نتیجه عملیات نامشخص بود،لطفاْ مجدداْ تلاش فرمایید")
+            }
+        }
+        //if  == "خطا : این کارت قبلا ثبت شده است" {
+    }
+    
+    func processBankNumber(Result aResult : NSDictionary) -> (Bank) {
+        var aBank = Bank()
+        if aResult["error"] != nil {
+            print("ERROR in Bank Parsing : ",aResult["error"]!)
+        }
+        aBank.code_bank = aResult["code_bank"] as? Int
+        aBank.bank = aResult["bank"] as? String
+        aBank.logo = aResult["logo"] as? String
+        print("Bank",aBank)
+        return aBank
     }
     
     func processNotifications(Result aResult : NSDictionary) -> ([GeneralNotification],[ShopNotification]) {
@@ -262,6 +311,7 @@ class JSONParser {
         profileInfo.state = (aProfileDicAsNS["state"] as? String) ?? ""
         profileInfo.city = (aProfileDicAsNS["city"] as? String) ?? ""
         profileInfo.email = (aProfileDicAsNS["email"] as? String) ?? ""
+        profileInfo.phone = (aProfileDicAsNS["phone"] as? String) ?? ""
         profileInfo.birthdate = (aProfileDicAsNS["birthdate"] as? String) ?? ""
         if let genderCode = aProfileDicAsNS["gender"] as? Int
         {
