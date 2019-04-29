@@ -149,6 +149,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func pushNewShops(){
+        SlidesAndPaths.shared.count_new_shop.accept(0)
         let vc = NewShopsViewController.instantiate()
         vc.coordinator = self
         navigationController.delegate = self
@@ -188,6 +189,8 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func pushNotifications(){
+        //Reset Notification Badge
+        SlidesAndPaths.shared.notifications_count.accept(0)
         let storyboard = UIStoryboard(name: "Notifications", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "NotificationsViewController") as! NotificationsViewController
         vc.coordinator = self

@@ -46,10 +46,10 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
         
         //self.delegate.paneView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: (UIScreen.main.bounds.height * 2)+40)
         
-        views["rightFormView"] = RightTabbedView(frame: CGRect(x: marginX, y: marginY, width: self.delegate.paneView.frame.width-2*marginX, height: self.delegate.paneView.frame.height-marginY))
+        views["rightFormView"] = RightTabbedViewWithWhitePanel(frame: CGRect(x: marginX, y: marginY, width: self.delegate.paneView.frame.width-2*marginX, height: self.delegate.paneView.frame.height-marginY))
         views["rightFormView"]!.backgroundColor = UIColor.clear
         let buttonsFont = UIFont(name: "Shabnam-Bold-FD", size: 14)
-        let buttonHeight = (views["rightFormView"] as! RightTabbedView).getHeight()
+        let buttonHeight = (views["rightFormView"] as! RightTabbedViewWithWhitePanel).getHeight()
         //let textFieldWidth = (views["rightFormView"]?.bounds.width)! - (2 * marginX)
         
         buttons["leftButton"] = UIButton(frame: CGRect(x: 0, y: 0, width: (views["rightFormView"]?.bounds.width)!/2, height: buttonHeight))
@@ -183,9 +183,28 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
         views["leftFormView"]!.addSubview(buttons["rightButton"]!)
         cursurY = cursurY + buttonHeight + marginY
 
-        let scrollView = UIScrollView(frame: CGRect(x: 0, y: cursurY, width: views["rightFormView"]!.frame.width, height: views["rightFormView"]!.frame.height-buttonHeight))
-        views["rightFormView"]!.addSubview(scrollView)
+        let scrollView = UIScrollView(frame: CGRect(x: 0, y: cursurY, width: views["leftFormView"]!.frame.width, height: views["leftFormView"]!.frame.height-cursurY-marginY))
+        let cardwidth = scrollView.frame.width - ( 4 * marginX)
+        let cardHeight = scrollView.frame.width/2
+        let cardMargin = cardHeight/4
+        var cardCursurY = marginY
+        
+        let acard = CardView(frame: CGRect(x: 2*marginX, y: cardCursurY, width: cardwidth, height: cardHeight))
+        scrollView.addSubview(acard)
+        cardCursurY = cardCursurY + marginY + acard.frame.height + cardMargin
 
+        let acard2 = CardView(frame: CGRect(x: 2*marginX, y: cardCursurY, width: cardwidth, height: cardHeight))
+        scrollView.addSubview(acard2)
+        cardCursurY = cardCursurY + marginY + acard.frame.height + cardMargin
+
+        let acard3 = CardView(frame: CGRect(x: 2*marginX, y: cardCursurY, width: cardwidth, height: cardHeight))
+        scrollView.addSubview(acard3)
+        cardCursurY = cardCursurY + marginY + acard.frame.height + cardMargin
+ 
+        //cursurY = cursurY + scrollView.contentSize.width
+        //views["leftFormView"]!.addSubview(acard)
+        scrollView.contentSize = CGSize(width: scrollView.contentSize.width, height: cardCursurY)
+        views["leftFormView"]!.addSubview(scrollView)
         self.delegate.paneView.addSubview(views["leftFormView"]!)
         
     }

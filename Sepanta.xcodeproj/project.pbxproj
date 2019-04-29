@@ -56,6 +56,8 @@
 		0F8B7D432267874B00EFAACD /* Shabnam-Bold-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F8B7D412267874600EFAACD /* Shabnam-Bold-FD.ttf */; };
 		0F8B7D442267874B00EFAACD /* Shabnam-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F8B7D422267874800EFAACD /* Shabnam-FD.ttf */; };
 		0F8B7D46226789A800EFAACD /* ShopSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8B7D45226789A800EFAACD /* ShopSearchResult.swift */; };
+		0F8E3F702275CCF300E51B17 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8E3F6F2275CCF300E51B17 /* CardView.swift */; };
+		0F8E3F722275CD4200E51B17 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F8E3F712275CD4200E51B17 /* CardView.xib */; };
 		0F984E29220B727B004AFB06 /* SepantaGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */; };
 		0F9BCFC52221FCCF00C87706 /* SlideControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9BCFC42221FCCF00C87706 /* SlideControl.swift */; };
 		0F9BCFC8222317E900C87706 /* SepantaGroupButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9BCFC7222317E900C87706 /* SepantaGroupButtons.swift */; };
@@ -166,6 +168,8 @@
 		0F8B7D412267874600EFAACD /* Shabnam-Bold-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shabnam-Bold-FD.ttf"; sourceTree = "<group>"; };
 		0F8B7D422267874800EFAACD /* Shabnam-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shabnam-FD.ttf"; sourceTree = "<group>"; };
 		0F8B7D45226789A800EFAACD /* ShopSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopSearchResult.swift; sourceTree = "<group>"; };
+		0F8E3F6F2275CCF300E51B17 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		0F8E3F712275CD4200E51B17 /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
 		0F984E28220B727B004AFB06 /* SepantaGroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaGroupsViewController.swift; sourceTree = "<group>"; };
 		0F9BCFC42221FCCF00C87706 /* SlideControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideControl.swift; sourceTree = "<group>"; };
 		0F9BCFC7222317E900C87706 /* SepantaGroupButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaGroupButtons.swift; sourceTree = "<group>"; };
@@ -400,6 +404,7 @@
 				0F1B75642236E42A0087C0DB /* ShopUI.swift */,
 				0F0661B1225BEA6A00A83734 /* PostUI.swift */,
 				0F50AE73226F66950028D8B6 /* MapViewAnnotations.swift */,
+				0F8E3F6F2275CCF300E51B17 /* CardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -413,6 +418,7 @@
 				0FFCDC47226C77350087BFEF /* Favorite.storyboard */,
 				0FFCDC51226C955F0087BFEF /* Notifications.storyboard */,
 				0FD094A9226E34C600E53A07 /* Map.storyboard */,
+				0F8E3F712275CD4200E51B17 /* CardView.xib */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -628,6 +634,7 @@
 				0F8B7D442267874B00EFAACD /* Shabnam-FD.ttf in Resources */,
 				0FE8B9AE220355F000C868C3 /* Main.storyboard in Resources */,
 				0FFCDC52226C955F0087BFEF /* Notifications.storyboard in Resources */,
+				0F8E3F722275CD4200E51B17 /* CardView.xib in Resources */,
 				0FD094AA226E34C600E53A07 /* Map.storyboard in Resources */,
 				0F237E41226783CF004CC7BC /* Shabnam-Light-FD.ttf in Resources */,
 				0F4D29E42267617100BFD425 /* Search.storyboard in Resources */,
@@ -754,6 +761,7 @@
 				0F3197B32270BD8F00CEF207 /* Bank.swift in Sources */,
 				0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */,
 				0F052EDB221C0790009175EA /* HomeCoordinator.swift in Sources */,
+				0F8E3F702275CCF300E51B17 /* CardView.swift in Sources */,
 				0FE8BA042205082100C868C3 /* SMSConfirmViewController.swift in Sources */,
 				0FFCDC54226CA96F0087BFEF /* Notifications.swift in Sources */,
 				0F890CFE2214B4CD0091FA2E /* Coordinator.swift in Sources */,

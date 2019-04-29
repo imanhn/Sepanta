@@ -18,6 +18,7 @@ class PostUI {
     var scrollBar : UIScrollView!
     var commentView = UIView(frame: .zero)
     var commentText = UITextField(frame: .zero)
+    var likeButton = UIButton(type: .custom)
     var peopleCommentsView = UIView(frame: .zero)
     var myDisposeBag = DisposeBag()
     var cursurY : CGFloat = 20
@@ -36,7 +37,7 @@ class PostUI {
         let aParameter = ["shop_id":"\(NetworkManager.shared.postDetailObs.value.shopId!)","post_id":"\(NetworkManager.shared.postDetailObs.value.id!)","body":"\(commentText.text!)"]
         print("Sending comment .... : ",aParameter)
         NetworkManager.shared.run(API: "send-comment", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: false)
-        NetworkManager.shared.commentSendingSuccessful
+        let commentSendDisp = NetworkManager.shared.commentSendingSuccessful
             .filter({$0 == true})
             .subscribe(onNext: { [unowned self] (succeed) in
                 self.delegate.alert(Message: "نظر شما ثبت شد")
@@ -45,37 +46,32 @@ class PostUI {
                 (sender as! UIButton).setEnable()
                 self.delegate.getPostData()
                 Spinner.stop()
-            }).disposed(by: myDisposeBag)
+            })
+        commentSendDisp.disposed(by: myDisposeBag)
+        self.delegate.disposeList.append(commentSendDisp)
         
-        NetworkManager.shared.status
+        let statusDisp = NetworkManager.shared.status
             .filter({$0 == CallStatus.error || $0 == CallStatus.InternalServerError})
+            .share(replay: 1, scope: .whileConnected)
             .subscribe(onNext: { innerStatus in
                 Spinner.stop()
                 (sender as! UIButton).setEnable()
-            }).disposed(by: myDisposeBag)
+            })
+        statusDisp.disposed(by: myDisposeBag)
+        self.delegate.disposeList.append(statusDisp)
     }
     
     func buildPostView(){
-        Observable.combineLatest(NetworkManager.shared.postDetailObs, NetworkManager.shared.postCommentsObs, resultSelector: { aPostDetail,aCommentsArray in
-            self.buildPostView(With: aPostDetail)
-            self.buildCommentView(With: aCommentsArray)
-        }).observeOn(MainScheduler.instance)
-            .subscribe()
-            .disposed(by: myDisposeBag)
-        /*
-        NetworkManager.shared.postDetailObs
-            .filter({$0.id != 0 && $0.id != nil})
-            .subscribe(onNext: { [unowned self] (innerPost) in
-                print("Post : \(String(describing: innerPost.id)) just started to be created")
-                self.buildPostView(With: innerPost)
-                //self.cursurY = self.cursurY + self.marginY + self.commentHeight
-            }).disposed(by: myDisposeBag)
-        
-        NetworkManager.shared.postCommentsObs
-            .subscribe(onNext: { innerComments in
-                self.buildCommentView(With: innerComments)
-            }).disposed(by: myDisposeBag)
-         */
+        let sharedPostObs = NetworkManager.shared.postDetailObs
+            .share(replay: 1, scope: .whileConnected)
+            .subscribe(onNext: { aPostDetail in
+                let aCommentsArray = aPostDetail.comments
+                self.buildPostView(With: aPostDetail)
+                self.buildCommentView(With: aCommentsArray ?? [])
+            }
+        )
+        sharedPostObs.disposed(by: myDisposeBag)
+        self.delegate.disposeList.append(sharedPostObs)
     }
     
     func buildPostView(With innerPost : Post){
@@ -102,7 +98,7 @@ class PostUI {
         if innerPost.image != "" && innerPost.image != nil {
             if innerPost.image != nil {
                 let imageStrUrl = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + innerPost.image!
-                print("PostUI : Reading : ",imageStrUrl)
+                //print("PostUI : Reading : ",imageStrUrl)
                 let imageCastedURL = URL(string: imageStrUrl)
                 if imageCastedURL != nil {
                     postImage.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1, ImageURL: imageCastedURL!, ImageName: innerPost.image!)
@@ -143,14 +139,20 @@ class PostUI {
         self.cursurY = self.cursurY + contentLabelHeight + self.marginY
         
         var cursorX = self.marginX
-        let likeButton = UIButton(type: .custom)
-        likeButton.setImage(UIImage(named: "icon_like"), for: .normal)
+        //print("innerPost : ",innerPost)
+        //print("innerPostLIKE : ",innerPost.isLiked)
+        if innerPost.isLiked == false {
+            likeButton.setImage(UIImage(named: "icon_like"), for: .normal)
+        }else{
+            likeButton.setImage(UIImage(named: "icon_like_dark"), for: .normal)
+        }
+        likeButton.addTarget(self, action: #selector(toggleLike), for: .touchUpInside)
         likeButton.frame = CGRect(x: cursorX, y: self.cursurY, width: buttonDim, height: buttonDim)
         self.delegate.postScrollView.addSubview(likeButton)
         cursorX = cursorX + buttonDim + self.marginX/2
         
         let likeNoString = "\(innerPost.countLike ?? 0)"
-        print("likeNoString : ",likeNoString)
+        //print("likeNoString : ",likeNoString)
         let likeNoWidth = likeNoString.width(withConstrainedHeight: buttonDim, font: aFont!)
         let likeNoLabel = UILabel(frame: CGRect(x: cursorX, y: self.cursurY, width: likeNoWidth, height: buttonDim))
         likeNoLabel.font = aFont
@@ -166,8 +168,8 @@ class PostUI {
         self.delegate.postScrollView.addSubview(commentButton)
         cursorX = cursorX + buttonDim + self.marginX/2
         
-        let commentNoString = "\(innerPost.countLike ?? 0)"
-        print("commentNoString : ",commentNoString)
+        let commentNoString = "\(innerPost.comments?.count ?? 0)"
+        //print("commentNoString : ",commentNoString)
         let commentNoWidth = commentNoString.width(withConstrainedHeight: buttonDim, font: aFont!)
         let commentNoLabel = UILabel(frame: CGRect(x: cursorX, y: self.cursurY, width: commentNoWidth, height: buttonDim))
         commentNoLabel.font = aFont
@@ -196,13 +198,54 @@ class PostUI {
         self.cursurY = self.cursurY + self.marginY + rowRect.height
     }
     
+    @objc func toggleLike(_ sender : Any){
+        Spinner.start()
+        (sender as! UIButton).isEnabled = false
+        let aParameter = ["shop_id":"\(NetworkManager.shared.postDetailObs.value.shopId!)","post_id":"\(NetworkManager.shared.postDetailObs.value.id!)"]
+        print("Toggling Like/Unlike .... : ",aParameter)
+        NetworkManager.shared.run(API: "like-dislike", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: false)
+        let toggleLikeDisp = NetworkManager.shared.toggleLiked
+            //.filter({$0 == true})
+            .subscribe(onNext: { [unowned self] (toggleStatus) in
+                (sender as! UIButton).isEnabled = true
+                if toggleStatus == ToggleStatus.NO {
+                    self.likeButton.setImage(UIImage(named: "icon_like"), for: .normal)
+                }else if toggleStatus == ToggleStatus.YES {
+                    self.likeButton.setImage(UIImage(named: "icon_like_dark"), for: .normal)
+                }else{
+                    Spinner.stop()
+                    return
+                    //self.delegate.alert(Message: "دسترسی به شبکه موقتاْ قطع شد")
+                }
+                if NetworkManager.shared.postDetailObs.value.isLiked.map({if $0 {return ToggleStatus.YES}else{return ToggleStatus.NO}}) != toggleStatus {
+                    //Like is updating
+                    var postDet = NetworkManager.shared.postDetailObs.value
+                    postDet.isLiked = !(postDet.isLiked ?? false)
+                    NetworkManager.shared.postDetailObs.accept(postDet)
+                }
+                
+            })
+        toggleLikeDisp.disposed(by: myDisposeBag)
+        self.delegate.disposeList.append(toggleLikeDisp)
+        
+        let statusDisp = NetworkManager.shared.status
+            .filter({$0 == CallStatus.error || $0 == CallStatus.InternalServerError})
+            .share(replay: 1, scope: .whileConnected)
+            .subscribe(onNext: { innerStatus in
+                Spinner.stop()
+                (sender as! UIButton).isEnabled = true
+            })
+        statusDisp.disposed(by: myDisposeBag)
+        self.delegate.disposeList.append(statusDisp)
+    }
+    
     func buildCommentView(With comments : [Comment]){
         if peopleCommentsView.superview != nil {
             peopleCommentsView = UIView(frame: .zero)
             peopleCommentsView.removeFromSuperview()
         }
         if comments.count == 0 {return}
-        print("Comments to Load : ",comments)
+        //print("Comments to Load : ",comments)
         peopleCommentsView = UIView(frame: CGRect(x: self.marginX, y: self.cursurY, width: self.delegate.postScrollView.frame.width - 2*self.marginX, height: 200))
         peopleCommentsView.backgroundColor = UIColor(hex: 0xF7F7F7)
         let profilePicturedim = peopleCommentsView.frame.width/10

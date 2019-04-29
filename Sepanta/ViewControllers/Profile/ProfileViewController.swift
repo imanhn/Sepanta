@@ -16,13 +16,13 @@ class ProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
     weak var coordinator : HomeCoordinator?
     var showProfileUI : ShowProfileUI!
     var myDisposeBag = DisposeBag()
-    @IBOutlet var topView : UIView!
     @IBOutlet weak var cupLabel : UILabel!
     @IBOutlet weak var clubNumLabel : UILabel!
     @IBOutlet weak var paneView : UIView!
     @IBOutlet weak var profilePicture : UIImageView!
     @IBOutlet weak var nameLabel : UILabel!
     @IBOutlet weak var descLabel : UILabel!
+    @IBOutlet weak var profileScrollView: UIScrollView!
     
     @IBAction func menuTapped(_ sender: Any) {
         self.coordinator!.openButtomMenu()
@@ -52,23 +52,23 @@ class ProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
         showProfileUI!.showContacts()
     }
     
-    func gradientTopView(){
-        let gradient = CAGradientLayer()
-        gradient.frame = self.view.bounds
-        gradient.colors = [UIColor(hex: 0xF7F7F7).cgColor, UIColor.white.cgColor]
-        topView.layer.insertSublayer(gradient, at: 0)
-    }
-    
     @objc override func ReloadViewController(_ sender:Any) {
         super.ReloadViewController(sender)
         showProfileUI = ShowProfileUI(self)
+        
     }
     
+    override func viewDidLayoutSubviews() {
+        let viewWidth = self.view.frame.width
+        let calculatedHeight = viewWidth * ( 0.25 + 0.125 + 0.5 + 0.75 + 0.125 + 0.125)
+        //print("Calculated Height : ",calculatedHeight)
+        profileScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: calculatedHeight)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
-        gradientTopView()
         showProfileUI = ShowProfileUI(self)
     }
 

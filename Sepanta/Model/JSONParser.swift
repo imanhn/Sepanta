@@ -79,7 +79,6 @@ class JSONParser {
                 } else if (apiName == "post-details") && (aMethod == HTTPMethod.post) {
                     //Returns the Post Detail
                     let aPost = (self?.processAsPostDetails(Result: aDic))!
-                    NetworkManager.shared.postCommentsObs.accept(aPost.comments ?? [Comment]())
                     NetworkManager.shared.postDetailObs.accept(aPost)
                 } else if (apiName == "profile") && (aMethod == HTTPMethod.post) {
                     //Returns Profile Data for a user Id
@@ -88,6 +87,16 @@ class JSONParser {
                 } else if (apiName == "send-comment") && (aMethod == HTTPMethod.post) {
                     // Sets True for commentSendingSuccessful to be observable by PostUI
                     NetworkManager.shared.commentSendingSuccessful.accept(true)
+                } else if (apiName == "like-dislike") && (aMethod == HTTPMethod.post) {
+                    // Sets True for commentSendingSuccessful to be observable by PostUI
+                    let likeStatus = self?.processLike(Result: aDic)
+                    if likeStatus == 2 {
+                        NetworkManager.shared.toggleLiked.accept(ToggleStatus.UNKNOWN)
+                    }else if likeStatus == 1 {
+                        NetworkManager.shared.toggleLiked.accept(ToggleStatus.YES)
+                    }else if likeStatus == 0 {
+                        NetworkManager.shared.toggleLiked.accept(ToggleStatus.NO)
+                    }
                 } else if (apiName == "profile-info") && (aMethod == HTTPMethod.post) {
                     // Sets True for profile-info to be observable by PostUI
                     NetworkManager.shared.updateProfileInfoSuccessful.accept(true)
@@ -228,6 +237,23 @@ class JSONParser {
             print("@@@ ERROR : Result does not contain >notification_user<")
         }
         return (generalNotif,shopNotif)
+    }
+
+    func processLike(Result aResult : NSDictionary) -> Int {
+        if aResult["error"] != nil {
+            print("ERROR in Like Parsing : ",aResult["error"]!)
+        }
+        if aResult["message"] != nil {
+            print("Like : Message Parsed : ",aResult["message"]!)
+        }
+        //print("Processlike : ",aResult["is_like"])
+        //print("casting Processlike : ",aResult["is_like"] as? String)
+        
+        if let likeStr = aResult["is_like"] as? String {
+            if likeStr == "1" {return 1}else{return 0}
+        }else{
+            return 2
+        }
     }
     
     func processShopLocationsList(Result aResult : NSDictionary) -> [Shop] {
@@ -483,25 +509,33 @@ class JSONParser {
             if let aContent = postDet["content"] as? String {aPost.content = aContent}
             if let anImage = postDet["image"] as? String {aPost.image = anImage}
             if let aViewCount = postDet["viewCount"] as? Int {aPost.viewCount = aViewCount}
-            if let aLike = postDet["is_like"] as? Bool {aPost.isLiked = aLike}
-            if let aCountLike = postDet["count_like"] as? Int {aPost.countLike = aCountLike}
-
-            if let someComments = aResult["comments"] as? NSArray {
-                aPost.comments = [Comment]()
-                for aComment in someComments {
-                    if let castedComment = aComment as? NSDictionary{
-                        let newComment = Comment(id: castedComment["id"] as? Int, username: castedComment["username"] as? String, body: castedComment["body"] as? String)
-                        print("Casted : ",newComment)
-                        aPost.comments!.append(newComment)
-                    }else{
-                        print("Error : Comment is incorrect and can not be casted : ",aComment)
-                    }
-                }
-            }else {
-                print("comments before case as Array : ",postDet["comments"] ?? "EMPTY Comment")
-            }
             print("JSON Parser : Parsed Post : ",aPost)
+        }else{
+            print("Post Detail Parser Failed!")
+            fatalError()
         }
+        if let someComments = aResult["comments"] as? NSArray {
+            aPost.comments = [Comment]()
+            for aComment in someComments {
+                if let castedComment = aComment as? NSDictionary{
+                    let newComment = Comment(id: castedComment["id"] as? Int, username: castedComment["username"] as? String, body: castedComment["body"] as? String)
+                    print("Casted : ",newComment)
+                    aPost.comments!.append(newComment)
+                }else{
+                    print("Error : Comment is incorrect and can not be casted : ",aComment)
+                }
+            }
+        }else {
+            print("comments before case as Array : ",aResult["comments"] ?? "EMPTY Comment")
+        }
+
+        if let aLike = aResult["is_like"] as? Bool {
+            print("Reading Like : ",aLike)
+            aPost.isLiked = aLike
+            
+        }
+        if let aCountLike = aResult["count_like"] as? Int {aPost.countLike = aCountLike}
+
         return aPost
     }
     
@@ -513,6 +547,19 @@ class JSONParser {
             SlidesAndPaths.shared.path_slider_image = (aResult["path_slider_image"] as? String) ?? SlidesAndPaths.shared.path_slider_image
             SlidesAndPaths.shared.path_category_image = (aResult["path_category_image"] as? String) ?? SlidesAndPaths.shared.path_category_image
             SlidesAndPaths.shared.path_bank_logo_image = (aResult["path_bank_logo_image"] as? String) ?? SlidesAndPaths.shared.path_bank_logo_image
+            if let notificationsCount = aResult["notifications_count"] as? Int {
+                //SlidesAndPaths.shared.notifications_count.accept(120)
+                SlidesAndPaths.shared.notifications_count.accept(notificationsCount)
+            }else{
+                print("Parser : Error : INVALID Notification count in HOME api")
+            }
+            if let newShopCount = aResult["count_new_shop"] as? Int {
+                //SlidesAndPaths.shared.count_new_shop.accept(5)
+                SlidesAndPaths.shared.count_new_shop.accept(newShopCount)
+            }else{
+                print("Parser : Error : INVALID new shop count in HOME api")
+            }
+
             if let slides = aResult["sliders"] as? NSArray{
                 for aSlide in slides {
                     if let aSlideAsNsDic = aSlide as? NSDictionary{
@@ -534,7 +581,7 @@ class JSONParser {
                                         //self.anUIImage.accept(image)
                                         SlidesAndPaths.shared.slides.append(Slide(id: anId, title: aTitle, link: aLink, user_id: aUserId, images: imageName,aUIImage: image))
                                         SlidesAndPaths.shared.slidesObs.accept(SlidesAndPaths.shared.slides)
-                                        let imageData = UIImagePNGRepresentation(image) as NSData?
+                                        let imageData = UIImageJPEGRepresentation(image,0.5) as NSData?
                                         if imageData != nil {
                                             //print("Saving slider : ",imageName)
                                             CacheManager.shared.saveFile(Data:imageData!, Filename:imageName)

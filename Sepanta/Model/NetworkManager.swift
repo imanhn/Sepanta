@@ -52,6 +52,7 @@ class NetworkManager {
     var postDetailObs = BehaviorRelay<Post>(value: Post(id: 0, shopId: 0, viewCount: 0, comments: [], isLiked: false, countLike: 0, title: "", content: "", image: ""))
     var postCommentsObs = BehaviorRelay<[Comment]>(value: [Comment]())
     var commentSendingSuccessful = BehaviorRelay<Bool>(value: false)
+    var toggleLiked = BehaviorRelay<ToggleStatus>(value: ToggleStatus.UNKNOWN)
     var updateProfileInfoSuccessful = BehaviorRelay<Bool>(value: false)
     var shopSearchResultObs = BehaviorRelay<[ShopSearchResult]>(value: [ShopSearchResult]())
     var profileObs = BehaviorRelay<Profile>(value: Profile())

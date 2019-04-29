@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Shabnam-FD.ttf">
+            <string>Shabnam-FD</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="CardView" customClass="CardView" customModule="Sepanta" customModuleProvider="target">
+            <connections>
+                <outlet property="bankLogo" destination="oxQ-fM-axq" id="q4A-89-1Vz"/>
+                <outlet property="cardNo1" destination="BUJ-iD-2Ss" id="0vY-S8-WNA"/>
+                <outlet property="cardNo2" destination="Y5k-At-Eby" id="dn5-83-JuE"/>
+                <outlet property="cardNo3" destination="wRC-0V-sZM" id="20h-mz-Btw"/>
+                <outlet property="cardNo4" destination="6wX-hc-NGd" id="U6w-E0-Go2"/>
+                <outlet property="contentView" destination="W1l-rb-2V7" id="YJF-ID-QpD"/>
+                <outlet property="deleteButton" destination="fYC-YW-Ytn" id="WU8-zS-mWC"/>
+                <outlet property="expiryDate" destination="6cg-Cc-UnJ" id="NYa-aK-ch8"/>
+                <outlet property="nameLabel" destination="YtG-Ys-g2k" id="EyN-t7-Ste"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="412" height="239"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W1l-rb-2V7" userLabel="ContentView">
+                    <rect key="frame" x="20.5" y="27" width="371" height="185.5"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fYC-YW-Ytn" userLabel="DeleteButton">
+                            <rect key="frame" x="20" y="16" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="20" id="ikA-ly-Z7v"/>
+                                <constraint firstAttribute="height" constant="20" id="psP-RC-4C5"/>
+                            </constraints>
+                            <state key="normal" image="card_menu"/>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="melli" translatesAutoresizingMaskIntoConstraints="NO" id="oxQ-fM-axq" userLabel="BankLogo">
+                            <rect key="frame" x="297.5" y="8" width="65.5" height="65"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="oxQ-fM-axq" secondAttribute="height" multiplier="1:1" id="0E7-lH-RGk"/>
+                            </constraints>
+                        </imageView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="8PD-BL-gct" userLabel="CardNumber">
+                            <rect key="frame" x="37.5" y="74" width="296.5" height="37"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BUJ-iD-2Ss" userLabel="label1">
+                                    <rect key="frame" x="0.0" y="0.0" width="38.5" height="37"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4567" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y5k-At-Eby" userLabel="label2">
+                                    <rect key="frame" x="84.5" y="0.0" width="40.5" height="37"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7896" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRC-0V-sZM" userLabel="label3">
+                                    <rect key="frame" x="171.5" y="0.0" width="40.5" height="37"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wX-hc-NGd" userLabel="label4">
+                                    <rect key="frame" x="258" y="0.0" width="38.5" height="37"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="P5f-RU-Tzp" userLabel="NameAndDate">
+                            <rect key="frame" x="37.5" y="111" width="296.5" height="37"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="تاریخ انقضار ۰۰/۰۰" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cg-Cc-UnJ" userLabel="expireDate">
+                                    <rect key="frame" x="0.0" y="0.0" width="96" height="37"/>
+                                    <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="13"/>
+                                    <color key="textColor" red="0.53680429131093532" green="0.5386725544207015" blue="0.54427734374999992" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="سید ایمان حسینی نیا" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YtG-Ys-g2k" userLabel="nameLabel">
+                                    <rect key="frame" x="191.5" y="0.0" width="105" height="37"/>
+                                    <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="12"/>
+                                    <color key="textColor" red="0.53680429131093532" green="0.5386725544207015" blue="0.54427734374999992" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_ok_tick" translatesAutoresizingMaskIntoConstraints="NO" id="zjO-1N-Qyo">
+                            <rect key="frame" x="158.5" y="150" width="55.5" height="55.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="zjO-1N-Qyo" secondAttribute="height" multiplier="1:1" id="M5K-9G-Ep8"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="oxQ-fM-axq" firstAttribute="height" secondItem="W1l-rb-2V7" secondAttribute="height" multiplier="0.35" id="25g-pU-6pU"/>
+                        <constraint firstItem="fYC-YW-Ytn" firstAttribute="top" secondItem="W1l-rb-2V7" secondAttribute="top" constant="16" id="9XV-Tr-C2h"/>
+                        <constraint firstAttribute="width" secondItem="W1l-rb-2V7" secondAttribute="height" multiplier="2:1" priority="750" id="Ac4-tG-qwt"/>
+                        <constraint firstAttribute="bottom" secondItem="zjO-1N-Qyo" secondAttribute="bottom" constant="-20" id="Giy-pw-Vr8"/>
+                        <constraint firstItem="8PD-BL-gct" firstAttribute="bottom" secondItem="P5f-RU-Tzp" secondAttribute="top" id="HFV-gJ-lfc"/>
+                        <constraint firstItem="zjO-1N-Qyo" firstAttribute="width" secondItem="W1l-rb-2V7" secondAttribute="width" multiplier="0.15" id="HSy-HP-AtD"/>
+                        <constraint firstItem="oxQ-fM-axq" firstAttribute="top" secondItem="W1l-rb-2V7" secondAttribute="top" constant="8" id="IGN-x7-ynF"/>
+                        <constraint firstItem="fYC-YW-Ytn" firstAttribute="leading" secondItem="W1l-rb-2V7" secondAttribute="leading" constant="20" id="Q5Q-NK-9Pa"/>
+                        <constraint firstItem="P5f-RU-Tzp" firstAttribute="height" secondItem="8PD-BL-gct" secondAttribute="height" id="RJ8-6U-Ph7"/>
+                        <constraint firstItem="P5f-RU-Tzp" firstAttribute="centerX" secondItem="8PD-BL-gct" secondAttribute="centerX" id="TrG-B0-zdj"/>
+                        <constraint firstItem="8PD-BL-gct" firstAttribute="centerY" secondItem="W1l-rb-2V7" secondAttribute="centerY" id="X6u-qY-b7b"/>
+                        <constraint firstAttribute="trailing" secondItem="oxQ-fM-axq" secondAttribute="trailing" constant="8" id="YMk-HH-TCw"/>
+                        <constraint firstItem="zjO-1N-Qyo" firstAttribute="centerX" secondItem="W1l-rb-2V7" secondAttribute="centerX" id="dqm-uA-0NH"/>
+                        <constraint firstItem="P5f-RU-Tzp" firstAttribute="width" secondItem="8PD-BL-gct" secondAttribute="width" id="fIf-JH-V6s"/>
+                        <constraint firstItem="8PD-BL-gct" firstAttribute="height" secondItem="W1l-rb-2V7" secondAttribute="height" multiplier="0.2" id="fmm-nb-YcY"/>
+                        <constraint firstItem="8PD-BL-gct" firstAttribute="centerX" secondItem="W1l-rb-2V7" secondAttribute="centerX" id="sek-u7-G0r"/>
+                        <constraint firstItem="8PD-BL-gct" firstAttribute="width" secondItem="W1l-rb-2V7" secondAttribute="width" multiplier="0.8" id="wSR-Zc-0uK"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="W1l-rb-2V7" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="An9-Rj-gcc"/>
+                <constraint firstItem="W1l-rb-2V7" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.9" id="Y7M-SQ-e8X"/>
+                <constraint firstItem="W1l-rb-2V7" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="YKC-GK-bjv"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-97" y="326.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="card_menu" width="120" height="120"/>
+        <image name="card_ok_tick" width="66" height="66"/>
+        <image name="melli" width="392" height="392"/>
+    </resources>
+</document>

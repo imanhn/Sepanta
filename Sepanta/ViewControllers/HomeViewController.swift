@@ -21,6 +21,8 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     @IBOutlet weak var currentImageView: AdImageView!
     @IBOutlet weak var leftImageView: AdImageView!
     @IBOutlet weak var rightImageView: AdImageView!
+    @IBOutlet weak var newShopsButton: UIButtonWithBadge!
+    @IBOutlet weak var notificationsButton: UIButtonWithBadge!
     
     @IBAction func gotoFavorites(_ sender: Any) {
         self.coordinator!.pushFavoriteList()
@@ -82,7 +84,21 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
         slideControl = SlideController(parentController: self)
     }
     
+    func subscribeForBadges(){
+        SlidesAndPaths.shared.count_new_shop
+            .subscribe(onNext: { [unowned self] newShopNo in
+                self.newShopsButton.manageBadge(newShopNo)
+                }
+        ).disposed(by: myDisposeBag)
 
+        SlidesAndPaths.shared.notifications_count
+            .subscribe(onNext: { [unowned self] notiCount in                
+                self.notificationsButton.manageBadge(notiCount)
+                }
+            ).disposed(by: myDisposeBag)
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
@@ -91,6 +107,7 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
         //alert(Message:"آزمايش نوار اطلاعات")
         //Handle Tap to End Editing
        // Handles Slide Events and delivers them to self.handle_pan
+        subscribeForBadges()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
         self.view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:))))
  

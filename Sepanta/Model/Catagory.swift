@@ -57,7 +57,7 @@ class Catagory : NSObject {
             if let image = response.result.value {
                 //print("image downloaded: \(self.image)")
                 self.anUIImage.accept(image)
-                let imageData = UIImagePNGRepresentation(image) as NSData?
+                let imageData = UIImageJPEGRepresentation(image,0.5) as NSData?
                 if imageData != nil {
                     //print("Saving catagory image for future use : ",self.image)
                     CacheManager.shared.saveFile(Data:imageData!, Filename:self.image)

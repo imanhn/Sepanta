@@ -50,7 +50,7 @@ class GetRichViewController : UIViewControllerWithKeyboardNotificationWithErrorB
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print("View DID Disapear!")
+        //print("View DID Disapear!")
         self.getRichUI = nil
     }
     

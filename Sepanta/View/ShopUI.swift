@@ -52,7 +52,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         {
             isShop = false
         }
-        isShop = true
+        //isShop = true
         super.init()
         showShopPosts()
         buildPostToolbar()

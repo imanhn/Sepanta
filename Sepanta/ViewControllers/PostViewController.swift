@@ -16,12 +16,14 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
     var postUI : PostUI!
     var coordinator : HomeCoordinator!
     var myDisposeBag = DisposeBag()
+    var disposeList = [Disposable]()
     var postID : Int?
     
     @IBOutlet weak var postScrollView: UIScrollView!
     @IBOutlet weak var postTitleLabelInHeader: UILabel!
     
     @IBAction func BackTapped(_ sender: Any) {
+        disposeList.forEach({$0.dispose()})
         postUI = nil
         self.coordinator!.popOneLevel()
     }

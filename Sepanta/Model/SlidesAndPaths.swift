@@ -18,6 +18,10 @@ class SlidesAndPaths {
     var path_slider_image : String = "/upload/profile/"
     var path_category_image : String = "/upload/category/"
     var path_bank_logo_image : String = "/upload/logo_bank/"
+    var path_banner_image : String = "/upload/banner/"
+    var path_operator_image : String = "/upload/operator"
+    var count_new_shop = BehaviorRelay<Int>(value: 0)
+    var notifications_count = BehaviorRelay<Int>(value: 0)
     var slides = [Slide]()
     var slidesObs = BehaviorRelay<[Slide]>(value: [])
     

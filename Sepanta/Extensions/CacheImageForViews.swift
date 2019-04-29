@@ -49,12 +49,17 @@ extension UIImageView {
                 self.af_setImage(withURL: imageUrl, placeholderImage: defaultImage, filter: filter,completion:
                     { (response) in
                         //print("Image Downloaded,Saving...")
-                        let downloadedImage = self.image!// UIImage(data: response.data!)!
-                        let imageData = UIImagePNGRepresentation(downloadedImage) as NSData?
-                        if imageData != nil {
-                            CacheManager.shared.saveFile(Data:imageData!, Filename:imageName)
+                        // UIImage(data: response.data!)!
+                        if let downloadedImage = self.image {
+                            let imageData = UIImageJPEGRepresentation(downloadedImage, 0.5) as NSData?
+                            if imageData != nil {
+                                //print("   Saving \(imageName)")
+                                CacheManager.shared.saveFile(Data:imageData!, Filename:imageName)
+                            }
+                        }else{
+                            print("AFImage finished downloading but no image yielded!")
                         }
-                        
+
                 })
             }
         }
@@ -86,8 +91,8 @@ extension UIButton {
                 self.af_setImage(for: .normal, url: imageUrl, placeholderImage: defaultImage, filter: filter, completion: { (response) in
                     //print("Image Downloaded : ",self.image(for: .normal))
                     let downloadedImage = self.image(for: .normal)// UIImage(data: response.data!)!
-                    if downloadedImage != nil {                        
-                        let imageData = UIImagePNGRepresentation(downloadedImage!) as NSData?
+                    if downloadedImage != nil {
+                        let imageData = UIImageJPEGRepresentation(downloadedImage!, 0.8) as NSData?
                         if imageData != nil {
                             //print("   Saving \(imageName)")
                             CacheManager.shared.saveFile(Data:imageData!, Filename:imageName)
