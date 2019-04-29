@@ -244,7 +244,12 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func pushContactUs(){
-        
+        let storyboard = UIStoryboard(name: "ContactUS", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ContactUSViewController") as! ContactUSViewController
+        vc.coordinator = self
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
     }
     
     func logout() {
