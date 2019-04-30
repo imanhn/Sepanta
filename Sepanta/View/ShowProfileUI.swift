@@ -11,7 +11,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 import Alamofire
-
+import RxAlamofire
 
 class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
     var delegate : ProfileViewController!
@@ -148,8 +148,19 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
         
     }
     
-    @objc func showShopDetail(){
-        
+    @objc func showShopDetail(_ sender : Any){
+        let aButton = (sender as? UIButton)
+        for ashop in shops.value {
+            if ashop.user_id == aButton?.tag {
+                print("Shop Selected Pushing : ",ashop)
+                // this is neccessary because ShowProfile is subscribed to Profile and it will raise an error
+                // right after trying to push a shop because shop contents are post and profile contents are shops!
+                // when We push a shop, if showprofile is still subscribed to ProfileObs then when the shopVC fetch shop profile from server
+                // ShowProfile receives that and can not cast Content[Post] to Content[shop]
+                NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: Profile())
+                self.delegate.coordinator!.pushShop(Shop: ashop)
+            }
+        }
     }
     
     func showContacts() {
@@ -189,24 +200,77 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
         let cardMargin = cardHeight/4
         var cardCursurY = marginY
         
-        let acard = CardView(frame: CGRect(x: 2*marginX, y: cardCursurY, width: cardwidth, height: cardHeight))
-        scrollView.addSubview(acard)
-        cardCursurY = cardCursurY + marginY + acard.frame.height + cardMargin
-
-        let acard2 = CardView(frame: CGRect(x: 2*marginX, y: cardCursurY, width: cardwidth, height: cardHeight))
-        scrollView.addSubview(acard2)
-        cardCursurY = cardCursurY + marginY + acard.frame.height + cardMargin
-
-        let acard3 = CardView(frame: CGRect(x: 2*marginX, y: cardCursurY, width: cardwidth, height: cardHeight))
-        scrollView.addSubview(acard3)
-        cardCursurY = cardCursurY + marginY + acard.frame.height + cardMargin
- 
-        //cursurY = cursurY + scrollView.contentSize.width
-        //views["leftFormView"]!.addSubview(acard)
+        for aCardData in NetworkManager.shared.profileObs.value.cards{
+            let acard = CardView(frame: CGRect(x: 2*marginX, y: cardCursurY, width: cardwidth, height: cardHeight))
+            acard.cardNo1.text = aCardData.card_number?.slice(From: 0, To: 3)
+            acard.cardNo2.text = aCardData.card_number?.slice(From: 4, To: 7)
+            acard.cardNo3.text = aCardData.card_number?.slice(From: 8, To: 11)
+            acard.cardNo4.text = aCardData.card_number?.slice(From: 12, To: 15)
+            let bankPrefixNum = aCardData.card_number?.slice(From: 0, To: 5)
+            if aCardData.bank_logo == nil || aCardData.bank_name == nil {
+                getBankData(bankPrefixNum!)
+                    .subscribe(onNext: { innerBank in
+                        if innerBank.logo != nil {
+                            let imageUrl = NetworkManager.shared.baseURLString + SlidesAndPaths.shared.path_bank_logo_image + (innerBank.logo ?? "")
+                            if let castedUrl = URL(string: imageUrl) {
+                                acard.bankLogo.setImageFromCache(PlaceHolderName: "icon_poldarsho", Scale: 1, ImageURL: castedUrl, ImageName: innerBank.logo!)
+                            }else{
+                                print("ShowProfileUI : Bank Str -> URL Can not be casted ")
+                            }
+                        }
+                        acard.nameLabel.text = innerBank.bank ?? "نامشخص"
+                    }).disposed(by: myDisposeBag)
+            }else{
+                if aCardData.bank_logo != nil {
+                    let imageUrl = NetworkManager.shared.baseURLString + SlidesAndPaths.shared.path_bank_logo_image + (aCardData.bank_logo ?? "")
+                    if let castedUrl = URL(string: imageUrl) {
+                        acard.bankLogo.setImageFromCache(PlaceHolderName: "icon_poldarsho", Scale: 1, ImageURL: castedUrl, ImageName: aCardData.bank_logo!)
+                    }
+                }
+                acard.nameLabel.text = aCardData.bank_name
+            }
+            scrollView.addSubview(acard)
+            cardCursurY = cardCursurY + marginY + acard.frame.height + cardMargin
+        }
+        let newCard = NewCardView(frame: CGRect(x: 2*marginX, y: cardCursurY, width: cardwidth, height: cardHeight))
+        scrollView.addSubview(newCard)
+        newCard.addButton.addTarget(self, action: #selector(addCardTapped), for: .touchUpInside)
+        cardCursurY = cardCursurY + marginY + newCard.frame.height + cardMargin
+        
         scrollView.contentSize = CGSize(width: scrollView.contentSize.width, height: cardCursurY)
         views["leftFormView"]!.addSubview(scrollView)
         self.delegate.paneView.addSubview(views["leftFormView"]!)
         
+    }
+    func getBankData(_ aPrefixNo : String) -> Observable<Bank> {
+        let aParameter = ["card_number":aPrefixNo]
+        return Observable.create { observer -> Disposable in
+            Alamofire.request(NetworkManager.shared.baseURLString + "/" + "check-bank", method: HTTPMethod.post, parameters: aParameter, encoding: JSONEncoding.default, headers: NetworkManager.shared.headers)
+                .validate()
+                .responseJSON { response in
+                    switch response.result {
+                    case .success:
+                        guard let data = response.data else {
+                            observer.onError(response.error!)
+                            return
+                        }
+                        do {
+                            let newBank = try JSONDecoder().decode(Bank.self, from: data)
+                            print("NewBankDecoded : ",newBank)
+                            observer.onNext(newBank)
+                        } catch {
+                            observer.onError(error)
+                        }
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    @objc func addCardTapped(_ sender : Any){
+        self.delegate.coordinator!.pushNewCard()
     }
     
     func getProfileData() {

@@ -23,48 +23,7 @@ class ContactUSViewController: UIViewControllerWithKeyboardNotificationWithError
     @IBOutlet weak var notBadButton: UIButton!
     @IBOutlet weak var badButton: UIButton!
     
-    @IBAction func goodTapped(_ sender: Any) {
-        if goodButton.tag == 1 {
-            goodButton.tag = 0
-            notBadButton.tag = 0
-            badButton.tag = 0
-        }else{
-            goodButton.tag = 1
-            notBadButton.tag = 0
-            badButton.tag = 0
-        }
-        updateEmojis()
-    }
-    @IBAction func notBadTapped(_ sender: Any) {
-        if notBadButton.tag == 1 {
-            goodButton.tag = 0
-            notBadButton.tag = 0
-            badButton.tag = 0
-        }else{
-            goodButton.tag = 0
-            notBadButton.tag = 1
-            badButton.tag = 0
-        }
-        updateEmojis()
-    }
-    @IBAction func badTapped(_ sender: Any) {
-        if badButton.tag == 1 {
-            goodButton.tag = 0
-            notBadButton.tag = 0
-            badButton.tag = 0
-        }else{
-            goodButton.tag = 0
-            notBadButton.tag = 0
-            badButton.tag = 1
-        }
-        updateEmojis()
-    }
-    
-    func updateEmojis(){
-        if goodButton.tag == 1 { goodButton.setImage(UIImage(named: "icon_emoji_01_color"), for: .normal) } else { goodButton.setImage(UIImage(named: "icon_emoji_01"), for: .normal) }
-        if notBadButton.tag == 1 { notBadButton.setImage(UIImage(named: "icon_emoji_02_color"), for: .normal) } else { notBadButton.setImage(UIImage(named: "icon_emoji_02"), for: .normal) }
-        if badButton.tag == 1 { badButton.setImage(UIImage(named: "icon_emoji_03_color"), for: .normal) } else { badButton.setImage(UIImage(named: "icon_emoji_03"), for: .normal) }
-    }
+
     
     @IBAction func backTapped(_ sender: Any) {
         contactUSUI!.disposeList.forEach({$0.dispose()})
@@ -97,6 +56,7 @@ class ContactUSViewController: UIViewControllerWithKeyboardNotificationWithError
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getPollFromServer()
         gradientMainView()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         contactUSUI = ContactUSUI(self)

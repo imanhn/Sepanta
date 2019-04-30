@@ -58,6 +58,7 @@ class NetworkManager {
     var shopSearchResultObs = BehaviorRelay<[ShopSearchResult]>(value: [ShopSearchResult]())
     var profileObs = BehaviorRelay<Profile>(value: Profile())
     var bankObs = BehaviorRelay<Bank>(value: Bank())
+    var pollObs = BehaviorRelay<Int>(value: 0)
     var shopNotifObs = BehaviorRelay<[ShopNotification]>(value: [ShopNotification]())
     var generalNotifObs = BehaviorRelay<[GeneralNotification]>(value: [GeneralNotification]())
     // Initialization

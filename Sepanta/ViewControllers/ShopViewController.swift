@@ -36,13 +36,28 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     @IBOutlet weak var rateLabel: UILabel!
     @IBOutlet weak var followersNumLabel: UILabel!
     @IBOutlet weak var shopDescription: UILabel!
-    @IBOutlet weak var paneView: UIView!
+    @IBOutlet weak var panelView: TabbedViewWithWhitePanel!
     @IBOutlet weak var PostToolbarView: UIView!
+    @IBOutlet weak var mainScrollView: UIScrollView!
     
     @IBOutlet weak var offLabelLeading: NSLayoutConstraint!
     @IBOutlet weak var shopLogoTrailing: NSLayoutConstraint!
     @IBOutlet weak var shopLogoShopTitleDistance: NSLayoutConstraint!
     
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var ContactButton: UIButton!
+    @IBOutlet weak var PostsButton: UIButton!
+    @IBAction func showPostsTapped(_ sender: Any) {
+        self.panelView.tabJust = .Right
+        self.panelView.setNeedsDisplay()
+        self.shopUI!.showShopPosts()
+    }
+    
+    @IBAction func showContactTapped(_ sender: Any) {
+        self.panelView.tabJust = .Left
+        self.panelView.setNeedsDisplay()
+        self.shopUI!.showContacts()
+    }
     @IBAction func homeTapped(_ sender: Any) {
         shopUI = nil
         NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: Profile())
@@ -100,6 +115,14 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
         NetworkManager.shared.run(API: "profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
     }
     
+    override func viewDidLayoutSubviews() {
+        
+        let calculatedHeight = UIScreen.main.bounds.height * 1.2
+        //print("Calculated Height : ",calculatedHeight)
+        mainScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: calculatedHeight)
+        
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         getShopFromServer()
     }

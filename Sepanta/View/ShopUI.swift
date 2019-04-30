@@ -21,6 +21,7 @@ class ButtonCell : UICollectionViewCell {
 
 class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     var delegate : ShopViewController
+    var disposeList = [Disposable]()
     var views = Dictionary<String,UIView>()
     var buttons = Dictionary<String,UIButton>()
     var postsView = UIView()
@@ -30,19 +31,9 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     var posts = BehaviorRelay<[Post]>(value: [Post]())
     let numberOfPostInARow : CGFloat = 4
     var isShop : Bool
-    /*
-    {
-        didSet {
-            sectionDataController.update(items: items, updateMode: .partial(animated: true), completion: {
-                // Completed update
-            })
-        }
-    }
-    let sectionDataController = SectionDataController<Model, CollectionViewAdapter>(
-        adapter: CollectionViewAdapter(collectionView: self.collectionView),
-        isEqual: { $0.id == $1.id } // If Model has Equatable, you can omit this closure.
-    )
-   */
+    var cursurY : CGFloat = 0
+    let marginY : CGFloat = 20
+    let marginX : CGFloat = 10
     init(_ vc : ShopViewController) {
         self.delegate = vc
         if  LoginKey.shared.role.uppercased() == "SHOP" || LoginKey.shared.role.uppercased() == "OPTIONAL(SHOP)" ||
@@ -61,7 +52,18 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     }
     
     @objc func shareTapped(sender : Any){
-        let activityVC = UIActivityViewController(activityItems: ["www.ipsepanta.ir"], applicationActivities: nil)
+        var shopURL = NetworkManager.shared.profileObs.value.url
+        if shopURL == nil {
+            if let ashopID = NetworkManager.shared.profileObs.value.shop_id  {
+                shopURL = "/shop/\(ashopID)"
+            }
+        }
+        
+        guard shopURL != nil else {
+            self.delegate.alert(Message: "اطلاعات فروشگاه برای به اشتراک گذاری کامل نیست")
+            return
+        }
+        let activityVC = UIActivityViewController(activityItems: ["www.ipsepanta.ir"+shopURL!], applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = self.delegate.view
         self.delegate.present(activityVC, animated: true, completion: nil)
     }
@@ -86,7 +88,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         var aProfile = NetworkManager.shared.profileObs.value
         let aParameter = ["shop id":"\(aProfile.shop_id ?? 0)"]
         NetworkManager.shared.run(API: "follow-unfollow-request", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: false)
-        NetworkManager.shared.status
+        let statusDisp = NetworkManager.shared.status
             .filter({$0 == CallStatus.ready})
             .subscribe(onNext: { [unowned self] (innerStatus) in
             print("innerStatus : ",innerStatus)
@@ -109,22 +111,23 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
             self.delegate.alert(Message: "عضویت قابل انجام نیست، احتمالاْ شبکه قطع می باشد مجددا تلاش فرمایید.")
             NetworkManager.shared.status = BehaviorRelay<CallStatus>(value: CallStatus.ready)
             Spinner.stop()
-        }).disposed(by: myDisposeBag)
+        })
+        statusDisp.disposed(by: myDisposeBag)
+        disposeList.append(statusDisp)
     }
     
     func buildPostToolbar(){
-        let marginY : CGFloat = 10
         let marginXBTWButtons : CGFloat = 10
         let leadingMarginX = self.delegate.offLabelLeading.constant
         let trailingMarginX = self.delegate.shopLogoTrailing.constant
         let viewWidth = self.delegate.PostToolbarView.frame.width
         let viewHeight = self.delegate.PostToolbarView.frame.height
-        let buttonDim = viewHeight - (2 * marginY)
+        let buttonDim = viewHeight
         if isShop {
             
             buttons["shareButton"] = RoundedButton(type: .custom)
             var xCursor = leadingMarginX
-            buttons["shareButton"]!.frame = CGRect(x: xCursor, y: marginY, width: buttonDim, height: buttonDim)
+            buttons["shareButton"]!.frame = CGRect(x: xCursor, y: 0, width: buttonDim, height: buttonDim)
             buttons["shareButton"]!.setImage(UIImage(named: "icon_share"), for: .normal)
             buttons["shareButton"]!.contentMode = .scaleAspectFit
             buttons["shareButton"]!.addTarget(self, action: #selector(shareTapped), for: .touchUpInside)
@@ -132,7 +135,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
 
             xCursor = xCursor + marginXBTWButtons + buttonDim
             buttons["addButton"] = UIButton(type: .custom)
-            buttons["addButton"]!.frame = CGRect(x: xCursor, y: marginY, width: buttonDim, height: buttonDim)
+            buttons["addButton"]!.frame = CGRect(x: xCursor, y: 0, width: buttonDim, height: buttonDim)
             buttons["addButton"]!.layer.cornerRadius = 5
             buttons["addButton"]!.layer.borderColor = UIColor(hex: 0xDA3A5C).cgColor
             buttons["addButton"]!.setImage(UIImage(named: "icon_add_white"), for: .normal)
@@ -143,7 +146,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
 
             xCursor = xCursor + marginXBTWButtons + buttonDim
             buttons["editButton"] = RoundedButton(type: .custom)
-            buttons["editButton"]!.frame = CGRect(x: xCursor, y: marginY, width: buttonDim, height: buttonDim)
+            buttons["editButton"]!.frame = CGRect(x: xCursor, y: 0, width: buttonDim, height: buttonDim)
             buttons["editButton"]!.setImage(UIImage(named: "icon_edit"), for: .normal)
             buttons["editButton"]!.addTarget(self, action: #selector(editTapped), for: .touchUpInside)
             self.delegate.PostToolbarView.addSubview(buttons["editButton"]!)
@@ -151,7 +154,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
             xCursor = xCursor + marginXBTWButtons + buttonDim
             let buttonWidth = viewWidth - xCursor - trailingMarginX
             buttons["newPostButton"] = RoundedButton(type: .custom)
-            buttons["newPostButton"]!.frame = CGRect(x: xCursor, y: marginY, width: buttonWidth, height: buttonDim)
+            buttons["newPostButton"]!.frame = CGRect(x: xCursor, y: 0, width: buttonWidth, height: buttonDim)
             buttons["newPostButton"]!.layer.cornerRadius = 5
             buttons["newPostButton"]!.layer.borderColor = UIColor(hex: 0xDA3A5C).cgColor
             buttons["newPostButton"]!.setImage(UIImage(named: "icon_btn_add"), for: .normal)
@@ -166,7 +169,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         }else{
             buttons["shareButton"] = RoundedButton(type: .custom)
             var xCursor = leadingMarginX
-            buttons["shareButton"]!.frame = CGRect(x: xCursor, y: marginY, width: buttonDim, height: buttonDim)
+            buttons["shareButton"]!.frame = CGRect(x: xCursor, y: 0, width: buttonDim, height: buttonDim)
             buttons["shareButton"]!.setImage(UIImage(named: "icon_share"), for: .normal)
             buttons["shareButton"]!.contentMode = .scaleAspectFit
             buttons["shareButton"]!.addTarget(self, action: #selector(shareTapped), for: .touchUpInside)
@@ -176,7 +179,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
             let totalTrailingDistanceToRight = self.delegate.shopLogoTrailing.constant + self.delegate.shopLogoShopTitleDistance.constant + self.delegate.shopLogo.frame.width
             let buttonWidth = viewWidth - xCursor - totalTrailingDistanceToRight
             buttons["followButton"] = SubmitButton(type: .custom)
-            buttons["followButton"]!.frame = CGRect(x: xCursor, y: marginY, width: buttonWidth, height: buttonDim)
+            buttons["followButton"]!.frame = CGRect(x: xCursor, y: 0, width: buttonWidth, height: buttonDim)
             buttons["followButton"]!.setTitle("بررسی عضویت...", for: .normal)
             buttons["followButton"]!.addTarget(self, action: #selector(followTapped), for: .touchUpInside)
             buttons["followButton"]!.setDisable()
@@ -194,7 +197,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     }
 
     func bindUIwithDataSource(){
-        NetworkManager.shared.shopFav
+        let shopFavDisp = NetworkManager.shared.shopFav
             .filter({$0 != ToggleStatus.UNKNOWN})
             .subscribe(onNext: { [unowned self] (favShopStatus) in
                 if favShopStatus == ToggleStatus.YES {
@@ -202,69 +205,73 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 }else{
                     self.delegate.favButton.setImage(UIImage(named: "icon_star_fav_gray"), for: .normal)
                 }
-            }).disposed(by: myDisposeBag)
+            })
+        shopFavDisp.disposed(by: myDisposeBag)
+        disposeList.append(shopFavDisp)
         
-        NetworkManager.shared.profileObs
-        .subscribe(onNext: { [unowned self] aProfile in
-            //print("SUBSCRIPTION UPDATE",aProfile)
-            self.delegate.shopTitle.text = aProfile.shop_name
-            self.delegate.scoreLabel.text = "امتیاز " + "\(aProfile.follower_count ?? 0)"
-            self.delegate.followersNumLabel.text = "\(aProfile.follower_count ?? 0)"
-            self.delegate.offLabel.text = "\(aProfile.shop_off ?? 0)%"
-            self.delegate.rateLabel.text = "(\(aProfile.rate ?? "0"))"
-            let rate : Float = Float(aProfile.rate ?? "0.0") ?? 0
-            if rate > 0.5 {self.delegate.star1.image = UIImage(named: "icon_star_on")}
-            if rate > 1.5 {self.delegate.star2.image = UIImage(named: "icon_star_on")}
-            if rate > 2.5 {self.delegate.star3.image = UIImage(named: "icon_star_on")}
-            if rate > 3.5 {self.delegate.star4.image = UIImage(named: "icon_star_on")}
-            if rate > 4.5 {self.delegate.star5.image = UIImage(named: "icon_star_on")}
-            //print("ShopUI : setting shopui.posts to  :: ",aProfile.content)
-            if let postContents = aProfile.content as? [Post] {
-                self.posts.accept(aProfile.content as! [Post])
-            }else{
-                print("aProfile.content has shops but expected to have posts")
-                self.delegate.alert(Message: "خطای داخلی اتفاق افتاده است")
-                return
-            }
-            //print("Profile : ",aProfile)
-            if !self.isShop {
-                if aProfile.is_follow != nil  {
-                    if aProfile.is_follow! {
-                        self.buttons["followButton"]!.setTitle("عضو شده اید", for: .normal)
-                        self.buttons["followButton"]!.setEnable()
-                    }else{
-                        self.buttons["followButton"]!.setTitle("عضویت", for: .normal)
-                        self.buttons["followButton"]!.setEnable()
+        let profileDisp = NetworkManager.shared.profileObs
+            .subscribe(onNext: { [unowned self] aProfile in
+                //print("SUBSCRIPTION UPDATE",aProfile)
+                self.delegate.shopTitle.text = aProfile.shop_name
+                self.delegate.scoreLabel.text = "امتیاز " + "\(aProfile.follower_count ?? 0)"
+                self.delegate.followersNumLabel.text = "\(aProfile.follower_count ?? 0)"
+                self.delegate.offLabel.text = "\(aProfile.shop_off ?? 0)%"
+                self.delegate.rateLabel.text = "(\(aProfile.rate ?? "0"))"
+                let rate : Float = Float(aProfile.rate ?? "0.0") ?? 0
+                if rate > 0.5 {self.delegate.star1.image = UIImage(named: "icon_star_on")}
+                if rate > 1.5 {self.delegate.star2.image = UIImage(named: "icon_star_on")}
+                if rate > 2.5 {self.delegate.star3.image = UIImage(named: "icon_star_on")}
+                if rate > 3.5 {self.delegate.star4.image = UIImage(named: "icon_star_on")}
+                if rate > 4.5 {self.delegate.star5.image = UIImage(named: "icon_star_on")}
+                //print("ShopUI : setting shopui.posts to  :: ",aProfile.content)
+                if let postContents = aProfile.content as? [Post] {
+                    self.posts.accept(aProfile.content as! [Post])
+                }else{
+                    print("aProfile.content has shops but expected to have posts")
+                    self.delegate.alert(Message: "خطای داخلی اتفاق افتاده است")
+                    return
+                }
+                //print("Profile : ",aProfile)
+                if !self.isShop {
+                    if aProfile.is_follow != nil  {
+                        if aProfile.is_follow! {
+                            self.buttons["followButton"]!.setTitle("عضو شده اید", for: .normal)
+                            self.buttons["followButton"]!.setEnable()
+                        }else{
+                            self.buttons["followButton"]!.setTitle("عضویت", for: .normal)
+                            self.buttons["followButton"]!.setEnable()
+                        }
                     }
                 }
-            }
-            
-            if aProfile.is_favorite != nil{
-                if aProfile.is_favorite! {
-                    self.delegate.favButton.setImage(UIImage(named: "icon_star_fav_dark"), for: .normal)
-                }else{
-                    self.delegate.favButton.setImage(UIImage(named: "icon_star_fav_gray"), for: .normal)
+                
+                if aProfile.is_favorite != nil{
+                    if aProfile.is_favorite! {
+                        self.delegate.favButton.setImage(UIImage(named: "icon_star_fav_dark"), for: .normal)
+                    }else{
+                        self.delegate.favButton.setImage(UIImage(named: "icon_star_fav_gray"), for: .normal)
+                    }
                 }
-            }
-            
-            if aProfile.image != nil {
-                let imageURL = URL(string: NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_profile_image + aProfile.image!)
-                //print("Shop Image : ",imageURL ?? "Nil")
-                if imageURL != nil {
-                    self.delegate.shopImage.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!)
-                    self.delegate.shopLogo.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!)
-                    self.delegate.shopLogo.layer.shadowColor = UIColor.black.cgColor
-                    self.delegate.shopLogo.layer.shadowOffset = CGSize(width: 3, height: 3)
-                    self.delegate.shopLogo.layer.shadowRadius = 3
-                    self.delegate.shopLogo.layer.shadowOpacity = 0.3
+                
+                if aProfile.image != nil {
+                    let imageURL = URL(string: NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_profile_image + aProfile.image!)
+                    //print("Shop Image : ",imageURL ?? "Nil")
+                    if imageURL != nil {
+                        self.delegate.shopImage.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!)
+                        self.delegate.shopLogo.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!)
+                        self.delegate.shopLogo.layer.shadowColor = UIColor.black.cgColor
+                        self.delegate.shopLogo.layer.shadowOffset = CGSize(width: 3, height: 3)
+                        self.delegate.shopLogo.layer.shadowRadius = 3
+                        self.delegate.shopLogo.layer.shadowOpacity = 0.3
+                    }
                 }
-            }
-            //if aProfil
-        }).disposed(by: myDisposeBag)
+                //if aProfil
+            })
+        profileDisp.disposed(by: myDisposeBag)
+        disposeList.append(profileDisp)
     }
     
     func bindCollectionView(){
-        self.posts.bind(to: collectionView.rx.items(cellIdentifier: "buttoncell")) { [unowned self] row, model, cell in
+        let postsCollectionViewDisp = self.posts.bind(to: collectionView.rx.items(cellIdentifier: "buttoncell")) { [unowned self] row, model, cell in
             if let aCell = cell as? ButtonCell {
                 //if aCell.aButton == nil {aCell.aButton = UIButton(type: .custom)}
                 let strURL = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + model.image!
@@ -293,88 +300,74 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
             }else{
                 print("\(cell) can not be casted to ButtonCell")
             }
-            }.disposed(by: myDisposeBag)
-        
+            }
+        postsCollectionViewDisp.disposed(by: myDisposeBag)
+        disposeList.append(postsCollectionViewDisp)
 
     }
     //Create Gradient on PageView
     func showShopPosts() {
         //print("reseller Request : ",views["leftFormView"] ?? "Nil")
-        if views["leftFormView"] != nil && views["leftFormView"]?.superview != nil { views["leftFormView"]?.removeFromSuperview()}
-        var cursurY : CGFloat = 0
-        let marginY : CGFloat = 0
-        let marginX : CGFloat = 10
         
-        //self.delegate.paneView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: (UIScreen.main.bounds.height * 2)+40)
-        
-        views["rightFormView"] = RightTabbedView(frame: CGRect(x: marginX, y: marginY, width: self.delegate.paneView.frame.width-2*marginX, height: self.delegate.paneView.frame.height-marginY))
-        views["rightFormView"]!.backgroundColor = UIColor.clear
-        let buttonsFont = UIFont(name: "Shabnam-Bold-FD", size: 14)
-        let buttonHeight = (views["rightFormView"] as! RightTabbedView).getHeight()
-        //let textFieldWidth = (views["rightFormView"]?.bounds.width)! - (2 * marginX)
-        
-        buttons["leftButton"] = UIButton(frame: CGRect(x: 0, y: 0, width: (views["rightFormView"]?.bounds.width)!/2, height: buttonHeight))
-        buttons["leftButton"]!.setTitle("اطلاعات ارتباطی", for: .normal)
-        buttons["leftButton"]!.titleLabel?.font = buttonsFont
-        buttons["leftButton"]!.addTarget(self.delegate, action: #selector(self.delegate.contactTapped), for: .touchUpInside)
-        buttons["leftButton"]!.setTitleColor(UIColor(hex: 0x515152), for: .normal)
-        
-        buttons["rightButton"] = UIButton(frame: CGRect(x: views["rightFormView"]!.bounds.width/2, y: 0, width: views["rightFormView"]!.bounds.width/2, height: buttonHeight))
-        buttons["rightButton"]!.setTitle("مطالب ارسال شده", for: .normal)
-        buttons["rightButton"]!.titleLabel?.font = buttonsFont
-        buttons["rightButton"]!.setTitleColor(UIColor(hex: 0x515152), for: .normal)
-        
-        views["rightFormView"]!.addSubview(buttons["leftButton"]!)
-        views["rightFormView"]!.addSubview(buttons["rightButton"]!)
-        cursurY = cursurY + buttonHeight + marginY+20
-        
+        self.delegate.contentView.subviews.forEach({$0.removeFromSuperview()})
+
+        self.delegate.PostsButton.setTitleColor(UIColor(hex: 0x515152), for: .normal)
+        self.delegate.ContactButton.setTitleColor(UIColor(hex: 0xD6D7D9), for: .normal)
+
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 10
         
-        collectionView = UICollectionView(frame: CGRect(x: marginX, y: cursurY, width: views["rightFormView"]!.frame.width-(2*marginX), height: views["rightFormView"]!.frame.height-cursurY), collectionViewLayout: flowLayout)
+        collectionView = UICollectionView(frame: CGRect(x: marginX, y: marginY, width: self.delegate.contentView.frame.width-(2*marginX), height: self.delegate.contentView.frame.height-2*marginY), collectionViewLayout: flowLayout)
         collectionView.register(ButtonCell.self, forCellWithReuseIdentifier: "buttoncell")
         collectionView.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0)
         _ = collectionView.rx.setDelegate(self) //Delegate method to call
-        views["rightFormView"]!.addSubview(collectionView)
-        self.delegate.paneView.addSubview(views["rightFormView"]!)
+        self.delegate.contentView.addSubview(collectionView)
         bindCollectionView()
     }
     
     func showContacts() {
-        //print("Card Request  : ",views["rightFormView"]!,"  SuperView : ",views["rightFormView"]!.superview ?? "Nil")
-        if views["rightFormView"]?.superview != nil { views["rightFormView"]?.removeFromSuperview()}
-        var cursurY : CGFloat = 0
-        let marginY : CGFloat = 0
-        let marginX : CGFloat = 10
-        views["leftFormView"] = LeftTabbedView(frame: CGRect(x: marginX, y: marginY, width: self.delegate.paneView.frame.width-2*marginX, height: self.delegate.paneView.frame.height-marginY))
-        views["leftFormView"]!.backgroundColor = UIColor.clear
         
+        self.delegate.contentView.subviews.forEach({$0.removeFromSuperview()})
         
-        let buttonsFont = UIFont(name: "Shabnam-Bold-FD", size: 14)
-        let buttonHeight = (views["leftFormView"] as! LeftTabbedView).getHeight()
-        //let textFieldWidth = (views["leftFormView"]!.bounds.width) - (2 * marginX)
+        self.delegate.PostsButton.setTitleColor(UIColor(hex: 0xD6D7D9), for: .normal)
+        self.delegate.ContactButton.setTitleColor(UIColor(hex: 0x515152), for: .normal)
+
+        self.delegate.contentView.subviews.forEach({$0.removeFromSuperview()})
+        disposeList.forEach({$0.dispose()})
+        cursurY = 0
+        let aProfile = NetworkManager.shared.profileObs.value
+        let buttonHeight = self.delegate.contentView.frame.height / 7
+        let textFieldWidth = (self.delegate.contentView.bounds.width) - (2 * marginX)
+        var shopView = UIView()
+        let sepantaText = aProfile.shop_name ?? ""
+        (shopView,_) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "icon_profile_05",  LabelText: sepantaText,Lines : 3)
+        cursurY = cursurY + shopView.frame.height + marginY/2
+        self.delegate.contentView.addSubview(shopView)
         
-        buttons["leftButton"] = UIButton(frame: CGRect(x: 0, y: 0, width: views["leftFormView"]!.bounds.width/2, height: buttonHeight))
-        buttons["leftButton"]!.setTitle("اطلاعات ارتباطی", for: .normal)
-        buttons["leftButton"]!.titleLabel?.font = buttonsFont
-        //buttons["leftButton"]!.addTarget(self, action: #selector(self.cardRequestTapped(_:)), for: .touchUpInside)
-        buttons["leftButton"]!.setTitleColor(UIColor(hex: 0x515152), for: .normal)
+        let sepantaAddress = aProfile.address ?? ""
+        var addressView = UIView()
+        (addressView,_) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "icon_profile_06",  LabelText: sepantaAddress,Lines : 2)
+        cursurY = cursurY + addressView.frame.height + marginY/2
+        self.delegate.contentView.addSubview(addressView)
         
+        var telView = UIView()
+        let shopTel = (aProfile.phone ?? "").toPersianNumbers()
+        (telView,_) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "icon_profile_07",  LabelText: shopTel,Lines: 1)
+        cursurY = cursurY + telView.frame.height + marginY/2
+        self.delegate.contentView.addSubview(telView)
         
-        buttons["rightButton"] = UIButton(frame: CGRect(x: views["leftFormView"]!.bounds.width/2, y: 0, width: views["leftFormView"]!.bounds.width/2, height: buttonHeight))
-        buttons["rightButton"]!.setTitle("مطالب ارسال شده", for: .normal)
-        buttons["rightButton"]!.titleLabel?.font = buttonsFont
-        buttons["rightButton"]!.addTarget(self.delegate, action: #selector(self.delegate.showPostTapped), for: .touchUpInside)
-        buttons["rightButton"]!.setTitleColor(UIColor(hex: 0x515152), for: .normal)
+        var webView = UIView()
+        let webAddress = "www.ipsepanta.ir" + (aProfile.url ?? "")
+        (webView,_) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "web",  LabelText: webAddress,Lines: 1)
+        cursurY = cursurY + webView.frame.height + marginY/2
+        self.delegate.contentView.addSubview(webView)
         
-        views["leftFormView"]!.addSubview(buttons["leftButton"]!)
-        views["leftFormView"]!.addSubview(buttons["rightButton"]!)
-        cursurY = cursurY + buttonHeight + marginY
-        
-        let scrollView = UIScrollView(frame: CGRect(x: 0, y: cursurY, width: views["rightFormView"]!.frame.width, height: views["rightFormView"]!.frame.height-buttonHeight))
-        views["rightFormView"]!.addSubview(scrollView)
-        
-        self.delegate.paneView.addSubview(views["leftFormView"]!)
+        /*var emailAddress = aProfile. ?? ""
+        var emailView = UIView()
+        (emailView,_) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "black-back-closed-envelope-shape",  LabelText: "info@ipsepanta.ir",Lines: 1)
+        cursurY = cursurY + emailView.frame.height + marginY/2
+        self.delegate.contentView.addSubview(emailView)
+        */
     }
     
     @objc func showPostDetail(_ sender : Any){

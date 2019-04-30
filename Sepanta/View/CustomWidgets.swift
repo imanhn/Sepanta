@@ -586,6 +586,19 @@ class LeftTabbedViewWithWhitePanel: UIView {
         
     }
 }
+protocol UITextFieldDelegateWithBackward : class{
+    func deletePressed(_ sender : Any)
+}
+
+class CreditCardPartNumber : UITextField{
+    weak var backwardDelegate : UITextFieldDelegateWithBackward?
+    override func deleteBackward() {
+        backwardDelegate?.deletePressed(self)
+        super.deleteBackward()
+        
+    }
+}
+
 extension UISearchBar {
     
     // OUTPUT 1
@@ -710,6 +723,42 @@ extension CGRect {
             aView.addSubview(triangleImage)
         }
         aView.addSubview(aText)        
+        return (aView,aText)
+    }
+    
+    func buildALabelView(Image anImageName : String,LabelText aStr : String,Lines noLines : Int)->(UIView,UILabel){
+        let rect = self
+        let aView = UIView(frame: rect)
+        /*let lineView = UIView(frame: CGRect(x: 0, y: rect.height-1, width: rect.width, height: 1))
+         lineView.backgroundColor = UIColor(hex: 0xD6D7D9)
+         aView.addSubview(lineView)
+         */
+        aView.backgroundColor = UIColor.white
+        let icondim = rect.height / 3
+        let spaceIconText : CGFloat = 20
+        let imageRect = CGRect(x: (rect.width-icondim), y: (rect.height - icondim)/2, width: icondim, height: icondim)
+        let anIcon = UIImageView(frame: imageRect)
+        anIcon.image = UIImage(named: anImageName)
+        anIcon.contentMode = .scaleAspectFit
+        let aText = UILabel(frame: CGRect(x: 0, y: 0, width: (rect.width-icondim-spaceIconText), height: rect.height))
+        
+        if noLines == 3 {
+            aText.font = UIFont(name: "Shabnam-FD", size: 12)
+        }else if noLines == 2 {
+            aText.font = UIFont(name: "Shabnam-FD", size: 12)
+        }else if noLines == 1 {
+            aText.font = UIFont(name: "Shabnam-FD", size: 14)
+        }
+        aText.adjustsFontSizeToFitWidth = true
+        aText.textColor = UIColor(hex: 0x515152)
+        aText.textAlignment = .right
+        aText.text = aStr
+        aText.numberOfLines = noLines
+        
+        //aText.delegate = self
+        aView.addSubview(aText)
+        aView.addSubview(anIcon)
+        
         return (aView,aText)
     }
 }

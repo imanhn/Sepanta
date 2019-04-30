@@ -251,6 +251,14 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
+    func pushNewCard(){
+        let storyboard = UIStoryboard(name: "NewCard", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "NewCardViewController") as! NewCardViewController
+        vc.coordinator = self
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
     
     func logout() {
         LoginKey.shared.deleteTokenAndUserID()

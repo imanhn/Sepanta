@@ -66,41 +66,36 @@ class ContactUSUI : NSObject , UITextFieldDelegate {
         self.delegate.showContactInfo.setTitleColor(UIColor(hex: 0x515152), for: .normal)
         self.delegate.showFeedback.setTitleColor(UIColor(hex: 0xD6D7D9), for: .normal)
         cursurY = 0
-
-        /*
-        
-        let backgroundFormView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 2))
-        backgroundFormView.layer.insertSublayer(gradient, at: 0)
-        self.delegate.mainView.addSubview(backgroundFormView)
-        */
-        
-        //views["rightFormView"] = TabbedViewWithWhitePanel(frame: CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: UIScreen.main.bounds.height * 2))
-        //self.delegate.panelView.backgroundColor = UIColor.clear
         
         let buttonHeight = self.delegate.contentView.frame.height / 7
         let textFieldWidth = (self.delegate.contentView.bounds.width) - (2 * marginX)
-
+        var shopView = UIView()
         let sepantaText = "مجموعه سپنتا یک استات آپ مبتنی بر ارائه سرویس های مرتبط با باشگاه مشتریان است. در مجموعه سپنتا فروشگاه ها و خریدران کالا و خدمات امکان یافتن منابع مورد نیاز را دارد"
-        (views["shopView"],labels["shopText"]) = buildALabelView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_05",  LabelText: sepantaText,Lines : 3)
-        cursurY = cursurY + views["shopView"]!.frame.height + marginY/2
-        self.delegate.contentView.addSubview(views["shopView"]!)
+        (shopView,_) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "icon_profile_05",  LabelText: sepantaText,Lines : 3)
+        cursurY = cursurY + shopView.frame.height + marginY/2
+        self.delegate.contentView.addSubview(shopView)
 
         let sepantaAddress = "تهران میدان آرژانتین خیابان الوند نبش الوند ۳۳ شرقی پلاک ۴۵ واحد ۶"
-        (views["addressView"],labels["addressText"]) = buildALabelView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_06",  LabelText: sepantaAddress,Lines : 2)
-        cursurY = cursurY + views["addressView"]!.frame.height + marginY/2
-        self.delegate.contentView.addSubview(views["addressView"]!)
+        
+        var addressView = UIView()
+        (addressView,_) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "icon_profile_06",  LabelText: sepantaAddress,Lines : 2)
+        cursurY = cursurY + addressView.frame.height + marginY/2
+        self.delegate.contentView.addSubview(addressView)
 
-        (views["telView"],labels["telText"]) = buildALabelView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_07",  LabelText: "۰۲۱-۴۵۲۲۷",Lines: 1)
-        cursurY = cursurY + views["telView"]!.frame.height + marginY/2
-        self.delegate.contentView.addSubview(views["telView"]!)
+        var telView = UIView()
+        (telView,_) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "icon_profile_07",  LabelText: "۰۲۱-۴۵۲۲۷",Lines: 1)
+        cursurY = cursurY + telView.frame.height + marginY/2
+        self.delegate.contentView.addSubview(telView)
 
-        (views["webView"],labels["webText"]) = buildALabelView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "web",  LabelText: "www.ipsepanta.ir",Lines: 1)
-        cursurY = cursurY + views["webView"]!.frame.height + marginY/2
-        self.delegate.contentView.addSubview(views["webView"]!)
+        var webView = UIView()
+        (webView,_) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "web",  LabelText: "www.ipsepanta.ir",Lines: 1)
+        cursurY = cursurY + webView.frame.height + marginY/2
+        self.delegate.contentView.addSubview(webView)
 
-        (views["emailView"],labels["emailText"]) = buildALabelView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "black-back-closed-envelope-shape",  LabelText: "info@ipsepanta.ir",Lines: 1)
-        cursurY = cursurY + views["emailView"]!.frame.height + marginY/2
-        self.delegate.contentView.addSubview(views["emailView"]!)
+        var emailView = UIView()
+        (emailView,_) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "black-back-closed-envelope-shape",  LabelText: "info@ipsepanta.ir",Lines: 1)
+        cursurY = cursurY + emailView.frame.height + marginY/2
+        self.delegate.contentView.addSubview(emailView)
 
         
         cursurY = cursurY + buttonHeight + marginY
@@ -163,43 +158,6 @@ class ContactUSUI : NSObject , UITextFieldDelegate {
             ).disposed(by: self.delegate.myDisposeBag)
     }
     
-    func buildALabelView(CGRect rect : CGRect,Image anImageName : String,LabelText aStr : String,Lines noLines : Int)->(UIView?,UILabel?){
-        let aView = UIView(frame: rect)
-        /*let lineView = UIView(frame: CGRect(x: 0, y: rect.height-1, width: rect.width, height: 1))
-        lineView.backgroundColor = UIColor(hex: 0xD6D7D9)
-        aView.addSubview(lineView)
-        */
-        aView.backgroundColor = UIColor.white
-        let icondim = rect.height / 3
-        let spaceIconText : CGFloat = 20
-        let imageRect = CGRect(x: (rect.width-icondim), y: (rect.height - icondim)/2, width: icondim, height: icondim)
-        let anIcon = UIImageView(frame: imageRect)
-        anIcon.image = UIImage(named: anImageName)
-        anIcon.contentMode = .scaleAspectFit
-        let aText = UILabel(frame: CGRect(x: 0, y: 0, width: (rect.width-icondim-spaceIconText), height: rect.height))
-        
-        if noLines == 3 {
-            aText.font = UIFont(name: "Shabnam-FD", size: 12)
-        }else if noLines == 2 {
-            aText.font = UIFont(name: "Shabnam-FD", size: 12)
-        }else if noLines == 1 {
-            aText.font = UIFont(name: "Shabnam-FD", size: 14)
-        }
-        aText.adjustsFontSizeToFitWidth = true
-        aText.textColor = UIColor(hex: 0x515152)
-        aText.textAlignment = .right
-        aText.text = aStr
-        aText.numberOfLines = noLines
-        
-        //aText.delegate = self
-        aView.addSubview(aText)
-        aView.addSubview(anIcon)
-        
-        return (aView,aText)
-    }
-    
-    
-
     
     @objc func submitFeedBack(_ sender : Any){
         self.delegate.view.endEditing(true)

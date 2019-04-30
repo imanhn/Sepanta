@@ -87,6 +87,10 @@ class JSONParser {
                 } else if (apiName == "send-comment") && (aMethod == HTTPMethod.post) {
                     // Sets True for commentSendingSuccessful to be observable by PostUI
                     NetworkManager.shared.commentSendingSuccessful.accept(true)
+                } else if (apiName == "poll") && (aMethod == HTTPMethod.get) {
+                    //Returns Profile Data for a user Id
+                    let aPollNo = (self?.processAsPollGet(Result: aDic))!
+                    NetworkManager.shared.pollObs.accept(aPollNo)
                 } else if (apiName == "contact") && (aMethod == HTTPMethod.post) {
                     // Sets True for commentSendingSuccessful to be observable by PostUI
                     NetworkManager.shared.message = (aDic["message"] as? String) ?? "نظر شما ثبت گردید"
@@ -167,7 +171,16 @@ class JSONParser {
                 }
             ).disposed(by: netObjectsDispose)
     }
-    
+    func processAsPollGet(Result aResult : NSDictionary) -> Int {
+        if aResult["error"] != nil {
+            print("ERROR in Card Request Parsing : ",aResult["error"]!)
+        }
+        if let aPoll = aResult["poll"] as? Int{
+            return aPoll
+        }
+        return 0
+
+    }
     func processSellRequest(Result aResult : NSDictionary)  {
         if aResult["error"] != nil {
             print("ERROR in Card Request Parsing : ",aResult["error"]!)

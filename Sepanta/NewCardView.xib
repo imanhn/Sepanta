@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Shabnam-Bold-FD.ttf">
+            <string>Shabnam-Bold-FD</string>
+        </array>
+        <array key="Shabnam-FD.ttf">
+            <string>Shabnam-FD</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="NewCardView" customClass="NewCardView" customModule="Sepanta" customModuleProvider="target">
+            <connections>
+                <outlet property="addButton" destination="Smb-cp-CpS" id="b50-Rj-WVH"/>
+                <outlet property="contentView" destination="dNE-uc-HHr" id="dHT-uw-01g"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="dmv-cn-51T" userLabel="NewCardView">
+            <rect key="frame" x="0.0" y="0.0" width="412" height="239"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dNE-uc-HHr" userLabel="ContentView">
+                    <rect key="frame" x="20.5" y="27" width="371" height="185.5"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Smb-cp-CpS" userLabel="addButton">
+                            <rect key="frame" x="139" y="45.5" width="93" height="93"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="Smb-cp-CpS" secondAttribute="height" multiplier="1:1" id="Uyu-a9-pxB"/>
+                            </constraints>
+                            <state key="normal" image="add_card"/>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="کارت جدید" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RxK-sM-kXY" userLabel="newCardLabel">
+                            <rect key="frame" x="0.0" y="130.5" width="371" height="18.5"/>
+                            <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="16"/>
+                            <color key="textColor" red="0.8565688776" green="0.2257254132" blue="0.36172668870000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="اضافه نمودن کارت جدید" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0AN-kK-1g1" userLabel="addLabelDesc">
+                            <rect key="frame" x="0.0" y="157" width="371" height="18.5"/>
+                            <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="16"/>
+                            <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="RxK-sM-kXY" firstAttribute="top" secondItem="Smb-cp-CpS" secondAttribute="bottom" constant="-8" id="0DP-Bp-Kp7"/>
+                        <constraint firstItem="RxK-sM-kXY" firstAttribute="centerX" secondItem="dNE-uc-HHr" secondAttribute="centerX" id="83B-pi-BxY"/>
+                        <constraint firstItem="RxK-sM-kXY" firstAttribute="width" secondItem="dNE-uc-HHr" secondAttribute="width" id="D78-QW-IBP"/>
+                        <constraint firstAttribute="width" secondItem="dNE-uc-HHr" secondAttribute="height" multiplier="2:1" priority="750" id="IWr-F3-zaO"/>
+                        <constraint firstItem="Smb-cp-CpS" firstAttribute="width" secondItem="dNE-uc-HHr" secondAttribute="width" multiplier="0.25" id="JgM-X4-dYz"/>
+                        <constraint firstItem="0AN-kK-1g1" firstAttribute="height" secondItem="RxK-sM-kXY" secondAttribute="height" id="LxE-4I-E1e"/>
+                        <constraint firstItem="0AN-kK-1g1" firstAttribute="width" secondItem="dNE-uc-HHr" secondAttribute="width" id="Rl4-t7-UaN"/>
+                        <constraint firstItem="RxK-sM-kXY" firstAttribute="height" secondItem="Smb-cp-CpS" secondAttribute="height" multiplier="0.2" id="ZTq-xd-zy8"/>
+                        <constraint firstItem="0AN-kK-1g1" firstAttribute="centerX" secondItem="dNE-uc-HHr" secondAttribute="centerX" id="hDB-be-SDB"/>
+                        <constraint firstItem="Smb-cp-CpS" firstAttribute="centerX" secondItem="dNE-uc-HHr" secondAttribute="centerX" id="iJn-g1-s3h"/>
+                        <constraint firstItem="0AN-kK-1g1" firstAttribute="top" secondItem="RxK-sM-kXY" secondAttribute="bottom" constant="8" id="jMr-s3-M7B"/>
+                        <constraint firstItem="Smb-cp-CpS" firstAttribute="centerY" secondItem="dNE-uc-HHr" secondAttribute="centerY" id="lTH-7A-Z2x"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="dNE-uc-HHr" firstAttribute="width" secondItem="dmv-cn-51T" secondAttribute="width" multiplier="0.9" id="292-QQ-N2v"/>
+                <constraint firstItem="dNE-uc-HHr" firstAttribute="centerX" secondItem="bUK-kJ-dBW" secondAttribute="centerX" id="na5-a0-AYF"/>
+                <constraint firstItem="dNE-uc-HHr" firstAttribute="centerY" secondItem="bUK-kJ-dBW" secondAttribute="centerY" id="rL4-6E-wVa"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="bUK-kJ-dBW"/>
+            <point key="canvasLocation" x="-97" y="326.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="add_card" width="50" height="50"/>
+    </resources>
+</document>

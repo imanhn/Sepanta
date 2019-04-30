@@ -35,6 +35,12 @@
 		0F63F7102277625E00799C8F /* ContactUS.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F63F70F2277625E00799C8F /* ContactUS.storyboard */; };
 		0F63F7142277690100799C8F /* ContactUSUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F7132277690100799C8F /* ContactUSUI.swift */; };
 		0F63F71622776A5400799C8F /* ContactUSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F71522776A5400799C8F /* ContactUSViewController.swift */; };
+		0F63F7182278947A00799C8F /* ContactUSEmoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F7172278947A00799C8F /* ContactUSEmoji.swift */; };
+		0F63F71A2278A25700799C8F /* StringSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F7192278A25700799C8F /* StringSlice.swift */; };
+		0F63F71C2278B65800799C8F /* NewCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F63F71B2278B65800799C8F /* NewCardView.xib */; };
+		0F63F71E2278BBDC00799C8F /* NewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F71D2278BBDC00799C8F /* NewCardView.swift */; };
+		0F63F7202278BDF200799C8F /* NewCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F71F2278BDF200799C8F /* NewCardViewController.swift */; };
+		0F63F7222278BE8000799C8F /* NewCard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F63F7212278BE8000799C8F /* NewCard.storyboard */; };
 		0F67F75A224CD00300659842 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67F759224CD00300659842 /* Post.swift */; };
 		0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */; };
 		0F70A647226B97650020C33C /* EditProfileImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F70A646226B97650020C33C /* EditProfileImagePicker.swift */; };
@@ -147,6 +153,12 @@
 		0F63F70F2277625E00799C8F /* ContactUS.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactUS.storyboard; sourceTree = "<group>"; };
 		0F63F7132277690100799C8F /* ContactUSUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUSUI.swift; sourceTree = "<group>"; };
 		0F63F71522776A5400799C8F /* ContactUSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUSViewController.swift; sourceTree = "<group>"; };
+		0F63F7172278947A00799C8F /* ContactUSEmoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUSEmoji.swift; sourceTree = "<group>"; };
+		0F63F7192278A25700799C8F /* StringSlice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSlice.swift; sourceTree = "<group>"; };
+		0F63F71B2278B65800799C8F /* NewCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewCardView.xib; sourceTree = "<group>"; };
+		0F63F71D2278BBDC00799C8F /* NewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardView.swift; sourceTree = "<group>"; };
+		0F63F71F2278BDF200799C8F /* NewCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewController.swift; sourceTree = "<group>"; };
+		0F63F7212278BE8000799C8F /* NewCard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCard.storyboard; sourceTree = "<group>"; };
 		0F67F759224CD00300659842 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringWithFontSizeCalc.swift; sourceTree = "<group>"; };
 		0F6F39C222078DC900393CD7 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
@@ -380,6 +392,7 @@
 				0FFCDC49226C77F50087BFEF /* FavoriteViewController.swift */,
 				0FD094AB226E370B00E53A07 /* NearestViewController.swift */,
 				0F63F71522776A5400799C8F /* ContactUSViewController.swift */,
+				0F63F71F2278BDF200799C8F /* NewCardViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -393,6 +406,7 @@
 				0FFCDC4B226C795B0087BFEF /* FavListDataSource.swift */,
 				0F0661AC2257E62400A83734 /* SepantaGroupsSubscription.swift */,
 				0F70A646226B97650020C33C /* EditProfileImagePicker.swift */,
+				0F63F7172278947A00799C8F /* ContactUSEmoji.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -413,6 +427,7 @@
 				0F0661B1225BEA6A00A83734 /* PostUI.swift */,
 				0F50AE73226F66950028D8B6 /* MapViewAnnotations.swift */,
 				0F8E3F6F2275CCF300E51B17 /* CardView.swift */,
+				0F63F71D2278BBDC00799C8F /* NewCardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -427,7 +442,9 @@
 				0FFCDC51226C955F0087BFEF /* Notifications.storyboard */,
 				0FD094A9226E34C600E53A07 /* Map.storyboard */,
 				0F8E3F712275CD4200E51B17 /* CardView.xib */,
+				0F63F71B2278B65800799C8F /* NewCardView.xib */,
 				0F63F70F2277625E00799C8F /* ContactUS.storyboard */,
+				0F63F7212278BE8000799C8F /* NewCard.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -438,6 +455,7 @@
 				0FDA55D22225A0A000E7C889 /* NSDictionaryToDictionary.swift */,
 				0F066F94222B19AB00C8871C /* UIViewRotate.swift */,
 				0FA307DF2227330700EDA829 /* EnglishNumbersToPersian.swift */,
+				0F63F7192278A25700799C8F /* StringSlice.swift */,
 				0F066F92222B198900C8871C /* UIColorFromHex.swift */,
 				0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */,
 				0F71A38E22319A2000F4EB6B /* Alert.swift */,
@@ -638,10 +656,12 @@
 			files = (
 				0FE8B9B3220355F100C868C3 /* LaunchScreen.storyboard in Resources */,
 				0FE8B9B0220355F100C868C3 /* Assets.xcassets in Resources */,
+				0F63F71C2278B65800799C8F /* NewCardView.xib in Resources */,
 				0FFCDC48226C77350087BFEF /* Favorite.storyboard in Resources */,
 				0F8B7D432267874B00EFAACD /* Shabnam-Bold-FD.ttf in Resources */,
 				0F8B7D442267874B00EFAACD /* Shabnam-FD.ttf in Resources */,
 				0FE8B9AE220355F000C868C3 /* Main.storyboard in Resources */,
+				0F63F7222278BE8000799C8F /* NewCard.storyboard in Resources */,
 				0FFCDC52226C955F0087BFEF /* Notifications.storyboard in Resources */,
 				0F8E3F722275CD4200E51B17 /* CardView.xib in Resources */,
 				0FD094AA226E34C600E53A07 /* Map.storyboard in Resources */,
@@ -729,6 +749,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F63F7182278947A00799C8F /* ContactUSEmoji.swift in Sources */,
 				0FDA55D722260FFE00E7C889 /* GroupViewController.swift in Sources */,
 				0F817A71223567E200F1738E /* NewShopsViewController.swift in Sources */,
 				0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */,
@@ -737,6 +758,8 @@
 				0FAE1FF3226332D20043B077 /* CreditCard.swift in Sources */,
 				0FFCDC4C226C795B0087BFEF /* FavListDataSource.swift in Sources */,
 				0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */,
+				0F63F71A2278A25700799C8F /* StringSlice.swift in Sources */,
+				0F63F71E2278BBDC00799C8F /* NewCardView.swift in Sources */,
 				0F1B75632236E39B0087C0DB /* ShopViewController.swift in Sources */,
 				0F066F95222B19AB00C8871C /* UIViewRotate.swift in Sources */,
 				0FFCDC4A226C77F50087BFEF /* FavoriteViewController.swift in Sources */,
@@ -767,6 +790,7 @@
 				0FAEEDE92230957100A9178F /* AboutUsUI.swift in Sources */,
 				0F817A6D22346BAF00F1738E /* EditProfileUI.swift in Sources */,
 				0F67F75A224CD00300659842 /* Post.swift in Sources */,
+				0F63F7202278BDF200799C8F /* NewCardViewController.swift in Sources */,
 				0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */,
 				0F8571F0225CC5B50056D062 /* UIViewControllerWithErrorBar.swift in Sources */,
 				0F3197B32270BD8F00CEF207 /* Bank.swift in Sources */,

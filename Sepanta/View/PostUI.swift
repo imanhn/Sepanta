@@ -101,7 +101,7 @@ class PostUI {
                 //print("PostUI : Reading : ",imageStrUrl)
                 let imageCastedURL = URL(string: imageStrUrl)
                 if imageCastedURL != nil {
-                    postImage.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1, ImageURL: imageCastedURL!, ImageName: innerPost.image!)
+                    postImage.setImageFromCache(PlaceHolderName: "AppIcon", Scale: 1, ImageURL: imageCastedURL!, ImageName: innerPost.image!)
                 }else{
                     print("PostUI : Post Image can not be casted.")
                 }
