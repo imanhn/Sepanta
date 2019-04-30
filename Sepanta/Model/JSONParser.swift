@@ -153,6 +153,10 @@ class JSONParser {
                 } else if (apiName == "card-request") && (aMethod == HTTPMethod.post) {
                     print("Starting card-request Parser...")
                     self?.processCardRequest(Result: aDic)
+                } else if (apiName == "points-user") && (aMethod == HTTPMethod.get) {
+                    print("Starting points-user Parser...")
+                    let aUserPoint = self?.processPoints(Result: aDic)
+                    NetworkManager.shared.userPointsObs.accept(aUserPoint!)
                 } else if (apiName == "selling-request") && (aMethod == HTTPMethod.post) {
                     print("Starting selling-request Parser...")
                     self?.processSellRequest(Result: aDic)
@@ -171,6 +175,42 @@ class JSONParser {
                 }
             ).disposed(by: netObjectsDispose)
     }
+    func processPoints(Result aResult : NSDictionary) -> UserPoints {
+        var aUserPoints = UserPoints()
+        aUserPoints.points = [PointElement]()
+        if aResult["error"] != nil {
+            print("ERROR in Card Request Parsing : ",aResult["error"]!)
+        }
+        if let amessage = aResult["message"] as? String{
+            aUserPoints.message = amessage
+        }
+        if let astatus = aResult["status"] as? String{
+            aUserPoints.status = astatus
+        }
+
+        if let points_total = aResult["points_total"] as? Int ?? aResult["points_total "] as? Int{
+            aUserPoints.points_total = points_total
+        }else{
+            print("*** ERORR : key : points_total not found")
+        }
+        if let pointsElements = aResult["points"] as? NSArray{
+            for anElement in pointsElements{
+                if let castedElement = anElement as? NSDictionary {                    
+                    let aPointElem = PointElement(key: (castedElement["key"] as? String) ?? "", total: (castedElement["total"] as? Int) ?? 0)
+                    aUserPoints.points?.append(aPointElem)
+                }else{
+                    print("*** Error : points element is not a Dictionary!")
+                }
+            }
+        }else{
+            print("*** Error : userpoints should have a key with name points!")
+            print("Keys : ",aResult.allKeys)
+        }
+        
+        return aUserPoints
+        
+    }
+    
     func processAsPollGet(Result aResult : NSDictionary) -> Int {
         if aResult["error"] != nil {
             print("ERROR in Card Request Parsing : ",aResult["error"]!)
@@ -179,8 +219,8 @@ class JSONParser {
             return aPoll
         }
         return 0
-
     }
+    
     func processSellRequest(Result aResult : NSDictionary)  {
         if aResult["error"] != nil {
             print("ERROR in Card Request Parsing : ",aResult["error"]!)

@@ -13,6 +13,7 @@ import RxCocoa
 
 class SlideController {
     var delegate : HomeViewController
+    var slideTimer: Timer?
     var adsPage = 1;
     var startLocation = CGPoint(x: 0, y: 0)
     var endLocation = CGPoint(x: 0, y: 0)
@@ -40,8 +41,36 @@ class SlideController {
             }, onDisposed: {
                 
             }).disposed(by: myDisposeBag)
+        startTimer()
+    }
+    func startTimer(){
+        slideTimer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateSlide), userInfo: nil, repeats: true)
     }
     
+    func endTimer() {
+        slideTimer?.invalidate()
+    }
+    
+    @objc func updateSlide(){
+        if self.adsPage == self.slides.count - 1 {
+            self.adsPage = 0
+        }else{
+            self.adsPage = self.adsPage + 1
+        }
+        let animDurationInterval = 0.3
+        UIView.animate(withDuration: animDurationInterval, animations: {
+            self.delegate.currentImageView.layer.frame = CGRect(x: -1 * UIScreen.main.bounds.width, y: self.delegate.currentImageView.layer.frame.origin.y, width: self.delegate.currentImageView.layer.bounds.width, height: self.delegate.currentImageView.layer.bounds.height)
+            self.delegate.rightImageView.layer.frame = CGRect(x: 0, y: self.delegate.rightImageView.layer.frame.origin.y, width: self.delegate.rightImageView.layer.bounds.width, height: self.delegate.rightImageView.layer.bounds.height)
+        }) { _ in
+            
+            //Temporary make current the right image so when moving back the frames it would be felt by the user
+            self.delegate.currentImageView.image = self.delegate.rightImageView.image
+            //Moving back frames to their original location
+            self.delegate.currentImageView.layer.frame = CGRect(x: 0, y: self.delegate.currentImageView.layer.frame.origin.y, width: self.delegate.currentImageView.layer.bounds.width, height: self.delegate.currentImageView.layer.bounds.height)
+            self.delegate.rightImageView.layer.frame = CGRect(x: UIScreen.main.bounds.width, y: self.delegate.rightImageView.layer.frame.origin.y, width: self.delegate.rightImageView.layer.bounds.width, height: self.delegate.rightImageView.layer.bounds.height)
+            self.setupLeftAndRightImages()
+        }
+    }
     @objc func handlePan(_ sender:UIPanGestureRecognizer) {
 //        print("State : ",sender.state)
         if (sender.state == UIGestureRecognizerState.began) {
@@ -107,6 +136,7 @@ class SlideController {
     }
     
     func setupLeftAndRightImages(){
+        print("Page : ",adsPage)
         if adsPage < 1 {
             //leftImageView.image = slides[adsPage] // No left! get the current for left
             self.delegate.leftImageView.image = slides.last // No left! get a blank logo for left

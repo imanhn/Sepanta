@@ -27,7 +27,10 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
         self.delegate = vc
         showMyClub()
         bindUIwithDataSource()
+        getProfileData()
+        getAndSubscribeToPointsScores()
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width
         let cellWidth = (width - 30) / numberOfFollowedShopInARow // compute your cell width
@@ -80,9 +83,7 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
         _ = collectionView.rx.setDelegate(self) //Delegate method to call
         views["rightFormView"]!.addSubview(collectionView)
         self.delegate.paneView.addSubview(views["rightFormView"]!)
-        getProfileData()
         bindCollectionView()
-        bindUIwithDataSource()
     }
     
     func bindUIwithDataSource() {
@@ -277,4 +278,15 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
         let aParameter = ["user id":"\(LoginKey.shared.userID)"]
         NetworkManager.shared.run(API: "profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
     }
+    
+    func getAndSubscribeToPointsScores() {
+        //let aParameter = ["user id":"\(LoginKey.shared.userID)"]
+        NetworkManager.shared.run(API: "points-user", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
+        NetworkManager.shared.userPointsObs
+            .subscribe(onNext: { [unowned self] aUserPoint in
+                //print("Subscribed and Received : ",aUserPoint)
+                self.delegate.cupScoreLabel.text = "\(aUserPoint.points_total ?? 0)"
+            }).disposed(by: myDisposeBag)
+    }
+
 }

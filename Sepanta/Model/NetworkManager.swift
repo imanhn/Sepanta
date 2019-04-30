@@ -59,6 +59,7 @@ class NetworkManager {
     var profileObs = BehaviorRelay<Profile>(value: Profile())
     var bankObs = BehaviorRelay<Bank>(value: Bank())
     var pollObs = BehaviorRelay<Int>(value: 0)
+    var userPointsObs = BehaviorRelay<UserPoints>(value: UserPoints())
     var shopNotifObs = BehaviorRelay<[ShopNotification]>(value: [ShopNotification]())
     var generalNotifObs = BehaviorRelay<[GeneralNotification]>(value: [GeneralNotification]())
     // Initialization
@@ -123,11 +124,12 @@ class NetworkManager {
             
             print(" Response Code : ",ahttpURLRes.statusCode)
             if ahttpURLRes.statusCode == 500 { self.status.accept(CallStatus.InternalServerError)}
+            
             if let aresult = jsonResult as? NSDictionary {
                 self.result = aresult
                 self.parser = JSONParser(API: apiName,Method : aMethod)
-                if let aparser = self.parser {
-                    aparser.resultSubject.accept(aresult)
+                if let aparser = self.parser {                    
+                    aparser.resultSubject.accept(aresult)                    
                 }
                 self.status.accept(CallStatus.ready)
             } else {

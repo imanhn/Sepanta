@@ -83,7 +83,11 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
         super.viewWillAppear(animated)
         slideControl = SlideController(parentController: self)
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        //print("Stoping Slider")
+        slideControl?.endTimer()
+    }
     func subscribeForBadges(){
         SlidesAndPaths.shared.count_new_shop
             .subscribe(onNext: { [unowned self] newShopNo in

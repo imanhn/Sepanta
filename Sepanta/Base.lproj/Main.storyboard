@@ -687,38 +687,38 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77E-V8-kIF" userLabel="EmtyBetweenSearchAndBigMenus">
-                                <rect key="frame" x="-0.5" y="265" width="375" height="20"/>
+                                <rect key="frame" x="-0.5" y="265" width="375" height="6.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ix2-Oq-HJW" userLabel="BigMenuView">
-                                <rect key="frame" x="0.5" y="285" width="375" height="113.5"/>
+                                <rect key="frame" x="0.5" y="271.5" width="375" height="120"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" alignment="center" spacing="-40" translatesAutoresizingMaskIntoConstraints="NO" id="H19-Dx-koA">
-                                        <rect key="frame" x="-0.5" y="-0.5" width="375" height="113.5"/>
+                                        <rect key="frame" x="-19.5" y="-0.5" width="413" height="120"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cz4-Hu-jFV" userLabel="poldarsho">
-                                                <rect key="frame" x="0.0" y="0.0" width="124" height="113.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="133.5" height="120"/>
                                                 <state key="normal" image="poldarsho"/>
                                                 <connections>
                                                     <action selector="poldarshoClicked:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="hZh-I6-Slh"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c5U-us-AV4" userLabel="jadidtarinha" customClass="UIButtonWithBadge" customModule="Sepanta" customModuleProvider="target">
-                                                <rect key="frame" x="84" y="0.0" width="123.5" height="113.5"/>
+                                                <rect key="frame" x="93.5" y="0.0" width="133" height="120"/>
                                                 <state key="normal" image="jadidtarinha"/>
                                                 <connections>
                                                     <action selector="gotoNewShops:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="PCj-Kb-atw"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ChQ-BQ-xuC" userLabel="nazdikeman">
-                                                <rect key="frame" x="167.5" y="0.0" width="124" height="113.5"/>
+                                                <rect key="frame" x="186.5" y="0.0" width="133.5" height="120"/>
                                                 <state key="normal" image="nazdikeman"/>
                                                 <connections>
                                                     <action selector="gotoMapNearestShop:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="gFm-AK-BXG"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TM7-rv-Nf9" userLabel="sepantaie">
-                                                <rect key="frame" x="251.5" y="0.0" width="123.5" height="113.5"/>
+                                                <rect key="frame" x="280" y="0.0" width="133" height="120"/>
                                                 <state key="normal" image="sepantaie"/>
                                                 <connections>
                                                     <action selector="sepantaieClicked:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="BKk-h3-my1"/>
@@ -729,13 +729,13 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="H19-Dx-koA" firstAttribute="centerX" secondItem="Ix2-Oq-HJW" secondAttribute="centerX" id="A1b-YC-w0V"/>
-                                    <constraint firstItem="H19-Dx-koA" firstAttribute="width" secondItem="Ix2-Oq-HJW" secondAttribute="width" id="GjQ-gm-Rqg"/>
+                                    <constraint firstItem="H19-Dx-koA" firstAttribute="width" secondItem="Ix2-Oq-HJW" secondAttribute="width" multiplier="1.1" id="GjQ-gm-Rqg"/>
                                     <constraint firstItem="H19-Dx-koA" firstAttribute="height" secondItem="Ix2-Oq-HJW" secondAttribute="height" id="Pmt-4l-Vy2"/>
                                     <constraint firstItem="H19-Dx-koA" firstAttribute="centerY" secondItem="Ix2-Oq-HJW" secondAttribute="centerY" id="aE3-dK-is9"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="00C-Cf-4Xx" userLabel="SlideView">
-                                <rect key="frame" x="0.0" y="418.5" width="375" height="167"/>
+                                <rect key="frame" x="0.0" y="398" width="375" height="167"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kEw-xu-kjy" userLabel="currentImageView" customClass="AdImageView" customModule="Sepanta" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="167.5"/>
@@ -763,7 +763,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h01-1f-URc" userLabel="FooterView">
-                                <rect key="frame" x="0.0" y="585.5" width="375" height="81.5"/>
+                                <rect key="frame" x="0.0" y="565" width="375" height="102"/>
                                 <subviews>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" currentPage="1" translatesAutoresizingMaskIntoConstraints="NO" id="Z97-MI-7W6" userLabel="pageControl">
                                         <rect key="frame" x="20" y="0.0" width="62.5" height="37"/>
@@ -771,13 +771,13 @@
                                         <color key="currentPageIndicatorTintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </pageControl>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="جای تبلیغ شما اینجاست" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syZ-L6-xEe" userLabel="commentLabel">
-                                        <rect key="frame" x="102.5" y="0.0" width="262.5" height="41"/>
+                                        <rect key="frame" x="102.5" y="0.0" width="262.5" height="51.5"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="15"/>
                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uV3-Kf-RWE" userLabel="menu">
-                                        <rect key="frame" x="177" y="51.5" width="21" height="22"/>
+                                        <rect key="frame" x="177" y="72" width="21" height="22"/>
                                         <state key="normal" image="icon_menu"/>
                                         <connections>
                                             <action selector="menuClicked:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="LQt-rT-1h7"/>
@@ -797,7 +797,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sdB-XE-itg" userLabel="EmptyBetweenBigMenusAndSlides">
-                                <rect key="frame" x="0.0" y="398.5" width="375" height="20"/>
+                                <rect key="frame" x="0.0" y="391.5" width="375" height="6.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
@@ -810,7 +810,7 @@
                             <constraint firstItem="sdB-XE-itg" firstAttribute="centerX" secondItem="5ro-eO-8c6" secondAttribute="centerX" id="8zr-RW-ufx"/>
                             <constraint firstItem="77E-V8-kIF" firstAttribute="centerX" secondItem="5ro-eO-8c6" secondAttribute="centerX" id="AmW-Gf-bDo"/>
                             <constraint firstItem="4Hk-Yy-qxo" firstAttribute="height" secondItem="D7t-mF-4dd" secondAttribute="height" multiplier="0.1" id="CwW-5m-cTZ"/>
-                            <constraint firstItem="Ix2-Oq-HJW" firstAttribute="height" secondItem="D7t-mF-4dd" secondAttribute="height" multiplier="0.17" id="DIy-sc-2v0"/>
+                            <constraint firstItem="Ix2-Oq-HJW" firstAttribute="height" secondItem="D7t-mF-4dd" secondAttribute="height" multiplier="0.18" id="DIy-sc-2v0"/>
                             <constraint firstItem="lB3-P9-L47" firstAttribute="width" secondItem="D7t-mF-4dd" secondAttribute="width" id="FJt-Ec-arM"/>
                             <constraint firstItem="Ix2-Oq-HJW" firstAttribute="width" secondItem="D7t-mF-4dd" secondAttribute="width" id="Hdc-Td-UZh"/>
                             <constraint firstItem="i1f-TJ-lt4" firstAttribute="top" secondItem="F3V-Da-Par" secondAttribute="bottom" id="IbP-la-luJ"/>
@@ -822,7 +822,7 @@
                             <constraint firstItem="4Hk-Yy-qxo" firstAttribute="top" secondItem="i1f-TJ-lt4" secondAttribute="bottom" id="R5k-5A-Tzz"/>
                             <constraint firstItem="h01-1f-URc" firstAttribute="bottom" secondItem="5ro-eO-8c6" secondAttribute="bottom" id="RbL-q1-8XI"/>
                             <constraint firstItem="F3V-Da-Par" firstAttribute="height" secondItem="D7t-mF-4dd" secondAttribute="height" multiplier="0.05" id="SGg-9f-Jwa"/>
-                            <constraint firstItem="sdB-XE-itg" firstAttribute="height" secondItem="D7t-mF-4dd" secondAttribute="height" multiplier="0.03" id="UkY-0f-1xm"/>
+                            <constraint firstItem="sdB-XE-itg" firstAttribute="height" secondItem="D7t-mF-4dd" secondAttribute="height" multiplier="0.01" id="UkY-0f-1xm"/>
                             <constraint firstItem="lB3-P9-L47" firstAttribute="height" secondItem="D7t-mF-4dd" secondAttribute="height" multiplier="0.11" id="Wic-in-fcf"/>
                             <constraint firstItem="F3V-Da-Par" firstAttribute="top" secondItem="5ro-eO-8c6" secondAttribute="top" id="WzQ-8g-AL0"/>
                             <constraint firstItem="lB3-P9-L47" firstAttribute="centerX" secondItem="5ro-eO-8c6" secondAttribute="centerX" id="XjW-FZ-KUa"/>
@@ -838,7 +838,7 @@
                             <constraint firstItem="sdB-XE-itg" firstAttribute="width" secondItem="D7t-mF-4dd" secondAttribute="width" id="tRw-x4-i0v"/>
                             <constraint firstItem="Ix2-Oq-HJW" firstAttribute="centerX" secondItem="5ro-eO-8c6" secondAttribute="centerX" id="ule-rR-1aw"/>
                             <constraint firstItem="lB3-P9-L47" firstAttribute="top" secondItem="4Hk-Yy-qxo" secondAttribute="bottom" constant="5" id="waS-ql-PYg"/>
-                            <constraint firstItem="77E-V8-kIF" firstAttribute="height" secondItem="D7t-mF-4dd" secondAttribute="height" multiplier="0.03" id="zTe-1v-Q28"/>
+                            <constraint firstItem="77E-V8-kIF" firstAttribute="height" secondItem="D7t-mF-4dd" secondAttribute="height" multiplier="0.01" id="zTe-1v-Q28"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5ro-eO-8c6"/>
                     </view>
@@ -1845,7 +1845,7 @@
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_profile_sepantaei" translatesAutoresizingMaskIntoConstraints="NO" id="dzy-DA-vDK">
                                                                 <rect key="frame" x="0.0" y="0.0" width="188" height="37.5"/>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۲۳" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCo-3o-N6O" userLabel="ClubNumLabel">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCo-3o-N6O" userLabel="ClubNumLabel">
                                                                 <rect key="frame" x="0.0" y="47.5" width="187.5" height="19.5"/>
                                                                 <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                                 <nil key="textColor"/>
@@ -1877,7 +1877,7 @@
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_profile_cup" translatesAutoresizingMaskIntoConstraints="NO" id="zb8-5F-iGt">
                                                                 <rect key="frame" x="0.0" y="0.0" width="188" height="37.5"/>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۲۰۵۵" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbi-4C-kSl" userLabel="cupScoreLabel">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbi-4C-kSl" userLabel="cupScoreLabel">
                                                                 <rect key="frame" x="0.5" y="47.5" width="187.5" height="19.5"/>
                                                                 <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                                 <nil key="textColor"/>
@@ -2020,6 +2020,7 @@
                     <connections>
                         <outlet property="clubNumLabel" destination="lCo-3o-N6O" id="LWE-G1-X64"/>
                         <outlet property="cupLabel" destination="tiH-BH-sg8" id="V32-Hy-PEk"/>
+                        <outlet property="cupScoreLabel" destination="rbi-4C-kSl" id="TpV-7B-qyD"/>
                         <outlet property="descLabel" destination="Tw6-xm-0we" id="MeQ-Na-PzA"/>
                         <outlet property="nameLabel" destination="sEQ-6I-Q3G" id="aWd-MX-Tno"/>
                         <outlet property="paneView" destination="VM7-AU-lig" id="eau-Sm-Ird"/>
@@ -2287,7 +2288,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(۳.۵)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pIT-PZ-YtQ" userLabel="rateLabel">
-                                                        <rect key="frame" x="48" y="1" width="30" height="18"/>
+                                                        <rect key="frame" x="48" y="0.5" width="30" height="18"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="13"/>
                                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -2337,7 +2338,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۲۳۴۵" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pvT-of-2uq" userLabel="followersNumberLabel">
-                                                        <rect key="frame" x="88" y="3" width="36" height="18"/>
+                                                        <rect key="frame" x="88" y="3.5" width="36" height="18"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-Light-FD" family="Shabnam FD" pointSize="13"/>
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -2353,17 +2354,17 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zsw-D0-1PL" userLabel="PostToolbarView">
-                                                <rect key="frame" x="0.0" y="265" width="375" height="56.5"/>
+                                                <rect key="frame" x="0.0" y="265" width="375" height="49"/>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="right" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOg-GD-0Rk" userLabel="shopDescription">
-                                                <rect key="frame" x="30" y="329.5" width="330" height="102.5"/>
+                                                <rect key="frame" x="30" y="322" width="330" height="102.5"/>
                                                 <string key="text">لوازم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگر و متون بلکه روزنامه و مجله  در ستون و سطر آنچنان که لازم است و برای شرایط فعلی ...</string>
                                                 <fontDescription key="fontDescription" name="Shabnam-Light-FD" family="Shabnam FD" pointSize="12"/>
                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V2O-um-KIy" userLabel="TabPaneView" customClass="TabbedViewWithWhitePanel" customModule="Sepanta" customModuleProvider="target">
-                                                <rect key="frame" x="15" y="452" width="345" height="385"/>
+                                                <rect key="frame" x="15" y="444.5" width="345" height="385"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fKc-CG-oMe" userLabel="Posts">
                                                         <rect key="frame" x="172.5" y="0.0" width="172.5" height="69.5"/>
@@ -2440,7 +2441,7 @@
                                             <constraint firstItem="zsw-D0-1PL" firstAttribute="top" secondItem="bvO-fp-oC8" secondAttribute="bottom" constant="15" id="j3S-TP-ehU"/>
                                             <constraint firstItem="Tof-jN-Exq" firstAttribute="height" secondItem="wIE-Rh-6ar" secondAttribute="height" multiplier="0.25" id="jkU-nb-7nb"/>
                                             <constraint firstItem="kdx-2V-44e" firstAttribute="leading" secondItem="H7K-YV-f4e" secondAttribute="leading" id="jpK-cR-a5d"/>
-                                            <constraint firstItem="zsw-D0-1PL" firstAttribute="height" secondItem="wIE-Rh-6ar" secondAttribute="height" multiplier="0.75" id="jyV-gy-a1z"/>
+                                            <constraint firstItem="zsw-D0-1PL" firstAttribute="height" secondItem="wIE-Rh-6ar" secondAttribute="height" multiplier="0.65" id="jyV-gy-a1z"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="z4i-zK-2T7" secondAttribute="trailing" constant="20" symbolic="YES" id="lYK-gq-DnO"/>
                                             <constraint firstItem="bOg-GD-0Rk" firstAttribute="height" secondItem="H7K-YV-f4e" secondAttribute="height" multiplier="0.12" id="ma2-eR-5w8"/>
                                             <constraint firstAttribute="trailing" secondItem="kdx-2V-44e" secondAttribute="trailing" id="nUE-zH-mL1"/>

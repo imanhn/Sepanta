@@ -17,6 +17,7 @@ class ProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
     var showProfileUI : ShowProfileUI!
     var myDisposeBag = DisposeBag()
     @IBOutlet weak var cupLabel : UILabel!
+    @IBOutlet weak var cupScoreLabel: UILabel!
     @IBOutlet weak var clubNumLabel : UILabel!
     @IBOutlet weak var paneView : UIView!
     @IBOutlet weak var profilePicture : UIImageView!

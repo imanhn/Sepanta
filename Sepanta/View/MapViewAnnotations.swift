@@ -34,7 +34,7 @@ extension NearestViewController: MKMapViewDelegate {
         
         rightButton.tag = (annotation as! MapAnnotation).userId!
         rightButton.addTarget(self, action: #selector(pushShop), for: .touchUpInside)
-        print("rightButton.tag : ",rightButton.tag)
+        //print("rightButton.tag : ",rightButton.tag)
         rightButton.layer.cornerRadius = 5
         view.rightCalloutAccessoryView = rightButton
         view.calloutOffset = CGPoint(x: 0, y: 5)
@@ -48,16 +48,16 @@ extension NearestViewController: MKMapViewDelegate {
         let backgroundImage = UIImage(named: "icon_place_map")
         
         let size = CGSize(width: 35, height: 50)
-        UIGraphicsBeginImageContext(size)
+        UIGraphicsBeginImageContext(size)        
         let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         backgroundImage?.draw(in: areaSize)
         let scale = (size.width/1.5)/max(iconImage.size.width,iconImage.size.height)
         let iconSize = CGRect(x: (size.width/2)-(iconImage.size.width*scale/2), y: (size.height/2)-(iconImage.size.height*scale/1.5), width: iconImage.size.width*scale, height: iconImage.size.height*scale)
         iconImage.draw(in: iconSize, blendMode: .normal, alpha: 1)
-        
         let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-        return newImage
+        let shadowImage = newImage.addShadow()
+        return shadowImage
     }
     
     @objc func pushShop(_ sender : Any){

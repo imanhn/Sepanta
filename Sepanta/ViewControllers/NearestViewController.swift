@@ -109,7 +109,6 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
         gotoMyLocation.layer.shadowOffset = CGSize(width: 3, height: 3)
         gotoMyLocation.layer.shadowRadius = 3
         gotoMyLocation.layer.shadowOpacity = 0.3
-
     }
     
     func showSingleShop(){
@@ -124,7 +123,7 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
         buildUI()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         initLocationManager()
