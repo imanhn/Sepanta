@@ -29,7 +29,14 @@ class ContactUSUI : NSObject , UITextFieldDelegate {
     var buttons = Dictionary<String,UIButton>()
     var submitButton = UIButton(type: .custom)
     var disposeList = [Disposable]()
-    
+    var subjectText = UITextField(frame: .zero)
+    var commentText = UITextField(frame: .zero)
+    var subjectView = UIView(frame: .zero)
+    var commentView = UIView(frame: .zero)
+    var cursurY : CGFloat = 0
+    let marginY : CGFloat = 10
+    let marginX : CGFloat = 20
+
     init(_ vc : ContactUSViewController) {
         self.delegate = vc
         super.init()
@@ -52,22 +59,15 @@ class ContactUSUI : NSObject , UITextFieldDelegate {
         }
     }
     //Create Gradient on PageView
-    @objc func showContactInfo() {
+    func showContactInfo() {
         
-        //print("reseller Request : ",views["leftFormView"] ?? "Nil")
-        if views["leftFormView"] != nil && views["leftFormView"]?.superview != nil
-        {
-            disposeList.forEach({$0.dispose()})
-            views["leftFormView"]?.removeFromSuperview()
-        }
-        var cursurY : CGFloat = 0
-        let marginY : CGFloat = 10
-        let marginX : CGFloat = 20
+        self.delegate.contentView.subviews.forEach({$0.removeFromSuperview()})
+        disposeList.forEach({$0.dispose()})
+        self.delegate.showContactInfo.setTitleColor(UIColor(hex: 0x515152), for: .normal)
+        self.delegate.showFeedback.setTitleColor(UIColor(hex: 0xD6D7D9), for: .normal)
+        cursurY = 0
+
         /*
-        let gradient = CAGradientLayer()
-        gradient.frame = self.delegate.view.bounds
-        gradient.colors = [UIColor(hex: 0xF7F7F7).cgColor, UIColor.white.cgColor]
-        self.delegate.mainView.layer.insertSublayer(gradient, at: 0)
         
         let backgroundFormView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 2))
         backgroundFormView.layer.insertSublayer(gradient, at: 0)
@@ -77,75 +77,98 @@ class ContactUSUI : NSObject , UITextFieldDelegate {
         //views["rightFormView"] = TabbedViewWithWhitePanel(frame: CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: UIScreen.main.bounds.height * 2))
         //self.delegate.panelView.backgroundColor = UIColor.clear
         
+        let buttonHeight = self.delegate.contentView.frame.height / 7
+        let textFieldWidth = (self.delegate.contentView.bounds.width) - (2 * marginX)
+
+        let sepantaText = "مجموعه سپنتا یک استات آپ مبتنی بر ارائه سرویس های مرتبط با باشگاه مشتریان است. در مجموعه سپنتا فروشگاه ها و خریدران کالا و خدمات امکان یافتن منابع مورد نیاز را دارد"
+        (views["shopView"],labels["shopText"]) = buildALabelView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_05",  LabelText: sepantaText,Lines : 3)
+        cursurY = cursurY + views["shopView"]!.frame.height + marginY/2
+        self.delegate.contentView.addSubview(views["shopView"]!)
+
+        let sepantaAddress = "تهران میدان آرژانتین خیابان الوند نبش الوند ۳۳ شرقی پلاک ۴۵ واحد ۶"
+        (views["addressView"],labels["addressText"]) = buildALabelView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_06",  LabelText: sepantaAddress,Lines : 2)
+        cursurY = cursurY + views["addressView"]!.frame.height + marginY/2
+        self.delegate.contentView.addSubview(views["addressView"]!)
+
+        (views["telView"],labels["telText"]) = buildALabelView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_07",  LabelText: "۰۲۱-۴۵۲۲۷",Lines: 1)
+        cursurY = cursurY + views["telView"]!.frame.height + marginY/2
+        self.delegate.contentView.addSubview(views["telView"]!)
+
+        (views["webView"],labels["webText"]) = buildALabelView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "web",  LabelText: "www.ipsepanta.ir",Lines: 1)
+        cursurY = cursurY + views["webView"]!.frame.height + marginY/2
+        self.delegate.contentView.addSubview(views["webView"]!)
+
+        (views["emailView"],labels["emailText"]) = buildALabelView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "black-back-closed-envelope-shape",  LabelText: "info@ipsepanta.ir",Lines: 1)
+        cursurY = cursurY + views["emailView"]!.frame.height + marginY/2
+        self.delegate.contentView.addSubview(views["emailView"]!)
+
         
-        let buttonsFont = UIFont(name: "Shabnam-Bold-FD", size: 14)
+        cursurY = cursurY + buttonHeight + marginY
+        
+    }
+    
+    func showFeedbackForm() {
+        
+        //print("Card Request  : ",self.delegate.panelView,"  SuperView : ",self.delegate.panelView.superview ?? "Nil")
+        
+        disposeList.forEach({$0.dispose()})
+        self.delegate.contentView.subviews.forEach({$0.removeFromSuperview()})
+        self.delegate.showContactInfo.setTitleColor(UIColor(hex: 0xD6D7D9), for: .normal)
+        self.delegate.showFeedback.setTitleColor(UIColor(hex: 0x515152), for: .normal)
+        cursurY = 0
         let buttonHeight = self.delegate.panelView.getHeight()
-        let textFieldWidth = (self.delegate.panelView.bounds.width) - (2 * marginX)
-        
-        buttons["leftButton"] = UIButton(frame: CGRect(x: 0, y: 0, width: (self.delegate.panelView.bounds.width)/2, height: buttonHeight))
-        buttons["leftButton"]!.setTitle("اطلاعات ارتباطی", for: .normal)
-        buttons["leftButton"]!.titleLabel?.font = buttonsFont
-        buttons["leftButton"]!.addTarget(self, action: #selector(showFeedbackForm), for: .touchUpInside)
-        buttons["leftButton"]!.setTitleColor(UIColor(hex: 0x515152), for: .normal)
-        
-        buttons["rightButton"] = UIButton(frame: CGRect(x: self.delegate.panelView.bounds.width/2, y: 0, width: self.delegate.panelView.bounds.width/2, height: buttonHeight))
-        buttons["rightButton"]!.setTitle("فرم تماس با ما", for: .normal)
-        buttons["rightButton"]!.titleLabel?.font = buttonsFont
-        buttons["rightButton"]!.setTitleColor(UIColor(hex: 0x515152), for: .normal)
-        
-        self.delegate.panelView.addSubview(buttons["leftButton"]!)
-        self.delegate.panelView.addSubview(buttons["rightButton"]!)
+        let textFieldWidth = (self.delegate.contentView.bounds.width) - (2 * marginX)
+
+        let subjectRect = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight)
+        (subjectView,subjectText) = subjectRect.buildARowView(Image: "", Selectable: false, PlaceHolderText: "موضوع")
+        self.delegate.contentView.addSubview(subjectView)
         cursurY = cursurY + buttonHeight + marginY
         
-        (views["shopView"],texts["shopText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_01", Selectable: false, PlaceHolderText: "نام فروشگاه")
-        self.delegate.panelView.addSubview(views["shopView"]!)
+        let commentRect = CGRect(x: marginX, y: cursurY, width: textFieldWidth , height: buttonHeight)
+        (commentView,commentText) = commentRect.buildARowView(Image: "", Selectable: false, PlaceHolderText: "توضیحات")
+        self.delegate.contentView.addSubview(commentView)
         cursurY = cursurY + buttonHeight + marginY
         
-        (views["serviceView"],texts["serviceText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_02", Selectable: false, PlaceHolderText: "نوع خدمت")
-        self.delegate.panelView.addSubview(views["serviceView"]!)
-        cursurY = cursurY + buttonHeight + marginY
-        
-        (views["familyView"],texts["familyText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: (textFieldWidth / 2)-(marginX/4), height: buttonHeight), Image: "icon_profile_04", Selectable: false, PlaceHolderText: "نام خانوادگی")
-        //texts["familyText"]!.text =  aProfileInfo.last_name
-        self.delegate.panelView.addSubview(views["familyView"]!)
-        (views["nameView"],texts["nameText"]) = buildARowView(CGRect: CGRect(x: (textFieldWidth / 2)+(marginX/4)+marginX, y: cursurY, width: (textFieldWidth / 2)-marginX/4, height: buttonHeight), Image: "icon_profile_03", Selectable: false, PlaceHolderText: "نام")
-        //texts["nameText"]!.text =  aProfileInfo.first_name
-        self.delegate.panelView.addSubview(views["nameView"]!)
-        cursurY = cursurY + buttonHeight + marginY
-        
-        (views["locationView"],texts["locationText"]) = buildARowView(CGRect: CGRect(x: marginX+buttonHeight+marginX, y: cursurY, width: textFieldWidth-(buttonHeight+marginX), height: buttonHeight), Image: "icon_profile_05", Selectable: false, PlaceHolderText: "محدوده")
-        self.delegate.panelView.addSubview(views["locationView"]!)
-        //texts["locationText"]!.text =  aProfileInfo.address
-        let locationButton = RoundedButton(frame: CGRect(x: marginX, y: cursurY, width: buttonHeight, height: buttonHeight))
-        locationButton.setImage(UIImage(named: "icon_profile_06"), for: .normal)
-        self.delegate.panelView.addSubview(locationButton)
-        cursurY = cursurY + buttonHeight + marginY
-        
-        (views["mobileNoView"],texts["mobileText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_07", Selectable: false, PlaceHolderText: "شماره همراه")
-        //texts["mobileText"]!.text =  aProfileInfo.phone
-        texts["mobileText"]?.keyboardType = UIKeyboardType.decimalPad
-        self.delegate.panelView.addSubview(views["mobileNoView"]!)
-        cursurY = cursurY + buttonHeight + marginY
-        
-        (views["discountRateView"],texts["discountText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_08", Selectable: false, PlaceHolderText: "درصد تخفیف پیشنهادی")
-        texts["discountText"]?.keyboardType = UIKeyboardType.decimalPad
-        self.delegate.panelView.addSubview(views["discountRateView"]!)
-        cursurY = cursurY + buttonHeight + (2 * marginY)
         
         
-        self.delegate.panelView.addSubview(submitButton)
-        cursurY = cursurY + buttonHeight + (1 * marginY)
-      
+        submitButton = SubmitButton(type: .custom)
+        submitButton.frame = CGRect(x: marginX+(textFieldWidth/2)-1.5*buttonHeight, y: cursurY, width: 3*buttonHeight, height: buttonHeight)
+        submitButton.setTitle("ارسال", for: .normal)
+        submitButton.addTarget(self, action: #selector(submitFeedBack), for: .touchUpInside)
+        self.delegate.contentView.addSubview(submitButton)
+        handleSubmitButtonEnableOrDisable()
         
         
     }
     
-    func buildARowView(CGRect rect : CGRect,Image anImageName : String,Selectable selectable:Bool,PlaceHolderText aPlaceHolder : String)->(UIView?,UITextField?){
+    func handleSubmitButtonEnableOrDisable(){
+        Observable.combineLatest([commentText.rx.text,
+                                  subjectText.rx.text
+            ])
+            .subscribe(onNext: { (combinedTexts) in
+                //print("combinedTexts : ",combinedTexts)
+                let mappedTextToBool = combinedTexts.map{$0 != nil && $0!.count > 0}
+                //print("mapped : ",mappedTextToBool)
+                let allTextFilled = mappedTextToBool.reduce(true, {$0 && $1})
+                if allTextFilled {
+                    if !self.submitButton.isEnabled {
+                        self.submitButton.setEnable()
+                    }
+                }else{
+                    if self.submitButton.isEnabled {
+                        self.submitButton.setDisable()
+                    }
+                }
+            }
+            ).disposed(by: self.delegate.myDisposeBag)
+    }
+    
+    func buildALabelView(CGRect rect : CGRect,Image anImageName : String,LabelText aStr : String,Lines noLines : Int)->(UIView?,UILabel?){
         let aView = UIView(frame: rect)
-        let lineView = UIView(frame: CGRect(x: 0, y: rect.height-1, width: rect.width, height: 1))
+        /*let lineView = UIView(frame: CGRect(x: 0, y: rect.height-1, width: rect.width, height: 1))
         lineView.backgroundColor = UIColor(hex: 0xD6D7D9)
         aView.addSubview(lineView)
-        
+        */
         aView.backgroundColor = UIColor.white
         let icondim = rect.height / 3
         let spaceIconText : CGFloat = 20
@@ -153,17 +176,22 @@ class ContactUSUI : NSObject , UITextFieldDelegate {
         let anIcon = UIImageView(frame: imageRect)
         anIcon.image = UIImage(named: anImageName)
         anIcon.contentMode = .scaleAspectFit
-        let aText = EmptyTextField(frame: CGRect(x: 0, y: 0, width: (rect.width-icondim-spaceIconText), height: rect.height))
-        aText.font = UIFont(name: "Shabnam-FD", size: 14)
-        aText.attributedPlaceholder = NSAttributedString(string: aPlaceHolder , attributes: [NSAttributedStringKey.foregroundColor: UIColor(hex: 0xD6D7D9)])
-        aText.textAlignment = .right
-        aText.delegate = self
-        if selectable {
-            let triangleImage = UIImageView(frame: CGRect(x: 0, y: rect.height*3/4 - 5, width: rect.height/4, height: rect.height/4))
-            triangleImage.image = UIImage(named: "icon_dropdown_red")
-            aText.tag = 11
-            aView.addSubview(triangleImage)
+        let aText = UILabel(frame: CGRect(x: 0, y: 0, width: (rect.width-icondim-spaceIconText), height: rect.height))
+        
+        if noLines == 3 {
+            aText.font = UIFont(name: "Shabnam-FD", size: 12)
+        }else if noLines == 2 {
+            aText.font = UIFont(name: "Shabnam-FD", size: 12)
+        }else if noLines == 1 {
+            aText.font = UIFont(name: "Shabnam-FD", size: 14)
         }
+        aText.adjustsFontSizeToFitWidth = true
+        aText.textColor = UIColor(hex: 0x515152)
+        aText.textAlignment = .right
+        aText.text = aStr
+        aText.numberOfLines = noLines
+        
+        //aText.delegate = self
         aView.addSubview(aText)
         aView.addSubview(anIcon)
         
@@ -171,70 +199,29 @@ class ContactUSUI : NSObject , UITextFieldDelegate {
     }
     
     
-    @objc func showFeedbackForm() {
-        
-        //print("Card Request  : ",self.delegate.panelView,"  SuperView : ",self.delegate.panelView.superview ?? "Nil")
-        if self.delegate.panelView.superview != nil {
-            disposeList.forEach({$0.dispose()})
-            self.delegate.panelView.removeFromSuperview()
-        }
-        
-        var cursurY : CGFloat = 0
-        let marginY : CGFloat = 10
-        let marginX : CGFloat = 20
-        views["leftFormView"] = LeftTabbedViewWithWhitePanel(frame: CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: UIScreen.main.bounds.height * 1))
-        views["leftFormView"]!.backgroundColor = UIColor.clear
-        
-        
-        let buttonsFont = UIFont(name: "Shabnam-Bold-FD", size: 14)
-        let buttonHeight = (views["leftFormView"] as! LeftTabbedViewWithWhitePanel).getHeight()
-        let textFieldWidth = (views["leftFormView"]!.bounds.width) - (2 * marginX)
-        
-        buttons["leftButton"] = UIButton(frame: CGRect(x: 0, y: 0, width: views["leftFormView"]!.bounds.width/2, height: buttonHeight))
-        buttons["leftButton"]!.setTitle("اطلاعات ارتباطی", for: .normal)
-        buttons["leftButton"]!.titleLabel?.font = buttonsFont
-        //buttons["leftButton"]!.addTarget(self, action: #selector(self.cardRequestTapped(_:)), for: .touchUpInside)
-        buttons["leftButton"]!.setTitleColor(UIColor(hex: 0x515152), for: .normal)
-        views["leftFormView"]!.addSubview(buttons["leftButton"]!)
-        
-        buttons["rightButton"] = UIButton(frame: CGRect(x: views["leftFormView"]!.bounds.width/2, y: 0, width: views["leftFormView"]!.bounds.width/2, height: buttonHeight))
-        buttons["rightButton"]!.setTitle("فرم تماس با ما", for: .normal)
-        buttons["rightButton"]!.titleLabel?.font = buttonsFont
-        buttons["rightButton"]!.addTarget(self, action: #selector(showContactInfo), for: .touchUpInside)
-        buttons["rightButton"]!.setTitleColor(UIColor(hex: 0x515152), for: .normal)
-        
-        views["leftFormView"]!.addSubview(buttons["rightButton"]!)
-        cursurY = cursurY + buttonHeight + marginY
-        
-        (views["familyView"],texts["familyText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: (textFieldWidth / 2)-(marginX/4), height: buttonHeight), Image: "icon_profile_04", Selectable: false, PlaceHolderText: "نام خانوادگی")
-        //texts["familyText"]!.text =  aProfileInfo.last_name
-        views["leftFormView"]!.addSubview(views["familyView"]!)
-        (views["nameView"],texts["nameText"]) = buildARowView(CGRect: CGRect(x: (textFieldWidth / 2)+(marginX/4)+marginX, y: cursurY, width: (textFieldWidth / 2)-marginX/4, height: buttonHeight), Image: "icon_profile_03", Selectable: false, PlaceHolderText: "نام")
-        //texts["nameText"]!.text =  aProfileInfo.first_name
-        views["leftFormView"]!.addSubview(views["nameView"]!)
-        cursurY = cursurY + buttonHeight + marginY
-        
-        (views["nationalCodeView"],texts["nationalCodeText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "identity-card", Selectable: false, PlaceHolderText: "کد ملی")
-        //texts["nationalCodeText"]!.text =  aProfileInfo.national_code
-        texts["nationalCodeText"]?.keyboardType = UIKeyboardType.decimalPad
-        views["leftFormView"]?.addSubview(views["nationalCodeView"]!)
-        cursurY = cursurY + buttonHeight + marginY
-        
-        
 
-        
-        submitButton = SubmitButton(type: .custom)
-        submitButton.frame = CGRect(x: marginX+(textFieldWidth/2)-1.5*buttonHeight, y: cursurY, width: 3*buttonHeight, height: buttonHeight)
-        submitButton.setTitle("ارسال", for: .normal)
-        submitButton.addTarget(self, action: #selector(submitFeedBack), for: .touchUpInside)
-        views["leftFormView"]?.addSubview(submitButton)
-        cursurY = cursurY + buttonHeight + (1 * marginY)
-        
-        
-    }
     
     @objc func submitFeedBack(_ sender : Any){
-    
+        self.delegate.view.endEditing(true)
+        let aParameter = ["title":self.subjectText.text ?? "",
+                          "body":self.commentText.text ?? ""]
+        NetworkManager.shared.run(API: "contact", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
+        let contactDisp = NetworkManager.shared.contactSendingSuccessful
+            .filter({$0 != ToggleStatus.UNKNOWN})
+            .subscribe(onNext: { aStatus in
+                if aStatus == ToggleStatus.YES {
+                    let aMessage = NetworkManager.shared.message
+                    self.subjectText.text = ""
+                    self.commentText.text = ""
+                    self.delegate.alert(Message: aMessage)
+                    NetworkManager.shared.contactSendingSuccessful.accept(ToggleStatus.UNKNOWN)
+                }else if aStatus == ToggleStatus.NO {
+                    self.delegate.alert(Message: "متاسفانه خطایی در هنگام ثبت نظر شما اتفاق افتاد")
+                    NetworkManager.shared.contactSendingSuccessful.accept(ToggleStatus.UNKNOWN)
+                }
+            })
+        contactDisp.disposed(by: self.delegate.myDisposeBag)
+        disposeList.append(contactDisp)
     }
     
 

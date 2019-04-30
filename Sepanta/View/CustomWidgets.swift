@@ -147,6 +147,7 @@ class EmptyTextField: UITextField {
     }
 }
 
+
 class UnderLinedTextField: UITextField {
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
@@ -691,10 +692,13 @@ extension CGRect {
         aView.backgroundColor = UIColor.white
         let icondim = self.height / 3
         let spaceIconText : CGFloat = 20
-        let imageRect = CGRect(x: (self.width-icondim), y: (self.height - icondim)/2, width: icondim, height: icondim)
-        let anIcon = UIImageView(frame: imageRect)
-        anIcon.image = UIImage(named: anImageName)
-        anIcon.contentMode = .scaleAspectFit
+        if anImageName.count > 0 {
+            let imageRect = CGRect(x: (self.width-icondim), y: (self.height - icondim)/2, width: icondim, height: icondim)
+            let anIcon = UIImageView(frame: imageRect)
+            anIcon.image = UIImage(named: anImageName)
+            anIcon.contentMode = .scaleAspectFit
+            aView.addSubview(anIcon)
+        }
         
         let aText = EmptyTextField(frame: CGRect(x: 0, y: 0, width: (self.width-icondim-spaceIconText), height: self.height))
         aText.font = UIFont(name: "Shabnam-FD", size: 14)
@@ -705,9 +709,7 @@ extension CGRect {
             triangleImage.image = UIImage(named: "icon_dropdown_red")
             aView.addSubview(triangleImage)
         }
-        aView.addSubview(aText)
-        aView.addSubview(anIcon)
-        
+        aView.addSubview(aText)        
         return (aView,aText)
     }
 }

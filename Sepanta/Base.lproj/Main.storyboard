@@ -1093,11 +1093,11 @@
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2FS-gh-jyP" userLabel="ViewWithDash" customClass="UIViewWithDash" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="112.5" y="-0.5" width="99.5" height="66.5"/>
+                                        <rect key="frame" x="112.5" y="-0.5" width="89" height="66.5"/>
                                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="رستوران و کافی شاپ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bQu-qj-7yU" userLabel="GroupLabel">
-                                        <rect key="frame" x="222" y="-0.5" width="98" height="66.5"/>
+                                        <rect key="frame" x="211.5" y="-0.5" width="108.5" height="66.5"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="13"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2587,7 +2587,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q3v-UR-c4g" userLabel="leftView">
-                                                    <rect key="frame" x="0.0" y="26.5" width="75" height="23.5"/>
+                                                    <rect key="frame" x="0.0" y="25.5" width="75" height="23.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۰٪" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTq-Nh-SDz" userLabel="percentLabel">
                                                             <rect key="frame" x="50" y="0.0" width="25" height="23.5"/>

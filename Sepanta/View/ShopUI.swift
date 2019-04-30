@@ -61,8 +61,11 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     }
     
     @objc func shareTapped(sender : Any){
-        
+        let activityVC = UIActivityViewController(activityItems: ["www.ipsepanta.ir"], applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = self.delegate.view
+        self.delegate.present(activityVC, animated: true, completion: nil)
     }
+    
     @objc func addTapped(sender : Any){
         
     }

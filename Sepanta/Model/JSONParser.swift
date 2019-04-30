@@ -87,6 +87,19 @@ class JSONParser {
                 } else if (apiName == "send-comment") && (aMethod == HTTPMethod.post) {
                     // Sets True for commentSendingSuccessful to be observable by PostUI
                     NetworkManager.shared.commentSendingSuccessful.accept(true)
+                } else if (apiName == "contact") && (aMethod == HTTPMethod.post) {
+                    // Sets True for commentSendingSuccessful to be observable by PostUI
+                    NetworkManager.shared.message = (aDic["message"] as? String) ?? "نظر شما ثبت گردید"
+                    if let aStatus =  aDic["status"] as? String{
+                        if aStatus == "successful" {
+                            NetworkManager.shared.contactSendingSuccessful.accept(ToggleStatus.YES)
+                        }else{
+                            NetworkManager.shared.contactSendingSuccessful.accept(ToggleStatus.NO)
+                        }
+                    }else{
+                        // if server response does not contain "status" key then its a no!
+                        NetworkManager.shared.contactSendingSuccessful.accept(ToggleStatus.NO)
+                    }
                 } else if (apiName == "like-dislike") && (aMethod == HTTPMethod.post) {
                     // Sets True for commentSendingSuccessful to be observable by PostUI
                     let likeStatus = self?.processLike(Result: aDic)
