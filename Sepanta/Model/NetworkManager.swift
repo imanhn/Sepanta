@@ -60,6 +60,7 @@ class NetworkManager {
     var bankObs = BehaviorRelay<Bank>(value: Bank())
     var pollObs = BehaviorRelay<Int>(value: 0)
     var userPointsObs = BehaviorRelay<UserPoints>(value: UserPoints())
+    var pointsElementsObs = BehaviorRelay<[PointElement]>(value: [PointElement]())
     var shopNotifObs = BehaviorRelay<[ShopNotification]>(value: [ShopNotification]())
     var generalNotifObs = BehaviorRelay<[GeneralNotification]>(value: [GeneralNotification]())
     // Initialization
@@ -128,7 +129,7 @@ class NetworkManager {
             if let aresult = jsonResult as? NSDictionary {
                 self.result = aresult
                 self.parser = JSONParser(API: apiName,Method : aMethod)
-                if let aparser = self.parser {                    
+                if let aparser = self.parser {
                     aparser.resultSubject.accept(aresult)                    
                 }
                 self.status.accept(CallStatus.ready)

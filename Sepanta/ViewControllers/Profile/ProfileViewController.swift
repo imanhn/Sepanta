@@ -24,6 +24,9 @@ class ProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
     @IBOutlet weak var nameLabel : UILabel!
     @IBOutlet weak var descLabel : UILabel!
     @IBOutlet weak var profileScrollView: UIScrollView!
+    @IBAction func showScoreTapped(_ sender: Any) {
+        self.coordinator!.pushScores()
+    }
     
     @IBAction func menuTapped(_ sender: Any) {
         self.coordinator!.openButtomMenu()

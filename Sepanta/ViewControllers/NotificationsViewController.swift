@@ -63,6 +63,7 @@ class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITable
                 let model = aShopNotif
                 aCell.bodyLabel.text = "پست جدید گذاشته شد"
                 aCell.titleLabel.text = model.shop_name
+                self.NotifTableView.rowHeight = UIScreen.main.bounds.height/9
                 /* //USE SHOP IMAGE
                  if let imageUrl = URL(string: NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_profile_image+(model.shop_image ?? "")) {
                     aCell.postImage.setImageFromCache(PlaceHolderName: "logo_shape_in", Scale: 1, ImageURL: imageUrl, ImageName: (model.shop_image ?? ""))
@@ -96,6 +97,7 @@ class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITable
                 let model = aShopNotif
                 aCell.bodyLabel.text = model.body
                 aCell.titleLabel.text = model.title
+                self.NotifTableView.rowHeight = UIScreen.main.bounds.height/9
                 if model.image != nil && (model.image?.count)! > 0 {
                     if let imageUrl = URL(string: NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_profile_image+(model.image ?? "")) {
                         aCell.postImage.setImageFromCache(PlaceHolderName: "logo_shape_in", Scale: 1, ImageURL: imageUrl, ImageName: (model.image ?? ""))

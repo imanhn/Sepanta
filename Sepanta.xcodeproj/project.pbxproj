@@ -33,6 +33,8 @@
 		0F50AE74226F66950028D8B6 /* MapViewAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F50AE73226F66950028D8B6 /* MapViewAnnotations.swift */; };
 		0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F512C042205B5C300B99C9E /* SignupViewController.swift */; };
 		0F58927C2278F65E0077B655 /* UserPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F58927B2278F65E0077B655 /* UserPoints.swift */; };
+		0F58927E227909080077B655 /* ScoresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F58927D227909080077B655 /* ScoresViewController.swift */; };
+		0F58928022790B210077B655 /* Scores.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F58927F22790B210077B655 /* Scores.storyboard */; };
 		0F63F7102277625E00799C8F /* ContactUS.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F63F70F2277625E00799C8F /* ContactUS.storyboard */; };
 		0F63F7142277690100799C8F /* ContactUSUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F7132277690100799C8F /* ContactUSUI.swift */; };
 		0F63F71622776A5400799C8F /* ContactUSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F71522776A5400799C8F /* ContactUSViewController.swift */; };
@@ -153,6 +155,8 @@
 		0F50AE73226F66950028D8B6 /* MapViewAnnotations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewAnnotations.swift; sourceTree = "<group>"; };
 		0F512C042205B5C300B99C9E /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		0F58927B2278F65E0077B655 /* UserPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPoints.swift; sourceTree = "<group>"; };
+		0F58927D227909080077B655 /* ScoresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresViewController.swift; sourceTree = "<group>"; };
+		0F58927F22790B210077B655 /* Scores.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Scores.storyboard; sourceTree = "<group>"; };
 		0F63F70F2277625E00799C8F /* ContactUS.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactUS.storyboard; sourceTree = "<group>"; };
 		0F63F7132277690100799C8F /* ContactUSUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUSUI.swift; sourceTree = "<group>"; };
 		0F63F71522776A5400799C8F /* ContactUSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUSViewController.swift; sourceTree = "<group>"; };
@@ -398,6 +402,7 @@
 				0FD094AB226E370B00E53A07 /* NearestViewController.swift */,
 				0F63F71522776A5400799C8F /* ContactUSViewController.swift */,
 				0F63F71F2278BDF200799C8F /* NewCardViewController.swift */,
+				0F58927D227909080077B655 /* ScoresViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -450,6 +455,7 @@
 				0F63F71B2278B65800799C8F /* NewCardView.xib */,
 				0F63F70F2277625E00799C8F /* ContactUS.storyboard */,
 				0F63F7212278BE8000799C8F /* NewCard.storyboard */,
+				0F58927F22790B210077B655 /* Scores.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -670,6 +676,7 @@
 				0F63F7222278BE8000799C8F /* NewCard.storyboard in Resources */,
 				0FFCDC52226C955F0087BFEF /* Notifications.storyboard in Resources */,
 				0F8E3F722275CD4200E51B17 /* CardView.xib in Resources */,
+				0F58928022790B210077B655 /* Scores.storyboard in Resources */,
 				0FD094AA226E34C600E53A07 /* Map.storyboard in Resources */,
 				0F237E41226783CF004CC7BC /* Shabnam-Light-FD.ttf in Resources */,
 				0F4D29E42267617100BFD425 /* Search.storyboard in Resources */,
@@ -822,6 +829,7 @@
 				0F066F99222C22EE00C8871C /* MenuController.swift in Sources */,
 				0FD32DCB227076C40092D6FC /* ProfileInfo.swift in Sources */,
 				0F0661AD2257E62400A83734 /* SepantaGroupsSubscription.swift in Sources */,
+				0F58927E227909080077B655 /* ScoresViewController.swift in Sources */,
 				0FAEEDE72230949C00A9178F /* AboutUsViewController.swift in Sources */,
 				0F890D022214B5310091FA2E /* AppCoordinator.swift in Sources */,
 				0FAEEDE5222F29C600A9178F /* GetRichUI.swift in Sources */,

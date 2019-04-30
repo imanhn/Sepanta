@@ -260,6 +260,15 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
+    func pushScores(){
+        let storyboard = UIStoryboard(name: "Scores", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ScoresViewController") as! ScoresViewController
+        vc.coordinator = self
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+    
     func logout() {
         LoginKey.shared.deleteTokenAndUserID()
         if self.parentCoordinator != nil{

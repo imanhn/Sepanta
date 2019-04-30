@@ -157,6 +157,7 @@ class JSONParser {
                     print("Starting points-user Parser...")
                     let aUserPoint = self?.processPoints(Result: aDic)
                     NetworkManager.shared.userPointsObs.accept(aUserPoint!)
+                    NetworkManager.shared.pointsElementsObs.accept(aUserPoint!.points!)
                 } else if (apiName == "selling-request") && (aMethod == HTTPMethod.post) {
                     print("Starting selling-request Parser...")
                     self?.processSellRequest(Result: aDic)
@@ -195,7 +196,7 @@ class JSONParser {
         }
         if let pointsElements = aResult["points"] as? NSArray{
             for anElement in pointsElements{
-                if let castedElement = anElement as? NSDictionary {                    
+                if let castedElement = anElement as? NSDictionary {
                     let aPointElem = PointElement(key: (castedElement["key"] as? String) ?? "", total: (castedElement["total"] as? Int) ?? 0)
                     aUserPoints.points?.append(aPointElem)
                 }else{
@@ -577,8 +578,7 @@ class JSONParser {
             if let aViewCount = postDet["viewCount"] as? Int {aPost.viewCount = aViewCount}
             print("JSON Parser : Parsed Post : ",aPost)
         }else{
-            print("Post Detail Parser Failed!")
-            fatalError()
+            print("*** Error : Post Detail is NULL - Parser Failed!")            
         }
         if let someComments = aResult["comments"] as? NSArray {
             aPost.comments = [Comment]()
