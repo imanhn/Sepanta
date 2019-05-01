@@ -60,6 +60,8 @@ class SearchViewController : UIViewControllerWithErrorBar{
         NetworkManager.shared.shopSearchResultObs.bind(to: searchResultTableView.rx.items(cellIdentifier: "SearchCell")) { row, aShopSearchResult, cell in
             if let aCell = cell as? SearchCell {
                 aCell.shopLabel.text = aShopSearchResult.shop_name
+                self.searchResultTableView.rowHeight = UIScreen.main.bounds.height/9
+                
             }
             }.disposed(by: myDisposeBag)
         
