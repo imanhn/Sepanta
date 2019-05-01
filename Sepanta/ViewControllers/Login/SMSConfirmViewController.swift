@@ -19,6 +19,7 @@ class SMSConfirmViewController: UIViewControllerWithKeyboardNotificationWithErro
     @IBOutlet weak var TimerLabel: UILabel!
     @IBOutlet weak var submitButton: SubmitButtonOnRedBar!
     var countdownTimer: Timer!
+    var disposeList = [Disposable]()
     var totalTime = 60
     var mobileNumber : String?
     var myDisposeBag = DisposeBag()
@@ -42,12 +43,15 @@ class SMSConfirmViewController: UIViewControllerWithKeyboardNotificationWithErro
                             "sms_verification_code":"\(self.SMSTextField.text ?? "")"]
         NetworkManager.shared.messageObs = BehaviorRelay<String>(value: "")
         NetworkManager.shared.run(API: "check-sms-code", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
-        NetworkManager.shared.messageObs
+        let messageDisp = NetworkManager.shared.messageObs
             .filter({$0.count > 0 })
             .subscribe(onNext: { [unowned self] (aMessage) in
                 self.alert(Message: aMessage)
                 NetworkManager.shared.messageObs = BehaviorRelay<String>(value: "")
-            }).disposed(by: self.myDisposeBag)
+            })
+        messageDisp.disposed(by: self.myDisposeBag)
+        disposeList.append(messageDisp)
+        
     }
     
     func setMobileNumber(_ astring : String){
@@ -64,11 +68,12 @@ class SMSConfirmViewController: UIViewControllerWithKeyboardNotificationWithErro
     }
     
     @IBAction func signupClicked(_ sender: Any) {
+        disposeList.forEach({$0.dispose()})
         self.coordinator!.gotoSignup()
     }
     
     func doSubscribtions(){
-        Observable.combineLatest([MobileTextField.rx.text,
+        let submitDisp = Observable.combineLatest([MobileTextField.rx.text,
                                   SMSTextField.rx.text
             ])
             .subscribe(onNext: { (combinedTexts) in
@@ -78,14 +83,19 @@ class SMSConfirmViewController: UIViewControllerWithKeyboardNotificationWithErro
                 }else{
                     self.submitButton.isEnabled = false
                 }
-            }).disposed(by: self.myDisposeBag)
+            })
+        submitDisp.disposed(by: self.myDisposeBag)
+        disposeList.append(submitDisp)
         
-        LoginKey.shared.tokenObs
-            .filter({$0.count > 0 })
-            .subscribe(onNext: { [unowned self] (atoken) in
+        let loginSucceedDisp = NetworkManager.shared.loginSucceed
+            .filter({$0})
+            .subscribe(onNext: { [unowned self] _ in
+                print("Pushing Home Page ")
+                NetworkManager.shared.loginSucceed.accept(false)
                 self.gotoHomePage()
-            }).disposed(by: self.myDisposeBag)
-        
+            })
+        loginSucceedDisp.disposed(by: self.myDisposeBag)
+        disposeList.append(loginSucceedDisp)
 
     }
     
@@ -95,6 +105,7 @@ class SMSConfirmViewController: UIViewControllerWithKeyboardNotificationWithErro
         } else {
             print("Timer is already stoped")
         }
+        disposeList.forEach({$0.dispose()})
         self.coordinator!.pushHomePage()
     }
     
@@ -127,6 +138,7 @@ extension SMSConfirmViewController {
     func endTimer() {
         countdownTimer.invalidate()
         //alert(Message: "وقت شما تمام شد لطفا مجددا تلاش کنید")
+        disposeList.forEach({$0.dispose()})
         self.coordinator!.popOneLevel()
     }
     

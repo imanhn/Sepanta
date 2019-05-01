@@ -35,6 +35,7 @@ class ProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
         self.coordinator!.pushEditProfile()
     }
     @IBAction func logoutTapped(_ sender: Any) {
+        showProfileUI = nil
         self.coordinator!.logout()
     }
     

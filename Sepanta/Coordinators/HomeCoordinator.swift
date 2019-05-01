@@ -14,7 +14,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     var menuOpened = false
     var navigationController: UINavigationController
     /* parentCoordinator could be either AppCoordinator or LoginCoordinator */
-    weak var parentCoordinator : Coordinator?
+    weak var parentCoordinator : AppCoordinator?
 
 
     init(navigationController: UINavigationController) {
@@ -272,24 +272,23 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     
     func logout() {
         LoginKey.shared.deleteTokenAndUserID()
-        while navigationController.topViewController != nil{
-            print("Poping ",navigationController.topViewController ?? "Nil")
-            navigationController.popViewController(animated: false)
-        }
-        pushLoginPage()
+        popLogin()
     }
     
     func pushHomePage() {
+        mountTokenToHeaders()
         _ = SlidesAndPaths.shared
-        _ = ProfileInfoWrapper.shared
+        _ = ProfileInfoWrapper.shared        
         let vc = HomeViewController.instantiate()
         vc.coordinator = self
         navigationController.delegate = self
-        navigationController.pushViewController(vc, animated: true)
+        navigationController.pushViewController(vc, animated: false)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
+    
     func mountTokenToHeaders() {
         NetworkManager.shared.headers["Authorization"] = "Bearer "+LoginKey.shared.token
+        print("Header Mounted : ",NetworkManager.shared.headers["Authorization"]?.count)
     }
     
     func pushLoginPage() {
@@ -315,33 +314,20 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
-    func gotoLogin(Set mobileNumber : String) {
-        var foundLoginInStack = false
+    func popLogin(Set mobileNumber : String = "") {
         while !navigationController.topViewController!.isKind(of: LoginViewController.self) {
-            print("Poping ",navigationController.topViewController ?? "Nil")
+            print("popLogin is Poping ",navigationController.topViewController ?? "Nil")
             navigationController.popViewController(animated: false)
-            foundLoginInStack = true
-        }
-        
-        if !foundLoginInStack {
-            let vc = LoginViewController.instantiate()
-            vc.coordinator = self
-            navigationController.pushViewController(vc, animated: false)
-            navigationController.setNavigationBarHidden(true, animated: false)
-            vc.setMobileNumber(mobileNumber)
         }
     }
     
     func start() {
+        pushLoginPage()
         if LoginKey.shared.isLoggedIn() {
             // Go to HomeViewController
             /*let retriveResult*/ _ = LoginKey.shared.retrieveTokenAndUserID()
             //print("Already Logged in with token : ",LoginKey.shared.token," Retriving : ",retriveResult)
-            mountTokenToHeaders()
             pushHomePage()
-        } else {
-            print("Not Logged in Yet/ or logged out before")
-            pushLoginPage()
         }
     }
 }

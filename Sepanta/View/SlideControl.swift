@@ -14,6 +14,7 @@ import RxCocoa
 class SlideController {
     var delegate : HomeViewController
     var slideTimer: Timer?
+    var disposeList = [Disposable]()
     var adsPage = 1;
     var startLocation = CGPoint(x: 0, y: 0)
     var endLocation = CGPoint(x: 0, y: 0)
@@ -26,7 +27,7 @@ class SlideController {
         self.delegate.pageControl.numberOfPages = slides.count
         self.delegate.currentImageView.image = slides[adsPage] // Current page
         self.delegate.currentImageView.setNeedsDisplay()
-        SlidesAndPaths.shared.slidesObs
+        let slideObs = SlidesAndPaths.shared.slidesObs
             .filter({$0.count >= 3})
             .subscribe(onNext: { [unowned self] (innerSlides) in
                 //print("Setting new Slides....")
@@ -40,13 +41,15 @@ class SlideController {
                 
             }, onDisposed: {
                 
-            }).disposed(by: myDisposeBag)
+            })
+        slideObs.disposed(by: myDisposeBag)
+        disposeList.append(slideObs)
         startTimer()
     }
     func startTimer(){
-        slideTimer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateSlide), userInfo: nil, repeats: true)
+        slideTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(updateSlide), userInfo: nil, repeats: true)
     }
-    
+
     func endTimer() {
         slideTimer?.invalidate()
     }
@@ -136,7 +139,7 @@ class SlideController {
     }
     
     func setupLeftAndRightImages(){
-        print("Page : ",adsPage)
+        //print("Page : ",adsPage)
         if adsPage < 1 {
             //leftImageView.image = slides[adsPage] // No left! get the current for left
             self.delegate.leftImageView.image = slides.last // No left! get a blank logo for left

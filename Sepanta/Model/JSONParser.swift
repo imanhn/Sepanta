@@ -40,6 +40,7 @@ class JSONParser {
                     if let aUserID = aDic["userId"] {
                         LoginKey.shared.userID = String(describing: aUserID)
                         LoginKey.shared.userIDObs.accept(LoginKey.shared.userID)
+                        NetworkManager.shared.SMSConfirmed.accept(true)
                     }else{
                         if let amessage =  aDic["message"] as? String {
                             NetworkManager.shared.messageObs.accept(amessage)
@@ -77,6 +78,7 @@ class JSONParser {
                         LoginKey.shared.username = aUsername
                         LoginKey.shared.role = aRole                        
                         LoginKey.shared.tokenObs.accept(LoginKey.shared.token)
+                        NetworkManager.shared.loginSucceed.accept(true)
                         LoginKey.shared.userIDObs.accept(LoginKey.shared.userID)
                         _ = LoginKey.shared.registerTokenAndUserID()
                     }else{

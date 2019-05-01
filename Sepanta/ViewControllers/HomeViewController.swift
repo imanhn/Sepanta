@@ -13,7 +13,7 @@ import RxSwift
 class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     weak var coordinator : HomeCoordinator?
     var myDisposeBag = DisposeBag()
-    var slideControl : SlideController?
+    weak var slideControl : SlideController?
     @IBOutlet weak var pageControl: UIPageControl!
     
     @IBOutlet weak var searchText: CustomSearchBar!

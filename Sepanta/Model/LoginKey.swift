@@ -26,6 +26,9 @@ class LoginKey {
     }
     
     func registerTokenAndUserID() -> Bool {
+        print("************************")
+        print("self.token : ",self.token)
+        print("************************")
         print("Registering Token :",self.token.count,"  USERID :",self.userID,"  Role : ",self.role)
         let tokenSucceed = KeychainWrapper.standard.set(self.token, forKey:"TOKEN")
         if tokenSucceed { print("Token Saved Successfully") } else {

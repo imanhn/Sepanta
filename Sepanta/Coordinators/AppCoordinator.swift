@@ -16,6 +16,7 @@ class AppCoordinator: Coordinator {
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
+    
     func removeChild(_ aCoordinator : Coordinator){
         
         for (index,coordinator) in childCoordinators.enumerated() {
@@ -28,7 +29,7 @@ class AppCoordinator: Coordinator {
         
     }
 
- 
+
     
     func start() {
         let homeCoordinator = HomeCoordinator(navigationController: navigationController)

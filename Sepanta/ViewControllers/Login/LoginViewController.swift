@@ -69,10 +69,12 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
                 
             }).disposed(by: self.myDisposeBag)
 
-        LoginKey.shared.userIDObs
-            .filter({$0.count > 0 })
-            .subscribe(onNext: { [unowned self] (auserID) in
+        NetworkManager.shared.SMSConfirmed
+            .filter({$0})
+            .subscribe(onNext: { [unowned self] _ in
                 let toEnglishMobileNo =  (self.MobileTextField.text ?? "").toEnglishNumbers()
+                print("Pushing SMSVC")
+                NetworkManager.shared.SMSConfirmed.accept(false)
                 self.coordinator!.gotoSMSVerification(Set: toEnglishMobileNo)
             }).disposed(by: self.myDisposeBag)
 

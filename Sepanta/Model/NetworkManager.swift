@@ -57,6 +57,8 @@ class NetworkManager {
     var updateProfileInfoSuccessful = BehaviorRelay<Bool>(value: false)
     var shopSearchResultObs = BehaviorRelay<[ShopSearchResult]>(value: [ShopSearchResult]())
     var profileObs = BehaviorRelay<Profile>(value: Profile())
+    var loginSucceed =  BehaviorRelay<Bool>(value: false)
+    var SMSConfirmed =  BehaviorRelay<Bool>(value: false)
     var bankObs = BehaviorRelay<Bank>(value: Bank())
     var pollObs = BehaviorRelay<Int>(value: 0)
     var userPointsObs = BehaviorRelay<UserPoints>(value: UserPoints())
@@ -89,9 +91,11 @@ class NetworkManager {
     }
     func run(API apiName : String, QueryString aQuery : String, Method aMethod : HTTPMethod, Parameters aParameter : Dictionary<String, String>?, Header  aHeader : HTTPHeaders? ,WithRetry : Bool) {
         var retryTime = 4
+        var timeOut : Double = 4
         if WithRetry == false {
-            print("NOT Retrying - \(apiName)")
+            print("NOT Retrying / High Timeout - \(apiName)")
             retryTime = 1
+            timeOut = 10
         }
         
         self.status.accept(CallStatus.inprogress)
@@ -99,9 +103,9 @@ class NetworkManager {
         var urlAddress = self.baseURLString + "/" + apiName + aQuery
         
         var headerToSend = self.headers
-        if (aHeader) != nil{
+        /*if (aHeader) != nil{
             headerToSend = aHeader!
-        }
+        }*/
         //print("Calling Alamofire with Header : ",headerToSend.count,"  Tok :",LoginKey.shared.token,"  ID : ",LoginKey.shared.userID)
         
         if aParameter != nil {
@@ -111,14 +115,14 @@ class NetworkManager {
         }
         
         print("RXAlamofire : Requesting JSON over URL : ",urlAddress)
-        /*
+        
         print("      Parameter : \(aParameter)")
         print("      Header : \(headerToSend)")
         print("      Method : \(aMethod)")
-        */
+        
         RxAlamofire.requestJSON(aMethod, urlAddress , parameters: aParameter, encoding: JSONEncoding.default, headers: headerToSend)
         .observeOn(MainScheduler.instance)
-        .timeout(4, scheduler: MainScheduler.instance)
+        .timeout(timeOut, scheduler: MainScheduler.instance)
         .retry(retryTime)
         //.debug()
         .subscribe(onNext: { [unowned self] (ahttpURLRes,jsonResult) in
@@ -131,6 +135,10 @@ class NetworkManager {
                     aparser.resultSubject.accept(aresult)                    
                 }
                 if ahttpURLRes.statusCode >= 400 {
+                    print("Header status : ",NetworkManager.shared.headers["Authorization"])
+                    print("Result : ",self.result)
+                    print("Result All Key : ",self.result.allKeys)
+                    print("Error : ",self.result["error"])
                     if let amessage = self.result["message"] as? String {
                         print("Setting : ",amessage)
                         self.messageObs.accept(amessage)

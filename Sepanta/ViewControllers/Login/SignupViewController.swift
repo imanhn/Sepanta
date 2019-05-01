@@ -32,7 +32,7 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
     @IBOutlet weak var termsLabel: UILabel!
     
     @IBAction func enterTapped(_ sender: Any) {
-        self.coordinator!.gotoLogin(Set: self.mobileNoText.text ?? "")
+        self.coordinator!.popLogin(Set: self.mobileNoText.text ?? "")
     }
     @IBAction func termsClicked(_ sender: Any) {
         TermsAgreed = !TermsAgreed;

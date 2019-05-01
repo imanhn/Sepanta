@@ -865,7 +865,7 @@
                                 <rect key="frame" x="0.0" y="40" width="375" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="مراکز سپنتایی" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKg-wA-Ses" userLabel="HeaderText">
-                                        <rect key="frame" x="143.5" y="4.5" width="89.5" height="22"/>
+                                        <rect key="frame" x="143" y="4.5" width="89.5" height="22"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="16"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2292,7 +2292,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(۳.۵)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pIT-PZ-YtQ" userLabel="rateLabel">
-                                                        <rect key="frame" x="48" y="0.5" width="30" height="18"/>
+                                                        <rect key="frame" x="48" y="1" width="30" height="18"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="13"/>
                                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -2342,7 +2342,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۲۳۴۵" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pvT-of-2uq" userLabel="followersNumberLabel">
-                                                        <rect key="frame" x="88" y="3.5" width="36" height="18"/>
+                                                        <rect key="frame" x="88" y="4" width="36" height="18"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-Light-FD" family="Shabnam FD" pointSize="13"/>
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -2673,7 +2673,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q3v-UR-c4g" userLabel="leftView">
-                                                    <rect key="frame" x="0.0" y="26" width="75" height="23.5"/>
+                                                    <rect key="frame" x="0.0" y="26.5" width="75" height="23.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۰٪" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTq-Nh-SDz" userLabel="percentLabel">
                                                             <rect key="frame" x="50" y="0.0" width="25" height="23.5"/>
