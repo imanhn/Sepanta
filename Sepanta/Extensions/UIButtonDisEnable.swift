@@ -19,5 +19,5 @@ extension UIButton {
         self.isEnabled = false
         self.backgroundColor = UIColor(hex: 0xD6D7D9)
     }
-
+    
 }

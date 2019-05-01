@@ -14,12 +14,13 @@ import RxCocoa
 
 class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,Storyboarded {
     var myDisposeBag  = DisposeBag()
-    weak var coordinator : LoginCoordinator?
+    weak var coordinator : HomeCoordinator?
     @IBOutlet var PageView: UIView!
     @IBOutlet weak var LoginPanelView: RightTabbedView!
     @IBOutlet weak var SignupButton: TabbedButton!
     @IBOutlet weak var EnterButton: UIButton!
     @IBOutlet weak var MobileTextField: UnderLinedTextField!
+    @IBOutlet weak var submitButton: SubmitButtonOnRedBar!
     
     @IBAction func MobileTypeEnded(_ sender: Any) {
         _ = (sender as AnyObject).resignFirstResponder()
@@ -38,49 +39,11 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
     @objc override func ReloadViewController(_ sender:Any) {
         super.ReloadViewController(sender)
     }
+    
     @IBAction func SendClicked(_ sender: Any) {
-        NetworkManager.shared.status
-            .filter({$0 == CallStatus.error})
-            .subscribe(onNext: { [unowned self] (innerNetworkCallStatus) in
-                Spinner.stop()
-                self.alert(Message: "دسترسی به سرور امکان پذیر نیست یا سیستم با مشکل مواجه شده است"+"\n"+NetworkManager.shared.message)
-                return 
-            }, onError: { _ in
-                
-            }, onCompleted: {
-                
-            }, onDisposed: {
-                
-            }).disposed(by: myDisposeBag)
-        
-        if !(MobileTextField.text!.isEmpty)  {
-            // Convert to English
-            //MobileTextField.insertText(MobileTextField.text!.toEnglishNumbers())
-            MobileTextField.text = MobileTextField.text!.toEnglishNumbers()
-            
-            LoginKey.shared.getUserID(MobileTextField.text!)
-            LoginKey.shared.userIDObs
-                //.debug()
-                .subscribe(onNext: { [unowned self] (innerUserIDObs) in
-                    LoginKey.shared.userID = innerUserIDObs
-                    print("USERID : ",LoginKey.shared.userID)
-                    print("inner USERID : ",innerUserIDObs)
-                    Spinner.stop()
-                    if LoginKey.shared.userID == "" {return}
-                    LoginKey.shared.userIDObs = BehaviorRelay<String>(value: String())
-                    self.coordinator!.gotoSMSVerification(Set : (self.MobileTextField.text)!)
-                    }, onError: { _ in
-                        
-                }, onCompleted: {
-                }, onDisposed: {
-                }).disposed(by: myDisposeBag)
-        }
-        else {
-            let alert = UIAlertController(title: "توجه", message: "لطفاْ شماره همراه خود را وارد کنید", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "بلی", style: .default))
-            self.present(alert, animated: true, completion: nil)
-            
-        }
+        self.view.endEditing(true)
+        let aParameter = ["cellphone":"\(self.MobileTextField.text ?? "")"]
+        NetworkManager.shared.run(API: "login", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
     }
     
     func setMobileNumber(_ astring : String){
@@ -92,12 +55,42 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
         self.MobileTextField.text =  astring.toEnglishNumbers()
     }
 
+    func doSubscribtions(){
+        MobileTextField.rx.text
+            .subscribe(onNext: { [unowned self] (atext) in
+                if !atext!.toEnglishNumbers().hasPrefix("09") {
+                    self.MobileTextField.text = "09"
+                }
+                if atext?.count == 11 {
+                    self.submitButton.isEnabled = true
+                }else{
+                    self.submitButton.isEnabled = false
+                }
+                
+            }).disposed(by: self.myDisposeBag)
 
+        LoginKey.shared.userIDObs
+            .filter({$0.count > 0 })
+            .subscribe(onNext: { [unowned self] (auserID) in
+                let toEnglishMobileNo =  (self.MobileTextField.text ?? "").toEnglishNumbers()
+                self.coordinator!.gotoSMSVerification(Set: toEnglishMobileNo)
+            }).disposed(by: self.myDisposeBag)
+
+        NetworkManager.shared.messageObs
+            .filter({$0.count > 0 })
+            .subscribe(onNext: { [unowned self] (aMessage) in
+                self.alert(Message: aMessage)
+                NetworkManager.shared.messageObs = BehaviorRelay<String>(value: "")
+            }).disposed(by: self.myDisposeBag)
+    }
+    
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
+        self.submitButton.isEnabled = false
+        doSubscribtions()
     
     }
 

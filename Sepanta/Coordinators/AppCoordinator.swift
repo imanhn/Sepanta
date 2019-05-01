@@ -28,29 +28,13 @@ class AppCoordinator: Coordinator {
         
     }
 
-    func mountTokenToHeaders() {
-        NetworkManager.shared.headers["Authorization"] = "Bearer "+LoginKey.shared.token
-    }
+ 
     
     func start() {
-        if LoginKey.shared.isLoggedIn() {
-            // Go to HomeViewController
-            /*let retriveResult*/ _ = LoginKey.shared.retrieveTokenAndUserID()
-            //print("Already Logged in with token : ",LoginKey.shared.token," Retriving : ",retriveResult)
-            mountTokenToHeaders()
-            let homeCoordinator = HomeCoordinator(navigationController: navigationController)
-            childCoordinators.append(homeCoordinator)
-            homeCoordinator.parentCoordinator = self
-            homeCoordinator.start()
-
-        } else {
-            // Go to Login Controller
-            print("Not Logged in Yet/ or logged out before")
-            let loginCoordinator = LoginCoordinator(navigationController: navigationController)
-            childCoordinators.append(loginCoordinator)
-            loginCoordinator.parentCoordinator = self
-            loginCoordinator.start()
-        }
+        let homeCoordinator = HomeCoordinator(navigationController: navigationController)
+        childCoordinators.append(homeCoordinator)
+        homeCoordinator.parentCoordinator = self
+        homeCoordinator.start()
     }
 
 }

@@ -14,7 +14,7 @@ import RxCocoa
 
 
 class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,UITextFieldDelegate,Storyboarded   {
-    weak var coordinator : LoginCoordinator?
+    weak var coordinator : HomeCoordinator?
     var userID : String = ""
     var smsVerificationCode : String = ""
     var currentStateCodeObs = BehaviorRelay<String>(value : String())

@@ -124,31 +124,24 @@ class NetworkManager {
         .subscribe(onNext: { [unowned self] (ahttpURLRes,jsonResult) in
             
             print(" Response Code : ",ahttpURLRes.statusCode)
-            if ahttpURLRes.statusCode == 500 { self.status.accept(CallStatus.InternalServerError)}
-            
             if let aresult = jsonResult as? NSDictionary {
                 self.result = aresult
                 self.parser = JSONParser(API: apiName,Method : aMethod)
                 if let aparser = self.parser {
                     aparser.resultSubject.accept(aresult)                    
                 }
+                if ahttpURLRes.statusCode >= 400 {
+                    if let amessage = self.result["message"] as? String {
+                        print("Setting : ",amessage)
+                        self.messageObs.accept(amessage)
+                    }
+                }
                 self.status.accept(CallStatus.ready)
             } else {
                 
                 self.status.accept(CallStatus.error)
             }
-            if let amessage = self.result["message"] as? String {
-                if amessage == "Unauthenticated." {
-                    print("User is not authorized")
-                }
-                self.message = amessage
-            }
-            if let astatus = self.result["status"] as? String {
-                self.message = astatus
-            }
-            if let acontent = self.result["content"] as? NSDictionary {
-                self.content = acontent
-            }
+            if ahttpURLRes.statusCode == 500 { self.status.accept(CallStatus.InternalServerError)}
             Spinner.stop()
             }, onError: { (err) in
                 if err.localizedDescription == "The Internet connection appears to be offline." {

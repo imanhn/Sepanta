@@ -40,6 +40,15 @@ class JSONParser {
                     if let aUserID = aDic["userId"] {
                         LoginKey.shared.userID = String(describing: aUserID)
                         LoginKey.shared.userIDObs.accept(LoginKey.shared.userID)
+                    }else{
+                        if let amessage =  aDic["message"] as? String {
+                            NetworkManager.shared.messageObs.accept(amessage)
+                            
+                        }else if let amessage =  aDic["status"] as? String {
+                            NetworkManager.shared.messageObs.accept(amessage)
+                        }else{
+                            NetworkManager.shared.messageObs.accept("عملیات با خطا مواجه شده است")
+                        }
                     }
                 } else if (apiName == "categories-filter") && (aMethod == HTTPMethod.get) {
                     //Returns All Catagories (while SepantaGroupsVC pushed/No state/City has selected yet //?? aDic["categoryShops"]  is redundant but who knows!
@@ -61,12 +70,24 @@ class JSONParser {
                     }
 
                 } else if (apiName == "check-sms-code") && (aMethod == HTTPMethod.post) {
-                    if let aToken = aDic["token"] {
-                        LoginKey.shared.token = String(describing: aToken)
-                        LoginKey.shared.username = String(describing: aDic["username"] )
-                        LoginKey.shared.role = String(describing: aDic["role"] )
+                    if let aToken = aDic["token"] as? String ,
+                        let aUsername = aDic["username"] as? String ,
+                        let aRole = aDic["role"] as? String {
+                        LoginKey.shared.token = aToken
+                        LoginKey.shared.username = aUsername
+                        LoginKey.shared.role = aRole                        
                         LoginKey.shared.tokenObs.accept(LoginKey.shared.token)
+                        LoginKey.shared.userIDObs.accept(LoginKey.shared.userID)
                         _ = LoginKey.shared.registerTokenAndUserID()
+                    }else{
+                        if let amessage =  aDic["message"] as? String {
+                            NetworkManager.shared.messageObs.accept(amessage)
+                            
+                        }else if let amessage =  aDic["status"] as? String {
+                            NetworkManager.shared.messageObs.accept(amessage)
+                        }else{
+                            NetworkManager.shared.messageObs.accept("عملیات با خطا مواجه شده است")
+                        }
                     }
                 } else if (apiName == "category-state-list") && (aMethod == HTTPMethod.get) {
                     //Returns the List of supported States (which probably have catagory

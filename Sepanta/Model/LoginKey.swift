@@ -26,20 +26,32 @@ class LoginKey {
     }
     
     func registerTokenAndUserID() -> Bool {
+        print("Registering Token :",self.token.count,"  USERID :",self.userID,"  Role : ",self.role)
         let tokenSucceed = KeychainWrapper.standard.set(self.token, forKey:"TOKEN")
-        if tokenSucceed { print("Token Saved Successfully") } else { print("Token Can not be saved") }
+        if tokenSucceed { print("Token Saved Successfully") } else {
+            print("Token Can not be saved")
+            fatalError()
+        }
         
         let useridSucceed = KeychainWrapper.standard.set(self.userID, forKey:"USERID")
-        if useridSucceed { print("UserID Saved Successfully") } else { print("UserID Can not be saved") }
+        if useridSucceed { print("UserID Saved Successfully") } else {
+            print("UserID Can not be saved")
+            fatalError()
+            
+        }
 
         let roleSucceed = KeychainWrapper.standard.set(self.role, forKey:"ROLE")
-        if roleSucceed { print("Role Saved Successfully") } else { print("Role Can not be saved") }
+        if roleSucceed { print("Role Saved Successfully") } else {
+            print("Role Can not be saved")
+            fatalError()
+        }
 
         if tokenSucceed && useridSucceed && roleSucceed {
             let loginDataSaved = KeychainWrapper.standard.set("YES", forKey:"LOGIN")
             return loginDataSaved
         } else {
             print("Unable to save login data....")
+            fatalError()
             let loginDataSaved = KeychainWrapper.standard.set("NO", forKey:"LOGIN")
             return loginDataSaved
         }
@@ -69,6 +81,7 @@ class LoginKey {
             self.userID = KeychainWrapper.standard.string(forKey: "USERID")!
             self.role = KeychainWrapper.standard.string(forKey: "ROLE")!
             print("Your USERID : ",self.userID)
+            print("Your token : ",self.token.count)
             print("Your role would be : ",self.role)
             return true
         } else {

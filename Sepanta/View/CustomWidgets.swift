@@ -83,6 +83,62 @@ class SubmitButton: UIButton {
     
 }
 
+class SubmitButtonOnRedBar: UIButton {
+    var curvSize : CGFloat = 5;
+    override var isEnabled: Bool {
+        didSet {
+            DispatchQueue.main.async {
+                if self.isEnabled {
+                    self.setTitleColor(UIColor(hex: 0x515152), for: .disabled)
+                    self.setTitleColor(UIColor(hex: 0x515152), for: .application)
+                    self.setTitleColor(UIColor(hex: 0x515152), for: .normal)
+                    //self.alpha = 1.0
+                }
+                else {
+                    self.setTitleColor(UIColor(hex: 0xD6D7D9), for: .disabled)
+                    self.setTitleColor(UIColor(hex: 0xD6D7D9), for: .application)
+                    self.setTitleColor(UIColor(hex: 0xD6D7D9), for: .normal)
+
+                    //self.alpha = 0.5
+                }
+            }
+        }
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.isEnabled = false
+        self.contentMode = .scaleAspectFit
+        self.semanticContentAttribute = .forceRightToLeft
+        self.setTitleColor(UIColor.white, for: .normal)
+        self.setTitleColor(UIColor.darkGray, for: .disabled)
+        self.backgroundColor = UIColor(hex: 0xFFFFFF)
+        self.setImage(UIImage(named: "icon_tick_white"), for: .normal)
+        self.setImage(UIImage(named: "icon_tick_white"), for: .disabled)
+        //self.setImage(UIImage(named: "icon_tick_black"), for: .disabled)
+        self.titleLabel?.font = UIFont(name: "Shabnam-FD", size: 16)
+        self.contentMode = .scaleAspectFit
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func draw(_ rect: CGRect) {
+        self.imageEdgeInsets = UIEdgeInsetsMake(0, frame.height/2, 0, 0)
+        self.layer.cornerRadius = curvSize
+        self.layer.masksToBounds = true
+        let context = UIGraphicsGetCurrentContext()
+        
+        let insideCGRec : CGRect = CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height)
+        let bezPath = UIBezierPath(roundedRect: insideCGRec, byRoundingCorners: [.allCorners], cornerRadii: CGSize(width: curvSize, height: curvSize)).cgPath
+        
+        context?.setLineWidth(1.0)
+        context?.setStrokeColor((UIColor(hex: 0xD6D7D9)).cgColor)
+        context?.addPath(bezPath)
+        context?.drawPath(using: CGPathDrawingMode.stroke)
+    }
+    
+}
 
 class RoundedButton: UIButton {
     var curvSize : CGFloat = 5;

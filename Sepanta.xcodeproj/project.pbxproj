@@ -63,7 +63,6 @@
 		0F890CFE2214B4CD0091FA2E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890CFD2214B4CD0091FA2E /* Coordinator.swift */; };
 		0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890CFF2214B4E90091FA2E /* Storyboarded.swift */; };
 		0F890D022214B5310091FA2E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D012214B5310091FA2E /* AppCoordinator.swift */; };
-		0F890D042214BF300091FA2E /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D032214BF300091FA2E /* LoginCoordinator.swift */; };
 		0F890D0E2215C7170091FA2E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D0D2215C7170091FA2E /* NetworkManager.swift */; };
 		0F890D122215D21C0091FA2E /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D112215D21C0091FA2E /* JSONParser.swift */; };
 		0F8B7D432267874B00EFAACD /* Shabnam-Bold-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F8B7D412267874600EFAACD /* Shabnam-Bold-FD.ttf */; };
@@ -188,7 +187,6 @@
 		0F890CFD2214B4CD0091FA2E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		0F890CFF2214B4E90091FA2E /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		0F890D012214B5310091FA2E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		0F890D032214BF300091FA2E /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		0F890D0D2215C7170091FA2E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0F890D112215D21C0091FA2E /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
 		0F8B7D412267874600EFAACD /* Shabnam-Bold-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shabnam-Bold-FD.ttf"; sourceTree = "<group>"; };
@@ -341,7 +339,6 @@
 				0F890D012214B5310091FA2E /* AppCoordinator.swift */,
 				0F052EDA221C0790009175EA /* HomeCoordinator.swift */,
 				0FB3ECCF222C8AF8009A89F7 /* MenuCoordinator.swift */,
-				0F890D032214BF300091FA2E /* LoginCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -794,7 +791,6 @@
 				0F066F9F222C704B00C8871C /* MenuViewController.swift in Sources */,
 				0F1B75652236E42A0087C0DB /* ShopUI.swift in Sources */,
 				0F237E1F2267654B004CC7BC /* SearchViewController.swift in Sources */,
-				0F890D042214BF300091FA2E /* LoginCoordinator.swift in Sources */,
 				0F1B755B223580C80087C0DB /* ShopsListDataSource.swift in Sources */,
 				0FB3ECD2222DC48F009A89F7 /* GetRichViewController.swift in Sources */,
 				0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */,
