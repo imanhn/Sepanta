@@ -102,7 +102,7 @@ class NetworkManager {
         Spinner.start()
         var urlAddress = self.baseURLString + "/" + apiName + aQuery
         
-        var headerToSend = self.headers
+        let headerToSend = self.headers
         /*if (aHeader) != nil{
             headerToSend = aHeader!
         }*/
@@ -115,11 +115,11 @@ class NetworkManager {
         }
         
         print("RXAlamofire : Requesting JSON over URL : ",urlAddress)
-        
+        /*
         print("      Parameter : \(aParameter)")
         print("      Header : \(headerToSend)")
         print("      Method : \(aMethod)")
-        
+        */
         RxAlamofire.requestJSON(aMethod, urlAddress , parameters: aParameter, encoding: JSONEncoding.default, headers: headerToSend)
         .observeOn(MainScheduler.instance)
         .timeout(timeOut, scheduler: MainScheduler.instance)
@@ -135,10 +135,8 @@ class NetworkManager {
                     aparser.resultSubject.accept(aresult)                    
                 }
                 if ahttpURLRes.statusCode >= 400 {
-                    print("Header status : ",NetworkManager.shared.headers["Authorization"])
-                    print("Result : ",self.result)
                     print("Result All Key : ",self.result.allKeys)
-                    print("Error : ",self.result["error"])
+                    print("Error : ",self.result["error"] ?? "[No Error Key]")
                     if let amessage = self.result["message"] as? String {
                         print("Setting : ",amessage)
                         self.messageObs.accept(amessage)
