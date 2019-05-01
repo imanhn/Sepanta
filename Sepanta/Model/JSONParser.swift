@@ -103,6 +103,16 @@ class JSONParser {
                     //Returns the Post Detail
                     let aPost = (self?.processAsPostDetails(Result: aDic))!
                     NetworkManager.shared.postDetailObs.accept(aPost)
+                } else if (apiName == "register") && (aMethod == HTTPMethod.post) {
+                    //set a message for register when things go wrong!
+                    if aDic["cellphone"] != nil {
+                        NetworkManager.shared.messageObs.accept("این شماره همراه قبلاْ ثبت نام نموده است")
+                    }else if aDic["username"] != nil {
+                        NetworkManager.shared.messageObs.accept("این شناسه کاربری قبلاْ ثبت نام نموده است")
+                    }else if let amessage = aDic["message"] as? String {
+                        NetworkManager.shared.messageObs.accept(amessage)
+                    }
+                    
                 } else if (apiName == "profile") && (aMethod == HTTPMethod.post) {
                     //Returns Profile Data for a user Id
                     let aProfile = (self?.processAsProfile(Result: aDic))!

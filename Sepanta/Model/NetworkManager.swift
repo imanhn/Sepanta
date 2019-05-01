@@ -132,11 +132,12 @@ class NetworkManager {
                 self.result = aresult
                 self.parser = JSONParser(API: apiName,Method : aMethod)
                 if let aparser = self.parser {
+                    print("Handing over resultSubject to JSONParser")
                     aparser.resultSubject.accept(aresult)                    
                 }
                 if ahttpURLRes.statusCode >= 400 {
                     print("Result All Key : ",self.result.allKeys)
-                    print("Error : ",self.result["error"] ?? "[No Error Key]")
+                    print("Error : ",self.result["error"] ?? "[Error happende but no Error Key in response!]")
                     if let amessage = self.result["message"] as? String {
                         print("Setting : ",amessage)
                         self.messageObs.accept(amessage)

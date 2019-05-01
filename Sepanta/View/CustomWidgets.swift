@@ -777,6 +777,7 @@ extension CGRect {
             let triangleImage = UIImageView(frame: CGRect(x: 0, y: self.height*3/4 - 5, width: self.height/4, height: self.height/4))
             triangleImage.image = UIImage(named: "icon_dropdown_red")
             aView.addSubview(triangleImage)
+            aText.tag = 11
         }
         aView.addSubview(aText)        
         return (aView,aText)

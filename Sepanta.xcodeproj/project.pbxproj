@@ -45,6 +45,7 @@
 		0F63F7202278BDF200799C8F /* NewCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F71F2278BDF200799C8F /* NewCardViewController.swift */; };
 		0F63F7222278BE8000799C8F /* NewCard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F63F7212278BE8000799C8F /* NewCard.storyboard */; };
 		0F63F7242278EE8500799C8F /* UIImageSetShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F7232278EE8500799C8F /* UIImageSetShadow.swift */; };
+		0F673455227A149C0064EF96 /* SignUPUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F673454227A149C0064EF96 /* SignUPUI.swift */; };
 		0F67F75A224CD00300659842 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67F759224CD00300659842 /* Post.swift */; };
 		0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */; };
 		0F70A647226B97650020C33C /* EditProfileImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F70A646226B97650020C33C /* EditProfileImagePicker.swift */; };
@@ -166,6 +167,7 @@
 		0F63F71F2278BDF200799C8F /* NewCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewController.swift; sourceTree = "<group>"; };
 		0F63F7212278BE8000799C8F /* NewCard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCard.storyboard; sourceTree = "<group>"; };
 		0F63F7232278EE8500799C8F /* UIImageSetShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageSetShadow.swift; sourceTree = "<group>"; };
+		0F673454227A149C0064EF96 /* SignUPUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPUI.swift; sourceTree = "<group>"; };
 		0F67F759224CD00300659842 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringWithFontSizeCalc.swift; sourceTree = "<group>"; };
 		0F6F39C222078DC900393CD7 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 				0F9BCFC7222317E900C87706 /* SepantaGroupButtons.swift */,
 				0FAEEDE82230957100A9178F /* AboutUsUI.swift */,
 				0FAEEDE4222F29C600A9178F /* GetRichUI.swift */,
+				0F673454227A149C0064EF96 /* SignUPUI.swift */,
 				0F63F7132277690100799C8F /* ContactUSUI.swift */,
 				0F817A6C22346BAF00F1738E /* EditProfileUI.swift */,
 				0FFCF613221811FC0040A7DC /* Spinner.swift */,
@@ -785,6 +788,7 @@
 				0F63F7142277690100799C8F /* ContactUSUI.swift in Sources */,
 				0F817A6F22354F8600F1738E /* Profile.swift in Sources */,
 				0FB3ECD0222C8AF8009A89F7 /* MenuCoordinator.swift in Sources */,
+				0F673455227A149C0064EF96 /* SignUPUI.swift in Sources */,
 				0FAE1FF52265BAC70043B077 /* UIButtonDisEnable.swift in Sources */,
 				0F1B75692238498E0087C0DB /* CacheImageForViews.swift in Sources */,
 				0F0661B4225BF93E00A83734 /* Comment.swift in Sources */,
