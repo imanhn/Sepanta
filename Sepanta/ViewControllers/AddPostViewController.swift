@@ -33,6 +33,7 @@ class AddPostViewController : UIViewControllerWithKeyboardNotificationWithErrorB
         let postImage = self.postImageButton.image(for: .normal)
         let imageData = UIImageJPEGRepresentation(postImage!, 0.2)!
         let targetUrl = URL(string: NetworkManager.shared.baseURLString+"/new-post")!
+        Spinner.start()
         Alamofire.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(imageData, withName: "image",fileName: "image.jpg", mimeType: "image/jpg")
             multipartFormData.append(atitle, withName: "title")
@@ -41,12 +42,34 @@ class AddPostViewController : UIViewControllerWithKeyboardNotificationWithErrorB
             switch encodingResult {
             case .success(let upload, _ , _):
                 print("SUCCEED,Sending Post Image....")
+                self.submitButton.setDisable()
                 upload.responseJSON { response in
-                    print("RESPONDED : ",response)
+                    
+//                    print("RESPONDED : ",response)
+//                    print("response.result : ",response.result)
+//                    print("response.value : ",response.value)
+                    if let aDic = response.value as? NSDictionary {
+                        if let aStatus = aDic["status"] as? String,
+                            let aMessage = aDic["message"] as? String{
+                            print("** CASTED! Succeess ** ","aStatus : ",aStatus)
+                            self.alert(Message: aMessage)
+                        }
+                    }
+                    self.submitButton.setEnable()
+                    if response.value != nil {
+                        print("** Succeess ** ")
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                            self.coordinator!.popOneLevel()
+                            Spinner.stop()
+                        })
+                    }
                     //debugPrint(response)
                 }
             case .failure(let encodingError):
                 print("Uploading image Failed : ",encodingError)
+                Spinner.stop()
+                self.alert(Message: "عملیات با مشکل مواجه شد مجددا تلاش بفرمایید")
+                self.submitButton.setEnable()
             }
         })
     }

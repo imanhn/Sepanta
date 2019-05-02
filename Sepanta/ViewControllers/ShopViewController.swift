@@ -22,7 +22,11 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     var shopUI : ShopUI!
     //var shopDataSource : ShopDataSource!
     @IBOutlet weak var favButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     
+    @IBOutlet weak var locationButton: UIButton!
+    var editShopButton : UIButton!
+    @IBOutlet weak var toolbarStack: UIStackView!
     @IBOutlet weak var shopImage: UIImageView!
     @IBOutlet weak var shopLogo: UIImageView!
     @IBOutlet weak var offLabel: UILabel!
@@ -107,12 +111,45 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     }
     
     func getShopFromServer() {
+        //print("self.shop.user_id : ",self.shop.user_id)
         guard self.shop.user_id != 0 && self.shop.user_id != nil else {
             alert(Message: "اظلاعات این فروشگاه کامل نیست")
             return
         }
         let aParameter = ["user id":"\(self.shop.user_id!)"]
         NetworkManager.shared.run(API: "profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
+    }
+    
+    func editAuthorized()-> Bool{
+        print("***Check Authorization : ","\(self.shop.user_id ?? 0)" ,"  ",LoginKey.shared.userID)
+        if "\(self.shop.user_id ?? 0)" == LoginKey.shared.userID {
+            return true
+        }else{
+            return false
+        }
+    }
+    
+    @objc func gotoEditShop(){
+        print("Editing : ",shop)
+        self.coordinator!.pushEditShop(Shop : shop)
+    }
+    
+    func changeToShopOwnerIfNeeded() {
+        if editAuthorized() {
+            self.locationButton.removeFromSuperview()
+            self.favButton.removeFromSuperview()
+            editShopButton = UIButton(frame: CGRect(x: 10, y: 10, width: 20, height: 20))
+            editShopButton.setImage(UIImage(named: "icon_edit"), for: .normal)
+            
+            editShopButton.addTarget(self, action: #selector(gotoEditShop), for: .touchUpInside)
+            toolbarStack.addSubview(editShopButton)
+            toolbarStack.addArrangedSubview(editShopButton)
+            toolbarStack.addSubview(locationButton)
+            toolbarStack.addArrangedSubview(locationButton)
+            toolbarStack.setNeedsUpdateConstraints()
+            toolbarStack.setNeedsLayout()
+            toolbarStack.setNeedsDisplay()
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -122,15 +159,16 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
         mainScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: calculatedHeight)
         
     }
-
+    /*
     override func viewWillAppear(_ animated: Bool) {
         getShopFromServer()
-    }
+    }*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getShopFromServer()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
-        
+        changeToShopOwnerIfNeeded()
         self.shopUI = ShopUI(self)
     }
     

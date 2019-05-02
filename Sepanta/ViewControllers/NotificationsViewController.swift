@@ -21,10 +21,7 @@ class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITable
     var myDisposeBag = DisposeBag()
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var tabbedView: TabbedViewWithWhitePanel!
-    var shopDisposable : Disposable!
-    var generalDisposable : Disposable!
-    var shopSelectedDisposable : Disposable!
-    var generalSelectedDisposable : Disposable!
+    var disposeList = [Disposable]()
     
     weak var coordinator : HomeCoordinator?
     
@@ -37,15 +34,14 @@ class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITable
     }
 
     @IBAction func shopNotifTapped(_ sender: Any) {
-        //generalSelectedDisposable.dispose()
-        generalDisposable.dispose()
-        bindShopNotification()
+        disposeList.forEach({$0.dispose()})
+        
+        bindNotificationForUser()
         self.tabbedView.tabJust = TabViewJustification.Right
         self.tabbedView.setNeedsDisplay()
     }
     @IBAction func generalNotifTapped(_ sender: Any) {
-        shopDisposable.dispose()
-        shopSelectedDisposable.dispose()
+        disposeList.forEach({$0.dispose()})
         bindGeneralNotification()
         self.tabbedView.tabJust = TabViewJustification.Left
         self.tabbedView.setNeedsDisplay()
@@ -57,42 +53,77 @@ class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITable
     }
     
 
-    func bindShopNotification(){
-        shopDisposable = NetworkManager.shared.shopNotifObs.bind(to: NotifTableView!.rx.items(cellIdentifier: "ShopNotifCell")) { row, aShopNotif, cell in
-            if let aCell = cell as? ShopNotifCell {
-                let model = aShopNotif
-                aCell.bodyLabel.text = "پست جدید گذاشته شد"
-                aCell.titleLabel.text = model.shop_name
-                self.NotifTableView.rowHeight = UIScreen.main.bounds.height/9
-                /* //USE SHOP IMAGE
-                 if let imageUrl = URL(string: NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_profile_image+(model.shop_image ?? "")) {
-                    aCell.postImage.setImageFromCache(PlaceHolderName: "logo_shape_in", Scale: 1, ImageURL: imageUrl, ImageName: (model.shop_image ?? ""))
-                 }*/
-                // USE Post Image
-                if let imageUrl = URL(string: NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_post_image+(model.post_image ?? "")) {
-                    aCell.postImage.setImageFromCache(PlaceHolderName: "logo_shape_in", Scale: 1, ImageURL: imageUrl, ImageName: (model.post_image ?? ""))
+    func bindNotificationForUser(){
+        if LoginKey.shared.role == "Shop"{
+            let shopNotifDisposable = NetworkManager.shared.notificationForShopObs.bind(to: NotifTableView!.rx.items(cellIdentifier: "ShopNotifCell")) { row, aShopNotif, cell in
+                if let aCell = cell as? ShopNotifCell {
+                    let model = aShopNotif
+                    aCell.bodyLabel.text = model.comment
+                    aCell.titleLabel.text = (model.first_name ?? "") + " " + (model.last_name ?? "")
+                    self.NotifTableView.rowHeight = UIScreen.main.bounds.height/9
+                    /* //USE SHOP IMAGE
+                     if let imageUrl = URL(string: NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_profile_image+(model.shop_image ?? "")) {
+                     aCell.postImage.setImageFromCache(PlaceHolderName: "logo_shape_in", Scale: 1, ImageURL: imageUrl, ImageName: (model.shop_image ?? ""))
+                     }*/
+                    // USE Post Image
+                    if let imageUrl = URL(string: NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_profile_image+(model.image ?? "")) {
+                        aCell.postImage.setImageFromCache(PlaceHolderName: "logo_shape_in", Scale: 1, ImageURL: imageUrl, ImageName: (model.image ?? ""))
+                    }
                 }
-
             }
-        }
-        shopDisposable.disposed(by: myDisposeBag)
-        
-        shopSelectedDisposable = NotifTableView!.rx.modelSelected(ShopNotification.self)
-            .subscribe(onNext: { [unowned self] selectedShop in
-                //print("Pushing Post with : ", selectedShop.post_id )
-                //self.coordinator!.pushShop(Shop: aShop)
-                if selectedShop.post_id == nil {
-                    self.alert(Message: "اطلاعات این پست هنوز کامل نیست")
-                }else{
-                    self.coordinator!.PushAPost(PostID : selectedShop.post_id!)
+            shopNotifDisposable.disposed(by: myDisposeBag)
+            disposeList.append(shopNotifDisposable)
+            
+            let shopNotifSelectedDisp = NotifTableView!.rx.modelSelected(NotificationForShop.self)
+                .subscribe(onNext: { [unowned self] selectedShop in
+                    //print("Pushing Post with : ", selectedShop.post_id )
+                    //self.coordinator!.pushShop(Shop: aShop)
+                    if selectedShop.post_id == nil {
+                        self.alert(Message: "اطلاعات این پست هنوز کامل نیست")
+                    }else{
+                        self.coordinator!.PushAPost(PostID : selectedShop.post_id!)
+                    }
+                })
+            shopNotifSelectedDisp.disposed(by: myDisposeBag)
+            disposeList.append(shopNotifSelectedDisp)
+
+        }else{
+            let userNotifDisposable = NetworkManager.shared.notificationForUserObs.bind(to: NotifTableView!.rx.items(cellIdentifier: "ShopNotifCell")) { row, aShopNotif, cell in
+                if let aCell = cell as? ShopNotifCell {
+                    let model = aShopNotif
+                    aCell.bodyLabel.text = "پست جدید گذاشته شد"
+                    aCell.titleLabel.text = model.shop_name
+                    self.NotifTableView.rowHeight = UIScreen.main.bounds.height/9
+                    if let imageUrl = URL(string: NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_post_image+(model.post_image ?? "")) {
+                        aCell.postImage.setImageFromCache(PlaceHolderName: "logo_shape_in", Scale: 1, ImageURL: imageUrl, ImageName: (model.post_image ?? ""))
+                    }
+                    
                 }
-            })
-        shopSelectedDisposable.disposed(by: myDisposeBag)
+                
+            }
+            userNotifDisposable.disposed(by: myDisposeBag)
+            disposeList.append(userNotifDisposable)
+            
+            let userSelectedDisposable = NotifTableView!.rx.modelSelected(NotificationForUser.self)
+                .subscribe(onNext: { [unowned self] selectedShop in
+                    //print("Pushing Post with : ", selectedShop.post_id )
+                    //self.coordinator!.pushShop(Shop: aShop)
+                    if selectedShop.post_id == nil {
+                        self.alert(Message: "اطلاعات این پست هنوز کامل نیست")
+                    }else{
+                        self.coordinator!.PushAPost(PostID : selectedShop.post_id!)
+                    }
+                })
+            userSelectedDisposable.disposed(by: myDisposeBag)
+            disposeList.append(userSelectedDisposable)
+        }
+        
+        
         
     }
     
     func bindGeneralNotification(){
-        generalDisposable = NetworkManager.shared.generalNotifObs.bind(to: NotifTableView!.rx.items(cellIdentifier: "ShopNotifCell")) { row, aShopNotif, cell in
+        let generalDisposable = NetworkManager.shared.generalNotifObs.bind(to: NotifTableView!.rx.items(cellIdentifier: "ShopNotifCell")) { row, aShopNotif, cell in
             if let aCell = cell as? ShopNotifCell {
                 let model = aShopNotif
                 aCell.bodyLabel.text = model.body
@@ -106,20 +137,12 @@ class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITable
             }
             }
         generalDisposable.disposed(by: myDisposeBag)
-        /*
-        generalSelectedDisposable = NotifTableView!.rx.modelSelected(GeneralNotification.self)
-            .subscribe(onNext: { [unowned self] selectedShop in
-                let aShop = Shop(shop_id: 0, user_id: selectedShop.user_id, shop_name: selectedShop.shop_name, shop_off: 0, lat: 0, long: 0, image: selectedShop.shop_image, rate: "", follower_count: 0, created_at: selectedShop.created_at)
-                print("Pushing Shop Post with : ", aShop)
-                self.coordinator!.pushShop(Shop: aShop)
-            })
-        generalSelectedDisposable.disposed(by: myDisposeBag)
-        */
+        disposeList.append(generalDisposable)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
-        bindShopNotification()
+        bindNotificationForUser()
         
     }
     @IBAction func menuClicked(_ sender: Any) {

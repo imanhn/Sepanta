@@ -158,13 +158,8 @@ class JSONParser {
                 } else if (apiName == "profile-info") && (aMethod == HTTPMethod.post) {
                     // Sets True for profile-info to be observable by PostUI
                     NetworkManager.shared.updateProfileInfoSuccessful.accept(true)
-                } else if (apiName == "category-shops-list") && (aMethod == HTTPMethod.post) {
-                    //Returns All shops in a Specific Catagory (Slug=3) OR Shops in a specific catagory in a state (Slug=1) OR Shops in a specific catagory in a city (Slug=2)
-                    print("Starting category-shops-list Parser...")
-                    let parsedShops = self?.processShopList(Result: aDic)
-                    NetworkManager.shared.shopObs.accept(parsedShops!)
-                } else if (apiName == "new-shops") && (aMethod == HTTPMethod.get) {
-                    print("Starting NewShops Parser...")
+                } else if ( (apiName == "new-shops") || (apiName == "my-following") || (apiName == "category-shops-list"))  {
+                    print("Starting Shops List Parser for : \(apiName)")
                     let parsedShops = self?.processShopList(Result: aDic)
                     NetworkManager.shared.shopObs.accept(parsedShops!)
                 } else if (apiName == "favorite") && (aMethod == HTTPMethod.get) {
@@ -204,8 +199,14 @@ class JSONParser {
                     self?.processSellRequest(Result: aDic)
                 } else if (apiName == "notifications") && (aMethod == HTTPMethod.get) {
                     print("Starting Notification Parser...")
-                    let (generalNotif,shopNotif) = (self?.processNotifications(Result: aDic))!
-                    NetworkManager.shared.shopNotifObs.accept(shopNotif)
+                    let (generalNotif,notifAsAny) = (self?.processNotifications(Result: aDic))!
+                    if let notifForShop = notifAsAny as? [NotificationForShop] {
+                        NetworkManager.shared.notificationForShopObs.accept(notifForShop)
+                    }else if let notifForUser = notifAsAny as? [NotificationForUser] {
+                        NetworkManager.shared.notificationForUserObs.accept(notifForUser)
+                    }else{
+                        fatalError()
+                    }
                     NetworkManager.shared.generalNotifObs.accept(generalNotif)
                 } else if (apiName == "home") && (aMethod == HTTPMethod.get) {
                 print("Starting Home Parser...")
@@ -302,31 +303,11 @@ class JSONParser {
         return aBank
     }
     
-    func processNotifications(Result aResult : NSDictionary) -> ([GeneralNotification],[ShopNotification]) {
+    func processNotifications(Result aResult : NSDictionary) -> ([GeneralNotification],[Any]) {
         var generalNotif = [GeneralNotification]()
-        var shopNotif = [ShopNotification]()
-        if aResult["notifications_user"] != nil {
-            if let notifs = aResult["notifications_user"] as? NSArray {
-                for anotif in notifs {
-                    if let aNSDic = anotif as? NSDictionary{
-                        var newShopNotif = ShopNotification()
-                        if let avalue = aNSDic["post_id"] { newShopNotif.post_id = avalue as? Int ?? 0}
-                        if let avalue = aNSDic["user_id"] { newShopNotif.user_id = avalue as? Int ?? 0}
-                        if let avalue = aNSDic["created_at"] { newShopNotif.created_at = avalue as? String ?? ""}
-                        if let avalue = aNSDic["shop_name"] { newShopNotif.shop_name = avalue as? String ?? ""}
-                        if let avalue = aNSDic["shop_image"] { newShopNotif.shop_image = avalue as? String ?? ""}
-                        if let avalue = aNSDic["post_image"] { newShopNotif.post_image = avalue as? String ?? ""}
-                        if let avalue = aNSDic["body"] { newShopNotif.body = avalue as? String ?? "پست جدید ما را ببینید"}
-                        shopNotif.append(newShopNotif)
-                    }
-                }
-            } else {
-                print("notifications_user can not be casted as array")
-            }
-        }else{
-            print("@@@ ERROR : Result does not contain >notification_user<")
-        }
-
+        var notifForUser = [NotificationForUser]()
+        var notifForShop = [NotificationForShop]()
+        
         if aResult["notifications_manager"] != nil {
             if let notifs = aResult["notifications_manager"] as? NSArray {
                 for anotif in notifs {
@@ -341,10 +322,54 @@ class JSONParser {
             } else {
                 print("notifications_user can not be casted as array")
             }
-        }else{
-            print("@@@ ERROR : Result does not contain >notification_user<")
         }
-        return (generalNotif,shopNotif)
+
+        if aResult["notifications_user"] != nil {
+            if let notifs = aResult["notifications_user"] as? NSArray {
+                for anotif in notifs {
+                    if let aNSDic = anotif as? NSDictionary{
+                        var newNotif = NotificationForUser()
+                        if let avalue = aNSDic["post_id"] { newNotif.post_id = avalue as? Int ?? 0}
+                        if let avalue = aNSDic["user_id"] { newNotif.user_id = avalue as? Int ?? 0}
+                        if let avalue = aNSDic["created_at"] { newNotif.created_at = avalue as? String ?? ""}
+                        if let avalue = aNSDic["shop_name"] { newNotif.shop_name = avalue as? String ?? ""}
+                        if let avalue = aNSDic["shop_image"] { newNotif.shop_image = avalue as? String ?? ""}
+                        if let avalue = aNSDic["post_image"] { newNotif.post_image = avalue as? String ?? ""}
+                        if let avalue = aNSDic["body"] { newNotif.body = avalue as? String ?? "پست جدید ما را ببینید"}
+                        notifForUser.append(newNotif)
+                    }
+                }
+                return (generalNotif,notifForUser)
+            } else {
+                print("notifications_user can not be casted as array")
+            }
+        }
+
+        if aResult["notifications_shop"] != nil {
+            if let notifs = aResult["notifications_shop"] as? NSArray {
+                for anotif in notifs {
+                    if let aNSDic = anotif as? NSDictionary{
+                        var newNotif = NotificationForShop()
+                        if let avalue = aNSDic["post_id"] { newNotif.post_id = avalue as? Int ?? 0}
+                        if let avalue = aNSDic["user_id"] { newNotif.user_id = avalue as? Int ?? 0}
+                        if let avalue = aNSDic["created_at"] { newNotif.created_at = avalue as? String ?? ""}
+                        if let avalue = aNSDic["first_name"] { newNotif.first_name = avalue as? String ?? ""}
+                        if let avalue = aNSDic["last_name"] { newNotif.last_name = avalue as? String ?? ""}
+                        if let avalue = aNSDic["image"] { newNotif.image = avalue as? String ?? ""}
+                        if let avalue = aNSDic["username"] { newNotif.username = avalue as? String ?? ""}
+                        if let avalue = aNSDic["comment"] { newNotif.comment = avalue as? String ?? "کامنت خالی گذاشت"}
+                        notifForShop.append(newNotif)
+                    }
+                }
+                return (generalNotif,notifForShop)
+            } else {
+                print("notifications_shop can not be casted as array")
+            }
+        }
+        print("@@@ ERROR : Result does not contain >notification_user or shop<")
+        fatalError()
+        
+        return (generalNotif,[])
     }
 
     func processLike(Result aResult : NSDictionary) -> Int {
@@ -619,7 +644,8 @@ class JSONParser {
             if let aViewCount = postDet["viewCount"] as? Int {aPost.viewCount = aViewCount}
             //print("JSON Parser : Parsed Post : ",aPost)
         }else{
-            print("*** Error : Post Detail is NULL - Parser Failed!")            
+            print("*** Error : Post Detail is NULL - Parser Failed!")
+            NetworkManager.shared.messageObs.accept("این پست حذف شده است")
         }
         if let someComments = aResult["comments"] as? NSArray {
             aPost.comments = [Comment]()
@@ -801,7 +827,32 @@ class JSONParser {
             } else{
                 print("aresult[shops or categoryShops][data] is empty or can not be casted")
             }
-        } else {
+        }else if let dataOfShops = aResult["shops"] as? NSArray ?? aResult["categoryShops"] as? NSArray{
+            for shopDic in dataOfShops
+            {
+                if let shopElemAsNSDic = shopDic as? NSDictionary{
+                    
+                    if let shopElem = shopElemAsNSDic as? Dictionary<String, Any>{
+                        //print("shopElem : ",shopElem)
+                        if shopElem["user_id"] != nil && shopElem["shop_id"] != nil {
+                            let aNewShop = Shop(shop_id: shopElem["shop_id"] as? Int ?? 0,
+                                                user_id: shopElem["user_id"] as? Int ?? 0,
+                                                shop_name: shopElem["shop_name"] as? String ?? "",
+                                                shop_off: shopElem["shop_off"] as? Int ?? 0,
+                                                lat: (shopElem["lat"] as? String)?.toDouble(),
+                                                long: (shopElem["lon"] as? String)?.toDouble(),
+                                                image: shopElem["image"] as? String ?? "",
+                                                rate: shopElem["rate"] as? String ?? "" ,
+                                                follower_count: shopElem["follower_count"] as? Int ?? 0,
+                                                created_at: shopElem["created_at"] as? String ?? "")
+                            shops.append(aNewShop)
+                        }
+                    }
+                }else{
+                    print("shopElm not casted.")
+                }
+            }
+        }else {
             print("Couldnt cast Result[shops] or [categoryShops] ")
             print("Shop Result keys : ",aResult.allKeys)
             print("aResult[categoryShops] ",aResult["categoryShops"] ?? "EMPTY")

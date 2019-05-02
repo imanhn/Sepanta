@@ -48,7 +48,7 @@ extension NearestViewController: MKMapViewDelegate {
         let backgroundImage = UIImage(named: "icon_place_map")
         
         let size = CGSize(width: 35, height: 50)
-        UIGraphicsBeginImageContext(size)        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)        
         let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         backgroundImage?.draw(in: areaSize)
         let scale = (size.width/1.5)/max(iconImage.size.width,iconImage.size.height)

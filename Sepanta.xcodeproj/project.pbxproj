@@ -63,7 +63,7 @@
 		0F817A6B2234635A00F1738E /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A6A2234635A00F1738E /* EditProfileViewController.swift */; };
 		0F817A6D22346BAF00F1738E /* EditProfileUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A6C22346BAF00F1738E /* EditProfileUI.swift */; };
 		0F817A6F22354F8600F1738E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A6E22354F8600F1738E /* Profile.swift */; };
-		0F817A71223567E200F1738E /* NewShopsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A70223567E200F1738E /* NewShopsViewController.swift */; };
+		0F817A71223567E200F1738E /* ShopsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A70223567E200F1738E /* ShopsListViewController.swift */; };
 		0F8571F0225CC5B50056D062 /* UIViewControllerWithErrorBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8571EF225CC5B50056D062 /* UIViewControllerWithErrorBar.swift */; };
 		0F890CFE2214B4CD0091FA2E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890CFD2214B4CD0091FA2E /* Coordinator.swift */; };
 		0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890CFF2214B4E90091FA2E /* Storyboarded.swift */; };
@@ -104,6 +104,9 @@
 		0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */; };
 		0FE8BA042205082100C868C3 /* SMSConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */; };
 		0FE8BA062205239E00C868C3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA052205239E00C868C3 /* HomeViewController.swift */; };
+		0FF55AB1227B49CE0093DEE0 /* EditShop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FF55AB0227B49CE0093DEE0 /* EditShop.storyboard */; };
+		0FF55AB3227B4C790093DEE0 /* EditShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF55AB2227B4C790093DEE0 /* EditShopViewController.swift */; };
+		0FF55AB5227B4CFA0093DEE0 /* EditShopUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF55AB4227B4CFA0093DEE0 /* EditShopUI.swift */; };
 		0FFCDC48226C77350087BFEF /* Favorite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FFCDC47226C77350087BFEF /* Favorite.storyboard */; };
 		0FFCDC4A226C77F50087BFEF /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCDC49226C77F50087BFEF /* FavoriteViewController.swift */; };
 		0FFCDC4C226C795B0087BFEF /* FavListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCDC4B226C795B0087BFEF /* FavListDataSource.swift */; };
@@ -192,7 +195,7 @@
 		0F817A6A2234635A00F1738E /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		0F817A6C22346BAF00F1738E /* EditProfileUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileUI.swift; sourceTree = "<group>"; };
 		0F817A6E22354F8600F1738E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
-		0F817A70223567E200F1738E /* NewShopsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewShopsViewController.swift; sourceTree = "<group>"; };
+		0F817A70223567E200F1738E /* ShopsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopsListViewController.swift; sourceTree = "<group>"; };
 		0F8571EF225CC5B50056D062 /* UIViewControllerWithErrorBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerWithErrorBar.swift; sourceTree = "<group>"; };
 		0F890CFD2214B4CD0091FA2E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		0F890CFF2214B4E90091FA2E /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
@@ -241,6 +244,9 @@
 		0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWidgets.swift; sourceTree = "<group>"; };
 		0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmViewController.swift; sourceTree = "<group>"; };
 		0FE8BA052205239E00C868C3 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		0FF55AB0227B49CE0093DEE0 /* EditShop.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditShop.storyboard; sourceTree = "<group>"; };
+		0FF55AB2227B4C790093DEE0 /* EditShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditShopViewController.swift; sourceTree = "<group>"; };
+		0FF55AB4227B4CFA0093DEE0 /* EditShopUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditShopUI.swift; sourceTree = "<group>"; };
 		0FFCDC47226C77350087BFEF /* Favorite.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Favorite.storyboard; sourceTree = "<group>"; };
 		0FFCDC49226C77F50087BFEF /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		0FFCDC4B226C795B0087BFEF /* FavListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavListDataSource.swift; sourceTree = "<group>"; };
@@ -308,6 +314,7 @@
 			children = (
 				0F817A662232D89C00F1738E /* ProfileViewController.swift */,
 				0F817A6A2234635A00F1738E /* EditProfileViewController.swift */,
+				0FF55AB2227B4C790093DEE0 /* EditShopViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -396,7 +403,7 @@
 				0F1B75592235778A0087C0DB /* Sepanta Groups */,
 				0F1B7558223577790087C0DB /* Profile */,
 				0F1B75572235775F0087C0DB /* Login */,
-				0F817A70223567E200F1738E /* NewShopsViewController.swift */,
+				0F817A70223567E200F1738E /* ShopsListViewController.swift */,
 				0FE8BA052205239E00C868C3 /* HomeViewController.swift */,
 				0F066F9E222C704B00C8871C /* MenuViewController.swift */,
 				0FAEEDE62230949C00A9178F /* AboutUsViewController.swift */,
@@ -445,6 +452,7 @@
 				0FFCF613221811FC0040A7DC /* Spinner.swift */,
 				0F817A6822341D8E00F1738E /* ShowProfileUI.swift */,
 				0F1B75642236E42A0087C0DB /* ShopUI.swift */,
+				0FF55AB4227B4CFA0093DEE0 /* EditShopUI.swift */,
 				0F0661B1225BEA6A00A83734 /* PostUI.swift */,
 				0F50AE73226F66950028D8B6 /* MapViewAnnotations.swift */,
 				0F8E3F6F2275CCF300E51B17 /* CardView.swift */,
@@ -468,6 +476,7 @@
 				0F63F7212278BE8000799C8F /* NewCard.storyboard */,
 				0F58927F22790B210077B655 /* Scores.storyboard */,
 				0F642B92227A415A00B887B8 /* AddPost.storyboard */,
+				0FF55AB0227B49CE0093DEE0 /* EditShop.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -679,6 +688,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FE8B9B3220355F100C868C3 /* LaunchScreen.storyboard in Resources */,
+				0FF55AB1227B49CE0093DEE0 /* EditShop.storyboard in Resources */,
 				0FE8B9B0220355F100C868C3 /* Assets.xcassets in Resources */,
 				0F63F71C2278B65800799C8F /* NewCardView.xib in Resources */,
 				0FFCDC48226C77350087BFEF /* Favorite.storyboard in Resources */,
@@ -777,7 +787,8 @@
 			files = (
 				0F63F7182278947A00799C8F /* ContactUSEmoji.swift in Sources */,
 				0FDA55D722260FFE00E7C889 /* GroupViewController.swift in Sources */,
-				0F817A71223567E200F1738E /* NewShopsViewController.swift in Sources */,
+				0FF55AB3227B4C790093DEE0 /* EditShopViewController.swift in Sources */,
+				0F817A71223567E200F1738E /* ShopsListViewController.swift in Sources */,
 				0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */,
 				0F052ED9221AE8C5009175EA /* LoginKey.swift in Sources */,
 				0F8B7D46226789A800EFAACD /* ShopSearchResult.swift in Sources */,
@@ -831,6 +842,7 @@
 				0F890CFE2214B4CD0091FA2E /* Coordinator.swift in Sources */,
 				0F1B755D2235C1080087C0DB /* SlidesAndPaths.swift in Sources */,
 				0F1B75612236BA610087C0DB /* CacheManager.swift in Sources */,
+				0FF55AB5227B4CFA0093DEE0 /* EditShopUI.swift in Sources */,
 				0FE8BA062205239E00C868C3 /* HomeViewController.swift in Sources */,
 				0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */,
 				0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */,

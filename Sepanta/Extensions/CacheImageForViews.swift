@@ -28,9 +28,10 @@ extension UIImage {
 
 extension UIImageView {
     
-    func setImageFromCache(PlaceHolderName defaultImageName : String, Scale aScale : CGFloat,ImageURL imageUrl : URL,ImageName imageName : String ){
+    func setImageFromCache(PlaceHolderName defaultImageName : String, Scale aScale : CGFloat,ImageURL imageUrl : URL,ImageName imageName : String,ContentMode acontentMode : UIViewContentMode = UIViewContentMode.scaleAspectFit ){
         let defaultImage = UIImage(named: defaultImageName)
-        self.contentMode = .scaleAspectFit
+        self.contentMode = acontentMode
+        
         let imageSize = CGSize(width: self.frame.size.width*aScale, height: self.frame.size.height*aScale)
         let filter = AspectScaledToFillSizeFilter(size: imageSize)//AspectScaledToFitSizeFilter(size: imageSize)
         self.image = defaultImage
@@ -68,10 +69,10 @@ extension UIImageView {
 
 extension UIButton {
     
-    func setImageFromCache(PlaceHolderName defaultImageName : String, Scale aScale : CGFloat,ImageURL imageUrl : URL,ImageName imageName : String ){
+    func setImageFromCache(PlaceHolderName defaultImageName : String, Scale aScale : CGFloat,ImageURL imageUrl : URL,ImageName imageName : String,ContentMode acontentMode : UIViewContentMode = UIViewContentMode.scaleAspectFit  ){
         let defaultImage = UIImage(named: defaultImageName)
         
-        self.contentMode = .scaleAspectFit
+        self.contentMode = acontentMode
         let imageSize = CGSize(width: self.frame.size.width*aScale, height: self.frame.size.height*aScale)
         let filter = AspectScaledToFitSizeFilter(size: imageSize)
         self.setImage(defaultImage, for: .normal)

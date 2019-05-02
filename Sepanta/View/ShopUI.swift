@@ -68,12 +68,23 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         self.delegate.present(activityVC, animated: true, completion: nil)
     }
     
-    @objc func addTapped(sender : Any){
-        
+    @objc func cupTapped(sender : Any){
+        if (NetworkManager.shared.userPointsObs.value.status ?? "").count == 0 {
+            NetworkManager.shared.run(API: "points-user", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
+        }
+        NetworkManager.shared.userPointsObs
+            .filter({($0.status ?? "").count > 0})
+            .share(replay: 1, scope: .whileConnected)
+            .subscribe(onNext: { [unowned self] aUserPoint in
+                //print("Subscribed and Received : ",aUserPoint)
+                self.delegate.coordinator!.pushScores()
+            }).disposed(by: myDisposeBag)
     }
-    @objc func editTapped(sender : Any){
-        
+    
+    @objc func sepantaieTapped(sender : Any){
+        self.delegate.coordinator!.pushMyFollowingShops()
     }
+    
     @objc func newPostTapped(sender : Any){
         self.delegate.coordinator!.pushAddPost()
     }
@@ -116,43 +127,50 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         disposeList.append(statusDisp)
     }
     
+
     func buildPostToolbar(){
         let marginXBTWButtons : CGFloat = 10
-        let leadingMarginX = self.delegate.offLabelLeading.constant
-        let trailingMarginX = self.delegate.shopLogoTrailing.constant
+        //let leadingMarginX = self.delegate.offLabelLeading.constant
+        //let trailingMarginX = self.delegate.shopLogoTrailing.constant
         let viewWidth = self.delegate.PostToolbarView.frame.width
         let viewHeight = self.delegate.PostToolbarView.frame.height
-        let buttonDim = viewHeight
-        if isShop {
-            
+        var buttonDim = viewHeight*0.9
+        
+        if isShop && self.delegate.editAuthorized() {
+            buttonDim = (viewWidth - (3 * marginXBTWButtons))/6
             buttons["shareButton"] = RoundedButton(type: .custom)
-            var xCursor = leadingMarginX
+            var xCursor : CGFloat = 0
             buttons["shareButton"]!.frame = CGRect(x: xCursor, y: 0, width: buttonDim, height: buttonDim)
             buttons["shareButton"]!.setImage(UIImage(named: "icon_share"), for: .normal)
             buttons["shareButton"]!.contentMode = .scaleAspectFit
             buttons["shareButton"]!.addTarget(self, action: #selector(shareTapped), for: .touchUpInside)
             self.delegate.PostToolbarView.addSubview(buttons["shareButton"]!)
-
             xCursor = xCursor + marginXBTWButtons + buttonDim
-            buttons["addButton"] = UIButton(type: .custom)
-            buttons["addButton"]!.frame = CGRect(x: xCursor, y: 0, width: buttonDim, height: buttonDim)
-            buttons["addButton"]!.layer.cornerRadius = 5
-            buttons["addButton"]!.layer.borderColor = UIColor(hex: 0xDA3A5C).cgColor
-            buttons["addButton"]!.setImage(UIImage(named: "icon_add_white"), for: .normal)
-            buttons["addButton"]!.backgroundColor = UIColor(hex: 0x9FDA64)
-            buttons["addButton"]!.contentMode = .scaleAspectFit
-            buttons["addButton"]!.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
-            self.delegate.PostToolbarView.addSubview(buttons["addButton"]!)
-
+            
+            buttons["cupButton"] = RoundedButton(type: .custom)
+            buttons["cupButton"]!.frame = CGRect(x: xCursor, y: 0, width: buttonDim, height: buttonDim)
+            buttons["cupButton"]!.layer.cornerRadius = 5
+            buttons["cupButton"]!.layer.borderColor = UIColor(hex: 0xDA3A5C).cgColor
+            buttons["cupButton"]!.setImage(UIImage(named: "icon_profile_cup"), for: .normal)
+            buttons["cupButton"]!.imageEdgeInsets = UIEdgeInsetsMake(buttonDim/6, buttonDim/5, buttonDim/6, buttonDim/5)
+            buttons["cupButton"]!.contentMode = .scaleAspectFit
+            buttons["cupButton"]!.addTarget(self, action: #selector(cupTapped), for: .touchUpInside)
+            self.delegate.PostToolbarView.addSubview(buttons["cupButton"]!)
             xCursor = xCursor + marginXBTWButtons + buttonDim
-            buttons["editButton"] = RoundedButton(type: .custom)
-            buttons["editButton"]!.frame = CGRect(x: xCursor, y: 0, width: buttonDim, height: buttonDim)
-            buttons["editButton"]!.setImage(UIImage(named: "icon_edit"), for: .normal)
-            buttons["editButton"]!.addTarget(self, action: #selector(editTapped), for: .touchUpInside)
-            self.delegate.PostToolbarView.addSubview(buttons["editButton"]!)
-
+            
+            buttons["sepantaieButton"] = RoundedButton(type: .custom)
+            buttons["sepantaieButton"]!.frame = CGRect(x: xCursor, y: 0, width: buttonDim, height: buttonDim)
+            buttons["sepantaieButton"]!.layer.cornerRadius = 5
+            buttons["sepantaieButton"]!.layer.borderColor = UIColor(hex: 0xDA3A5C).cgColor
+            buttons["sepantaieButton"]!.setImage(UIImage(named: "icon_sepantaei"), for: .normal)
+            buttons["sepantaieButton"]!.imageEdgeInsets = UIEdgeInsetsMake(buttonDim/6, buttonDim/4, buttonDim/6, buttonDim/4)
+            buttons["sepantaieButton"]!.addTarget(self, action: #selector(sepantaieTapped), for: .touchUpInside)
+            self.delegate.PostToolbarView.addSubview(buttons["sepantaieButton"]!)
             xCursor = xCursor + marginXBTWButtons + buttonDim
-            let buttonWidth = viewWidth - xCursor - trailingMarginX
+            
+            //let buttonWidth = viewWidth - xCursor - trailingMarginX - leadingMarginX -  marginXBTWButtons
+            let buttonWidth = buttonDim * 3
+            
             buttons["newPostButton"] = RoundedButton(type: .custom)
             buttons["newPostButton"]!.frame = CGRect(x: xCursor, y: 0, width: buttonWidth, height: buttonDim)
             buttons["newPostButton"]!.layer.cornerRadius = 5
@@ -165,10 +183,11 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
             buttons["newPostButton"]!.imageEdgeInsets = UIEdgeInsetsMake(0, buttonDim/2, 0, 0)
             buttons["newPostButton"]!.addTarget(self, action: #selector(newPostTapped), for: .touchUpInside)
             self.delegate.PostToolbarView.addSubview(buttons["newPostButton"]!)
+            //print("buttons[newPostButton].wd : ",buttons["newPostButton"]!.frame.width)
             
         }else{
             buttons["shareButton"] = RoundedButton(type: .custom)
-            var xCursor = leadingMarginX
+            var xCursor : CGFloat = 0
             buttons["shareButton"]!.frame = CGRect(x: xCursor, y: 0, width: buttonDim, height: buttonDim)
             buttons["shareButton"]!.setImage(UIImage(named: "icon_share"), for: .normal)
             buttons["shareButton"]!.contentMode = .scaleAspectFit
@@ -196,22 +215,29 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         return CGSize(width: cellWidth, height: cellWidth)
     }
 
+    
     func bindUIwithDataSource(){
         let shopFavDisp = NetworkManager.shared.shopFav
             .filter({$0 != ToggleStatus.UNKNOWN})
             .subscribe(onNext: { [unowned self] (favShopStatus) in
-                if favShopStatus == ToggleStatus.YES {
-                    self.delegate.favButton.setImage(UIImage(named: "icon_star_fav_dark"), for: .normal)
-                }else{
-                    self.delegate.favButton.setImage(UIImage(named: "icon_star_fav_gray"), for: .normal)
+                if self.delegate.favButton != nil {
+                    if favShopStatus == ToggleStatus.YES {
+                        self.delegate.favButton.setImage(UIImage(named: "icon_star_fav_dark"), for: .normal)
+                    }else{
+                        self.delegate.favButton.setImage(UIImage(named: "icon_star_fav_gray"), for: .normal)
+                    }
                 }
             })
         shopFavDisp.disposed(by: myDisposeBag)
         disposeList.append(shopFavDisp)
         
         let profileDisp = NetworkManager.shared.profileObs
+            .filter({$0.id != nil})
             .subscribe(onNext: { [unowned self] aProfile in
                 //print("SUBSCRIPTION UPDATE",aProfile)
+                //print("Before Shop : ",self.delegate.shop)
+                self.delegate.shop.updateFromProfile(Profile: aProfile)
+                //print("After Shop : ",self.delegate.shop)
                 self.delegate.shopTitle.text = aProfile.shop_name
                 self.delegate.scoreLabel.text = "امتیاز " + "\(aProfile.follower_count ?? 0)"
                 self.delegate.followersNumLabel.text = "\(aProfile.follower_count ?? 0)"
@@ -232,7 +258,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                     return
                 }
                 //print("Profile : ",aProfile)
-                if !self.isShop {
+                if self.buttons["followButton"] != nil {
                     if aProfile.is_follow != nil  {
                         if aProfile.is_follow! {
                             self.buttons["followButton"]!.setTitle("عضو شده اید", for: .normal)
@@ -244,11 +270,13 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                     }
                 }
                 
-                if aProfile.is_favorite != nil{
-                    if aProfile.is_favorite! {
-                        self.delegate.favButton.setImage(UIImage(named: "icon_star_fav_dark"), for: .normal)
-                    }else{
-                        self.delegate.favButton.setImage(UIImage(named: "icon_star_fav_gray"), for: .normal)
+                if (self.delegate.favButton != nil){ //Otherwise the fav button is removed!
+                    if aProfile.is_favorite != nil{
+                        if aProfile.is_favorite! {
+                            self.delegate.favButton.setImage(UIImage(named: "icon_star_fav_dark"), for: .normal)
+                        }else{
+                            self.delegate.favButton.setImage(UIImage(named: "icon_star_fav_gray"), for: .normal)
+                        }
                     }
                 }
                 
@@ -256,7 +284,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                     let imageURL = URL(string: NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_profile_image + aProfile.image!)
                     //print("Shop Image : ",imageURL ?? "Nil")
                     if imageURL != nil {
-                        self.delegate.shopImage.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!)
+                        self.delegate.shopImage.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 0, ImageURL: imageURL!, ImageName: aProfile.image!,ContentMode: UIViewContentMode.scaleAspectFit)
                         self.delegate.shopLogo.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!)
                         self.delegate.shopLogo.layer.shadowColor = UIColor.black.cgColor
                         self.delegate.shopLogo.layer.shadowOffset = CGSize(width: 3, height: 3)

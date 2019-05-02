@@ -1,5 +1,5 @@
 //
-//  NewShopsViewController.swift
+//  ShopsListViewController.swift
 //  Sepanta
 //
 //  Created by Iman on 12/19/1397 AP.
@@ -28,26 +28,32 @@ class NewShopCell : UITableViewCell {
     
 }
 
-class NewShopsViewController :  UIViewControllerWithErrorBar,Storyboarded{
+class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded{
+    typealias dataSourceFunc = () -> ShopsListDataSource
+    var fetchMechanism : dataSourceFunc!
+    var shopDataSource : ShopsListDataSource!
     weak var coordinator : HomeCoordinator?
     let myDisposeBag = DisposeBag()
-    var newShopsDataSource : ShopsListDataSource!
-    
+    //var newShopsDataSource : ShopsListDataSource!
+    @IBOutlet weak var headerLabel: UILabel!
+    var headerLabelToSet : String = "فروشگاه ها"
     @IBOutlet weak var shopTable: UITableView!
     
     @IBAction func backTapped(_ sender: Any) {
-        newShopsDataSource = nil
+        shopDataSource = nil
         NetworkManager.shared.shopObs = BehaviorRelay<[Any]>(value: [Any]())
         self.coordinator!.popOneLevel()
     }
     
     @IBAction func homeTapped(_ sender: Any) {
+        shopDataSource = nil
         self.coordinator!.popHome()
     }
 
     @objc override func ReloadViewController(_ sender:Any) {
         super.ReloadViewController(sender)
-        newShopsDataSource.getNewShopsFromServer()
+        shopDataSource = fetchMechanism()
+        //newShopsDataSource.getNewShopsFromServer()
     }
     
     func bindToTableView() {
@@ -90,13 +96,20 @@ class NewShopsViewController :  UIViewControllerWithErrorBar,Storyboarded{
                 self.coordinator!.pushShop(Shop: selectedShop)
             }).disposed(by: myDisposeBag)
     }
-
+    
+    func setHeaderName(){
+        self.headerLabel.text = self.headerLabelToSet
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setHeaderName()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         bindToTableView()
-        newShopsDataSource = ShopsListDataSource(self)
-        newShopsDataSource.getNewShopsFromServer()
+        shopDataSource = fetchMechanism()
+        
+        //newShopsDataSource = ShopsListDataSource(self)
+        //newShopsDataSource.getNewShopsFromServer()
     }
     
 }

@@ -459,13 +459,13 @@
                                                         <textInputTraits key="textInputTraits" keyboardType="phonePad" enablesReturnKeyAutomatically="YES" textContentType="tel"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ورود کد ارسال شده" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ron-c6-HyJ" userLabel="SMSCodeText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="48" width="338" height="47.5"/>
+                                                        <rect key="frame" x="0.0" y="48" width="338" height="48"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="phonePad" enablesReturnKeyAutomatically="YES"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۰۱:۰۰" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAM-oe-oMT" userLabel="TimerLabel">
-                                                        <rect key="frame" x="0.0" y="95.5" width="338" height="56.5"/>
+                                                        <rect key="frame" x="0.0" y="96" width="338" height="56"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="24"/>
                                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -489,7 +489,7 @@
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_lock_gray" translatesAutoresizingMaskIntoConstraints="NO" id="w94-6D-GwQ" userLabel="LockIcon">
-                                        <rect key="frame" x="305" y="139.5" width="18" height="28.5"/>
+                                        <rect key="frame" x="305" y="139.5" width="18" height="29"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1100,11 +1100,11 @@
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2FS-gh-jyP" userLabel="ViewWithDash" customClass="UIViewWithDash" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="112.5" y="-0.5" width="89" height="66.5"/>
+                                        <rect key="frame" x="112.5" y="-0.5" width="99.5" height="66.5"/>
                                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="رستوران و کافی شاپ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bQu-qj-7yU" userLabel="GroupLabel">
-                                        <rect key="frame" x="211.5" y="-0.5" width="108.5" height="66.5"/>
+                                        <rect key="frame" x="222" y="-0.5" width="98" height="66.5"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="13"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1218,7 +1218,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(۳.۵)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm0-oF-1UR" userLabel="rateLabel">
-                                                                    <rect key="frame" x="135" y="-0.5" width="32" height="19.5"/>
+                                                                    <rect key="frame" x="141" y="1" width="26" height="16.5"/>
                                                                     <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                                     <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1262,7 +1262,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="center" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۲۳۴۵" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3X-df-CwZ" userLabel="followersNumberLabel">
-                                                                    <rect key="frame" x="168.5" y="2" width="38.5" height="19.5"/>
+                                                                    <rect key="frame" x="170.5" y="3.5" width="36.5" height="16.5"/>
                                                                     <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -2069,7 +2069,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QNx-mI-Nj0" userLabel="HeaderToolbar">
                                         <rect key="frame" x="0.0" y="0.0" width="150" height="66.5"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="sNe-ef-z1t">
+                                            <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="sNe-ef-z1t" userLabel="ToolbarStack">
                                                 <rect key="frame" x="0.0" y="0.0" width="150" height="66.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pRX-14-oKc" userLabel="Back">
@@ -2128,7 +2128,7 @@
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H7K-YV-f4e" userLabel="MainScrollView">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="855.5"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kdx-2V-44e" userLabel="shopImage">
+                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kdx-2V-44e" userLabel="shopImage">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="167"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="kdx-2V-44e" secondAttribute="height" multiplier="375:167" id="6V6-aL-QdW"/>
@@ -2266,7 +2266,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zsw-D0-1PL" userLabel="PostToolbarView">
-                                                <rect key="frame" x="0.0" y="265" width="375" height="49"/>
+                                                <rect key="frame" x="30" y="265" width="330" height="49"/>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="right" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOg-GD-0Rk" userLabel="shopDescription">
                                                 <rect key="frame" x="30" y="322" width="330" height="102.5"/>
@@ -2322,7 +2322,6 @@
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="zsw-D0-1PL" secondAttribute="trailing" id="1cs-B8-1sg"/>
                                             <constraint firstItem="bvO-fp-oC8" firstAttribute="top" secondItem="Z3j-0i-tz3" secondAttribute="bottom" constant="8" id="1jL-7Y-DdO"/>
                                             <constraint firstItem="kdx-2V-44e" firstAttribute="top" secondItem="H7K-YV-f4e" secondAttribute="top" id="5P4-su-11m"/>
                                             <constraint firstItem="wIE-Rh-6ar" firstAttribute="leading" secondItem="Tof-jN-Exq" secondAttribute="trailing" constant="15" id="6Yx-QC-jGr"/>
@@ -2330,7 +2329,6 @@
                                             <constraint firstItem="Tof-jN-Exq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H7K-YV-f4e" secondAttribute="leading" constant="20" symbolic="YES" id="CAO-ii-vDG"/>
                                             <constraint firstItem="z4i-zK-2T7" firstAttribute="width" secondItem="H7K-YV-f4e" secondAttribute="width" multiplier="0.1" id="DGs-VH-IjU"/>
                                             <constraint firstItem="V2O-um-KIy" firstAttribute="leading" secondItem="H7K-YV-f4e" secondAttribute="leading" constant="15" id="DHc-bk-Rql"/>
-                                            <constraint firstItem="zsw-D0-1PL" firstAttribute="leading" secondItem="H7K-YV-f4e" secondAttribute="leading" id="GAQ-Cb-tUo"/>
                                             <constraint firstItem="bOg-GD-0Rk" firstAttribute="trailing" secondItem="wIE-Rh-6ar" secondAttribute="trailing" id="GQL-BE-TS5"/>
                                             <constraint firstAttribute="trailing" secondItem="V2O-um-KIy" secondAttribute="trailing" constant="15" id="HGL-hF-5JT"/>
                                             <constraint firstItem="bvO-fp-oC8" firstAttribute="trailing" secondItem="Tof-jN-Exq" secondAttribute="trailing" id="KRd-4r-GEC"/>
@@ -2355,9 +2353,11 @@
                                             <constraint firstItem="kdx-2V-44e" firstAttribute="leading" secondItem="H7K-YV-f4e" secondAttribute="leading" id="jpK-cR-a5d"/>
                                             <constraint firstItem="zsw-D0-1PL" firstAttribute="height" secondItem="wIE-Rh-6ar" secondAttribute="height" multiplier="0.65" id="jyV-gy-a1z"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="z4i-zK-2T7" secondAttribute="trailing" constant="20" symbolic="YES" id="lYK-gq-DnO"/>
+                                            <constraint firstItem="zsw-D0-1PL" firstAttribute="leading" secondItem="z4i-zK-2T7" secondAttribute="leading" id="m7q-hR-i5n"/>
                                             <constraint firstItem="bOg-GD-0Rk" firstAttribute="height" secondItem="H7K-YV-f4e" secondAttribute="height" multiplier="0.12" id="ma2-eR-5w8"/>
                                             <constraint firstAttribute="trailing" secondItem="kdx-2V-44e" secondAttribute="trailing" id="nUE-zH-mL1"/>
                                             <constraint firstItem="Z3j-0i-tz3" firstAttribute="trailing" secondItem="Tof-jN-Exq" secondAttribute="trailing" id="qUH-Gv-s6J"/>
+                                            <constraint firstItem="zsw-D0-1PL" firstAttribute="trailing" secondItem="wIE-Rh-6ar" secondAttribute="trailing" id="rjr-hp-Qrx"/>
                                             <constraint firstItem="z4i-zK-2T7" firstAttribute="leading" secondItem="H7K-YV-f4e" secondAttribute="leading" constant="30" id="s6g-QO-Eto"/>
                                             <constraint firstItem="bOg-GD-0Rk" firstAttribute="leading" secondItem="z4i-zK-2T7" secondAttribute="leading" id="sIs-RT-vMf"/>
                                             <constraint firstItem="Z3j-0i-tz3" firstAttribute="top" secondItem="Tof-jN-Exq" secondAttribute="bottom" constant="8" id="ugj-GQ-5RY"/>
@@ -2398,9 +2398,11 @@
                         <outlet property="ContactButton" destination="tUw-qs-99r" id="Yi0-l1-oCj"/>
                         <outlet property="PostToolbarView" destination="zsw-D0-1PL" id="Dor-h2-7KY"/>
                         <outlet property="PostsButton" destination="fKc-CG-oMe" id="bf2-Fc-Ikb"/>
+                        <outlet property="backButton" destination="pRX-14-oKc" id="Qwl-hc-m2I"/>
                         <outlet property="contentView" destination="ICV-AJ-VqL" id="bki-Po-xGN"/>
                         <outlet property="favButton" destination="FA8-GZ-Ios" id="bFT-NT-HjD"/>
                         <outlet property="followersNumLabel" destination="pvT-of-2uq" id="Exw-NC-7kE"/>
+                        <outlet property="locationButton" destination="7gl-VR-Tci" id="pT5-sS-bPC"/>
                         <outlet property="mainScrollView" destination="H7K-YV-f4e" id="IDR-S6-xhG"/>
                         <outlet property="offLabel" destination="z4i-zK-2T7" id="Nfm-mE-wVg"/>
                         <outlet property="offLabelLeading" destination="s6g-QO-Eto" id="UhC-Wx-007"/>
@@ -2418,6 +2420,7 @@
                         <outlet property="star3" destination="vKA-sQ-4fN" id="wWE-n7-NKh"/>
                         <outlet property="star4" destination="iXH-RL-5nT" id="0iG-70-nDj"/>
                         <outlet property="star5" destination="vLk-i6-q23" id="Ue2-sw-Aga"/>
+                        <outlet property="toolbarStack" destination="sNe-ef-z1t" id="OGG-7x-Us7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ndd-Cb-DXC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2531,10 +2534,10 @@
             </objects>
             <point key="canvasLocation" x="5152.8000000000002" y="814.54272863568224"/>
         </scene>
-        <!--NewShopsViewController-->
+        <!--ShopsListViewController-->
         <scene sceneID="xXb-bM-xri">
             <objects>
-                <viewController storyboardIdentifier="NewShopsViewController" id="fmO-YM-XcO" userLabel="NewShopsViewController" customClass="NewShopsViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShopsListViewController" id="fmO-YM-XcO" userLabel="ShopsListViewController" customClass="ShopsListViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e7B-0e-Mxq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2597,16 +2600,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q3v-UR-c4g" userLabel="leftView">
-                                                    <rect key="frame" x="0.0" y="26" width="75" height="23.5"/>
+                                                    <rect key="frame" x="0.0" y="27" width="75" height="22"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۰٪" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTq-Nh-SDz" userLabel="percentLabel">
-                                                            <rect key="frame" x="50" y="0.0" width="25" height="23.5"/>
+                                                            <rect key="frame" x="50" y="0.0" width="25" height="22"/>
                                                             <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="17"/>
                                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YPa-95-62C" userLabel="GotoShopButton">
-                                                            <rect key="frame" x="30" y="0.0" width="10" height="23.5"/>
+                                                            <rect key="frame" x="30" y="0.0" width="10" height="22"/>
                                                             <state key="normal" image="icon_back_black"/>
                                                         </button>
                                                     </subviews>
@@ -2674,7 +2677,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(۳.۵)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vh7-S1-avd" userLabel="rateLabel">
-                                                                    <rect key="frame" x="111" y="0.5" width="32" height="19.5"/>
+                                                                    <rect key="frame" x="117" y="2" width="26" height="16.5"/>
                                                                     <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                                     <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -2718,7 +2721,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="center" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۲۳۴۵" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jT7-U1-NK3" userLabel="followersNumberLabel">
-                                                                    <rect key="frame" x="147.5" y="3.5" width="38.5" height="19.5"/>
+                                                                    <rect key="frame" x="149.5" y="5" width="36.5" height="16.5"/>
                                                                     <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -2811,6 +2814,7 @@
                         <viewLayoutGuide key="safeArea" id="IA6-Uf-18Z"/>
                     </view>
                     <connections>
+                        <outlet property="headerLabel" destination="gPw-3B-3WQ" id="Xt0-q1-Mbf"/>
                         <outlet property="shopTable" destination="d56-7s-DdQ" id="TL7-jA-Xng"/>
                     </connections>
                 </viewController>

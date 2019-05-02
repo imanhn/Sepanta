@@ -52,15 +52,19 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
                 NetworkManager.shared.messageObs
                     .filter({$0.count > 0})
                     .subscribe(onNext: { [unowned self] amessage in
-                        self.alert(Message: amessage)
                         NetworkManager.shared.messageObs = BehaviorRelay<String>(value: "")
-                        }).disposed(by: myDisposeBag)
+                        self.alert(Message: amessage)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                            self.BackTapped(sender)
+                        })
+                    }).disposed(by: myDisposeBag)
             }else if okButton.tag == 2 {
                 print("Edit Post")
             }
             okButton.superview?.removeFromSuperview()
         }
     }
+    
     func editAuthorized()-> Bool{
         print("***Check Authorization : ","\(NetworkManager.shared.profileObs.value.id ?? 0)" ,"  ",LoginKey.shared.userID)
         if "\(NetworkManager.shared.profileObs.value.id ?? 0)" == LoginKey.shared.userID {
@@ -68,18 +72,20 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
         }else{
             return false
         }
-        
     }
+    
     func initUI(){
         let authorized = editAuthorized()
         if !authorized {
+            print("*** NOT Authorized")
             editPostButton.setImage(UIImage(named: "icon_edit_grey"), for: .disabled)
             deletePostButton.setImage(UIImage(named: "icon_delete_grey"), for: .disabled)
             editPostButton.isEnabled = false
             deletePostButton.isEnabled = false
         }else{
-            editPostButton.setImage(UIImage(named: "icon_edit_grey"), for: .normal)
-            deletePostButton.setImage(UIImage(named: "icon_delete_grey"), for: .normal)
+            print("*** Authorized")
+            editPostButton.setImage(UIImage(named: "icon_edit"), for: .normal)
+            deletePostButton.setImage(UIImage(named: "icon_delete"), for: .normal)
             editPostButton.isEnabled = true
             deletePostButton.isEnabled = true
         }
@@ -94,19 +100,28 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
         Spinner.start()
         let aParameter = ["post_id":"\(postID!)"]
         NetworkManager.shared.run(API: "post-details", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
+        let messageDisp = NetworkManager.shared.messageObs
+            .filter({$0.count > 0})
+            .subscribe(onNext: { [unowned self] amessage in
+                NetworkManager.shared.messageObs = BehaviorRelay<String>(value: "")
+                self.alert(Message: amessage)
+            })
+        messageDisp.disposed(by: myDisposeBag)
+        disposeList.append(messageDisp)
     }
     
     @objc override func ReloadViewController(_ sender:Any) {
         super.ReloadViewController(sender)
         getPostData()
     }
-    
+    /*
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getPostData()
-    }
+    }*/
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        getPostData()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         initUI()

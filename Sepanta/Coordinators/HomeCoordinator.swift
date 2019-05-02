@@ -8,10 +8,13 @@
 
 import Foundation
 import UIKit
+import Alamofire
+import RxSwift
 
 class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     var childCoordinators = [Coordinator]()
     var menuOpened = false
+    var myDisposeBag = DisposeBag()
     var navigationController: UINavigationController
     /* parentCoordinator could be either AppCoordinator or LoginCoordinator */
     weak var parentCoordinator : AppCoordinator?
@@ -97,11 +100,16 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func pushShowProfile (){
-        let vc = ProfileViewController.instantiate()
-        vc.coordinator = self
-        navigationController.delegate = self
-        navigationController.pushViewController(vc, animated: true)
-        navigationController.setNavigationBarHidden(true, animated: false)
+        if LoginKey.shared.role == "Shop" {
+            let ashop = Shop(shop_id: nil, user_id: Int(LoginKey.shared.userID), shop_name: nil, shop_off: nil, lat: nil, long: nil, image: nil, rate: nil, follower_count: nil, created_at: nil)            
+            self.pushShop(Shop: ashop)
+        }else{
+            let vc = ProfileViewController.instantiate()
+            vc.coordinator = self
+            navigationController.delegate = self
+            navigationController.pushViewController(vc, animated: true)
+            navigationController.setNavigationBarHidden(true, animated: false)
+        }
     }
     
     func pushEditProfile (){
@@ -150,8 +158,29 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     
     func pushNewShops(){
         SlidesAndPaths.shared.count_new_shop.accept(0)
-        let vc = NewShopsViewController.instantiate()
+        let vc = ShopsListViewController.instantiate()
         vc.coordinator = self
+        vc.fetchMechanism = {
+            let shopsDataSource = ShopsListDataSource(vc)
+            shopsDataSource.getNewShopsFromServer()
+            return shopsDataSource
+        }
+        vc.headerLabelToSet = "جدیدترین ها"
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+    
+    func pushMyFollowingShops(){
+        SlidesAndPaths.shared.count_new_shop.accept(0)
+        let vc = ShopsListViewController.instantiate()
+        vc.coordinator = self
+        vc.fetchMechanism = {
+            let shopsDataSource = ShopsListDataSource(vc)
+            shopsDataSource.getMyFollowingFromServer()
+            return shopsDataSource
+        }
+        vc.headerLabelToSet = "باشگاه های من"
         navigationController.delegate = self
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
@@ -270,6 +299,16 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
+    func pushEditShop(Shop ashop : Shop){
+        let storyboard = UIStoryboard(name: "EditShop", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "EditShopViewController") as! EditShopViewController
+        vc.coordinator = self
+        vc.shop = ashop
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+
     func logout() {
         LoginKey.shared.deleteTokenAndUserID()
         popLogin()

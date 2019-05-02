@@ -63,7 +63,8 @@ class NetworkManager {
     var pollObs = BehaviorRelay<Int>(value: 0)
     var userPointsObs = BehaviorRelay<UserPoints>(value: UserPoints())
     var pointsElementsObs = BehaviorRelay<[PointElement]>(value: [PointElement]())
-    var shopNotifObs = BehaviorRelay<[ShopNotification]>(value: [ShopNotification]())
+    var notificationForUserObs = BehaviorRelay<[NotificationForUser]>(value: [NotificationForUser]())
+    var notificationForShopObs = BehaviorRelay<[NotificationForShop]>(value: [NotificationForShop]())
     var generalNotifObs = BehaviorRelay<[GeneralNotification]>(value: [GeneralNotification]())
     // Initialization
     

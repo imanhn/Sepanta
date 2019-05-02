@@ -38,7 +38,7 @@ UIImagePickerControllerDelegate {
     }
     
     func launchImagePicker() {
-        owner.imagePicker.delegate = self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        owner.imagePicker.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
         owner.imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
         owner.present(owner.imagePicker, animated: true, completion: nil)
     }

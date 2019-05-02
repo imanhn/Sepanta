@@ -46,6 +46,10 @@ class ShopsListDataSource {
         NetworkManager.shared.run(API: "new-shops", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
     }
     
+    func getMyFollowingFromServer(){
+        NetworkManager.shared.run(API: "my-following", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
+    }
+    
     init (_ vc : UIViewController){
         self.delegate = vc
         //subscribeToShop()

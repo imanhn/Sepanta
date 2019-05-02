@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ShopNotification {
+struct NotificationForUser {
     var post_id : Int?
     var user_id : Int?
     var created_at : String?
@@ -17,6 +17,18 @@ struct ShopNotification {
     var post_image : String?
     var body : String?
 }
+
+struct NotificationForShop {
+    var post_id : Int?
+    var user_id : Int?
+    var created_at : String?
+    var first_name : String?
+    var last_name : String?
+    var image : String?
+    var username : String?
+    var comment : String?
+}
+
 
 struct GeneralNotification {
     var title : String?

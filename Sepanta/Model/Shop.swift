@@ -33,4 +33,16 @@ struct Shop : ShopProtocol {
     var rate : String?
     var follower_count : Int?
     var created_at : String?
+    
+    mutating func updateFromProfile(Profile aprofile : Profile){
+        user_id = aprofile.id
+        shop_id = aprofile.shop_id
+        shop_off = aprofile.shop_off
+        image = aprofile.image
+        lat = aprofile.lat
+        long = aprofile.long
+        rate = aprofile.rate
+        shop_name = aprofile.shop_name
+        follower_count = aprofile.follower_count
+    }
 }

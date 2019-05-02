@@ -20,6 +20,7 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
     var collectionView : UICollectionView!
     var myDisposeBag = DisposeBag()
     var shops = BehaviorRelay<[Shop]>(value: [Shop]())
+    var posts = BehaviorRelay<[Post]>(value: [Post]())
     let numberOfFollowedShopInARow : CGFloat = 4
     
     init(_ vc : ProfileViewController) {
@@ -109,44 +110,80 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
             //self.delegate.cupLabel
             self.delegate.clubNumLabel.text = "\(aProfile.follow_count ?? 0)"
             //print("aProfile.content : ",aProfile.content)
-            self.shops.accept(aProfile.content as! [Shop])
+            if LoginKey.shared.role == "Shop" {
+                self.posts.accept(aProfile.content as! [Post])
+            }else{
+                self.shops.accept(aProfile.content as! [Shop])
+            }
         }).disposed(by: myDisposeBag)
     }
     
     func bindCollectionView(){
-        self.shops.bind(to: collectionView.rx.items(cellIdentifier: "shopcell")) { [unowned self] row, model, cell in
-            if let aCell = cell as? ButtonCell {
-                //if aCell.aButton == nil {aCell.aButton = UIButton(type: .custom)}
-                let strURL = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + model.image!
-                let imageURL = URL(string: strURL)
-                //print("ROW:\(row) UICollectionView binding : ",imageURL ?? "NIL"," Cell : ",aCell,"  model : ",model)
-                //print("ShopUI Binding Posts : ",model)
-                self.collectionView.addSubview(aCell)
-                aCell.addSubview(aCell.aButton)
-                if imageURL == nil {
-                    print("     Post URL is not valid : ",model.image ?? "Empty Image")
+        if LoginKey.shared.role == "Shop" {
+            self.posts.bind(to: collectionView.rx.items(cellIdentifier: "shopcell")) { [unowned self] row, model, cell in
+                if let aCell = cell as? ButtonCell {
+                    //if aCell.aButton == nil {aCell.aButton = UIButton(type: .custom)}
+                    //print("model : ",model)
                     let dim = (self.collectionView.bounds.width * 0.8) / self.numberOfFollowedShopInARow
                     aCell.aButton.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
-                    aCell.aButton.setImage(UIImage(named: "logo_shape"), for: .normal)
+                    self.collectionView.addSubview(aCell)
+                    aCell.addSubview(aCell.aButton)
+                    if model.image != nil && (model.image ?? "").count > 0 {
+                        let strURL = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + (model.image ?? "")
+                        let imageURL = URL(string: strURL)
+                        if imageURL == nil {
+                            print("     Post URL is not valid : ",model.image ?? "Empty Image")
+                            aCell.aButton.setImage(UIImage(named: "logo_shape"), for: .normal)
+                        }else{
+                            aCell.aButton.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1, ImageURL: imageURL!, ImageName: model.image!)
+                        }
+                    }else{
+                        aCell.aButton.setImage(UIImage(named: "logo_shape"), for: .normal)
+                    }
+                    aCell.aButton.layer.shadowColor = UIColor.black.cgColor
+                    aCell.aButton.layer.shadowOffset = CGSize(width: 3, height: 3)
+                    aCell.aButton.layer.shadowRadius = 2
+                    aCell.aButton.layer.shadowOpacity = 0.2
+                    
+                    aCell.aButton.tag = model.id ?? 0
+                    aCell.aButton.addTarget(self, action: #selector(self.showPostDetail), for: .touchUpInside)
                 }else{
+                    print("\(cell) can not be casted to PostCell")
+                }
+                }.disposed(by: myDisposeBag)
+        }else{
+            self.shops.bind(to: collectionView.rx.items(cellIdentifier: "shopcell")) { [unowned self] row, model, cell in
+                if let aCell = cell as? ButtonCell {
+                    //if aCell.aButton == nil {aCell.aButton = UIButton(type: .custom)}
+                    //print("model : ",model)
                     let dim = (self.collectionView.bounds.width * 0.8) / self.numberOfFollowedShopInARow
                     aCell.aButton.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
-                    //aCell.aButton.af_setImage(for: .normal, url: imageURL!) //Also Works!
-                    aCell.aButton.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1, ImageURL: imageURL!, ImageName: model.image!)
+                    self.collectionView.addSubview(aCell)
+                    aCell.addSubview(aCell.aButton)
+                    if model.image != nil && (model.image ?? "").count > 0 {
+                        let strURL = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + (model.image ?? "")
+                        let imageURL = URL(string: strURL)
+                        if imageURL == nil {
+                            print("     Post URL is not valid : ",model.image ?? "Empty Image")
+                            aCell.aButton.setImage(UIImage(named: "logo_shape"), for: .normal)
+                        }else{
+                            aCell.aButton.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1, ImageURL: imageURL!, ImageName: model.image!)
+                        }
+                    }else{
+                        aCell.aButton.setImage(UIImage(named: "logo_shape"), for: .normal)
+                    }
+                    aCell.aButton.layer.shadowColor = UIColor.black.cgColor
+                    aCell.aButton.layer.shadowOffset = CGSize(width: 3, height: 3)
+                    aCell.aButton.layer.shadowRadius = 2
+                    aCell.aButton.layer.shadowOpacity = 0.2
+                    
+                    aCell.aButton.tag = model.user_id ?? 0
+                    aCell.aButton.addTarget(self, action: #selector(self.showShopDetail), for: .touchUpInside)
+                }else{
+                    print("\(cell) can not be casted to PostCell")
                 }
-                aCell.aButton.layer.shadowColor = UIColor.black.cgColor
-                aCell.aButton.layer.shadowOffset = CGSize(width: 3, height: 3)
-                aCell.aButton.layer.shadowRadius = 2
-                aCell.aButton.layer.shadowOpacity = 0.2
-
-                aCell.aButton.tag = model.user_id ?? 0
-                aCell.aButton.addTarget(self, action: #selector(self.showShopDetail), for: .touchUpInside)
-            }else{
-                print("\(cell) can not be casted to PostCell")
-            }
-            }.disposed(by: myDisposeBag)
-        
-        
+                }.disposed(by: myDisposeBag)
+        }
     }
     
     @objc func showShopDetail(_ sender : Any){
@@ -161,6 +198,14 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
                 NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: Profile())
                 self.delegate.coordinator!.pushShop(Shop: ashop)
             }
+        }
+    }
+    @objc func showPostDetail(_ sender : Any){
+        let aButton = (sender as? UIButton)
+        if let postID = aButton?.tag {
+            self.delegate.coordinator!.PushAPost(PostID: postID)
+        }else{
+            self.delegate.alert(Message: "اطلاعات این پست کامل نیست")
         }
     }
     
