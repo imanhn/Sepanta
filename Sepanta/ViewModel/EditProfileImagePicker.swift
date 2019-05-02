@@ -14,46 +14,15 @@ import RxAlamofire
 import RxSwift
 
 
-class EditProfileImagePicker : NSObject,
-    RSKImageCropViewControllerDelegate,
-    RSKImageCropViewControllerDataSource,
-    UINavigationControllerDelegate,
-    UIImagePickerControllerDelegate {
+class EditProfileImagePicker : ImagePicker {
     var editProfileViewController : EditProfileViewController
     
     init(_ vc : EditProfileViewController){
-        self.editProfileViewController = vc
-        super.init()
-        launchImagePicker()
+        self.editProfileViewController = vc        
+        super.init(vc)
     }
     
-    func launchImagePicker() {
-        editProfileViewController.imagePicker.delegate = self
-        editProfileViewController.imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
-        editProfileViewController.present(editProfileViewController.imagePicker, animated: true, completion: nil)
-    }
-    
-    internal func imagePickerController(_ picker: UIImagePickerController,
-                                        didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
-            return
-        }
-        self.pushCropper(image)
-        picker.dismiss(animated: true, completion: nil)
-    }
-    
-    func pushCropper(_ selectedImage : UIImage){
-        let imageCropViewController = RSKImageCropViewController(image: selectedImage, cropMode: .circle)
-        imageCropViewController.delegate = self
-        imageCropViewController.dataSource = self
-        editProfileViewController.navigationController?.pushViewController(imageCropViewController, animated: true)
-    }
-    func imageCropViewControllerDidCancelCrop(_ controller: RSKImageCropViewController) {
-        self.editProfileViewController.navigationController?.popViewController(animated: true)
-    }
-    
-    func imageCropViewController(_ controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect, rotationAngle: CGFloat) {
+    override func imageCropViewController(_ controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect, rotationAngle: CGFloat) {
         self.editProfileViewController.navigationController?.popViewController(animated: true)
         self.editProfileViewController.profilePicture.image = croppedImage
         self.editProfileViewController.profilePicture.layer.cornerRadius = self.editProfileViewController.profilePicture.frame.width/2
@@ -83,17 +52,5 @@ class EditProfileImagePicker : NSObject,
                 print("Uploading image Failed : ",encodingError)
             }
         })
-    }
-    
-    func imageCropViewControllerCustomMaskRect(_ controller: RSKImageCropViewController) -> CGRect {
-        return .zero//CGRect(x: 0, y: 0, width: 375, height: 200)
-    }
-    
-    func imageCropViewControllerCustomMaskPath(_ controller: RSKImageCropViewController) -> UIBezierPath {
-        return UIBezierPath(rect: controller.maskRect)
-    }
-    
-    func imageCropViewControllerCustomMovementRect(_ controller: RSKImageCropViewController) -> CGRect {
-        return .zero//CGRect(x: 0, y: 0, width: 100 , height: 100)
     }
 }

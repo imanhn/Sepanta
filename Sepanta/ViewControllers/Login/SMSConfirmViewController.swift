@@ -30,11 +30,17 @@ class SMSConfirmViewController: UIViewControllerWithKeyboardNotificationWithErro
             setMobileNumber(mobileNumber!)
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         initUI()
         doSubscribtions()
+    }
+    
+    @objc override func ReloadViewController(_ sender:Any) {
+        super.ReloadViewController(sender)
+        submitTapped(sender)
     }
     
     @IBAction func submitTapped(_ sender: Any) {
@@ -89,6 +95,7 @@ class SMSConfirmViewController: UIViewControllerWithKeyboardNotificationWithErro
         
         let loginSucceedDisp = NetworkManager.shared.loginSucceed
             .filter({$0})
+            .observeOn(MainScheduler.asyncInstance)
             .subscribe(onNext: { [unowned self] _ in
                 print("Pushing Home Page ")
                 NetworkManager.shared.loginSucceed.accept(false)

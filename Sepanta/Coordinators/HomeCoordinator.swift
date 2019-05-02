@@ -288,7 +288,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     
     func mountTokenToHeaders() {
         NetworkManager.shared.headers["Authorization"] = "Bearer "+LoginKey.shared.token
-        print("Header Mounted : ",NetworkManager.shared.headers["Authorization"]?.count)
+        //print("Header Mounted : ",NetworkManager.shared.headers["Authorization"]?.count)
     }
     
     func pushLoginPage() {
@@ -319,6 +319,15 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
             print("popLogin is Poping ",navigationController.topViewController ?? "Nil")
             navigationController.popViewController(animated: false)
         }
+    }
+    
+    func pushAddPost(){
+        let storyboard = UIStoryboard(name: "AddPost", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "AddPostViewController") as! AddPostViewController
+        vc.coordinator = self
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
     }
     
     func start() {

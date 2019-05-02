@@ -53,10 +53,10 @@ class LoginKey {
             let loginDataSaved = KeychainWrapper.standard.set("YES", forKey:"LOGIN")
             return loginDataSaved
         } else {
-            print("Unable to save login data....")
-            fatalError()
+            print("Unable to save login data....")            
             let loginDataSaved = KeychainWrapper.standard.set("NO", forKey:"LOGIN")
-            return loginDataSaved
+            fatalError()
+            //return loginDataSaved
         }
     }
     
@@ -82,7 +82,7 @@ class LoginKey {
         if loginDataSaved == "YES" {
             self.token = KeychainWrapper.standard.string(forKey: "TOKEN")!
             self.userID = KeychainWrapper.standard.string(forKey: "USERID")!
-            self.role = KeychainWrapper.standard.string(forKey: "ROLE")!
+            self.role = "Shop"//KeychainWrapper.standard.string(forKey: "ROLE")!
             print("Your USERID : ",self.userID)
             print("Your token : ",self.token.count)
             print("Your role would be : ",self.role)

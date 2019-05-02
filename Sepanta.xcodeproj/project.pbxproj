@@ -45,6 +45,10 @@
 		0F63F7202278BDF200799C8F /* NewCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F71F2278BDF200799C8F /* NewCardViewController.swift */; };
 		0F63F7222278BE8000799C8F /* NewCard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F63F7212278BE8000799C8F /* NewCard.storyboard */; };
 		0F63F7242278EE8500799C8F /* UIImageSetShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F7232278EE8500799C8F /* UIImageSetShadow.swift */; };
+		0F642B93227A415A00B887B8 /* AddPost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F642B92227A415A00B887B8 /* AddPost.storyboard */; };
+		0F642B95227A418100B887B8 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F642B94227A418100B887B8 /* AddPostViewController.swift */; };
+		0F642B97227A4D7D00B887B8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F642B96227A4D7D00B887B8 /* ImagePicker.swift */; };
+		0F642B99227A525800B887B8 /* AddPostImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F642B98227A525700B887B8 /* AddPostImagePicker.swift */; };
 		0F673455227A149C0064EF96 /* SignUPUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F673454227A149C0064EF96 /* SignUPUI.swift */; };
 		0F67F75A224CD00300659842 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67F759224CD00300659842 /* Post.swift */; };
 		0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */; };
@@ -167,6 +171,10 @@
 		0F63F71F2278BDF200799C8F /* NewCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewController.swift; sourceTree = "<group>"; };
 		0F63F7212278BE8000799C8F /* NewCard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCard.storyboard; sourceTree = "<group>"; };
 		0F63F7232278EE8500799C8F /* UIImageSetShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageSetShadow.swift; sourceTree = "<group>"; };
+		0F642B92227A415A00B887B8 /* AddPost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddPost.storyboard; sourceTree = "<group>"; };
+		0F642B94227A418100B887B8 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
+		0F642B96227A4D7D00B887B8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		0F642B98227A525700B887B8 /* AddPostImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostImagePicker.swift; sourceTree = "<group>"; };
 		0F673454227A149C0064EF96 /* SignUPUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPUI.swift; sourceTree = "<group>"; };
 		0F67F759224CD00300659842 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringWithFontSizeCalc.swift; sourceTree = "<group>"; };
@@ -402,6 +410,7 @@
 				0F63F71522776A5400799C8F /* ContactUSViewController.swift */,
 				0F63F71F2278BDF200799C8F /* NewCardViewController.swift */,
 				0F58927D227909080077B655 /* ScoresViewController.swift */,
+				0F642B94227A418100B887B8 /* AddPostViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -415,6 +424,8 @@
 				0FFCDC4B226C795B0087BFEF /* FavListDataSource.swift */,
 				0F0661AC2257E62400A83734 /* SepantaGroupsSubscription.swift */,
 				0F70A646226B97650020C33C /* EditProfileImagePicker.swift */,
+				0F642B98227A525700B887B8 /* AddPostImagePicker.swift */,
+				0F642B96227A4D7D00B887B8 /* ImagePicker.swift */,
 				0F63F7172278947A00799C8F /* ContactUSEmoji.swift */,
 			);
 			path = ViewModel;
@@ -456,6 +467,7 @@
 				0F63F70F2277625E00799C8F /* ContactUS.storyboard */,
 				0F63F7212278BE8000799C8F /* NewCard.storyboard */,
 				0F58927F22790B210077B655 /* Scores.storyboard */,
+				0F642B92227A415A00B887B8 /* AddPost.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -674,6 +686,7 @@
 				0F8B7D442267874B00EFAACD /* Shabnam-FD.ttf in Resources */,
 				0FE8B9AE220355F000C868C3 /* Main.storyboard in Resources */,
 				0F63F7222278BE8000799C8F /* NewCard.storyboard in Resources */,
+				0F642B93227A415A00B887B8 /* AddPost.storyboard in Resources */,
 				0FFCDC52226C955F0087BFEF /* Notifications.storyboard in Resources */,
 				0F8E3F722275CD4200E51B17 /* CardView.xib in Resources */,
 				0F58928022790B210077B655 /* Scores.storyboard in Resources */,
@@ -799,6 +812,7 @@
 				0FB3ECD2222DC48F009A89F7 /* GetRichViewController.swift in Sources */,
 				0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */,
 				0F50AE72226F61110028D8B6 /* MapAnnotation.swift in Sources */,
+				0F642B97227A4D7D00B887B8 /* ImagePicker.swift in Sources */,
 				0F817A6B2234635A00F1738E /* EditProfileViewController.swift in Sources */,
 				0F817A6922341D8E00F1738E /* ShowProfileUI.swift in Sources */,
 				0FAEEDE92230957100A9178F /* AboutUsUI.swift in Sources */,
@@ -806,6 +820,7 @@
 				0F67F75A224CD00300659842 /* Post.swift in Sources */,
 				0F63F7202278BDF200799C8F /* NewCardViewController.swift in Sources */,
 				0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */,
+				0F642B99227A525800B887B8 /* AddPostImagePicker.swift in Sources */,
 				0F8571F0225CC5B50056D062 /* UIViewControllerWithErrorBar.swift in Sources */,
 				0F3197B32270BD8F00CEF207 /* Bank.swift in Sources */,
 				0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */,
@@ -838,6 +853,7 @@
 				0F50AE74226F66950028D8B6 /* MapViewAnnotations.swift in Sources */,
 				0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */,
 				0FD094AC226E370B00E53A07 /* NearestViewController.swift in Sources */,
+				0F642B95227A418100B887B8 /* AddPostViewController.swift in Sources */,
 				0F0661B2225BEA6A00A83734 /* PostUI.swift in Sources */,
 				0F63F71622776A5400799C8F /* ContactUSViewController.swift in Sources */,
 				0F817A672232D89C00F1738E /* ProfileViewController.swift in Sources */,

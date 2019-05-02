@@ -41,7 +41,7 @@
                                             <action selector="homeTapped:" destination="RsX-vz-rou" eventType="touchUpInside" id="e6W-gl-Xsz"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="علاقه مندی ها" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydK-qW-e4c" userLabel="NewShopsHeader">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="علاقه مندی ها" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydK-qW-e4c" userLabel="NewShopsHeader">
                                         <rect key="frame" x="113" y="0.0" width="150" height="66.5"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -85,16 +85,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nE2-8A-RvM" userLabel="leftView">
-                                                    <rect key="frame" x="0.0" y="26.5" width="75" height="22"/>
+                                                    <rect key="frame" x="0.0" y="26" width="75" height="23.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۰٪" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7T-UF-TK9" userLabel="percentLabel">
-                                                            <rect key="frame" x="50" y="0.0" width="25" height="22"/>
+                                                            <rect key="frame" x="50" y="0.0" width="25" height="23.5"/>
                                                             <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="17"/>
                                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zE2-Cn-y6a" userLabel="GotoShopButton">
-                                                            <rect key="frame" x="30" y="0.0" width="10" height="22"/>
+                                                            <rect key="frame" x="30" y="0.0" width="10" height="23.5"/>
                                                             <state key="normal" image="icon_back_black"/>
                                                         </button>
                                                     </subviews>

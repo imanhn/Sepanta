@@ -178,6 +178,17 @@ class PostUI {
         commentNoLabel.contentMode = .center
         self.delegate.postScrollView.addSubview(commentNoLabel)
         
+        /*
+        let menuButton = UIButton(type: .custom)
+        menuButton.setImage(UIImage(named: "postMenu"), for: .normal)
+        menuButton.frame = CGRect(x: self.delegate.postScrollView.frame.width-self.marginX-buttonDim, y: self.cursurY, width: buttonDim*0.75, height: buttonDim*0.75)
+        self.delegate.postScrollView.addSubview(menuButton)
+         */
+        
+        
+        
+        cursorX = cursorX + buttonDim + self.marginX/2
+
         self.cursurY = self.cursurY + buttonDim + self.marginY*2
         cursorX = self.marginX
         

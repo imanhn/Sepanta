@@ -80,7 +80,19 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
                 self.alert(Message: aMessage)
                 NetworkManager.shared.messageObs = BehaviorRelay<String>(value: "")
             })
+        messageDisp.disposed(by: myDisposeBag)
         disposeList.append(messageDisp)
+        
+        let useridDisp = LoginKey.shared.userIDObs
+            .share(replay: 1, scope: .whileConnected)
+            .filter({$0.count > 0})
+            .subscribe(onNext: { innerUserID in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                    self.coordinator!.gotoSMSVerification(Set: self.signupUI.mobileText.text ?? "")
+                })
+            })
+        useridDisp.disposed(by: myDisposeBag)
+        disposeList.append(useridDisp)
     }
     
     deinit {

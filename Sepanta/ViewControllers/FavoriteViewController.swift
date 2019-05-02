@@ -68,7 +68,7 @@ class FavoriteViewController :  UIViewControllerWithErrorBar,XIBView{
             }.disposed(by: myDisposeBag)
         shopTable.rx.modelSelected(Shop.self)
             .subscribe(onNext: { [unowned self] selectedShop in
-                print("Pushing ShopVC with : ", selectedShop)
+                //print("Pushing ShopVC with : ", selectedShop)
                 self.coordinator!.pushShop(Shop: selectedShop)
             }).disposed(by: myDisposeBag)
     }

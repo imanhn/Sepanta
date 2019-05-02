@@ -13,7 +13,7 @@ import RxAlamofire
 import RxSwift
 import Photos
 
-class EditProfileViewController : UIViewControllerWithKeyboardNotificationWithErrorBar,Storyboarded{
+class EditProfileViewController : UIViewControllerWithKeyboardNotificationWithErrorBar,Storyboarded,UIViewControllerWithImagePicker{
 
     @IBOutlet weak var formView: UIView!
     @IBOutlet var topView: UIView!
@@ -21,7 +21,7 @@ class EditProfileViewController : UIViewControllerWithKeyboardNotificationWithEr
     var editProfileUI : EditProfileUI!
     var myDisposeBag = DisposeBag()
     var imagePicker = UIImagePickerController()
-    var imagePickerDelegate : EditProfileImagePicker!
+    var imagePickerDelegate :  ImagePicker!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBAction func homeTapped(_ sender: Any) {

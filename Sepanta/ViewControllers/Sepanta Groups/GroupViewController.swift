@@ -103,7 +103,7 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
         
         shopTable.rx.modelSelected(Shop.self)
             .subscribe(onNext: { [unowned self] selectedShop in
-                print("Pushing ShopVC with : ", selectedShop)
+                //print("Pushing ShopVC with : ", selectedShop)
                 self.coordinator!.pushShop(Shop: selectedShop)
             }).disposed(by: myDisposeBag)
     }

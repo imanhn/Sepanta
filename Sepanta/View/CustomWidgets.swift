@@ -177,6 +177,22 @@ class RoundedButton: UIButton {
     
 }
 
+class RoundedButtonWithShadow : RoundedButton{
+    override init(frame: CGRect){
+        super.init(frame: frame)
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 1, height: 2)
+        self.layer.shadowRadius = 2
+        self.layer.opacity = 0.9
+        self.layer.shadowOpacity = 0.3
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        //fatalError("init(coder:) has not been implemented")
+    }
+}
+
 class RoundedButtonWithDarkBackground: UIButton {
     var curvSize : CGFloat = 5;
 

@@ -103,13 +103,21 @@ class JSONParser {
                     //Returns the Post Detail
                     let aPost = (self?.processAsPostDetails(Result: aDic))!
                     NetworkManager.shared.postDetailObs.accept(aPost)
+                } else if (apiName == "post-delete") && (aMethod == HTTPMethod.post) {
+                    //Returns the Post Detail
+                    if let amessage = aDic["message"] as? String {
+                        NetworkManager.shared.messageObs.accept(amessage)
+                    }
                 } else if (apiName == "register") && (aMethod == HTTPMethod.post) {
-                    //set a message for register when things go wrong!
+                    //set a message for register when things go wrong or right!
                     if aDic["cellphone"] != nil {
                         NetworkManager.shared.messageObs.accept("این شماره همراه قبلاْ ثبت نام نموده است")
                     }else if aDic["username"] != nil {
                         NetworkManager.shared.messageObs.accept("این شناسه کاربری قبلاْ ثبت نام نموده است")
-                    }else if let amessage = aDic["message"] as? String {
+                    }else if let amessage = aDic["message"] as? String ,
+                            let auserID = aDic["userId"] as? Int {
+                            LoginKey.shared.userID = "\(auserID)"
+                        LoginKey.shared.userIDObs.accept("\(auserID)")
                         NetworkManager.shared.messageObs.accept(amessage)
                     }
                     
@@ -591,7 +599,7 @@ class JSONParser {
                 newCard.status = (aCard["status"] as? Int) ?? 0
                 newCard.bank_name = (aCard["bank_name"] as? String) ?? ""
                 newCard.bank_logo = (aCard["bank_logo"] as? String) ?? ""
-                print("     Profile Card : ",newCard)
+                //print("     Profile Card : ",newCard)
                 profile.cards.append(newCard)
             }
         }
@@ -609,7 +617,7 @@ class JSONParser {
             if let aContent = postDet["content"] as? String {aPost.content = aContent}
             if let anImage = postDet["image"] as? String {aPost.image = anImage}
             if let aViewCount = postDet["viewCount"] as? Int {aPost.viewCount = aViewCount}
-            print("JSON Parser : Parsed Post : ",aPost)
+            //print("JSON Parser : Parsed Post : ",aPost)
         }else{
             print("*** Error : Post Detail is NULL - Parser Failed!")            
         }
@@ -618,7 +626,7 @@ class JSONParser {
             for aComment in someComments {
                 if let castedComment = aComment as? NSDictionary{
                     let newComment = Comment(id: castedComment["id"] as? Int, username: castedComment["username"] as? String, body: castedComment["body"] as? String)
-                    print("Casted : ",newComment)
+                    //print("Casted : ",newComment)
                     aPost.comments!.append(newComment)
                 }else{
                     print("Error : Comment is incorrect and can not be casted : ",aComment)
@@ -629,7 +637,7 @@ class JSONParser {
         }
 
         if let aLike = aResult["is_like"] as? Bool {
-            print("Reading Like : ",aLike)
+            //print("Reading Like : ",aLike)
             aPost.isLiked = aLike
             
         }

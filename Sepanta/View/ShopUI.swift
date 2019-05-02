@@ -75,7 +75,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         
     }
     @objc func newPostTapped(sender : Any){
-        
+        self.delegate.coordinator!.pushAddPost()
     }
     
     @objc func followTapped(sender : Any){
@@ -225,7 +225,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 if rate > 4.5 {self.delegate.star5.image = UIImage(named: "icon_star_on")}
                 //print("ShopUI : setting shopui.posts to  :: ",aProfile.content)
                 if let postContents = aProfile.content as? [Post] {
-                    self.posts.accept(aProfile.content as! [Post])
+                    self.posts.accept(postContents)
                 }else{
                     print("aProfile.content has shops but expected to have posts")
                     self.delegate.alert(Message: "خطای داخلی اتفاق افتاده است")

@@ -102,10 +102,12 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
             ).disposed(by: myDisposeBag)
 
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
+        //showQuestion(Message: "آيا از حذف پست مطمئن هستید؟", OKLabel: "بلی", CancelLabel: "خیر", QuestionTag: 1)
         //TEST
         //NetworkManager.shared.status.accept(CallStatus.error)
         //alert(Message:"آزمايش نوار اطلاعات")

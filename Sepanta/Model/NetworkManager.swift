@@ -132,7 +132,7 @@ class NetworkManager {
                 self.result = aresult
                 self.parser = JSONParser(API: apiName,Method : aMethod)
                 if let aparser = self.parser {
-                    print("Handing over resultSubject to JSONParser")
+                    //print("Handing over resultSubject to JSONParser")
                     aparser.resultSubject.accept(aresult)                    
                 }
                 if ahttpURLRes.statusCode >= 400 {

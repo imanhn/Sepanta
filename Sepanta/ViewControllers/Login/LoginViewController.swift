@@ -14,6 +14,7 @@ import RxCocoa
 
 class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,Storyboarded {
     var myDisposeBag  = DisposeBag()
+    var disposeList = [Disposable]()
     weak var coordinator : HomeCoordinator?
     @IBOutlet var PageView: UIView!
     @IBOutlet weak var LoginPanelView: RightTabbedView!
@@ -38,6 +39,7 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
     }
     @objc override func ReloadViewController(_ sender:Any) {
         super.ReloadViewController(sender)
+        SendClicked(sender)
     }
     
     @IBAction func SendClicked(_ sender: Any) {
@@ -56,7 +58,7 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
     }
 
     func doSubscribtions(){
-        MobileTextField.rx.text
+        let submitDisp = MobileTextField.rx.text
             .subscribe(onNext: { [unowned self] (atext) in
                 if !atext!.toEnglishNumbers().hasPrefix("09") {
                     self.MobileTextField.text = "09"
@@ -67,33 +69,42 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
                     self.submitButton.isEnabled = false
                 }
                 
-            }).disposed(by: self.myDisposeBag)
-
-        NetworkManager.shared.SMSConfirmed
+            })
+        submitDisp.disposed(by: self.myDisposeBag)
+        disposeList.append(submitDisp)
+        
+        let smsDisp = NetworkManager.shared.SMSConfirmed
             .filter({$0})
+            .observeOn(MainScheduler.asyncInstance)
             .subscribe(onNext: { [unowned self] _ in
-                let toEnglishMobileNo =  (self.MobileTextField.text ?? "").toEnglishNumbers()
                 print("Pushing SMSVC")
                 NetworkManager.shared.SMSConfirmed.accept(false)
-                self.coordinator!.gotoSMSVerification(Set: toEnglishMobileNo)
-            }).disposed(by: self.myDisposeBag)
+                self.pushSMSConfirm()
+            })
+        smsDisp.disposed(by: self.myDisposeBag)
+        disposeList.append(smsDisp)
 
-        NetworkManager.shared.messageObs
+        let messageDisp = NetworkManager.shared.messageObs
             .filter({$0.count > 0 })
             .subscribe(onNext: { [unowned self] (aMessage) in
                 self.alert(Message: aMessage)
                 NetworkManager.shared.messageObs = BehaviorRelay<String>(value: "")
-            }).disposed(by: self.myDisposeBag)
+            })
+        messageDisp.disposed(by: self.myDisposeBag)
+        disposeList.append(messageDisp)
     }
     
-
+    func pushSMSConfirm(){
+        disposeList.forEach({$0.dispose()})
+        let toEnglishMobileNo =  (self.MobileTextField.text ?? "").toEnglishNumbers()
+        self.coordinator!.gotoSMSVerification(Set: toEnglishMobileNo)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         self.submitButton.isEnabled = false
         doSubscribtions()
-    
     }
 
     override func didReceiveMemoryWarning() {

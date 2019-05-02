@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Shabnam-Bold-FD.ttf">
+            <string>Shabnam-Bold-FD</string>
+        </array>
+        <array key="Shabnam-FD.ttf">
+            <string>Shabnam-FD</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--AddPostViewController-->
+        <scene sceneID="VY1-4F-jbH">
+            <objects>
+                <viewController storyboardIdentifier="AddPostViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TaS-e7-jw3" userLabel="AddPostViewController" customClass="AddPostViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ypk-ah-k08">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="97y-d5-X4s" userLabel="HeaderView">
+                                <rect key="frame" x="0.0" y="20" width="375" height="46.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X5S-Lm-hjL" userLabel="HomeLogo">
+                                        <rect key="frame" x="271.5" y="10" width="93.5" height="27"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="X5S-Lm-hjL" secondAttribute="height" multiplier="86:25" id="z2n-93-j4B"/>
+                                        </constraints>
+                                        <state key="normal" image="logo_home"/>
+                                        <connections>
+                                            <action selector="homeTapped:" destination="TaS-e7-jw3" eventType="touchUpInside" id="RCc-X3-l9M"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="پست جدید" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wCm-fe-Wio" userLabel="NewShopsHeader">
+                                        <rect key="frame" x="113" y="0.0" width="150" height="46.5"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
+                                        <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yb5-6o-kqq" userLabel="BackButton">
+                                        <rect key="frame" x="8" y="-0.5" width="31.5" height="46.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="yb5-6o-kqq" secondAttribute="height" multiplier="1:1.5" id="lza-gC-8HS"/>
+                                        </constraints>
+                                        <state key="normal" image="icon_back_black"/>
+                                        <connections>
+                                            <action selector="backTapped:" destination="TaS-e7-jw3" eventType="touchUpInside" id="r52-ce-N2c"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="yb5-6o-kqq" firstAttribute="centerY" secondItem="97y-d5-X4s" secondAttribute="centerY" id="1jX-mH-led"/>
+                                    <constraint firstItem="yb5-6o-kqq" firstAttribute="height" secondItem="97y-d5-X4s" secondAttribute="height" id="JKl-G2-Kob"/>
+                                    <constraint firstItem="wCm-fe-Wio" firstAttribute="height" secondItem="97y-d5-X4s" secondAttribute="height" id="JsC-8T-nz1"/>
+                                    <constraint firstItem="wCm-fe-Wio" firstAttribute="width" secondItem="97y-d5-X4s" secondAttribute="width" multiplier="0.4" id="NZp-S5-SkM"/>
+                                    <constraint firstItem="X5S-Lm-hjL" firstAttribute="centerY" secondItem="97y-d5-X4s" secondAttribute="centerY" id="PZo-PF-QUb"/>
+                                    <constraint firstItem="X5S-Lm-hjL" firstAttribute="width" secondItem="97y-d5-X4s" secondAttribute="width" multiplier="0.25" id="auc-TF-7d3"/>
+                                    <constraint firstItem="yb5-6o-kqq" firstAttribute="leading" secondItem="97y-d5-X4s" secondAttribute="leading" constant="8" id="h8f-ln-drX"/>
+                                    <constraint firstAttribute="trailing" secondItem="X5S-Lm-hjL" secondAttribute="trailing" constant="10" id="hbY-6H-R9g"/>
+                                    <constraint firstItem="wCm-fe-Wio" firstAttribute="centerY" secondItem="97y-d5-X4s" secondAttribute="centerY" id="tlj-6n-HRm"/>
+                                    <constraint firstItem="wCm-fe-Wio" firstAttribute="centerX" secondItem="97y-d5-X4s" secondAttribute="centerX" id="zJc-Xw-4pj"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P0r-D0-eis" userLabel="MainView">
+                                <rect key="frame" x="0.0" y="66.5" width="375" height="600.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YUv-LG-YxW" userLabel="PostImageButton" customClass="RoundedButtonWithShadow" customModule="Sepanta" customModuleProvider="target">
+                                        <rect key="frame" x="50" y="10" width="275" height="275"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="YUv-LG-YxW" secondAttribute="height" multiplier="1:1" id="9Xd-2m-otd"/>
+                                        </constraints>
+                                        <state key="normal" image="uploadPostImagePlacebo"/>
+                                        <connections>
+                                            <action selector="postImageTapped:" destination="TaS-e7-jw3" eventType="touchUpInside" id="Y64-9y-Y2K"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="   عنوان پست" textAlignment="right" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="auj-4a-aqi" userLabel="Title" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
+                                        <rect key="frame" x="50" y="305" width="275" height="42"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="   توضیحات پست" textAlignment="right" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="z3R-9V-CBy" userLabel="Body" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
+                                        <rect key="frame" x="50" y="367" width="275" height="42"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7zO-pl-tis" userLabel="SendButton" customClass="SubmitButton" customModule="Sepanta" customModuleProvider="target">
+                                        <rect key="frame" x="93" y="429" width="188" height="54"/>
+                                        <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="ارسال" image="icon_tik_dark">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="submitTapped:" destination="TaS-e7-jw3" eventType="touchUpInside" id="RWb-7d-KQf"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="z3R-9V-CBy" firstAttribute="width" secondItem="auj-4a-aqi" secondAttribute="width" id="2At-Rn-IC3"/>
+                                    <constraint firstItem="7zO-pl-tis" firstAttribute="centerX" secondItem="z3R-9V-CBy" secondAttribute="centerX" id="43Z-3l-57C"/>
+                                    <constraint firstItem="auj-4a-aqi" firstAttribute="centerX" secondItem="P0r-D0-eis" secondAttribute="centerX" id="C3f-j0-ega"/>
+                                    <constraint firstItem="auj-4a-aqi" firstAttribute="width" secondItem="YUv-LG-YxW" secondAttribute="width" id="Ctf-4d-p4c"/>
+                                    <constraint firstItem="YUv-LG-YxW" firstAttribute="top" secondItem="P0r-D0-eis" secondAttribute="top" constant="10" id="DQ2-vs-Or3"/>
+                                    <constraint firstItem="z3R-9V-CBy" firstAttribute="centerX" secondItem="auj-4a-aqi" secondAttribute="centerX" id="DhG-Sx-3b6"/>
+                                    <constraint firstItem="YUv-LG-YxW" firstAttribute="centerX" secondItem="P0r-D0-eis" secondAttribute="centerX" id="Hsd-c1-8Yz"/>
+                                    <constraint firstItem="7zO-pl-tis" firstAttribute="top" secondItem="z3R-9V-CBy" secondAttribute="bottom" constant="20" id="Je0-Rm-If1"/>
+                                    <constraint firstItem="auj-4a-aqi" firstAttribute="height" secondItem="P0r-D0-eis" secondAttribute="height" multiplier="0.07" id="P4r-OS-IXC"/>
+                                    <constraint firstItem="YUv-LG-YxW" firstAttribute="leading" secondItem="P0r-D0-eis" secondAttribute="leading" constant="50" id="TQA-FT-ewe"/>
+                                    <constraint firstItem="z3R-9V-CBy" firstAttribute="height" secondItem="auj-4a-aqi" secondAttribute="height" id="UjY-eg-xea"/>
+                                    <constraint firstAttribute="trailing" secondItem="YUv-LG-YxW" secondAttribute="trailing" constant="50" id="XqF-S2-ybV"/>
+                                    <constraint firstItem="7zO-pl-tis" firstAttribute="width" secondItem="P0r-D0-eis" secondAttribute="width" multiplier="0.5" id="q1o-DS-3h5"/>
+                                    <constraint firstItem="auj-4a-aqi" firstAttribute="top" secondItem="YUv-LG-YxW" secondAttribute="bottom" constant="20" id="quU-Z1-PLQ"/>
+                                    <constraint firstItem="z3R-9V-CBy" firstAttribute="top" secondItem="auj-4a-aqi" secondAttribute="bottom" constant="20" id="rIE-Qm-kOy"/>
+                                    <constraint firstItem="7zO-pl-tis" firstAttribute="height" secondItem="P0r-D0-eis" secondAttribute="height" multiplier="0.09" id="uZI-Lq-FH4"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="97y-d5-X4s" firstAttribute="trailing" secondItem="LWu-64-7Aw" secondAttribute="trailing" id="4XS-Uq-arY"/>
+                            <constraint firstItem="97y-d5-X4s" firstAttribute="leading" secondItem="LWu-64-7Aw" secondAttribute="leading" id="CqU-bu-DBx"/>
+                            <constraint firstItem="P0r-D0-eis" firstAttribute="top" secondItem="97y-d5-X4s" secondAttribute="bottom" id="EER-Vu-cRW"/>
+                            <constraint firstItem="LWu-64-7Aw" firstAttribute="trailing" secondItem="P0r-D0-eis" secondAttribute="trailing" id="Kfe-jL-T2R"/>
+                            <constraint firstItem="97y-d5-X4s" firstAttribute="height" secondItem="Ypk-ah-k08" secondAttribute="height" multiplier="0.07" id="VY6-5e-xRr"/>
+                            <constraint firstItem="97y-d5-X4s" firstAttribute="top" secondItem="LWu-64-7Aw" secondAttribute="top" id="gi3-eR-nqn"/>
+                            <constraint firstItem="P0r-D0-eis" firstAttribute="leading" secondItem="LWu-64-7Aw" secondAttribute="leading" id="p85-1O-toj"/>
+                            <constraint firstItem="LWu-64-7Aw" firstAttribute="bottom" secondItem="P0r-D0-eis" secondAttribute="bottom" id="rdn-5o-Bdd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LWu-64-7Aw"/>
+                    </view>
+                    <connections>
+                        <outlet property="bodyTextField" destination="z3R-9V-CBy" id="fYn-gX-le2"/>
+                        <outlet property="mainView" destination="P0r-D0-eis" id="cJc-vg-8tE"/>
+                        <outlet property="postImageButton" destination="YUv-LG-YxW" id="98N-po-uGi"/>
+                        <outlet property="submitButton" destination="7zO-pl-tis" id="n27-3I-HBH"/>
+                        <outlet property="titleTextField" destination="auj-4a-aqi" id="PJN-V2-QdK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SoJ-2a-IY4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="119" y="-186"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon_back_black" width="10" height="16"/>
+        <image name="icon_tik_dark" width="20" height="14"/>
+        <image name="logo_home" width="86" height="25"/>
+        <image name="uploadPostImagePlacebo" width="600" height="600"/>
+    </resources>
+</document>

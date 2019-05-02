@@ -110,7 +110,8 @@ class SepantaGroupButtons {
         let backgroundImageUp = UIImage(named: "btn_up")
         
         let size = CGSize(width: buttonsDim*1.3, height: buttonsDim*1.3)
-        UIGraphicsBeginImageContext(size)
+        //UIGraphicsBeginImageContext(size)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
         var textBox = CGRect()
         let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         //print("upside : ",upside)
