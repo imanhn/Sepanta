@@ -198,10 +198,11 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
 
-    func PushAPost(PostID aPostID : Int){
+    func PushAPost(PostID aPostID : Int,OwnerUserID auserid : Int){
         let vc = PostViewController.instantiate()
         vc.coordinator = self
         vc.postID = aPostID
+        vc.postOwnerUserID = auserid
         navigationController.delegate = self
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)

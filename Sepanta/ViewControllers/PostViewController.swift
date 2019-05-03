@@ -18,6 +18,7 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
     var myDisposeBag = DisposeBag()
     var disposeList = [Disposable]()
     var postID : Int?
+    var postOwnerUserID : Int?
     
     @IBOutlet weak var editPostButton: UIButton!
     @IBOutlet weak var deletePostButton: UIButton!
@@ -76,7 +77,14 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
     }
     
     func editAuthorized()-> Bool{
-        print("***Check Authorization : ","\(NetworkManager.shared.profileObs.value.id ?? 0)" ,"  ",LoginKey.shared.userID)
+        if "\(postOwnerUserID ?? 0)" == LoginKey.shared.userID
+        {
+            print("PostOwner is Logged!")
+            return true
+        }else{
+            print("postownerUserID : \(postOwnerUserID ?? 0)","  Login userID",LoginKey.shared.userID)
+        }
+        print("***Check Post Authorization : ","\(NetworkManager.shared.profileObs.value.id ?? 0)" ,"  ",LoginKey.shared.userID)
         if "\(NetworkManager.shared.profileObs.value.id ?? 0)" == LoginKey.shared.userID {
             return true
         }else{

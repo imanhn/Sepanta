@@ -46,10 +46,10 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         }
         //isShop = true
         super.init()
-        showShopPosts()
         buildPostToolbar()
         bindUIwithDataSource()
-        
+        showShopPosts()
+
     }
     
     @objc func shareTapped(sender : Any){
@@ -286,7 +286,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                     let imageURL = URL(string: NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_profile_image + aProfile.image!)
                     //print("Shop Image : ",imageURL ?? "Nil")
                     if imageURL != nil {
-                        self?.delegate.shopImage.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!,ContentMode: UIViewContentMode.scaleAspectFit)
+                        self?.delegate.shopImage.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!,ContentMode: UIViewContentMode.scaleToFill)
                         self?.delegate.shopLogo.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!)
                         self?.delegate.shopLogo.layer.shadowColor = UIColor.black.cgColor
                         self?.delegate.shopLogo.layer.shadowOffset = CGSize(width: 3, height: 3)
@@ -309,14 +309,13 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 let dim = ((self?.collectionView.bounds.width ?? 50) * 0.8) / (self?.numberOfPostInARow ?? 3)
                 //print("ROW:\(row) UICollectionView binding : ",imageURL ?? "NIL"," Cell : ",aCell,"  model : ",model)
                 //print("ShopUI Binding Posts : ",model)
-                self?.collectionView.addSubview(aCell)
+                //self?.collectionView.addSubview(aCell)
+                aCell.aButton.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
                 aCell.addSubview(aCell.aButton)
                 if imageURL == nil {
                     //print("     Post URL is not valid : ",model.image)
-                    aCell.aButton.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
                     aCell.aButton.setImage(UIImage(named: "logo_shape"), for: .normal)
                 }else{
-                    aCell.aButton.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
                     //aCell.aButton.af_setImage(for: .normal, url: imageURL!) //Also Works!
                     aCell.aButton.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1, ImageURL: imageURL!, ImageName: model.image!)
                 }
@@ -345,13 +344,13 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
 
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 10
-        
-        collectionView = UICollectionView(frame: CGRect(x: marginX, y: marginY, width: self.delegate.contentView.frame.width-(2*marginX), height: self.delegate.contentView.frame.height-2*marginY), collectionViewLayout: flowLayout)
+        let collectionViewRect = CGRect(x: marginX, y: marginY, width: self.delegate.contentView.frame.width-(2*marginX), height: self.delegate.contentView.frame.height-2*marginY)
+        collectionView = UICollectionView(frame: collectionViewRect, collectionViewLayout: flowLayout)
         collectionView.register(ButtonCell.self, forCellWithReuseIdentifier: "buttoncell")
         collectionView.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0)
         _ = collectionView.rx.setDelegate(self) //Delegate method to call
-        self.delegate.contentView.addSubview(collectionView)
         bindCollectionView()
+        self.delegate.contentView.addSubview(collectionView)
     }
     
     func showContacts() {
@@ -400,8 +399,20 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     }
     
     @objc func showPostDetail(_ sender : Any){
+        let aButton = (sender as? UIButton)
+        guard aButton?.tag != nil else {return}
+        var selectedPost : Post!
+        for apost in self.posts.value {
+            if apost.id == aButton?.tag {
+                selectedPost = apost
+                break
+            }
+        }
+        self.delegate.coordinator!.PushAPost(PostID: selectedPost.id ?? (aButton?.tag)!, OwnerUserID: self.delegate.shop.user_id!)
+        /*
         let postID = (sender as! UIButton).tag
         print("ShopUI : Pushing Post with ID : ",postID)
         self.delegate.coordinator?.PushAPost(PostID: postID)
+         */
     }
 }

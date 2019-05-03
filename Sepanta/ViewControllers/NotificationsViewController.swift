@@ -36,7 +36,7 @@ class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITable
     }
 
     @IBAction func shopNotifTapped(_ sender: Any) {
-        disposeList.forEach({$0.dispose()})        
+        disposeList.forEach({$0.dispose()})
         bindNotificationForUser()
         self.tabbedView.tabJust = TabViewJustification.Right
         self.tabbedView.setNeedsDisplay()
@@ -76,13 +76,14 @@ class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITable
             disposeList.append(shopNotifDisposable)
             
             let shopNotifSelectedDisp = NotifTableView!.rx.modelSelected(NotificationForShop.self)
-                .subscribe(onNext: { [unowned self] selectedShop in
-                    //print("Pushing Post with : ", selectedShop.post_id )
+                .subscribe(onNext: { [unowned self] selectedNotiForShop in
+                    print("Notification : Pushing Post with : ", selectedNotiForShop )
                     //self.coordinator!.pushShop(Shop: aShop)
-                    if selectedShop.post_id == nil {
+                    
+                    if selectedNotiForShop.post_id == nil {
                         self.alert(Message: "اطلاعات این پست هنوز کامل نیست")
                     }else{
-                        self.coordinator!.PushAPost(PostID : selectedShop.post_id!)
+                        self.coordinator!.PushAPost(PostID : selectedNotiForShop.post_id!, OwnerUserID: selectedNotiForShop.user_id!)
                     }
                 })
             shopNotifSelectedDisp.disposed(by: myDisposeBag)
@@ -106,13 +107,13 @@ class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITable
             disposeList.append(userNotifDisposable)
             
             let userSelectedDisposable = NotifTableView!.rx.modelSelected(NotificationForUser.self)
-                .subscribe(onNext: { [unowned self] selectedShop in
-                    //print("Pushing Post with : ", selectedShop.post_id )
+                .subscribe(onNext: { [unowned self] selectedNotiForUser in
+                    //print("Pushing Post with : ", selectedNotiForUser.post_id )
                     //self.coordinator!.pushShop(Shop: aShop)
-                    if selectedShop.post_id == nil {
+                    if selectedNotiForUser.post_id == nil {
                         self.alert(Message: "اطلاعات این پست هنوز کامل نیست")
                     }else{
-                        self.coordinator!.PushAPost(PostID : selectedShop.post_id!)
+                        self.coordinator!.PushAPost(PostID : selectedNotiForUser.post_id!, OwnerUserID: selectedNotiForUser.user_id!)
                     }
                 })
             userSelectedDisposable.disposed(by: myDisposeBag)

@@ -120,6 +120,7 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
     
     func bindCollectionView(){
         if LoginKey.shared.role == "Shop" {
+            // Code should get here! because show Profile no longer shows ShopProfiles! 
             self.posts.bind(to: collectionView.rx.items(cellIdentifier: "shopcell")) { [weak self] row, model, cell in
                 if let aCell = cell as? ButtonCell {
                     //if aCell.aButton == nil {aCell.aButton = UIButton(type: .custom)}
@@ -202,11 +203,21 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
     }
     @objc func showPostDetail(_ sender : Any){
         let aButton = (sender as? UIButton)
+        guard aButton?.tag != nil else {return}
+        var selectedPost : Post!
+        for apost in self.posts.value {
+            if apost.id == aButton?.tag {
+                selectedPost = apost
+                break
+            }
+        }
+        self.delegate.coordinator!.PushAPost(PostID: selectedPost.id ?? (aButton?.tag)!, OwnerUserID: selectedPost.shopId!)
+        /*
         if let postID = aButton?.tag {
-            self.delegate.coordinator!.PushAPost(PostID: postID)
+         self.delegate.coordinator!.PushAPost(PostID: postID, UserID: 1) // IMAN
         }else{
             self.delegate.alert(Message: "اطلاعات این پست کامل نیست")
-        }
+        }*/
     }
     
     func showContacts() {

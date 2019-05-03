@@ -160,7 +160,7 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
         getShopFromServer()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         changeToShopOwnerIfNeeded()
-        self.shopUI = ShopUI(self)
+        self.shopUI = ShopUI(self)        
     }
     
 
