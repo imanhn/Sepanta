@@ -53,14 +53,16 @@ class Catagory : NSObject {
             return
         }
         print("Lets Download Catagory Image from : ",imageUrl)
-        Alamofire.request(imageUrl).responseImage { [unowned self] response in
+        Alamofire.request(imageUrl).responseImage { [weak self] response in
             if let image = response.result.value {
                 //print("image downloaded: \(self.image)")
-                self.anUIImage.accept(image)
+                self?.anUIImage.accept(image)
                 let imageData = UIImageJPEGRepresentation(image,0.5) as NSData?
                 if imageData != nil {
                     //print("Saving catagory image for future use : ",self.image)
-                    CacheManager.shared.saveFile(Data:imageData!, Filename:self.image)
+                    if let afilename = self?.image{
+                        CacheManager.shared.saveFile(Data:imageData!, Filename:afilename)
+                    }
                 }
             }
         }

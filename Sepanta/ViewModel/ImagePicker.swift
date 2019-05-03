@@ -13,12 +13,15 @@ import UIKit
 import Alamofire
 import RxAlamofire
 import RxSwift
-
+/*
 protocol UIViewControllerWithImagePicker : class {
     var imagePicker : UIImagePickerController {get set}
     var imagePickerDelegate : ImagePicker! {get set}
+}*/
+protocol UIViewControllerWithImagePicker : class {
+    var imagePicker : UIImagePickerController! {get set}
+    var imagePickerDelegate : ImagePicker! {get set}
 }
-
 class ImagePicker : NSObject,
     RSKImageCropViewControllerDelegate,
     RSKImageCropViewControllerDataSource,

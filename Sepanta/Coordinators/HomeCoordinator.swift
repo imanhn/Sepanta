@@ -160,8 +160,8 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         SlidesAndPaths.shared.count_new_shop.accept(0)
         let vc = ShopsListViewController.instantiate()
         vc.coordinator = self
-        vc.fetchMechanism = {
-            let shopsDataSource = ShopsListDataSource(vc)
+        vc.fetchMechanism = { aShopListViewController in
+            let shopsDataSource = ShopsListDataSource(aShopListViewController)
             shopsDataSource.getNewShopsFromServer()
             return shopsDataSource
         }
@@ -171,12 +171,11 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
-    func pushMyFollowingShops(){
-        SlidesAndPaths.shared.count_new_shop.accept(0)
+    func pushMyFollowingShops(){       
         let vc = ShopsListViewController.instantiate()
         vc.coordinator = self
-        vc.fetchMechanism = {
-            let shopsDataSource = ShopsListDataSource(vc)
+        vc.fetchMechanism = { aShopListViewController in
+            let shopsDataSource = ShopsListDataSource(aShopListViewController)
             shopsDataSource.getMyFollowingFromServer()
             return shopsDataSource
         }
@@ -185,7 +184,20 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
-    
+    func pushFavoriteList(){
+        let vc = ShopsListViewController.instantiate()
+        vc.coordinator = self
+        vc.fetchMechanism = { aShopListViewController in
+            let shopsDataSource = ShopsListDataSource(aShopListViewController)
+            shopsDataSource.getFavShopsFromServer()
+            return shopsDataSource
+        }
+        vc.headerLabelToSet = "علاقه مندی ها"
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+
     func PushAPost(PostID aPostID : Int){
         let vc = PostViewController.instantiate()
         vc.coordinator = self
@@ -207,15 +219,6 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
-    func pushFavoriteList(){
-        let storyboard = UIStoryboard(name: "Favorite", bundle: Bundle.main)
-        let vc = storyboard.instantiateViewController(withIdentifier: "FavoriteViewController") as! FavoriteViewController
-        vc.coordinator = self
-        
-        navigationController.delegate = self
-        navigationController.pushViewController(vc, animated: true)
-        navigationController.setNavigationBarHidden(true, animated: false)
-    }
     
     func pushNotifications(){
         //Reset Notification Badge
@@ -364,6 +367,20 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         let storyboard = UIStoryboard(name: "AddPost", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "AddPostViewController") as! AddPostViewController
         vc.coordinator = self
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+    
+    func pushEditPost(shop_id : Int, post_id : Int, post_title : String,post_body: String, post_image : UIImage){
+        let storyboard = UIStoryboard(name: "AddPost", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "AddPostViewController") as! AddPostViewController
+        vc.coordinator = self
+        vc.shop_id = shop_id
+        vc.post_id = post_id
+        vc.postTitle = post_title
+        vc.postBody = post_body
+        vc.postUIImage = post_image
         navigationController.delegate = self
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)

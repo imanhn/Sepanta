@@ -17,7 +17,7 @@ class ShopsListDataSource {
     var delegate : UIViewController
     let myDisposeBag = DisposeBag()
     var fetchedShops = [Shop]()
-    var shopProfiles = BehaviorRelay<[Profile]>(value: [])
+    
 
     func getShopListForACatagory(Catagory catagoryID:String,State state : String?,City city:String?){
         var aParameter : Dictionary<String, String> = [:]
@@ -40,6 +40,10 @@ class ShopsListDataSource {
 
         print("Running network request category-shops-list... \(aParameter)  state : \(state!)  City : \(city!)")
         NetworkManager.shared.run(API: "category-shops-list", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
+    }
+    
+    func getFavShopsFromServer(){
+        NetworkManager.shared.run(API: "favorite", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
     }
     
     func getNewShopsFromServer(){

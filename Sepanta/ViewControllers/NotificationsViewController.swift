@@ -26,16 +26,17 @@ class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITable
     weak var coordinator : HomeCoordinator?
     
     @IBAction func backTapped(_ sender: Any) {
+        disposeList.forEach({$0.dispose()})
         self.coordinator!.popOneLevel()
     }
     
     @IBAction func homeTapped(_ sender: Any) {
+        disposeList.forEach({$0.dispose()})
         self.coordinator!.popHome()
     }
 
     @IBAction func shopNotifTapped(_ sender: Any) {
-        disposeList.forEach({$0.dispose()})
-        
+        disposeList.forEach({$0.dispose()})        
         bindNotificationForUser()
         self.tabbedView.tabJust = TabViewJustification.Right
         self.tabbedView.setNeedsDisplay()

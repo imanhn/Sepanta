@@ -22,6 +22,7 @@ class ButtonCell : UICollectionViewCell {
 class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     var delegate : ShopViewController
     var disposeList = [Disposable]()
+    var updateFromProfileDisposable : Disposable!
     var views = Dictionary<String,UIView>()
     var buttons = Dictionary<String,UIButton>()
     var postsView = UIView()
@@ -82,6 +83,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     }
     
     @objc func sepantaieTapped(sender : Any){
+        updateFromProfileDisposable?.dispose()
         self.delegate.coordinator!.pushMyFollowingShops()
     }
     
@@ -231,51 +233,51 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         shopFavDisp.disposed(by: myDisposeBag)
         disposeList.append(shopFavDisp)
         
-        let profileDisp = NetworkManager.shared.profileObs
+        updateFromProfileDisposable = NetworkManager.shared.profileObs
             .filter({$0.id != nil})
-            .subscribe(onNext: { [unowned self] aProfile in
+            .subscribe(onNext: { [weak self] aProfile in
                 //print("SUBSCRIPTION UPDATE",aProfile)
                 //print("Before Shop : ",self.delegate.shop)
-                self.delegate.shop.updateFromProfile(Profile: aProfile)
+                self?.delegate.shop.updateFromProfile(Profile: aProfile)
                 //print("After Shop : ",self.delegate.shop)
-                self.delegate.shopTitle.text = aProfile.shop_name
-                self.delegate.scoreLabel.text = "امتیاز " + "\(aProfile.follower_count ?? 0)"
-                self.delegate.followersNumLabel.text = "\(aProfile.follower_count ?? 0)"
-                self.delegate.offLabel.text = "\(aProfile.shop_off ?? 0)%"
-                self.delegate.rateLabel.text = "(\(aProfile.rate ?? "0"))"
+                self?.delegate.shopTitle.text = aProfile.shop_name
+                self?.delegate.scoreLabel.text = "امتیاز " + "\(aProfile.follower_count ?? 0)"
+                self?.delegate.followersNumLabel.text = "\(aProfile.follower_count ?? 0)"
+                self?.delegate.offLabel.text = "\(aProfile.shop_off ?? 0)%"
+                self?.delegate.rateLabel.text = "(\(aProfile.rate ?? "0"))"
                 let rate : Float = Float(aProfile.rate ?? "0.0") ?? 0
-                if rate > 0.5 {self.delegate.star1.image = UIImage(named: "icon_star_on")}
-                if rate > 1.5 {self.delegate.star2.image = UIImage(named: "icon_star_on")}
-                if rate > 2.5 {self.delegate.star3.image = UIImage(named: "icon_star_on")}
-                if rate > 3.5 {self.delegate.star4.image = UIImage(named: "icon_star_on")}
-                if rate > 4.5 {self.delegate.star5.image = UIImage(named: "icon_star_on")}
+                if rate > 0.5 {self?.delegate.star1.image = UIImage(named: "icon_star_on")}
+                if rate > 1.5 {self?.delegate.star2.image = UIImage(named: "icon_star_on")}
+                if rate > 2.5 {self?.delegate.star3.image = UIImage(named: "icon_star_on")}
+                if rate > 3.5 {self?.delegate.star4.image = UIImage(named: "icon_star_on")}
+                if rate > 4.5 {self?.delegate.star5.image = UIImage(named: "icon_star_on")}
                 //print("ShopUI : setting shopui.posts to  :: ",aProfile.content)
                 if let postContents = aProfile.content as? [Post] {
-                    self.posts.accept(postContents)
+                    self?.posts.accept(postContents)
                 }else{
                     print("aProfile.content has shops but expected to have posts")
-                    self.delegate.alert(Message: "خطای داخلی اتفاق افتاده است")
+                    self?.delegate.alert(Message: "خطای داخلی اتفاق افتاده است")
                     return
                 }
                 //print("Profile : ",aProfile)
-                if self.buttons["followButton"] != nil {
+                if self?.buttons["followButton"] != nil {
                     if aProfile.is_follow != nil  {
                         if aProfile.is_follow! {
-                            self.buttons["followButton"]!.setTitle("عضو شده اید", for: .normal)
-                            self.buttons["followButton"]!.setEnable()
+                            self?.buttons["followButton"]!.setTitle("عضو شده اید", for: .normal)
+                            self?.buttons["followButton"]!.setEnable()
                         }else{
-                            self.buttons["followButton"]!.setTitle("عضویت", for: .normal)
-                            self.buttons["followButton"]!.setEnable()
+                            self?.buttons["followButton"]!.setTitle("عضویت", for: .normal)
+                            self?.buttons["followButton"]!.setEnable()
                         }
                     }
                 }
                 
-                if (self.delegate.favButton != nil){ //Otherwise the fav button is removed!
+                if (self?.delegate.favButton != nil){ //Otherwise the fav button is removed!
                     if aProfile.is_favorite != nil{
                         if aProfile.is_favorite! {
-                            self.delegate.favButton.setImage(UIImage(named: "icon_star_fav_dark"), for: .normal)
+                            self?.delegate.favButton.setImage(UIImage(named: "icon_star_fav_dark"), for: .normal)
                         }else{
-                            self.delegate.favButton.setImage(UIImage(named: "icon_star_fav_gray"), for: .normal)
+                            self?.delegate.favButton.setImage(UIImage(named: "icon_star_fav_gray"), for: .normal)
                         }
                     }
                 }
@@ -284,37 +286,36 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                     let imageURL = URL(string: NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_profile_image + aProfile.image!)
                     //print("Shop Image : ",imageURL ?? "Nil")
                     if imageURL != nil {
-                        self.delegate.shopImage.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 0, ImageURL: imageURL!, ImageName: aProfile.image!,ContentMode: UIViewContentMode.scaleAspectFit)
-                        self.delegate.shopLogo.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!)
-                        self.delegate.shopLogo.layer.shadowColor = UIColor.black.cgColor
-                        self.delegate.shopLogo.layer.shadowOffset = CGSize(width: 3, height: 3)
-                        self.delegate.shopLogo.layer.shadowRadius = 3
-                        self.delegate.shopLogo.layer.shadowOpacity = 0.3
+                        self?.delegate.shopImage.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!,ContentMode: UIViewContentMode.scaleAspectFit)
+                        self?.delegate.shopLogo.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!)
+                        self?.delegate.shopLogo.layer.shadowColor = UIColor.black.cgColor
+                        self?.delegate.shopLogo.layer.shadowOffset = CGSize(width: 3, height: 3)
+                        self?.delegate.shopLogo.layer.shadowRadius = 3
+                        self?.delegate.shopLogo.layer.shadowOpacity = 0.3
                     }
                 }
                 //if aProfil
             })
-        profileDisp.disposed(by: myDisposeBag)
-        disposeList.append(profileDisp)
+        updateFromProfileDisposable.disposed(by: myDisposeBag)
+        disposeList.append(updateFromProfileDisposable)
     }
     
     func bindCollectionView(){
-        let postsCollectionViewDisp = self.posts.bind(to: collectionView.rx.items(cellIdentifier: "buttoncell")) { [unowned self] row, model, cell in
+        let postsCollectionViewDisp = self.posts.bind(to: collectionView.rx.items(cellIdentifier: "buttoncell")) { [weak self] row, model, cell in
             if let aCell = cell as? ButtonCell {
                 //if aCell.aButton == nil {aCell.aButton = UIButton(type: .custom)}
                 let strURL = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + model.image!
                 let imageURL = URL(string: strURL)
+                let dim = ((self?.collectionView.bounds.width ?? 50) * 0.8) / (self?.numberOfPostInARow ?? 3)
                 //print("ROW:\(row) UICollectionView binding : ",imageURL ?? "NIL"," Cell : ",aCell,"  model : ",model)
                 //print("ShopUI Binding Posts : ",model)
-                self.collectionView.addSubview(aCell)
+                self?.collectionView.addSubview(aCell)
                 aCell.addSubview(aCell.aButton)
                 if imageURL == nil {
                     //print("     Post URL is not valid : ",model.image)
-                    let dim = (self.collectionView.bounds.width * 0.8) / self.numberOfPostInARow
                     aCell.aButton.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
                     aCell.aButton.setImage(UIImage(named: "logo_shape"), for: .normal)
                 }else{
-                    let dim = (self.collectionView.bounds.width * 0.8) / self.numberOfPostInARow
                     aCell.aButton.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
                     //aCell.aButton.af_setImage(for: .normal, url: imageURL!) //Also Works!
                     aCell.aButton.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1, ImageURL: imageURL!, ImageName: model.image!)
@@ -324,7 +325,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 aCell.aButton.layer.shadowRadius = 2
                 aCell.aButton.layer.shadowOpacity = 0.2
                 aCell.aButton.tag = model.id ?? 0
-                aCell.aButton.addTarget(self, action: #selector(self.showPostDetail), for: .touchUpInside)
+                aCell.aButton.addTarget(self, action: #selector(self?.showPostDetail), for: .touchUpInside)
             }else{
                 print("\(cell) can not be casted to ButtonCell")
             }

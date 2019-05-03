@@ -20,7 +20,7 @@ class EditProfileViewController : UIViewControllerWithKeyboardNotificationWithEr
     weak var coordinator : HomeCoordinator?
     var editProfileUI : EditProfileUI!
     var myDisposeBag = DisposeBag()
-    var imagePicker = UIImagePickerController()
+    var imagePicker : UIImagePickerController! = UIImagePickerController()
     var imagePickerDelegate :  ImagePicker!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var profilePicture: UIImageView!

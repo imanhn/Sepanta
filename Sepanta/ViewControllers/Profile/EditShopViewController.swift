@@ -12,15 +12,16 @@ import RxSwift
 import RxCocoa
 import Alamofire
 import AlamofireImage
-
+import Photos
 
 class EditShopViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar,Storyboarded,UIViewControllerWithImagePicker{
-    var imagePicker = UIImagePickerController()
+    var imagePicker : UIImagePickerController! = UIImagePickerController()
     
     var imagePickerDelegate: ImagePicker!
     
     @IBOutlet weak var shopImage: UIImageView!
     @IBOutlet weak var shopLogo: UIImageView!
+    
     
     @IBOutlet weak var mainScrollView: UIScrollView!
     @IBOutlet weak var shopLogoTrailing: NSLayoutConstraint!
@@ -41,6 +42,52 @@ class EditShopViewController :  UIViewControllerWithKeyboardNotificationWithErro
         editshopUI = nil
         //NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: Profile())
         self.coordinator!.popOneLevel()
+    }
+    
+    @IBAction func mainImageSelectTapped(_ sender: Any) {
+        if PHPhotoLibrary.authorizationStatus() != PHAuthorizationStatus.authorized {
+            PHPhotoLibrary.requestAuthorization({ (status: PHAuthorizationStatus) in
+                switch status {
+                case PHAuthorizationStatus.denied :
+                    //self.alert(Message: "دسترسی به تصاویر داده نشد")
+                    break
+                case PHAuthorizationStatus.restricted :
+                    //self.alert(Message: "دسترسی به تصاویر لازم است")
+                    break
+                case .notDetermined:
+                    //self.alert(Message: "دسترسی به تصاویر لازم است")
+                    break
+                case .authorized:
+                    self.imagePickerDelegate = MainImageForShopImagePicker(self)
+                    break
+                }
+            })
+        }else{
+            imagePickerDelegate = MainImageForShopImagePicker(self)
+        }
+    }
+    
+    @IBAction func logoImageSelectTapped(_ sender: Any) {
+        if PHPhotoLibrary.authorizationStatus() != PHAuthorizationStatus.authorized {
+            PHPhotoLibrary.requestAuthorization({ (status: PHAuthorizationStatus) in
+                switch status {
+                case PHAuthorizationStatus.denied :
+                    //self.alert(Message: "دسترسی به تصاویر داده نشد")
+                    break
+                case PHAuthorizationStatus.restricted :
+                    //self.alert(Message: "دسترسی به تصاویر لازم است")
+                    break
+                case .notDetermined:
+                    //self.alert(Message: "دسترسی به تصاویر لازم است")
+                    break
+                case .authorized:
+                    self.imagePickerDelegate = LogoImageForShopImagePicker(self)
+                    break
+                }
+            })
+        }else{
+            imagePickerDelegate = LogoImageForShopImagePicker(self)
+        }
     }
     
     @objc override func ReloadViewController(_ sender:Any) {

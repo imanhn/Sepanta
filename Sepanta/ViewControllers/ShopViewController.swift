@@ -95,15 +95,6 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
         NetworkManager.shared.run(API: "favorite", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil, WithRetry: false)
     }
     
-    @objc func showPostTapped(_ sender : Any) {
-        shopUI!.showShopPosts()
-    }
-    
-    @objc func contactTapped(_ sender : Any) {
-        //Refactor needed
-        //When I go to a post and come back ShopUI will be released and here is the place I get an exception!
-        shopUI!.showContacts()
-    }
     
     @objc override func ReloadViewController(_ sender:Any) {
         super.ReloadViewController(sender)

@@ -35,7 +35,17 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
     }
     
     @IBAction func editTapped(_ sender: Any) {
-        showQuestion(Message: "آيا می خواهید این پست را ویرایش کنید؟", OKLabel: "بلی", CancelLabel: "خیر", QuestionTag: 2)
+        if
+            let ashopID = NetworkManager.shared.postDetailObs.value.shopId,
+            let apost_id = NetworkManager.shared.postDetailObs.value.id,
+            let apostTitle = NetworkManager.shared.postDetailObs.value.title,
+            let apostBody = NetworkManager.shared.postDetailObs.value.content,
+            let postUIImage = postUI.postImage.image {
+            self.coordinator!.pushEditPost(shop_id: ashopID, post_id: apost_id, post_title: apostTitle, post_body: apostBody, post_image: postUIImage)
+        }else{
+            alert(Message: "اطلاعات پست برای ویرایش کامل نیست")
+        }
+        //showQuestion(Message: "آيا می خواهید این پست را ویرایش کنید؟", OKLabel: "بلی", CancelLabel: "خیر", QuestionTag: 2)
     }
     
     @IBAction func deleteTapped(_ sender: Any) {
@@ -114,10 +124,12 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
         super.ReloadViewController(sender)
         getPostData()
     }
-    /*
+    
     override func viewWillAppear(_ animated: Bool) {
+        //print("WILL APEAR : POST ID : ",postID)
         super.viewWillAppear(animated)
-    }*/
+        //getPostData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,8 +141,7 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NetworkManager.shared.postDetailObs.accept(Post())
-        self.postUI = nil
+        //NetworkManager.shared.postDetailObs.accept(Post())
     }
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)

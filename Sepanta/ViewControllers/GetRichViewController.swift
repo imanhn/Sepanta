@@ -22,6 +22,10 @@ class GetRichViewController : UIViewControllerWithKeyboardNotificationWithErrorB
         getRichUI!.showCardRequest(self)
     }
     @IBAction func homeTapped(_ sender: Any) {
+        if getRichUI != nil {
+            getRichUI!.disposeList.forEach({$0.dispose()})
+        }
+        getRichUI = nil
         self.coordinator!.popHome()
     }
     @objc func resellerRequestTapped(_ sender : Any) {

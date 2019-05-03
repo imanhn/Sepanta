@@ -158,13 +158,10 @@ class JSONParser {
                 } else if (apiName == "profile-info") && (aMethod == HTTPMethod.post) {
                     // Sets True for profile-info to be observable by PostUI
                     NetworkManager.shared.updateProfileInfoSuccessful.accept(true)
-                } else if ( (apiName == "new-shops") || (apiName == "my-following") || (apiName == "category-shops-list"))  {
+                } else if (apiName == "new-shops") || (apiName == "my-following") || (apiName == "category-shops-list") ||
+                        ((apiName == "favorite") && (aMethod == HTTPMethod.get))  {
                     print("Starting Shops List Parser for : \(apiName)")
                     let parsedShops = self?.processShopList(Result: aDic)
-                    NetworkManager.shared.shopObs.accept(parsedShops!)
-                } else if (apiName == "favorite") && (aMethod == HTTPMethod.get) {
-                    print("Starting List of Favorite Shop  Parser...")
-                    let parsedShops = self?.processFavShopList(Result: aDic)
                     NetworkManager.shared.shopObs.accept(parsedShops!)
                 } else if (apiName == "favorite") && (aMethod == HTTPMethod.post) {
                     print("Starting Toggle Favorite on a shop Parser...")
@@ -743,50 +740,6 @@ class JSONParser {
         }
     }
     
-    func processFavShopList(Result aResult : NSDictionary) -> [Shop] {
-        var shops = [Shop]()
-        if aResult["error"] != nil {
-            print("ERROR in Shop List Parsing : ",aResult["error"]!)
-        }
-        if aResult["message"] != nil {
-            print("Message Parsed : ",aResult["message"]!)
-        }
-        
-        //print("Shop Result keys : ",aResult.allKeys)
-        //print("Result : ",aResult)
-        if let favShops = aResult["favorite"] as? NSArray{
-                for shopDic in favShops
-                {
-                    if let shopElemAsNSDic = shopDic as? NSDictionary{
-                        if let shopElem = shopElemAsNSDic as? Dictionary<String, Any>{
-                            //print("shopElem : ",shopElem)
-                            if shopElem["user_id"] != nil && shopElem["shop_id"] != nil {
-                                let aNewShop = Shop(shop_id: shopElem["shop_id"] as? Int ?? 0,
-                                                    user_id: shopElem["user_id"] as? Int ?? 0,
-                                                    shop_name: shopElem["shop_name"] as? String ?? "",
-                                                    shop_off: shopElem["shop_off"] as? Int ?? 0,
-                                                    lat: (shopElem["lat"] as? String)?.toDouble(),
-                                                    long: (shopElem["lon"] as? String)?.toDouble(),
-                                                    image: shopElem["image"] as? String ?? "",
-                                                    rate: shopElem["rate"] as? String ?? "" ,
-                                                    follower_count: shopElem["follower_count"] as? Int ?? 0,
-                                                    created_at: shopElem["created_at"] as? String ?? "")
-                                shops.append(aNewShop)
-                            }
-                        }
-                    }else{
-                        print("shopElm not casted.")
-                    }
-                }
-            } else{
-                print("aresult[shops or categoryShops][data] is empty or can not be casted")
-            }
-        print("Shops Fetched : ",shops.count," record")
-        //print("Parsing State List Successful")
-        
-        return shops
-        
-    }
     func processShopList(Result aResult : NSDictionary) -> [Shop] {
         var shops = [Shop]()
         if aResult["error"] != nil {
@@ -798,7 +751,8 @@ class JSONParser {
         
         //print("Shop Result keys : ",aResult.allKeys)
         //print("Result : ",aResult)
-        if let aDic = aResult["shops"] as? NSDictionary ?? aResult["categoryShops"] as? NSDictionary{
+        
+        if let aDic = aResult["shops"] as? NSDictionary ?? aResult["categoryShops"] as? NSDictionary ?? aResult["favorite"] as? NSDictionary{
             if let dataOfShops = aDic["data"] as? NSArray {
                 for shopDic in dataOfShops
                 {
@@ -827,7 +781,7 @@ class JSONParser {
             } else{
                 print("aresult[shops or categoryShops][data] is empty or can not be casted")
             }
-        }else if let dataOfShops = aResult["shops"] as? NSArray ?? aResult["categoryShops"] as? NSArray{
+        }else if let dataOfShops = aResult["shops"] as? NSArray ?? aResult["categoryShops"] as? NSArray ?? aResult["favorite"] as? NSArray{
             for shopDic in dataOfShops
             {
                 if let shopElemAsNSDic = shopDic as? NSDictionary{

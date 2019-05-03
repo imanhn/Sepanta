@@ -89,44 +89,44 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
     
     func bindUIwithDataSource() {
        NetworkManager.shared.profileObs
-        .subscribe(onNext: { [unowned self] aProfile in
+        .subscribe(onNext: { [weak self] aProfile in
             if aProfile.image != nil && aProfile.image!.count > 0 {
                 let imageUrl = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_profile_image + aProfile.image!
                 print("Profile Picture : ",imageUrl)
                 let castedUrl = URL(string: imageUrl)
                 if castedUrl != nil {
-                    self.delegate.profilePicture.setImageFromCache(PlaceHolderName: "icon_profile_img", Scale: 1, ImageURL: castedUrl!, ImageName: aProfile.image!)
-                    self.delegate.profilePicture.layer.cornerRadius = self.delegate.profilePicture.frame.width/2
-                    self.delegate.profilePicture.layer.masksToBounds = true
-                    self.delegate.profilePicture.layer.borderColor = UIColor.white.cgColor
-                    self.delegate.profilePicture.layer.borderWidth = 4
+                    self?.delegate.profilePicture.setImageFromCache(PlaceHolderName: "icon_profile_img", Scale: 1, ImageURL: castedUrl!, ImageName: aProfile.image!)
+                    self?.delegate.profilePicture.layer.cornerRadius = (self?.delegate.profilePicture.frame.width ?? 50)/2
+                    self?.delegate.profilePicture.layer.masksToBounds = true
+                    self?.delegate.profilePicture.layer.borderColor = UIColor.white.cgColor
+                    self?.delegate.profilePicture.layer.borderWidth = 4
 
                 }else{
                     print("URL Can not be casted : ",imageUrl)
                 }
             }
-            self.delegate.nameLabel.text =  aProfile.fullName
-            self.delegate.descLabel.text = aProfile.fullName
-            //self.delegate.cupLabel
-            self.delegate.clubNumLabel.text = "\(aProfile.follow_count ?? 0)"
+            self?.delegate.nameLabel.text =  aProfile.fullName
+            self?.delegate.descLabel.text = aProfile.fullName
+            //self?.delegate.cupLabel
+            self?.delegate.clubNumLabel.text = "\(aProfile.follow_count ?? 0)"
             //print("aProfile.content : ",aProfile.content)
             if LoginKey.shared.role == "Shop" {
-                self.posts.accept(aProfile.content as! [Post])
+                self?.posts.accept(aProfile.content as! [Post])
             }else{
-                self.shops.accept(aProfile.content as! [Shop])
+                self?.shops.accept(aProfile.content as! [Shop])
             }
         }).disposed(by: myDisposeBag)
     }
     
     func bindCollectionView(){
         if LoginKey.shared.role == "Shop" {
-            self.posts.bind(to: collectionView.rx.items(cellIdentifier: "shopcell")) { [unowned self] row, model, cell in
+            self.posts.bind(to: collectionView.rx.items(cellIdentifier: "shopcell")) { [weak self] row, model, cell in
                 if let aCell = cell as? ButtonCell {
                     //if aCell.aButton == nil {aCell.aButton = UIButton(type: .custom)}
                     //print("model : ",model)
-                    let dim = (self.collectionView.bounds.width * 0.8) / self.numberOfFollowedShopInARow
+                    let dim = ((self?.collectionView.bounds.width ?? 50) * 0.8) / (self?.numberOfFollowedShopInARow ?? 3)
                     aCell.aButton.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
-                    self.collectionView.addSubview(aCell)
+                    self?.collectionView.addSubview(aCell)
                     aCell.addSubview(aCell.aButton)
                     if model.image != nil && (model.image ?? "").count > 0 {
                         let strURL = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + (model.image ?? "")
@@ -146,19 +146,19 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
                     aCell.aButton.layer.shadowOpacity = 0.2
                     
                     aCell.aButton.tag = model.id ?? 0
-                    aCell.aButton.addTarget(self, action: #selector(self.showPostDetail), for: .touchUpInside)
+                    aCell.aButton.addTarget(self, action: #selector(self?.showPostDetail), for: .touchUpInside)
                 }else{
                     print("\(cell) can not be casted to PostCell")
                 }
                 }.disposed(by: myDisposeBag)
         }else{
-            self.shops.bind(to: collectionView.rx.items(cellIdentifier: "shopcell")) { [unowned self] row, model, cell in
+            self.shops.bind(to: collectionView.rx.items(cellIdentifier: "shopcell")) { [weak self] row, model, cell in
                 if let aCell = cell as? ButtonCell {
                     //if aCell.aButton == nil {aCell.aButton = UIButton(type: .custom)}
                     //print("model : ",model)
-                    let dim = (self.collectionView.bounds.width * 0.8) / self.numberOfFollowedShopInARow
+                    let dim = ((self?.collectionView.bounds.width ?? 50) * 0.8) / (self?.numberOfFollowedShopInARow ?? 3)
                     aCell.aButton.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
-                    self.collectionView.addSubview(aCell)
+                    self?.collectionView.addSubview(aCell)
                     aCell.addSubview(aCell.aButton)
                     if model.image != nil && (model.image ?? "").count > 0 {
                         let strURL = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + (model.image ?? "")
@@ -178,7 +178,7 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
                     aCell.aButton.layer.shadowOpacity = 0.2
                     
                     aCell.aButton.tag = model.user_id ?? 0
-                    aCell.aButton.addTarget(self, action: #selector(self.showShopDetail), for: .touchUpInside)
+                    aCell.aButton.addTarget(self, action: #selector(self?.showShopDetail), for: .touchUpInside)
                 }else{
                     print("\(cell) can not be casted to PostCell")
                 }

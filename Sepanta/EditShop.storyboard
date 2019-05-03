@@ -107,16 +107,45 @@
                                             <constraint firstItem="VKj-gL-VWy" firstAttribute="leading" secondItem="L65-lZ-lGw" secondAttribute="leading" id="wLr-bY-XtU"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4q-VP-hPg" userLabel="selectMainImageBadge">
+                                        <rect key="frame" x="0.0" y="75" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="g4q-VP-hPg" secondAttribute="height" multiplier="1:1" id="Rhi-ls-XG8"/>
+                                            <constraint firstAttribute="width" constant="40" id="xiS-Tz-hU3"/>
+                                        </constraints>
+                                        <state key="normal" image="plus"/>
+                                        <connections>
+                                            <action selector="mainImageSelectTapped:" destination="hKG-r2-rSp" eventType="touchUpInside" id="O4e-Na-tSO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kcf-UU-ZwS" userLabel="selectLogoImageBadge">
+                                        <rect key="frame" x="270" y="174.5" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Kcf-UU-ZwS" secondAttribute="height" multiplier="1:1" id="eLq-bS-rOT"/>
+                                            <constraint firstAttribute="width" constant="25" id="sjm-5S-4HL"/>
+                                        </constraints>
+                                        <state key="normal" image="plus"/>
+                                        <connections>
+                                            <action selector="logoImageSelectTapped:" destination="hKG-r2-rSp" eventType="touchUpInside" id="e2c-0O-zhE"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="L65-lZ-lGw" firstAttribute="leading" secondItem="Eok-nR-aAs" secondAttribute="leading" id="1vx-YA-zyp"/>
+                                    <constraint firstItem="Kcf-UU-ZwS" firstAttribute="centerY" secondItem="NcO-rb-MQF" secondAttribute="centerY" id="8cA-mw-abN"/>
+                                    <constraint firstItem="Kcf-UU-ZwS" firstAttribute="width" secondItem="Kcf-UU-ZwS" secondAttribute="height" multiplier="1:1" id="9VP-26-82N"/>
+                                    <constraint firstItem="g4q-VP-hPg" firstAttribute="width" secondItem="g4q-VP-hPg" secondAttribute="height" multiplier="1:1" id="GMq-Ot-ufp"/>
                                     <constraint firstAttribute="bottom" secondItem="L65-lZ-lGw" secondAttribute="bottom" id="Ihg-wm-8Xi"/>
                                     <constraint firstItem="vzE-Yc-djh" firstAttribute="leading" secondItem="Eok-nR-aAs" secondAttribute="leading" constant="20" id="J7O-ou-WF9"/>
                                     <constraint firstAttribute="trailing" secondItem="NcO-rb-MQF" secondAttribute="trailing" constant="20" id="Kzb-7V-QSi"/>
+                                    <constraint firstItem="g4q-VP-hPg" firstAttribute="leading" secondItem="Eok-nR-aAs" secondAttribute="leading" id="ak3-Ud-PDU"/>
                                     <constraint firstAttribute="trailing" secondItem="vzE-Yc-djh" secondAttribute="trailing" constant="20" id="bWI-uM-ZaL"/>
                                     <constraint firstItem="vzE-Yc-djh" firstAttribute="top" secondItem="Eok-nR-aAs" secondAttribute="top" constant="20" id="dJa-YH-yE7"/>
+                                    <constraint firstItem="g4q-VP-hPg" firstAttribute="centerY" secondItem="vzE-Yc-djh" secondAttribute="centerY" id="dOg-gH-Qrr"/>
+                                    <constraint firstItem="Kcf-UU-ZwS" firstAttribute="width" secondItem="Kcf-UU-ZwS" secondAttribute="height" multiplier="1:1" id="fUv-TV-ggl"/>
                                     <constraint firstItem="NcO-rb-MQF" firstAttribute="width" secondItem="Eok-nR-aAs" secondAttribute="width" multiplier="0.2" id="lLC-P0-J1i"/>
                                     <constraint firstItem="NcO-rb-MQF" firstAttribute="top" secondItem="vzE-Yc-djh" secondAttribute="bottom" constant="-20" id="n6L-wp-55j"/>
+                                    <constraint firstItem="Kcf-UU-ZwS" firstAttribute="leading" secondItem="NcO-rb-MQF" secondAttribute="leading" constant="-10" id="npi-k2-JdG"/>
                                     <constraint firstItem="L65-lZ-lGw" firstAttribute="top" secondItem="NcO-rb-MQF" secondAttribute="bottom" constant="8" id="obi-1P-E2m"/>
                                     <constraint firstAttribute="trailing" secondItem="L65-lZ-lGw" secondAttribute="trailing" id="w0d-kM-Ax2"/>
                                 </constraints>
@@ -151,5 +180,6 @@
     <resources>
         <image name="icon_back_black" width="10" height="16"/>
         <image name="logo_home" width="86" height="25"/>
+        <image name="plus" width="112" height="110"/>
     </resources>
 </document>

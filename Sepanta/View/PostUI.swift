@@ -24,6 +24,7 @@ class PostUI {
     var cursurY : CGFloat = 20
     let marginX : CGFloat = 20
     let marginY : CGFloat = 20
+    var postImage = UIImageView()
     var commentHeight : CGFloat = 0
     init (_ vc : PostViewController){
         self.delegate = vc
@@ -93,7 +94,7 @@ class PostUI {
         postView.layer.shadowOffset = CGSize(width: 3, height: 3)
         postView.layer.shadowRadius = 3
         postView.layer.shadowOpacity = 0.2
-        let postImage = UIImageView(frame: CGRect(x: self.marginX, y: self.marginX, width: postView.frame.width-2*self.marginX, height: postView.frame.height-2*self.marginX))
+        postImage = UIImageView(frame: CGRect(x: self.marginX, y: self.marginX, width: postView.frame.width-2*self.marginX, height: postView.frame.height-2*self.marginX))
         postView.addSubview(postImage)
         if innerPost.image != "" && innerPost.image != nil {
             if innerPost.image != nil {

@@ -103,14 +103,14 @@ class EditShopUI :  NSObject, UITextFieldDelegate{
             print("aProfileInfo Picture : ",imageUrl)
             let castedUrl = URL(string: imageUrl)
             if castedUrl != nil {
-                self.delegate.shopImage.setImageFromCache(PlaceHolderName: "icon_profile_img", Scale: 0, ImageURL: castedUrl!, ImageName: aProfileInfo.image!,ContentMode: UIViewContentMode.scaleToFill)
+                self.delegate.shopImage.setImageFromCache(PlaceHolderName: "icon_profile_img", Scale: 1.0, ImageURL: castedUrl!, ImageName: aProfileInfo.image!,ContentMode: UIViewContentMode.scaleAspectFit)
                 self.delegate.shopImage.layer.shadowColor = UIColor.black.cgColor
                 self.delegate.shopImage.layer.shadowOffset = CGSize(width: 3, height: 3)
                 self.delegate.shopImage.layer.shadowRadius = 3
                 self.delegate.shopImage.layer.shadowOpacity = 0.3
                 self.delegate.shopImage.layer.cornerRadius = 5
 
-                self.delegate.shopLogo.setImageFromCache(PlaceHolderName: "icon_profile_img", Scale: 1, ImageURL: castedUrl!, ImageName: aProfileInfo.image!)
+                self.delegate.shopLogo.setImageFromCache(PlaceHolderName: "icon_profile_img", Scale: 1.0, ImageURL: castedUrl!, ImageName: aProfileInfo.image!)
                 self.delegate.shopLogo.layer.shadowColor = UIColor.black.cgColor
                 self.delegate.shopLogo.layer.shadowOffset = CGSize(width: 3, height: 3)
                 self.delegate.shopLogo.layer.shadowRadius = 3

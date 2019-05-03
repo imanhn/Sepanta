@@ -29,7 +29,7 @@ class NewShopCell : UITableViewCell {
 }
 
 class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded{
-    typealias dataSourceFunc = () -> ShopsListDataSource
+    typealias dataSourceFunc = (ShopsListViewController) -> ShopsListDataSource
     var fetchMechanism : dataSourceFunc!
     var shopDataSource : ShopsListDataSource!
     weak var coordinator : HomeCoordinator?
@@ -52,7 +52,7 @@ class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded{
 
     @objc override func ReloadViewController(_ sender:Any) {
         super.ReloadViewController(sender)
-        shopDataSource = fetchMechanism()
+        shopDataSource = fetchMechanism(self)
         //newShopsDataSource.getNewShopsFromServer()
     }
     
@@ -106,9 +106,9 @@ class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded{
         setHeaderName()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         bindToTableView()
-        shopDataSource = fetchMechanism()
+        shopDataSource = fetchMechanism(self)
         
-        //newShopsDataSource = ShopsListDataSource(self)
+        //let newShopsDataSource = ShopsListDataSource(self)
         //newShopsDataSource.getNewShopsFromServer()
     }
     
