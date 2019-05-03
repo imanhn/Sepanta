@@ -100,19 +100,12 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
                 self.notificationsButton.manageBadge(notiCount)
                 }
             ).disposed(by: myDisposeBag)
-
     }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
-        //showQuestion(Message: "آيا از حذف پست مطمئن هستید؟", OKLabel: "بلی", CancelLabel: "خیر", QuestionTag: 1)
-        //TEST
-        //NetworkManager.shared.status.accept(CallStatus.error)
-        //alert(Message:"آزمايش نوار اطلاعات")
-        //Handle Tap to End Editing
-       // Handles Slide Events and delivers them to self.handle_pan
         subscribeForBadges()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
         self.view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:))))

@@ -45,6 +45,7 @@ class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
         items.append(ButtomMenuItem(aLabel: "پولدار شو", anImageName: "icon_mainmenu_07"))
         items.append(ButtomMenuItem(aLabel: "درباره ما", anImageName: "icon_mainmenu_08"))
         items.append(ButtomMenuItem(aLabel: "ارتباط با ما", anImageName: "icon_mainmenu_09"))
+        items.append(ButtomMenuItem(aLabel: "خروج از پروفایل", anImageName: "icon_logout_white"))
         menuItems.accept(items)
     }
     

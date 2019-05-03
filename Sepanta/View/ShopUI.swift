@@ -33,7 +33,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     let numberOfPostInARow : CGFloat = 4
     var isShop : Bool
     var cursurY : CGFloat = 0
-    let marginY : CGFloat = 20
+    let marginY : CGFloat = 15
     let marginX : CGFloat = 10
     init(_ vc : ShopViewController) {
         self.delegate = vc
@@ -49,19 +49,8 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         buildPostToolbar()
         bindUIwithDataSource()
         showShopPosts()
-        manageLogoutButton()
     }
     
-    func manageLogoutButton(){
-        //if self.delegate.
-        if isShop && self.delegate.editAuthorized() {
-            self.delegate.logoutButton.isHidden = false
-        }
-        else{
-            self.delegate.logoutButton.isHidden = true
-        }
-        //self.delegate.logoutButton.
-    }
     
     @objc func shareTapped(sender : Any){
         var shopURL = NetworkManager.shared.profileObs.value.url
@@ -373,7 +362,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
 
         self.delegate.contentView.subviews.forEach({$0.removeFromSuperview()})
         disposeList.forEach({$0.dispose()})
-        cursurY = 0
+        cursurY = 10
         let aProfile = NetworkManager.shared.profileObs.value
         let buttonHeight = self.delegate.contentView.frame.height / 7
         let textFieldWidth = (self.delegate.contentView.bounds.width) - (2 * marginX)

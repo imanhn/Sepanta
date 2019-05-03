@@ -44,7 +44,6 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     @IBOutlet weak var PostToolbarView: UIView!
     @IBOutlet weak var mainScrollView: UIScrollView!
     
-    @IBOutlet weak var logoutButton: RoundedButton!
     @IBOutlet weak var offLabelLeading: NSLayoutConstraint!
     @IBOutlet weak var shopLogoTrailing: NSLayoutConstraint!
     @IBOutlet weak var shopLogoShopTitleDistance: NSLayoutConstraint!
@@ -150,8 +149,7 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     }
     
     override func viewDidLayoutSubviews() {
-        
-        let calculatedHeight = UIScreen.main.bounds.height * 1.2
+        let calculatedHeight = UIScreen.main.bounds.height * 1.5
         //print("Calculated Height : ",calculatedHeight)
         mainScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: calculatedHeight)
         

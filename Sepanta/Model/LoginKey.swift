@@ -85,10 +85,20 @@ class LoginKey {
         let loginDataSaved : String? = KeychainWrapper.standard.string(forKey: "LOGIN")
         //let arole : String? = KeychainWrapper.standard.string(forKey: "ROLE")
         if loginDataSaved == "YES" {
-            self.token = KeychainWrapper.standard.string(forKey: "TOKEN")!
-            self.userID = KeychainWrapper.standard.string(forKey: "USERID")!
-            self.role = KeychainWrapper.standard.string(forKey: "ROLE")!
-            self.username = KeychainWrapper.standard.string(forKey: "USERNAME")!
+            if let atoken  = KeychainWrapper.standard.string(forKey: "TOKEN") {
+                self.token = atoken
+            }else{
+                print("ERROR : No Token could be read")
+            }
+            if let auserid = KeychainWrapper.standard.string(forKey: "USERID") {
+                self.userID = auserid
+            }
+            if let arole = KeychainWrapper.standard.string(forKey: "ROLE") {
+                self.role = arole
+            }
+            if let auserName = KeychainWrapper.standard.string(forKey: "USERNAME") {
+                self.username = auserName
+            }
             print("Your USERID : ",self.userID)
             print("Your UserName : ",self.username)
             print("Your token : ",self.token.count)

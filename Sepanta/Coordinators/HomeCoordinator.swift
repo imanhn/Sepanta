@@ -65,6 +65,10 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
             popHome()
             pushContactUs()
             break
+        case 7:
+            popHome()
+            logout()
+            break
 
         default:
             print("Wrong Menu Number")
