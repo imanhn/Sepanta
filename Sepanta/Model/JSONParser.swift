@@ -125,6 +125,11 @@ class JSONParser {
                     //Returns Profile Data for a user Id
                     let aProfile = (self?.processAsProfile(Result: aDic))!
                     NetworkManager.shared.profileObs.accept(aProfile)
+                }else if (apiName == "report-comment") || (apiName == "report-post") || (apiName == "report-comment"){
+                    //Returns Profile Data for a user Id
+                    if let amessage = aDic["message"] as? String {
+                        NetworkManager.shared.messageObs.accept(amessage)
+                    }
                 } else if (apiName == "send-comment") && (aMethod == HTTPMethod.post) {
                     // Sets True for commentSendingSuccessful to be observable by PostUI
                     NetworkManager.shared.commentSendingSuccessful.accept(true)
@@ -366,7 +371,7 @@ class JSONParser {
         print("@@@ ERROR : Result does not contain >notification_user or shop<")
         fatalError()
         
-        return (generalNotif,[])
+        //return (generalNotif,[])
     }
 
     func processLike(Result aResult : NSDictionary) -> Int {

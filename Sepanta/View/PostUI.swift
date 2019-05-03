@@ -251,6 +251,81 @@ class PostUI {
         self.delegate.disposeList.append(statusDisp)
     }
     
+    func userIsCommentOwner(Comment aComment : Comment)->Bool{
+        print("Checking Comment owner commentuser: ",aComment.username," LoginUser : ",LoginKey.shared.username)
+        if aComment.username == LoginKey.shared.username {
+            return true
+        }else{
+            return false
+        }
+    }
+    
+    func getComment(ByID commentID : Int)-> Comment?{
+        for aComment in NetworkManager.shared.postDetailObs.value.comments ?? [Comment]() {
+            if aComment.id == commentID {
+                return aComment
+            }
+        }
+        return nil
+    }
+    
+    @objc func menuOnCommentTapped(_ sender : Any){
+        let menuButton = (sender as! UIButton)
+        let abuse = "گزارش تخلف"
+        let del = "حذف نظر"
+        let edit = "ویرایش نظر"
+        //let close = "بستن منو"
+        var menuList = [abuse]
+        let selectedComment = getComment(ByID: menuButton.tag)
+        guard selectedComment != nil else {
+            self.delegate.alert(Message: "اطلاعات این نظر کامل نیست")
+            return
+        }
+        
+        if userIsCommentOwner(Comment: selectedComment!) {
+            // This Facility is not yet implemented on Back-End
+            //print("SELF COMMENT DETECTED")
+            //menuList = [abuse,del,edit]
+        }
+        
+        let controller = menuLister(menuList) {
+            (selectedOption) in
+            switch selectedOption {
+            case abuse : self.reportCommentAbuse(Comment : selectedComment!);break
+            case del : self.deleteComment(Comment : selectedComment!);break
+            case edit : self.editComment(Comment : selectedComment!);break
+            default :
+                print("Should not get here, but if it gets its fine! really!")
+            }
+        }
+        controller.preferredContentSize = CGSize(width: 150, height: 100)
+        self.delegate.showPopup(controller, sourceView: menuButton)
+    }
+    
+    func reportCommentAbuse(Comment aComment : Comment){
+        guard aComment.id != nil else {
+            self.delegate.alert(Message: "نظر قابل ریپورت کردن نیست")
+            return
+        }
+        
+        let aParameter = ["comment_id":"\(aComment.id!)"]
+        NetworkManager.shared.run(API: "report-comment", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: true)
+        let messageDisp = NetworkManager.shared.messageObs
+            .subscribe(onNext: {amessage in
+                self.delegate.alert(Message: amessage)
+                NetworkManager.shared.messageObs = BehaviorRelay<String>(value: "")
+            })
+        messageDisp.disposed(by: myDisposeBag)
+        self.delegate.disposeList.append(messageDisp)
+    }
+    
+    func deleteComment(Comment aComment : Comment){
+        
+    }
+    func editComment(Comment aComment : Comment){
+        
+    }
+
     func buildCommentView(With comments : [Comment]){
         if peopleCommentsView.superview != nil {
             peopleCommentsView = UIView(frame: .zero)
@@ -265,8 +340,18 @@ class PostUI {
         let commentFont = UIFont(name: "Shabnam-FD", size: 12)
         var commentCursurY : CGFloat = self.marginY
         for aComment in comments {
-            let commentWidth : CGFloat = peopleCommentsView.frame.width - profilePicturedim - 3*self.marginX
-            let usernameLabel = UILabel(frame: CGRect(x: self.marginX, y: commentCursurY, width: commentWidth, height: profilePicturedim))
+            let menuButtonWidth = profilePicturedim / 2
+            let commentWidth : CGFloat = peopleCommentsView.frame.width - profilePicturedim - 3*self.marginX - menuButtonWidth
+            
+            let menuButton = UIButton(type: .custom)
+            menuButton.frame = CGRect(x: self.marginX, y: commentCursurY+(menuButtonWidth/2), width: menuButtonWidth, height: menuButtonWidth)
+            menuButton.setImage(UIImage(named: "postMenu"), for: .normal)
+            menuButton.addTarget(self, action: #selector(menuOnCommentTapped), for: .touchUpInside)
+            menuButton.tag = aComment.id ?? 0
+            
+            peopleCommentsView.addSubview(menuButton)
+            
+            let usernameLabel = UILabel(frame: CGRect(x: self.marginX+menuButtonWidth, y: commentCursurY, width: commentWidth, height: profilePicturedim))
             usernameLabel.font = usernameFont
             usernameLabel.textColor = UIColor(hex: 0xD6D7D9)
             usernameLabel.contentMode = .right
@@ -285,6 +370,7 @@ class PostUI {
             if let commentText = aComment.body {
                 commentHeight = commentText.height(withConstrainedWidth: commentWidth, font: commentFont!)
             }
+            
             let commentBody = UILabel(frame: CGRect(x: self.marginX, y: commentCursurY, width: commentWidth, height: commentHeight))
             commentBody.font = commentFont
             commentBody.numberOfLines = 10

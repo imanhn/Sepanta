@@ -130,8 +130,11 @@ class NetworkManager {
             
             print(" Response Code : ",ahttpURLRes.statusCode)
             if let aresult = jsonResult as? NSDictionary {
+                
                 self.result = aresult
                 self.parser = JSONParser(API: apiName,Method : aMethod)
+
+
                 if let aparser = self.parser {
                     //print("Handing over resultSubject to JSONParser")
                     aparser.resultSubject.accept(aresult)                    

@@ -44,6 +44,7 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     @IBOutlet weak var PostToolbarView: UIView!
     @IBOutlet weak var mainScrollView: UIScrollView!
     
+    @IBOutlet weak var logoutButton: RoundedButton!
     @IBOutlet weak var offLabelLeading: NSLayoutConstraint!
     @IBOutlet weak var shopLogoTrailing: NSLayoutConstraint!
     @IBOutlet weak var shopLogoShopTitleDistance: NSLayoutConstraint!
@@ -55,6 +56,11 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
         self.panelView.tabJust = .Right
         self.panelView.setNeedsDisplay()
         self.shopUI!.showShopPosts()
+    }
+    
+    @IBAction func logoutTapped(_ sender: Any) {
+        shopUI = nil
+        self.coordinator!.logout()
     }
     
     @IBAction func showContactTapped(_ sender: Any) {

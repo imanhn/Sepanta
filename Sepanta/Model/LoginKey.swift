@@ -40,7 +40,12 @@ class LoginKey {
         if useridSucceed { print("UserID Saved Successfully") } else {
             print("UserID Can not be saved")
             fatalError()
-            
+        }
+
+        let usernameSucceed = KeychainWrapper.standard.set(self.username, forKey:"USERNAME")
+        if usernameSucceed { print("UserName Saved Successfully") } else {
+            print("UserName Can not be saved")
+            fatalError()
         }
 
         let roleSucceed = KeychainWrapper.standard.set(self.role, forKey:"ROLE")
@@ -83,7 +88,9 @@ class LoginKey {
             self.token = KeychainWrapper.standard.string(forKey: "TOKEN")!
             self.userID = KeychainWrapper.standard.string(forKey: "USERID")!
             self.role = KeychainWrapper.standard.string(forKey: "ROLE")!
+            self.username = KeychainWrapper.standard.string(forKey: "USERNAME")!
             print("Your USERID : ",self.userID)
+            print("Your UserName : ",self.username)
             print("Your token : ",self.token.count)
             print("Your role would be : ",self.role)
             return true

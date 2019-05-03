@@ -151,6 +151,15 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
         super.viewWillDisappear(animated)
         //NetworkManager.shared.postDetailObs.accept(Post())
     }
+    
+    func showPopup(_ controller: UIViewController, sourceView: UIView) {
+        //print("Showing POPUP : ",sourceView)
+        let presentationController = AlwaysPresentAsPopover.configurePresentation(forController: controller)
+        presentationController.sourceView = sourceView
+        presentationController.sourceRect = sourceView.bounds
+        presentationController.permittedArrowDirections = [.down, .up]
+        self.present(controller, animated: true)
+    }
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)

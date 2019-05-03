@@ -9,9 +9,9 @@ class ArrayChoiceTableViewController<Element> : UITableViewController {
     
     typealias SelectionHandler = (Element) -> Void
     typealias LabelProvider = (Element) -> String
-    private var values : [Element]
-    private var labels : LabelProvider
-    private var onSelect : SelectionHandler?
+    fileprivate var values : [Element]
+    fileprivate var labels : LabelProvider
+    fileprivate var onSelect : SelectionHandler?
 
     
     init(_ values : [Element], labels : @escaping LabelProvider = String.init(describing:), onSelect : SelectionHandler? = nil) {
@@ -46,7 +46,7 @@ class ArrayChoiceTableViewController<Element> : UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         cell.textLabel?.text = labels(values[indexPath.row])
-        cell.textLabel?.font = UIFont (name: "Shabnam FD", size: 20)
+        cell.textLabel?.font = UIFont (name: "Shabnam FD", size: 16)
         cell.textLabel?.textAlignment = .right
         return cell
     }
@@ -58,3 +58,21 @@ class ArrayChoiceTableViewController<Element> : UITableViewController {
     
 }
 
+class menuLister<Element> : ArrayChoiceTableViewController<Element>{
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = UIColor(hex: 0x515152)
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        cell.backgroundColor = UIColor(hex: 0x515152)
+        cell.textLabel?.text = labels(values[indexPath.row])
+        cell.textLabel?.font = UIFont (name: "Shabnam FD", size: 13)
+        cell.textLabel?.backgroundColor = UIColor(hex: 0x515152)
+        cell.textLabel?.textColor = UIColor.white
+        cell.textLabel?.textAlignment = .right
+        //tableView.backgroundColor = UIColor(hex: 0x515152)
+        return cell
+    }
+}

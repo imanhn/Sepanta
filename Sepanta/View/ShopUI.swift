@@ -49,7 +49,18 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         buildPostToolbar()
         bindUIwithDataSource()
         showShopPosts()
-
+        manageLogoutButton()
+    }
+    
+    func manageLogoutButton(){
+        //if self.delegate.
+        if isShop && self.delegate.editAuthorized() {
+            self.delegate.logoutButton.isHidden = false
+        }
+        else{
+            self.delegate.logoutButton.isHidden = true
+        }
+        //self.delegate.logoutButton.
     }
     
     @objc func shareTapped(sender : Any){

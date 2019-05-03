@@ -57,7 +57,7 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
         //let textFieldWidth = (views["rightFormView"]?.bounds.width)! - (2 * marginX)
         
         buttons["leftButton"] = UIButton(frame: CGRect(x: 0, y: 0, width: (views["rightFormView"]?.bounds.width)!/2, height: buttonHeight))
-        buttons["leftButton"]!.setTitle("اطلاعات ارتباطی", for: .normal)
+        buttons["leftButton"]!.setTitle("کارت های من", for: .normal)
         buttons["leftButton"]!.titleLabel?.font = buttonsFont
         buttons["leftButton"]!.addTarget(self.delegate, action: #selector(self.delegate.contactTapped), for: .touchUpInside)
         buttons["leftButton"]!.setTitleColor(UIColor(hex: 0x515152), for: .normal)
@@ -235,7 +235,7 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
         //let textFieldWidth = (views["leftFormView"]!.bounds.width) - (2 * marginX)
         
         buttons["leftButton"] = UIButton(frame: CGRect(x: 0, y: 0, width: views["leftFormView"]!.bounds.width/2, height: buttonHeight))
-        buttons["leftButton"]!.setTitle("اطلاعات ارتباطی", for: .normal)
+        buttons["leftButton"]!.setTitle("کارت های من", for: .normal)
         buttons["leftButton"]!.titleLabel?.font = buttonsFont
         //buttons["leftButton"]!.addTarget(self, action: #selector(self.cardRequestTapped(_:)), for: .touchUpInside)
         buttons["leftButton"]!.setTitleColor(UIColor(hex: 0x515152), for: .normal)
