@@ -255,9 +255,8 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 if let postContents = aProfile.content as? [Post] {
                     self?.posts.accept(postContents)
                 }else{
-                    print("aProfile.content has shops but expected to have posts")
+                    print("aProfile.content has shops but expected to have posts : ",aProfile.content )
                     self?.delegate.alert(Message: "خطای داخلی اتفاق افتاده است")
-                    return
                 }
                 //print("Profile : ",aProfile)
                 if self?.buttons["followButton"] != nil {

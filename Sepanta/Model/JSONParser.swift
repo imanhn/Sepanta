@@ -571,8 +571,8 @@ class JSONParser {
                 let aPostOrShop = (aContent as! NSDictionary)
                 //print("aPostOrShop : ",aPostOrShop)
                 //print("shop_Name : ",aPostOrShop["shop_name"])
-                if aPostOrShop["shop_name"] != nil || aPostOrShop["shop_off"] != nil {
-                    //print("This is a shop")
+                if profile.role?.uppercased() == "User".uppercased() {//aPostOrShop["shop_name"] != nil || aPostOrShop["shop_off"] != nil {
+                    print("This is a shop")
                     var newShop = Shop()
                     newShop.shop_id = (aPostOrShop["shop_id"] as? Int) ?? 0
                     newShop.user_id = (aPostOrShop["user_id"] as? Int) ?? 0
@@ -591,7 +591,7 @@ class JSONParser {
                     newShop.follower_count = (aPostOrShop["follower_count"] as? Int) ?? 0
                     newShop.created_at = (aPostOrShop["created_at"] as? String) ?? ""
                     profile.content.append(newShop)
-                }else if aPostOrShop["title"] != nil {
+                }else if profile.role?.uppercased() == "Shop".uppercased() {//else if aPostOrShop["title"] != nil {
                     //print("This is a Post")
                     var newPost = Post(id: 0, shopId: 0, viewCount: 0, comments: [], isLiked: false, countLike: 0, title: "", content: "", image: "")
                     newPost.id = (aPostOrShop["id"] as? Int) ?? 0
@@ -608,7 +608,11 @@ class JSONParser {
                     //print("     Profile Post : ",newPost)
                     profile.content.append(newPost)
                 }else{
-                    print("Error : ButtonCell[ShopUI or ProfileUI] returned Data is incomplete")
+                    if contents.count > 0
+                    {
+                        print("Error : Content has no Shop or Post role : ",profile.role," Content size : ",contents.count)
+                        fatalError()
+                    }
                 }
             }
         }else{
@@ -702,6 +706,7 @@ class JSONParser {
                         let aTitle = aSlideAsNsDic["title"] as? String ?? "بدون نام"
                         let aLink = aSlideAsNsDic["link"] as? String ?? ""
                         let aUserId = aSlideAsNsDic["user_id"] as? Int ?? 0
+                        let aShopId = aSlideAsNsDic["shop_id"] as? Int ?? 0
                         let imageName = aSlideAsNsDic["images"] as? String ?? ""
                         let img = UIImage().getImageFromCache(ImageName: imageName)
                         if img == nil{
@@ -714,7 +719,7 @@ class JSONParser {
                                     if let image = response.result.value {
                                         //print("image downloaded: \(self.image)")
                                         //self.anUIImage.accept(image)
-                                        SlidesAndPaths.shared.slides.append(Slide(id: anId, title: aTitle, link: aLink, user_id: aUserId, images: imageName,aUIImage: image))
+                                        SlidesAndPaths.shared.slides.append(Slide(id: anId, title: aTitle, link: aLink, user_id: aUserId, shop_id: aShopId, images: imageName,aUIImage: image))
                                         SlidesAndPaths.shared.slidesObs.accept(SlidesAndPaths.shared.slides)
                                         let imageData = UIImageJPEGRepresentation(image,0.5) as NSData?
                                         if imageData != nil {
@@ -732,7 +737,7 @@ class JSONParser {
                             }
                         }else{
                             //print("Slide : ",anId," exists in cache : ",img)
-                            SlidesAndPaths.shared.slides.append(Slide(id: anId, title: aTitle, link: aLink, user_id: aUserId, images: imageName,aUIImage: img!))
+                            SlidesAndPaths.shared.slides.append(Slide(id: anId, title: aTitle, link: aLink, user_id: aUserId, shop_id: aShopId, images: imageName,aUIImage: img!))
                             SlidesAndPaths.shared.slidesObs.accept(SlidesAndPaths.shared.slides)
                         }
                     }else{

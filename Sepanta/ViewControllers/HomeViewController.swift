@@ -13,7 +13,7 @@ import RxSwift
 class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     weak var coordinator : HomeCoordinator?
     var myDisposeBag = DisposeBag()
-    weak var slideControl : SlideController?
+    var slideControl : SlideController?
     @IBOutlet weak var pageControl: UIPageControl!
     
     @IBOutlet weak var searchText: CustomSearchBar!
@@ -23,6 +23,7 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     @IBOutlet weak var rightImageView: AdImageView!
     @IBOutlet weak var newShopsButton: UIButtonWithBadge!
     @IBOutlet weak var notificationsButton: UIButtonWithBadge!
+    @IBOutlet weak var slideView: UIView!
     
     @IBAction func gotoFavorites(_ sender: Any) {
         self.coordinator!.pushFavoriteList()
@@ -68,11 +69,7 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     }
 
     //Passes events to delegate class
-    @objc func handlePan(_ sender:UIPanGestureRecognizer) {
-        if slideControl != nil {
-            slideControl?.handlePan(sender)
-        }
-    }
+
     
     @objc override func ReloadViewController(_ sender:Any) {
         super.ReloadViewController(sender)
@@ -107,9 +104,19 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         subscribeForBadges()
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTapped)))
         self.view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:))))
- 
+        
+    }
+    
+    @objc func viewTapped(_ sender:UITapGestureRecognizer){
+        slideControl?.handleTap(sender)
+    }
+    
+    @objc func handlePan(_ sender:UIPanGestureRecognizer) {
+        if slideControl != nil {
+            slideControl?.handlePan(sender)
+        }
     }
     
     override func didReceiveMemoryWarning() {

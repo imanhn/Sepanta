@@ -45,7 +45,7 @@ class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
         items.append(ButtomMenuItem(aLabel: "پولدار شو", anImageName: "icon_mainmenu_07"))
         items.append(ButtomMenuItem(aLabel: "درباره ما", anImageName: "icon_mainmenu_08"))
         items.append(ButtomMenuItem(aLabel: "ارتباط با ما", anImageName: "icon_mainmenu_09"))
-        items.append(ButtomMenuItem(aLabel: "خروج از پروفایل", anImageName: "icon_logout_white"))
+        items.append(ButtomMenuItem(aLabel: "خروج از پروفایل", anImageName: "icon_logout_white2"))
         menuItems.accept(items)
     }
     
@@ -77,6 +77,9 @@ class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
 
     override func viewDidLoad() {
         loadMenuItems()
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backFromMenuTapped)))
         bindToTableView()
+        
     }
+    
 }

@@ -14,6 +14,7 @@ struct Slide  {
     var title : String
     var link : String
     var user_id : Int
+    var shop_id : Int
     var images : String
     var aUIImage : UIImage
 }

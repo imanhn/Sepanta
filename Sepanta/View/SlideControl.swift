@@ -19,6 +19,7 @@ class SlideController {
     var startLocation = CGPoint(x: 0, y: 0)
     var endLocation = CGPoint(x: 0, y: 0)
     var slides : [UIImage] = [UIImage(named: "logo_shape")!,UIImage(named: "logo_shape")!,UIImage(named: "logo_shape")!,UIImage(named: "logo_shape")!]
+    var aPanStarted = false
     let myDisposeBag = DisposeBag()
     
     init(parentController : HomeViewController){
@@ -75,12 +76,17 @@ class SlideController {
         }
     }
     @objc func handlePan(_ sender:UIPanGestureRecognizer) {
-//        print("State : ",sender.state)
-        if (sender.state == UIGestureRecognizerState.began) {
+        print("Pan Status : ",aPanStarted," State : ",sender.state)
+        let panStartLocation = sender.location(in: self.delegate.slideView)        
+        if (sender.state == UIGestureRecognizerState.began && isOnSlideView(panStartLocation)) {
+            print("Pan STARTED")
             startLocation = sender.location(in: self.delegate.view)
+            aPanStarted = true
             //print("Start X : ",startLocation.x," Y : ",startLocation.y)
-        } else if (sender.state == UIGestureRecognizerState.ended) {
+        } else if (sender.state == UIGestureRecognizerState.ended && aPanStarted) {
+            print("Pan ENDED")
             endLocation = sender.location(in: self.delegate.view)
+            aPanStarted = false
             let animDurationInterval = TimeInterval(1/(abs(sender.velocity(in: self.delegate.view).x/1000)))
             //print("Velocity : ",sender.velocity(in: self.delegate.view))
             let deltaX = endLocation.x - startLocation.x
@@ -124,7 +130,7 @@ class SlideController {
                 }
             }
             //print("END X : ",endLocation.x," Y : ",endLocation.y)
-        } else if (sender.state == UIGestureRecognizerState.changed) {
+        } else if (sender.state == UIGestureRecognizerState.changed && aPanStarted) {
             let midLocation = sender.location(in: self.delegate.view)
             var deltaX = midLocation.x - startLocation.x
             if (deltaX < 0) && (adsPage == slides.count-1) ||  (deltaX > 0) && (adsPage == 0){
@@ -162,5 +168,28 @@ class SlideController {
         if SlidesAndPaths.shared.slides.count > adsPage {
             self.delegate.commentLabel.text = SlidesAndPaths.shared.slides[adsPage].title
         }
+    }
+    func isOnSlideView(_ aLocation : CGPoint)->Bool{
+        if aLocation.x > 0 && aLocation.x < self.delegate.slideView.frame.width &&
+            aLocation.y > 0 && aLocation.y < self.delegate.slideView.frame.height{
+            return true
+        }
+        return false
+    }
+    func handleTap(_ sender : UITapGestureRecognizer){
+        if (sender.state == UIGestureRecognizerState.ended) {
+            let tapLocation = sender.location(in: self.delegate.slideView)
+            if isOnSlideView(tapLocation){
+                let ashop = Shop(shop_id: SlidesAndPaths.shared.slides[adsPage].shop_id,
+                                 user_id: SlidesAndPaths.shared.slides[adsPage].user_id,
+                                 shop_name: "",
+                                 shop_off: 0,
+                                 lat: 0, long: 0,
+                                 image: SlidesAndPaths.shared.slides[adsPage].images,
+                                 rate: "", follower_count: 0, created_at: "")
+                self.delegate.coordinator!.pushShop(Shop: ashop)
+            }
+        }
+
     }
 }
