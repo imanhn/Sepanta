@@ -29,6 +29,7 @@ class EditShopUI :  NSObject, UITextFieldDelegate{
     var stateCode : String!
     var cityCode : String!
     var disposeList = [Disposable]()
+    var myDisposeBag = DisposeBag()
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -54,87 +55,48 @@ class EditShopUI :  NSObject, UITextFieldDelegate{
         getAndSubscribeToProfileInfo()
         //handleSubmitButtonEnableOrDisable()
     }
-    /*
-    func handleSubmitButtonEnableOrDisable(){
-        Observable.combineLatest([texts["familyText"]!.rx.text,
-                                  texts["nameText"]!.rx.text,
-                                  texts["nationalCodeText"]!.rx.text,
-                                  texts["birthDateText"]!.rx.text,
-                                  texts["maritalStatusText"]!.rx.text,
-                                  texts["emailText"]!.rx.text,
-                                  texts["stateText"]!.rx.text,
-                                  texts["cityText"]!.rx.text,
-                                  texts["regionText"]!.rx.text,
-                                  texts["genderText"]!.rx.text
-            ])
-            
-            .subscribe(onNext: { (combinedTexts) in
-                //print("combinedTexts : ",combinedTexts)
-                let mappedTextToBool = combinedTexts.map{$0 != nil && $0!.count > 0}
-                //print("mapped : ",mappedTextToBool)
-                let allTextFilled = mappedTextToBool.reduce(true, {$0 && $1})
-                if allTextFilled {
-                    if !self.submitButton.isEnabled {
-                        self.submitButton.setEnable()
-                    }
-                }else{
-                    if self.submitButton.isEnabled {
-                        self.submitButton.setDisable()
-                    }
-                }
-            }
-            ).disposed(by: self.delegate.myDisposeBag)
-    }
-    */
+
     
     func getAndSubscribeToProfileInfo(){
         //let aParameter = ["user id":"\(LoginKey.shared.userID)"]
         NetworkManager.shared.run(API: "profile-info", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
-        ProfileInfoWrapper.shared.profileInfoObs
+        let profileInfoDisp = ProfileInfoWrapper.shared.profileInfoObs
             .subscribe(onNext: { [unowned self] (aProfileInfo) in
                 //print("***FillingEDit")
                 self.fillEditProfileForm(With: aProfileInfo)
-            }).disposed(by: self.delegate.myDisposeBag)
+            })
+        profileInfoDisp.disposed(by: self.myDisposeBag)
+        disposeList.append(profileInfoDisp)
     }
     
     func fillEditProfileForm(With aProfileInfo : ProfileInfo){
-        if aProfileInfo.image != nil && aProfileInfo.image!.count > 0 {
-            let imageUrl = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_profile_image + aProfileInfo.image!
-            print("aProfileInfo Picture : ",imageUrl)
-            let castedUrl = URL(string: imageUrl)
-            if castedUrl != nil {
-                self.delegate.shopImage.setImageFromCache(PlaceHolderName: "icon_profile_img", Scale: 1.0, ImageURL: castedUrl!, ImageName: aProfileInfo.image!,ContentMode: UIViewContentMode.scaleToFill)
-                self.delegate.shopImage.layer.shadowColor = UIColor.black.cgColor
-                self.delegate.shopImage.layer.shadowOffset = CGSize(width: 3, height: 3)
-                self.delegate.shopImage.layer.shadowRadius = 3
-                self.delegate.shopImage.layer.shadowOpacity = 0.3
-                self.delegate.shopImage.layer.cornerRadius = 5
-
-                self.delegate.shopLogo.setImageFromCache(PlaceHolderName: "icon_profile_img", Scale: 1.0, ImageURL: castedUrl!, ImageName: aProfileInfo.image!)
+        if aProfileInfo.image != nil {
+            let imageURL = URL(string: NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_profile_image + aProfileInfo.image!)
+            //print("Shop Image : ",imageURL ?? "Nil")
+            if imageURL != nil {
+                self.delegate.shopLogo.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfileInfo.image!)
                 self.delegate.shopLogo.layer.shadowColor = UIColor.black.cgColor
                 self.delegate.shopLogo.layer.shadowOffset = CGSize(width: 3, height: 3)
                 self.delegate.shopLogo.layer.shadowRadius = 3
                 self.delegate.shopLogo.layer.shadowOpacity = 0.3
-
-            }else{
-                print("URL Can not be casted : ",imageUrl)
             }
-        }else if let aCacheImage = UIImage().getImageFromCache(ImageName: NetworkManager.shared.profileObs.value.image ?? "") {
-            self.delegate.shopImage.image = aCacheImage
-            self.delegate.shopImage.layer.shadowColor = UIColor.black.cgColor
-            self.delegate.shopImage.layer.shadowOffset = CGSize(width: 3, height: 3)
-            self.delegate.shopImage.layer.shadowRadius = 3
-            self.delegate.shopImage.layer.shadowOpacity = 0.3
-            self.delegate.shopImage.layer.cornerRadius = 5
-
-            self.delegate.shopLogo.image = aCacheImage
-            self.delegate.shopLogo.layer.shadowColor = UIColor.black.cgColor
-            self.delegate.shopLogo.layer.shadowOffset = CGSize(width: 3, height: 3)
-            self.delegate.shopLogo.layer.shadowRadius = 3
-            self.delegate.shopLogo.layer.shadowOpacity = 0.3
-            self.delegate.shopLogo.layer.cornerRadius = 5
-
+        }else{
+            self.delegate.shopBanner.image = UIImage(named: "logo_shape")
         }
+        
+        if (aProfileInfo.banner ?? "").count > 0 {
+            let imageURL = URL(string: NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_banner_image + aProfileInfo.banner!)
+            if imageURL != nil {
+                self.delegate.shopBanner.setImageFromCache(PlaceHolderName: "banner_placeholder", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfileInfo.banner!,ContentMode: UIViewContentMode.scaleToFill)
+                self.delegate.shopBanner.layer.shadowColor = UIColor.black.cgColor
+                self.delegate.shopBanner.layer.shadowOffset = CGSize(width: 3, height: 3)
+                self.delegate.shopBanner.layer.shadowRadius = 3
+                self.delegate.shopBanner.layer.shadowOpacity = 0.3
+            }
+        }else{
+            self.delegate.shopBanner.image = UIImage(named: "banner_placeholder")
+        }
+
         
         texts["familyText"]!.text = aProfileInfo.last_name
         texts["nameText"]!.text = aProfileInfo.first_name
@@ -190,12 +152,14 @@ class EditShopUI :  NSObject, UITextFieldDelegate{
             "address":"\(texts["regionText"]!.text ?? "")"
         ]
         NetworkManager.shared.run(API: "profile-info", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
-        NetworkManager.shared.updateProfileInfoSuccessful
+        let updateMessageDisp = NetworkManager.shared.updateProfileInfoSuccessful
             .filter({$0 == true})
             .subscribe(onNext: { [unowned self] (succeed) in
                 self.delegate.alert(Message: "اطلاعات پروفایل شما بروز شد")
                 NetworkManager.shared.updateProfileInfoSuccessful = BehaviorRelay<Bool>(value: false)
-            }).disposed(by: self.delegate.myDisposeBag)
+            })
+        updateMessageDisp.disposed(by: self.myDisposeBag)
+        disposeList.append(updateMessageDisp)
     }
     
     func showForm() {
@@ -345,7 +309,7 @@ class EditShopUI :  NSObject, UITextFieldDelegate{
                 controller.preferredContentSize = CGSize(width: 250, height: 300)
                 self.delegate.showPopup(controller, sourceView: aTextField)
             })
-        cityDispose.disposed(by: self.delegate.myDisposeBag)
+        cityDispose.disposed(by: self.myDisposeBag)
         disposeList.append(cityDispose)
     }
     
@@ -384,7 +348,7 @@ class EditShopUI :  NSObject, UITextFieldDelegate{
                     controller.preferredContentSize = CGSize(width: 250, height: 300)
                     self.delegate.showPopup(controller, sourceView: aTextField)
                 })
-            provinceDispose.disposed(by: self.delegate.myDisposeBag)
+            provinceDispose.disposed(by: self.myDisposeBag)
             disposeList.append(provinceDispose)
         }
     }

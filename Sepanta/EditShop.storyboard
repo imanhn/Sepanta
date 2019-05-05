@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -67,14 +65,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eok-nR-aAs" userLabel="MainView">
                                 <rect key="frame" x="0.0" y="74.5" width="375" height="592.5"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vzE-Yc-djh" userLabel="shopImage">
-                                        <rect key="frame" x="20" y="20" width="335" height="149"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="vzE-Yc-djh" userLabel="shopBanner">
+                                        <rect key="frame" x="20" y="20" width="335" height="149.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="vzE-Yc-djh" secondAttribute="height" multiplier="375:167" id="GT4-3D-4ho"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NcO-rb-MQF" userLabel="shopLogo">
-                                        <rect key="frame" x="280" y="149" width="75" height="75"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_shape" translatesAutoresizingMaskIntoConstraints="NO" id="NcO-rb-MQF" userLabel="shopLogo">
+                                        <rect key="frame" x="280" y="149.5" width="75" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="NcO-rb-MQF" secondAttribute="height" multiplier="1:1" id="obC-GU-ed4"/>
                                         </constraints>
@@ -94,10 +92,10 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L65-lZ-lGw" userLabel="TextFormView">
-                                        <rect key="frame" x="0.0" y="232" width="375" height="360.5"/>
+                                        <rect key="frame" x="0.0" y="232.5" width="375" height="360"/>
                                         <subviews>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VKj-gL-VWy" userLabel="ScrollView">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="360.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="360"/>
                                             </scrollView>
                                         </subviews>
                                         <constraints>
@@ -167,7 +165,7 @@
                     </view>
                     <connections>
                         <outlet property="mainScrollView" destination="VKj-gL-VWy" id="DPT-5K-wRC"/>
-                        <outlet property="shopImage" destination="vzE-Yc-djh" id="Scx-qn-vYt"/>
+                        <outlet property="shopBanner" destination="vzE-Yc-djh" id="rZD-5V-bCC"/>
                         <outlet property="shopLogo" destination="NcO-rb-MQF" id="jsr-uY-MfZ"/>
                         <outlet property="textFormView" destination="L65-lZ-lGw" id="PYF-iG-xDP"/>
                     </connections>
@@ -178,8 +176,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="banner_placeholder" width="375" height="167"/>
         <image name="icon_back_black" width="10" height="16"/>
         <image name="logo_home" width="86" height="25"/>
+        <image name="logo_shape" width="100" height="97.5"/>
         <image name="plus" width="112" height="110"/>
     </resources>
 </document>

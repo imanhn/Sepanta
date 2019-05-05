@@ -14,6 +14,7 @@ struct ProfileInfo {
     var first_name : String?
     var last_name : String?
     var bio : String?
+    var banner : String?
     var address : String?
     var image : String?
     var national_code : String?

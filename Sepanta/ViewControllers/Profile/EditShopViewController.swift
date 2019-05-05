@@ -19,7 +19,7 @@ class EditShopViewController :  UIViewControllerWithKeyboardNotificationWithErro
     
     var imagePickerDelegate: ImagePicker!
     
-    @IBOutlet weak var shopImage: UIImageView!
+    @IBOutlet weak var shopBanner: UIImageView!
     @IBOutlet weak var shopLogo: UIImageView!
     
     
@@ -33,12 +33,14 @@ class EditShopViewController :  UIViewControllerWithKeyboardNotificationWithErro
     var editshopUI : EditShopUI!
     
     @IBAction func homeTapped(_ sender: Any) {
+        editshopUI.disposeList.forEach({$0.dispose()})
         editshopUI = nil
         //NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: Profile())
         self.coordinator!.popHome()
     }
     
     @IBAction func backTapped(_ sender: Any) {
+        editshopUI.disposeList.forEach({$0.dispose()})
         editshopUI = nil
         //NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: Profile())
         self.coordinator!.popOneLevel()

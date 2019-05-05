@@ -29,13 +29,13 @@ class ShopsListDataSource {
             // "http://www.ipsepanta.ir/api/v1/category-shops-list?slug=1&category_id=4&state_code=8"
             aParameter = ["slug":"1",
                           "category_id":"\(catagoryID)",
-                          "state_code":"\(state!)"]
+                          "code":"\(state!)"]
         }
         if (state != nil && state != "" ) && (city != nil && city != "") {
             // "http://www.ipsepanta.ir/api/v1/category-shops-list?slug=2&category_id=4&city_code=1246"
             aParameter = ["slug":"2",
                           "category_id":"\(catagoryID)",
-                "city_code":"\(city!)"]
+                "code":"\(city!)"]
         }
 
         print("Running network request category-shops-list... \(aParameter)  state : \(state!)  City : \(city!)")

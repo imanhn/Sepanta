@@ -57,6 +57,7 @@ class NetworkManager {
     var updateProfileInfoSuccessful = BehaviorRelay<Bool>(value: false)
     var shopSearchResultObs = BehaviorRelay<[ShopSearchResult]>(value: [ShopSearchResult]())
     var profileObs = BehaviorRelay<Profile>(value: Profile())
+    var shopProfileObs = BehaviorRelay<Profile>(value: Profile())
     var loginSucceed =  BehaviorRelay<Bool>(value: false)
     var SMSConfirmed =  BehaviorRelay<Bool>(value: false)
     var bankObs = BehaviorRelay<Bank>(value: Bank())
@@ -90,9 +91,9 @@ class NetworkManager {
         //print(escapedString!)
         return escapedString!
     }
-    func run(API apiName : String, QueryString aQuery : String, Method aMethod : HTTPMethod, Parameters aParameter : Dictionary<String, String>?, Header  aHeader : HTTPHeaders? ,WithRetry : Bool) {
+    func run(API apiName : String, QueryString aQuery : String, Method aMethod : HTTPMethod, Parameters aParameter : Dictionary<String, String>?, Header  aHeader : HTTPHeaders? ,WithRetry : Bool,TargetObs targetObs : String = "") {
         var retryTime = 4
-        var timeOut : Double = 4
+        var timeOut : Double = 5
         if WithRetry == false {
             print("NOT Retrying / High Timeout - \(apiName)")
             retryTime = 1
@@ -132,7 +133,7 @@ class NetworkManager {
             if let aresult = jsonResult as? NSDictionary {
                 
                 self.result = aresult
-                self.parser = JSONParser(API: apiName,Method : aMethod)
+                self.parser = JSONParser(API: apiName,Method : aMethod,TargetObs : targetObs)
 
 
                 if let aparser = self.parser {

@@ -77,7 +77,7 @@ class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
 
     override func viewDidLoad() {
         loadMenuItems()
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backFromMenuTapped)))
+        //self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backFromMenuTapped)))
         bindToTableView()
         
     }

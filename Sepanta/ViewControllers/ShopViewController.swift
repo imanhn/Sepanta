@@ -51,17 +51,14 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var ContactButton: UIButton!
     @IBOutlet weak var PostsButton: UIButton!
+    
     @IBAction func showPostsTapped(_ sender: Any) {
         self.panelView.tabJust = .Right
         self.panelView.setNeedsDisplay()
         self.shopUI!.showShopPosts()
     }
     
-    @IBAction func logoutTapped(_ sender: Any) {
-        shopUI = nil
-        self.coordinator!.logout()
-    }
-    
+
     @IBAction func showContactTapped(_ sender: Any) {
         self.panelView.tabJust = .Left
         self.panelView.setNeedsDisplay()
@@ -107,13 +104,14 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     }
     
     func getShopFromServer() {
+        NetworkManager.shared.shopProfileObs = BehaviorRelay<Profile>(value: Profile())
         //print("self.shop.user_id : ",self.shop.user_id)
         guard self.shop.user_id != 0 && self.shop.user_id != nil else {
             alert(Message: "اظلاعات این فروشگاه کامل نیست")
             return
         }
         let aParameter = ["user id":"\(self.shop.user_id!)"]
-        NetworkManager.shared.run(API: "profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
+        NetworkManager.shared.run(API: "profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true,TargetObs: "SHOP")
     }
     
     func editAuthorized()-> Bool{

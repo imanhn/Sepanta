@@ -25,6 +25,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     var updateFromProfileDisposable : Disposable!
     var views = Dictionary<String,UIView>()
     var buttons = Dictionary<String,UIButton>()
+    var followButton = FollowButton(type: .custom)
     var postsView = UIView()
     let myDisposeBag = DisposeBag()
     var rightPanelscrollView = UIScrollView()
@@ -92,11 +93,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     }
     
     @objc func followTapped(sender : Any){
-        if buttons["followButton"] == nil {
-            print("Error ShopUI: Odd!, followbutton should not be NIL here!")
-            return
-        }
-        buttons["followButton"]!.setDisable()
+        followButton.setDisable()
         Spinner.start()
         var aProfile = NetworkManager.shared.profileObs.value
         let aParameter = ["shop id":"\(aProfile.shop_id ?? 0)"]
@@ -110,17 +107,17 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 aProfile.is_follow = !(aProfile.is_follow ?? false )
                // print("After : \(String(describing: aProfile.is_follow))")
                 NetworkManager.shared.profileObs.accept(aProfile)
-                self.buttons["followButton"]!.setEnable()
+                self.followButton.setEnable()
                 //print("Done")
             }else{
-                self.buttons["followButton"]!.setEnable()
+                self.followButton.setEnable()
                 print("Follow request Not Done! because status is not ready Status : ",innerStatus)
             }
             Spinner.stop()
             NetworkManager.shared.status = BehaviorRelay<CallStatus>(value: CallStatus.ready)
         }, onError: { _ in
             print("Error")
-            self.buttons["followButton"]!.setEnable()
+            self.followButton.setEnable()
             self.delegate.alert(Message: "عضویت قابل انجام نیست، احتمالاْ شبکه قطع می باشد مجددا تلاش فرمایید.")
             NetworkManager.shared.status = BehaviorRelay<CallStatus>(value: CallStatus.ready)
             Spinner.stop()
@@ -199,12 +196,13 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
             xCursor = xCursor + marginXBTWButtons + buttonDim
             let totalTrailingDistanceToRight = self.delegate.shopLogoTrailing.constant + self.delegate.shopLogoShopTitleDistance.constant + self.delegate.shopLogo.frame.width
             let buttonWidth = viewWidth - xCursor - totalTrailingDistanceToRight
-            buttons["followButton"] = SubmitButton(type: .custom)
-            buttons["followButton"]!.frame = CGRect(x: xCursor, y: 0, width: buttonWidth, height: buttonDim)
-            buttons["followButton"]!.setTitle("بررسی عضویت...", for: .normal)
-            buttons["followButton"]!.addTarget(self, action: #selector(followTapped), for: .touchUpInside)
-            buttons["followButton"]!.setDisable()
-            self.delegate.PostToolbarView.addSubview(buttons["followButton"]!)
+            followButton = FollowButton(type: .custom)
+            followButton.isFollowed = false
+            followButton.frame = CGRect(x: xCursor, y: 0, width: buttonWidth, height: buttonDim)
+            followButton.setTitle("بررسی عضویت...", for: .normal)
+            followButton.addTarget(self, action: #selector(followTapped), for: .touchUpInside)
+            followButton.setDisable()
+            self.delegate.PostToolbarView.addSubview(followButton)
         }
         
     }
@@ -233,7 +231,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         shopFavDisp.disposed(by: myDisposeBag)
         disposeList.append(shopFavDisp)
         
-        updateFromProfileDisposable = NetworkManager.shared.profileObs
+        updateFromProfileDisposable = NetworkManager.shared.shopProfileObs
             .filter({$0.id != nil})
             .subscribe(onNext: { [weak self] aProfile in
                 //print("SUBSCRIPTION UPDATE",aProfile)
@@ -245,6 +243,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 self?.delegate.followersNumLabel.text = "\(aProfile.follower_count ?? 0)"
                 self?.delegate.offLabel.text = "\(aProfile.shop_off ?? 0)%"
                 self?.delegate.rateLabel.text = "(\(aProfile.rate ?? "0"))"
+                self?.delegate.shopDescription.text = "\(aProfile.bio ?? aProfile.shop_name ?? "")"
                 let rate : Float = Float(aProfile.rate ?? "0.0") ?? 0
                 if rate > 0.5 {self?.delegate.star1.image = UIImage(named: "icon_star_on")}
                 if rate > 1.5 {self?.delegate.star2.image = UIImage(named: "icon_star_on")}
@@ -259,15 +258,14 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                     self?.delegate.alert(Message: "خطای داخلی اتفاق افتاده است")
                 }
                 //print("Profile : ",aProfile)
-                if self?.buttons["followButton"] != nil {
-                    if aProfile.is_follow != nil  {
-                        if aProfile.is_follow! {
-                            self?.buttons["followButton"]!.setTitle("عضو شده اید", for: .normal)
-                            self?.buttons["followButton"]!.setEnable()
-                        }else{
-                            self?.buttons["followButton"]!.setTitle("عضویت", for: .normal)
-                            self?.buttons["followButton"]!.setEnable()
-                        }
+                if aProfile.is_follow != nil  {
+                    self?.followButton.isFollowed = aProfile.is_follow ?? false
+                    if aProfile.is_follow! {
+                        self?.followButton.setTitle("عضو شده اید", for: .normal)
+                        self?.followButton.setEnable()
+                    }else{
+                        self?.followButton.setTitle("عضویت", for: .normal)
+                        self?.followButton.setEnable()
                     }
                 }
                 
@@ -285,14 +283,28 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                     let imageURL = URL(string: NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_profile_image + aProfile.image!)
                     //print("Shop Image : ",imageURL ?? "Nil")
                     if imageURL != nil {
-                        self?.delegate.shopImage.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!,ContentMode: UIViewContentMode.scaleToFill)
-                        self?.delegate.shopLogo.setImageFromCache(PlaceHolderName: "logo_shape@1x", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!)
+                        self?.delegate.shopLogo.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!)
                         self?.delegate.shopLogo.layer.shadowColor = UIColor.black.cgColor
                         self?.delegate.shopLogo.layer.shadowOffset = CGSize(width: 3, height: 3)
                         self?.delegate.shopLogo.layer.shadowRadius = 3
                         self?.delegate.shopLogo.layer.shadowOpacity = 0.3
                     }
                 }
+                if (aProfile.banner ?? "").count > 0 {
+                    let imageURL = URL(string: NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_banner_image + aProfile.banner!)
+                    if imageURL != nil {
+                        self?.delegate.shopImage.setImageFromCache(PlaceHolderName: "banner_placeholder", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.banner!,ContentMode: UIViewContentMode.scaleToFill)
+                        self?.delegate.shopImage.layer.shadowColor = UIColor.black.cgColor
+                        self?.delegate.shopImage.layer.shadowOffset = CGSize(width: 3, height: 3)
+                        self?.delegate.shopImage.layer.shadowRadius = 3
+                        self?.delegate.shopImage.layer.shadowOpacity = 0.3
+                    }
+                }else{
+                    self?.delegate.shopImage.image = UIImage(named: "banner_placeholder")
+                }
+
+                
+
                 //if aProfil
             })
         updateFromProfileDisposable.disposed(by: myDisposeBag)
@@ -362,7 +374,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         self.delegate.contentView.subviews.forEach({$0.removeFromSuperview()})
         disposeList.forEach({$0.dispose()})
         cursurY = 10
-        let aProfile = NetworkManager.shared.profileObs.value
+        let aProfile = NetworkManager.shared.shopProfileObs.value
         let buttonHeight = self.delegate.contentView.frame.height / 7
         let textFieldWidth = (self.delegate.contentView.bounds.width) - (2 * marginX)
         var shopView = UIView()

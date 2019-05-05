@@ -45,6 +45,9 @@ class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded{
         self.coordinator!.popOneLevel()
     }
     
+    @IBAction func menuTapped(_ sender: Any) {
+         self.coordinator!.openButtomMenu()
+    }
     @IBAction func homeTapped(_ sender: Any) {
         shopDataSource = nil
         self.coordinator!.popHome()

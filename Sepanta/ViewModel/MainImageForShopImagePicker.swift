@@ -33,28 +33,42 @@ class MainImageForShopImagePicker : ImagePicker {
     
     override func imageCropViewController(_ controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect, rotationAngle: CGFloat) {
         self.editShopViewController.navigationController?.popViewController(animated: true)
-        self.editShopViewController.shopImage.image = croppedImage
+        self.editShopViewController.shopBanner.image = croppedImage
         uploadPicture()
     }
     
     func uploadPicture(){
-        let profileimage = self.editShopViewController.shopImage.image!
+        Spinner.start()
+        let profileimage = self.editShopViewController.shopBanner.image!
         let imageData = UIImageJPEGRepresentation(profileimage, 0.2)!
-        let targetUrl = URL(string: NetworkManager.shared.baseURLString+"/profile-image")!
+        let targetUrl = URL(string: NetworkManager.shared.baseURLString+"/banner-image")!
+        var messageAlerted = false
         Alamofire.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(imageData, withName: "image",fileName: "image.jpg", mimeType: "image/jpg")
         }, usingThreshold: UInt64.init(), to: targetUrl, method: HTTPMethod.post, headers: NetworkManager.shared.headers, encodingCompletion: { encodingResult in
             switch encodingResult {
             case .success(let upload, _ , _):
-                print("SUCCEED,Updating Profile....")
-                let aParameter = ["user id":"\(LoginKey.shared.userID)"]
-                NetworkManager.shared.run(API: "profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
+                print("SUCCEED,Sending Banner Image....")
                 upload.responseJSON { response in
-                    //print("RESPONDED : ",response)
+                    if let aDic = response.value as? NSDictionary {
+                        if let aStatus = aDic["status"] as? String,
+                            let aMessage = aDic["message"] as? String{
+                            print("** CASTED! Succeess ** ","aStatus : ",aStatus)
+                            messageAlerted = true
+                            self.editShopViewController.alert(Message: aMessage)
+                        }
+                    }
+                    if response.value != nil {
+                        if messageAlerted == false { self.editShopViewController.alert(Message: "تصویر بارگذاری شد") }
+                        print("** Succeess ** ")
+                    }
                     //debugPrint(response)
                 }
+                Spinner.stop()
             case .failure(let encodingError):
+                if messageAlerted == false { self.editShopViewController.alert(Message: "عملیات بارگذاری تصویر با خطا مواجه شد، لطفاْ مجددا تلاش بفرمایید") }
                 print("Uploading image Failed : ",encodingError)
+                Spinner.stop()
             }
         })
     }

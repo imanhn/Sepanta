@@ -19,7 +19,7 @@ class JSONParser {
     var netObjectsDispose = DisposeBag()
     var resultSubject = BehaviorRelay<NSDictionary>(value : NSDictionary())
 //    var result : JSON
-    init(API apiName : String, Method aMethod : HTTPMethod) {
+    init(API apiName : String, Method aMethod : HTTPMethod,TargetObs targetObs : String) {
        // aMethod is not being used here for network operation.
        // It has only added to distinguish services with same API name and different Method
        // So they need their own Observable type
@@ -121,10 +121,17 @@ class JSONParser {
                         NetworkManager.shared.messageObs.accept(amessage)
                     }
                     
-                } else if (apiName == "profile") && (aMethod == HTTPMethod.post) {
+                } else if (apiName == "profile")  {
                     //Returns Profile Data for a user Id
                     let aProfile = (self?.processAsProfile(Result: aDic))!
-                    NetworkManager.shared.profileObs.accept(aProfile)
+                    if targetObs == "SHOP" {
+                        //NetworkManager.shared.shopProfileObs = BehaviorRelay<Profile>(value: aProfile)
+                        NetworkManager.shared.shopProfileObs.accept(aProfile)
+                    }else{
+                        //NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: aProfile)
+                        NetworkManager.shared.profileObs.accept(aProfile)
+                    }
+                    
                 }else if (apiName == "report-comment") || (apiName == "report-post") || (apiName == "report-comment"){
                     //Returns Profile Data for a user Id
                     if let amessage = aDic["message"] as? String {
@@ -468,6 +475,7 @@ class JSONParser {
         profileInfo.bio = (aProfileDicAsNS["bio"] as? String) ?? ""
         profileInfo.address = (aProfileDicAsNS["address"] as? String) ?? ""
         profileInfo.image = (aProfileDicAsNS["image"] as? String) ?? ""
+        profileInfo.banner = (aProfileDicAsNS["banner"] as? String) ?? ""
         profileInfo.national_code = (aProfileDicAsNS["national_code"] as? String) ?? ""
         profileInfo.state = (aProfileDicAsNS["state"] as? String) ?? ""
         profileInfo.city = (aProfileDicAsNS["city"] as? String) ?? ""
@@ -546,6 +554,8 @@ class JSONParser {
         profile.message = (aProfileDicAsNS["message"] as? String) ?? ""
         profile.id = (aProfileDicAsNS["id"] as? Int) ?? 0
         profile.image = (aProfileDicAsNS["image"] as? String) ?? ""
+        profile.banner = (aProfileDicAsNS["banner"] as? String) ?? ""
+        profile.bio = (aProfileDicAsNS["bio"] as? String) ?? ""
         profile.address = (aProfileDicAsNS["address"] as? String) ?? ""
         profile.shop_id = (aProfileDicAsNS["shop_id"] as? Int) ?? 0
         profile.shop_name = (aProfileDicAsNS["shop_name"] as? String) ?? ""
@@ -565,14 +575,13 @@ class JSONParser {
         profile.is_follow = (aProfileDicAsNS["is_follow"] as? Bool) ?? false
         profile.follow_count = (aProfileDicAsNS["follow_count"] as? Int) ?? 0
         profile.follower_count = (aProfileDicAsNS["follower_count"] as? Int) ?? 0
-        
         if let contents = aProfileDicAsNS["content"] as? NSArray {
             for aContent in contents {
                 let aPostOrShop = (aContent as! NSDictionary)
                 //print("aPostOrShop : ",aPostOrShop)
                 //print("shop_Name : ",aPostOrShop["shop_name"])
                 if profile.role?.uppercased() == "User".uppercased() {//aPostOrShop["shop_name"] != nil || aPostOrShop["shop_off"] != nil {
-                    print("This is a shop")
+                    //print("This is a shop")
                     var newShop = Shop()
                     newShop.shop_id = (aPostOrShop["shop_id"] as? Int) ?? 0
                     newShop.user_id = (aPostOrShop["user_id"] as? Int) ?? 0

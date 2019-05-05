@@ -13,6 +13,8 @@ struct Profile {
     var message : String?
     var id : Int?
     var image : String?
+    var banner : String?
+    var bio : String?
     var address : String?
     var shop_id : Int?
     var shop_name : String?

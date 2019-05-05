@@ -44,7 +44,11 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
     
     @IBAction func SendClicked(_ sender: Any) {
         self.view.endEditing(true)
-        let aParameter = ["cellphone":"\(self.MobileTextField.text ?? "")"]
+
+        print("no : ",self.MobileTextField.text!)
+        print("Converted : ",(self.MobileTextField.text ?? "").toEnglishNumbers())
+        let aMobileNo = (self.MobileTextField.text ?? "").toEnglishNumbers()
+        let aParameter = ["cellphone":"\(aMobileNo)"]
         NetworkManager.shared.run(API: "login", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
     }
     
@@ -60,9 +64,6 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
     func doSubscribtions(){
         let submitDisp = MobileTextField.rx.text
             .subscribe(onNext: { [unowned self] (atext) in
-                if !atext!.toEnglishNumbers().hasPrefix("09") {
-                    self.MobileTextField.text = "09"
-                }
                 if atext?.count == 11 {
                     self.submitButton.isEnabled = true
                 }else{
@@ -75,7 +76,7 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
         
         let smsDisp = NetworkManager.shared.SMSConfirmed
             .filter({$0})
-            .observeOn(MainScheduler.asyncInstance)
+            //.observeOn(MainScheduler.asyncInstance)
             .subscribe(onNext: { [unowned self] _ in
                 print("Pushing SMSVC")
                 NetworkManager.shared.SMSConfirmed.accept(false)

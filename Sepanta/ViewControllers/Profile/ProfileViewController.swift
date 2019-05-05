@@ -29,6 +29,7 @@ class ProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
     }
     
     @IBAction func menuTapped(_ sender: Any) {
+        print("Menu Tapped")
         self.coordinator!.openButtomMenu()
     }
     @IBAction func editTapped(_ sender: Any) {

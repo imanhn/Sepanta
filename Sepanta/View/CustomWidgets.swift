@@ -140,6 +140,27 @@ class SubmitButtonOnRedBar: UIButton {
     
 }
 
+class FollowButton: SubmitButton {    
+    var isFollowed = false
+    override var isEnabled: Bool {
+        didSet {
+            DispatchQueue.main.async {
+                if self.isEnabled {
+                    if self.isFollowed {
+                        self.backgroundColor = UIColor(hex: 0x515152)
+                    }else{
+                        self.backgroundColor = UIColor(hex: 0x9FDA64)
+                    }
+                    //self.alpha = 1.0
+                }
+                else {
+                    self.backgroundColor = UIColor(hex: 0xD6D7D9)
+                    //self.alpha = 0.5
+                }
+            }
+        }
+    }
+}
 class RoundedButton: UIButton {
     var curvSize : CGFloat = 5;
     override var isEnabled: Bool {
