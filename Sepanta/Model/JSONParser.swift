@@ -144,6 +144,10 @@ class JSONParser {
                     //Returns Profile Data for a user Id
                     let aPollNo = (self?.processAsPollGet(Result: aDic))!
                     NetworkManager.shared.pollObs.accept(aPollNo)
+                } else if (apiName == "rating") && (aMethod == HTTPMethod.post) {
+                    //Returns Rating...
+                    let arate = (self?.processRating(Result: aDic))!
+                    NetworkManager.shared.shopRateObs.accept(arate)
                 } else if (apiName == "contact") && (aMethod == HTTPMethod.post) {
                     // Sets True for commentSendingSuccessful to be observable by PostUI
                     NetworkManager.shared.message = (aDic["message"] as? String) ?? "نظر شما ثبت گردید"
@@ -227,6 +231,26 @@ class JSONParser {
                 }
             ).disposed(by: netObjectsDispose)
     }
+    func processRating(Result aResult : NSDictionary) -> Rate {
+        var aRate = Rate()
+        if aResult["error"] != nil {
+            print("ERROR in Card Request Parsing : ",aResult["error"]!)
+        }
+        if let amessage = aResult["message"] as? String{
+            aRate.message = amessage
+        }
+        if let astatus = aResult["status"] as? String{
+            aRate.status = astatus
+        }
+        if let arate_count = aResult["rate_count"] as? Int{
+            aRate.rate_count = arate_count
+        }
+        if let arate_avg = aResult["rate_avg"] as? Int{
+            aRate.rate_avg = arate_avg
+        }
+        return aRate
+    }
+
     func processPoints(Result aResult : NSDictionary) -> UserPoints {
         var aUserPoints = UserPoints()
         aUserPoints.points = [PointElement]()

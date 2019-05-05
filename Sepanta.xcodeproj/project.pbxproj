@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0F052ED9221AE8C5009175EA /* LoginKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F052ED8221AE8C5009175EA /* LoginKey.swift */; };
 		0F052EDB221C0790009175EA /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F052EDA221C0790009175EA /* HomeCoordinator.swift */; };
+		0F056010227F811F005F7BCE /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F05600F227F811F005F7BCE /* RateView.swift */; };
+		0F056012227F92BC005F7BCE /* Rate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F056011227F92BC005F7BCE /* Rate.swift */; };
 		0F0661AD2257E62400A83734 /* SepantaGroupsSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0661AC2257E62400A83734 /* SepantaGroupsSubscription.swift */; };
 		0F0661B0225BE98100A83734 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0661AF225BE98100A83734 /* PostViewController.swift */; };
 		0F0661B2225BEA6A00A83734 /* PostUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0661B1225BEA6A00A83734 /* PostUI.swift */; };
@@ -138,6 +140,8 @@
 /* Begin PBXFileReference section */
 		0F052ED8221AE8C5009175EA /* LoginKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginKey.swift; sourceTree = "<group>"; };
 		0F052EDA221C0790009175EA /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		0F05600F227F811F005F7BCE /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
+		0F056011227F92BC005F7BCE /* Rate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rate.swift; sourceTree = "<group>"; };
 		0F0661AC2257E62400A83734 /* SepantaGroupsSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaGroupsSubscription.swift; sourceTree = "<group>"; };
 		0F0661AF225BE98100A83734 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		0F0661B1225BEA6A00A83734 /* PostUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUI.swift; sourceTree = "<group>"; };
@@ -383,6 +387,7 @@
 				0F1B755C2235C1080087C0DB /* SlidesAndPaths.swift */,
 				0FDA55D42225C02800E7C889 /* Catagory.swift */,
 				0FA307DD222700B100EDA829 /* Shop.swift */,
+				0F056011227F92BC005F7BCE /* Rate.swift */,
 				0F817A6E22354F8600F1738E /* Profile.swift */,
 				0F70A648226BC7BF0020C33C /* ProfileInfoWrapper.swift */,
 				0FD32DCA227076C40092D6FC /* ProfileInfo.swift */,
@@ -458,6 +463,7 @@
 				0F50AE73226F66950028D8B6 /* MapViewAnnotations.swift */,
 				0F8E3F6F2275CCF300E51B17 /* CardView.swift */,
 				0F63F71D2278BBDC00799C8F /* NewCardView.swift */,
+				0F05600F227F811F005F7BCE /* RateView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -839,7 +845,9 @@
 				0FFCDC54226CA96F0087BFEF /* Notifications.swift in Sources */,
 				0F890CFE2214B4CD0091FA2E /* Coordinator.swift in Sources */,
 				0F1B755D2235C1080087C0DB /* SlidesAndPaths.swift in Sources */,
+				0F056012227F92BC005F7BCE /* Rate.swift in Sources */,
 				0F1B75612236BA610087C0DB /* CacheManager.swift in Sources */,
+				0F056010227F811F005F7BCE /* RateView.swift in Sources */,
 				0FF55AB5227B4CFA0093DEE0 /* EditShopUI.swift in Sources */,
 				0F997399227BBAA400A65716 /* LogoImageForShopImagePicker.swift in Sources */,
 				0FE8BA062205239E00C868C3 /* HomeViewController.swift in Sources */,

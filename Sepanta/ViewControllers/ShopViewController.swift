@@ -18,6 +18,8 @@ import AlamofireImage
 class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     weak var coordinator : HomeCoordinator?
     let myDisposeBag = DisposeBag()
+    var disposeList = [Disposable]()
+    var shopRateDisp : Disposable!
     var shop : Shop!
     var shopUI : ShopUI!
     //var shopDataSource : ShopDataSource!
@@ -32,11 +34,11 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     @IBOutlet weak var offLabel: UILabel!
     @IBOutlet weak var shopTitle: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
-    @IBOutlet weak var star1: UIImageView!
-    @IBOutlet weak var star2: UIImageView!
-    @IBOutlet weak var star3: UIImageView!
-    @IBOutlet weak var star4: UIImageView!
-    @IBOutlet weak var star5: UIImageView!
+    @IBOutlet weak var star1: UIButton!
+    @IBOutlet weak var star2: UIButton!
+    @IBOutlet weak var star3: UIButton!
+    @IBOutlet weak var star4: UIButton!
+    @IBOutlet weak var star5: UIButton!
     @IBOutlet weak var rateLabel: UILabel!
     @IBOutlet weak var followersNumLabel: UILabel!
     @IBOutlet weak var shopDescription: UILabel!
@@ -51,6 +53,47 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var ContactButton: UIButton!
     @IBOutlet weak var PostsButton: UIButton!
+
+    @IBAction func rateTapped(_ sender: Any) {
+        
+        print("RateTApped : ",shop.shop_id ?? 0)
+        let rWidth = (self.view.frame.width * 0.9)
+        let rHeight = rWidth / 2
+        let xOffset = self.view.frame.width * 0.05
+        let yOffset = (self.view.frame.height - rHeight) / 2
+        
+        let rateViewRect = CGRect(x: xOffset, y: yOffset, width: rWidth, height: rHeight)
+        if let ashopID = shop.shop_id  {
+            let rateView = RateView(frame: rateViewRect,ShopID: ashopID)
+            self.view.addSubview(rateView)
+            shopRateDisp = NetworkManager.shared.shopRateObs
+                .filter({$0.rate_avg != nil && $0.rate_avg! > 0})
+                .subscribe(onNext: { [unowned self] arate in
+                    self.updateNewRate(arate)
+                    NetworkManager.shared.shopRateObs = BehaviorRelay<Rate>(value: Rate())
+                })
+            shopRateDisp.disposed(by: myDisposeBag)
+            disposeList.append(shopRateDisp)
+        }
+    }
+    
+    func updateNewRate(_ aRate : Rate){
+        if let rate = aRate.rate_avg {
+            self.star1.setImage(UIImage(named: "icon_star_gray"), for: .normal)
+            self.star2.setImage(UIImage(named: "icon_star_gray"), for: .normal)
+            self.star3.setImage(UIImage(named: "icon_star_gray"), for: .normal)
+            self.star4.setImage(UIImage(named: "icon_star_gray"), for: .normal)
+            self.star5.setImage(UIImage(named: "icon_star_gray"), for: .normal)
+            if rate >= 1 {self.star1.setImage(UIImage(named: "icon_star_on"), for: .normal)}
+            if rate >= 2 {self.star2.setImage(UIImage(named: "icon_star_on"), for: .normal)}
+            if rate >= 3 {self.star3.setImage(UIImage(named: "icon_star_on"), for: .normal)}
+            if rate >= 4 {self.star4.setImage(UIImage(named: "icon_star_on"), for: .normal)}
+            if rate >= 5 {self.star5.setImage(UIImage(named: "icon_star_on"), for: .normal)}
+        }
+        rateLabel.text = "(\(aRate.rate_count ?? 1))"
+        self.alert(Message: aRate.message ?? "امتیاز شما ثبت گردید")
+        shopRateDisp?.dispose()
+    }
     
     @IBAction func showPostsTapped(_ sender: Any) {
         self.panelView.tabJust = .Right
@@ -115,7 +158,7 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     }
     
     func editAuthorized()-> Bool{
-        print("***Check Authorization : ","\(self.shop.user_id ?? 0)" ,"  ",LoginKey.shared.userID)
+        //print("***Check Authorization : ","\(self.shop.user_id ?? 0)" ,"  ",LoginKey.shared.userID)
         if "\(self.shop.user_id ?? 0)" == LoginKey.shared.userID {
             return true
         }else{

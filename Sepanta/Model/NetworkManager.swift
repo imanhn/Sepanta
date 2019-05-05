@@ -67,6 +67,7 @@ class NetworkManager {
     var notificationForUserObs = BehaviorRelay<[NotificationForUser]>(value: [NotificationForUser]())
     var notificationForShopObs = BehaviorRelay<[NotificationForShop]>(value: [NotificationForShop]())
     var generalNotifObs = BehaviorRelay<[GeneralNotification]>(value: [GeneralNotification]())
+    var shopRateObs = BehaviorRelay<Rate>(value: Rate())
     // Initialization
     
     private init() {

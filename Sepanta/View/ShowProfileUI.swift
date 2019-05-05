@@ -211,13 +211,8 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
                 break
             }
         }
+        NetworkManager.shared.postDetailObs = BehaviorRelay<Post>(value: Post())
         self.delegate.coordinator!.PushAPost(PostID: selectedPost.id ?? (aButton?.tag)!, OwnerUserID: selectedPost.shopId!)
-        /*
-        if let postID = aButton?.tag {
-         self.delegate.coordinator!.PushAPost(PostID: postID, UserID: 1) // IMAN
-        }else{
-            self.delegate.alert(Message: "اطلاعات این پست کامل نیست")
-        }*/
     }
     
     func showContacts() {

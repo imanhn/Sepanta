@@ -64,7 +64,7 @@ class PostUI {
     
     func buildPostView(){
         let sharedPostObs = NetworkManager.shared.postDetailObs
-            .share(replay: 1, scope: .whileConnected)
+            //.share(replay: 1, scope: .whileConnected)
             .subscribe(onNext: { aPostDetail in
                 let aCommentsArray = aPostDetail.comments
                 self.buildPostView(With: aPostDetail)
@@ -99,15 +99,16 @@ class PostUI {
         if innerPost.image != "" && innerPost.image != nil {
             if innerPost.image != nil {
                 let imageStrUrl = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + innerPost.image!
-                //print("PostUI : Reading : ",imageStrUrl)
+                print("*PostUI : Reading : ",imageStrUrl)
                 let imageCastedURL = URL(string: imageStrUrl)
                 if imageCastedURL != nil {
-                    postImage.setImageFromCache(PlaceHolderName: "AppIcon", Scale: 1, ImageURL: imageCastedURL!, ImageName: innerPost.image!)
+                    postImage.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1, ImageURL: imageCastedURL!, ImageName: innerPost.image!)
                 }else{
                     print("PostUI : Post Image can not be casted.")
                 }
             }
         }else{
+            print("*PostUI : innerPost is nil! \(innerPost.image)")
             postImage.image = UIImage(named: "logo_shape")
             postImage.contentMode = .scaleToFill
         }

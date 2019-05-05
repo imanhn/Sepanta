@@ -54,9 +54,9 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     
     
     @objc func shareTapped(sender : Any){
-        var shopURL = NetworkManager.shared.profileObs.value.url
+        var shopURL = NetworkManager.shared.shopProfileObs.value.url
         if shopURL == nil {
-            if let ashopID = NetworkManager.shared.profileObs.value.shop_id  {
+            if let ashopID = NetworkManager.shared.shopProfileObs.value.shop_id  {
                 shopURL = "/shop/\(ashopID)"
             }
         }
@@ -95,7 +95,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     @objc func followTapped(sender : Any){
         followButton.setDisable()
         Spinner.start()
-        var aProfile = NetworkManager.shared.profileObs.value
+        var aProfile = NetworkManager.shared.shopProfileObs.value
         let aParameter = ["shop id":"\(aProfile.shop_id ?? 0)"]
         NetworkManager.shared.run(API: "follow-unfollow-request", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: false)
         let statusDisp = NetworkManager.shared.status
@@ -106,7 +106,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 //print("Before : \(String(describing: aProfile.is_follow))")
                 aProfile.is_follow = !(aProfile.is_follow ?? false )
                // print("After : \(String(describing: aProfile.is_follow))")
-                NetworkManager.shared.profileObs.accept(aProfile)
+                NetworkManager.shared.shopProfileObs.accept(aProfile)
                 self.followButton.setEnable()
                 //print("Done")
             }else{
@@ -245,11 +245,11 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 self?.delegate.rateLabel.text = "(\(aProfile.rate ?? "0"))"
                 self?.delegate.shopDescription.text = "\(aProfile.bio ?? aProfile.shop_name ?? "")"
                 let rate : Float = Float(aProfile.rate ?? "0.0") ?? 0
-                if rate > 0.5 {self?.delegate.star1.image = UIImage(named: "icon_star_on")}
-                if rate > 1.5 {self?.delegate.star2.image = UIImage(named: "icon_star_on")}
-                if rate > 2.5 {self?.delegate.star3.image = UIImage(named: "icon_star_on")}
-                if rate > 3.5 {self?.delegate.star4.image = UIImage(named: "icon_star_on")}
-                if rate > 4.5 {self?.delegate.star5.image = UIImage(named: "icon_star_on")}
+                if rate > 0.5 {self?.delegate.star1.setImage(UIImage(named: "icon_star_on"), for: .normal)}
+                if rate > 1.5 {self?.delegate.star2.setImage(UIImage(named: "icon_star_on"), for: .normal)}
+                if rate > 2.5 {self?.delegate.star3.setImage(UIImage(named: "icon_star_on"), for: .normal)}
+                if rate > 3.5 {self?.delegate.star4.setImage(UIImage(named: "icon_star_on"), for: .normal)}
+                if rate > 4.5 {self?.delegate.star5.setImage(UIImage(named: "icon_star_on"), for: .normal)}
                 //print("ShopUI : setting shopui.posts to  :: ",aProfile.content)
                 if let postContents = aProfile.content as? [Post] {
                     self?.posts.accept(postContents)
@@ -419,11 +419,8 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 break
             }
         }
+        NetworkManager.shared.postDetailObs = BehaviorRelay<Post>(value: Post())
         self.delegate.coordinator!.PushAPost(PostID: selectedPost.id ?? (aButton?.tag)!, OwnerUserID: self.delegate.shop.user_id!)
-        /*
-        let postID = (sender as! UIButton).tag
-        print("ShopUI : Pushing Post with ID : ",postID)
-        self.delegate.coordinator?.PushAPost(PostID: postID)
-         */
+
     }
 }

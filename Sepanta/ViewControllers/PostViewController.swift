@@ -84,7 +84,7 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
         }else{
             print("postownerUserID : \(postOwnerUserID ?? 0)","  Login userID",LoginKey.shared.userID)
         }
-        print("***Check Post Authorization : ","\(NetworkManager.shared.profileObs.value.id ?? 0)" ,"  ",LoginKey.shared.userID)
+        print("***Check Post Authorization : ","\(NetworkManager.shared.shopProfileObs.value.id ?? 0)" ,"  ",LoginKey.shared.userID)
         if "\(NetworkManager.shared.profileObs.value.id ?? 0)" == LoginKey.shared.userID {
             return true
         }else{

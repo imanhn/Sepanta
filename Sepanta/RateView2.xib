@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Shabnam-FD.ttf">
+            <string>Shabnam-FD</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="RateView" customClass="RateView" customModule="Sepanta" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="cCE-u2-Prq" id="jnx-5l-gUA"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="RateView" id="iN0-l3-epB" userLabel="RateView" customClass="RateView" customModule="Sepanta" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="206"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cCE-u2-Prq" userLabel="ContentView">
+                    <rect key="frame" x="20.5" y="5" width="373" height="206"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="eKy-La-mDl" userLabel="FormView">
+                            <rect key="frame" x="74.5" y="0.0" width="224" height="206"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="لطفا امتیاز خود را وارد فرمایید" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMK-Fe-gpo" userLabel="title">
+                                    <rect key="frame" x="0.0" y="0.0" width="224" height="68.5"/>
+                                    <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
+                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77i-T1-s9e">
+                                    <rect key="frame" x="0.0" y="68.5" width="224" height="69"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="2dd-d5-H9K" userLabel="starsView">
+                                            <rect key="frame" x="67.5" y="0.0" width="89" height="69"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o93-DW-P2p" userLabel="star5">
+                                                    <rect key="frame" x="0.0" y="0.0" width="17.5" height="69"/>
+                                                    <state key="normal" image="icon_star_gray"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqB-Vw-Ony" userLabel="star4">
+                                                    <rect key="frame" x="17.5" y="0.0" width="18" height="69"/>
+                                                    <state key="normal" image="icon_star_gray"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oc3-1a-mQd" userLabel="star3">
+                                                    <rect key="frame" x="35.5" y="0.0" width="18" height="69"/>
+                                                    <state key="normal" image="icon_star_gray"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uz6-AB-27E" userLabel="star2">
+                                                    <rect key="frame" x="53.5" y="0.0" width="18" height="69"/>
+                                                    <state key="normal" image="icon_star_gray"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xm4-5u-8ix" userLabel="star1">
+                                                    <rect key="frame" x="71.5" y="0.0" width="17.5" height="69"/>
+                                                    <state key="normal" image="icon_star_gray"/>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="2dd-d5-H9K" firstAttribute="width" secondItem="77i-T1-s9e" secondAttribute="width" multiplier="0.4" id="IFj-0N-DzO"/>
+                                        <constraint firstItem="2dd-d5-H9K" firstAttribute="centerY" secondItem="77i-T1-s9e" secondAttribute="centerY" id="K0a-UJ-tAf"/>
+                                        <constraint firstItem="2dd-d5-H9K" firstAttribute="height" secondItem="77i-T1-s9e" secondAttribute="height" id="TqW-6j-8kN"/>
+                                        <constraint firstItem="2dd-d5-H9K" firstAttribute="centerX" secondItem="77i-T1-s9e" secondAttribute="centerX" id="uI5-4C-eE2"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EDI-IV-PbN">
+                                    <rect key="frame" x="0.0" y="137.5" width="224" height="68.5"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JH7-dc-MTc" userLabel="Submit" customClass="SubmitButton" customModule="Sepanta" customModuleProvider="target">
+                                            <rect key="frame" x="56" y="17" width="112" height="34.5"/>
+                                            <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
+                                            <inset key="titleEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <inset key="imageEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <state key="normal" title="ارسال" image="icon_tick_black">
+                                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="JH7-dc-MTc" firstAttribute="height" secondItem="EDI-IV-PbN" secondAttribute="height" multiplier="0.5" id="5vM-P7-6ST"/>
+                                        <constraint firstItem="JH7-dc-MTc" firstAttribute="centerY" secondItem="EDI-IV-PbN" secondAttribute="centerY" id="DtH-d4-wzk"/>
+                                        <constraint firstItem="JH7-dc-MTc" firstAttribute="width" secondItem="EDI-IV-PbN" secondAttribute="width" multiplier="0.5" id="H5k-L3-blt"/>
+                                        <constraint firstItem="JH7-dc-MTc" firstAttribute="centerX" secondItem="EDI-IV-PbN" secondAttribute="centerX" id="p5K-IF-u3i"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="eKy-La-mDl" firstAttribute="height" secondItem="cCE-u2-Prq" secondAttribute="height" id="1Ka-oZ-ydk"/>
+                        <constraint firstItem="eKy-La-mDl" firstAttribute="width" secondItem="cCE-u2-Prq" secondAttribute="width" multiplier="0.6" id="E0D-7T-ES9"/>
+                        <constraint firstItem="eKy-La-mDl" firstAttribute="centerX" secondItem="cCE-u2-Prq" secondAttribute="centerX" id="PAc-KF-zie"/>
+                        <constraint firstItem="eKy-La-mDl" firstAttribute="centerY" secondItem="cCE-u2-Prq" secondAttribute="centerY" id="Vy9-qm-DG2"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="cCE-u2-Prq" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="1eK-se-D5u"/>
+                <constraint firstItem="cCE-u2-Prq" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="N0N-sL-bue"/>
+                <constraint firstItem="cCE-u2-Prq" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.9" id="UgY-hR-f7L"/>
+                <constraint firstItem="cCE-u2-Prq" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="gJo-0Y-Gj3"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-23.188405797101453" y="382.36607142857139"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_star_gray" width="11" height="11"/>
+        <image name="icon_tick_black" width="20" height="14"/>
+    </resources>
+</document>

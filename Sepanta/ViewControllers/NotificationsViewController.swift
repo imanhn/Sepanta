@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import RxSwift
+import RxCocoa
 
 class ShopNotifCell : UITableViewCell {
     @IBOutlet weak var postImage: UIImageView!
@@ -55,7 +56,7 @@ class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITable
     
 
     func bindNotificationForUser(){
-        if LoginKey.shared.role == "Shop"{
+        if LoginKey.shared.role.uppercased() == "Shop".uppercased(){
             let shopNotifDisposable = NetworkManager.shared.notificationForShopObs.bind(to: NotifTableView!.rx.items(cellIdentifier: "ShopNotifCell")) { row, aShopNotif, cell in
                 if let aCell = cell as? ShopNotifCell {
                     let model = aShopNotif
@@ -83,7 +84,8 @@ class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITable
                     if selectedNotiForShop.post_id == nil {
                         self.alert(Message: "اطلاعات این پست هنوز کامل نیست")
                     }else{
-                        self.coordinator!.PushAPost(PostID : selectedNotiForShop.post_id!, OwnerUserID: selectedNotiForShop.user_id!)
+                        NetworkManager.shared.postDetailObs = BehaviorRelay<Post>(value: Post())
+                        self.coordinator!.PushAPost(PostID : selectedNotiForShop.post_id!, OwnerUserID: Int(LoginKey.shared.userID) ?? 0)
                     }
                 })
             shopNotifSelectedDisp.disposed(by: myDisposeBag)
@@ -113,6 +115,7 @@ class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITable
                     if selectedNotiForUser.post_id == nil {
                         self.alert(Message: "اطلاعات این پست هنوز کامل نیست")
                     }else{
+                        NetworkManager.shared.postDetailObs = BehaviorRelay<Post>(value: Post())
                         self.coordinator!.PushAPost(PostID : selectedNotiForUser.post_id!, OwnerUserID: selectedNotiForUser.user_id!)
                     }
                 })
