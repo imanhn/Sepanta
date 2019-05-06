@@ -30,6 +30,57 @@ class UnderLinedSelectableUIView: UIView {
     }
 }
 
+class FilterButton: UIButton {
+    var curvSize : CGFloat = 5;
+    override var isEnabled: Bool {
+        didSet {
+            DispatchQueue.main.async {
+                if self.isEnabled {
+                    self.backgroundColor = UIColor.white
+                    //self.alpha = 1.0
+                }
+                else {
+                    self.backgroundColor = UIColor.white
+                    //self.alpha = 0.5
+                }
+            }
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.isEnabled = false
+        self.contentMode = .scaleAspectFit
+        self.semanticContentAttribute = .forceRightToLeft
+        self.setTitleColor(UIColor(hex: 0x515152), for: .normal)
+        self.setTitleColor(UIColor(hex: 0x515152), for: .disabled)
+        self.setImage(UIImage(named: "icon_tick_black"), for: .normal)
+        self.setImage(UIImage(named: "icon_tick_black"), for: .disabled)
+        //self.setImage(UIImage(named: "icon_tick_black"), for: .disabled)
+        self.titleLabel?.font = UIFont(name: "Shabnam-FD", size: 16)
+        self.contentMode = .scaleAspectFit
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func draw(_ rect: CGRect) {
+        self.imageEdgeInsets = UIEdgeInsetsMake(0, frame.height/2, 0, 0)
+        self.layer.cornerRadius = curvSize
+        self.layer.masksToBounds = true
+        let context = UIGraphicsGetCurrentContext()
+        
+        let insideCGRec : CGRect = CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height)
+        let bezPath = UIBezierPath(roundedRect: insideCGRec, byRoundingCorners: [.allCorners], cornerRadii: CGSize(width: curvSize, height: curvSize)).cgPath
+        
+        context?.setLineWidth(1.0)
+        context?.setStrokeColor(UIColor.white.cgColor)
+        context?.addPath(bezPath)
+        context?.drawPath(using: CGPathDrawingMode.stroke)
+    }
+    
+}
 
 class SubmitButton: UIButton {
     var curvSize : CGFloat = 5;
@@ -323,6 +374,27 @@ class UnderLinedSelectableTextField: UITextField {
     }
 }
 
+class UnderLinedSelectableTextFieldWithWhiteTri: UITextField {
+    override func draw(_ rect: CGRect) {
+        let sizeOfTriangle = rect.height/4;
+        let context = UIGraphicsGetCurrentContext()
+        context?.setLineWidth(1.0)
+        context?.setStrokeColor((UIColor(hex: 0x515152)).cgColor)
+        context?.move(to: CGPoint(x: 20, y: self.bounds.height))
+        context?.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height))
+        context?.drawPath(using: CGPathDrawingMode.stroke)
+        
+        let contextTriangle = UIGraphicsGetCurrentContext()
+        contextTriangle?.setLineWidth(2.0)
+        contextTriangle?.setStrokeColor((UIColor.white).cgColor)
+        contextTriangle?.setFillColor((UIColor.white).cgColor)
+        contextTriangle?.move(to: CGPoint(x: 20, y: self.bounds.height-5))
+        contextTriangle?.addLine(to: CGPoint(x: 20+sizeOfTriangle, y: self.bounds.height-5))
+        contextTriangle?.addLine(to: CGPoint(x: 20, y: self.bounds.height-5-sizeOfTriangle))
+        contextTriangle?.closePath()
+        contextTriangle?.fillPath()
+    }
+}
 class MainButton:UIButton{
     override func draw(_ rect: CGRect) {
         var imageView : UIImageView

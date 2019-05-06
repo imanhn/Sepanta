@@ -31,10 +31,17 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     weak var coordinator : HomeCoordinator?
     let myDisposeBag  = DisposeBag()
     //var shops : BehaviorRelay<[Shop]> = BehaviorRelay(value: [])
+    var filterIsOpen = false
     var selectedCity : String?
     var selectedState : String?
+    var filterView : FilterView!
+    var selectedFilterType : String?
+    var selectedFilterValue : String?
     var newShopsDataSource : ShopsListDataSource!
+    @IBOutlet weak var groupHeaderTopCons: NSLayoutConstraint!
+    @IBOutlet weak var headerViewHeightCons: NSLayoutConstraint!
     
+    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var groupLogoImage: UIImageView!
     @IBOutlet weak var shopTable: UITableView!
     @IBOutlet weak var HeaderLabel: UILabel!
@@ -42,7 +49,86 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     var currentGroupImage = UIImage()
     var catagoryId = Int()
     var currentGroupName = String()
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        print("EDIT : ",textField.tag,"  ",  selectedFilterType )
+        print(textField.tag == 2 ,"  ",selectedFilterType == "جستجو" )
+        if textField.tag == 2 && selectedFilterType == "جستجو" {
+            return true
+        }else{
+            return false
+        }
+    }
+    
+    @objc func filterValueTapped(_ sender: Any) {
+        if selectedFilterType == "جستجو" {
+            return
+        }
+        let allfilterValues = ["محبوب ترین",
+                          "بیشترین تخفیف",
+                          "حروف الفبا",
+                          "جدید ترین"
+]
+        let controller = ArrayChoiceTableViewController(allfilterValues) {
+            (selectedFilter) in
+            self.selectedFilterValue = selectedFilter
+            self.filterView.filterValue.text = selectedFilter
+        }
+        controller.preferredContentSize = CGSize(width: 250, height: allfilterValues.count*60)
+        Spinner.stop()
+        self.showPopup(controller, sourceView: filterView.filterValue)
+    }
+    
+    @objc func filterTypeTapped(_ sender : Any){
+        let allfilterValues = ["فیلتر بر اساس","جستجو"
+        ]
+        let controller = ArrayChoiceTableViewController(allfilterValues) {
+            (selectedFilter) in
+            self.view.endEditing(true)
+            self.selectedFilterType = selectedFilter
+            self.filterView.filterType.text = selectedFilter
+        }
+        controller.preferredContentSize = CGSize(width: 250, height: allfilterValues.count*60)
+        Spinner.stop()
+        self.showPopup(controller, sourceView: filterView.filterValue)
+    }
+    
+    func createFilterView(){
+        let frameOri = self.view.convert(headerView.frame.origin, to: self.view)
+        filterView = FilterView(frame: CGRect(x: self.view.frame.width, y: frameOri.y+headerView.frame.height, width: self.view.frame.width, height: UIScreen.main.bounds.height*0.25))
+        filterView.isHidden = true
+        self.view.addSubview(filterView)
+        filterView.filterValue.addTarget(self, action: #selector(filterValueTapped(_:)), for: .allTouchEvents)
+        filterView.filterType.tag = 1
+        filterView.filterValue.tag = 2
+        filterView.filterType.addTarget(self, action: #selector(filterTypeTapped(_:)), for: .allTouchEvents)
+        filterView.filterValue.delegate = self
+        filterView.filterType.delegate = self
+        filterView.submitButton.addTarget(self, action: #selector(doFilterTapped), for: .touchUpInside)
+    }
+    @objc func doFilterTapped(_ sender : UIButton){
+    
+    }
+    @IBAction func filterTapped(_ sender: Any) {
+        let frameOri = self.view.convert(headerView.frame.origin, to: self.view)
+        if filterIsOpen {
+            self.groupHeaderTopCons.constant = 0
+            self.filterView.frame = CGRect(x: self.view.frame.width, y: frameOri.y+self.headerView.frame.height, width: self.view.frame.width, height: UIScreen.main.bounds.height*0.25)
+            UIView.animate(withDuration: 0.5) {
+                self.view.layoutIfNeeded()
+            }
+        }else{
+            filterView.isHidden = false
+            
+            self.groupHeaderTopCons.constant = UIScreen.main.bounds.height*0.25
+            UIView.animate(withDuration: 0.5) {
+                self.filterView.frame = CGRect(x: 0, y: frameOri.y+self.headerView.frame.height, width: self.view.frame.width, height: UIScreen.main.bounds.height*0.25)
+                self.view.layoutIfNeeded()
+            }
 
+        }
+        filterIsOpen = !filterIsOpen
+    }
     @IBAction func backButtonPressed(_ sender: Any) {
         newShopsDataSource = nil
         NetworkManager.shared.shopObs = BehaviorRelay<[Any]>(value: [Any]())
@@ -117,6 +203,7 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createFilterView()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         newShopsDataSource = ShopsListDataSource(self)
         newShopsDataSource.getShopListForACatagory(Catagory: "\(self.catagoryId)", State: selectedState, City: selectedCity)
@@ -124,6 +211,13 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
         updateGroupHeaders()
     }
     
+    func showPopup(_ controller: UIViewController, sourceView: UIView) {
+        let presentationController = AlwaysPresentAsPopover.configurePresentation(forController: controller)
+        presentationController.sourceView = sourceView
+        presentationController.sourceRect = sourceView.bounds
+        presentationController.permittedArrowDirections = [.down, .up]
+        self.present(controller, animated: true)
+    }
     
     
 }

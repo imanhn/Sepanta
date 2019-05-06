@@ -39,7 +39,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9Y-tP-8xX" userLabel="HomeLogo">
-                                        <rect key="frame" x="349" y="0.0" width="16" height="53.5"/>
+                                        <rect key="frame" x="279" y="0.0" width="86" height="53.5"/>
                                         <state key="normal" image="logo_home"/>
                                         <connections>
                                             <action selector="homeTapped:" destination="Uis-5v-aGi" eventType="touchUpInside" id="acW-O5-frh"/>
@@ -136,7 +136,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="reO-9j-0gF" userLabel="HomeLogo">
-                                        <rect key="frame" x="349" y="0.0" width="16" height="53.5"/>
+                                        <rect key="frame" x="279" y="0.0" width="86" height="53.5"/>
                                         <state key="normal" image="logo_home"/>
                                         <connections>
                                             <action selector="homeTapped:" destination="Uis-5v-aGi" eventType="touchUpInside" id="4Mk-ra-6l5"/>
@@ -459,13 +459,13 @@
                                                         <textInputTraits key="textInputTraits" keyboardType="phonePad" enablesReturnKeyAutomatically="YES" textContentType="tel"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ورود کد ارسال شده" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ron-c6-HyJ" userLabel="SMSCodeText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="48" width="337.5" height="48"/>
+                                                        <rect key="frame" x="0.0" y="48" width="337.5" height="47.5"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="phonePad" enablesReturnKeyAutomatically="YES"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۰۱:۰۰" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAM-oe-oMT" userLabel="TimerLabel">
-                                                        <rect key="frame" x="0.0" y="96" width="337.5" height="56"/>
+                                                        <rect key="frame" x="0.0" y="95.5" width="337.5" height="56.5"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="24"/>
                                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -489,7 +489,7 @@
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_lock_gray" translatesAutoresizingMaskIntoConstraints="NO" id="w94-6D-GwQ" userLabel="LockIcon">
-                                        <rect key="frame" x="306.5" y="140" width="16" height="29"/>
+                                        <rect key="frame" x="304.5" y="140" width="18" height="28.5"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -618,34 +618,34 @@
                                 <rect key="frame" x="19" y="120" width="337.5" height="67"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" distribution="equalCentering" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Cij-HL-a8x" userLabel="MenuStackView">
-                                        <rect key="frame" x="16.5" y="22.5" width="304" height="22"/>
+                                        <rect key="frame" x="16.5" y="13.5" width="304" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxo-tG-8Ao" userLabel="help">
-                                                <rect key="frame" x="0.0" y="0.0" width="16" height="22"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                 <state key="normal" image="icon_help_resized"/>
                                                 <connections>
                                                     <action selector="gotoHelp:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="5Df-Ix-VTQ"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8s7-oa-94L" userLabel="notification" customClass="UIButtonWithBadge" customModule="Sepanta" customModuleProvider="target">
-                                                <rect key="frame" x="72" y="0.0" width="16" height="22"/>
+                                                <rect key="frame" x="66" y="0.0" width="40" height="40"/>
                                                 <state key="normal" image="icon_news_resized"/>
                                                 <connections>
                                                     <action selector="gotoNotifications:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="z7O-m3-A85"/>
                                                 </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_logo_statuse_in" translatesAutoresizingMaskIntoConstraints="NO" id="su3-Wk-zEO" userLabel="logo">
-                                                <rect key="frame" x="144" y="3" width="16" height="16"/>
+                                                <rect key="frame" x="122.5" y="7.5" width="59" height="25"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahS-up-E30" userLabel="favorites">
-                                                <rect key="frame" x="216" y="0.0" width="16" height="22"/>
+                                                <rect key="frame" x="198" y="0.0" width="40" height="40"/>
                                                 <state key="normal" image="icon_home_fav"/>
                                                 <connections>
                                                     <action selector="gotoFavorites:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="jh8-56-UN9"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QWN-5j-uDl" userLabel="profile">
-                                                <rect key="frame" x="288" y="0.0" width="16" height="22"/>
+                                                <rect key="frame" x="264" y="0.0" width="40" height="40"/>
                                                 <state key="normal" image="icon_profile_03_resized"/>
                                                 <connections>
                                                     <action selector="gotoProfile:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="n5v-ZJ-Pbc"/>
@@ -706,28 +706,28 @@
                                         <rect key="frame" x="-19" y="0.0" width="413" height="117"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cz4-Hu-jFV" userLabel="poldarsho">
-                                                <rect key="frame" x="0.0" y="47.5" width="133.5" height="22"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="133.5" height="117"/>
                                                 <state key="normal" image="poldarsho"/>
                                                 <connections>
                                                     <action selector="poldarshoClicked:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="hZh-I6-Slh"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c5U-us-AV4" userLabel="jadidtarinha" customClass="UIButtonWithBadge" customModule="Sepanta" customModuleProvider="target">
-                                                <rect key="frame" x="93.5" y="47.5" width="133" height="22"/>
+                                                <rect key="frame" x="93.5" y="0.0" width="133" height="117"/>
                                                 <state key="normal" image="jadidtarinha"/>
                                                 <connections>
                                                     <action selector="gotoNewShops:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="PCj-Kb-atw"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ChQ-BQ-xuC" userLabel="nazdikeman">
-                                                <rect key="frame" x="186.5" y="47.5" width="133" height="22"/>
+                                                <rect key="frame" x="186.5" y="0.0" width="133" height="117"/>
                                                 <state key="normal" image="nazdikeman"/>
                                                 <connections>
                                                     <action selector="gotoMapNearestShop:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="gFm-AK-BXG"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TM7-rv-Nf9" userLabel="sepantaie">
-                                                <rect key="frame" x="279.5" y="47.5" width="133.5" height="22"/>
+                                                <rect key="frame" x="279.5" y="0.0" width="133.5" height="117"/>
                                                 <state key="normal" image="sepantaie"/>
                                                 <connections>
                                                     <action selector="sepantaieClicked:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="BKk-h3-my1"/>
@@ -890,7 +890,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kec-e1-xZk" userLabel="HomeLogo">
-                                        <rect key="frame" x="349" y="0.0" width="16" height="30"/>
+                                        <rect key="frame" x="279" y="0.0" width="86" height="30"/>
                                         <state key="normal" image="logo_home"/>
                                         <connections>
                                             <action selector="homeTapped:" destination="I4W-Vv-3RO" eventType="touchUpInside" id="Hu6-B7-Myc"/>
@@ -1058,6 +1058,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FH5-xx-38Z" userLabel="FilterButton">
                                         <rect key="frame" x="60.5" y="0.0" width="44.5" height="66.5"/>
                                         <state key="normal" image="icon_filter_black"/>
+                                        <connections>
+                                            <action selector="filterTapped:" destination="paQ-sF-XCC" eventType="touchUpInside" id="aN6-Fb-sBa"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1109,11 +1112,11 @@
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2FS-gh-jyP" userLabel="ViewWithDash" customClass="UIViewWithDash" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="112.5" y="0.0" width="99" height="67"/>
+                                        <rect key="frame" x="112.5" y="0.0" width="88.5" height="67"/>
                                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="رستوران و کافی شاپ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bQu-qj-7yU" userLabel="GroupLabel">
-                                        <rect key="frame" x="221.5" y="0.0" width="98" height="67"/>
+                                        <rect key="frame" x="211" y="0.0" width="108.5" height="67"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="13"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1159,7 +1162,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mqg-jq-uP5" userLabel="GotoShopButton">
-                                                            <rect key="frame" x="24" y="0.0" width="16" height="69.5"/>
+                                                            <rect key="frame" x="30" y="0.0" width="10" height="69.5"/>
                                                             <state key="normal" image="icon_back_black"/>
                                                         </button>
                                                     </subviews>
@@ -1227,7 +1230,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(۳.۵)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm0-oF-1UR" userLabel="rateLabel">
-                                                                    <rect key="frame" x="140" y="0.5" width="26" height="16.5"/>
+                                                                    <rect key="frame" x="134" y="-1" width="32" height="19.5"/>
                                                                     <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                                     <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1271,7 +1274,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="center" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۲۳۴۵" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3X-df-CwZ" userLabel="followersNumberLabel">
-                                                                    <rect key="frame" x="170.5" y="3.5" width="36.5" height="16.5"/>
+                                                                    <rect key="frame" x="168.5" y="2" width="38.5" height="19.5"/>
                                                                     <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -1392,8 +1395,10 @@
                     </view>
                     <connections>
                         <outlet property="HeaderLabel" destination="WOE-4b-wMG" id="KOB-cG-gZd"/>
+                        <outlet property="groupHeaderTopCons" destination="Xtz-fr-pwx" id="ocC-6w-B6T"/>
                         <outlet property="groupLabel" destination="bQu-qj-7yU" id="DLe-tW-Cx2"/>
                         <outlet property="groupLogoImage" destination="IHc-L4-h8m" id="9xJ-lQ-V1W"/>
+                        <outlet property="headerView" destination="dfg-if-lSA" id="Abm-FS-mHt"/>
                         <outlet property="shopTable" destination="xyh-FI-DeV" id="ZXf-wi-z9V"/>
                     </connections>
                 </viewController>
@@ -1572,7 +1577,7 @@
                                 <rect key="frame" x="0.0" y="597" width="375" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3g-Bn-6M8" userLabel="BackButton">
-                                        <rect key="frame" x="179.5" y="0.0" width="16" height="70"/>
+                                        <rect key="frame" x="177.5" y="0.0" width="20" height="70"/>
                                         <state key="normal" image="icon_mainmenu_10_arr_down"/>
                                         <connections>
                                             <action selector="backFromMenuTapped:" destination="meB-CV-uE7" eventType="touchUpInside" id="1qy-no-EMz"/>
@@ -1676,7 +1681,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="74.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRe-G8-3rv" userLabel="HomeLogo">
-                                        <rect key="frame" x="349" y="0.0" width="16" height="74.5"/>
+                                        <rect key="frame" x="279" y="0.0" width="86" height="74.5"/>
                                         <state key="normal" image="logo_home"/>
                                         <connections>
                                             <action selector="homeTapped:" destination="dpa-Ex-OBY" eventType="touchUpInside" id="9Tf-pj-A6o"/>
@@ -1919,7 +1924,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="46.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YFy-0r-C8N" userLabel="HomeLogo">
-                                        <rect key="frame" x="349" y="0.0" width="16" height="46.5"/>
+                                        <rect key="frame" x="279" y="0.0" width="86" height="46.5"/>
                                         <state key="normal" image="logo_home"/>
                                         <connections>
                                             <action selector="homeTapped:" destination="kV1-Jn-zS8" eventType="touchUpInside" id="ynI-oW-Hvc"/>
@@ -2564,7 +2569,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YPa-95-62C" userLabel="GotoShopButton">
-                                                            <rect key="frame" x="24" y="0.0" width="16" height="23.5"/>
+                                                            <rect key="frame" x="30" y="0.0" width="10" height="23.5"/>
                                                             <state key="normal" image="icon_back_black"/>
                                                         </button>
                                                     </subviews>
@@ -2669,14 +2674,14 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E4F-pH-Mji" userLabel="buttomMiddleView">
                                                             <rect key="frame" x="0.0" y="39.5" width="225" height="19.5"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="icon_profile_04" translatesAutoresizingMaskIntoConstraints="NO" id="5ZF-y3-PKk" userLabel="followersIcon">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_profile_04" translatesAutoresizingMaskIntoConstraints="NO" id="5ZF-y3-PKk" userLabel="followersIcon">
                                                                     <rect key="frame" x="197" y="3.5" width="18" height="12"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="5ZF-y3-PKk" secondAttribute="height" multiplier="26:17" id="Xjc-WH-LPw"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="۱۲۳۴۵" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jT7-U1-NK3" userLabel="followersNumberLabel">
-                                                                    <rect key="frame" x="150.5" y="2.5" width="36.5" height="19.5"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۲۳۴۵" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jT7-U1-NK3" userLabel="followersNumberLabel">
+                                                                    <rect key="frame" x="148.5" y="2.5" width="38.5" height="19.5"/>
                                                                     <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
