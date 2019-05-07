@@ -10,8 +10,10 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 import Alamofire
 import AlamofireImage
+
 
 class ShopCell : UITableViewCell {
     @IBOutlet weak var shopImage: UIImageView!
@@ -24,23 +26,26 @@ class ShopCell : UITableViewCell {
     @IBOutlet weak var star4: UIImageView!
     @IBOutlet weak var star5: UIImageView!
     @IBOutlet weak var rateLabel: UILabel!
-    
 }
 
 class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,Storyboarded{
+    typealias SortFunction = (Shop,Shop)-> Bool
+    
     weak var coordinator : HomeCoordinator?
+    let byOff = "بیشترین تخفیف"
+    let byRate = "بیشترین امتیاز"
+    let byName = "نام فروشگاه"
+    let searchOption = "جستجو"
+    let sortOption = "مرتب سازی با"
     let myDisposeBag  = DisposeBag()
+    var sectionOfShops = BehaviorRelay<[SectionOfShopData]>(value: [SectionOfShopData]())
     //var shops : BehaviorRelay<[Shop]> = BehaviorRelay(value: [])
     var filterIsOpen = false
     var selectedCity : String?
     var selectedState : String?
     var filterView : FilterView!
-    var selectedFilterType : String?
-    var selectedFilterValue : String?
     var newShopsDataSource : ShopsListDataSource!
     @IBOutlet weak var groupHeaderTopCons: NSLayoutConstraint!
-    @IBOutlet weak var headerViewHeightCons: NSLayoutConstraint!
-    
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var groupLogoImage: UIImageView!
     @IBOutlet weak var shopTable: UITableView!
@@ -51,9 +56,9 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     var currentGroupName = String()
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        print("EDIT : ",textField.tag,"  ",  selectedFilterType )
-        print(textField.tag == 2 ,"  ",selectedFilterType == "جستجو" )
-        if textField.tag == 2 && selectedFilterType == "جستجو" {
+        //print("EDIT : ",textField.tag,"  ",  selectedFilterType )
+        //print(textField.tag == 2 ,"  ",selectedFilterType == searchOption )
+        if textField.tag == 2 && self.filterView.filterType.text == searchOption {
             return true
         }else{
             return false
@@ -61,17 +66,12 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     }
     
     @objc func filterValueTapped(_ sender: Any) {
-        if selectedFilterType == "جستجو" {
+        if self.filterView.filterType.text == searchOption {
             return
         }
-        let allfilterValues = ["محبوب ترین",
-                          "بیشترین تخفیف",
-                          "حروف الفبا",
-                          "جدید ترین"
-]
+        let allfilterValues = [byName,byRate,byOff]
         let controller = ArrayChoiceTableViewController(allfilterValues) {
             (selectedFilter) in
-            self.selectedFilterValue = selectedFilter
             self.filterView.filterValue.text = selectedFilter
         }
         controller.preferredContentSize = CGSize(width: 250, height: allfilterValues.count*60)
@@ -80,13 +80,17 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     }
     
     @objc func filterTypeTapped(_ sender : Any){
-        let allfilterValues = ["فیلتر بر اساس","جستجو"
-        ]
+        let allfilterValues = [searchOption,sortOption]
         let controller = ArrayChoiceTableViewController(allfilterValues) {
             (selectedFilter) in
             self.view.endEditing(true)
-            self.selectedFilterType = selectedFilter
             self.filterView.filterType.text = selectedFilter
+            if selectedFilter == self.searchOption {
+                self.filterView.filterValue.text = ""
+            }else if selectedFilter == self.sortOption {
+                self.filterView.filterValue.text = self.byName
+            }
+
         }
         controller.preferredContentSize = CGSize(width: 250, height: allfilterValues.count*60)
         Spinner.stop()
@@ -106,9 +110,37 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
         filterView.filterType.delegate = self
         filterView.submitButton.addTarget(self, action: #selector(doFilterTapped), for: .touchUpInside)
     }
-    @objc func doFilterTapped(_ sender : UIButton){
     
+    @objc func doFilterTapped(_ sender : UIButton){
+        self.view.endEditing(true)
+        if self.filterView.filterType.text == searchOption {
+            let aFilteredData = SectionOfShopData(original: self.sectionOfShops.value[0], items: NetworkManager.shared.shopObs.value, filter: {
+                (ashop)->Bool in
+                guard (self.filterView.filterValue.text ?? "").count > 0 else{return true}
+                if (ashop.shop_name?.contains(self.filterView.filterValue.text ?? ""))! { return true}else{return false}
+            })
+            sectionOfShops.accept([aFilteredData])
+        }else if self.filterView.filterType.text == sortOption {
+            var sortFunc : SortFunction = { (ashop,bshop) in return true}
+            if (self.filterView.filterValue.text ?? "") == byName {
+                sortFunc = { (ashop,bshop) in
+                    if ((ashop.shop_name ?? "") < (bshop.shop_name ?? "")) {return true}else{return false}
+                }
+            }else if (self.filterView.filterValue.text ?? "") == byRate {
+                sortFunc = { (ashop,bshop) in
+                    if ((ashop.rate ?? "") < (bshop.rate ?? "")) {return true}else{return false}
+                }
+            }else if (self.filterView.filterValue.text ?? "") == byOff {
+                sortFunc = { (ashop,bshop) in
+                    if ((ashop.shop_off ?? 0) > (bshop.shop_off ?? 0)) {return true}else{return false}
+                }
+            }
+            let aSortedData = SectionOfShopData(original: self.sectionOfShops.value[0], items: NetworkManager.shared.shopObs.value, sort: sortFunc)
+            sectionOfShops.accept([aSortedData])
+
+        }
     }
+    
     @IBAction func filterTapped(_ sender: Any) {
         let frameOri = self.view.convert(headerView.frame.origin, to: self.view)
         if filterIsOpen {
@@ -119,11 +151,11 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
             }
         }else{
             filterView.isHidden = false
-            
             self.groupHeaderTopCons.constant = UIScreen.main.bounds.height*0.25
             UIView.animate(withDuration: 0.5) {
                 self.filterView.frame = CGRect(x: 0, y: frameOri.y+self.headerView.frame.height, width: self.view.frame.width, height: UIScreen.main.bounds.height*0.25)
                 self.view.layoutIfNeeded()
+                self.filterView.filterType.text = self.searchOption
             }
 
         }
@@ -131,7 +163,7 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     }
     @IBAction func backButtonPressed(_ sender: Any) {
         newShopsDataSource = nil
-        NetworkManager.shared.shopObs = BehaviorRelay<[Any]>(value: [Any]())
+        NetworkManager.shared.shopObs = BehaviorRelay<[Shop]>(value: [Shop]())
         coordinator!.popOneLevel()
         
     }
@@ -153,9 +185,20 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     
 
     func bindToTableView() {
-        NetworkManager.shared.shopObs.bind(to: shopTable.rx.items(cellIdentifier: "cell")) { row, aShopAsAny, cell in
+        NetworkManager.shared.shopObs
+            .subscribe(onNext: { shops in
+                let initsec = SectionOfShopData(original: SectionOfShopData(header: "Header", items: [Shop]()), items: shops)
+                self.sectionOfShops.accept([initsec])
+                self.shopTable.reloadData()
+            }).disposed(by: myDisposeBag)
+                
+        let dataSource = RxTableViewSectionedAnimatedDataSource<SectionOfShopData>(configureCell: { dataSource, tableView, indexPath, item in
+            let row = indexPath.row
+            let model = item
+            let cell = self.shopTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            
+            var returningCell : ShopCell!
             if let aCell = cell as? ShopCell {
-                let model = aShopAsAny as! Shop
                 aCell.shopName.text = model.shop_name
                 let persianDiscount :String = "\(model.shop_off ?? 0)".toPersianNumbers()
                 aCell.discountPercentage.text = persianDiscount+"%"
@@ -182,10 +225,15 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
                         
                     }
                 }
-                
-            
+                returningCell = aCell
             }
-            }.disposed(by: myDisposeBag)
+            return returningCell ?? cell
+            
+        })
+        //NetworkManager.shared.shopObs
+        sectionOfShops
+            .bind(to: shopTable.rx.items(dataSource: dataSource))
+            .disposed(by: myDisposeBag)
         
         shopTable.rx.modelSelected(Shop.self)
             .subscribe(onNext: { [unowned self] selectedShop in
@@ -220,4 +268,38 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     }
     
     
+}
+
+
+struct SectionOfShopData : AnimatableSectionModelType{
+    var identity: String {
+        return header ?? ""
+    }
+    
+    typealias Identity = String
+    
+    var header: String
+    var items: [Shop]
+}
+
+extension SectionOfShopData: SectionModelType {
+    typealias Item = Shop
+    typealias FilterFunction = (Shop) -> Bool
+    typealias SortFunction = (Shop,Shop) -> Bool
+    
+    init(original: SectionOfShopData, items: [Shop]) {
+        self = original
+        self.items = items
+    }
+    
+    init(original: SectionOfShopData, items: [Shop], filter : FilterFunction) {
+        self = original
+        self.items = items.filter({filter($0)})
+    }
+
+    init(original: SectionOfShopData, items: [Shop], sort : SortFunction) {
+        self = original
+        self.items = items.sorted(by: sort)
+    }
+
 }

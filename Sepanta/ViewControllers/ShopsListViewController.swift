@@ -41,7 +41,7 @@ class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded{
     
     @IBAction func backTapped(_ sender: Any) {
         shopDataSource = nil
-        NetworkManager.shared.shopObs = BehaviorRelay<[Any]>(value: [Any]())
+        NetworkManager.shared.shopObs = BehaviorRelay<[Shop]>(value: [Shop]())
         self.coordinator!.popOneLevel()
     }
     
@@ -60,9 +60,9 @@ class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded{
     }
     
     func bindToTableView() {
-        NetworkManager.shared.shopObs.bind(to: shopTable.rx.items(cellIdentifier: "cell")) { row, aShopAsAny, cell in
+        NetworkManager.shared.shopObs.bind(to: shopTable.rx.items(cellIdentifier: "cell")) { row, model, cell in
             if let aCell = cell as? NewShopCell {
-                let model = aShopAsAny as! Shop
+                //let model = aShopAsAny as! Shop
                 aCell.shopName.text = model.shop_name
                 let persianDiscount :String = "\(model.shop_off ?? 0)".toPersianNumbers()
                 aCell.discountPercentage.text = persianDiscount+"%"

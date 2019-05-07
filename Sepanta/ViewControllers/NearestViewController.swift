@@ -94,7 +94,7 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
                 {
                     //print("ADDING ",(ashop as! Shop).user_id)
                     //let aShopAnnotation = ShopAnnotation(WithShop: ashop as! Shop)
-                    let aShopAnnotation = MapAnnotation(WithShop: ashop as! Shop)
+                    let aShopAnnotation = MapAnnotation(WithShop: ashop)
                     self.mapView.addAnnotation(aShopAnnotation)
                     
                 }

@@ -48,7 +48,7 @@ class NetworkManager {
     var provinceDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
     var cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
     var catagoriesObs = BehaviorRelay<[Any]>(value: [Any]())
-    var shopObs = BehaviorRelay<[Any]>(value: [Any]())
+    var shopObs = BehaviorRelay<[Shop]>(value: [Shop]())
     var postDetailObs = BehaviorRelay<Post>(value: Post(id: 0, shopId: 0, viewCount: 0, comments: [], isLiked: false, countLike: 0, title: "", content: "", image: ""))
     var postCommentsObs = BehaviorRelay<[Comment]>(value: [Comment]())
     var commentSendingSuccessful = BehaviorRelay<Bool>(value: false)

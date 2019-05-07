@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import RxDataSources
 
 protocol ShopProtocol : CollectionCell{
     var shop_id : Int? {get set}
@@ -22,7 +23,12 @@ protocol ShopProtocol : CollectionCell{
     var created_at : String? {get set}
 }
 
-struct Shop : ShopProtocol {
+struct Shop : ShopProtocol,IdentifiableType,Equatable {
+    static func == (lhs: Shop, rhs: Shop) -> Bool {
+        if lhs.identity == rhs.identity { return true }else{return false}
+    }
+    
+    
     var shop_id : Int?
     var user_id : Int?
     var shop_name : String?
@@ -33,6 +39,9 @@ struct Shop : ShopProtocol {
     var rate : String?
     var follower_count : Int?
     var created_at : String?
+    var identity: Int {
+        return shop_id ?? 0
+    }
     
     mutating func updateFromProfile(Profile aprofile : Profile){
         user_id = aprofile.id
