@@ -150,7 +150,7 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
     }
     
     //Create Gradient on PageView
-    @objc func sendEditedData(){
+    @objc func sendEditedData(_ sender : UIButton){
         //Submit data to server to change profile data and them back to profile view if required
         var gender_code = "1" //مرد
         if texts["genderText"]!.text == "زن" { gender_code = "0"}
@@ -174,7 +174,12 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
             .filter({$0 == true})
             .subscribe(onNext: { [unowned self] (succeed) in
                 self.delegate.alert(Message: "اطلاعات پروفایل شما بروز شد")
-                NetworkManager.shared.updateProfileInfoSuccessful = BehaviorRelay<Bool>(value: false)                
+                NetworkManager.shared.updateProfileInfoSuccessful = BehaviorRelay<Bool>(value: false)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                    self.delegate.backTapped(sender)
+                    Spinner.stop()
+                })
+                
             }).disposed(by: self.delegate.myDisposeBag)
     }
     
@@ -257,7 +262,7 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
         submitButton = SubmitButton(type: .custom)
         submitButton.frame = CGRect(x: marginX+(textFieldWidth/2)-1.5*buttonHeight, y: cursurY, width: 3*buttonHeight, height: buttonHeight)
         submitButton.setTitle("تایید", for: .normal)
-        submitButton.addTarget(self, action: #selector(sendEditedData), for: .touchUpInside)
+        submitButton.addTarget(self, action: #selector(sendEditedData(_:)), for: .touchUpInside)
         submitButton.setEnable()
         
         views["rightFormView"]?.addSubview(submitButton)

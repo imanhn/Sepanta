@@ -28,6 +28,10 @@ class NewCardView: UIView {
     func commonInit() {
         Bundle.main.loadNibNamed(kContent_XIB_NAME, owner: self, options: nil)
         contentView.fixInView(self)
+//        addSubview(contentView)
+//        contentView.frame = self.bounds
+//        contentView.autoresizingMask = [.flexibleHeight,.flexibleWidth]
+
         layer.masksToBounds = false
         //layer.borderColor = UIColor(hex: 0xF7F7F7).cgColor
         layer.cornerRadius = 5
@@ -37,5 +41,17 @@ class NewCardView: UIView {
         layer.shadowOffset = CGSize(width: 3, height: 3)
         layer.shadowRadius = 2
         
+    }
+}
+
+extension UIView{
+    func fixInView(_ container : UIView!) -> Void{
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.frame = container.frame
+        container.addSubview(self)
+        NSLayoutConstraint(item: self, attribute: .leading, relatedBy: .equal, toItem: container, attribute: .leading, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: self, attribute: .trailing , relatedBy: .equal, toItem: container, attribute: .trailing , multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: container, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: container, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
     }
 }

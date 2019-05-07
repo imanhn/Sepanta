@@ -60,7 +60,7 @@ class EditProfileViewController : UIViewControllerWithKeyboardNotificationWithEr
     
     @objc override func ReloadViewController(_ sender:Any) {
         super.ReloadViewController(sender)
-        editProfileUI.sendEditedData()
+        editProfileUI.sendEditedData(sender as! UIButton)
     }
     
     
