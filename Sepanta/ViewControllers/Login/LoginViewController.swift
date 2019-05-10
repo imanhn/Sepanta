@@ -34,7 +34,7 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
         if coordinator == nil {
             
         }else{
-            coordinator!.gotoSignup()
+            coordinator!.pushSignup()
         }
     }
     @objc override func ReloadViewController(_ sender:Any) {
@@ -98,7 +98,7 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
     func pushSMSConfirm(){
         disposeList.forEach({$0.dispose()})
         let toEnglishMobileNo =  (self.MobileTextField.text ?? "").toEnglishNumbers()
-        self.coordinator!.gotoSMSVerification(Set: toEnglishMobileNo)
+        self.coordinator!.pushSMSVerification(Set: toEnglishMobileNo)
     }
     
     override func viewDidLoad() {

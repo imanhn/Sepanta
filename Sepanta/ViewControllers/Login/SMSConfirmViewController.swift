@@ -75,7 +75,7 @@ class SMSConfirmViewController: UIViewControllerWithKeyboardNotificationWithErro
     
     @IBAction func signupClicked(_ sender: Any) {
         disposeList.forEach({$0.dispose()})
-        self.coordinator!.gotoSignup()
+        self.coordinator!.pushSignup()
     }
     
     func doSubscribtions(){

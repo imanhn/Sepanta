@@ -96,7 +96,9 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func pushAboutUs() {
-        let vc = AboutUsViewController.instantiate()
+        let storyboard = UIStoryboard(name: "ContactAboutUS", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "AboutUsViewController") as! AboutUsViewController
+        //let vc = AboutUsViewController.instantiate()
         vc.coordinator = self
         navigationController.delegate = self
         navigationController.pushViewController(vc, animated: true)
@@ -104,11 +106,14 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func pushShowProfile (){
+
         if LoginKey.shared.role == "Shop" {
             let ashop = Shop(shop_id: nil, user_id: Int(LoginKey.shared.userID), shop_name: nil, shop_off: nil, lat: nil, long: nil, image: nil, rate: nil, follower_count: nil, created_at: nil)            
             self.pushShop(Shop: ashop)
         }else{
-            let vc = ProfileViewController.instantiate()
+            let storyboard = UIStoryboard(name: "Profile", bundle: Bundle.main)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+            //let vc = ProfileViewController.instantiate()
             vc.coordinator = self
             navigationController.delegate = self
             navigationController.pushViewController(vc, animated: true)
@@ -117,7 +122,9 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func pushEditProfile (){
-        let vc = EditProfileViewController.instantiate()
+        let storyboard = UIStoryboard(name: "Profile", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "EditProfileViewController") as! EditProfileViewController
+//        let vc = EditProfileViewController.instantiate()
         vc.coordinator = self
         navigationController.delegate = self
         navigationController.pushViewController(vc, animated: true)
@@ -125,7 +132,9 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func pushShop(Shop ashop : Shop){
-        let vc = ShopViewController.instantiate()
+        let storyboard = UIStoryboard(name: "Shop", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ShopViewController") as! ShopViewController
+        //let vc = ShopViewController.instantiate()
         vc.coordinator = self
         vc.shop = ashop
         navigationController.delegate = self
@@ -134,7 +143,9 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
 
     func pushSepantaieGroup (){
-        let vc = SepantaGroupsViewController.instantiate()
+        let storyboard = UIStoryboard(name: "SepantaGroup", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SepantaGroupsViewController") as! SepantaGroupsViewController
+        //let vc = SepantaGroupsViewController.instantiate()
         vc.coordinator = self
         navigationController.delegate = self
         navigationController.pushViewController(vc, animated: true)
@@ -142,7 +153,9 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func pushAGroup(GroupID anID:Int,GroupImage anImage:UIImage,GroupName aName : String,State astate : String?,City acity : String?){
-        let vc = GroupViewController.instantiate()
+        let storyboard = UIStoryboard(name: "SepantaGroup", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "GroupViewController") as! GroupViewController
+        //let vc = GroupViewController.instantiate()
         vc.coordinator = self
         vc.catagoryId = anID
         vc.currentGroupName = aName
@@ -154,7 +167,9 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func pushGetRich(_ aCardNo : String?){
-        let vc = GetRichViewController.instantiate()
+        let storyboard = UIStoryboard(name: "GetRich", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "GetRichViewController") as! GetRichViewController
+        //let vc = GetRichViewController.instantiate()
         vc.coordinator = self
         vc.cardNo = aCardNo
         navigationController.delegate = self
@@ -164,7 +179,9 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     
     func pushNewShops(){
         SlidesAndPaths.shared.count_new_shop.accept(0)
-        let vc = ShopsListViewController.instantiate()
+        let storyboard = UIStoryboard(name: "Shop", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ShopsListViewController") as! ShopsListViewController
+        //let vc = ShopsListViewController.instantiate()
         vc.coordinator = self
         vc.fetchMechanism = { aShopListViewController in
             let shopsDataSource = ShopsListDataSource(aShopListViewController)
@@ -177,8 +194,10 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
-    func pushMyFollowingShops(){       
-        let vc = ShopsListViewController.instantiate()
+    func pushMyFollowingShops(){
+        let storyboard = UIStoryboard(name: "Shop", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ShopsListViewController") as! ShopsListViewController
+//        let vc = ShopsListViewController.instantiate()
         vc.coordinator = self
         vc.fetchMechanism = { aShopListViewController in
             let shopsDataSource = ShopsListDataSource(aShopListViewController)
@@ -192,10 +211,11 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func pushFavoriteList(){
-        let vc = ShopsListViewController.instantiate()
+        let storyboard = UIStoryboard(name: "Shop", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "FavListViewController") as! FavListViewController
         vc.coordinator = self
-        vc.fetchMechanism = { aShopListViewController in
-            let shopsDataSource = ShopsListDataSource(aShopListViewController)
+        vc.fetchMechanism = { sFavListViewController in
+            let shopsDataSource = FavListDataSource(sFavListViewController)
             shopsDataSource.getFavShopsFromServer()
             return shopsDataSource
         }
@@ -206,7 +226,9 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
 
     func PushAPost(PostID aPostID : Int,OwnerUserID auserid : Int){
-        let vc = PostViewController.instantiate()
+        let storyboard = UIStoryboard(name: "Post", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "PostViewController") as! PostViewController
+        //let vc = PostViewController.instantiate()
         vc.coordinator = self
         vc.postID = aPostID
         vc.postOwnerUserID = auserid
@@ -286,7 +308,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func pushContactUs(){
-        let storyboard = UIStoryboard(name: "ContactUS", bundle: Bundle.main)
+        let storyboard = UIStoryboard(name: "ContactAboutUS", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "ContactUSViewController") as! ContactUSViewController
         vc.coordinator = self
         navigationController.delegate = self
@@ -312,7 +334,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func pushEditShop(Shop ashop : Shop){
-        let storyboard = UIStoryboard(name: "EditShop", bundle: Bundle.main)
+        let storyboard = UIStoryboard(name: "Shop", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "EditShopViewController") as! EditShopViewController
         vc.coordinator = self
         vc.shop = ashop
@@ -343,23 +365,29 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func pushLoginPage() {
-        let vc = LoginViewController.instantiate()
+        let storyboard = UIStoryboard(name: "Login", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//        let vc = LoginViewController.instantiate()
         vc.coordinator = self
         navigationController.delegate = self
         navigationController.pushViewController(vc, animated: false)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
-    func gotoSMSVerification(Set mobileNumber : String) {
-        let vc = SMSConfirmViewController.instantiate()
+    func pushSMSVerification(Set mobileNumber : String) {
+        let storyboard = UIStoryboard(name: "Login", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SMSConfirmViewController") as! SMSConfirmViewController
+//        let vc = SMSConfirmViewController.instantiate()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: false)
         navigationController.setNavigationBarHidden(true, animated: false)
         vc.mobileNumber = mobileNumber
     }
     
-    func gotoSignup() {
-        let vc = SignupViewController.instantiate()
+    func pushSignup() {
+        let storyboard = UIStoryboard(name: "Login", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SignupViewController") as! SignupViewController
+//        let vc = SignupViewController.instantiate()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: false)
         navigationController.setNavigationBarHidden(true, animated: false)
@@ -373,7 +401,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func pushAddPost(){
-        let storyboard = UIStoryboard(name: "AddPost", bundle: Bundle.main)
+        let storyboard = UIStoryboard(name: "Post", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "AddPostViewController") as! AddPostViewController
         vc.coordinator = self
         navigationController.delegate = self
@@ -382,7 +410,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func pushEditPost(shop_id : Int, post_id : Int, post_title : String,post_body: String, post_image : UIImage){
-        let storyboard = UIStoryboard(name: "AddPost", bundle: Bundle.main)
+        let storyboard = UIStoryboard(name: "Post", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "AddPostViewController") as! AddPostViewController
         vc.coordinator = self
         vc.shop_id = shop_id

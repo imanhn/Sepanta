@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,7 +30,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="46.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X5S-Lm-hjL" userLabel="HomeLogo">
-                                        <rect key="frame" x="271.5" y="10" width="93.5" height="27"/>
+                                        <rect key="frame" x="271.5" y="9.5" width="93.5" height="27.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="X5S-Lm-hjL" secondAttribute="height" multiplier="86:25" id="z2n-93-j4B"/>
                                         </constraints>
@@ -42,13 +40,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="پست جدید" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wCm-fe-Wio" userLabel="NewShopsHeader">
-                                        <rect key="frame" x="113" y="0.0" width="150" height="46.5"/>
+                                        <rect key="frame" x="112.5" y="0.0" width="150" height="46.5"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yb5-6o-kqq" userLabel="BackButton">
-                                        <rect key="frame" x="8" y="-0.5" width="31.5" height="46.5"/>
+                                        <rect key="frame" x="8" y="0.0" width="31" height="46.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="yb5-6o-kqq" secondAttribute="height" multiplier="1:1.5" id="lza-gC-8HS"/>
                                         </constraints>
@@ -98,7 +96,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7zO-pl-tis" userLabel="SendButton" customClass="SubmitButton" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="93" y="429" width="188" height="54"/>
+                                        <rect key="frame" x="94" y="429" width="187.5" height="54.5"/>
                                         <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -162,9 +160,118 @@
             </objects>
             <point key="canvasLocation" x="119" y="-186"/>
         </scene>
+        <!--PostViewController-->
+        <scene sceneID="ods-uf-EVV">
+            <objects>
+                <viewController storyboardIdentifier="PostViewController" id="IYT-dM-O2c" userLabel="PostViewController" customClass="PostViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vhg-hJ-dz6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dXi-H4-95f" userLabel="HeaderView">
+                                <rect key="frame" x="0.0" y="20" width="375" height="46.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="El1-8U-rWN" userLabel="HomeLogo">
+                                        <rect key="frame" x="262.5" y="0.0" width="112.5" height="46.5"/>
+                                        <state key="normal" image="logo_home"/>
+                                        <connections>
+                                            <action selector="BackToHome:" destination="IYT-dM-O2c" eventType="touchUpInside" id="eKH-Qy-ygT"/>
+                                        </connections>
+                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Dd6-E6-d13" userLabel="Toolbar">
+                                        <rect key="frame" x="5" y="0.0" width="131.5" height="46.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jxm-zf-idM" userLabel="BackButton">
+                                                <rect key="frame" x="0.0" y="0.0" width="44" height="46.5"/>
+                                                <state key="normal" image="icon_back_black"/>
+                                                <connections>
+                                                    <action selector="BackTapped:" destination="IYT-dM-O2c" eventType="touchUpInside" id="mGv-tc-eoB"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yxQ-xg-z7X" userLabel="EditButton">
+                                                <rect key="frame" x="44" y="0.0" width="43.5" height="46.5"/>
+                                                <state key="normal" image="icon_edit"/>
+                                                <connections>
+                                                    <action selector="editTapped:" destination="IYT-dM-O2c" eventType="touchUpInside" id="YW3-90-9pY"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CLB-kw-7rN" userLabel="DeleteButton">
+                                                <rect key="frame" x="87.5" y="0.0" width="44" height="46.5"/>
+                                                <state key="normal" image="icon_delete"/>
+                                                <connections>
+                                                    <action selector="deleteTapped:" destination="IYT-dM-O2c" eventType="touchUpInside" id="gNe-4o-Y3E"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="عنوان پست" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTp-QW-9BC" userLabel="HeaderLabel">
+                                        <rect key="frame" x="131.5" y="0.0" width="112.5" height="46.5"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
+                                        <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="lTp-QW-9BC" firstAttribute="width" secondItem="dXi-H4-95f" secondAttribute="width" multiplier="0.3" id="9SO-Wh-U2R"/>
+                                    <constraint firstItem="Dd6-E6-d13" firstAttribute="leading" secondItem="dXi-H4-95f" secondAttribute="leading" constant="5" id="9js-K0-yOy"/>
+                                    <constraint firstItem="lTp-QW-9BC" firstAttribute="centerX" secondItem="dXi-H4-95f" secondAttribute="centerX" id="BXf-dr-1au"/>
+                                    <constraint firstItem="lTp-QW-9BC" firstAttribute="centerY" secondItem="dXi-H4-95f" secondAttribute="centerY" id="DsW-YM-6G2"/>
+                                    <constraint firstItem="El1-8U-rWN" firstAttribute="width" secondItem="dXi-H4-95f" secondAttribute="width" multiplier="0.3" id="Fmh-8c-9oQ"/>
+                                    <constraint firstItem="Dd6-E6-d13" firstAttribute="width" secondItem="dXi-H4-95f" secondAttribute="width" multiplier="0.35" id="NDe-w8-Jbn"/>
+                                    <constraint firstAttribute="trailing" secondItem="El1-8U-rWN" secondAttribute="trailing" id="Pp5-Qc-0BT"/>
+                                    <constraint firstItem="lTp-QW-9BC" firstAttribute="height" secondItem="dXi-H4-95f" secondAttribute="height" id="W8H-p4-adQ"/>
+                                    <constraint firstItem="El1-8U-rWN" firstAttribute="centerY" secondItem="dXi-H4-95f" secondAttribute="centerY" id="YEg-lc-2VG"/>
+                                    <constraint firstAttribute="bottom" secondItem="Dd6-E6-d13" secondAttribute="bottom" id="gOh-hT-gWQ"/>
+                                    <constraint firstItem="El1-8U-rWN" firstAttribute="top" secondItem="dXi-H4-95f" secondAttribute="top" id="iI7-x5-sTk"/>
+                                    <constraint firstItem="Dd6-E6-d13" firstAttribute="top" secondItem="dXi-H4-95f" secondAttribute="top" id="jIF-4Y-5QM"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3GR-1V-UBx" userLabel="PostView">
+                                <rect key="frame" x="0.0" y="66.5" width="375" height="600.5"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sxe-G3-Uqa" userLabel="PostScrollView">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="600.5"/>
+                                    </scrollView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Sxe-G3-Uqa" firstAttribute="leading" secondItem="3GR-1V-UBx" secondAttribute="leading" id="7YX-8L-9Z5"/>
+                                    <constraint firstAttribute="bottom" secondItem="Sxe-G3-Uqa" secondAttribute="bottom" id="Gmv-5q-DKX"/>
+                                    <constraint firstItem="Sxe-G3-Uqa" firstAttribute="top" secondItem="3GR-1V-UBx" secondAttribute="top" id="sK9-gM-LoP"/>
+                                    <constraint firstAttribute="trailing" secondItem="Sxe-G3-Uqa" secondAttribute="trailing" id="yGV-wt-b0a"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dXi-H4-95f" firstAttribute="height" secondItem="Vhg-hJ-dz6" secondAttribute="height" multiplier="0.07" id="0Ag-x8-GT2"/>
+                            <constraint firstItem="dXi-H4-95f" firstAttribute="top" secondItem="Be0-sS-i6k" secondAttribute="top" id="2sW-62-HbR"/>
+                            <constraint firstItem="3GR-1V-UBx" firstAttribute="top" secondItem="dXi-H4-95f" secondAttribute="bottom" id="9zO-5A-7Vl"/>
+                            <constraint firstItem="dXi-H4-95f" firstAttribute="trailing" secondItem="3GR-1V-UBx" secondAttribute="trailing" id="Ifc-vB-Crc"/>
+                            <constraint firstItem="Be0-sS-i6k" firstAttribute="bottom" secondItem="3GR-1V-UBx" secondAttribute="bottom" id="KeT-Ug-P3n"/>
+                            <constraint firstAttribute="trailing" secondItem="dXi-H4-95f" secondAttribute="trailing" id="MaA-Dk-96v"/>
+                            <constraint firstItem="dXi-H4-95f" firstAttribute="leading" secondItem="3GR-1V-UBx" secondAttribute="leading" id="e4Y-o3-rV2"/>
+                            <constraint firstItem="dXi-H4-95f" firstAttribute="leading" secondItem="Vhg-hJ-dz6" secondAttribute="leading" id="yxo-2Z-yN0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Be0-sS-i6k"/>
+                    </view>
+                    <connections>
+                        <outlet property="deletePostButton" destination="CLB-kw-7rN" id="8GB-H4-e6T"/>
+                        <outlet property="editPostButton" destination="yxQ-xg-z7X" id="Kt5-Q4-Fof"/>
+                        <outlet property="postScrollView" destination="Sxe-G3-Uqa" id="X9e-iW-E2o"/>
+                        <outlet property="postTitleLabelInHeader" destination="lTp-QW-9BC" id="Uz3-u4-CuI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fi1-hw-vxd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2918" y="776"/>
+        </scene>
     </scenes>
     <resources>
         <image name="icon_back_black" width="10" height="16"/>
+        <image name="icon_delete" width="16" height="20"/>
+        <image name="icon_edit" width="18" height="16"/>
         <image name="icon_tik_dark" width="20" height="14"/>
         <image name="logo_home" width="86" height="25"/>
         <image name="uploadPostImagePlacebo" width="600" height="600"/>

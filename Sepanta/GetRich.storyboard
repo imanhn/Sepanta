@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Shabnam-FD.ttf">
+            <string>Shabnam-FD</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--GetRichViewController-->
+        <scene sceneID="fAD-On-lEz">
+            <objects>
+                <viewController storyboardIdentifier="GetRichViewController" id="Egp-pF-FKM" userLabel="GetRichViewController" customClass="GetRichViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UM8-xJ-3p0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wk0-0X-sxW" userLabel="HeaderView">
+                                <rect key="frame" x="0.0" y="44" width="414" height="71.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="پولدارشو" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edl-UQ-tDb" userLabel="HeaderLabel">
+                                        <rect key="frame" x="103.5" y="0.0" width="207" height="71.5"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
+                                        <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVJ-sN-Bdq" userLabel="HomeLogo">
+                                        <rect key="frame" x="318" y="0.0" width="86" height="71.5"/>
+                                        <state key="normal" image="logo_home"/>
+                                        <connections>
+                                            <action selector="homeTapped:" destination="Egp-pF-FKM" eventType="touchUpInside" id="kbZ-G3-WWi"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="edl-UQ-tDb" firstAttribute="height" secondItem="wk0-0X-sxW" secondAttribute="height" id="BVg-0W-nDj"/>
+                                    <constraint firstItem="SVJ-sN-Bdq" firstAttribute="top" secondItem="wk0-0X-sxW" secondAttribute="top" id="MH2-o8-mcw"/>
+                                    <constraint firstAttribute="bottom" secondItem="SVJ-sN-Bdq" secondAttribute="bottom" id="QiP-JC-dUR"/>
+                                    <constraint firstItem="edl-UQ-tDb" firstAttribute="centerY" secondItem="wk0-0X-sxW" secondAttribute="centerY" id="TuJ-fH-wji"/>
+                                    <constraint firstItem="edl-UQ-tDb" firstAttribute="centerX" secondItem="wk0-0X-sxW" secondAttribute="centerX" id="piR-mg-ga3"/>
+                                    <constraint firstItem="edl-UQ-tDb" firstAttribute="width" secondItem="wk0-0X-sxW" secondAttribute="width" multiplier="0.5" id="xyV-Z9-gcv"/>
+                                    <constraint firstAttribute="trailing" secondItem="SVJ-sN-Bdq" secondAttribute="trailing" constant="10" id="yMI-FC-Z1d"/>
+                                </constraints>
+                            </view>
+                            <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8CL-6c-RLD" userLabel="MenuView">
+                                <rect key="frame" x="145" y="790.5" width="124" height="71.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="05K-DC-khX" userLabel="menu">
+                                        <rect key="frame" x="0.0" y="0.0" width="124" height="71.5"/>
+                                        <state key="normal" image="icon_menu"/>
+                                        <connections>
+                                            <action selector="menuClicked:" destination="Egp-pF-FKM" eventType="touchUpInside" id="KXJ-yq-J3m"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="05K-DC-khX" firstAttribute="width" secondItem="8CL-6c-RLD" secondAttribute="width" id="LWR-YO-maK"/>
+                                    <constraint firstItem="05K-DC-khX" firstAttribute="height" secondItem="8CL-6c-RLD" secondAttribute="height" id="Oqv-Jn-iET"/>
+                                    <constraint firstItem="05K-DC-khX" firstAttribute="centerX" secondItem="8CL-6c-RLD" secondAttribute="centerX" id="V6l-Ef-auN"/>
+                                    <constraint firstItem="05K-DC-khX" firstAttribute="centerY" secondItem="8CL-6c-RLD" secondAttribute="centerY" id="ucM-qz-S2M"/>
+                                </constraints>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="auq-T6-nHe">
+                                <rect key="frame" x="0.0" y="115.5" width="414" height="675"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="8CL-6c-RLD" firstAttribute="centerX" secondItem="fwC-ar-ncM" secondAttribute="centerX" id="1PN-mm-9PP"/>
+                            <constraint firstItem="8CL-6c-RLD" firstAttribute="top" secondItem="auq-T6-nHe" secondAttribute="bottom" id="9rT-O3-qZI"/>
+                            <constraint firstItem="auq-T6-nHe" firstAttribute="top" secondItem="wk0-0X-sxW" secondAttribute="bottom" id="DLd-8t-0Be"/>
+                            <constraint firstItem="wk0-0X-sxW" firstAttribute="height" secondItem="UM8-xJ-3p0" secondAttribute="height" multiplier="0.08" id="Kmc-3F-1JY"/>
+                            <constraint firstItem="fwC-ar-ncM" firstAttribute="bottom" secondItem="8CL-6c-RLD" secondAttribute="bottom" id="Vvz-rs-3d0"/>
+                            <constraint firstItem="auq-T6-nHe" firstAttribute="trailing" secondItem="fwC-ar-ncM" secondAttribute="trailing" id="X67-4t-5vD"/>
+                            <constraint firstItem="auq-T6-nHe" firstAttribute="centerX" secondItem="fwC-ar-ncM" secondAttribute="centerX" id="c21-92-3m2"/>
+                            <constraint firstItem="wk0-0X-sxW" firstAttribute="leading" secondItem="fwC-ar-ncM" secondAttribute="leading" id="dD6-nr-RT4"/>
+                            <constraint firstItem="wk0-0X-sxW" firstAttribute="top" secondItem="fwC-ar-ncM" secondAttribute="top" id="dow-ps-P6W"/>
+                            <constraint firstItem="8CL-6c-RLD" firstAttribute="height" secondItem="UM8-xJ-3p0" secondAttribute="height" multiplier="0.08" id="fO7-Yd-Eof"/>
+                            <constraint firstItem="8CL-6c-RLD" firstAttribute="width" secondItem="UM8-xJ-3p0" secondAttribute="width" multiplier="0.3" id="hD2-wE-w9z"/>
+                            <constraint firstItem="auq-T6-nHe" firstAttribute="centerY" secondItem="fwC-ar-ncM" secondAttribute="centerY" id="hfY-5l-pUf"/>
+                            <constraint firstItem="wk0-0X-sxW" firstAttribute="trailing" secondItem="fwC-ar-ncM" secondAttribute="trailing" id="nlV-Bi-Bjh"/>
+                            <constraint firstItem="wk0-0X-sxW" firstAttribute="width" secondItem="UM8-xJ-3p0" secondAttribute="width" id="rqd-4O-2If"/>
+                            <constraint firstItem="auq-T6-nHe" firstAttribute="leading" secondItem="fwC-ar-ncM" secondAttribute="leading" id="yqa-q3-H8D"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fwC-ar-ncM"/>
+                    </view>
+                    <connections>
+                        <outlet property="scrollView" destination="auq-T6-nHe" id="0Jo-ix-UCj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1RZ-hJ-Brm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1457" y="27"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon_menu" width="21" height="18"/>
+        <image name="logo_home" width="86" height="25"/>
+    </resources>
+</document>

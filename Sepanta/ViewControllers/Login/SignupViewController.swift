@@ -88,7 +88,7 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
             .filter({$0.count > 0})
             .subscribe(onNext: { innerUserID in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-                    self.coordinator!.gotoSMSVerification(Set: self.signupUI.mobileText.text ?? "")
+                    self.coordinator!.pushSMSVerification(Set: self.signupUI.mobileText.text ?? "")
                 })
             })
         useridDisp.disposed(by: myDisposeBag)

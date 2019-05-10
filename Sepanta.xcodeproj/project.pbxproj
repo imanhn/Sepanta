@@ -38,7 +38,7 @@
 		0F58927C2278F65E0077B655 /* UserPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F58927B2278F65E0077B655 /* UserPoints.swift */; };
 		0F58927E227909080077B655 /* ScoresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F58927D227909080077B655 /* ScoresViewController.swift */; };
 		0F58928022790B210077B655 /* Scores.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F58927F22790B210077B655 /* Scores.storyboard */; };
-		0F63F7102277625E00799C8F /* ContactUS.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F63F70F2277625E00799C8F /* ContactUS.storyboard */; };
+		0F63F7102277625E00799C8F /* ContactAboutUS.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F63F70F2277625E00799C8F /* ContactAboutUS.storyboard */; };
 		0F63F7142277690100799C8F /* ContactUSUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F7132277690100799C8F /* ContactUSUI.swift */; };
 		0F63F71622776A5400799C8F /* ContactUSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F71522776A5400799C8F /* ContactUSViewController.swift */; };
 		0F63F7182278947A00799C8F /* ContactUSEmoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F7172278947A00799C8F /* ContactUSEmoji.swift */; };
@@ -48,7 +48,7 @@
 		0F63F7202278BDF200799C8F /* NewCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F71F2278BDF200799C8F /* NewCardViewController.swift */; };
 		0F63F7222278BE8000799C8F /* NewCard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F63F7212278BE8000799C8F /* NewCard.storyboard */; };
 		0F63F7242278EE8500799C8F /* UIImageSetShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F7232278EE8500799C8F /* UIImageSetShadow.swift */; };
-		0F642B93227A415A00B887B8 /* AddPost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F642B92227A415A00B887B8 /* AddPost.storyboard */; };
+		0F642B93227A415A00B887B8 /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F642B92227A415A00B887B8 /* Post.storyboard */; };
 		0F642B95227A418100B887B8 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F642B94227A418100B887B8 /* AddPostViewController.swift */; };
 		0F642B97227A4D7D00B887B8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F642B96227A4D7D00B887B8 /* ImagePicker.swift */; };
 		0F642B99227A525800B887B8 /* AddPostImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F642B98227A525700B887B8 /* AddPostImagePicker.swift */; };
@@ -59,6 +59,11 @@
 		0F70A649226BC7BF0020C33C /* ProfileInfoWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F70A648226BC7BF0020C33C /* ProfileInfoWrapper.swift */; };
 		0F71A38B2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F71A38A2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift */; };
 		0F71A38F22319A2000F4EB6B /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F71A38E22319A2000F4EB6B /* Alert.swift */; };
+		0F79BBA12285C4C000795AE0 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F79BBA02285C4C000795AE0 /* Login.storyboard */; };
+		0F79BBA42285C6C100795AE0 /* SepantaGroup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F79BBA32285C6C100795AE0 /* SepantaGroup.storyboard */; };
+		0F79BBA62285C75E00795AE0 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F79BBA52285C75E00795AE0 /* Profile.storyboard */; };
+		0F79BBA82285CA5700795AE0 /* GetRich.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F79BBA72285CA5700795AE0 /* GetRich.storyboard */; };
+		0F79BBAA2285CD4900795AE0 /* FavListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F79BBA92285CD4900795AE0 /* FavListViewController.swift */; };
 		0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */; };
 		0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */; };
 		0F817A672232D89C00F1738E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A662232D89C00F1738E /* ProfileViewController.swift */; };
@@ -109,7 +114,7 @@
 		0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */; };
 		0FE8BA042205082100C868C3 /* SMSConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */; };
 		0FE8BA062205239E00C868C3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA052205239E00C868C3 /* HomeViewController.swift */; };
-		0FF55AB1227B49CE0093DEE0 /* EditShop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FF55AB0227B49CE0093DEE0 /* EditShop.storyboard */; };
+		0FF55AB1227B49CE0093DEE0 /* Shop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FF55AB0227B49CE0093DEE0 /* Shop.storyboard */; };
 		0FF55AB3227B4C790093DEE0 /* EditShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF55AB2227B4C790093DEE0 /* EditShopViewController.swift */; };
 		0FF55AB5227B4CFA0093DEE0 /* EditShopUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF55AB4227B4CFA0093DEE0 /* EditShopUI.swift */; };
 		0FFCDC4C226C795B0087BFEF /* FavListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCDC4B226C795B0087BFEF /* FavListDataSource.swift */; };
@@ -170,7 +175,7 @@
 		0F58927B2278F65E0077B655 /* UserPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPoints.swift; sourceTree = "<group>"; };
 		0F58927D227909080077B655 /* ScoresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresViewController.swift; sourceTree = "<group>"; };
 		0F58927F22790B210077B655 /* Scores.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Scores.storyboard; sourceTree = "<group>"; };
-		0F63F70F2277625E00799C8F /* ContactUS.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactUS.storyboard; sourceTree = "<group>"; };
+		0F63F70F2277625E00799C8F /* ContactAboutUS.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactAboutUS.storyboard; sourceTree = "<group>"; };
 		0F63F7132277690100799C8F /* ContactUSUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUSUI.swift; sourceTree = "<group>"; };
 		0F63F71522776A5400799C8F /* ContactUSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUSViewController.swift; sourceTree = "<group>"; };
 		0F63F7172278947A00799C8F /* ContactUSEmoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUSEmoji.swift; sourceTree = "<group>"; };
@@ -180,7 +185,7 @@
 		0F63F71F2278BDF200799C8F /* NewCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewController.swift; sourceTree = "<group>"; };
 		0F63F7212278BE8000799C8F /* NewCard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCard.storyboard; sourceTree = "<group>"; };
 		0F63F7232278EE8500799C8F /* UIImageSetShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageSetShadow.swift; sourceTree = "<group>"; };
-		0F642B92227A415A00B887B8 /* AddPost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddPost.storyboard; sourceTree = "<group>"; };
+		0F642B92227A415A00B887B8 /* Post.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Post.storyboard; sourceTree = "<group>"; };
 		0F642B94227A418100B887B8 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		0F642B96227A4D7D00B887B8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0F642B98227A525700B887B8 /* AddPostImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostImagePicker.swift; sourceTree = "<group>"; };
@@ -194,6 +199,11 @@
 		0F70A648226BC7BF0020C33C /* ProfileInfoWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoWrapper.swift; sourceTree = "<group>"; };
 		0F71A38A2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerWithKeyboardNotification.swift; sourceTree = "<group>"; };
 		0F71A38E22319A2000F4EB6B /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		0F79BBA02285C4C000795AE0 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		0F79BBA32285C6C100795AE0 /* SepantaGroup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SepantaGroup.storyboard; sourceTree = "<group>"; };
+		0F79BBA52285C75E00795AE0 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		0F79BBA72285CA5700795AE0 /* GetRich.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GetRich.storyboard; sourceTree = "<group>"; };
+		0F79BBA92285CD4900795AE0 /* FavListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavListViewController.swift; sourceTree = "<group>"; };
 		0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysShowPopup.swift; sourceTree = "<group>"; };
 		0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayChoiceTableViewController.swift; sourceTree = "<group>"; };
 		0F817A662232D89C00F1738E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -252,7 +262,7 @@
 		0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWidgets.swift; sourceTree = "<group>"; };
 		0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSConfirmViewController.swift; sourceTree = "<group>"; };
 		0FE8BA052205239E00C868C3 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		0FF55AB0227B49CE0093DEE0 /* EditShop.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditShop.storyboard; sourceTree = "<group>"; };
+		0FF55AB0227B49CE0093DEE0 /* Shop.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Shop.storyboard; sourceTree = "<group>"; };
 		0FF55AB2227B4C790093DEE0 /* EditShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditShopViewController.swift; sourceTree = "<group>"; };
 		0FF55AB4227B4CFA0093DEE0 /* EditShopUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditShopUI.swift; sourceTree = "<group>"; };
 		0FFCDC4B226C795B0087BFEF /* FavListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavListDataSource.swift; sourceTree = "<group>"; };
@@ -355,6 +365,16 @@
 			path = Bridge;
 			sourceTree = "<group>";
 		};
+		0F79BBA22285C62500795AE0 /* CreditCard */ = {
+			isa = PBXGroup;
+			children = (
+				0F8E3F712275CD4200E51B17 /* CardView.xib */,
+				0F63F71B2278B65800799C8F /* NewCardView.xib */,
+				0F63F7212278BE8000799C8F /* NewCard.storyboard */,
+			);
+			name = CreditCard;
+			sourceTree = "<group>";
+		};
 		0F890CFC2214B4B40091FA2E /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
@@ -424,6 +444,7 @@
 				0F63F71F2278BDF200799C8F /* NewCardViewController.swift */,
 				0F58927D227909080077B655 /* ScoresViewController.swift */,
 				0F642B94227A418100B887B8 /* AddPostViewController.swift */,
+				0F79BBA92285CD4900795AE0 /* FavListViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -474,18 +495,20 @@
 		0FAE1FF722673F0B0043B077 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				0F79BBA22285C62500795AE0 /* CreditCard */,
 				0FE8B9B1220355F100C868C3 /* LaunchScreen.storyboard */,
 				0FE8B9AC220355F000C868C3 /* Main.storyboard */,
 				0F4D29E32267617100BFD425 /* Search.storyboard */,
 				0FFCDC51226C955F0087BFEF /* Notifications.storyboard */,
 				0FD094A9226E34C600E53A07 /* Map.storyboard */,
-				0F8E3F712275CD4200E51B17 /* CardView.xib */,
-				0F63F71B2278B65800799C8F /* NewCardView.xib */,
-				0F63F70F2277625E00799C8F /* ContactUS.storyboard */,
-				0F63F7212278BE8000799C8F /* NewCard.storyboard */,
+				0F63F70F2277625E00799C8F /* ContactAboutUS.storyboard */,
 				0F58927F22790B210077B655 /* Scores.storyboard */,
-				0F642B92227A415A00B887B8 /* AddPost.storyboard */,
-				0FF55AB0227B49CE0093DEE0 /* EditShop.storyboard */,
+				0F642B92227A415A00B887B8 /* Post.storyboard */,
+				0FF55AB0227B49CE0093DEE0 /* Shop.storyboard */,
+				0F79BBA02285C4C000795AE0 /* Login.storyboard */,
+				0F79BBA32285C6C100795AE0 /* SepantaGroup.storyboard */,
+				0F79BBA52285C75E00795AE0 /* Profile.storyboard */,
+				0F79BBA72285CA5700795AE0 /* GetRich.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -697,21 +720,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FE8B9B3220355F100C868C3 /* LaunchScreen.storyboard in Resources */,
-				0FF55AB1227B49CE0093DEE0 /* EditShop.storyboard in Resources */,
+				0F79BBA62285C75E00795AE0 /* Profile.storyboard in Resources */,
+				0F79BBA42285C6C100795AE0 /* SepantaGroup.storyboard in Resources */,
+				0FF55AB1227B49CE0093DEE0 /* Shop.storyboard in Resources */,
 				0FE8B9B0220355F100C868C3 /* Assets.xcassets in Resources */,
 				0F63F71C2278B65800799C8F /* NewCardView.xib in Resources */,
 				0F8B7D432267874B00EFAACD /* Shabnam-Bold-FD.ttf in Resources */,
+				0F79BBA82285CA5700795AE0 /* GetRich.storyboard in Resources */,
 				0F8B7D442267874B00EFAACD /* Shabnam-FD.ttf in Resources */,
 				0FE8B9AE220355F000C868C3 /* Main.storyboard in Resources */,
 				0F63F7222278BE8000799C8F /* NewCard.storyboard in Resources */,
-				0F642B93227A415A00B887B8 /* AddPost.storyboard in Resources */,
+				0F79BBA12285C4C000795AE0 /* Login.storyboard in Resources */,
+				0F642B93227A415A00B887B8 /* Post.storyboard in Resources */,
 				0FFCDC52226C955F0087BFEF /* Notifications.storyboard in Resources */,
 				0F8E3F722275CD4200E51B17 /* CardView.xib in Resources */,
 				0F58928022790B210077B655 /* Scores.storyboard in Resources */,
 				0FD094AA226E34C600E53A07 /* Map.storyboard in Resources */,
 				0F237E41226783CF004CC7BC /* Shabnam-Light-FD.ttf in Resources */,
 				0F4D29E42267617100BFD425 /* Search.storyboard in Resources */,
-				0F63F7102277625E00799C8F /* ContactUS.storyboard in Resources */,
+				0F63F7102277625E00799C8F /* ContactAboutUS.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -877,6 +904,7 @@
 				0F50AE74226F66950028D8B6 /* MapViewAnnotations.swift in Sources */,
 				0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */,
 				0FD094AC226E370B00E53A07 /* NearestViewController.swift in Sources */,
+				0F79BBAA2285CD4900795AE0 /* FavListViewController.swift in Sources */,
 				0F642B95227A418100B887B8 /* AddPostViewController.swift in Sources */,
 				0F0661B2225BEA6A00A83734 /* PostUI.swift in Sources */,
 				0F63F71622776A5400799C8F /* ContactUSViewController.swift in Sources */,
