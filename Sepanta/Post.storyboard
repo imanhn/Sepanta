@@ -261,6 +261,7 @@
                         <outlet property="editPostButton" destination="yxQ-xg-z7X" id="Kt5-Q4-Fof"/>
                         <outlet property="postScrollView" destination="Sxe-G3-Uqa" id="X9e-iW-E2o"/>
                         <outlet property="postTitleLabelInHeader" destination="lTp-QW-9BC" id="Uz3-u4-CuI"/>
+                        <outlet property="toolbarStack" destination="Dd6-E6-d13" id="MiB-YB-rx7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fi1-hw-vxd" userLabel="First Responder" sceneMemberID="firstResponder"/>

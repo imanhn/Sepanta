@@ -65,6 +65,7 @@
 		0F79BBA82285CA5700795AE0 /* GetRich.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F79BBA72285CA5700795AE0 /* GetRich.storyboard */; };
 		0F79BBAA2285CD4900795AE0 /* FavListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F79BBA92285CD4900795AE0 /* FavListViewController.swift */; };
 		0F79BBAC2285D36B00795AE0 /* ShopSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F79BBAB2285D36B00795AE0 /* ShopSectionData.swift */; };
+		0F79BBB02285DC0500795AE0 /* ReportPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F79BBAF2285DC0500795AE0 /* ReportPostView.swift */; };
 		0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */; };
 		0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */; };
 		0F817A672232D89C00F1738E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A662232D89C00F1738E /* ProfileViewController.swift */; };
@@ -206,6 +207,7 @@
 		0F79BBA72285CA5700795AE0 /* GetRich.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GetRich.storyboard; sourceTree = "<group>"; };
 		0F79BBA92285CD4900795AE0 /* FavListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavListViewController.swift; sourceTree = "<group>"; };
 		0F79BBAB2285D36B00795AE0 /* ShopSectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopSectionData.swift; sourceTree = "<group>"; };
+		0F79BBAF2285DC0500795AE0 /* ReportPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPostView.swift; sourceTree = "<group>"; };
 		0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysShowPopup.swift; sourceTree = "<group>"; };
 		0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayChoiceTableViewController.swift; sourceTree = "<group>"; };
 		0F817A662232D89C00F1738E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -473,24 +475,25 @@
 		0F9BCFC6222201B600C87706 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */,
-				0F9BCFC42221FCCF00C87706 /* SlideControl.swift */,
-				0F9BCFC7222317E900C87706 /* SepantaGroupButtons.swift */,
 				0FAEEDE82230957100A9178F /* AboutUsUI.swift */,
-				0FAEEDE4222F29C600A9178F /* GetRichUI.swift */,
-				0F673454227A149C0064EF96 /* SignUPUI.swift */,
+				0F8E3F6F2275CCF300E51B17 /* CardView.swift */,
+				0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */,
 				0F63F7132277690100799C8F /* ContactUSUI.swift */,
 				0F817A6C22346BAF00F1738E /* EditProfileUI.swift */,
-				0FFCF613221811FC0040A7DC /* Spinner.swift */,
-				0F817A6822341D8E00F1738E /* ShowProfileUI.swift */,
-				0F1B75642236E42A0087C0DB /* ShopUI.swift */,
 				0FF55AB4227B4CFA0093DEE0 /* EditShopUI.swift */,
-				0F0661B1225BEA6A00A83734 /* PostUI.swift */,
-				0F50AE73226F66950028D8B6 /* MapViewAnnotations.swift */,
-				0F8E3F6F2275CCF300E51B17 /* CardView.swift */,
-				0F63F71D2278BBDC00799C8F /* NewCardView.swift */,
-				0F05600F227F811F005F7BCE /* RateView.swift */,
 				0F4C8EB4227FB21F00E35F8B /* FilterView.swift */,
+				0FAEEDE4222F29C600A9178F /* GetRichUI.swift */,
+				0F50AE73226F66950028D8B6 /* MapViewAnnotations.swift */,
+				0F63F71D2278BBDC00799C8F /* NewCardView.swift */,
+				0F0661B1225BEA6A00A83734 /* PostUI.swift */,
+				0F05600F227F811F005F7BCE /* RateView.swift */,
+				0F79BBAF2285DC0500795AE0 /* ReportPostView.swift */,
+				0F9BCFC7222317E900C87706 /* SepantaGroupButtons.swift */,
+				0F1B75642236E42A0087C0DB /* ShopUI.swift */,
+				0F817A6822341D8E00F1738E /* ShowProfileUI.swift */,
+				0F673454227A149C0064EF96 /* SignUPUI.swift */,
+				0F9BCFC42221FCCF00C87706 /* SlideControl.swift */,
+				0FFCF613221811FC0040A7DC /* Spinner.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -838,6 +841,7 @@
 				0F1B75632236E39B0087C0DB /* ShopViewController.swift in Sources */,
 				0F066F95222B19AB00C8871C /* UIViewRotate.swift in Sources */,
 				0F70A649226BC7BF0020C33C /* ProfileInfoWrapper.swift in Sources */,
+				0F79BBB02285DC0500795AE0 /* ReportPostView.swift in Sources */,
 				0FAE1FFF226745780043B077 /* XIBView.swift in Sources */,
 				0F70A647226B97650020C33C /* EditProfileImagePicker.swift in Sources */,
 				0F63F7242278EE8500799C8F /* UIImageSetShadow.swift in Sources */,

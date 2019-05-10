@@ -19,11 +19,12 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
     var disposeList = [Disposable]()
     var postID : Int?
     var postOwnerUserID : Int?
-    
+    var abuseButton = UIButton(type: .custom)
     @IBOutlet weak var editPostButton: UIButton!
     @IBOutlet weak var deletePostButton: UIButton!
     @IBOutlet weak var postScrollView: UIScrollView!
     @IBOutlet weak var postTitleLabelInHeader: UILabel!
+    @IBOutlet weak var toolbarStack: UIStackView!
     
     @IBAction func BackTapped(_ sender: Any) {
         disposeList.forEach({$0.dispose()})
@@ -49,8 +50,24 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
         //showQuestion(Message: "آيا می خواهید این پست را ویرایش کنید؟", OKLabel: "بلی", CancelLabel: "خیر", QuestionTag: 2)
     }
     
+    @objc func reportPost(_ sender : Any) {
+        let offsetY = (self.view.frame.height - self.view.frame.width) / 2
+        let offsetX : CGFloat = 20
+        let w = self.view.frame.width - (2 * offsetX)
+        let h = w/2
+        let aRepPostView = ReportPostView(frame: CGRect(x: offsetX, y: offsetY, width:w, height: h), PostID: postID!)
+        self.view.addSubview(aRepPostView)
+        NetworkManager.shared.serverMessageObs = BehaviorRelay<String>(value: "")
+        NetworkManager.shared.serverMessageObs
+            .filter({$0.count > 0})
+            .subscribe(onNext: { [unowned self] amessage in
+                NetworkManager.shared.serverMessageObs = BehaviorRelay<String>(value: "")
+                self.alert(Message: amessage)
+            }).disposed(by: myDisposeBag)
+    }
+    
     @IBAction func deleteTapped(_ sender: Any) {
-        showQuestion(Message: "آيا از حذف پست مطمئن هستید؟", OKLabel: "بلی", CancelLabel: "خیر", QuestionTag: 1)
+        showQuestion(Message: "آيا از حذف این پست مطمئن هستید؟", OKLabel: "بلی", CancelLabel: "خیر", QuestionTag: 1)
     }
     
     @objc override func okPressed(_ sender: Any) {
@@ -59,11 +76,11 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
                 print("Delete Post")
                 let aParameter = ["post_id":"\(self.postID ?? 0)"]
                 NetworkManager.shared.run(API: "post-delete", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
-                NetworkManager.shared.messageObs = BehaviorRelay<String>(value: "")
-                NetworkManager.shared.messageObs
+                NetworkManager.shared.serverMessageObs = BehaviorRelay<String>(value: "")
+                NetworkManager.shared.serverMessageObs
                     .filter({$0.count > 0})
                     .subscribe(onNext: { [unowned self] amessage in
-                        NetworkManager.shared.messageObs = BehaviorRelay<String>(value: "")
+                        NetworkManager.shared.serverMessageObs = BehaviorRelay<String>(value: "")
                         self.alert(Message: amessage)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                             self.BackTapped(sender)
@@ -96,10 +113,18 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
         let authorized = editAuthorized()
         if !authorized {
             print("*** NOT Authorized")
-            editPostButton.setImage(UIImage(named: "icon_edit_grey"), for: .disabled)
-            deletePostButton.setImage(UIImage(named: "icon_delete_grey"), for: .disabled)
-            editPostButton.isEnabled = false
-            deletePostButton.isEnabled = false
+            deletePostButton.isHidden = true
+            editPostButton.isHidden = true
+            
+            abuseButton = UIButton(frame: CGRect(x: 10, y: 10, width: 20, height: 20))
+            abuseButton.setImage(UIImage(named: "abuseButton"), for: .normal)
+            abuseButton.addTarget(self, action: #selector(reportPost(_:)), for: .touchUpInside)
+            
+            toolbarStack.addSubview(abuseButton)
+            toolbarStack.addArrangedSubview(abuseButton)
+            toolbarStack.setNeedsUpdateConstraints()
+            toolbarStack.setNeedsLayout()
+            toolbarStack.setNeedsDisplay()
         }else{
             print("*** Authorized")
             editPostButton.setImage(UIImage(named: "icon_edit"), for: .normal)

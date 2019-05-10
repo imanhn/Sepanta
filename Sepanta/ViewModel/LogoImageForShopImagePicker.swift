@@ -31,7 +31,7 @@ class LogoImageForShopImagePicker : ImagePicker {
     
     func uploadPicture(){
         Spinner.start()
-        let profileimage = self.editShopViewController.shopBanner.image!
+        let profileimage = self.editShopViewController.shopLogo.image!
         let imageData = UIImageJPEGRepresentation(profileimage, 0.2)!
         let targetUrl = URL(string: NetworkManager.shared.baseURLString+"/profile-image")!
         var messageAlerted = false

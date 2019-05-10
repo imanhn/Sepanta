@@ -106,7 +106,7 @@ class JSONParser {
                 } else if (apiName == "post-delete") && (aMethod == HTTPMethod.post) {
                     //Returns the Post Detail
                     if let amessage = aDic["message"] as? String {
-                        NetworkManager.shared.messageObs.accept(amessage)
+                        NetworkManager.shared.serverMessageObs.accept(amessage)
                     }
                 } else if (apiName == "register") && (aMethod == HTTPMethod.post) {
                     //set a message for register when things go wrong or right!
@@ -135,7 +135,7 @@ class JSONParser {
                 }else if (apiName == "report-comment") || (apiName == "report-post") || (apiName == "report-comment"){
                     //Returns Profile Data for a user Id
                     if let amessage = aDic["message"] as? String {
-                        NetworkManager.shared.messageObs.accept(amessage)
+                        NetworkManager.shared.serverMessageObs.accept(amessage)
                     }
                 } else if (apiName == "send-comment") && (aMethod == HTTPMethod.post) {
                     // Sets True for commentSendingSuccessful to be observable by PostUI

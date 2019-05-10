@@ -322,10 +322,11 @@ class PostUI {
         
         let aParameter = ["comment_id":"\(aComment.id!)"]
         NetworkManager.shared.run(API: "report-comment", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: true)
-        let messageDisp = NetworkManager.shared.messageObs
+        NetworkManager.shared.serverMessageObs = BehaviorRelay<String>(value: "")
+        let messageDisp = NetworkManager.shared.serverMessageObs
             .subscribe(onNext: {amessage in
                 self.delegate.alert(Message: amessage)
-                NetworkManager.shared.messageObs = BehaviorRelay<String>(value: "")
+                //NetworkManager.shared.messageObs = BehaviorRelay<String>(value: "")
             })
         messageDisp.disposed(by: myDisposeBag)
         self.delegate.disposeList.append(messageDisp)

@@ -89,6 +89,7 @@ class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded{
                 if rate > 2.5 {aCell.star3.image = UIImage(named: "icon_star_on")}
                 if rate > 3.5 {aCell.star4.image = UIImage(named: "icon_star_on")}
                 if rate > 4.5 {aCell.star5.image = UIImage(named: "icon_star_on")}
+                
                 if let shopImage = aCell.shopImage{
                     //print("NetworkManager.shared.websiteRootAddress : ",NetworkManager.shared.websiteRootAddress)
                     //print("SlidesAndPaths.shared.path_profile_image : ",SlidesAndPaths.shared.path_profile_image)
@@ -101,7 +102,9 @@ class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded{
                         print("model.image path could not be cast to URL  : ",model.image ?? "(model.image is nil)")
                         
                     }
+ 
                 }
+                
                 returningCell = aCell
             }
             return returningCell ?? cell

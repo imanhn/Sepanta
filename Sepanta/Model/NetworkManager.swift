@@ -44,6 +44,7 @@ class NetworkManager {
     var statusMessage : String
     var message : String
     var messageObs = BehaviorRelay<String>(value: "")
+    var serverMessageObs = BehaviorRelay<String>(value: "")    
     // Result of Parser :
     var provinceDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
     var cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
