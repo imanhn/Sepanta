@@ -41,8 +41,9 @@ class CacheManager {
         //data = NSData(contentsOf: fileURL)
         do {
            data = try NSData(contentsOf: fileURL)
-        } catch let error as NSError{
-            print("Failed reading: \(fileURL), Error: " + error.localizedDescription)
+        } catch {
+        //} catch let error as NSError{
+            //print("Failed reading: \(fileURL), Error: " + error.localizedDescription)
             return nil
         }
         return data

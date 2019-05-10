@@ -15,7 +15,7 @@ class NewCardViewController : UIViewControllerWithErrorBar,UITextFieldDelegate,U
     //var myDisposeBag = DisposeBag()
     var disposeList = [Disposable]()
     weak var coordinator : HomeCoordinator?
-
+    var cardNo : String = ""
     @IBOutlet weak var part1: CreditCardPartNumber!
     @IBOutlet weak var part2: CreditCardPartNumber!
     @IBOutlet weak var part3: CreditCardPartNumber!
@@ -35,15 +35,20 @@ class NewCardViewController : UIViewControllerWithErrorBar,UITextFieldDelegate,U
         self.coordinator!.popHome()
     }
     
+    @IBAction func submitTapped(_ sender: Any) {
+        
+        self.coordinator!.pushGetRich(cardNo)
+    }
+    
     func handleSubmitButtonEnableOrDisable(){
         let handleSubmitStatus = Observable.combineLatest([part1.rx.text,
                                   part2.rx.text,
                                   part3.rx.text,
                                   part4.rx.text
-            
             ])
             .subscribe(onNext: { (combinedTexts) in
                 //print("combinedTexts : ",combinedTexts)
+                self.cardNo = combinedTexts.reduce("", {$0 + ($1 ?? "")})
                 let mappedTextToBool = combinedTexts.map{$0 != nil && $0!.count == 4}
                 //print("mapped : ",mappedTextToBool)
                 var tagToEdit = 101

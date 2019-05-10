@@ -55,7 +55,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
             break
         case 4:
             popHome()
-            pushGetRich()
+            pushGetRich(nil)
             break
         case 5:
             popHome()
@@ -152,9 +152,11 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
-    func pushGetRich(){
+    
+    func pushGetRich(_ aCardNo : String?){
         let vc = GetRichViewController.instantiate()
         vc.coordinator = self
+        vc.cardNo = aCardNo
         navigationController.delegate = self
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
@@ -188,6 +190,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
+    
     func pushFavoriteList(){
         let vc = ShopsListViewController.instantiate()
         vc.coordinator = self
@@ -246,7 +249,8 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
-    
+
+
     func pushShopMapOrPopMapVC(_ ashop : Shop){
         var isMapLoaded = false
         for avc in navigationController.viewControllers

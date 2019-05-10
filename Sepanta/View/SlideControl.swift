@@ -76,15 +76,15 @@ class SlideController {
         }
     }
     @objc func handlePan(_ sender:UIPanGestureRecognizer) {
-        print("Pan Status : ",aPanStarted," State : ",sender.state)
+        //print("Pan Status : ",aPanStarted," State : ",sender.state)
         let panStartLocation = sender.location(in: self.delegate.slideView)        
         if (sender.state == UIGestureRecognizerState.began && isOnSlideView(panStartLocation)) {
-            print("Pan STARTED")
+            //print("Pan STARTED")
             startLocation = sender.location(in: self.delegate.view)
             aPanStarted = true
             //print("Start X : ",startLocation.x," Y : ",startLocation.y)
         } else if (sender.state == UIGestureRecognizerState.ended && aPanStarted) {
-            print("Pan ENDED")
+            //print("Pan ENDED")
             endLocation = sender.location(in: self.delegate.view)
             aPanStarted = false
             let animDurationInterval = TimeInterval(1/(abs(sender.velocity(in: self.delegate.view).x/1000)))
@@ -96,6 +96,7 @@ class SlideController {
                     self.delegate.currentImageView.layer.frame = CGRect(x: UIScreen.main.bounds.width, y: self.delegate.currentImageView.layer.frame.origin.y, width: self.delegate.currentImageView.layer.bounds.width, height: self.delegate.currentImageView.layer.bounds.height)
                     self.delegate.leftImageView.layer.frame = CGRect(x: 0, y: self.delegate.leftImageView.layer.frame.origin.y, width: self.delegate.leftImageView.layer.bounds.width, height: self.delegate.leftImageView.layer.bounds.height)
                 }) { _ in
+                    if self.adsPage < 1 {return}
                     self.adsPage = self.adsPage - 1
                     //Temporary make current the left image so when moving back the frames it would be felt by the user
                     self.delegate.currentImageView.image = self.delegate.leftImageView.image
@@ -111,6 +112,7 @@ class SlideController {
                     self.delegate.currentImageView.layer.frame = CGRect(x: -1 * UIScreen.main.bounds.width, y: self.delegate.currentImageView.layer.frame.origin.y, width: self.delegate.currentImageView.layer.bounds.width, height: self.delegate.currentImageView.layer.bounds.height)
                     self.delegate.rightImageView.layer.frame = CGRect(x: 0, y: self.delegate.rightImageView.layer.frame.origin.y, width: self.delegate.rightImageView.layer.bounds.width, height: self.delegate.rightImageView.layer.bounds.height)
                 }) { _ in
+                    if self.adsPage > self.slides.count-2 {return}
                     self.adsPage = self.adsPage + 1
                     //Temporary make current the right image so when moving back the frames it would be felt by the user
                     self.delegate.currentImageView.image = self.delegate.rightImageView.image
@@ -145,7 +147,6 @@ class SlideController {
     }
     
     func setupLeftAndRightImages(){
-        //print("Page : ",adsPage)
         if adsPage < 1 {
             //leftImageView.image = slides[adsPage] // No left! get the current for left
             self.delegate.leftImageView.image = slides.last // No left! get a blank logo for left

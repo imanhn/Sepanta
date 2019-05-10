@@ -33,10 +33,13 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     
     weak var coordinator : HomeCoordinator?
     let byOff = "بیشترین تخفیف"
+    let byFollower = "بیشترین عضو"
+    let byNewest = "جدید ترین"
     let byRate = "بیشترین امتیاز"
     let byName = "نام فروشگاه"
     let searchOption = "جستجو"
     let sortOption = "مرتب سازی با"
+    let noFilterOption = "بدون فیلتر"
     let myDisposeBag  = DisposeBag()
     var sectionOfShops = BehaviorRelay<[SectionOfShopData]>(value: [SectionOfShopData]())
     //var shops : BehaviorRelay<[Shop]> = BehaviorRelay(value: [])
@@ -66,33 +69,37 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     }
     
     @objc func filterValueTapped(_ sender: Any) {
-        if self.filterView.filterType.text == searchOption {
+        if self.filterView.filterType.text == searchOption || self.filterView.filterType.text == noFilterOption {
             return
         }
-        let allfilterValues = [byName,byRate,byOff]
+        let allfilterValues = [byNewest,byName,byRate,byOff,byFollower]
         let controller = ArrayChoiceTableViewController(allfilterValues) {
             (selectedFilter) in
+            if selectedFilter == self.noFilterOption {
+                self.filterView.filterType.isEnabled = false
+            }else{
+                self.filterView.filterType.isEnabled = true
+            }
             self.filterView.filterValue.text = selectedFilter
         }
-        controller.preferredContentSize = CGSize(width: 250, height: allfilterValues.count*60)
+        controller.preferredContentSize = CGSize(width: 250, height: allfilterValues.count*45)
         Spinner.stop()
         self.showPopup(controller, sourceView: filterView.filterValue)
     }
     
     @objc func filterTypeTapped(_ sender : Any){
-        let allfilterValues = [searchOption,sortOption]
-        let controller = ArrayChoiceTableViewController(allfilterValues) {
+        let allfilterTypes = [searchOption,sortOption,noFilterOption]
+        let controller = ArrayChoiceTableViewController(allfilterTypes) {
             (selectedFilter) in
             self.view.endEditing(true)
             self.filterView.filterType.text = selectedFilter
-            if selectedFilter == self.searchOption {
+            if selectedFilter == self.searchOption || selectedFilter == self.noFilterOption{
                 self.filterView.filterValue.text = ""
             }else if selectedFilter == self.sortOption {
                 self.filterView.filterValue.text = self.byName
             }
-
         }
-        controller.preferredContentSize = CGSize(width: 250, height: allfilterValues.count*60)
+        controller.preferredContentSize = CGSize(width: 250, height: allfilterTypes.count*45)
         Spinner.stop()
         self.showPopup(controller, sourceView: filterView.filterValue)
     }
@@ -120,6 +127,9 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
                 if (ashop.shop_name?.contains(self.filterView.filterValue.text ?? ""))! { return true}else{return false}
             })
             sectionOfShops.accept([aFilteredData])
+        }else if ((self.filterView.filterValue.text ?? "") == byNewest) || self.filterView.filterType.text == noFilterOption {
+            let aNormalList = SectionOfShopData(original: self.sectionOfShops.value[0], items: NetworkManager.shared.shopObs.value)
+            sectionOfShops.accept([aNormalList])
         }else if self.filterView.filterType.text == sortOption {
             var sortFunc : SortFunction = { (ashop,bshop) in return true}
             if (self.filterView.filterValue.text ?? "") == byName {
@@ -128,11 +138,15 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
                 }
             }else if (self.filterView.filterValue.text ?? "") == byRate {
                 sortFunc = { (ashop,bshop) in
-                    if ((ashop.rate ?? "") < (bshop.rate ?? "")) {return true}else{return false}
+                    if ((Int(ashop.rate ?? "0") ?? 0) < (Int(bshop.rate ?? "0") ?? 0)) {return true}else{return false}
                 }
             }else if (self.filterView.filterValue.text ?? "") == byOff {
                 sortFunc = { (ashop,bshop) in
                     if ((ashop.shop_off ?? 0) > (bshop.shop_off ?? 0)) {return true}else{return false}
+                }
+            }else if (self.filterView.filterValue.text ?? "") == byFollower {
+                sortFunc = { (ashop,bshop) in
+                    if ((ashop.follower_count ?? 0) > (bshop.follower_count ?? 0)) {return true}else{return false}
                 }
             }
             let aSortedData = SectionOfShopData(original: self.sectionOfShops.value[0], items: NetworkManager.shared.shopObs.value, sort: sortFunc)

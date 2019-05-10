@@ -157,6 +157,11 @@ class EditShopUI :  NSObject, UITextFieldDelegate{
             .subscribe(onNext: { [unowned self] (succeed) in
                 self.delegate.alert(Message: "اطلاعات پروفایل شما بروز شد")
                 NetworkManager.shared.updateProfileInfoSuccessful = BehaviorRelay<Bool>(value: false)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                    self.delegate.backTapped(self.submitButton)
+                    Spinner.stop()
+                })
+
             })
         updateMessageDisp.disposed(by: self.myDisposeBag)
         disposeList.append(updateMessageDisp)

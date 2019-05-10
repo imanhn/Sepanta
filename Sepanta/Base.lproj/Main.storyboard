@@ -39,7 +39,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9Y-tP-8xX" userLabel="HomeLogo">
-                                        <rect key="frame" x="279" y="0.0" width="86" height="53.5"/>
+                                        <rect key="frame" x="349" y="0.0" width="16" height="53.5"/>
                                         <state key="normal" image="logo_home"/>
                                         <connections>
                                             <action selector="homeTapped:" destination="Uis-5v-aGi" eventType="touchUpInside" id="acW-O5-frh"/>
@@ -75,7 +75,7 @@
                                     <constraint firstItem="Pb4-fn-2uq" firstAttribute="height" secondItem="8qm-00-Y2G" secondAttribute="height" id="qSw-0C-5ju"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ogw-6P-OKw">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ogw-6P-OKw">
                                 <rect key="frame" x="0.0" y="73.5" width="375" height="540"/>
                             </scrollView>
                         </subviews>
@@ -136,7 +136,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="reO-9j-0gF" userLabel="HomeLogo">
-                                        <rect key="frame" x="279" y="0.0" width="86" height="53.5"/>
+                                        <rect key="frame" x="349" y="0.0" width="16" height="53.5"/>
                                         <state key="normal" image="logo_home"/>
                                         <connections>
                                             <action selector="homeTapped:" destination="Uis-5v-aGi" eventType="touchUpInside" id="4Mk-ra-6l5"/>
@@ -459,13 +459,13 @@
                                                         <textInputTraits key="textInputTraits" keyboardType="phonePad" enablesReturnKeyAutomatically="YES" textContentType="tel"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ورود کد ارسال شده" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ron-c6-HyJ" userLabel="SMSCodeText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="48" width="337.5" height="47.5"/>
+                                                        <rect key="frame" x="0.0" y="48" width="337.5" height="48"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="phonePad" enablesReturnKeyAutomatically="YES"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۰۱:۰۰" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAM-oe-oMT" userLabel="TimerLabel">
-                                                        <rect key="frame" x="0.0" y="95.5" width="337.5" height="56.5"/>
+                                                        <rect key="frame" x="0.0" y="96" width="337.5" height="56"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="24"/>
                                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -489,7 +489,7 @@
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_lock_gray" translatesAutoresizingMaskIntoConstraints="NO" id="w94-6D-GwQ" userLabel="LockIcon">
-                                        <rect key="frame" x="304.5" y="140" width="18" height="28.5"/>
+                                        <rect key="frame" x="306.5" y="140" width="16" height="29"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -617,35 +617,35 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Hk-Yy-qxo" userLabel="ToolbarView">
                                 <rect key="frame" x="19" y="120" width="337.5" height="67"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleAspectFit" distribution="equalCentering" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Cij-HL-a8x" userLabel="MenuStackView">
-                                        <rect key="frame" x="16.5" y="13.5" width="304" height="40"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="hph-dd-qiT">
+                                        <rect key="frame" x="0.0" y="0.0" width="337.5" height="67"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxo-tG-8Ao" userLabel="help">
-                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="67"/>
                                                 <state key="normal" image="icon_help_resized"/>
                                                 <connections>
                                                     <action selector="gotoHelp:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="5Df-Ix-VTQ"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8s7-oa-94L" userLabel="notification" customClass="UIButtonWithBadge" customModule="Sepanta" customModuleProvider="target">
-                                                <rect key="frame" x="66" y="0.0" width="40" height="40"/>
+                                                <rect key="frame" x="69.5" y="0.0" width="40" height="67"/>
                                                 <state key="normal" image="icon_news_resized"/>
                                                 <connections>
                                                     <action selector="gotoNotifications:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="z7O-m3-A85"/>
                                                 </connections>
                                             </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_logo_statuse_in" translatesAutoresizingMaskIntoConstraints="NO" id="su3-Wk-zEO" userLabel="logo">
-                                                <rect key="frame" x="122.5" y="7.5" width="59" height="25"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="icon_logo_statuse_in" translatesAutoresizingMaskIntoConstraints="NO" id="su3-Wk-zEO" userLabel="logo">
+                                                <rect key="frame" x="139" y="0.0" width="59" height="67"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahS-up-E30" userLabel="favorites">
-                                                <rect key="frame" x="198" y="0.0" width="40" height="40"/>
+                                                <rect key="frame" x="227.5" y="0.0" width="40" height="67"/>
                                                 <state key="normal" image="icon_home_fav"/>
                                                 <connections>
                                                     <action selector="gotoFavorites:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="jh8-56-UN9"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QWN-5j-uDl" userLabel="profile">
-                                                <rect key="frame" x="264" y="0.0" width="40" height="40"/>
+                                                <rect key="frame" x="297.5" y="0.0" width="40" height="67"/>
                                                 <state key="normal" image="icon_profile_03_resized"/>
                                                 <connections>
                                                     <action selector="gotoProfile:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="n5v-ZJ-Pbc"/>
@@ -655,9 +655,10 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="Cij-HL-a8x" firstAttribute="width" secondItem="4Hk-Yy-qxo" secondAttribute="width" multiplier="0.9" id="I9B-O8-nu5"/>
-                                    <constraint firstItem="Cij-HL-a8x" firstAttribute="centerX" secondItem="4Hk-Yy-qxo" secondAttribute="centerX" id="WMZ-aJ-rSI"/>
-                                    <constraint firstItem="Cij-HL-a8x" firstAttribute="centerY" secondItem="4Hk-Yy-qxo" secondAttribute="centerY" id="Xiv-WY-zQr"/>
+                                    <constraint firstItem="hph-dd-qiT" firstAttribute="centerX" secondItem="4Hk-Yy-qxo" secondAttribute="centerX" id="CZa-Yc-utz"/>
+                                    <constraint firstItem="hph-dd-qiT" firstAttribute="height" secondItem="4Hk-Yy-qxo" secondAttribute="height" id="EgX-6Y-hxQ"/>
+                                    <constraint firstItem="hph-dd-qiT" firstAttribute="centerY" secondItem="4Hk-Yy-qxo" secondAttribute="centerY" id="IHM-iC-Lgd"/>
+                                    <constraint firstItem="hph-dd-qiT" firstAttribute="width" secondItem="4Hk-Yy-qxo" secondAttribute="width" id="oba-AQ-ywx"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lB3-P9-L47" userLabel="SearchView">
@@ -884,13 +885,13 @@
                                 <rect key="frame" x="0.0" y="40" width="375" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="مراکز سپنتایی" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKg-wA-Ses" userLabel="HeaderText">
-                                        <rect key="frame" x="143" y="4" width="89.5" height="22"/>
+                                        <rect key="frame" x="147" y="5.5" width="81" height="19"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="16"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kec-e1-xZk" userLabel="HomeLogo">
-                                        <rect key="frame" x="279" y="0.0" width="86" height="30"/>
+                                        <rect key="frame" x="349" y="0.0" width="16" height="30"/>
                                         <state key="normal" image="logo_home"/>
                                         <connections>
                                             <action selector="homeTapped:" destination="I4W-Vv-3RO" eventType="touchUpInside" id="Hu6-B7-Myc"/>
@@ -1112,11 +1113,11 @@
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2FS-gh-jyP" userLabel="ViewWithDash" customClass="UIViewWithDash" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="112.5" y="0.0" width="88.5" height="67"/>
+                                        <rect key="frame" x="112.5" y="0.0" width="99" height="67"/>
                                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="رستوران و کافی شاپ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bQu-qj-7yU" userLabel="GroupLabel">
-                                        <rect key="frame" x="211" y="0.0" width="108.5" height="67"/>
+                                        <rect key="frame" x="221.5" y="0.0" width="98" height="67"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="13"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1162,7 +1163,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mqg-jq-uP5" userLabel="GotoShopButton">
-                                                            <rect key="frame" x="30" y="0.0" width="10" height="69.5"/>
+                                                            <rect key="frame" x="24" y="0.0" width="16" height="69.5"/>
                                                             <state key="normal" image="icon_back_black"/>
                                                         </button>
                                                     </subviews>
@@ -1230,7 +1231,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(۳.۵)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm0-oF-1UR" userLabel="rateLabel">
-                                                                    <rect key="frame" x="134" y="-1" width="32" height="19.5"/>
+                                                                    <rect key="frame" x="140" y="0.5" width="26" height="16.5"/>
                                                                     <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                                     <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1274,7 +1275,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="center" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۲۳۴۵" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3X-df-CwZ" userLabel="followersNumberLabel">
-                                                                    <rect key="frame" x="168.5" y="2" width="38.5" height="19.5"/>
+                                                                    <rect key="frame" x="170.5" y="3.5" width="36.5" height="16.5"/>
                                                                     <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -1577,7 +1578,7 @@
                                 <rect key="frame" x="0.0" y="597" width="375" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3g-Bn-6M8" userLabel="BackButton">
-                                        <rect key="frame" x="177.5" y="0.0" width="20" height="70"/>
+                                        <rect key="frame" x="179.5" y="0.0" width="16" height="70"/>
                                         <state key="normal" image="icon_mainmenu_10_arr_down"/>
                                         <connections>
                                             <action selector="backFromMenuTapped:" destination="meB-CV-uE7" eventType="touchUpInside" id="1qy-no-EMz"/>
@@ -1592,7 +1593,7 @@
                                     <constraint firstAttribute="height" constant="70" id="qhh-ap-dTM"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gJx-tm-rBV" userLabel="MenuTableView">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gJx-tm-rBV" userLabel="MenuTableView" customClass="MenuTableView" customModule="Sepanta" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="197" width="375" height="400"/>
                                 <color key="backgroundColor" red="0.8565688776" green="0.2257254132" blue="0.36172668870000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1681,7 +1682,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="74.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRe-G8-3rv" userLabel="HomeLogo">
-                                        <rect key="frame" x="279" y="0.0" width="86" height="74.5"/>
+                                        <rect key="frame" x="349" y="0.0" width="16" height="74.5"/>
                                         <state key="normal" image="logo_home"/>
                                         <connections>
                                             <action selector="homeTapped:" destination="dpa-Ex-OBY" eventType="touchUpInside" id="9Tf-pj-A6o"/>
@@ -1766,15 +1767,18 @@
                                                                     <constraint firstAttribute="width" secondItem="BtM-bP-xj3" secondAttribute="height" multiplier="92:125" id="rv3-nw-4ZX"/>
                                                                 </constraints>
                                                                 <state key="normal" image="icon_profile_sepantaei"/>
+                                                                <connections>
+                                                                    <action selector="favTapped:" destination="dpa-Ex-OBY" eventType="touchUpInside" id="WaH-l8-0Bq"/>
+                                                                </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCo-3o-N6O" userLabel="ClubNumLabel">
-                                                                <rect key="frame" x="0.0" y="47.5" width="187.5" height="19.5"/>
+                                                                <rect key="frame" x="0.0" y="47.5" width="187.5" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="عضویت در باشگاه ها" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tiH-BH-sg8" userLabel="ClubLabel">
-                                                                <rect key="frame" x="0.0" y="67" width="187.5" height="14"/>
+                                                                <rect key="frame" x="0.0" y="64" width="187.5" height="12"/>
                                                                 <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="10"/>
                                                                 <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -1806,13 +1810,13 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbi-4C-kSl" userLabel="cupScoreLabel">
-                                                                <rect key="frame" x="0.0" y="47.5" width="187.5" height="19.5"/>
+                                                                <rect key="frame" x="0.0" y="47.5" width="187.5" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="مجموع امتیازات" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pz-8L-6Dq" userLabel="cupLabel">
-                                                                <rect key="frame" x="0.0" y="67" width="187.5" height="14"/>
+                                                                <rect key="frame" x="0.0" y="64" width="187.5" height="12"/>
                                                                 <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="10"/>
                                                                 <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -1924,7 +1928,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="46.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YFy-0r-C8N" userLabel="HomeLogo">
-                                        <rect key="frame" x="279" y="0.0" width="86" height="46.5"/>
+                                        <rect key="frame" x="349" y="0.0" width="16" height="46.5"/>
                                         <state key="normal" image="logo_home"/>
                                         <connections>
                                             <action selector="homeTapped:" destination="kV1-Jn-zS8" eventType="touchUpInside" id="ynI-oW-Hvc"/>
@@ -2073,7 +2077,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6JN-jc-89E" userLabel="HomeButton">
-                                        <rect key="frame" x="279" y="0.0" width="86" height="46.5"/>
+                                        <rect key="frame" x="349" y="0.0" width="16" height="46.5"/>
                                         <state key="normal" image="logo_home"/>
                                         <connections>
                                             <action selector="homeTapped:" destination="pgX-lU-fqZ" eventType="touchUpInside" id="YBI-6g-AwI"/>
@@ -2211,7 +2215,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۲۳۴۵" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pvT-of-2uq" userLabel="followersNumberLabel">
-                                                        <rect key="frame" x="89" y="3" width="36" height="18"/>
+                                                        <rect key="frame" x="91.5" y="4.5" width="33.5" height="15.5"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-Light-FD" family="Shabnam FD" pointSize="13"/>
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -2560,16 +2564,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q3v-UR-c4g" userLabel="leftView">
-                                                    <rect key="frame" x="0.0" y="25.5" width="75" height="23.5"/>
+                                                    <rect key="frame" x="0.0" y="26.5" width="75" height="22"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۰٪" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTq-Nh-SDz" userLabel="percentLabel">
-                                                            <rect key="frame" x="50" y="0.0" width="25" height="23.5"/>
+                                                            <rect key="frame" x="50" y="0.0" width="25" height="22"/>
                                                             <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="17"/>
                                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YPa-95-62C" userLabel="GotoShopButton">
-                                                            <rect key="frame" x="30" y="0.0" width="10" height="23.5"/>
+                                                            <rect key="frame" x="24" y="0.0" width="16" height="22"/>
                                                             <state key="normal" image="icon_back_black"/>
                                                         </button>
                                                     </subviews>
@@ -2606,38 +2610,38 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MiF-Dn-fWB" userLabel="centerMiddleView">
                                                             <rect key="frame" x="0.0" y="19.5" width="225" height="20"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="icon_star_gray" translatesAutoresizingMaskIntoConstraints="NO" id="rZn-tc-3Bh" userLabel="star1">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_star_gray" translatesAutoresizingMaskIntoConstraints="NO" id="rZn-tc-3Bh" userLabel="star1">
                                                                     <rect key="frame" x="205" y="5" width="10" height="10"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="rZn-tc-3Bh" secondAttribute="height" multiplier="1:1" id="Ony-TR-wXW"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="icon_star_gray" translatesAutoresizingMaskIntoConstraints="NO" id="ErR-Sa-oJd" userLabel="star2">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_star_gray" translatesAutoresizingMaskIntoConstraints="NO" id="ErR-Sa-oJd" userLabel="star2">
                                                                     <rect key="frame" x="192.5" y="5" width="9.5" height="10"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="ErR-Sa-oJd" secondAttribute="height" multiplier="1:1" id="mXw-kJ-hSF"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="icon_star_gray" translatesAutoresizingMaskIntoConstraints="NO" id="dcr-K7-lvn" userLabel="star3">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_star_gray" translatesAutoresizingMaskIntoConstraints="NO" id="dcr-K7-lvn" userLabel="star3">
                                                                     <rect key="frame" x="179.5" y="5" width="10" height="10"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="dcr-K7-lvn" secondAttribute="height" multiplier="1:1" id="sId-2o-DIb"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="icon_star_gray" translatesAutoresizingMaskIntoConstraints="NO" id="oJf-Yj-brk" userLabel="star4">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_star_gray" translatesAutoresizingMaskIntoConstraints="NO" id="oJf-Yj-brk" userLabel="star4">
                                                                     <rect key="frame" x="166.5" y="5" width="10" height="10"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="oJf-Yj-brk" secondAttribute="height" multiplier="1:1" id="o5H-bh-bPb"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="icon_star_gray" translatesAutoresizingMaskIntoConstraints="NO" id="hfB-GN-wRy" userLabel="star5">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_star_gray" translatesAutoresizingMaskIntoConstraints="NO" id="hfB-GN-wRy" userLabel="star5">
                                                                     <rect key="frame" x="154" y="5" width="9.5" height="10"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="hfB-GN-wRy" secondAttribute="height" multiplier="1:1" id="ZSH-uc-uHc"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="(۳.۵)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vh7-S1-avd" userLabel="rateLabel">
-                                                                    <rect key="frame" x="118" y="0.0" width="26" height="19.5"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(۳.۵)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vh7-S1-avd" userLabel="rateLabel">
+                                                                    <rect key="frame" x="118" y="1.5" width="26" height="16.5"/>
                                                                     <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                                     <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -2681,7 +2685,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="center" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۲۳۴۵" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jT7-U1-NK3" userLabel="followersNumberLabel">
-                                                                    <rect key="frame" x="148.5" y="2.5" width="38.5" height="19.5"/>
+                                                                    <rect key="frame" x="150.5" y="4" width="36.5" height="16.5"/>
                                                                     <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>

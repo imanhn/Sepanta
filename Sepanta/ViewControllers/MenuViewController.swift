@@ -23,7 +23,7 @@ class MenuItemCell : UITableViewCell {
 
 class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
     weak var coordinator : MenuCoordinator?
-    @IBOutlet weak var menuTableView: UITableView!
+    @IBOutlet weak var menuTableView: MenuTableView!
     let myDisposeBag = DisposeBag()
     let menuItems : BehaviorRelay<[ButtomMenuItem]> = BehaviorRelay(value: [])
     
@@ -74,12 +74,22 @@ class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
             }
             .disposed(by: myDisposeBag)
     }
-
+    
     override func viewDidLoad() {
         loadMenuItems()
-        //self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backFromMenuTapped)))
+        menuTableView.menuViewController = self
         bindToTableView()
-        
     }
     
+}
+
+class MenuTableView : UITableView {
+    var menuViewController : MenuViewController!
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let aview = super.hitTest(point, with: event)
+        if point.y < 0 {
+            menuViewController?.backFromMenuTapped(self)
+        }
+        return aview
+    }
 }

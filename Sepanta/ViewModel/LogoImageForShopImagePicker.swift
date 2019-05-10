@@ -40,7 +40,7 @@ class LogoImageForShopImagePicker : ImagePicker {
         }, usingThreshold: UInt64.init(), to: targetUrl, method: HTTPMethod.post, headers: NetworkManager.shared.headers, encodingCompletion: { encodingResult in
             switch encodingResult {
             case .success(let upload, _ , _):
-                print("SUCCEED,Sending Banner Image....")
+                print("SUCCEED,Sending Logo Image....")
                 upload.responseJSON { response in
                     if let aDic = response.value as? NSDictionary {
                         if let aStatus = aDic["status"] as? String,

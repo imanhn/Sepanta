@@ -130,7 +130,7 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     
     @IBAction func poldarshoClicked(_ sender: Any) {
         //print("HomeViewController.Coordinator : ",coordinator)
-        self.coordinator!.pushGetRich()
+        self.coordinator!.pushGetRich(nil)
         
     }
     

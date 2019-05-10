@@ -9,13 +9,15 @@
 
 import Foundation
 import UIKit
+import SafariServices
 
 //extension  GetRichViewController {
-class AboutUsUI {
+class AboutUsUI : NSObject,SFSafariViewControllerDelegate{
     var delegate : AboutUsViewController!
     var submitButton = UIButton(type: .custom)
     
-    init() {
+    override init() {
+        super.init()
     }
     
     //Create Gradient on PageView
@@ -114,6 +116,7 @@ class AboutUsUI {
         aBut.setTitle("ادامه مطالعه بر روی سایت", for: .normal)
         aBut.frame = CGRect(x: UIScreen.main.bounds.width/5, y: cursurY, width: UIScreen.main.bounds.width*3/5, height: UIScreen.main.bounds.width*3/20)
         aBut.titleLabel?.font = UIFont(name: "Shabnam-Bold-FD", size: 16)
+        aBut.addTarget(self, action: #selector(openWebSite), for: .touchUpInside)
         //aBut.setAttributedTitle(NSAttributedString(attributedString: ""), for: .normal)
         self.delegate.scrollView.addSubview(aBut)
         cursurY = cursurY + aBut.frame.height + 10//marginY
@@ -133,4 +136,15 @@ class AboutUsUI {
 
     }
     
+    @objc func openWebSite(){
+        let url = URL(string: "http://www.ipsepanta.ir")!
+        let safariVC = SFSafariViewController(url: url)
+        self.delegate.coordinator!.navigationController.pushViewController(safariVC, animated: true)
+        safariVC.delegate = self
+    }
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: false, completion: {})
+        self.delegate.coordinator!.popOneLevel()
+    }
 }

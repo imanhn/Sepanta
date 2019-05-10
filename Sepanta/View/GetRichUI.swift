@@ -391,6 +391,10 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         (views["cardNoView"],texts["cardNoText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "credit-card", Selectable: false, PlaceHolderText: "شماره کارت")
         views["leftFormView"]?.addSubview(views["cardNoView"]!)
         texts["cardNoText"]?.keyboardType = UIKeyboardType.decimalPad
+        if self.delegate.cardNo != nil {
+            texts["cardNoText"]!.text = self.delegate.cardNo
+            texts["cardNoText"]!.sendActions(for: .valueChanged)
+        }
         cursurY = cursurY + buttonHeight + marginY
         let cardDispose = texts["cardNoText"]!.rx.text
             .subscribe(onNext: { aCardNumber in

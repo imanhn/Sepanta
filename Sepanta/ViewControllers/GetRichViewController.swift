@@ -13,6 +13,7 @@ import RxSwift
 class GetRichViewController : UIViewControllerWithKeyboardNotificationWithErrorBar,UITextFieldDelegate,Storyboarded{
    var myDisposeBag = DisposeBag()
     var profileInfo : ProfileInfo?
+    var cardNo : String?
     @IBOutlet weak var scrollView: UIScrollView!
     var getRichUI : GetRichUI?
     
@@ -44,7 +45,11 @@ class GetRichViewController : UIViewControllerWithKeyboardNotificationWithErrorB
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         getRichUI = GetRichUI()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
-        getRichUI!.showResellerRequest(self)
+        if cardNo != nil {
+            getRichUI!.showCardRequest(self)
+        }else{
+            getRichUI!.showResellerRequest(self)
+        }
         //resellerRequestTapped(nil)
         
     }

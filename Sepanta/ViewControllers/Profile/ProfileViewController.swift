@@ -28,6 +28,10 @@ class ProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
         self.coordinator!.pushScores()
     }
     
+    @IBAction func favTapped(_ sender: Any) {
+        self.coordinator!.pushFavoriteList()
+    }
+    
     @IBAction func menuTapped(_ sender: Any) {
         print("Menu Tapped")
         self.coordinator!.openButtomMenu()

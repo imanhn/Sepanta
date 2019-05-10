@@ -16,6 +16,7 @@ import Alamofire
 class PostUI {
     var delegate : PostViewController
     var scrollBar : UIScrollView!
+    var likeNoLabel = UILabel(frame: .zero)
     var commentView = UIView(frame: .zero)
     var commentText = UITextField(frame: .zero)
     var likeButton = UIButton(type: .custom)
@@ -156,7 +157,7 @@ class PostUI {
         let likeNoString = "\(innerPost.countLike ?? 0)"
         //print("likeNoString : ",likeNoString)
         let likeNoWidth = likeNoString.width(withConstrainedHeight: buttonDim, font: aFont!)
-        let likeNoLabel = UILabel(frame: CGRect(x: cursorX, y: self.cursurY, width: likeNoWidth, height: buttonDim))
+        likeNoLabel = UILabel(frame: CGRect(x: cursorX, y: self.cursurY, width: likeNoWidth, height: buttonDim))
         likeNoLabel.font = aFont
         likeNoLabel.textColor = UIColor(hex: 0xD6D7D9)
         likeNoLabel.text = likeNoString
@@ -218,25 +219,35 @@ class PostUI {
         print("Toggling Like/Unlike .... : ",aParameter)
         NetworkManager.shared.run(API: "like-dislike", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: false)
         let toggleLikeDisp = NetworkManager.shared.toggleLiked
-            //.filter({$0 == true})
+            .observeOn(MainScheduler.instance)
+            .filter({$0 != ToggleStatus.UNKNOWN})
             .subscribe(onNext: { [unowned self] (toggleStatus) in
+                print("*Toggling... : ",self.likeNoLabel.text)
                 (sender as! UIButton).isEnabled = true
+                let currentLikes = Int(self.likeNoLabel.text ?? "0")!
                 if toggleStatus == ToggleStatus.NO {
                     self.likeButton.setImage(UIImage(named: "icon_like"), for: .normal)
+                    self.likeNoLabel.text = "\(currentLikes-1)"
                 }else if toggleStatus == ToggleStatus.YES {
                     self.likeButton.setImage(UIImage(named: "icon_like_dark"), for: .normal)
+                    self.likeNoLabel.text = "\(currentLikes+1)"
                 }else{
+                    print("NOT UPDATING POST!")
                     Spinner.stop()
                     return
                     //self.delegate.alert(Message: "دسترسی به شبکه موقتاْ قطع شد")
                 }
+                self.likeNoLabel.setNeedsDisplay()
+                print("  *Toggled... : ",self.likeNoLabel.text)
+                
                 if NetworkManager.shared.postDetailObs.value.isLiked.map({if $0 {return ToggleStatus.YES}else{return ToggleStatus.NO}}) != toggleStatus {
                     //Like is updating
+                    print("Updating post data...")
                     var postDet = NetworkManager.shared.postDetailObs.value
                     postDet.isLiked = !(postDet.isLiked ?? false)
                     NetworkManager.shared.postDetailObs.accept(postDet)
                 }
-                
+                NetworkManager.shared.toggleLiked = BehaviorRelay<ToggleStatus>(value: ToggleStatus.UNKNOWN)
             })
         toggleLikeDisp.disposed(by: myDisposeBag)
         self.delegate.disposeList.append(toggleLikeDisp)
