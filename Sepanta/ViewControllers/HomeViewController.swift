@@ -14,6 +14,8 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     weak var coordinator : HomeCoordinator?
     var myDisposeBag = DisposeBag()
     var slideControl : SlideController?
+    
+    @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var pageControl: UIPageControl!
     
     @IBOutlet weak var searchText: CustomSearchBar!
@@ -98,12 +100,21 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
                 }
             ).disposed(by: myDisposeBag)
     }
-
+    
+    @objc func doAnimateLogo(){
+        self.logo.animateView()
+    }
+    
+    func animateLogo(){
+        let animateLogo = Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(doAnimateLogo), userInfo: nil, repeats: true)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         subscribeForBadges()
+        animateLogo()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTapped)))
         self.view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:))))
         

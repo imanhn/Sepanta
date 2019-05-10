@@ -158,18 +158,25 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     @IBAction func filterTapped(_ sender: Any) {
         let frameOri = self.view.convert(headerView.frame.origin, to: self.view)
         if filterIsOpen {
-            self.groupHeaderTopCons.constant = 0
-            self.filterView.frame = CGRect(x: self.view.frame.width, y: frameOri.y+self.headerView.frame.height, width: self.view.frame.width, height: UIScreen.main.bounds.height*0.25)
-            UIView.animate(withDuration: 0.5) {
-                self.view.layoutIfNeeded()
+            //self.groupHeaderTopCons.constant = 0
+            self.filterView.frame = CGRect(x: 0, y: frameOri.y+self.headerView.frame.height, width: self.view.frame.width, height: UIScreen.main.bounds.height*0.25)
+            filterView.isHidden = true
+            
+            UIView.animate(withDuration: 1.0) {
+                self.filterView.frame = CGRect(x: 0, y: frameOri.y+self.headerView.frame.height, width: self.view.frame.width, height: UIScreen.main.bounds.height*0.25)
+                //self.view.layoutIfNeeded()
+                self.groupHeaderTopCons.constant = 0
             }
         }else{
             filterView.isHidden = false
-            self.groupHeaderTopCons.constant = UIScreen.main.bounds.height*0.25
-            UIView.animate(withDuration: 0.5) {
+            //self.groupHeaderTopCons.constant = UIScreen.main.bounds.height*0.25
+            self.filterView.frame = CGRect(x: 0, y: frameOri.y+self.headerView.frame.height, width: self.view.frame.width, height: UIScreen.main.bounds.height*0.25)
+            
+            UIView.animate(withDuration: 1.0) {
                 self.filterView.frame = CGRect(x: 0, y: frameOri.y+self.headerView.frame.height, width: self.view.frame.width, height: UIScreen.main.bounds.height*0.25)
-                self.view.layoutIfNeeded()
-                self.filterView.filterType.text = self.searchOption
+                self.groupHeaderTopCons.constant = UIScreen.main.bounds.height*0.25
+                //self.view.layoutIfNeeded()
+                //self.filterView.filterType.text = self.searchOption
             }
 
         }

@@ -96,4 +96,54 @@ extension UIViewController {
         aView.addSubview(bButton)
 
     }
+    
+    func showDarkQuestion(Message aMessage : String,OKLabel okLabel : String, CancelLabel cancelLabel : String,QuestionTag atag : Int){
+        for av in self.view.subviews{
+            if av.tag == 123 {
+                return
+            }
+        }
+        let offsetY = (self.view.frame.height) / 4
+        let offsetX : CGFloat = 20
+        let w = self.view.frame.width - (2 * offsetX)
+        let h = w/2
+        let aframe = CGRect(x: offsetX, y: offsetY, width:w, height: h)
+
+        let contentView = UIView(frame: aframe)
+        contentView.layer.cornerRadius = 10
+        contentView.backgroundColor = UIColor(hex: 0xF7F7F7)
+        contentView.layer.shadowColor = UIColor.black.cgColor
+        contentView.layer.shadowOpacity = 0.3
+        contentView.layer.shadowOffset = CGSize(width: 3, height: 3)
+        contentView.layer.shadowRadius = 5
+        self.view.addSubview(contentView)
+        
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: contentView.frame.height/7, width: contentView.frame.width, height: contentView.frame.height*2/7))
+        titleLabel.text = aMessage
+        titleLabel.font = UIFont(name: "Shabnam FD", size: 13)
+        titleLabel.textColor = UIColor(hex: 0x515152)
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.textAlignment = .center
+        contentView.addSubview(titleLabel)
+        
+        
+        let yesButton = RoundedButtonWithDarkBackground(type: .custom)
+        yesButton.frame = CGRect(x: contentView.frame.width/10, y: contentView.frame.height*4/7, width: contentView.frame.width*3/10, height: contentView.frame.height*2/7)
+        contentView.addSubview(yesButton)
+        yesButton.setTitle(okLabel, for: .normal)
+        yesButton.setTitleColor(UIColor.white, for: .normal)
+        yesButton.titleLabel?.font = UIFont(name: "Shabnam FD", size: 12)
+        yesButton.addTarget(self, action: #selector(okPressed), for: .touchUpInside)
+        yesButton.tag = atag
+        
+        let noButton = RoundedButtonWithDarkBackground(type: .custom)
+        noButton.frame = CGRect(x: contentView.frame.width*6/10, y: contentView.frame.height*4/7, width: contentView.frame.width*3/10, height: contentView.frame.height*2/7)
+        contentView.addSubview(noButton)
+        noButton.setTitle(cancelLabel, for: .normal)
+        noButton.setTitleColor(UIColor.white, for: .normal)
+        noButton.titleLabel?.font = UIFont(name: "Shabnam FD", size: 12)
+        noButton.addTarget(self, action: #selector(cancelPressed), for: .touchUpInside)
+        
+        
+    }
 }

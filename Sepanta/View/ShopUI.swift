@@ -30,7 +30,6 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     let myDisposeBag = DisposeBag()
     var rightPanelscrollView = UIScrollView()
     var collectionView : UICollectionView!
-    var posts = BehaviorRelay<[Post]>(value: [Post]())
     let numberOfPostInARow : CGFloat = 4
     var isShop : Bool
     var cursurY : CGFloat = 0
@@ -251,12 +250,13 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 if rate > 3.5 {self?.delegate.star4.setImage(UIImage(named: "icon_star_on"), for: .normal)}
                 if rate > 4.5 {self?.delegate.star5.setImage(UIImage(named: "icon_star_on"), for: .normal)}
                 //print("ShopUI : setting shopui.posts to  :: ",aProfile.content)
+                /*
                 if let postContents = aProfile.content as? [Post] {
                     self?.posts.accept(postContents)
                 }else{
                     print("aProfile.content has shops but expected to have posts : ",aProfile.content )
                     self?.delegate.alert(Message: "خطای داخلی اتفاق افتاده است")
-                }
+                }*/
                 //print("Profile : ",aProfile)
                 if aProfile.is_follow != nil  {
                     self?.followButton.isFollowed = aProfile.is_follow ?? false
@@ -312,7 +312,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
     }
     
     func bindCollectionView(){
-        let postsCollectionViewDisp = self.posts.bind(to: collectionView.rx.items(cellIdentifier: "buttoncell")) { [weak self] row, model, cell in
+        let postsCollectionViewDisp = NetworkManager.shared.postsObs.bind(to: collectionView.rx.items(cellIdentifier: "buttoncell")) { [weak self] row, model, cell in
             if let aCell = cell as? ButtonCell {
                 //if aCell.aButton == nil {aCell.aButton = UIButton(type: .custom)}
                 let strURL = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + model.image!
@@ -413,7 +413,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         let aButton = (sender as? UIButton)
         guard aButton?.tag != nil else {return}
         var selectedPost : Post!
-        for apost in self.posts.value {
+        for apost in NetworkManager.shared.postsObs.value {
             if apost.id == aButton?.tag {
                 selectedPost = apost
                 break

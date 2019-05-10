@@ -127,9 +127,11 @@ class JSONParser {
                     if targetObs == "SHOP" {
                         //NetworkManager.shared.shopProfileObs = BehaviorRelay<Profile>(value: aProfile)
                         NetworkManager.shared.shopProfileObs.accept(aProfile)
+                        NetworkManager.shared.postsObs.accept(aProfile.content as! [Post])
                     }else{
                         //NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: aProfile)
                         NetworkManager.shared.profileObs.accept(aProfile)
+                        NetworkManager.shared.postsObs.accept(aProfile.content as! [Post])
                     }
                     
                 }else if (apiName == "report-comment") || (apiName == "report-post") || (apiName == "report-comment"){

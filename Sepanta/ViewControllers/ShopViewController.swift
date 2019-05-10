@@ -208,7 +208,15 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
         self.shopUI = ShopUI(self)        
     }
     
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        guard (self.shopUI != nil) && (self.shopUI.collectionView != nil) else {
+            return
+        }
+        DispatchQueue.main.async{
+            self.shopUI!.collectionView.reloadData()
+        }
+    }
     
 }
 

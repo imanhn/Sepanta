@@ -43,39 +43,55 @@ class ReportPostView: UIView {
         contentView.layer.cornerRadius = 10
         contentView.backgroundColor = UIColor(hex: 0xF7F7F7)
         contentView.layer.shadowColor = UIColor.black.cgColor
-        contentView.layer.shadowOpacity = 0.2
+        contentView.layer.shadowOpacity = 0.3
         contentView.layer.shadowOffset = CGSize(width: 3, height: 3)
-        contentView.layer.shadowRadius = 2
+        contentView.layer.shadowRadius = 5
         self.addSubview(contentView)
         
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: contentView.frame.width, height: contentView.frame.height/3))
-        titleLabel.text = "آیا می خواهید برای این پست تخلف گزارش نمایید؟"
+        titleLabel.text = "آیا این پست دارای تخلف است؟"
         titleLabel.font = UIFont(name: "Shabnam FD", size: 13)
         titleLabel.textColor = UIColor(hex: 0x515152)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textAlignment = .center
         contentView.addSubview(titleLabel)
         
-        descText = UITextField(frame: CGRect(x: contentView.frame.width/3, y: contentView.frame.height/3, width: contentView.frame.width/3, height: contentView.frame.height/3))
+        descText = UITextField(frame: CGRect(x: 10, y: contentView.frame.height/3, width: contentView.frame.width - 20, height: contentView.frame.height*2/9))
         descText.font = UIFont(name: "Shabnam FD", size: 13)
         descText.textColor = UIColor(hex: 0x515152)
+        descText.backgroundColor = UIColor.white
+        descText.layer.cornerRadius = 5
+        descText.layer.masksToBounds = true
+        descText.textAlignment = .right
+        //descText.placeholder = "   توضیحات"
+        descText.attributedPlaceholder = NSAttributedString(string: "   توضیحات" , attributes: [NSAttributedStringKey.foregroundColor: UIColor(hex: 0xD6D7D9)])
+        //descText.drawPlaceholder(in: CGRect(x: contentView.frame.width/2, y: contentView.frame.height/3, width: (contentView.frame.width/2) - 20, height: contentView.frame.height/3))
+        descText.semanticContentAttribute = .forceRightToLeft
         contentView.addSubview(descText)
         
-        let yesButton = SubmitButton(type: .custom)
-        yesButton.frame = CGRect(x: contentView.frame.width/5, y: contentView.frame.height*2/3, width: contentView.frame.width/5, height: contentView.frame.height/4)
+        let lineView = UIView(frame: CGRect(x: 10, y: (contentView.frame.height/3)+(contentView.frame.height*2/9)+2, width: descText.frame.width , height: 1))
+        lineView.backgroundColor = UIColor(hex: 0xD6D7D9)
+        contentView.addSubview(lineView)
+
+        
+        
+        let yesButton = RoundedButtonWithDarkBackground(type: .custom)
+        yesButton.frame = CGRect(x: contentView.frame.width/10, y: contentView.frame.height*2/3, width: contentView.frame.width*3/10, height: contentView.frame.height/4)
         contentView.addSubview(yesButton)
         yesButton.setTitle("بلی", for: .normal)
+        yesButton.setTitleColor(UIColor.white, for: .normal)
         yesButton.titleLabel?.font = UIFont(name: "Shabnam FD", size: 12)
         yesButton.addTarget(self, action: #selector(yesTapped), for: .touchUpInside)
-        yesButton.setEnable()
+        
 
-        let noButton = SubmitButton(type: .custom)
-        noButton.frame = CGRect(x: contentView.frame.width*3/5, y: contentView.frame.height*2/3, width: contentView.frame.width/5, height: contentView.frame.height/4)
+        let noButton = RoundedButtonWithDarkBackground(type: .custom)
+        noButton.frame = CGRect(x: contentView.frame.width*6/10, y: contentView.frame.height*2/3, width: contentView.frame.width*3/10, height: contentView.frame.height/4)
         contentView.addSubview(noButton)
         noButton.setTitle("خیر", for: .normal)
+        noButton.setTitleColor(UIColor.white, for: .normal)
         noButton.titleLabel?.font = UIFont(name: "Shabnam FD", size: 12)
         noButton.addTarget(self, action: #selector(noTapped), for: .touchUpInside)
-        noButton.setEnable()
+        
 
     }
     

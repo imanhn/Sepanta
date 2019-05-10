@@ -51,7 +51,7 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
     }
     
     @objc func reportPost(_ sender : Any) {
-        let offsetY = (self.view.frame.height - self.view.frame.width) / 2
+        let offsetY = (self.view.frame.height) / 2
         let offsetX : CGFloat = 20
         let w = self.view.frame.width - (2 * offsetX)
         let h = w/2
@@ -67,7 +67,7 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
     }
     
     @IBAction func deleteTapped(_ sender: Any) {
-        showQuestion(Message: "آيا از حذف این پست مطمئن هستید؟", OKLabel: "بلی", CancelLabel: "خیر", QuestionTag: 1)
+        showDarkQuestion(Message: "آيا از حذف این پست مطمئن هستید؟", OKLabel: "بلی", CancelLabel: "خیر", QuestionTag: 1)
     }
     
     @objc override func okPressed(_ sender: Any) {
@@ -81,7 +81,10 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
                     .filter({$0.count > 0})
                     .subscribe(onNext: { [unowned self] amessage in
                         NetworkManager.shared.serverMessageObs = BehaviorRelay<String>(value: "")
+                        //Updating my Posts!
+                        self.getMyShopFromServer()
                         self.alert(Message: amessage)
+                        
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                             self.BackTapped(sender)
                         })
@@ -93,6 +96,13 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
         }
     }
     
+    func getMyShopFromServer() {
+        NetworkManager.shared.shopProfileObs = BehaviorRelay<Profile>(value: Profile())
+        //print("self.shop.user_id : ",self.shop.user_id)
+        let aParameter = ["user id":LoginKey.shared.userID]
+        NetworkManager.shared.run(API: "profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true,TargetObs: "SHOP")
+    }
+
     func editAuthorized()-> Bool{
         if "\(postOwnerUserID ?? 0)" == LoginKey.shared.userID
         {

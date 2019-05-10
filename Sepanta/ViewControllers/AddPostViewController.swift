@@ -152,6 +152,7 @@ class AddPostViewController : UIViewControllerWithKeyboardNotificationWithErrorB
                         }
                     }
                     self.submitButton.setEnable()
+                    self.getMyShopFromServer()
                     if response.value != nil {
                         print("** Succeess ** ")
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
@@ -222,6 +223,13 @@ class AddPostViewController : UIViewControllerWithKeyboardNotificationWithErrorB
             )
         submitDisp.disposed(by: self.myDisposeBag)
         disposeList.append(submitDisp)
+    }
+    
+    func getMyShopFromServer() {
+        NetworkManager.shared.shopProfileObs = BehaviorRelay<Profile>(value: Profile())
+        //print("self.shop.user_id : ",self.shop.user_id)
+        let aParameter = ["user id":LoginKey.shared.userID]
+        NetworkManager.shared.run(API: "profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true,TargetObs: "SHOP")
     }
     
     func initUI(){

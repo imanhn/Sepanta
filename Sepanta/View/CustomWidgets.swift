@@ -928,3 +928,15 @@ extension CGRect {
         return (aView,aText)
     }
 }
+
+extension UIImageView {
+    func animateView(){
+        let shakeAnimation = CABasicAnimation(keyPath: "position")
+        shakeAnimation.duration = 0.05
+        shakeAnimation.repeatCount = 5
+        shakeAnimation.autoreverses = true
+        shakeAnimation.fromValue = NSValue(cgPoint: CGPoint(x:self.center.x - 5, y:self.center.y))
+        shakeAnimation.toValue = NSValue(cgPoint: CGPoint(x:self.center.x + 5, y:self.center.y))
+        self.layer.add(shakeAnimation, forKey: "position")
+    }
+}
