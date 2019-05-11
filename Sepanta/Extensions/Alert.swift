@@ -46,7 +46,8 @@ extension UIViewController {
             cancelButton.superview?.removeFromSuperview()
         }
     }
-    
+
+
     func showQuestion(Message aMessage : String,OKLabel okLabel : String, CancelLabel cancelLabel : String,QuestionTag atag : Int){
         for av in self.view.subviews{
             if av.tag == 123 {
@@ -106,7 +107,7 @@ extension UIViewController {
         let offsetY = (self.view.frame.height) / 4
         let offsetX : CGFloat = 20
         let w = self.view.frame.width - (2 * offsetX)
-        let h = w/2
+        let h = (w/2)*0.8
         let aframe = CGRect(x: offsetX, y: offsetY, width:w, height: h)
 
         let contentView = UIView(frame: aframe)
@@ -145,5 +146,50 @@ extension UIViewController {
         noButton.addTarget(self, action: #selector(cancelPressed), for: .touchUpInside)
         
         
+    }
+    
+    func showAlertWithOK(Message aMessage : String,OKLabel okLabel : String,Tag tag : Int = 0){
+        for av in self.view.subviews{
+            if av.tag == 123 {
+                return
+            }
+        }
+        let marginX = self.view.frame.width / 30
+        let textFont = UIFont (name: "Shabnam FD", size: 13)!
+        let aView = UIView(frame: CGRect(x: marginX, y: self.view.frame.height*0.4, width: self.view.frame.width-2*marginX, height: self.view.frame.height*0.2))
+        aView.backgroundColor = UIColor(hex: 0x96336C)
+        aView.tag = 123
+        aView.layer.cornerRadius = 5
+        aView.layer.borderColor = UIColor.white.cgColor
+        aView.layer.borderWidth = 1
+        aView.layer.shadowColor = UIColor.black.cgColor
+        aView.layer.shadowOffset = CGSize(width: 2, height: 3)
+        aView.layer.shadowOpacity = 0.3
+        self.view.addSubview(aView)
+        let aLabel = UILabel(frame: CGRect(x: marginX, y: aView.frame.height*0.1, width: aView.frame.width-2*marginX, height: aView.frame.height*0.4))
+        aLabel.text = aMessage
+        aLabel.font = textFont
+        aLabel.numberOfLines = 3
+        aLabel.semanticContentAttribute = .forceRightToLeft
+        aLabel.textAlignment = .right
+        aLabel.textColor = UIColor.white
+        aView.addSubview(aLabel)
+        let buttonWidth = aView.frame.width / 3
+        let aButton = UIButton(frame: CGRect(x: (aView.frame.width-buttonWidth)/2, y: aView.frame.height*0.55, width: buttonWidth, height: aView.frame.height*0.35))
+        aButton.setTitle(okLabel, for: .normal)
+        aButton.titleLabel?.textColor = UIColor.white
+        aButton.titleLabel?.font = textFont
+        aButton.layer.cornerRadius = 4
+        aButton.layer.borderWidth = 1
+        aButton.layer.borderColor = UIColor.white.cgColor
+        aButton.tag = tag
+        aButton.addTarget(self, action: #selector(doneAlert), for: .touchUpInside)
+        aView.addSubview(aButton)
+        
+    }
+    @objc func doneAlert(_ sender : Any){
+        if let okButton = sender as? UIButton {
+            okButton.superview?.removeFromSuperview()
+        }
     }
 }

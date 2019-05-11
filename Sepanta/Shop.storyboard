@@ -391,15 +391,15 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gs4-pN-YwK" userLabel="PostToolbarView">
                                                 <rect key="frame" x="30" y="264.5" width="330" height="48.5"/>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="right" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymb-f0-e8R" userLabel="shopDescription">
-                                                <rect key="frame" x="30" y="321" width="330" height="71.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="right" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymb-f0-e8R" userLabel="shopDescription">
+                                                <rect key="frame" x="30" y="321" width="330" height="47.5"/>
                                                 <string key="text">لوازم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگر و متون بلکه روزنامه و مجله  در ستون و سطر آنچنان که لازم است و برای شرایط فعلی ...</string>
                                                 <fontDescription key="fontDescription" name="Shabnam-Light-FD" family="Shabnam FD" pointSize="12"/>
                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Z3-NA-gBm" userLabel="TabPaneView" customClass="TabbedViewWithWhitePanel" customModule="Sepanta" customModuleProvider="target">
-                                                <rect key="frame" x="15" y="412.5" width="345" height="533"/>
+                                                <rect key="frame" x="15" y="388.5" width="345" height="533"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAB-pZ-Xhq" userLabel="Posts">
                                                         <rect key="frame" x="172.5" y="0.0" width="172.5" height="60"/>
@@ -456,7 +456,7 @@
                                             <constraint firstItem="PAB-X1-dta" firstAttribute="centerY" secondItem="ipq-Wk-abA" secondAttribute="centerY" id="8oF-Ef-odz"/>
                                             <constraint firstItem="N7a-eG-qPq" firstAttribute="height" secondItem="ipq-Wk-abA" secondAttribute="height" id="AWJ-LD-opv"/>
                                             <constraint firstItem="PAB-X1-dta" firstAttribute="leading" secondItem="fwY-Qd-9NW" secondAttribute="leading" constant="30" id="Ars-Gh-s4i"/>
-                                            <constraint firstItem="ymb-f0-e8R" firstAttribute="height" secondItem="fwY-Qd-9NW" secondAttribute="height" multiplier="0.12" id="EFl-bh-1Dx"/>
+                                            <constraint firstItem="ymb-f0-e8R" firstAttribute="height" secondItem="fwY-Qd-9NW" secondAttribute="height" multiplier="0.08" id="EFl-bh-1Dx"/>
                                             <constraint firstItem="gFd-3y-par" firstAttribute="height" secondItem="N7a-eG-qPq" secondAttribute="height" id="FlG-8m-FQ2"/>
                                             <constraint firstItem="Gs4-pN-YwK" firstAttribute="leading" secondItem="PAB-X1-dta" secondAttribute="leading" id="GmU-kx-aPW"/>
                                             <constraint firstItem="9Z3-NA-gBm" firstAttribute="leading" secondItem="fwY-Qd-9NW" secondAttribute="leading" constant="15" id="H2V-IB-fHv"/>
@@ -916,16 +916,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k0N-Ap-Jfr" userLabel="leftView">
-                                                    <rect key="frame" x="0.0" y="26.5" width="75" height="22"/>
+                                                    <rect key="frame" x="0.0" y="25.5" width="75" height="23.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۰٪" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F19-Ne-oId" userLabel="percentLabel">
-                                                            <rect key="frame" x="50" y="0.0" width="25" height="22"/>
+                                                            <rect key="frame" x="50" y="0.0" width="25" height="23.5"/>
                                                             <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="17"/>
                                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dzk-iP-Hqw" userLabel="GotoShopButton">
-                                                            <rect key="frame" x="30" y="0.0" width="10" height="22"/>
+                                                            <rect key="frame" x="30" y="0.0" width="10" height="23.5"/>
                                                             <state key="normal" image="icon_back_black"/>
                                                         </button>
                                                     </subviews>

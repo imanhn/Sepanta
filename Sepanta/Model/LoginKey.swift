@@ -17,6 +17,7 @@ class LoginKey {
     var userID = String()
     var username = String()
     var role = String()
+    var version : Float = 1.0
     var myDisposeBag = DisposeBag()
     static let shared = LoginKey()
     var userIDObs = BehaviorRelay<String>(value: String())

@@ -60,7 +60,7 @@ class FavListViewController :  UIViewControllerWithErrorBar,XIBView{
     }
     
     func bindToTableView() {
-        NetworkManager.shared.shopObs.bind(to: shopTable.rx.items(cellIdentifier: "cell")) { row, model, cell in
+        NetworkManager.shared.favShopObs.bind(to: shopTable.rx.items(cellIdentifier: "cell")) { row, model, cell in
             if let aCell = cell as? FavShopCell {
                 //let model = aShopAsAny as! Shop
                 aCell.shopName.text = model.shop_name

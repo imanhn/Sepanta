@@ -71,7 +71,7 @@ class SignUPUI : NSObject , UITextFieldDelegate {
     func showSignUpForm() {
         var cursurY : CGFloat = 0
         let marginY : CGFloat = 5
-        let marginX : CGFloat = 20
+        let marginX : CGFloat = 10
         
         let buttonHeight = (self.delegate.signUpFormView.frame.height / 5) - marginY
         let textFieldWidth = (self.delegate.signUpFormView.bounds.width) - (2 * marginX)
@@ -106,7 +106,7 @@ class SignUPUI : NSObject , UITextFieldDelegate {
 
         
         termsCheckButton = UIButton(type: .custom)
-        termsCheckButton.frame = CGRect(x: marginX+textFieldWidth-buttonHeight, y: cursurY, width: buttonHeight, height: buttonHeight)
+        termsCheckButton.frame = CGRect(x: marginX+textFieldWidth-buttonHeight+(buttonHeight*0.1), y: cursurY+(buttonHeight*0.1), width: buttonHeight*0.8, height: buttonHeight*0.8)
         termsCheckButton.backgroundColor = UIColor(hex: 0xD6D7D9)
         termsCheckButton.setImage(UIImage(named: "icon_tick_white"), for: .normal)
         termsCheckButton.contentMode = .scaleAspectFit
@@ -114,9 +114,18 @@ class SignUPUI : NSObject , UITextFieldDelegate {
         self.delegate.signUpFormView.addSubview(termsCheckButton)
         termLabel = UILabel(frame: CGRect(x: marginX, y: cursurY, width: textFieldWidth-buttonHeight-(marginX/2), height: buttonHeight))
         termLabel.textColor = UIColor(hex: 0xD6D7D9)
-        termLabel.text = "قوانین و مقررات را خوانده ام و موافقم"
+        
+        let termsText = "قوانین و مقررات را خوانده ام و موافقم"
+        let attributedText = NSMutableAttributedString(string: termsText)
+        attributedText.addAttribute(NSAttributedStringKey.underlineStyle, value: NSUnderlineStyle.styleSingle.rawValue, range: NSMakeRange(0,15))
+        attributedText.addAttribute(.foregroundColor, value: UIColor.blue, range: NSRange(location: 0, length: 15))
+        termLabel.attributedText = attributedText
         termLabel.textAlignment = .right
         termLabel.font = UIFont(name: "Shabnam-FD", size: 14)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(viewTerms))
+        termLabel.isUserInteractionEnabled = true
+        termLabel.addGestureRecognizer(tap)
         self.delegate.signUpFormView.addSubview(termLabel)
         cursurY = cursurY + buttonHeight + buttonHeight*2/3
         
@@ -125,16 +134,43 @@ class SignUPUI : NSObject , UITextFieldDelegate {
         
     }
     
+    @objc func viewTerms(){
+        let offsetY = self.delegate.view.frame.height*0.1
+        let offsetX = self.delegate.view.frame.width*0.1
+        let aTermView = TermsView(frame: CGRect(x: offsetX, y: offsetY, width: self.delegate.view.frame.width-(2*offsetX), height: self.delegate.view.frame.height-(2*offsetY)))
+        
+        if let rtfPath = Bundle.main.url(forResource: "terms", withExtension: "rtf") {
+            do {
+                let attributedStringWithRtf: NSAttributedString = try NSAttributedString(url: rtfPath, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
+                aTermView.textView.attributedText = attributedStringWithRtf                
+            } catch let error {
+                print("Got an error \(error)")
+            }
+        }else{
+            print("Terms and Service File Not Found")
+        }
+        self.delegate.view.addSubview(aTermView)
+    }
     
     @objc func termsButtonTapped(_ sender : Any){
         termsAgreed = !termsAgreed
         if termsAgreed {
             termsCheckButton.setImage(UIImage(named: "icon_tik_dark"), for: UIControlState.normal)
             termLabel.textColor = UIColor(hex: 0x515152)
+            let termsText = "قوانین و مقررات را خوانده ام و موافقم"
+            let attributedText = NSMutableAttributedString(string: termsText)
+            attributedText.addAttribute(NSAttributedStringKey.underlineStyle, value: NSUnderlineStyle.styleSingle.rawValue, range: NSMakeRange(0,15))
+            attributedText.addAttribute(.foregroundColor, value: UIColor.blue, range: NSRange(location: 0, length: 15))
+            termLabel.attributedText = attributedText
             termsCheckButton.tag = 1
         } else {
             termsCheckButton.setImage(UIImage(named: "icon_tick_white"), for: .normal)
             termLabel.textColor = UIColor(hex: 0xD6D7D9)
+            let termsText = "قوانین و مقررات را خوانده ام و موافقم"
+            let attributedText = NSMutableAttributedString(string: termsText)
+            attributedText.addAttribute(NSAttributedStringKey.underlineStyle, value: NSUnderlineStyle.styleSingle.rawValue, range: NSMakeRange(0,15))
+            attributedText.addAttribute(.foregroundColor, value: UIColor.blue, range: NSRange(location: 0, length: 15))
+            termLabel.attributedText = attributedText
             termsCheckButton.tag = 0
         }
     }

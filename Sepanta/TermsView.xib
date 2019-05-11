@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Shabnam-Bold-FD.ttf">
+            <string>Shabnam-Bold-FD</string>
+        </array>
+        <array key="Shabnam-FD.ttf">
+            <string>Shabnam-FD</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="TermView" customClass="TermView">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="o1d-H4-AJV"/>
+                <outlet property="textView" destination="E07-Du-cuH" id="IJh-Ri-ESw"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="Content View">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRN-Sn-sWU" userLabel="modelView">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hw5-BU-crA" userLabel="header">
+                            <rect key="frame" x="10" y="20" width="355" height="66.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="قوانین و مقررات سپنتا" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OjV-tY-33p" userLabel="title">
+                                    <rect key="frame" x="0.0" y="0.0" width="355" height="66.5"/>
+                                    <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="OjV-tY-33p" firstAttribute="centerY" secondItem="hw5-BU-crA" secondAttribute="centerY" id="5dA-vK-hdQ"/>
+                                <constraint firstItem="OjV-tY-33p" firstAttribute="centerX" secondItem="hw5-BU-crA" secondAttribute="centerX" id="bsp-pc-do7"/>
+                                <constraint firstItem="OjV-tY-33p" firstAttribute="width" secondItem="hw5-BU-crA" secondAttribute="width" id="gxd-Zs-Jv4"/>
+                                <constraint firstItem="OjV-tY-33p" firstAttribute="height" secondItem="hw5-BU-crA" secondAttribute="height" id="nTb-Fg-X85"/>
+                            </constraints>
+                        </view>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" keyboardDismissMode="onDrag" editable="NO" textAlignment="right" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E07-Du-cuH" userLabel="textView">
+                            <rect key="frame" x="10" y="96.5" width="355" height="494"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <string key="text">قوانین و مقررات باشگاه
+بازدیدکننده گرامی، به باشگاه مشتریان سپنتا خوش آمدید!
+
+* پایگاه اینترنتی باشگاه مشتریان سپنتا و اعضاء این باشگاه، مقید به قوانین تجارت الکترونیکی و جرایم رایانه ای و سایر قوانین مربوطه می‌باشند. ضمناً مقررات ذیل مورد قبول تمامی اعضاء این باشگاه بوده و باشگاه مشتریان سپنتا این اختیار را دارد تا تغییرات مورد نظر خود را در ضوابط و مقررات باشگاه اعمال نماید و به محض درج این ضوابط در سایت، قابل اجرا خواهد بود. بر این اساس تنها مرجع اطلاع رسانی رسمی تغییرات یاد شده، سایت باشگاه مشتریان سپنتا بوده و تمامی اعضاء ملزم به مطالعه و پیگیری اخبار و اطلاعیه های صادره می باشند.
+
+1- استفاده از وب سایت باشگاه مشتریان
+* خدمات و محتویات این پایگاه براى استفاده اعضاء باشگاه مشتریان سپنتا عرضه شده است و مالکیت معنوی اطلاعات موجود در پایگاه اینترنتی متعلق به سپنتا است و هرگونه سوءاستفاده از این اطلاعات پیگرد قانونی خواهد داشت. هرگونه استفاده از محتویات، نقل قول از محتویات پایگاه اینترنتی برای پایگاه ها و وبلاگ های شخصی که منافع غیرتجاری را دنبال می کنند، با ذکر منبع مجاز است.
+* استفاده از سایت به هرروشی اعم از "page-scrape"، "robot"،"Spider" یا سایر ابزار اتوماتیك، برنامه، الگوریتم یا مراحل دستی مشابه برای دستیابی، مالكیت، كپی یا هدایت قسمتی از وب سایت ممنوع می باشد. همچنین به كارگیری هر روش دیگری برای فراگیری ساختار وب سایت یا تلاش برای كسب اجزاء، اسناد یا اطلاعات وب سایت ممنوع می باشد. دسترسی غیرمجاز به هر یك از قسمت ها یا مشخصات وب سایت یا سایر سرویس های ارائه شده آن از طریق هك كردن، رمزگشایی و نیز سایر روش های غیرمجاز ممنوع می باشد.
+
+2- لینك سازی
+دربرگیری هر یك از سایت های لینك شده دلیل بر تایید آن سایت نمی باشد و مسئولیت هرگونه استفاده از وب سایت با استناد بر سایت های لینك شده آن بر عهده استفاده كننده می باشد. باشگاه مشتریان سپنتا توصیه می نماید به دقت مراقب حق مالكیت و ضوابط و شرایط سایت های لینك شده مورد بازدید باشید.
+
+3- كپی رایت
+تمامی محتویات این وب سایت ازجمله متن ها، تصاویر، لوگوها، نمادها، عكس ها و نرم افزارها، دارایی های سپنتا محسوب شده و تلفیق (به معنای جمع آوری، مرتب سازی و گرد هم آوری) محتویات این سایت نیز منحصراً متعلق به سپنتا بوده و توسط قوانین بین المللی كپی رایت محافظت می گردد. ممكن است از محتویات و نرم افزار این وب سایت برای خرید، فروش و منبع كارت الكترونیكی استفاده شود. سایر موارد استفاده همچون بازسازی، تغییر، مشاركت، انتقال، چاپ مجدد، نمایش یا استفاده از محتویات و مطالب این وب سایت قویاً ممنوع می باشد.
+
+4- حدود مسئولیت
+مطالب موجود در این سایت ممکن است اشتباه بوده و یا غلط تایپی داشته باشد و اطلاعات ممکن است تغییر یافته یا بروز شود. باشگاه مشتریان سپنتا هیچ مسئولیتی در برابر وب سایت هایی که ممکن است از این وب سایت به آنها لینک داده شود ندارد.
+
+5- نحوه استفاده
+* استفاده از وب سایت به هر روشی كه سبب آسیب دیدگی، ایجاد وقفه یا زیان رسیدن به آن شود، ممنوع می باشد. بدینوسیله تمامی اعضاء توافق می نمایند كه در صورت نقض مقررات و قوانین مربوطه، تمامی خسارات احتمالی وارده بر سپنتا ، كاركنان و شركت های تابعه آن را بر عهده بگیرند. شایان ذكر است مسئولیت ارتباطات الكترونیكی و مطالب ارسالی از رایانه اعضاء باشگاه، بر عهده خود ایشان بوده و استفاده از وب سایت فقط برای اهداف قانونی جایز می باشد.
+* استفاده از وب سایت برای مقاصد زیر مجاز نمی باشد:
+ارسال یا استفاده از موضوعات خلاف قانون و اخلاق و یا فریب دهنده.
+ارسال یا استفاده از مطالب و موضوعاتی كه حاوی ویروس های نرم افزاری، فعالیت های سیاسی، درخواستهای تجاری، نامه های زنجیره ای، یا هرگونه SPAM باشد.
+استفاده از وب سایت به شكلی كه موجب آزردگی، ناراحتی یا هیجان بی مورد شود.
+
+6- شرایط و محدودیت های استفاده
+استفاده از محصولات و خدمات این سایت منوط به رعایت مقررات و ضوابط سایت است و تبلیغ یا فروش هرگونه محصول که به صورت مستقیم یا غیرمستقیم مغایر با قوانین جمهوری اسلامی ایران باشد و یا موجب شکایت از شرکت خارجی گردد در سایت غیر مجاز می باشد. این سایت از استانداردهای تجارت الکترونیکی B2C تبعیت می کند و استفاده از آن در کاربردهای دیگر مجاز نمی باشد.
+
+7- شرایط و ضوابط عضویت در باشگاه مشتریان سپنتا
+7-1- پذیرش
+* باشگاه مشتریان سپنتا این اختیار را دارد تا درخواست متقاضیانی را كه جهت عضویت در سایت رسمی باشگاه مشتریان سپنتا ثبت نام می نمایند را بررسی و در خصوص پذیرش و یا رد آنها تصمیم گیری نماید. براین اساس پذیرفته شدن افراد در باشگاه مشتریان، محدودكننده اختیارات باشگاه در رعایت ضوابط و مقررات نبوده و هرگاه هر یك از اعضاء از مقررات باشگاه عدول نماید، باشگاه مشتریان سپنتا این اختیار را دارد تا بدون اعلام قبلی با حذف تعهدات و امتیازات اعطائی، درخصوص عضویت ایشان تصمیم گیری نماید. در این صورت افراد یاد شده به طور قطع و غیرقابل عدول حق هرگونه ادعا و اعتراضی را نسبت به تصمیمات باشگاه از خود سلب می‌نماید.
+* هر کاربری که دارای کد کاربری و کلمه عبور در سایت باشد در قبال هر فعالیتی که بتوان در بخش کاربری انجام داد مسئول بوده و این مسئولیت شامل محتوا, عکس ها, فیلم ها و ... می باشد. ضمناً استفاده از محصولات دیگران به نام خود نیز غیرمجاز بوده و ثبت لینک به هر سایت غیرمجاز ممنوعمی باشد.
+* در باشگاه مشتریان سپنتا اعضاء به دو دسته فعال و غیرفعال تقسیم می شوند. عضو فعال به اعضایی گفته می شود كه در هر دوره زمانی سه ماهه حداقل یك مرتبه با ورود نام كاربری و رمز عبور خود (Login) وارد سایت باشگاه مشتریان شوند. باشگاه مشتریان سپنتا این اختیار را دارد تا بدون اعلام قبلی با حذف تعهدات و امتیازات اعطائی، در خصوص عضویت اعضای غیرفعال تصمیم گیری نماید. در این صورت افراد یاد شده به طور قطع و غیرقابل عدول حق هرگونه ادعا و اعتراضی را نسبت به تصمیمات باشگاه از خود سلب می‌نمایند.
+
+
+7-2-حریم شخصی
+ارائه محصولات، خدمات و یا آگهی ها نیاز به ثبت برخی از اطلاعات در فرم های سایت دارد. این اطلاعات باید صحیح باشد و در صورت صحیح نبودن، باشگاه مشتریان سپنتا می تواند نسبت به حذف آنها اقدام نماید. سپنتا هرگونه اطلاعات وارد شده به هنگام استفاده از وب سایت را نگهداری نموده و در راستای سیاست حفظ حریم خصوصی عمل خواهد كرد. آدرس پست الکترونیک شما در هیچ قسمت از سایت نشان داده نخواهد شد و صرفاً ارسال تقاضا برای شما از طریق فرم های سایت انجام می پذیرد. باشگاه مشتریان سپنتا می تواند اطلاعات وارد شده توسط کاربر را به اطلاعات درست تغییر دهد.
+
+7-3-سایر مقررات 
+باشگاه مشتریان با توجه به اهداف و سیاست گذاری بانك، با اجرای طرح امتیازی به اعضایی كه از خدمات بانكی منتخب سپنتا استفاده نمایند امتیاز اختصاص داده و این امكان را فراهم می نماید تا اعضاء با جمع آوری امتیاز در طرح های تشویقی باشگاه شركت نموده و از مزایای پاداش ها بهره‌مند شوند. بر این اساس باشگاه مشتریان سپنتا این اختیار را دارد تا تغییرات مورد نظر خود را درخصوص موارد ذیل انجام داده و اعضاء به طور قطع و غیرقابل عدول حق هرگونه ادعا و اعتراضی را نسبت به باشگاه از خود سلب ‌می نمایند.
+1- ایجاد، تغییر، توقف و یا حذف طرح امتیازی یا اجزاء آن از قبیل شرایط ورود به بخش طرح امتیازی، خدمات بانكی مورد استفاده، مقدار امتیاز تخصیص داده شده به هر خدمت، طول عمر امتیازها، پاداش های مترتب بر امتیازها، ارزش ریالی امتیازها و... در اختیار باشگاه است.
+2-ایجاد، تغییر، توقف و یا حذف پاداش های اعطایی یا اجزاء آن از قبیل شرایط ورود به بخش پاداش، تعداد، مبالغ و نوع پاداش و... در اختیار باشگاه است.
+تغییر در زمان بندی به روزرسانی امتیازها، رسیدگی به درخواست پاداش های ارائه شده، پرداخت وجود جوایز و ... در اختیار باشگاه است.
+* هرگاه برای باشگاه مشتریان سپنتا محرز شود كه تراكنش های صورت پذیرفته توسط اعضاء كه منجر به امتیاز شده است، به صورت صوری و از روش هایی مغایر با روش های تعریف شده در كسب و كار و یا هر نوع روش دیگر با هدف شبیه سازی تراكنش های موجه بوده و هدف از انجام آن صرفاً كسب امتیاز بوده است، باشگاه این اختیار را دارد كه بدون اعلام قبلی از ادامه فعالیت آن دسته از اعضاء در هر مرحله ای كه هستند (انتخاب پاداش نقدی، تسهیلات، قرعه كشی ها و ... ) ممانعت به عمل آورده و با حذف تعهدات و امتیازات اعطایی درخصوص عضویت و یا لغو عضویت ایشان تصمیم گیری نماید. در این صورت افراد یاد شده به طور قطع و غیرقابل عدول حق هرگونه ادعا و اعتراضی را نسبت به تصمیمات باشگاه مشتریان سپنتا از خود سلب می‌نمایند.
+* باشگاه مشتریان سپنتا این اختیار را دارد تا درخصوص برخورد با اعضایی كه به واسطه استفاده از خدمات بانك، موجبات ضرر و زیان سپنتا و یا سایر مشتریان را فراهم نموده اند (از قبیل چك برگشتی، مطالبات معوق و ... ) به نحو مقتضی تصمیم گیری نماید.
+* در صورت بروز مشكلات فنی، قطعی، كندی سرعت، فیلترینگ اینترنت و ... ایجاد محدودیت در دسترسی به وب سایت، باشگاه مشتریان سپنتا حتی الامكان تمامی تلاش خود را جهت رفع مشكل و كسب رضایت اعضاء محترم باشگاه مشتریان به كار خواهد گرفت؛ لیكن باشگاه سپنتا هیچ گونه تعهد و مسئولیتی در قبال ادعاها و مشكلات احتمالی بوجود آمده را نمی پذیرد.
+
+
+8- استفاده از اطلاعات
+سپنتا در موارد زیر مجاز به استفاده از اطلاعات شخصی جمع آوری شده می باشد:
+1-درصورتی كه مشخصات یا رمز ثبت شده برای استفاده از خدمات سپنتا را فراموش كرده باشید سپنتا برای مشخص نمودن هویت شما و انجام همكاری های لازم می تواند از اطلاعات ثبت شده استفاده نماید.
+2-برای فراهم نمودن خدمات مورد تقاضای شما.
+3-به منظور فراهم آوردن اطلاعات بیشتر در مورد سایر وب سایت ها و خدماتی كه ازنظر سپنتا برایتان حائز اهمیت است.
+4-برای بازاریابی های آینده، اهداف همگانی و مشترك ازجمله بازاریابی مستقیم و نیز تحقیقات و مطالعات بازار.
+5-اطمینان از مرتبط بودن اطلاعات با علایق شما و سایر مصارف مجاز از جانب شما.
+6-در صورت نیاز به استفاده از اطلاعات شخصی اعضاء در سایر موارد، باشگاه مشتریان سپنتا پیش تر رضایت شما را كسب خواهد نمود.
+</string>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="12"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="shI-sr-AXy" userLabel="footer">
+                            <rect key="frame" x="10" y="600.5" width="355" height="66.5"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcg-SF-5uX" userLabel="ok">
+                                    <rect key="frame" x="89" y="8" width="177.5" height="50"/>
+                                    <color key="backgroundColor" red="0.8565688776" green="0.2257254132" blue="0.36172668870000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
+                                    <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                    <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" title="متوجه شدم" image="icon_tick_white">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="5"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="okTapped:" destination="-1" eventType="touchUpInside" id="pE3-vw-LUV"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="dcg-SF-5uX" firstAttribute="width" secondItem="shI-sr-AXy" secondAttribute="width" multiplier="0.5" id="2NP-1T-6ak"/>
+                                <constraint firstItem="dcg-SF-5uX" firstAttribute="height" secondItem="shI-sr-AXy" secondAttribute="height" multiplier="0.75" id="Dva-FT-RMI"/>
+                                <constraint firstItem="dcg-SF-5uX" firstAttribute="centerY" secondItem="shI-sr-AXy" secondAttribute="centerY" id="OOZ-me-Cak"/>
+                                <constraint firstItem="dcg-SF-5uX" firstAttribute="centerX" secondItem="shI-sr-AXy" secondAttribute="centerX" id="j29-Ub-jKx"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="hw5-BU-crA" firstAttribute="leading" secondItem="3O4-Yy-dqw" secondAttribute="leading" constant="10" id="85L-Ae-WxZ"/>
+                        <constraint firstItem="3O4-Yy-dqw" firstAttribute="trailing" secondItem="shI-sr-AXy" secondAttribute="trailing" constant="10" id="9kd-zA-dRa"/>
+                        <constraint firstItem="shI-sr-AXy" firstAttribute="height" secondItem="YRN-Sn-sWU" secondAttribute="height" multiplier="0.1" id="EQ6-95-xxL"/>
+                        <constraint firstItem="3O4-Yy-dqw" firstAttribute="bottom" secondItem="shI-sr-AXy" secondAttribute="bottom" id="P3C-i9-PCs"/>
+                        <constraint firstItem="hw5-BU-crA" firstAttribute="height" secondItem="YRN-Sn-sWU" secondAttribute="height" multiplier="0.1" id="Qd3-5V-KVM"/>
+                        <constraint firstItem="E07-Du-cuH" firstAttribute="leading" secondItem="3O4-Yy-dqw" secondAttribute="leading" constant="10" id="TNw-O6-nv0"/>
+                        <constraint firstItem="3O4-Yy-dqw" firstAttribute="trailing" secondItem="hw5-BU-crA" secondAttribute="trailing" constant="10" id="day-Rb-M73"/>
+                        <constraint firstItem="E07-Du-cuH" firstAttribute="top" secondItem="hw5-BU-crA" secondAttribute="bottom" constant="10" id="hxi-4g-fao"/>
+                        <constraint firstItem="hw5-BU-crA" firstAttribute="top" secondItem="3O4-Yy-dqw" secondAttribute="top" id="jfr-IY-0sn"/>
+                        <constraint firstItem="3O4-Yy-dqw" firstAttribute="trailing" secondItem="E07-Du-cuH" secondAttribute="trailing" constant="10" id="n2A-Da-iYs"/>
+                        <constraint firstItem="shI-sr-AXy" firstAttribute="leading" secondItem="3O4-Yy-dqw" secondAttribute="leading" constant="10" id="tcC-GH-P29"/>
+                        <constraint firstItem="shI-sr-AXy" firstAttribute="top" secondItem="E07-Du-cuH" secondAttribute="bottom" constant="10" id="xw2-YD-ALp"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="3O4-Yy-dqw"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="YRN-Sn-sWU" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="AAY-HD-XcT"/>
+                <constraint firstItem="YRN-Sn-sWU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="CJU-Er-8p3"/>
+                <constraint firstItem="YRN-Sn-sWU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="H8D-Xr-tMT"/>
+                <constraint firstItem="YRN-Sn-sWU" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="TbT-YE-qaY"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_tick_white" width="20" height="14"/>
+    </resources>
+</document>

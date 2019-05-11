@@ -112,6 +112,7 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        manageVersion()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         subscribeForBadges()
         animateLogo()

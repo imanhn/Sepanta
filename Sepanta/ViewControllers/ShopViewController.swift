@@ -133,7 +133,17 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
             alert(Message: "اطلاعات فروشگاه ناقص است امکان اضافه به علاقه مندی ها وجود ندارد")
             return
         }
-        // Toggle Favorite the shop
+        
+        // Toggle Favorite the shop Icon immediately
+        if (self.favButton != nil){
+            if NetworkManager.shared.shopProfileObs.value.is_favorite != nil{
+                if NetworkManager.shared.shopProfileObs.value.is_favorite! {
+                    self.favButton.setImage(UIImage(named: "icon_star_fav_gray"), for: .normal)
+                }else{
+                    self.favButton.setImage(UIImage(named: "icon_star_fav_dark"), for: .normal)
+                }
+            }
+        }
         let aParameter = ["shop_id":"\(self.shop.shop_id ?? 0)"]
         NetworkManager.shared.run(API: "favorite", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
         // Update Favorite list

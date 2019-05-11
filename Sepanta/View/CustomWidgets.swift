@@ -407,9 +407,32 @@ class MainButton:UIButton{
     
 }
 class TabbedButton: UIButton {
-    var curvSize : CGFloat = 10;
+    var curvSize : CGFloat = 5;
+    var shiftUp : CGFloat = 10
     override func draw(_ rect: CGRect) {
+        shiftUp = rect.height/6
+        let context = UIGraphicsGetCurrentContext()
+        context?.setLineWidth(1.0)
+        context?.setStrokeColor((UIColor( red: 0.84,     green: 0.84, blue:0.84, alpha: 1.0 )).cgColor)
+        context?.setFillColor((UIColor( red: 1.0,     green: 1.0, blue:1.0, alpha: 1.0 )).cgColor)
+        context?.move(to: CGPoint(x: curvSize, y: 0))
         
+        context?.addLine(to: CGPoint(x: self.bounds.width-curvSize, y: 0))
+        context?.addQuadCurve(to: CGPoint(x: self.bounds.width, y: curvSize), control: CGPoint(x: self.bounds.width, y: 0))
+        
+        context?.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height-shiftUp-curvSize))
+        context?.addQuadCurve(to: CGPoint(x: self.bounds.width-curvSize, y: self.bounds.height-shiftUp), control: CGPoint(x: self.bounds.width, y: self.bounds.height-shiftUp))
+        
+        context?.addLine(to: CGPoint(x: curvSize, y: self.bounds.height-shiftUp))
+        context?.addQuadCurve(to: CGPoint(x: 0, y: self.bounds.height-shiftUp-curvSize), control: CGPoint(x: 0, y: self.bounds.height-shiftUp))
+        
+        context?.addLine(to: CGPoint(x: 0, y: curvSize))
+        context?.addQuadCurve(to: CGPoint(x: curvSize, y: 0), control: CGPoint(x: 0, y: 0))
+        
+        context?.closePath()
+        //context?.drawPath(using: CGPathDrawingMode.stroke)
+        context?.drawPath(using: CGPathDrawingMode.fillStroke)
+        /*
         let context = UIGraphicsGetCurrentContext()
         let downScaling : CGAffineTransform = CGAffineTransform(scaleX: 1, y: 0.9);
         let bezPath = UIBezierPath(roundedRect: self.bounds.applying(downScaling), byRoundingCorners: [.allCorners], cornerRadii: CGSize(width: curvSize, height: curvSize)).cgPath
@@ -418,6 +441,7 @@ class TabbedButton: UIButton {
         context?.setStrokeColor((UIColor( red: 0.84,     green: 0.84, blue:0.84, alpha: 1.0 )).cgColor)
         context?.addPath(bezPath)
         context?.drawPath(using: CGPathDrawingMode.stroke)
+        */
     }
 }
 
@@ -521,7 +545,7 @@ class RoundedUIViewWithWhitePanel: UIView {
         context?.addQuadCurve(to: CGPoint(x: self.bounds.width-curvSize, y: self.bounds.height), control: CGPoint(x: self.bounds.width, y: self.bounds.height))
 
         context?.addLine(to: CGPoint(x: curvSize, y: self.bounds.height))
-        context?.addQuadCurve(to: CGPoint(x: 0, y: self.bounds.height-curvSize), control: CGPoint(x: 0, y: self.bounds.height-curvSize))
+        context?.addQuadCurve(to: CGPoint(x: 0, y: self.bounds.height-curvSize), control: CGPoint(x: 0, y: self.bounds.height))
 
         context?.addLine(to: CGPoint(x: 0, y: curvSize))
         context?.addQuadCurve(to: CGPoint(x: curvSize, y: 0), control: CGPoint(x: 0, y: 0))

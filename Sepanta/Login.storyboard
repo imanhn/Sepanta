@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -22,15 +22,15 @@
         <scene sceneID="36s-CK-bnK">
             <objects>
                 <viewController storyboardIdentifier="LoginViewController" hidesBottomBarWhenPushed="YES" id="fNu-Zg-BKZ" userLabel="LoginViewController" customClass="LoginViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" id="awC-mk-3RK" userLabel="PageView">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <view key="view" contentMode="scaleToFill" id="awC-mk-3RK" userLabel="PageView">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="foj-nF-Org" userLabel="LogoView">
-                                <rect key="frame" x="-1" y="133.5" width="414" height="89.5"/>
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="foj-nF-Org" userLabel="LogoView">
+                                <rect key="frame" x="-1" y="86.5" width="375" height="67"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_all_login" translatesAutoresizingMaskIntoConstraints="NO" id="ZSe-qP-JJ8">
-                                        <rect key="frame" x="97" y="4.5" width="220.5" height="80.5"/>
+                                        <rect key="frame" x="105.5" y="3.5" width="164" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="ZSe-qP-JJ8" secondAttribute="height" multiplier="175:64" id="47d-Qo-VYP"/>
                                         </constraints>
@@ -42,81 +42,95 @@
                                     <constraint firstItem="ZSe-qP-JJ8" firstAttribute="height" secondItem="foj-nF-Org" secondAttribute="height" multiplier="0.9" id="p86-Cy-aFY"/>
                                 </constraints>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" translatesAutoresizingMaskIntoConstraints="NO" id="K4j-7x-Mih" userLabel="LoginPanelView" customClass="RightTabbedView" customModule="Sepanta" customModuleProvider="target">
-                                <rect key="frame" x="20.5" y="420.5" width="373" height="340.5"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K4j-7x-Mih" userLabel="LoginPanelView" customClass="RightTabbedView" customModule="Sepanta" customModuleProvider="target">
+                                <rect key="frame" x="19" y="300" width="337.5" height="253.5"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0o-jh-Vrf" userLabel="Enter">
-                                        <rect key="frame" x="186.5" y="0.0" width="186.5" height="68"/>
-                                        <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
-                                        <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="ورود" image="icon_profile_03_dark">
-                                            <color key="titleColor" red="0.8565688776" green="0.2257254132" blue="0.36172668870000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="3"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fPQ-iM-ybT" userLabel="Signup" customClass="TabbedButton" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="186.5" height="68"/>
-                                        <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
-                                        <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="ثبت نام" image="icon_edit_grey">
-                                            <color key="titleColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                                <color key="value" red="0.84004039119999996" green="0.20921024660000001" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="3"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="signupClicked:" destination="fNu-Zg-BKZ" eventType="touchUpInside" id="cRO-vr-Gl5"/>
-                                        </connections>
-                                    </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZHY-Nx-gHL" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="19" y="204" width="335" height="41"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="phonePad" textContentType="tel"/>
-                                        <connections>
-                                            <action selector="MobileTypeEnded:" destination="fNu-Zg-BKZ" eventType="editingDidEnd" id="2uX-Ho-pTA"/>
-                                            <action selector="mobileNoTypeDone:" destination="fNu-Zg-BKZ" eventType="primaryActionTriggered" id="sWg-9L-yve"/>
-                                        </connections>
-                                    </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_mobile_gray" translatesAutoresizingMaskIntoConstraints="NO" id="Yf4-pL-m1m" userLabel="MobileIcon">
-                                        <rect key="frame" x="328" y="208" width="16" height="33"/>
-                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="icH-12-8fH">
+                                        <rect key="frame" x="0.0" y="0.0" width="337.5" height="63.5"/>
+                                        <subviews>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fPQ-iM-ybT" userLabel="Signup" customClass="TabbedButton" customModule="Sepanta" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="168.5" height="63.5"/>
+                                                <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
+                                                <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="ثبت نام" image="icon_edit_grey">
+                                                    <color key="titleColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                        <color key="value" red="0.84004039119999996" green="0.20921024660000001" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="signupClicked:" destination="fNu-Zg-BKZ" eventType="touchUpInside" id="cRO-vr-Gl5"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0o-jh-Vrf" userLabel="Enter">
+                                                <rect key="frame" x="168.5" y="0.0" width="169" height="63.5"/>
+                                                <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
+                                                <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="ورود" image="icon_profile_03_dark">
+                                                    <color key="titleColor" red="0.8565688776" green="0.2257254132" blue="0.36172668870000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uth-92-mEy" userLabel="Form">
+                                        <rect key="frame" x="20" y="73.5" width="297.5" height="170"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZHY-Nx-gHL" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="71" width="297.5" height="28"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="phonePad" textContentType="tel"/>
+                                                <connections>
+                                                    <action selector="MobileTypeEnded:" destination="fNu-Zg-BKZ" eventType="editingDidEnd" id="2uX-Ho-pTA"/>
+                                                    <action selector="mobileNoTypeDone:" destination="fNu-Zg-BKZ" eventType="primaryActionTriggered" id="sWg-9L-yve"/>
+                                                </connections>
+                                            </textField>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_mobile_gray" translatesAutoresizingMaskIntoConstraints="NO" id="Yf4-pL-m1m" userLabel="MobileIcon">
+                                                <rect key="frame" x="269" y="71" width="28.5" height="28"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Yf4-pL-m1m" secondAttribute="height" multiplier="1:1" id="bZf-dO-0Qi"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="Yf4-pL-m1m" firstAttribute="height" secondItem="ZHY-Nx-gHL" secondAttribute="height" id="2y9-dy-9eU"/>
+                                            <constraint firstItem="ZHY-Nx-gHL" firstAttribute="centerX" secondItem="Uth-92-mEy" secondAttribute="centerX" id="3d4-FD-dlE"/>
+                                            <constraint firstItem="ZHY-Nx-gHL" firstAttribute="centerY" secondItem="Uth-92-mEy" secondAttribute="centerY" id="MUj-XB-TqG"/>
+                                            <constraint firstItem="Yf4-pL-m1m" firstAttribute="centerY" secondItem="ZHY-Nx-gHL" secondAttribute="centerY" id="WP6-iP-AIs"/>
+                                            <constraint firstItem="ZHY-Nx-gHL" firstAttribute="height" secondItem="Uth-92-mEy" secondAttribute="height" multiplier="0.1667" id="mxK-c0-plH"/>
+                                            <constraint firstItem="Yf4-pL-m1m" firstAttribute="trailing" secondItem="ZHY-Nx-gHL" secondAttribute="trailing" id="r4j-fY-Qje"/>
+                                            <constraint firstItem="ZHY-Nx-gHL" firstAttribute="width" secondItem="Uth-92-mEy" secondAttribute="width" id="tKG-Qi-xtq"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="ZHY-Nx-gHL" firstAttribute="width" secondItem="K4j-7x-Mih" secondAttribute="width" multiplier="0.9" id="6nc-va-WNu"/>
-                                    <constraint firstItem="fPQ-iM-ybT" firstAttribute="height" secondItem="E0o-jh-Vrf" secondAttribute="height" id="BqF-Id-ILh"/>
-                                    <constraint firstItem="ZHY-Nx-gHL" firstAttribute="top" secondItem="E0o-jh-Vrf" secondAttribute="bottom" multiplier="3" id="F1Q-vO-B0t"/>
-                                    <constraint firstItem="ZHY-Nx-gHL" firstAttribute="height" secondItem="E0o-jh-Vrf" secondAttribute="height" multiplier="0.6" id="FLw-dg-B0R"/>
-                                    <constraint firstItem="E0o-jh-Vrf" firstAttribute="width" secondItem="K4j-7x-Mih" secondAttribute="width" multiplier="0.5" id="HQ2-So-NPB"/>
-                                    <constraint firstItem="Yf4-pL-m1m" firstAttribute="centerY" secondItem="ZHY-Nx-gHL" secondAttribute="centerY" id="MZW-0x-m47"/>
-                                    <constraint firstItem="E0o-jh-Vrf" firstAttribute="height" secondItem="K4j-7x-Mih" secondAttribute="height" multiplier="0.2" id="Rcf-kH-Bid"/>
-                                    <constraint firstItem="Yf4-pL-m1m" firstAttribute="leading" secondItem="ZHY-Nx-gHL" secondAttribute="leading" constant="10" id="ae9-zT-1MY"/>
-                                    <constraint firstItem="E0o-jh-Vrf" firstAttribute="top" secondItem="K4j-7x-Mih" secondAttribute="top" id="bbS-1I-D01"/>
-                                    <constraint firstItem="fPQ-iM-ybT" firstAttribute="top" secondItem="K4j-7x-Mih" secondAttribute="top" id="cXv-mQ-xYl"/>
-                                    <constraint firstItem="E0o-jh-Vrf" firstAttribute="leading" secondItem="K4j-7x-Mih" secondAttribute="leading" id="dGR-vj-FLE"/>
-                                    <constraint firstItem="ZHY-Nx-gHL" firstAttribute="centerX" secondItem="K4j-7x-Mih" secondAttribute="centerX" id="ebi-v1-Whw"/>
-                                    <constraint firstAttribute="trailing" secondItem="fPQ-iM-ybT" secondAttribute="trailing" id="f6i-7A-Dvr"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="E0o-jh-Vrf" secondAttribute="trailing" id="hQf-DJ-FV0"/>
-                                    <constraint firstItem="fPQ-iM-ybT" firstAttribute="width" secondItem="E0o-jh-Vrf" secondAttribute="width" id="iEP-PM-P7J"/>
-                                    <constraint firstItem="fPQ-iM-ybT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="K4j-7x-Mih" secondAttribute="leading" id="tZ0-bv-nPP"/>
-                                    <constraint firstItem="Yf4-pL-m1m" firstAttribute="height" secondItem="ZHY-Nx-gHL" secondAttribute="height" multiplier="0.8" id="zGj-ga-aKy"/>
+                                    <constraint firstAttribute="bottom" secondItem="Uth-92-mEy" secondAttribute="bottom" constant="10" id="1Pm-LL-D4u"/>
+                                    <constraint firstItem="Uth-92-mEy" firstAttribute="leading" secondItem="K4j-7x-Mih" secondAttribute="leading" constant="20" id="ES3-hV-4Oq"/>
+                                    <constraint firstItem="icH-12-8fH" firstAttribute="height" secondItem="K4j-7x-Mih" secondAttribute="height" multiplier="0.25" id="IPU-7e-9Tu"/>
+                                    <constraint firstItem="icH-12-8fH" firstAttribute="top" secondItem="K4j-7x-Mih" secondAttribute="top" id="QNv-g6-Dgx"/>
+                                    <constraint firstAttribute="trailing" secondItem="Uth-92-mEy" secondAttribute="trailing" constant="20" id="RgF-No-qpk"/>
+                                    <constraint firstItem="Uth-92-mEy" firstAttribute="top" secondItem="icH-12-8fH" secondAttribute="bottom" constant="10" id="kmN-yU-soO"/>
+                                    <constraint firstItem="icH-12-8fH" firstAttribute="leading" secondItem="K4j-7x-Mih" secondAttribute="leading" id="ruj-FR-QPy"/>
+                                    <constraint firstAttribute="trailing" secondItem="icH-12-8fH" secondAttribute="trailing" id="uI8-4X-vX7"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fpm-5S-vNV" userLabel="SendView">
-                                <rect key="frame" x="0.0" y="781" width="414" height="115"/>
+                                <rect key="frame" x="0.0" y="573.5" width="375" height="93.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6T4-dt-V5f" userLabel="SendButton" customClass="SubmitButtonOnRedBar" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="103.5" y="23" width="207" height="69"/>
+                                        <rect key="frame" x="94" y="19" width="187.5" height="56"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -142,11 +156,11 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9su-fC-t8g" userLabel="EmptyMiddlePanel">
-                                <rect key="frame" x="0.0" y="223" width="414" height="197.5"/>
+                                <rect key="frame" x="0.0" y="153.5" width="375" height="146.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uhb-xN-phx" userLabel="EmptyHeader">
-                                <rect key="frame" x="0.0" y="44" width="414" height="89.5"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="66.5"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -190,21 +204,21 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vWS-pT-SaE" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="46" y="28"/>
+            <point key="canvasLocation" x="45.600000000000001" y="27.436281859070466"/>
         </scene>
         <!--SMSConfirmViewController-->
         <scene sceneID="UP3-ZS-zMr">
             <objects>
                 <viewController storyboardIdentifier="SMSConfirmViewController" hidesBottomBarWhenPushed="YES" id="5gp-hJ-eXr" userLabel="SMSConfirmViewController" customClass="SMSConfirmViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" id="G5p-G4-r0W" userLabel="PageView">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AoP-AA-6vo" userLabel="LogoView">
-                                <rect key="frame" x="-1" y="133.5" width="414" height="89.5"/>
+                                <rect key="frame" x="-1" y="86.5" width="375" height="67"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_all_login" translatesAutoresizingMaskIntoConstraints="NO" id="3hX-e9-GvS">
-                                        <rect key="frame" x="97" y="4.5" width="220.5" height="80.5"/>
+                                        <rect key="frame" x="105.5" y="3.5" width="164" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="3hX-e9-GvS" secondAttribute="height" multiplier="175:64" id="nTe-kc-EbT"/>
                                         </constraints>
@@ -217,13 +231,13 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g3e-T0-MzZ" userLabel="LoginPanelView" customClass="RightTabbedView" customModule="Sepanta" customModuleProvider="target">
-                                <rect key="frame" x="20.5" y="420.5" width="373" height="340.5"/>
+                                <rect key="frame" x="19" y="300" width="337.5" height="253.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="7dp-qy-nZj">
-                                        <rect key="frame" x="0.0" y="0.0" width="373" height="85"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="337.5" height="63.5"/>
                                         <subviews>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gF4-em-Cg1" userLabel="Signup" customClass="TabbedButton" customModule="Sepanta" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="186.5" height="85"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="168.5" height="63.5"/>
                                                 <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                                 <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <state key="normal" title="ثبت نام" image="icon_edit_grey">
@@ -242,7 +256,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5FL-Ke-bpo" userLabel="Enter">
-                                                <rect key="frame" x="186.5" y="0.0" width="186.5" height="85"/>
+                                                <rect key="frame" x="168.5" y="0.0" width="169" height="63.5"/>
                                                 <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                                 <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <state key="normal" title="ورود" image="icon_profile_03_dark">
@@ -257,25 +271,25 @@
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqJ-jR-VrW" userLabel="FormView">
-                                        <rect key="frame" x="0.0" y="85" width="373" height="255.5"/>
+                                        <rect key="frame" x="0.0" y="63.5" width="337.5" height="190"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="wFP-pZ-e0a">
-                                                <rect key="frame" x="0.0" y="25.5" width="373" height="204.5"/>
+                                                <rect key="frame" x="0.0" y="19" width="337.5" height="152"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Yr-ej-hbv" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="373" height="64"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="337.5" height="48"/>
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="phonePad" enablesReturnKeyAutomatically="YES" textContentType="tel"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ورود کد ارسال شده" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iV8-Mh-cO6" userLabel="SMSCodeText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="64" width="373" height="64.5"/>
+                                                        <rect key="frame" x="0.0" y="48" width="337.5" height="47.5"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="phonePad" enablesReturnKeyAutomatically="YES"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۰۱:۰۰" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="deo-qw-Kdt" userLabel="TimerLabel">
-                                                        <rect key="frame" x="0.0" y="128.5" width="373" height="76"/>
+                                                        <rect key="frame" x="0.0" y="95.5" width="337.5" height="56.5"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="24"/>
                                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -293,13 +307,13 @@
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_mobile_gray" translatesAutoresizingMaskIntoConstraints="NO" id="vqJ-I3-Yow" userLabel="MobileIcon">
-                                        <rect key="frame" x="324" y="123.5" width="39" height="38.5"/>
+                                        <rect key="frame" x="298.5" y="92" width="29" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="vqJ-I3-Yow" secondAttribute="height" multiplier="1:1" id="xGX-Ye-kWR"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_lock_gray" translatesAutoresizingMaskIntoConstraints="NO" id="A7d-P2-ytV" userLabel="LockIcon">
-                                        <rect key="frame" x="340" y="187.5" width="18" height="38.5"/>
+                                        <rect key="frame" x="304.5" y="140" width="18" height="28.5"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -321,10 +335,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LTc-FT-ey2" userLabel="SendView">
-                                <rect key="frame" x="0.0" y="781" width="414" height="115"/>
+                                <rect key="frame" x="0.0" y="573.5" width="375" height="93.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ni-mx-mVj" userLabel="SendButton" customClass="SubmitButtonOnRedBar" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="103.5" y="23" width="207" height="69"/>
+                                        <rect key="frame" x="94" y="19" width="187.5" height="56"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -350,11 +364,11 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S0e-QL-rPB" userLabel="EmptyMiddlePanel">
-                                <rect key="frame" x="0.0" y="223" width="414" height="197.5"/>
+                                <rect key="frame" x="0.0" y="153.5" width="375" height="146.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K6T-8R-hod" userLabel="EmptyHeader">
-                                <rect key="frame" x="0.0" y="44" width="414" height="89.5"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="66.5"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -402,15 +416,15 @@
         <scene sceneID="xJX-Em-lo3">
             <objects>
                 <viewController storyboardIdentifier="SignupViewController" hidesBottomBarWhenPushed="YES" id="Hbd-WL-1Xx" userLabel="SignupViewController" customClass="SignupViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" id="U8q-CH-peH" userLabel="PageView">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <view key="view" contentMode="scaleToFill" id="U8q-CH-peH" userLabel="PageView">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hZ4-Hw-vrA" userLabel="LogoView">
-                                <rect key="frame" x="-1" y="133.5" width="414" height="89.5"/>
+                                <rect key="frame" x="-1" y="86.5" width="375" height="67"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_all_login" translatesAutoresizingMaskIntoConstraints="NO" id="hMv-NF-HYi">
-                                        <rect key="frame" x="97" y="4.5" width="220.5" height="80.5"/>
+                                        <rect key="frame" x="105.5" y="3.5" width="164" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="hMv-NF-HYi" secondAttribute="height" multiplier="175:64" id="G7K-jp-5mJ"/>
                                         </constraints>
@@ -422,68 +436,70 @@
                                     <constraint firstItem="hMv-NF-HYi" firstAttribute="centerX" secondItem="hZ4-Hw-vrA" secondAttribute="centerX" id="wtw-cO-sBg"/>
                                 </constraints>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" translatesAutoresizingMaskIntoConstraints="NO" id="zRI-iF-5yv" userLabel="LoginPanelView" customClass="LeftTabbedView" customModule="Sepanta" customModuleProvider="target">
-                                <rect key="frame" x="20.5" y="241" width="373" height="520"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zRI-iF-5yv" userLabel="LoginPanelView" customClass="LeftTabbedView" customModule="Sepanta" customModuleProvider="target">
+                                <rect key="frame" x="19" y="166.5" width="337.5" height="387"/>
                                 <subviews>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hhF-ro-Fsb" userLabel="Signup">
-                                        <rect key="frame" x="0.0" y="0.0" width="181.5" height="78"/>
-                                        <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
-                                        <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="ثبت نام" image="icon_edit">
-                                            <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                                <color key="value" red="0.84004039119999996" green="0.20921024660000001" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="3"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mti-J0-dsB" userLabel="Enter" customClass="TabbedButton" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="191.5" y="0.0" width="181.5" height="78"/>
-                                        <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
-                                        <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="ورود" image="icon_login">
-                                            <color key="titleColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="3"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="enterTapped:" destination="Hbd-WL-1Xx" eventType="touchUpInside" id="Gen-ef-k7j"/>
-                                            <action selector="gotoLogin:" destination="Hbd-WL-1Xx" eventType="touchUpInside" id="cJb-HU-Vb4"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gDJ-14-w9z" userLabel="SignUpFormView">
-                                        <rect key="frame" x="0.0" y="86" width="373" height="434"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="w1W-t4-AV7">
+                                        <rect key="frame" x="0.0" y="0.0" width="337.5" height="62"/>
+                                        <subviews>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hhF-ro-Fsb" userLabel="Signup">
+                                                <rect key="frame" x="0.0" y="0.0" width="168.5" height="62"/>
+                                                <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
+                                                <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="ثبت نام" image="icon_edit">
+                                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                        <color key="value" red="0.84004039119999996" green="0.20921024660000001" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mti-J0-dsB" userLabel="Enter" customClass="TabbedButton" customModule="Sepanta" customModuleProvider="target">
+                                                <rect key="frame" x="168.5" y="0.0" width="169" height="62"/>
+                                                <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
+                                                <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="ورود" image="icon_login">
+                                                    <color key="titleColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="enterTapped:" destination="Hbd-WL-1Xx" eventType="touchUpInside" id="Gen-ef-k7j"/>
+                                                    <action selector="gotoLogin:" destination="Hbd-WL-1Xx" eventType="touchUpInside" id="cJb-HU-Vb4"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gDJ-14-w9z" userLabel="Form">
+                                        <rect key="frame" x="20" y="70" width="297.5" height="307"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="hhF-ro-Fsb" secondAttribute="trailing" id="60s-do-VtA"/>
-                                    <constraint firstItem="mti-J0-dsB" firstAttribute="trailing" secondItem="hhF-ro-Fsb" secondAttribute="leading" constant="-10" id="8tB-8Q-swK"/>
-                                    <constraint firstItem="gDJ-14-w9z" firstAttribute="top" secondItem="mti-J0-dsB" secondAttribute="bottom" constant="8" id="DXR-e1-kle"/>
-                                    <constraint firstItem="mti-J0-dsB" firstAttribute="leading" secondItem="zRI-iF-5yv" secondAttribute="leading" id="EBm-zu-JD7"/>
-                                    <constraint firstAttribute="trailing" secondItem="gDJ-14-w9z" secondAttribute="trailing" id="JId-Ct-fPl"/>
-                                    <constraint firstItem="hhF-ro-Fsb" firstAttribute="height" secondItem="mti-J0-dsB" secondAttribute="height" id="JhZ-Ie-74r"/>
-                                    <constraint firstItem="mti-J0-dsB" firstAttribute="height" secondItem="zRI-iF-5yv" secondAttribute="height" multiplier="0.15" id="R44-wi-FUh"/>
-                                    <constraint firstItem="hhF-ro-Fsb" firstAttribute="width" secondItem="mti-J0-dsB" secondAttribute="width" id="V0r-Sn-z0z"/>
-                                    <constraint firstAttribute="bottom" secondItem="gDJ-14-w9z" secondAttribute="bottom" id="cas-at-SgM"/>
-                                    <constraint firstItem="mti-J0-dsB" firstAttribute="top" secondItem="zRI-iF-5yv" secondAttribute="top" id="dDZ-pH-VSg"/>
-                                    <constraint firstItem="gDJ-14-w9z" firstAttribute="leading" secondItem="zRI-iF-5yv" secondAttribute="leading" id="dUu-ke-UU8"/>
-                                    <constraint firstItem="hhF-ro-Fsb" firstAttribute="top" secondItem="zRI-iF-5yv" secondAttribute="top" id="mdS-8J-tb6"/>
+                                    <constraint firstItem="w1W-t4-AV7" firstAttribute="leading" secondItem="zRI-iF-5yv" secondAttribute="leading" id="4Q0-hO-tB3"/>
+                                    <constraint firstItem="w1W-t4-AV7" firstAttribute="height" secondItem="zRI-iF-5yv" secondAttribute="height" multiplier="0.16" id="8ku-ol-hGu"/>
+                                    <constraint firstAttribute="trailing" secondItem="gDJ-14-w9z" secondAttribute="trailing" constant="20" id="JId-Ct-fPl"/>
+                                    <constraint firstItem="gDJ-14-w9z" firstAttribute="top" secondItem="w1W-t4-AV7" secondAttribute="bottom" constant="8" id="JZu-Xf-90C"/>
+                                    <constraint firstItem="w1W-t4-AV7" firstAttribute="top" secondItem="zRI-iF-5yv" secondAttribute="top" id="ROs-Dk-eS8"/>
+                                    <constraint firstAttribute="bottom" secondItem="gDJ-14-w9z" secondAttribute="bottom" constant="10" id="cas-at-SgM"/>
+                                    <constraint firstItem="gDJ-14-w9z" firstAttribute="leading" secondItem="zRI-iF-5yv" secondAttribute="leading" constant="20" id="dUu-ke-UU8"/>
+                                    <constraint firstAttribute="trailing" secondItem="w1W-t4-AV7" secondAttribute="trailing" id="l7G-fc-0vs"/>
+                                    <constraint firstItem="w1W-t4-AV7" firstAttribute="width" secondItem="zRI-iF-5yv" secondAttribute="width" id="vvX-uF-urR"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JAD-HO-ZwM" userLabel="SendView">
-                                <rect key="frame" x="0.0" y="781" width="414" height="115"/>
+                                <rect key="frame" x="0.0" y="573.5" width="375" height="93.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CtG-Kf-tZu" userLabel="SendButton" customClass="SubmitButtonOnRedBar" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="103.5" y="23" width="207" height="69"/>
+                                        <rect key="frame" x="94" y="19" width="187.5" height="56"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -509,11 +525,11 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rjj-ab-Gec" userLabel="EmptyMiddlePanel">
-                                <rect key="frame" x="0.0" y="223" width="414" height="18"/>
+                                <rect key="frame" x="0.0" y="153.5" width="375" height="13"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XVN-UU-tWh" userLabel="EmptyHeader">
-                                <rect key="frame" x="0.0" y="44" width="414" height="89.5"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="66.5"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

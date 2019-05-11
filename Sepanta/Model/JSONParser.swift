@@ -176,11 +176,14 @@ class JSONParser {
                 } else if (apiName == "profile-info") && (aMethod == HTTPMethod.post) {
                     // Sets True for profile-info to be observable by PostUI
                     NetworkManager.shared.updateProfileInfoSuccessful.accept(true)
-                } else if (apiName == "new-shops") || (apiName == "my-following") || (apiName == "category-shops-list") ||
-                        ((apiName == "favorite") && (aMethod == HTTPMethod.get))  {
+                } else if (apiName == "new-shops") || (apiName == "my-following") || (apiName == "category-shops-list") {
                     print("Starting Shops List Parser for : \(apiName)")
                     let parsedShops = self?.processShopList(Result: aDic)
                     NetworkManager.shared.shopObs.accept(parsedShops!)
+                } else if (apiName == "favorite") && (aMethod == HTTPMethod.get)  {
+                    print("Starting Fav Shops List Parser for : \(apiName)")
+                    let parsedShops = self?.processShopList(Result: aDic)
+                    NetworkManager.shared.favShopObs.accept(parsedShops!)
                 } else if (apiName == "favorite") && (aMethod == HTTPMethod.post) {
                     print("Starting Toggle Favorite on a shop Parser...")
                     let aToggle = self?.processFavAShopToggle(Result: aDic)
@@ -212,6 +215,16 @@ class JSONParser {
                 } else if (apiName == "selling-request") && (aMethod == HTTPMethod.post) {
                     print("Starting selling-request Parser...")
                     self?.processSellRequest(Result: aDic)
+                } else if (apiName == "app-version") && (aMethod == HTTPMethod.get) {
+                    print("Starting version Parser getting latest version...")
+                    if let stringVersion = aDic["version"] as? String {
+                        NetworkManager.shared.versionObs.accept(Float(stringVersion)!)
+                    }
+                } else if (apiName == "app-version") && (aMethod == HTTPMethod.post) {
+                    print("Starting version Parser - sending in use...")
+                    if let amessage = aDic["message"] as? String {
+                        print("Server : ",amessage)
+                    }
                 } else if (apiName == "notifications") && (aMethod == HTTPMethod.get) {
                     print("Starting Notification Parser...")
                     let (generalNotif,notifAsAny) = (self?.processNotifications(Result: aDic))!
