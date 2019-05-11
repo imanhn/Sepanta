@@ -9,39 +9,13 @@
 import Foundation
 
 struct Comment : Decodable, Equatable {
-    var id : Int?
-    var username : String?
+    var comment_id : Int?
     var body : String?
-}
-
-/*
-import RxDataSources
-struct Comment : Decodable, Equatable,IdentifiableType {
-    typealias Identity = Int
-    var id : Int?
-    var identity : Int { return self.id ?? 0}
     var username : String?
-    var body : String?
+    var user_id : Int?
+    var first_name : String?
+    var last_name : String?
+    var image : String?
 }
 
 
-struct SectionOfComments {
-    var header: String
-    var items: [Item]
-}
-
-extension SectionOfComments: SectionModelType,AnimatableSectionModelType {
-    var identity: Int {
-        return 1
-    }
-    
-    typealias Identity = Int
-    
-    typealias Item = Comment
-    
-    init(original: SectionOfComments, items: [Item]) {
-        self = original
-        self.items = items
-    }
-}
- */

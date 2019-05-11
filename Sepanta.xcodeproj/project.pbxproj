@@ -427,7 +427,6 @@
 				0F1B755E2235C8460087C0DB /* Slide.swift */,
 				0F052ED8221AE8C5009175EA /* LoginKey.swift */,
 				0F1B755C2235C1080087C0DB /* SlidesAndPaths.swift */,
-				0F3BDD0D22864A120087EA97 /* VersionControl.swift */,
 				0FDA55D42225C02800E7C889 /* Catagory.swift */,
 				0FA307DD222700B100EDA829 /* Shop.swift */,
 				0F056011227F92BC005F7BCE /* Rate.swift */,
@@ -441,6 +440,7 @@
 				0F1B75602236BA610087C0DB /* CacheManager.swift */,
 				0F50AE71226F61110028D8B6 /* MapAnnotation.swift */,
 				0F58927B2278F65E0077B655 /* UserPoints.swift */,
+				0F3BDD0D22864A120087EA97 /* VersionControl.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

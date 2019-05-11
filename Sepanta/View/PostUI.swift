@@ -100,7 +100,7 @@ class PostUI {
         if innerPost.image != "" && innerPost.image != nil {
             if innerPost.image != nil {
                 let imageStrUrl = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + innerPost.image!
-                print("*PostUI : Reading : ",imageStrUrl)
+                //print("*PostUI : Reading : ",imageStrUrl)
                 let imageCastedURL = URL(string: imageStrUrl)
                 if imageCastedURL != nil {
                     postImage.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1, ImageURL: imageCastedURL!, ImageName: innerPost.image!)
@@ -109,7 +109,7 @@ class PostUI {
                 }
             }
         }else{
-            print("*PostUI : innerPost is nil! \(innerPost.image)")
+            //print("*PostUI : innerPost is nil! \(innerPost.image)")
             postImage.image = UIImage(named: "logo_shape")
             postImage.contentMode = .scaleToFill
         }
@@ -224,21 +224,23 @@ class PostUI {
             .subscribe(onNext: { [unowned self] (toggleStatus) in
                 print("*Toggling... : ",self.likeNoLabel.text)
                 (sender as! UIButton).isEnabled = true
-                let currentLikes = Int(self.likeNoLabel.text ?? "0")!
-                if toggleStatus == ToggleStatus.NO {
-                    self.likeButton.setImage(UIImage(named: "icon_like"), for: .normal)
-                    self.likeNoLabel.text = "\(currentLikes-1)"
-                }else if toggleStatus == ToggleStatus.YES {
-                    self.likeButton.setImage(UIImage(named: "icon_like_dark"), for: .normal)
-                    self.likeNoLabel.text = "\(currentLikes+1)"
-                }else{
-                    print("NOT UPDATING POST!")
-                    Spinner.stop()
-                    return
-                    //self.delegate.alert(Message: "دسترسی به شبکه موقتاْ قطع شد")
+                DispatchQueue.main.async {
+                    let currentLikes = Int(self.likeNoLabel.text ?? "0")!
+                    if toggleStatus == ToggleStatus.NO {
+                        self.likeButton.setImage(UIImage(named: "icon_like"), for: .normal)
+                        self.likeNoLabel.text = "\(currentLikes-1)"
+                    }else if toggleStatus == ToggleStatus.YES {
+                        self.likeButton.setImage(UIImage(named: "icon_like_dark"), for: .normal)
+                        self.likeNoLabel.text = "\(currentLikes+1)"
+                    }else{
+                        print("NOT UPDATING POST!")
+                        Spinner.stop()
+                        return
+                        //self.delegate.alert(Message: "دسترسی به شبکه موقتاْ قطع شد")
+                    }
+                    self.likeNoLabel.setNeedsDisplay()
+                    print("  *Toggled... : ",self.likeNoLabel.text)
                 }
-                self.likeNoLabel.setNeedsDisplay()
-                print("  *Toggled... : ",self.likeNoLabel.text)
                 
                 if NetworkManager.shared.postDetailObs.value.isLiked.map({if $0 {return ToggleStatus.YES}else{return ToggleStatus.NO}}) != toggleStatus {
                     //Like is updating
@@ -274,7 +276,7 @@ class PostUI {
     
     func getComment(ByID commentID : Int)-> Comment?{
         for aComment in NetworkManager.shared.postDetailObs.value.comments ?? [Comment]() {
-            if aComment.id == commentID {
+            if aComment.comment_id == commentID {
                 return aComment
             }
         }
@@ -315,12 +317,12 @@ class PostUI {
     }
     
     func reportCommentAbuse(Comment aComment : Comment){
-        guard aComment.id != nil else {
+        guard aComment.comment_id != nil else {
             self.delegate.alert(Message: "نظر قابل ریپورت کردن نیست")
             return
         }
         
-        let aParameter = ["comment_id":"\(aComment.id!)"]
+        let aParameter = ["comment_id":"\(aComment.comment_id!)"]
         NetworkManager.shared.run(API: "report-comment", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: true)
         NetworkManager.shared.serverMessageObs = BehaviorRelay<String>(value: "")
         let messageDisp = NetworkManager.shared.serverMessageObs
@@ -360,23 +362,30 @@ class PostUI {
             menuButton.frame = CGRect(x: self.marginX, y: commentCursurY+(menuButtonWidth/2), width: menuButtonWidth, height: menuButtonWidth)
             menuButton.setImage(UIImage(named: "postMenu"), for: .normal)
             menuButton.addTarget(self, action: #selector(menuOnCommentTapped), for: .touchUpInside)
-            menuButton.tag = aComment.id ?? 0
+            menuButton.tag = aComment.comment_id ?? 0
             
             peopleCommentsView.addSubview(menuButton)
             
-            let usernameLabel = UILabel(frame: CGRect(x: self.marginX+menuButtonWidth, y: commentCursurY, width: commentWidth, height: profilePicturedim))
+            let usernameLabel = UILabel(frame: CGRect(x: (self.marginX*3/2)+menuButtonWidth, y: commentCursurY, width: commentWidth, height: profilePicturedim))
             usernameLabel.font = usernameFont
             usernameLabel.textColor = UIColor(hex: 0xD6D7D9)
             usernameLabel.contentMode = .right
             usernameLabel.semanticContentAttribute = .forceRightToLeft
-            usernameLabel.text = aComment.username ?? "بدون نام"
+            usernameLabel.text = (aComment.first_name ?? "")+" "+(aComment.last_name ?? "")
             peopleCommentsView.addSubview(usernameLabel)
-            let profilePictureImageView = UIImageView(frame: CGRect(x: 2*self.marginX+usernameLabel.frame.width, y: commentCursurY, width: profilePicturedim, height: profilePicturedim))
+            let profilePictureImageView = UIImageView(frame: CGRect(x: 3*self.marginX+usernameLabel.frame.width, y: commentCursurY, width: profilePicturedim, height: profilePicturedim))
             profilePictureImageView.backgroundColor = UIColor.white
             profilePictureImageView.layer.cornerRadius = (profilePicturedim / 2) - 2
             profilePictureImageView.image = UIImage(named: "icon_profile_03")
             profilePictureImageView.contentMode = .scaleAspectFill
             profilePictureImageView.clipsToBounds = true
+            if aComment.image != nil {
+                let imageStr = NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_profile_image+aComment.image!
+                if let imageUrl = URL(string: imageStr) {
+                    profilePictureImageView.af_setImage(withURL: imageUrl, placeholderImage: UIImage(named: "icon_profile_03"), filter: nil)
+                }
+            }
+            
             peopleCommentsView.addSubview(profilePictureImageView)
             commentCursurY = commentCursurY + self.marginY/3 + profilePicturedim
             var commentHeight = profilePicturedim
@@ -384,7 +393,7 @@ class PostUI {
                 commentHeight = commentText.height(withConstrainedWidth: commentWidth, font: commentFont!)
             }
             
-            let commentBody = UILabel(frame: CGRect(x: self.marginX, y: commentCursurY, width: commentWidth, height: commentHeight))
+            let commentBody = UILabel(frame: CGRect(x: self.marginX+menuButtonWidth, y: commentCursurY, width: commentWidth, height: commentHeight))
             commentBody.font = commentFont
             commentBody.numberOfLines = 10
             commentBody.textColor = UIColor(hex: 0x515152)

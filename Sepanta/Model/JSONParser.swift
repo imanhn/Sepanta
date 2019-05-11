@@ -217,7 +217,8 @@ class JSONParser {
                     self?.processSellRequest(Result: aDic)
                 } else if (apiName == "app-version") && (aMethod == HTTPMethod.get) {
                     print("Starting version Parser getting latest version...")
-                    if let stringVersion = aDic["version"] as? String {
+                    if let stringVersion = aDic["version_ios"] as? String {
+                        //print("Version fetched : ",stringVersion)
                         NetworkManager.shared.versionObs.accept(Float(stringVersion)!)
                     }
                 } else if (apiName == "app-version") && (aMethod == HTTPMethod.post) {
@@ -705,7 +706,14 @@ class JSONParser {
             aPost.comments = [Comment]()
             for aComment in someComments {
                 if let castedComment = aComment as? NSDictionary{
-                    let newComment = Comment(id: castedComment["id"] as? Int, username: castedComment["username"] as? String, body: castedComment["body"] as? String)
+                    let newComment = Comment(comment_id: castedComment["comment_id"] as? Int,
+                                             body: castedComment["body"] as? String,
+                                             username: castedComment["username"] as? String,
+                                             user_id: castedComment["user_id"] as? Int,
+                                             first_name: castedComment["first_name"] as? String,
+                                             last_name: castedComment["last_name"] as? String,
+                                             image: castedComment["image"] as? String
+                                             )
                     //print("Casted : ",newComment)
                     aPost.comments!.append(newComment)
                 }else{
