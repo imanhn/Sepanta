@@ -399,7 +399,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Z3-NA-gBm" userLabel="TabPaneView" customClass="TabbedViewWithWhitePanel" customModule="Sepanta" customModuleProvider="target">
-                                                <rect key="frame" x="15" y="388.5" width="345" height="533"/>
+                                                <rect key="frame" x="15" y="388.5" width="345" height="355.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAB-pZ-Xhq" userLabel="Posts">
                                                         <rect key="frame" x="172.5" y="0.0" width="172.5" height="60"/>
@@ -422,7 +422,7 @@
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cSF-SD-wAR" userLabel="TabContentView">
-                                                        <rect key="frame" x="8" y="80" width="329" height="445"/>
+                                                        <rect key="frame" x="8" y="80" width="329" height="267.5"/>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -487,7 +487,7 @@
                                             <constraint firstItem="N7a-eG-qPq" firstAttribute="trailing" secondItem="ipq-Wk-abA" secondAttribute="trailing" id="wB7-Mg-0yz"/>
                                             <constraint firstItem="ymb-f0-e8R" firstAttribute="top" secondItem="Gs4-pN-YwK" secondAttribute="bottom" constant="8" id="yTM-Ht-s00"/>
                                             <constraint firstAttribute="trailing" secondItem="60Z-aG-NJs" secondAttribute="trailing" constant="15" id="zLC-fa-cdt"/>
-                                            <constraint firstItem="9Z3-NA-gBm" firstAttribute="height" secondItem="fwY-Qd-9NW" secondAttribute="height" multiplier="0.9" id="zl8-WO-l7N"/>
+                                            <constraint firstItem="9Z3-NA-gBm" firstAttribute="height" secondItem="fwY-Qd-9NW" secondAttribute="height" multiplier="0.6" id="zl8-WO-l7N"/>
                                         </constraints>
                                     </scrollView>
                                 </subviews>
@@ -516,6 +516,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ECD-OT-JaH"/>
                     </view>
+                    <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="ContactButton" destination="ugn-Tw-fEN" id="jGJ-lz-2wv"/>
                         <outlet property="PostToolbarView" destination="Gs4-pN-YwK" id="MdS-lV-Sds"/>

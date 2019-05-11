@@ -200,7 +200,7 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     }
     
     override func viewDidLayoutSubviews() {
-        let calculatedHeight = UIScreen.main.bounds.height * 1.5
+        let calculatedHeight = UIScreen.main.bounds.height * 1.2
         //print("Calculated Height : ",calculatedHeight)
         mainScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: calculatedHeight)
         

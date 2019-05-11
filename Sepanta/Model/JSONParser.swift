@@ -131,7 +131,7 @@ class JSONParser {
                     }else{
                         //NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: aProfile)
                         NetworkManager.shared.profileObs.accept(aProfile)
-                        NetworkManager.shared.postsObs.accept(aProfile.content as! [Post])
+                        //NetworkManager.shared.shopObs.accept(aProfile.content as! [Shop])
                     }
                     
                 }else if (apiName == "report-comment") || (apiName == "report-post") || (apiName == "report-comment"){
@@ -633,7 +633,7 @@ class JSONParser {
                     }else if let dicImage = aPostOrShop["image"] as? NSDictionary {
                         newShop.image = (dicImage["image"] as? String) ?? "EmptyImage"
                     }else{
-                        print("Can not cast Shop IMAGE : \(String(describing: aPostOrShop["image"]))")
+                        print("Can not cast followed-shop IMAGE : \(String(describing: aPostOrShop["image"]))")
                     }
                     newShop.rate = (aPostOrShop["rate"] as? String) ?? ""
                     newShop.follower_count = (aPostOrShop["follower_count"] as? Int) ?? 0
