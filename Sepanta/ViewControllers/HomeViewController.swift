@@ -32,7 +32,7 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     }
     
     @IBAction func searchTapped(_ sender: Any) {
-        let akeyword = self.searchText.text ?? ""       
+        let akeyword = self.searchText.text ?? ""        
         self.coordinator!.PushSearch(Keyword: akeyword)
     }
     
@@ -41,7 +41,7 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     }
     
     @IBAction func gotoHelp(_ sender: Any) {
-        alert(Message: "نمایش کمک")
+        self.coordinator!.pushHelp()
     }
     
     @IBAction func gotoMapNearestShop(_ sender: Any) {

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Shabnam-Bold-FD.ttf">
+            <string>Shabnam-Bold-FD</string>
+        </array>
+        <array key="Shabnam-FD.ttf">
+            <string>Shabnam-FD</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--HelpViewController-->
+        <scene sceneID="EXU-Ao-ti4">
+            <objects>
+                <pageViewController storyboardIdentifier="HelpViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="oe7-sR-sYA" userLabel="HelpViewController" customClass="HelpViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Dl-Va-uH8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-24" y="-306"/>
+        </scene>
+        <!--ContentViewController-->
+        <scene sceneID="RC1-jv-Wdc">
+            <objects>
+                <viewController storyboardIdentifier="ContentViewController" id="E6b-9u-o0M" userLabel="ContentViewController" customClass="ContentViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fiJ-Vf-uOo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DWa-vh-mzR" userLabel="image">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YoP-2V-nzZ" userLabel="HelpTextView">
+                                <rect key="frame" x="28" y="70" width="319" height="133.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="راهنما" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7de-ZP-uXb" userLabel="Title">
+                                        <rect key="frame" x="20" y="20" width="279" height="93.5"/>
+                                        <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="14"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.8565688776" green="0.2257254132" blue="0.36172668870000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="7de-ZP-uXb" secondAttribute="bottom" constant="20" id="AhA-Wi-rPn"/>
+                                    <constraint firstItem="7de-ZP-uXb" firstAttribute="top" secondItem="YoP-2V-nzZ" secondAttribute="top" constant="20" id="Pq5-8H-847"/>
+                                    <constraint firstAttribute="trailing" secondItem="7de-ZP-uXb" secondAttribute="trailing" constant="20" id="TZY-gW-kcr"/>
+                                    <constraint firstItem="7de-ZP-uXb" firstAttribute="leading" secondItem="YoP-2V-nzZ" secondAttribute="leading" constant="20" id="uHZ-Ma-t8f"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBound" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button hidden="YES" opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Kt-nU-KMZ" userLabel="DoneButton">
+                                <rect key="frame" x="112.5" y="563.5" width="150" height="53.5"/>
+                                <color key="backgroundColor" red="0.27445790819999999" green="0.21089498300000001" blue="0.483205157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="16"/>
+                                <state key="normal" title="متوجه شدم">
+                                    <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBound" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="doneButtonTapped:" destination="E6b-9u-o0M" eventType="touchUpInside" id="DWp-5b-04X"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="DWa-vh-mzR" firstAttribute="leading" secondItem="CSv-j1-se6" secondAttribute="leading" id="FaO-Dv-Wif"/>
+                            <constraint firstItem="9Kt-nU-KMZ" firstAttribute="bottom" secondItem="DWa-vh-mzR" secondAttribute="bottom" constant="-50" id="JEc-nx-si6"/>
+                            <constraint firstItem="CSv-j1-se6" firstAttribute="bottom" secondItem="DWa-vh-mzR" secondAttribute="bottom" id="KEw-Dw-ANw"/>
+                            <constraint firstItem="YoP-2V-nzZ" firstAttribute="height" secondItem="fiJ-Vf-uOo" secondAttribute="height" multiplier="0.2" id="PHM-va-BbP"/>
+                            <constraint firstItem="YoP-2V-nzZ" firstAttribute="centerX" secondItem="CSv-j1-se6" secondAttribute="centerX" id="Qm1-fV-eXK"/>
+                            <constraint firstItem="9Kt-nU-KMZ" firstAttribute="centerX" secondItem="CSv-j1-se6" secondAttribute="centerX" id="Rsn-rS-jqW"/>
+                            <constraint firstItem="YoP-2V-nzZ" firstAttribute="top" secondItem="CSv-j1-se6" secondAttribute="top" constant="50" id="XnK-Nu-ezF"/>
+                            <constraint firstItem="9Kt-nU-KMZ" firstAttribute="width" secondItem="fiJ-Vf-uOo" secondAttribute="width" multiplier="0.4" id="frR-jh-79p"/>
+                            <constraint firstItem="YoP-2V-nzZ" firstAttribute="width" secondItem="fiJ-Vf-uOo" secondAttribute="width" multiplier="0.85" id="hih-sn-GgL"/>
+                            <constraint firstAttribute="trailing" secondItem="DWa-vh-mzR" secondAttribute="trailing" id="npR-eb-OSI"/>
+                            <constraint firstItem="9Kt-nU-KMZ" firstAttribute="height" secondItem="fiJ-Vf-uOo" secondAttribute="height" multiplier="0.08" id="pm7-5f-ymu"/>
+                            <constraint firstItem="DWa-vh-mzR" firstAttribute="top" secondItem="fiJ-Vf-uOo" secondAttribute="top" id="sHI-cq-Q4c"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="CSv-j1-se6"/>
+                    </view>
+                    <connections>
+                        <outlet property="doneButton" destination="9Kt-nU-KMZ" id="fNQ-oX-6zp"/>
+                        <outlet property="helpTextView" destination="YoP-2V-nzZ" id="UJ9-DL-Bvx"/>
+                        <outlet property="labelViewToTopCons" destination="XnK-Nu-ezF" id="Uua-Iv-HsS"/>
+                        <outlet property="slideImageView" destination="DWa-vh-mzR" id="r4p-3h-9UT"/>
+                        <outlet property="titleLabel" destination="7de-ZP-uXb" id="RtV-fQ-fT5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o7z-HG-xo5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="763" y="-311"/>
+        </scene>
+    </scenes>
+</document>

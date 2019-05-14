@@ -70,6 +70,9 @@
 		0F79BBB02285DC0500795AE0 /* ReportPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F79BBAF2285DC0500795AE0 /* ReportPostView.swift */; };
 		0F79BBB522863E3E00795AE0 /* TermsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F79BBB422863E3E00795AE0 /* TermsView.xib */; };
 		0F79BBB7228641DC00795AE0 /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F79BBB6228641DC00795AE0 /* TermsView.swift */; };
+		0F7CD8A02287358F00B92CBA /* Help.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F7CD89F2287358F00B92CBA /* Help.storyboard */; };
+		0F7CD8A222873A8000B92CBA /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7CD8A122873A8000B92CBA /* HelpViewController.swift */; };
+		0F7CD8A4228749D900B92CBA /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7CD8A3228749D900B92CBA /* ContentViewController.swift */; };
 		0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */; };
 		0F7FDA7F2206069300703792 /* ArrayChoiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */; };
 		0F817A672232D89C00F1738E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A662232D89C00F1738E /* ProfileViewController.swift */; };
@@ -216,6 +219,9 @@
 		0F79BBAF2285DC0500795AE0 /* ReportPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPostView.swift; sourceTree = "<group>"; };
 		0F79BBB422863E3E00795AE0 /* TermsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsView.xib; sourceTree = "<group>"; };
 		0F79BBB6228641DC00795AE0 /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
+		0F7CD89F2287358F00B92CBA /* Help.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Help.storyboard; sourceTree = "<group>"; };
+		0F7CD8A122873A8000B92CBA /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		0F7CD8A3228749D900B92CBA /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		0F7FDA7C2205FAFE00703792 /* AlwaysShowPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysShowPopup.swift; sourceTree = "<group>"; };
 		0F7FDA7E2206069300703792 /* ArrayChoiceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayChoiceTableViewController.swift; sourceTree = "<group>"; };
 		0F817A662232D89C00F1738E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -466,6 +472,8 @@
 				0F58927D227909080077B655 /* ScoresViewController.swift */,
 				0F817A70223567E200F1738E /* ShopsListViewController.swift */,
 				0F1B75622236E39B0087C0DB /* ShopViewController.swift */,
+				0F7CD8A122873A8000B92CBA /* HelpViewController.swift */,
+				0F7CD8A3228749D900B92CBA /* ContentViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -534,6 +542,7 @@
 				0F79BBA52285C75E00795AE0 /* Profile.storyboard */,
 				0F79BBA72285CA5700795AE0 /* GetRich.storyboard */,
 				0F79BBB422863E3E00795AE0 /* TermsView.xib */,
+				0F7CD89F2287358F00B92CBA /* Help.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -765,6 +774,7 @@
 				0FD094AA226E34C600E53A07 /* Map.storyboard in Resources */,
 				0F237E41226783CF004CC7BC /* Shabnam-Light-FD.ttf in Resources */,
 				0F4D29E42267617100BFD425 /* Search.storyboard in Resources */,
+				0F7CD8A02287358F00B92CBA /* Help.storyboard in Resources */,
 				0F63F7102277625E00799C8F /* ContactAboutUS.storyboard in Resources */,
 				0F79BBB522863E3E00795AE0 /* TermsView.xib in Resources */,
 			);
@@ -897,6 +907,7 @@
 				0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */,
 				0F642B99227A525800B887B8 /* AddPostImagePicker.swift in Sources */,
 				0F8571F0225CC5B50056D062 /* UIViewControllerWithErrorBar.swift in Sources */,
+				0F7CD8A222873A8000B92CBA /* HelpViewController.swift in Sources */,
 				0F3197B32270BD8F00CEF207 /* Bank.swift in Sources */,
 				0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */,
 				0F052EDB221C0790009175EA /* HomeCoordinator.swift in Sources */,
@@ -932,6 +943,7 @@
 				0FAEEDE5222F29C600A9178F /* GetRichUI.swift in Sources */,
 				0F997397227BB84600A65716 /* MainImageForShopImagePicker.swift in Sources */,
 				0F890D0E2215C7170091FA2E /* NetworkManager.swift in Sources */,
+				0F7CD8A4228749D900B92CBA /* ContentViewController.swift in Sources */,
 				0F9BCFC8222317E900C87706 /* SepantaGroupButtons.swift in Sources */,
 				0F50AE74226F66950028D8B6 /* MapViewAnnotations.swift in Sources */,
 				0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */,

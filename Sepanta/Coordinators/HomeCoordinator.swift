@@ -193,6 +193,16 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
+
+    func pushHelp() {
+        let storyboard = UIStoryboard(name: "Help", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "HelpViewController") as! HelpViewController
+        //let vc = ShopsListViewController.instantiate()
+        vc.coordinator = self
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
     
     func pushMyFollowingShops(){
         let storyboard = UIStoryboard(name: "Shop", bundle: Bundle.main)
