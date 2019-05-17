@@ -603,7 +603,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" estimatedRowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Eaq-h5-feM" userLabel="NewShopTable">
-                                <rect key="frame" x="0.0" y="86.5" width="375" height="580.5"/>
+                                <rect key="frame" x="0.0" y="86.5" width="375" height="534"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -808,16 +808,17 @@
                                 </prototypes>
                             </tableView>
                             <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4B2-bc-qQ1" userLabel="MenuView">
-                                <rect key="frame" x="131.5" y="600.5" width="112.5" height="66.5"/>
+                                <rect key="frame" x="0.0" y="620.5" width="375" height="46.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYz-EZ-Aj2" userLabel="menu">
-                                        <rect key="frame" x="0.0" y="0.0" width="112.5" height="66.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="46.5"/>
                                         <state key="normal" image="icon_menu"/>
                                         <connections>
                                             <action selector="menuTapped:" destination="RCo-oH-Vgj" eventType="touchUpInside" id="hQ0-5k-iC4"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="eYz-EZ-Aj2" firstAttribute="width" secondItem="4B2-bc-qQ1" secondAttribute="width" id="PXr-pv-3T6"/>
                                     <constraint firstItem="eYz-EZ-Aj2" firstAttribute="height" secondItem="4B2-bc-qQ1" secondAttribute="height" id="Z1U-Av-YX6"/>
@@ -829,16 +830,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Eaq-h5-feM" firstAttribute="trailing" secondItem="ELW-cd-nRM" secondAttribute="trailing" id="0Jl-t0-l5q"/>
-                            <constraint firstItem="Eaq-h5-feM" firstAttribute="bottom" secondItem="4B2-bc-qQ1" secondAttribute="bottom" id="3Pt-WP-8gT"/>
                             <constraint firstItem="4B2-bc-qQ1" firstAttribute="centerX" secondItem="ELW-cd-nRM" secondAttribute="centerX" id="6b2-Aj-4D4"/>
-                            <constraint firstItem="4B2-bc-qQ1" firstAttribute="width" secondItem="gOH-9v-iIy" secondAttribute="width" multiplier="0.3" id="ALS-ui-CZ7"/>
+                            <constraint firstItem="4B2-bc-qQ1" firstAttribute="width" secondItem="gOH-9v-iIy" secondAttribute="width" id="ALS-ui-CZ7"/>
                             <constraint firstItem="Eve-Yh-3FL" firstAttribute="top" secondItem="ELW-cd-nRM" secondAttribute="top" id="AOQ-H1-qQz"/>
                             <constraint firstItem="Eaq-h5-feM" firstAttribute="leading" secondItem="ELW-cd-nRM" secondAttribute="leading" id="CDb-qN-XL0"/>
                             <constraint firstItem="Eaq-h5-feM" firstAttribute="top" secondItem="Eve-Yh-3FL" secondAttribute="bottom" id="Cb0-aG-s3G"/>
                             <constraint firstItem="Eve-Yh-3FL" firstAttribute="height" secondItem="gOH-9v-iIy" secondAttribute="height" multiplier="0.1" id="EqM-1k-7yM"/>
-                            <constraint firstItem="4B2-bc-qQ1" firstAttribute="height" secondItem="gOH-9v-iIy" secondAttribute="height" multiplier="0.1" id="Qew-mk-IeX"/>
+                            <constraint firstItem="ELW-cd-nRM" firstAttribute="bottom" secondItem="4B2-bc-qQ1" secondAttribute="bottom" id="Gmu-dn-sEd"/>
+                            <constraint firstItem="4B2-bc-qQ1" firstAttribute="height" secondItem="gOH-9v-iIy" secondAttribute="height" multiplier="0.07" id="Qew-mk-IeX"/>
                             <constraint firstItem="Eve-Yh-3FL" firstAttribute="width" secondItem="gOH-9v-iIy" secondAttribute="width" id="fXT-iZ-S4s"/>
-                            <constraint firstItem="Eaq-h5-feM" firstAttribute="bottom" secondItem="ELW-cd-nRM" secondAttribute="bottom" id="kGt-E0-KQS"/>
+                            <constraint firstItem="Eaq-h5-feM" firstAttribute="bottom" secondItem="4B2-bc-qQ1" secondAttribute="top" id="kGt-E0-KQS"/>
                             <constraint firstItem="Eve-Yh-3FL" firstAttribute="centerX" secondItem="ELW-cd-nRM" secondAttribute="centerX" id="tGF-4O-FHN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ELW-cd-nRM"/>
@@ -905,7 +906,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" estimatedRowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gYc-qh-vib" userLabel="FavShopTable">
-                                <rect key="frame" x="0.0" y="86.5" width="375" height="580.5"/>
+                                <rect key="frame" x="0.0" y="86.5" width="375" height="534"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -1009,16 +1010,17 @@
                                 </prototypes>
                             </tableView>
                             <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VgE-1R-ebS" userLabel="MenuView">
-                                <rect key="frame" x="131.5" y="600.5" width="112.5" height="66.5"/>
+                                <rect key="frame" x="0.0" y="620.5" width="375" height="46.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRI-wZ-nIk" userLabel="menu">
-                                        <rect key="frame" x="0.0" y="0.0" width="112.5" height="66.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="46.5"/>
                                         <state key="normal" image="icon_menu"/>
                                         <connections>
                                             <action selector="menuTapped:" destination="TgT-sM-3UL" eventType="touchUpInside" id="g2u-hm-1iS"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="eRI-wZ-nIk" firstAttribute="centerY" secondItem="VgE-1R-ebS" secondAttribute="centerY" id="1q6-OO-1mj"/>
                                     <constraint firstItem="eRI-wZ-nIk" firstAttribute="width" secondItem="VgE-1R-ebS" secondAttribute="width" id="c88-wf-apF"/>
@@ -1032,13 +1034,13 @@
                             <constraint firstItem="VgE-1R-ebS" firstAttribute="centerX" secondItem="U0f-9N-xrT" secondAttribute="centerX" id="1CA-qf-NEf"/>
                             <constraint firstItem="d8D-hM-J0q" firstAttribute="width" secondItem="0oC-p8-Wea" secondAttribute="width" id="A6X-19-uZv"/>
                             <constraint firstItem="gYc-qh-vib" firstAttribute="top" secondItem="d8D-hM-J0q" secondAttribute="bottom" id="GrQ-7p-uzX"/>
-                            <constraint firstItem="VgE-1R-ebS" firstAttribute="height" secondItem="0oC-p8-Wea" secondAttribute="height" multiplier="0.1" id="Jqv-lg-UCH"/>
-                            <constraint firstItem="gYc-qh-vib" firstAttribute="bottom" secondItem="U0f-9N-xrT" secondAttribute="bottom" id="NtH-bG-57J"/>
-                            <constraint firstItem="gYc-qh-vib" firstAttribute="bottom" secondItem="VgE-1R-ebS" secondAttribute="bottom" id="Orf-j2-fIF"/>
+                            <constraint firstItem="VgE-1R-ebS" firstAttribute="height" secondItem="0oC-p8-Wea" secondAttribute="height" multiplier="0.07" id="Jqv-lg-UCH"/>
+                            <constraint firstItem="gYc-qh-vib" firstAttribute="bottom" secondItem="VgE-1R-ebS" secondAttribute="top" id="Orf-j2-fIF"/>
                             <constraint firstItem="d8D-hM-J0q" firstAttribute="top" secondItem="U0f-9N-xrT" secondAttribute="top" id="Rch-BC-qOk"/>
                             <constraint firstItem="d8D-hM-J0q" firstAttribute="centerX" secondItem="U0f-9N-xrT" secondAttribute="centerX" id="SC5-3l-4zz"/>
+                            <constraint firstItem="U0f-9N-xrT" firstAttribute="bottom" secondItem="VgE-1R-ebS" secondAttribute="bottom" id="SSk-Bk-wTX"/>
                             <constraint firstItem="gYc-qh-vib" firstAttribute="trailing" secondItem="U0f-9N-xrT" secondAttribute="trailing" id="ZxI-FV-utP"/>
-                            <constraint firstItem="VgE-1R-ebS" firstAttribute="width" secondItem="0oC-p8-Wea" secondAttribute="width" multiplier="0.3" id="Zxu-91-t9P"/>
+                            <constraint firstItem="VgE-1R-ebS" firstAttribute="width" secondItem="0oC-p8-Wea" secondAttribute="width" id="Zxu-91-t9P"/>
                             <constraint firstItem="gYc-qh-vib" firstAttribute="leading" secondItem="U0f-9N-xrT" secondAttribute="leading" id="hYU-tC-Fs2"/>
                             <constraint firstItem="d8D-hM-J0q" firstAttribute="height" secondItem="0oC-p8-Wea" secondAttribute="height" multiplier="0.1" id="x11-2h-gsL"/>
                         </constraints>

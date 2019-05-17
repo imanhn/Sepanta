@@ -101,10 +101,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o64-70-9Bz" userLabel="SepantaGroupsView">
-                                <rect key="frame" x="0.0" y="155" width="414" height="707"/>
+                                <rect key="frame" x="0.0" y="155" width="414" height="669.5"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="Ygg-5T-EJF" userLabel="SepantaScroll">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="707"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="669.5"/>
                                     </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -116,10 +116,10 @@
                                 </constraints>
                             </view>
                             <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tt9-Lp-HiX" userLabel="MenuView">
-                                <rect key="frame" x="145" y="790.5" width="124" height="71.5"/>
+                                <rect key="frame" x="0.0" y="824.5" width="414" height="71.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDX-oN-nnt" userLabel="menu">
-                                        <rect key="frame" x="0.0" y="0.0" width="124" height="71.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="71.5"/>
                                         <state key="normal" image="icon_menu"/>
                                         <connections>
                                             <action selector="menuClicked:" destination="ahc-a2-JOR" eventType="touchUpInside" id="Xrz-p4-FKH"/>
@@ -138,8 +138,8 @@
                         <constraints>
                             <constraint firstItem="MxR-V4-GMR" firstAttribute="top" secondItem="xmD-RJ-JpY" secondAttribute="bottom" constant="8" id="1Es-gY-gSv"/>
                             <constraint firstItem="MxR-V4-GMR" firstAttribute="centerX" secondItem="2Fv-tT-a1K" secondAttribute="centerX" id="7y5-Y5-Eae"/>
-                            <constraint firstItem="Tt9-Lp-HiX" firstAttribute="width" secondItem="LAu-8t-t13" secondAttribute="width" multiplier="0.3" id="Ebj-MB-BYl"/>
-                            <constraint firstItem="2Fv-tT-a1K" firstAttribute="bottom" secondItem="o64-70-9Bz" secondAttribute="bottom" id="F1i-h4-ApM"/>
+                            <constraint firstItem="Tt9-Lp-HiX" firstAttribute="width" secondItem="LAu-8t-t13" secondAttribute="width" id="Ebj-MB-BYl"/>
+                            <constraint firstItem="Tt9-Lp-HiX" firstAttribute="top" secondItem="o64-70-9Bz" secondAttribute="bottom" id="F1i-h4-ApM"/>
                             <constraint firstItem="MxR-V4-GMR" firstAttribute="width" secondItem="LAu-8t-t13" secondAttribute="width" id="FCt-rz-n2g"/>
                             <constraint firstItem="xmD-RJ-JpY" firstAttribute="centerX" secondItem="2Fv-tT-a1K" secondAttribute="centerX" id="HXy-IH-lLr"/>
                             <constraint firstItem="o64-70-9Bz" firstAttribute="top" secondItem="MxR-V4-GMR" secondAttribute="bottom" constant="8" id="L4M-W3-C7q"/>
@@ -150,7 +150,7 @@
                             <constraint firstItem="o64-70-9Bz" firstAttribute="leading" secondItem="2Fv-tT-a1K" secondAttribute="leading" id="p9k-8Q-v54"/>
                             <constraint firstItem="MxR-V4-GMR" firstAttribute="height" secondItem="xmD-RJ-JpY" secondAttribute="height" multiplier="1.5" id="pGR-YB-YJO"/>
                             <constraint firstItem="o64-70-9Bz" firstAttribute="width" secondItem="LAu-8t-t13" secondAttribute="width" id="q6G-o3-44x"/>
-                            <constraint firstItem="2Fv-tT-a1K" firstAttribute="bottom" secondItem="Tt9-Lp-HiX" secondAttribute="bottom" id="xKM-Xj-QAR"/>
+                            <constraint firstAttribute="bottom" secondItem="Tt9-Lp-HiX" secondAttribute="bottom" id="xKM-Xj-QAR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2Fv-tT-a1K"/>
                     </view>
@@ -287,7 +287,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Oc0-p0-Jfb" userLabel="ShopTable">
-                                <rect key="frame" x="0.0" y="222" width="414" height="717"/>
+                                <rect key="frame" x="0.0" y="223" width="414" height="601.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -492,10 +492,10 @@
                                 </prototypes>
                             </tableView>
                             <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3lc-U3-gXZ" userLabel="MenuView">
-                                <rect key="frame" x="145" y="790.5" width="124" height="71.5"/>
+                                <rect key="frame" x="0.0" y="824.5" width="414" height="71.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mWt-pp-31m" userLabel="menu">
-                                        <rect key="frame" x="0.0" y="0.0" width="124" height="71.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="71.5"/>
                                         <state key="normal" image="icon_menu"/>
                                         <connections>
                                             <action selector="openButtomMenu:" destination="uEa-te-1cH" eventType="touchUpInside" id="jSD-q8-ua7"/>
@@ -514,17 +514,17 @@
                         <constraints>
                             <constraint firstItem="3lc-U3-gXZ" firstAttribute="height" secondItem="bOP-iz-05U" secondAttribute="height" multiplier="0.08" id="0aa-Jj-C6W"/>
                             <constraint firstItem="ARE-vf-tXM" firstAttribute="centerX" secondItem="Ern-TH-3rr" secondAttribute="centerX" id="1Nz-Kd-ywh"/>
-                            <constraint firstItem="Ern-TH-3rr" firstAttribute="bottom" secondItem="3lc-U3-gXZ" secondAttribute="bottom" id="5jL-e7-oNW"/>
+                            <constraint firstAttribute="bottom" secondItem="3lc-U3-gXZ" secondAttribute="bottom" id="5jL-e7-oNW"/>
                             <constraint firstItem="Oc0-p0-Jfb" firstAttribute="width" secondItem="bOP-iz-05U" secondAttribute="width" id="7B4-1e-kUm"/>
                             <constraint firstItem="ARE-vf-tXM" firstAttribute="top" secondItem="uKR-e3-AUD" secondAttribute="bottom" id="9hE-or-GKo"/>
-                            <constraint firstItem="3lc-U3-gXZ" firstAttribute="width" secondItem="bOP-iz-05U" secondAttribute="width" multiplier="0.3" id="LQx-G4-L4J"/>
+                            <constraint firstItem="3lc-U3-gXZ" firstAttribute="width" secondItem="bOP-iz-05U" secondAttribute="width" id="LQx-G4-L4J"/>
                             <constraint firstItem="uKR-e3-AUD" firstAttribute="height" secondItem="bOP-iz-05U" secondAttribute="height" multiplier="0.1" id="MiC-tw-jcx"/>
-                            <constraint firstItem="Oc0-p0-Jfb" firstAttribute="height" secondItem="bOP-iz-05U" secondAttribute="height" multiplier="0.8" id="PDe-ck-Vm8"/>
                             <constraint firstItem="uKR-e3-AUD" firstAttribute="centerX" secondItem="Ern-TH-3rr" secondAttribute="centerX" id="UlE-LI-Cpn"/>
                             <constraint firstItem="3lc-U3-gXZ" firstAttribute="centerX" secondItem="Ern-TH-3rr" secondAttribute="centerX" id="Wl5-Gx-Ge7"/>
                             <constraint firstItem="uKR-e3-AUD" firstAttribute="width" secondItem="bOP-iz-05U" secondAttribute="width" id="eW0-06-qAu"/>
+                            <constraint firstItem="3lc-U3-gXZ" firstAttribute="top" secondItem="Oc0-p0-Jfb" secondAttribute="bottom" id="hUy-7Z-rLx"/>
                             <constraint firstItem="ARE-vf-tXM" firstAttribute="height" secondItem="uKR-e3-AUD" secondAttribute="height" id="i40-OV-rFA"/>
-                            <constraint firstItem="Oc0-p0-Jfb" firstAttribute="top" secondItem="ARE-vf-tXM" secondAttribute="bottom" constant="-1" id="s8j-tQ-XZq"/>
+                            <constraint firstItem="Oc0-p0-Jfb" firstAttribute="top" secondItem="ARE-vf-tXM" secondAttribute="bottom" id="s8j-tQ-XZq"/>
                             <constraint firstItem="uKR-e3-AUD" firstAttribute="top" secondItem="Ern-TH-3rr" secondAttribute="top" id="sZD-h5-1jK"/>
                             <constraint firstItem="ARE-vf-tXM" firstAttribute="width" secondItem="uKR-e3-AUD" secondAttribute="width" id="sos-Sa-eis"/>
                             <constraint firstItem="Oc0-p0-Jfb" firstAttribute="centerX" secondItem="Ern-TH-3rr" secondAttribute="centerX" id="wX0-9b-bAh"/>

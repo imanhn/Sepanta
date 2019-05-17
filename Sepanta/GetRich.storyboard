@@ -52,10 +52,10 @@
                                 </constraints>
                             </view>
                             <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8CL-6c-RLD" userLabel="MenuView">
-                                <rect key="frame" x="145" y="790.5" width="124" height="71.5"/>
+                                <rect key="frame" x="0.0" y="833.5" width="414" height="62.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="05K-DC-khX" userLabel="menu">
-                                        <rect key="frame" x="0.0" y="0.0" width="124" height="71.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="62.5"/>
                                         <state key="normal" image="icon_menu"/>
                                         <connections>
                                             <action selector="menuClicked:" destination="Egp-pF-FKM" eventType="touchUpInside" id="KXJ-yq-J3m"/>
@@ -70,7 +70,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="auq-T6-nHe">
-                                <rect key="frame" x="0.0" y="115.5" width="414" height="675"/>
+                                <rect key="frame" x="0.0" y="115.5" width="414" height="718"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -79,14 +79,13 @@
                             <constraint firstItem="8CL-6c-RLD" firstAttribute="top" secondItem="auq-T6-nHe" secondAttribute="bottom" id="9rT-O3-qZI"/>
                             <constraint firstItem="auq-T6-nHe" firstAttribute="top" secondItem="wk0-0X-sxW" secondAttribute="bottom" id="DLd-8t-0Be"/>
                             <constraint firstItem="wk0-0X-sxW" firstAttribute="height" secondItem="UM8-xJ-3p0" secondAttribute="height" multiplier="0.08" id="Kmc-3F-1JY"/>
-                            <constraint firstItem="fwC-ar-ncM" firstAttribute="bottom" secondItem="8CL-6c-RLD" secondAttribute="bottom" id="Vvz-rs-3d0"/>
+                            <constraint firstAttribute="bottom" secondItem="8CL-6c-RLD" secondAttribute="bottom" id="Vvz-rs-3d0"/>
                             <constraint firstItem="auq-T6-nHe" firstAttribute="trailing" secondItem="fwC-ar-ncM" secondAttribute="trailing" id="X67-4t-5vD"/>
                             <constraint firstItem="auq-T6-nHe" firstAttribute="centerX" secondItem="fwC-ar-ncM" secondAttribute="centerX" id="c21-92-3m2"/>
                             <constraint firstItem="wk0-0X-sxW" firstAttribute="leading" secondItem="fwC-ar-ncM" secondAttribute="leading" id="dD6-nr-RT4"/>
                             <constraint firstItem="wk0-0X-sxW" firstAttribute="top" secondItem="fwC-ar-ncM" secondAttribute="top" id="dow-ps-P6W"/>
-                            <constraint firstItem="8CL-6c-RLD" firstAttribute="height" secondItem="UM8-xJ-3p0" secondAttribute="height" multiplier="0.08" id="fO7-Yd-Eof"/>
-                            <constraint firstItem="8CL-6c-RLD" firstAttribute="width" secondItem="UM8-xJ-3p0" secondAttribute="width" multiplier="0.3" id="hD2-wE-w9z"/>
-                            <constraint firstItem="auq-T6-nHe" firstAttribute="centerY" secondItem="fwC-ar-ncM" secondAttribute="centerY" id="hfY-5l-pUf"/>
+                            <constraint firstItem="8CL-6c-RLD" firstAttribute="height" secondItem="UM8-xJ-3p0" secondAttribute="height" multiplier="0.07" id="fO7-Yd-Eof"/>
+                            <constraint firstItem="8CL-6c-RLD" firstAttribute="width" secondItem="UM8-xJ-3p0" secondAttribute="width" id="hD2-wE-w9z"/>
                             <constraint firstItem="wk0-0X-sxW" firstAttribute="trailing" secondItem="fwC-ar-ncM" secondAttribute="trailing" id="nlV-Bi-Bjh"/>
                             <constraint firstItem="wk0-0X-sxW" firstAttribute="width" secondItem="UM8-xJ-3p0" secondAttribute="width" id="rqd-4O-2If"/>
                             <constraint firstItem="auq-T6-nHe" firstAttribute="leading" secondItem="fwC-ar-ncM" secondAttribute="leading" id="yqa-q3-H8D"/>
