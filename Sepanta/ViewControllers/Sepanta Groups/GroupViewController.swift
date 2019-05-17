@@ -124,7 +124,10 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
             let aFilteredData = SectionOfShopData(original: self.sectionOfShops.value[0], items: NetworkManager.shared.shopObs.value, filter: {
                 (ashop)->Bool in
                 guard (self.filterView.filterValue.text ?? "").count > 0 else{return true}
-                if (ashop.shop_name?.contains(self.filterView.filterValue.text ?? ""))! { return true}else{return false}
+                if let shopName = ashop.shop_name {
+                    let searchSubString = (self.filterView.filterValue.text ?? "").CRC()
+                    if (shopName.contains(searchSubString)) { return true}else{return false}
+                }else{return false}
             })
             sectionOfShops.accept([aFilteredData])
         }else if ((self.filterView.filterValue.text ?? "") == byNewest) || self.filterView.filterType.text == noFilterOption {
@@ -138,7 +141,7 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
                 }
             }else if (self.filterView.filterValue.text ?? "") == byRate {
                 sortFunc = { (ashop,bshop) in
-                    if ((Int(ashop.rate ?? "0") ?? 0) < (Int(bshop.rate ?? "0") ?? 0)) {return true}else{return false}
+                    if ((Int(ashop.rate ?? "0") ?? 0) > (Int(bshop.rate ?? "0") ?? 0)) {return true}else{return false}
                 }
             }else if (self.filterView.filterValue.text ?? "") == byOff {
                 sortFunc = { (ashop,bshop) in
@@ -214,7 +217,7 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
             }).disposed(by: myDisposeBag)
                 
         let dataSource = RxTableViewSectionedAnimatedDataSource<SectionOfShopData>(configureCell: { dataSource, tableView, indexPath, item in
-            let row = indexPath.row
+            //let row = indexPath.row
             let model = item
             let cell = self.shopTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             
@@ -225,9 +228,14 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
                 aCell.discountPercentage.text = persianDiscount+"%"
                 let persianFollowers :String = "\(model.follower_count ?? 0)".toPersianNumbers()
                 aCell.shopFollowers.text = persianFollowers
-                let persianRate :String = (model.rate ?? "0").toPersianNumbers()
+                let persianRate :String = "\(model.rate_count ?? 0)".toPersianNumbers()
                 let rate : Float = Float(model.rate ?? "0.0") ?? 0
-                aCell.rateLabel.text = "("+persianRate+")"
+                aCell.rateLabel.text = "("+persianRate+")"                
+                aCell.star1.image = UIImage(named: "icon_star_gray")
+                aCell.star2.image = UIImage(named: "icon_star_gray")
+                aCell.star3.image = UIImage(named: "icon_star_gray")
+                aCell.star4.image = UIImage(named: "icon_star_gray")
+                aCell.star5.image = UIImage(named: "icon_star_gray")
                 if rate > 0.5 {aCell.star1.image = UIImage(named: "icon_star_on")}
                 if rate > 1.5 {aCell.star2.image = UIImage(named: "icon_star_on")}
                 if rate > 2.5 {aCell.star3.image = UIImage(named: "icon_star_on")}

@@ -104,7 +104,8 @@ class AddPostViewController : UIViewControllerWithKeyboardNotificationWithErrorB
                     self.submitButton.setEnable()
                     if response.value != nil {
                         print("** Succeess ** ")
-                        let aParameter = ["post_id":"\(self.post_id)"]
+                        guard self.post_id != nil else { return }
+                        let aParameter = ["post_id":"\(self.post_id!)"]
                         NetworkManager.shared.run(API: "post-details", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                             self.backTapped(sender)

@@ -11,7 +11,7 @@ import RxDataSources
 
 struct SectionOfShopData : AnimatableSectionModelType{
     var identity: String {
-        return header ?? ""
+        return header
     }
     
     typealias Identity = String

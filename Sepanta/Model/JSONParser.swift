@@ -462,10 +462,11 @@ class JSONParser {
                                                         user_id: uid,
                                                         shop_name: shopElem["shop_name"] as? String ?? "",
                                                         shop_off: shopElem["shop_off"] as? Int ?? 0,
-                                                        lat: (shopElem["lat"] as? String)?.toDouble(),
-                                                        long: (shopElem["lon"] as? String)?.toDouble(),
+                                                        lat: ((shopElem["lat"] as? String)?.toDouble()) ?? 0.0,
+                                                        long: (shopElem["lon"] as? String)?.toDouble() ?? 0.0,
                                                         image: shopElem["image"] as? String ?? "",
                                                         rate: shopElem["rate"] as? String ?? "" ,
+                                                        rate_count: shopElem["rate_count"] as? Int ?? 0 ,
                                                         follower_count: shopElem["follower_count"] as? Int ?? 0,
                                                         created_at: shopElem["created_at"] as? String ?? "")
                                     //print("UserID : \(uid) ShopID : \(shopid) Lat : \(aNewShop.lat) Long : \(aNewShop.long)")
@@ -659,7 +660,7 @@ class JSONParser {
                 }else{
                     if contents.count > 0
                     {
-                        print("Error : Content has no Shop or Post role : ",profile.role," Content size : ",contents.count)
+                        print("Error : Content has no Shop or Post role : ",profile.role ?? "NIL"," Content size : ",contents.count)
                         fatalError()
                     }
                 }
@@ -725,11 +726,14 @@ class JSONParser {
         }
 
         if let aLike = aResult["is_like"] as? Bool {
-            //print("Reading Like : ",aLike)
+            print("Reading isLike : ",aLike)
             aPost.isLiked = aLike
             
         }
-        if let aCountLike = aResult["count_like"] as? Int {aPost.countLike = aCountLike}
+        if let aCountLike = aResult["count_like"] as? Int {
+            print("Reading Count Like : ",aCountLike)
+            aPost.countLike = aCountLike
+        }
 
         return aPost
     }
@@ -831,10 +835,11 @@ class JSONParser {
                                                     user_id: shopElem["user_id"] as? Int ?? 0,
                                                     shop_name: shopElem["shop_name"] as? String ?? "",
                                                     shop_off: shopElem["shop_off"] as? Int ?? 0,
-                                                    lat: (shopElem["lat"] as? String)?.toDouble(),
-                                                    long: (shopElem["lon"] as? String)?.toDouble(),
+                                                    lat: (shopElem["lat"] as? String)?.toDouble() ?? 0.0,
+                                                    long: (shopElem["lon"] as? String)?.toDouble() ?? 0.0,
                                                     image: shopElem["image"] as? String ?? "",
                                                     rate: shopElem["rate"] as? String ?? "" ,
+                                                    rate_count: shopElem["rate_count"] as? Int ?? 0 ,
                                                     follower_count: shopElem["follower_count"] as? Int ?? 0,
                                                     created_at: shopElem["created_at"] as? String ?? "")
                                 shops.append(aNewShop)
@@ -859,10 +864,11 @@ class JSONParser {
                                                 user_id: shopElem["user_id"] as? Int ?? 0,
                                                 shop_name: shopElem["shop_name"] as? String ?? "",
                                                 shop_off: shopElem["shop_off"] as? Int ?? 0,
-                                                lat: (shopElem["lat"] as? String)?.toDouble(),
-                                                long: (shopElem["lon"] as? String)?.toDouble(),
+                                                lat: (shopElem["lat"] as? String)?.toDouble() ?? 0.0,
+                                                long: (shopElem["lon"] as? String)?.toDouble() ?? 0.0,
                                                 image: shopElem["image"] as? String ?? "",
                                                 rate: shopElem["rate"] as? String ?? "" ,
+                                                rate_count: shopElem["rate_count"] as? Int ?? 0 ,
                                                 follower_count: shopElem["follower_count"] as? Int ?? 0,
                                                 created_at: shopElem["created_at"] as? String ?? "")
                             shops.append(aNewShop)

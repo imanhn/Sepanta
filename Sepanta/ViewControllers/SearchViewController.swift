@@ -72,15 +72,16 @@ class SearchViewController : UIViewControllerWithErrorBar{
                     self.alert(Message: "اظلاعات این فروشگاه کامل نیست")
                     return
                 }
-                let ashop = Shop(shop_id: aShopSearchResult.shop_id, user_id: aShopSearchResult.user_id, shop_name: aShopSearchResult.shop_name, shop_off: nil, lat: nil, long: nil, image: nil, rate: nil, follower_count: nil, created_at: nil)
+                let ashop = Shop(shop_id: aShopSearchResult.shop_id, user_id: aShopSearchResult.user_id, shop_name: aShopSearchResult.shop_name, shop_off: nil, lat: nil, long: nil, image: nil, rate: nil,rate_count: 0, follower_count: nil, created_at: nil)
                 self.coordinator!.pushShop(Shop: ashop)
             }).disposed(by: myDisposeBag)
     }
     
     
     func callNewSearch(){
-        if self.searchText.text == "" {return}
-        let aParameter = ["shop_name":"\(self.searchText.text ?? "")"]
+        guard self.searchText.text != nil &&  self.searchText.text != "" else { return }
+        let searchText = self.searchText.text!.CRC()
+        let aParameter = ["shop_name":searchText]
         NetworkManager.shared.run(API: "search-shops", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: true)
     }
     

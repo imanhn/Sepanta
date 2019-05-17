@@ -62,6 +62,7 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
     }
 
     func doSubscribtions(){
+        print("**** Subscribing **** ")
         let submitDisp = MobileTextField.rx.text
             .subscribe(onNext: { [unowned self] (atext) in
                 if atext?.count == 11 {
@@ -76,7 +77,7 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
         
         let smsDisp = NetworkManager.shared.SMSConfirmed
             .filter({$0})
-            //.observeOn(MainScheduler.asyncInstance)
+            //.observeOn(MainScheduler.a2syncInstance)
             .subscribe(onNext: { [unowned self] _ in
                 print("Pushing SMSVC")
                 NetworkManager.shared.SMSConfirmed.accept(false)

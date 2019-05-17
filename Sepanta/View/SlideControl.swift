@@ -187,7 +187,9 @@ class SlideController {
                                  shop_off: 0,
                                  lat: 0, long: 0,
                                  image: SlidesAndPaths.shared.slides[adsPage].images,
-                                 rate: "", follower_count: 0, created_at: "")
+                                 rate: "",
+                                 rate_count: 0,
+                                 follower_count: 0, created_at: "")
                 self.delegate.coordinator!.pushShop(Shop: ashop)
             }
         }

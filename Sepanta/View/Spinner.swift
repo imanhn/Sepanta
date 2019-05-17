@@ -11,11 +11,11 @@ import UIKit
 
 open class Spinner {
     internal static var spinner: UIActivityIndicatorView?
-    open static var style: UIActivityIndicatorViewStyle = .whiteLarge
-    open static var baseBackColor = UIColor(white: 0, alpha: 0.6)
-    open static var baseColor = UIColor.init(red: 0.84, green: 0.84, blue: 0.84, alpha: 1.0)
+    public static var style: UIActivityIndicatorViewStyle = .whiteLarge
+    public static var baseBackColor = UIColor(white: 0, alpha: 0.6)
+    public static var baseColor = UIColor.init(red: 0.84, green: 0.84, blue: 0.84, alpha: 1.0)
     
-    open static func start() {
+    public static func start() {
         if spinner == nil, let window = UIApplication.shared.keyWindow {
             let frame = UIScreen.main.bounds
             spinner = UIActivityIndicatorView(frame: frame)
@@ -26,7 +26,7 @@ open class Spinner {
         }
     }
     
-    open static func stop() {
+    public static func stop() {
         if spinner != nil {
             spinner!.stopAnimating()
             spinner!.removeFromSuperview()

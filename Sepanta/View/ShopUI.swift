@@ -241,7 +241,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 self?.delegate.scoreLabel.text = "امتیاز " + "\(aProfile.follower_count ?? 0)"
                 self?.delegate.followersNumLabel.text = "\(aProfile.follower_count ?? 0)"
                 self?.delegate.offLabel.text = "\(aProfile.shop_off ?? 0)%"
-                self?.delegate.rateLabel.text = "(\(aProfile.rate ?? "0"))"
+                self?.delegate.rateLabel.text = "(\(aProfile.rate_count ?? 0))"
                 self?.delegate.shopDescription.text = "\(aProfile.bio ?? aProfile.shop_name ?? "")"
                 let rate : Float = Float(aProfile.rate ?? "0.0") ?? 0
                 if rate > 0.5 {self?.delegate.star1.setImage(UIImage(named: "icon_star_on"), for: .normal)}
@@ -257,7 +257,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                     print("aProfile.content has shops but expected to have posts : ",aProfile.content )
                     self?.delegate.alert(Message: "خطای داخلی اتفاق افتاده است")
                 }*/
-                //print("Profile : ",aProfile)
+                print("Profile : ",aProfile)
                 if aProfile.is_follow != nil  {
                     self?.followButton.isFollowed = aProfile.is_follow ?? false
                     if aProfile.is_follow! {
@@ -281,7 +281,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 
                 if aProfile.image != nil {
                     let imageURL = URL(string: NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_profile_image + aProfile.image!)
-                    //print("Shop Image : ",imageURL ?? "Nil")
+                    print("Shop Image : ",imageURL ?? "Nil")
                     if imageURL != nil {
                         self?.delegate.shopLogo.setImageFromCache(PlaceHolderName: "logo_shape", Scale: 1.0, ImageURL: imageURL!, ImageName: aProfile.image!)
                         self?.delegate.shopLogo.layer.shadowColor = UIColor.black.cgColor

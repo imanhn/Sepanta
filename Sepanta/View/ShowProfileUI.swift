@@ -131,6 +131,7 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
                     aCell.addSubview(aCell.aButton)
                     if model.image != nil && (model.image ?? "").count > 0 {
                         let strURL = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + (model.image ?? "")
+                        print("Address : ",strURL)
                         let imageURL = URL(string: strURL)
                         if imageURL == nil {
                             print("     Post URL is not valid : ",model.image ?? "Empty Image")
@@ -162,7 +163,7 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
                     self?.collectionView.addSubview(aCell)
                     aCell.addSubview(aCell.aButton)
                     if model.image != nil && (model.image ?? "").count > 0 {
-                        let strURL = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_post_image + (model.image ?? "")
+                        let strURL = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_profile_image + (model.image ?? "")
                         let imageURL = URL(string: strURL)
                         if imageURL == nil {
                             print("     Post URL is not valid : ",model.image ?? "Empty Image")

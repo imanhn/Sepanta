@@ -37,6 +37,7 @@ struct Shop : ShopProtocol,IdentifiableType,Equatable {
     var long : Double?
     var image : String?
     var rate : String?
+    var rate_count : Int?
     var follower_count : Int?
     var created_at : String?
     var identity: Int {
@@ -51,7 +52,30 @@ struct Shop : ShopProtocol,IdentifiableType,Equatable {
         lat = aprofile.lat
         long = aprofile.long
         rate = aprofile.rate
+        rate_count = aprofile.rate_count
         shop_name = aprofile.shop_name
         follower_count = aprofile.follower_count
+    }
+    init(){
+        
+    }
+    
+    init(WithUserID auserId : Int?){
+        self.init()
+        self.user_id = auserId
+    }
+    
+    init(shop_id: Int? = 0, user_id: Int? = 0, shop_name: String? = "", shop_off: Int? = 0 , lat: Double? = 0.0, long: Double? = 0.0, image: String? = "", rate: String? = "", rate_count: Int? = 0, follower_count: Int? = 0, created_at: String? = ""){
+        self.shop_id = shop_id
+        self.user_id = user_id
+        self.shop_name = shop_name
+        self.shop_off = shop_off
+        self.lat = lat
+        self.long = long
+        self.image = image
+        self.rate = rate
+        self.rate_count = rate_count
+        self.follower_count = follower_count
+        self.created_at = created_at
     }
 }

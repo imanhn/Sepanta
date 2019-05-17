@@ -106,7 +106,7 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     }
     
     func animateLogo(){
-        let animateLogo = Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(doAnimateLogo), userInfo: nil, repeats: true)
+         _ = Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(doAnimateLogo), userInfo: nil, repeats: true)
         
     }
     

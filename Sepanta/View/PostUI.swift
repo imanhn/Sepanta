@@ -20,6 +20,8 @@ class PostUI {
     var commentView = UIView(frame: .zero)
     var commentText = UITextField(frame: .zero)
     var likeButton = UIButton(type: .custom)
+    var isPostLiked = false
+    var countPostLikes = -1
     var peopleCommentsView = UIView(frame: .zero)
     var myDisposeBag = DisposeBag()
     var cursurY : CGFloat = 20
@@ -29,7 +31,7 @@ class PostUI {
     var commentHeight : CGFloat = 0
     init (_ vc : PostViewController){
         self.delegate = vc
-        self.buildPostView()
+        self.subscribeToPostDetail()
     }
     
     @objc func sendComment(_ sender : Any){
@@ -63,13 +65,23 @@ class PostUI {
         self.delegate.disposeList.append(statusDisp)
     }
     
-    func buildPostView(){
+    func subscribeToPostDetail(){
         let sharedPostObs = NetworkManager.shared.postDetailObs
             //.share(replay: 1, scope: .whileConnected)
+            .observeOn(MainScheduler.instance)
+            .filter({$0.id != nil && $0.shopId != nil})
             .subscribe(onNext: { aPostDetail in
                 let aCommentsArray = aPostDetail.comments
-                self.buildPostView(With: aPostDetail)
-                self.buildCommentView(With: aCommentsArray ?? [])
+                print("Updating/Building POSTVIEW  ")
+                self.isPostLiked = aPostDetail.isLiked!
+                if self.countPostLikes == -1 {
+                    self.countPostLikes = aPostDetail.countLike!
+                }
+                print("isPostLiked : ",self.isPostLiked,"  self.countPostLikes : ",self.countPostLikes)
+                DispatchQueue.main.async {
+                    self.buildPostView(With: aPostDetail)
+                    self.buildCommentView(With: aCommentsArray ?? [])
+                }
             }
         )
         sharedPostObs.disposed(by: myDisposeBag)
@@ -143,7 +155,7 @@ class PostUI {
         
         var cursorX = self.marginX
         //print("innerPost : ",innerPost)
-        //print("innerPostLIKE : ",innerPost.isLiked)
+        print("innerPostLIKE : ",innerPost.isLiked)
         if innerPost.isLiked == false {
             likeButton.setImage(UIImage(named: "icon_like"), for: .normal)
         }else{
@@ -153,9 +165,12 @@ class PostUI {
         likeButton.frame = CGRect(x: cursorX, y: self.cursurY, width: buttonDim, height: buttonDim)
         self.delegate.postScrollView.addSubview(likeButton)
         cursorX = cursorX + buttonDim + self.marginX/2
-        
-        let likeNoString = "\(innerPost.countLike ?? 0)"
-        //print("likeNoString : ",likeNoString)
+        print("innerPost.countLike : ",innerPost.countLike,"  ",countPostLikes)
+        var likeNoString = "\(innerPost.countLike ?? 0)"
+        if countPostLikes != -1 {
+            likeNoString = "\(self.countPostLikes)"
+        }
+        print("likeNoString : ",likeNoString)
         let likeNoWidth = likeNoString.width(withConstrainedHeight: buttonDim, font: aFont!)
         likeNoLabel = UILabel(frame: CGRect(x: cursorX, y: self.cursurY, width: likeNoWidth, height: buttonDim))
         likeNoLabel.font = aFont
@@ -222,24 +237,34 @@ class PostUI {
             .observeOn(MainScheduler.instance)
             .filter({$0 != ToggleStatus.UNKNOWN})
             .subscribe(onNext: { [unowned self] (toggleStatus) in
-                print("*Toggling... : ",self.likeNoLabel.text)
+                print("*Toggling... : ",self.likeNoLabel.text ?? "NIL")
                 (sender as! UIButton).isEnabled = true
                 DispatchQueue.main.async {
-                    let currentLikes = Int(self.likeNoLabel.text ?? "0")!
-                    if toggleStatus == ToggleStatus.NO {
-                        self.likeButton.setImage(UIImage(named: "icon_like"), for: .normal)
-                        self.likeNoLabel.text = "\(currentLikes-1)"
-                    }else if toggleStatus == ToggleStatus.YES {
-                        self.likeButton.setImage(UIImage(named: "icon_like_dark"), for: .normal)
-                        self.likeNoLabel.text = "\(currentLikes+1)"
+                    print("self.likeNoLabel.text : ",self.likeNoLabel.text ?? "NIL")
+                    print("Current countPostLines : ",self.countPostLikes)
+                    print("ToggleStatus : ",toggleStatus)
+                    
+                    if toggleStatus == ToggleStatus.NO && self.isPostLiked {
+                        self.countPostLikes = self.countPostLikes - 1
+                    }else if toggleStatus == ToggleStatus.YES && !self.isPostLiked {
+                        self.countPostLikes = self.countPostLikes + 1
                     }else{
-                        print("NOT UPDATING POST!")
+                        print("NOT UPDATING POST because : ",toggleStatus,"  ",self.isPostLiked)
                         Spinner.stop()
                         return
                         //self.delegate.alert(Message: "دسترسی به شبکه موقتاْ قطع شد")
                     }
+                    self.likeNoLabel.text = "\(self.countPostLikes)"
+                    print("After Apply self.likeNoLabel.text : ",self.likeNoLabel.text ?? "NIL")
+                    print("After Apply countPostLines : ",self.countPostLikes)
+                    
+                    if self.isPostLiked {
+                        self.likeButton.setImage(UIImage(named: "icon_like_dark"), for: .normal)
+                    }else{
+                        self.likeButton.setImage(UIImage(named: "icon_like"), for: .normal)
+                    }
                     self.likeNoLabel.setNeedsDisplay()
-                    print("  *Toggled... : ",self.likeNoLabel.text)
+                    print("  *Toggled... : ",self.likeNoLabel.text ?? "NIL")
                 }
                 
                 if NetworkManager.shared.postDetailObs.value.isLiked.map({if $0 {return ToggleStatus.YES}else{return ToggleStatus.NO}}) != toggleStatus {
@@ -266,7 +291,7 @@ class PostUI {
     }
     
     func userIsCommentOwner(Comment aComment : Comment)->Bool{
-        print("Checking Comment owner commentuser: ",aComment.username," LoginUser : ",LoginKey.shared.username)
+        print("Checking Comment owner commentuser: ",aComment.username ?? "NIL" ," LoginUser : ",LoginKey.shared.username)
         if aComment.username == LoginKey.shared.username {
             return true
         }else{
@@ -289,7 +314,7 @@ class PostUI {
         let del = "حذف نظر"
         let edit = "ویرایش نظر"
         //let close = "بستن منو"
-        var menuList = [abuse]
+        let menuList = [abuse]
         let selectedComment = getComment(ByID: menuButton.tag)
         guard selectedComment != nil else {
             self.delegate.alert(Message: "اطلاعات این نظر کامل نیست")

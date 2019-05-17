@@ -108,7 +108,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     func pushShowProfile (){
 
         if LoginKey.shared.role == "Shop" {
-            let ashop = Shop(shop_id: nil, user_id: Int(LoginKey.shared.userID), shop_name: nil, shop_off: nil, lat: nil, long: nil, image: nil, rate: nil, follower_count: nil, created_at: nil)            
+            let ashop = Shop(WithUserID: Int(LoginKey.shared.userID))
             self.pushShop(Shop: ashop)
         }else{
             let storyboard = UIStoryboard(name: "Profile", bundle: Bundle.main)
@@ -407,6 +407,11 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         while !navigationController.topViewController!.isKind(of: LoginViewController.self) {
             print("popLogin is Poping ",navigationController.topViewController ?? "Nil")
             navigationController.popViewController(animated: false)
+        }
+        if let vc = navigationController.topViewController as? LoginViewController {
+            vc.doSubscribtions()
+        }else{
+            fatalError()
         }
     }
     

@@ -41,7 +41,7 @@ extension UIImageView {
         {
             cachedData = CacheManager.shared.readFile(Filename:imageName)
             if cachedData != nil {
-                //print("Image is already cached ")
+               // print("Image is already cached ")
                 let cachedImage = UIImage(data: cachedData! as Data)
                 self.image = cachedImage
                 
@@ -58,7 +58,7 @@ extension UIImageView {
                                 CacheManager.shared.saveFile(Data:imageData!, Filename:imageName)
                             }
                         }else{
-                            print("AFImage finished downloading but no image yielded!")
+                            //print("AFImage finished downloading but no image yielded!")
                         }
 
                 })
@@ -78,6 +78,7 @@ extension UIButton {
         self.setImage(defaultImage, for: .normal)
         
         //let imageUrl = URL(string: NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_profile_image+imageName)!
+        //print("SetFrom Cache : ",imageUrl)
         var cachedData : NSData?
         if imageName.count > 0
         {
@@ -85,17 +86,17 @@ extension UIButton {
             if cachedData != nil {
                 //print("Image is already cached ")
                 let cachedImage = UIImage(data: cachedData! as Data)
-                //print("    Cached Image from Data is : ",cachedImage)
+               // print("    Cached Image from Data is : ",cachedImage)
                 self.setImage(cachedImage, for: .normal)
             }else{
-                //print("Downloading....")
+               // print("Downloading....")
                 self.af_setImage(for: .normal, url: imageUrl, placeholderImage: defaultImage, filter: filter, completion: { (response) in
                     //print("Image Downloaded : ",self.image(for: .normal))
                     let downloadedImage = self.image(for: .normal)// UIImage(data: response.data!)!
                     if downloadedImage != nil {
                         let imageData = UIImageJPEGRepresentation(downloadedImage!, 0.8) as NSData?
                         if imageData != nil {
-                            //print("   Saving \(imageName)")
+                           // print("   Saving \(imageName)")
                             CacheManager.shared.saveFile(Data:imageData!, Filename:imageName)
                         }
                     }

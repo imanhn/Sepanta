@@ -8,6 +8,15 @@
 
 import Foundation
 extension String {
+    
+    func CRC()->String{
+        let serverK = "ک"
+        let iosK = "ك"
+        let serverY  = "ی"
+        let iosY = "ي"
+        return self.replacingOccurrences(of: iosK, with: serverK).replacingOccurrences(of: iosY, with: serverY)
+    }
+    
     func toDouble()->Double{
         var result : String = "0"
         var filtered = ""
