@@ -25,7 +25,7 @@ extension HomeViewController {
     
     func getLatestVersion(){
         NetworkManager.shared.run(API: "app-version", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil, WithRetry: true)
-        NetworkManager.shared.versionObs
+        let verDisp = NetworkManager.shared.versionObs
             .filter({$0 != 0.0})
             .subscribe(onNext: { aversion in
                 if (aversion - LoginKey.shared.version >= 1.0) {
@@ -37,7 +37,9 @@ extension HomeViewController {
                     //print("Latest : \(aversion) current : \(LoginKey.shared.version)")
                 }
                 NetworkManager.shared.versionObs = BehaviorRelay<Float>(value: 0.0)
-            }).disposed(by: myDisposeBag)
+            })
+        verDisp.disposed(by: myDisposeBag)
+        disposeList.append(verDisp)
     }
     
     override func doneAlert(_ sender: Any) {

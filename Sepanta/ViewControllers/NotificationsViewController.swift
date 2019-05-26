@@ -25,14 +25,16 @@ class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITable
     var disposeList = [Disposable]()
     
     weak var coordinator : HomeCoordinator?
-    
-    @IBAction func backTapped(_ sender: Any) {
+
+    @objc override func willPop() {
         disposeList.forEach({$0.dispose()})
+    }
+
+    @IBAction func backTapped(_ sender: Any) {
         self.coordinator!.popOneLevel()
     }
     
-    @IBAction func homeTapped(_ sender: Any) {
-        disposeList.forEach({$0.dispose()})
+    @IBAction func homeTapped(_ sender: Any) {        
         self.coordinator!.popHome()
     }
 
@@ -85,7 +87,7 @@ class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITable
                         self.alert(Message: "اطلاعات این پست هنوز کامل نیست")
                     }else{
                         NetworkManager.shared.postDetailObs = BehaviorRelay<Post>(value: Post())
-                        self.coordinator!.PushAPost(PostID : selectedNotiForShop.post_id!, OwnerUserID: Int(LoginKey.shared.userID) ?? 0)
+                        self.coordinator!.PushAPost(PostID : selectedNotiForShop.post_id!, OwnerUserID: selectedNotiForShop.user_id ?? 0)
                     }
                 })
             shopNotifSelectedDisp.disposed(by: myDisposeBag)

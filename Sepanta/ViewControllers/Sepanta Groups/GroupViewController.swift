@@ -30,7 +30,8 @@ class ShopCell : UITableViewCell {
 
 class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,Storyboarded{
     typealias SortFunction = (Shop,Shop)-> Bool
-    
+    var dataSource : RxTableViewSectionedAnimatedDataSource<SectionOfShopData>!
+    var disposeList : [Disposable] = [Disposable]()
     weak var coordinator : HomeCoordinator?
     let byOff = "بیشترین تخفیف"
     let byFollower = "بیشترین عضو"
@@ -185,11 +186,15 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
         }
         filterIsOpen = !filterIsOpen
     }
-    @IBAction func backButtonPressed(_ sender: Any) {
+    @objc override func willPop() {
+        disposeList.forEach({$0.dispose()})
         newShopsDataSource = nil
+        dataSource = nil
         NetworkManager.shared.shopObs = BehaviorRelay<[Shop]>(value: [Shop]())
+    }
+    
+    @IBAction func backButtonPressed(_ sender: Any) {
         coordinator!.popOneLevel()
-        
     }
     
     @IBAction func gotoHomePage(_ sender: Any) {
@@ -215,8 +220,8 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
                 self.sectionOfShops.accept([initsec])
                 self.shopTable.reloadData()
             }).disposed(by: myDisposeBag)
-                
-        let dataSource = RxTableViewSectionedAnimatedDataSource<SectionOfShopData>(configureCell: { dataSource, tableView, indexPath, item in
+        
+        dataSource = RxTableViewSectionedAnimatedDataSource<SectionOfShopData>(configureCell: { dataSource, tableView, indexPath, item in
             //let row = indexPath.row
             let model = item
             let cell = self.shopTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
@@ -258,17 +263,21 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
             }
             return returningCell ?? cell
             
-        })
-        //NetworkManager.shared.shopObs
-        sectionOfShops
-            .bind(to: shopTable.rx.items(dataSource: dataSource))
-            .disposed(by: myDisposeBag)
+        }) // of datasource
         
-        shopTable.rx.modelSelected(Shop.self)
+        //NetworkManager.shared.shopObs
+        let aSectionShopDisp = sectionOfShops.bind(to: shopTable.rx.items(dataSource: dataSource))
+        aSectionShopDisp.disposed(by: myDisposeBag)
+        disposeList.append(aSectionShopDisp)
+        
+ 
+        let aModelSelectDisp = shopTable.rx.modelSelected(Shop.self)
             .subscribe(onNext: { [unowned self] selectedShop in
                 //print("Pushing ShopVC with : ", selectedShop)
                 self.coordinator!.pushShop(Shop: selectedShop)
-            }).disposed(by: myDisposeBag)
+            })
+        aModelSelectDisp.disposed(by: myDisposeBag)
+        disposeList.append(aModelSelectDisp)
     }
     
     @objc override func ReloadViewController(_ sender:Any) {

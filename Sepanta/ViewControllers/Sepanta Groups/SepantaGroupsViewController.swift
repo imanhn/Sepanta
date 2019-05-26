@@ -29,15 +29,16 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
     @IBAction func menuClicked(_ sender: Any) {
         self.coordinator!.openButtomMenu()
     }
-    
-    @IBAction func homeTapped(_ sender: Any) {
+    @objc override func willPop() {
         self.groupButtons = nil
         disposableArray.forEach{$0.dispose()}
+    }
+
+    @IBAction func homeTapped(_ sender: Any) {
         self.coordinator!.popHome()
     }
+
     @IBAction func backButtonTapped(_ sender: Any) {
-        self.groupButtons = nil
-        disposableArray.forEach{$0.dispose()}
         self.coordinator!.popOneLevel()
     }
     

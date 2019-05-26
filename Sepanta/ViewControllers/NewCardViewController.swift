@@ -25,13 +25,15 @@ class NewCardViewController : UIViewControllerWithErrorBar,UITextFieldDelegate,U
     
     @IBOutlet weak var submitButton: SubmitButton!
     
-    @IBAction func backTapped(_ sender: Any) {
+    @objc override func willPop() {
         disposeList.forEach({$0.dispose()})
+    }
+
+    @IBAction func backTapped(_ sender: Any) {        
         self.coordinator!.popOneLevel()
     }
     
     @IBAction func homeTapped(_ sender: Any) {
-        disposeList.forEach({$0.dispose()})
         self.coordinator!.popHome()
     }
     

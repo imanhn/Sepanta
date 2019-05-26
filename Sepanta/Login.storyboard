@@ -85,7 +85,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uth-92-mEy" userLabel="Form">
                                         <rect key="frame" x="20" y="73.5" width="297.5" height="170"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZHY-Nx-gHL" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
+                                            <textField opaque="NO" tag="12" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ZHY-Nx-gHL" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="71" width="297.5" height="28"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
@@ -276,13 +276,13 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="wFP-pZ-e0a">
                                                 <rect key="frame" x="0.0" y="19" width="337.5" height="152"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Yr-ej-hbv" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
+                                                    <textField opaque="NO" tag="12" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5Yr-ej-hbv" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="337.5" height="48"/>
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="phonePad" enablesReturnKeyAutomatically="YES" textContentType="tel"/>
                                                     </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ورود کد ارسال شده" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iV8-Mh-cO6" userLabel="SMSCodeText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
+                                                    <textField opaque="NO" tag="14" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ورود کد ارسال شده" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="iV8-Mh-cO6" userLabel="SMSCodeText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="48" width="337.5" height="47.5"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
@@ -447,7 +447,7 @@
                                                 <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="20"/>
                                                 <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <state key="normal" title="ثبت نام" image="icon_edit">
-                                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" red="0.8565688776" green="0.2257254132" blue="0.36172668870000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">

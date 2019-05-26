@@ -391,7 +391,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gs4-pN-YwK" userLabel="PostToolbarView">
                                                 <rect key="frame" x="30" y="264.5" width="330" height="48.5"/>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="right" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymb-f0-e8R" userLabel="shopDescription">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="right" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymb-f0-e8R" userLabel="shopDescription">
                                                 <rect key="frame" x="30" y="321" width="330" height="47.5"/>
                                                 <string key="text">لوازم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگر و متون بلکه روزنامه و مجله  در ستون و سطر آنچنان که لازم است و برای شرایط فعلی ...</string>
                                                 <fontDescription key="fontDescription" name="Shabnam-Light-FD" family="Shabnam FD" pointSize="12"/>

@@ -30,14 +30,16 @@ class ScoresViewController : UIViewControllerWithErrorBar,XIBView,UITableViewDel
     var disposeList = [Disposable]()
     weak var coordinator : HomeCoordinator?
     @IBOutlet weak var totalNumLabel: UILabel!
+
+    @objc override func willPop() {
+        disposeList.forEach({$0.dispose()})
+    }
     
     @IBAction func backTapped(_ sender: Any) {
-        disposeList.forEach({$0.dispose()})
         self.coordinator!.popOneLevel()
     }
     
     @IBAction func homeTapped(_ sender: Any) {
-        disposeList.forEach({$0.dispose()})
         self.coordinator!.popHome()
     }
     

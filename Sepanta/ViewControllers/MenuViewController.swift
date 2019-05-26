@@ -22,18 +22,22 @@ class MenuItemCell : UITableViewCell {
 }
 
 class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
-    weak var coordinator : MenuCoordinator?
+    weak var coordinator : HomeCoordinator?
     @IBOutlet weak var menuTableView: MenuTableView!
     let myDisposeBag = DisposeBag()
-    let menuItems : BehaviorRelay<[ButtomMenuItem]> = BehaviorRelay(value: [])
+    var disposeList = [Disposable]()
+    var menuItems : BehaviorRelay<[ButtomMenuItem]> = BehaviorRelay(value: [])
     
     @IBAction func backFromMenuTapped(_ sender: Any) {
+        removeMenuAndDismissVC()
+    }
+    
+    func removeMenuAndDismissVC(){
+        print("Dismissing menu...")
+        menuItems  = BehaviorRelay<[ButtomMenuItem]>(value: [ButtomMenuItem]())
+        disposeList.forEach({$0.dispose()})
+        //self.removeFromParentViewController()
         self.dismiss(animated: true, completion: {})
-        guard self.coordinator != nil else {
-            print("Coordinator of MenuViewController is nil")
-            return
-        }
-        self.coordinator?.menuDismissed()    
     }
     
     func loadMenuItems() {
@@ -50,16 +54,16 @@ class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
     }
     
     func bindToTableView() {
-        
-        menuItems.bind(to: menuTableView.rx.items(cellIdentifier: "menuCell")) { row, model, cell in
+        let menuItemDisp = menuItems.bind(to: menuTableView.rx.items(cellIdentifier: "menuCell")) { row, model, cell in
             if let aCell = cell as? MenuItemCell {
                 aCell.menuCellLabel.text = model.aLabel
                 aCell.menuCellImage.image =  UIImage(named: model.anImageName)
-                
             }
-            }.disposed(by: myDisposeBag)
+        }
+        menuItemDisp.disposed(by: myDisposeBag)
+        disposeList.append(menuItemDisp)
         
-        Observable
+        let selectDisp = Observable
             .zip(menuTableView.rx.itemSelected, menuTableView.rx.modelSelected(ButtomMenuItem.self))
             .bind { [unowned self] indexPath, model in
                 self.menuTableView.deselectRow(at: indexPath, animated: true)
@@ -68,11 +72,24 @@ class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
                     print("MenuViewController : Coordinator for MenuViewController is nil")
                     return
                 }
-                self.coordinator!.menuSelected(IndexPath: indexPath)
-                //MenuCoordinator.shared.itemSelected(IndexPath: indexPath)
-                self.dismiss(animated: true, completion: {})
+                
+                if indexPath.row == 7 {
+                    print("Option Menu : 7")
+                    self.logout()
+                }else{
+                    self.coordinator?.launchMenuSelection(indexPath.row)
+                    self.removeMenuAndDismissVC()
+                }
             }
-            .disposed(by: myDisposeBag)
+        selectDisp.disposed(by: myDisposeBag)
+        disposeList.append(selectDisp)
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("Removing Subscription for MenuVC")
+        disposeList.forEach({$0.dispose()})
     }
     
     override func viewDidLoad() {
@@ -81,10 +98,25 @@ class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
         bindToTableView()
     }
     
+    @objc override func okPressed(_ sender: Any) {
+        print("ok Pressed")
+        self.removeMenuAndDismissVC()
+        LoginKey.shared.deleteTokenAndUserID()
+        self.coordinator!.popLogin()
+    }
+    
+    @objc override func cancelPressed(_ sender : Any){
+        self.removeMenuAndDismissVC()
+    }
+
+    func logout() {
+        print("showing Question")
+        self.showQuestion(Message: "آیا می خواهیداز پروفایل خود خارج شوید؟", OKLabel: "بلی", CancelLabel: "خیر", QuestionTag: 100)
+    }
 }
 
 class MenuTableView : UITableView {
-    var menuViewController : MenuViewController!
+    weak var menuViewController : MenuViewController!
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let aview = super.hitTest(point, with: event)
         if point.y < 0 {

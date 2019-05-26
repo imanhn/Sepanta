@@ -32,17 +32,15 @@ class EditShopViewController :  UIViewControllerWithKeyboardNotificationWithErro
     var shop : Shop!
     var editshopUI : EditShopUI!
     
-    @IBAction func homeTapped(_ sender: Any) {
+    @objc override func willPop() {
         editshopUI.disposeList.forEach({$0.dispose()})
         editshopUI = nil
-        //NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: Profile())
+    }
+    @IBAction func homeTapped(_ sender: Any) {
         self.coordinator!.popHome()
     }
     
     @IBAction func backTapped(_ sender: Any) {
-        editshopUI.disposeList.forEach({$0.dispose()})
-        editshopUI = nil
-        //NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: Profile())
         self.coordinator!.popOneLevel()
     }
     

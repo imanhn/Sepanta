@@ -66,8 +66,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
             pushContactUs()
             break
         case 7:
-            popHome()
-            logout()
+            print("Menu Logout!")
             break
 
         default:
@@ -78,21 +77,38 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func popOneLevel(){
+            print("*** POPING One Level....")
+            navigationController.topViewController?.willPop()
             navigationController.popViewController(animated: true)
     }
     
     func popHome() {
         while !navigationController.topViewController!.isKind(of: HomeViewController.self) {
             print("Poping ",navigationController.topViewController ?? "Nil")
+            navigationController.topViewController?.willPop()
             navigationController.popViewController(animated: false)
         }
     }
     
+    func popLogin(Set mobileNumber : String = "") {
+        while !navigationController.topViewController!.isKind(of: LoginViewController.self) {
+            print("popLogin is Poping ",navigationController.topViewController ?? "Nil")
+            navigationController.topViewController?.willPop()
+            navigationController.popViewController(animated: false)
+        }
+        if let vc = navigationController.topViewController as? LoginViewController {
+            vc.doSubscribtions()
+        }else{
+            fatalError()
+        }
+    }
+
     func openButtomMenu (){
-        let menuCoordinator = MenuCoordinator(navigationController: navigationController)
-        childCoordinators.append(menuCoordinator)
-        menuCoordinator.parentCoordinator = self
-        menuCoordinator.start()
+        let menuVC = MenuViewController.instantiate()
+        menuVC.coordinator = self
+        navigationController.delegate = self
+        navigationController.showDetailViewController(menuVC, sender: self)
+        navigationController.setNavigationBarHidden(true, animated: false)
     }
     
     func pushAboutUs() {
@@ -353,10 +369,6 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
 
-    func logout() {
-        LoginKey.shared.deleteTokenAndUserID()
-        popLogin()
-    }
     
     func pushHomePage() {
         mountTokenToHeaders()
@@ -403,17 +415,6 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
-    func popLogin(Set mobileNumber : String = "") {
-        while !navigationController.topViewController!.isKind(of: LoginViewController.self) {
-            print("popLogin is Poping ",navigationController.topViewController ?? "Nil")
-            navigationController.popViewController(animated: false)
-        }
-        if let vc = navigationController.topViewController as? LoginViewController {
-            vc.doSubscribtions()
-        }else{
-            fatalError()
-        }
-    }
     
     func pushAddPost(){
         let storyboard = UIStoryboard(name: "Post", bundle: Bundle.main)

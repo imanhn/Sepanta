@@ -25,10 +25,13 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
     @IBOutlet weak var postScrollView: UIScrollView!
     @IBOutlet weak var postTitleLabelInHeader: UILabel!
     @IBOutlet weak var toolbarStack: UIStackView!
-    
-    @IBAction func BackTapped(_ sender: Any) {
+
+    @objc override func willPop() {
         disposeList.forEach({$0.dispose()})
         postUI = nil
+    }
+
+    @IBAction func BackTapped(_ sender: Any) {
         self.coordinator!.popOneLevel()
     }
     

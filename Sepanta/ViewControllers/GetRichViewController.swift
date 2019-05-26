@@ -15,20 +15,25 @@ class GetRichViewController : UIViewControllerWithKeyboardNotificationWithErrorB
     var profileInfo : ProfileInfo?
     var cardNo : String?
     @IBOutlet weak var scrollView: UIScrollView!
-    var getRichUI : GetRichUI?
-    
+    var getRichUI : GetRichUI?    
     weak var coordinator : HomeCoordinator?
 
-    @objc func cardRequestTapped(_ sender : Any) {
-        getRichUI!.showCardRequest(self)
-    }
-    @IBAction func homeTapped(_ sender: Any) {
+    
+    @objc override func willPop() {
         if getRichUI != nil {
             getRichUI!.disposeList.forEach({$0.dispose()})
         }
         getRichUI = nil
+    }
+
+    @IBAction func homeTapped(_ sender: Any) {
         self.coordinator!.popHome()
     }
+
+    @objc func cardRequestTapped(_ sender : Any) {
+        getRichUI!.showCardRequest(self)
+    }
+
     @objc func resellerRequestTapped(_ sender : Any) {
         getRichUI!.showResellerRequest(self)
     }

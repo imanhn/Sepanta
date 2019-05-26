@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 class SlideController {
-    var delegate : HomeViewController
+    weak var delegate : HomeViewController!
     var slideTimer: Timer?
     var disposeList = [Disposable]()
     var adsPage = 1;
@@ -48,11 +48,15 @@ class SlideController {
         startTimer()
     }
     func startTimer(){
-        slideTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(updateSlide), userInfo: nil, repeats: true)
+        if slideTimer == nil {
+            slideTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(updateSlide), userInfo: nil, repeats: true)
+        }
     }
 
     func endTimer() {
-        slideTimer?.invalidate()
+        if slideTimer != nil {
+            slideTimer?.invalidate()
+        }
     }
     
     @objc func updateSlide(){
@@ -150,19 +154,33 @@ class SlideController {
         if adsPage < 1 {
             //leftImageView.image = slides[adsPage] // No left! get the current for left
             self.delegate.leftImageView.image = slides.last // No left! get a blank logo for left
-            self.delegate.rightImageView.image = slides[adsPage+1]
+            if adsPage+1 <= slides.count-1 {
+                self.delegate.rightImageView.image = slides[adsPage+1]
+            }
             self.delegate.currentImageView.image = slides[adsPage] // Current page
         } else if adsPage > slides.count-2 {
-            self.delegate.leftImageView.image = slides[adsPage-1]
+            if adsPage-1 >= 0 {
+                self.delegate.leftImageView.image = slides[adsPage-1]
+            }
             self.delegate.rightImageView.image = slides.first // No right! get a blank logo for right
-            self.delegate.currentImageView.image = slides[adsPage] // Current page
+            if adsPage <= slides.count-1 {
+                self.delegate.currentImageView.image = slides[adsPage] // Current page
+            }
             //adsPage = slides.count-2
         } else {
-            self.delegate.leftImageView.image = slides[adsPage-1]
-            self.delegate.rightImageView.image = slides[adsPage+1]
+            if adsPage-1 >= 0 {
+                self.delegate.leftImageView.image = slides[adsPage-1]
+            }
+            if adsPage+1 <= slides.count-1 {
+                self.delegate.rightImageView.image = slides[adsPage+1]
+            }
+            if adsPage <= slides.count-1 {
+                self.delegate.currentImageView.image = slides[adsPage] // Current page
+            }
+        }
+        if adsPage <= slides.count-1 {
             self.delegate.currentImageView.image = slides[adsPage] // Current page
         }
-        self.delegate.currentImageView.image = slides[adsPage] // Current page
         self.delegate.currentImageView.setNeedsDisplay()
         //print("Page : ",adsPage)
         self.delegate.pageControl.currentPage = adsPage

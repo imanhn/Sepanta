@@ -37,13 +37,15 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
         self.coordinator!.openButtomMenu()
     }
     
-    @IBAction func BackTapped(_ sender: Any) {
+    @objc override func willPop() {
         NetworkManager.shared.shopSearchResultObs = BehaviorRelay<[ShopSearchResult]>(value: [ShopSearchResult]())
         locationManager.stopUpdatingLocation()
-        //mapView.removeAnnotations(mapView.annotations)
         if shopDisposable != nil {
             shopDisposable.dispose()
         }
+    }
+
+    @IBAction func BackTapped(_ sender: Any) {
         self.coordinator!.popOneLevel()
     }
     
@@ -52,7 +54,6 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
     }
     
     @IBAction func BackToHome(_ sender: Any) {
-        NetworkManager.shared.shopSearchResultObs = BehaviorRelay<[ShopSearchResult]>(value: [ShopSearchResult]())
         self.coordinator!.popHome()
     }
     @objc override func ReloadViewController(_ sender:Any) {

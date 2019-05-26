@@ -107,19 +107,18 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
         self.panelView.setNeedsDisplay()
         self.shopUI!.showContacts()
     }
-    @IBAction func homeTapped(_ sender: Any) {
+    
+    @objc override func willPop() {
         shopUI = nil
         NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: Profile())
         NetworkManager.shared.shopFav = BehaviorRelay<ToggleStatus>(value: ToggleStatus.UNKNOWN)
-        //shopDataSource = nil
+    }
+
+    @IBAction func homeTapped(_ sender: Any) {
         self.coordinator!.popHome()
     }
     
     @IBAction func backTapped(_ sender: Any) {
-        shopUI = nil
-        NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: Profile())
-        NetworkManager.shared.shopFav = BehaviorRelay<ToggleStatus>(value: ToggleStatus.UNKNOWN)
-        //shopDataSource = nil
         self.coordinator!.popOneLevel()
     }
     

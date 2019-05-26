@@ -79,7 +79,7 @@ class MainImageForShopImagePicker : ImagePicker {
         owner.navigationController?.pushViewController(imageCropViewController, animated: true)
     }
     override func imageCropViewControllerCustomMaskRect(_ controller: RSKImageCropViewController) -> CGRect {
-        let ratio : CGFloat = 2
+        let ratio : CGFloat = 3.5
         let offsetY = (UIScreen.main.bounds.height - (UIScreen.main.bounds.width/ratio))/2
         let maskHeight = UIScreen.main.bounds.width/ratio
         let recmask = CGRect(x: 0 , y: offsetY, width: UIScreen.main.bounds.width , height: maskHeight)

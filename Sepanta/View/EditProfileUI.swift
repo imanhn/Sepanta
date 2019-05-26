@@ -26,7 +26,6 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
     var submitButton = UIButton(type: .custom)
     var stateCode : String!
     var cityCode : String!
-    var disposeList = [Disposable]()
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -54,7 +53,7 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
     }
     
     func handleSubmitButtonEnableOrDisable(){
-        Observable.combineLatest([texts["familyText"]!.rx.text,
+        let submitDisp = Observable.combineLatest([texts["familyText"]!.rx.text,
                                   texts["nameText"]!.rx.text,
                                   texts["nationalCodeText"]!.rx.text,
                                   texts["birthDateText"]!.rx.text,
@@ -81,17 +80,22 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
                     }
                 }
             }
-        ).disposed(by: self.delegate.myDisposeBag)
+        )
+        submitDisp.disposed(by: self.delegate.myDisposeBag)
+        self.delegate.disposeList.append(submitDisp)
+        
     }
     
     func getAndSubscribeToProfileInfo(){
         //let aParameter = ["user id":"\(LoginKey.shared.userID)"]
         NetworkManager.shared.run(API: "profile-info", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
-        ProfileInfoWrapper.shared.profileInfoObs
+        let profileInfoWriapperDisp = ProfileInfoWrapper.shared.profileInfoObs
             .subscribe(onNext: { [unowned self] (aProfileInfo) in
                 //print("***FillingEDit")
                 self.fillEditProfileForm(With: aProfileInfo)
-            }).disposed(by: self.delegate.myDisposeBag)
+            })
+        profileInfoWriapperDisp.disposed(by: self.delegate.myDisposeBag)
+        self.delegate.disposeList.append(profileInfoWriapperDisp)
     }
     
     func fillEditProfileForm(With aProfileInfo : ProfileInfo){
@@ -170,7 +174,7 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
             "address":"\(texts["regionText"]!.text ?? "")"
         ]
         NetworkManager.shared.run(API: "profile-info", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
-        NetworkManager.shared.updateProfileInfoSuccessful
+        let updateProDisp = NetworkManager.shared.updateProfileInfoSuccessful
             .filter({$0 == true})
             .subscribe(onNext: { [unowned self] (succeed) in
                 self.delegate.alert(Message: "اطلاعات پروفایل شما بروز شد")
@@ -180,7 +184,9 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
                     Spinner.stop()
                 })
                 
-            }).disposed(by: self.delegate.myDisposeBag)
+            })
+        updateProDisp.disposed(by: self.delegate.myDisposeBag)
+        self.delegate.disposeList.append(updateProDisp)
     }
     
     func showForm() {
@@ -330,7 +336,7 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
                 self.delegate.showPopup(controller, sourceView: aTextField)
             })
         cityDispose.disposed(by: self.delegate.myDisposeBag)
-        disposeList.append(cityDispose)
+        self.delegate.disposeList.append(cityDispose)
     }
     
     @objc func selectStateTapped(_ sender : Any){
@@ -369,7 +375,7 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
                     self.delegate.showPopup(controller, sourceView: aTextField)
                 })
             provinceDispose.disposed(by: self.delegate.myDisposeBag)
-            disposeList.append(provinceDispose)
+            self.delegate.disposeList.append(provinceDispose)
         }
     }
     

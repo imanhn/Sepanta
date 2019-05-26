@@ -8,13 +8,15 @@
 
 import Foundation
 import UIKit
+import RxCocoa
 import RxSwift
 
 class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     weak var coordinator : HomeCoordinator?
     var myDisposeBag = DisposeBag()
+    var logoAnimTimer : Timer?
     var slideControl : SlideController?
-    
+    var disposeList = [Disposable]()
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var pageControl: UIPageControl!
     
@@ -27,6 +29,11 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     @IBOutlet weak var notificationsButton: UIButtonWithBadge!
     @IBOutlet weak var slideView: UIView!
     
+    @objc override func willPop() {
+        self.disposeList.forEach({$0.dispose()})
+        self.slideView = nil
+    }
+
     @IBAction func gotoFavorites(_ sender: Any) {
         self.coordinator!.pushFavoriteList()
     }
@@ -51,8 +58,7 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     @IBOutlet weak var searchTextField: CustomSearchBar!
     
     @IBAction func gotoProfile(_ sender: Any) {
-        self.coordinator!.pushShowProfile()
-        //self.coordinator!.logout()
+        self.coordinator!.pushShowProfile()        
     }
     @IBAction func gotoNewShops(_ sender: Any) {
         self.coordinator!.pushNewShops()
@@ -80,25 +86,43 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        slideControl = SlideController(parentController: self)
+        if slideControl == nil {
+            slideControl = SlideController(parentController: self)
+        } else {
+            slideControl?.startTimer()
+        }
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         //print("Stoping Slider")
-        slideControl?.endTimer()
+        if logoAnimTimer != nil {
+            logoAnimTimer?.invalidate()
+            logoAnimTimer = nil            
+        }
+        if slideControl != nil {
+            slideControl?.endTimer()
+        }
     }
+    
     func subscribeForBadges(){
-        SlidesAndPaths.shared.count_new_shop
+        let newShopDisp = SlidesAndPaths.shared.count_new_shop
             .subscribe(onNext: { [unowned self] newShopNo in
                 self.newShopsButton.manageBadge(newShopNo)
+                SlidesAndPaths.shared.count_new_shop = BehaviorRelay<Int>(value: 0)
                 }
-        ).disposed(by: myDisposeBag)
+        )
+        newShopDisp.disposed(by: myDisposeBag)
+        disposeList.append(newShopDisp)
 
-        SlidesAndPaths.shared.notifications_count
+        let notDisp = SlidesAndPaths.shared.notifications_count
             .subscribe(onNext: { [unowned self] notiCount in                
                 self.notificationsButton.manageBadge(notiCount)
+                SlidesAndPaths.shared.notifications_count = BehaviorRelay<Int>(value: 0)
                 }
-            ).disposed(by: myDisposeBag)
+            )
+        notDisp.disposed(by: myDisposeBag)
+        disposeList.append(notDisp)
     }
     
     @objc func doAnimateLogo(){
@@ -106,15 +130,16 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     }
     
     func animateLogo(){
-         _ = Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(doAnimateLogo), userInfo: nil, repeats: true)
-        
+        if logoAnimTimer == nil {
+            logoAnimTimer = Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(doAnimateLogo), userInfo: nil, repeats: true)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         manageVersion()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
-        subscribeForBadges()
+        subscribeForBadges()        
         animateLogo()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTapped)))
         self.view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:))))

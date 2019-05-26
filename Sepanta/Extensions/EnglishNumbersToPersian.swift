@@ -72,6 +72,7 @@ extension String {
         }
         return result
     }
+    
     func toEnglishNumbers()->String{
         var filtered = ""
         var result : String = ""
@@ -104,6 +105,21 @@ extension String {
             }
         }
         return result
+    }
+    func containPersianChar()->Bool{
+        let persianChars = "چجحخهعغفقثصضکگمنتالبیسشوپدذرزطظًٌٍَُِّْةآأإيئؤكٓژٰ‌ٔء"
+        for aChar in self {
+            if persianChars.contains(aChar) {return true }
+        }
+        return false
+    }
+    
+    func containSymbol()->Bool{
+        let symbolChars = "§±!@#$%^&*()_+}{|:?>.,/;'\"\\ "
+        for aChar in self {
+            if symbolChars.contains(aChar) {return true }
+        }
+        return false
     }
 
 }

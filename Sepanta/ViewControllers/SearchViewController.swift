@@ -20,6 +20,7 @@ class SearchCell : UITableViewCell {
 class SearchViewController : UIViewControllerWithErrorBar{
     weak var coordinator : HomeCoordinator?
     var myDisposeBag = DisposeBag()
+    var disposeList = [Disposable]()
     var keyword : String?
     @IBOutlet weak var searchText: CustomSearchBar!
     @IBOutlet weak var searchButton: UIButton!
@@ -28,14 +29,17 @@ class SearchViewController : UIViewControllerWithErrorBar{
     @IBAction func returnOnKeyboardTapped(_ sender: Any) {
         _ = (sender as AnyObject).resignFirstResponder()
     }
-    
-    @IBAction func BackTapped(_ sender: Any) {
+
+    @objc override func willPop() {
+        disposeList.forEach({$0.dispose()})
         NetworkManager.shared.shopSearchResultObs = BehaviorRelay<[ShopSearchResult]>(value: [ShopSearchResult]())
+    }
+
+    @IBAction func BackTapped(_ sender: Any) {
         self.coordinator!.popOneLevel()
     }
     
     @IBAction func BackToHome(_ sender: Any) {
-        NetworkManager.shared.shopSearchResultObs = BehaviorRelay<[ShopSearchResult]>(value: [ShopSearchResult]())
         self.coordinator!.popHome()
     }
     
@@ -49,23 +53,26 @@ class SearchViewController : UIViewControllerWithErrorBar{
         
     }
     func bindToTableView() {
-        self.searchText.rx.controlEvent([.editingChanged])
+        let searchDisp = self.searchText.rx.controlEvent([.editingChanged])
             .asObservable()
             .throttle(3, scheduler: MainScheduler.instance)
             .subscribe({ [unowned self] _ in
                 self.callNewSearch()
                 //print("My text : \(self.searchText.text ?? "")")
-            }).disposed(by: myDisposeBag)
+            })
+        searchDisp.disposed(by: myDisposeBag)
+        disposeList.append(searchDisp)
 
-        NetworkManager.shared.shopSearchResultObs.bind(to: searchResultTableView.rx.items(cellIdentifier: "SearchCell")) { row, aShopSearchResult, cell in
+        let resultDisp = NetworkManager.shared.shopSearchResultObs.bind(to: searchResultTableView.rx.items(cellIdentifier: "SearchCell")) { row, aShopSearchResult, cell in
             if let aCell = cell as? SearchCell {
                 aCell.shopLabel.text = aShopSearchResult.shop_name
                 self.searchResultTableView.rowHeight = UIScreen.main.bounds.height/9
-                
-            }
-            }.disposed(by: myDisposeBag)
+            }            
+        }
+        resultDisp.disposed(by: myDisposeBag)
+        disposeList.append(resultDisp)
         
-        searchResultTableView.rx.modelSelected(ShopSearchResult.self)
+        let selectDisp = searchResultTableView.rx.modelSelected(ShopSearchResult.self)
             .subscribe(onNext: { [unowned self] aShopSearchResult in
                 //print("*** Getting Profile for Shop Result : ", aShopSearchResult)
                 guard aShopSearchResult.user_id != 0 else {
@@ -74,7 +81,9 @@ class SearchViewController : UIViewControllerWithErrorBar{
                 }
                 let ashop = Shop(shop_id: aShopSearchResult.shop_id, user_id: aShopSearchResult.user_id, shop_name: aShopSearchResult.shop_name, shop_off: nil, lat: nil, long: nil, image: nil, rate: nil,rate_count: 0, follower_count: nil, created_at: nil)
                 self.coordinator!.pushShop(Shop: ashop)
-            }).disposed(by: myDisposeBag)
+            })
+        selectDisp.disposed(by: myDisposeBag)
+        disposeList.append(selectDisp)
     }
     
     

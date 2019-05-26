@@ -33,17 +33,17 @@ class AddPostViewController : UIViewControllerWithKeyboardNotificationWithErrorB
     @IBOutlet weak var submitButton: SubmitButton!
     @IBOutlet weak var mainView: UIView!
 
-    @IBAction func backTapped(_ sender: Any) {
+    @objc override func willPop() {
         disposeList.forEach({$0.dispose()})
         imagePickerDelegate = nil
         imagePicker = nil
+    }
+
+    @IBAction func backTapped(_ sender: Any) {
         self.coordinator!.popOneLevel()
     }
     
     @IBAction func homeTapped(_ sender: Any) {
-        disposeList.forEach({$0.dispose()})
-        imagePickerDelegate = nil
-        imagePicker = nil
         self.coordinator!.popHome()
     }
     

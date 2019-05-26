@@ -20,8 +20,9 @@ import UIKit
 import RxCocoa
 import RxSwift
 import Alamofire
+import SafariServices
 
-class ContactUSUI : NSObject , UITextFieldDelegate {
+class ContactUSUI : NSObject , UITextFieldDelegate,SFSafariViewControllerDelegate {
     var delegate : ContactUSViewController!
     var views = Dictionary<String,UIView>()
     var texts = Dictionary<String,UITextField>()
@@ -75,6 +76,8 @@ class ContactUSUI : NSObject , UITextFieldDelegate {
         cursurY = cursurY + shopView.frame.height + marginY/2
         self.delegate.contentView.addSubview(shopView)
 
+        
+        /*
         let sepantaAddress = "تهران میدان آرژانتین خیابان الوند نبش الوند ۳۳ شرقی پلاک ۴۵ واحد ۶"
         
         var addressView = UIView()
@@ -86,14 +89,19 @@ class ContactUSUI : NSObject , UITextFieldDelegate {
         (telView,_) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "icon_profile_07",  LabelText: "۰۲۱-۴۵۲۲۷",Lines: 1)
         cursurY = cursurY + telView.frame.height + marginY/2
         self.delegate.contentView.addSubview(telView)
-
+         */
+        
         var webView = UIView()
-        (webView,_) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "web",  LabelText: "www.ipsepanta.ir",Lines: 1)
+        var aLab = UILabel()
+        (webView,aLab) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "web",  LabelText: "https://www.sepantaclubs.com",Lines: 1)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(openWebSite))
+        aLab.isUserInteractionEnabled = true
+        aLab.addGestureRecognizer(tap)
         cursurY = cursurY + webView.frame.height + marginY/2
         self.delegate.contentView.addSubview(webView)
-
+        
         var emailView = UIView()
-        (emailView,_) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "black-back-closed-envelope-shape",  LabelText: "info@ipsepanta.ir",Lines: 1)
+        (emailView,_) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "black-back-closed-envelope-shape",  LabelText: "info@sepantaclubs.com",Lines: 1)
         cursurY = cursurY + emailView.frame.height + marginY/2
         self.delegate.contentView.addSubview(emailView)
 
@@ -182,5 +190,16 @@ class ContactUSUI : NSObject , UITextFieldDelegate {
         disposeList.append(contactDisp)
     }
     
+    @objc func openWebSite(){
+        let url = URL(string: "https://www.sepantaclubs.com")!
+        let safariVC = SFSafariViewController(url: url)
+        self.delegate.coordinator!.navigationController.pushViewController(safariVC, animated: true)
+        safariVC.delegate = self
+    }
+
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: false, completion: {})
+        self.delegate.coordinator!.popOneLevel()
+    }
 
 }

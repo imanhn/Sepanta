@@ -12,7 +12,7 @@ import RxAlamofire
 import RxSwift
 import RxCocoa
 
-class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,Storyboarded {
+class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,Storyboarded,UITextFieldDelegate {
     var myDisposeBag  = DisposeBag()
     var disposeList = [Disposable]()
     weak var coordinator : HomeCoordinator?
@@ -22,6 +22,20 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
     @IBOutlet weak var EnterButton: UIButton!
     @IBOutlet weak var MobileTextField: UnderLinedTextField!
     @IBOutlet weak var submitButton: SubmitButtonOnRedBar!
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        print("Text ",range," str : ",string," currnet : ",currentText,"  Updated :  ",updatedText)
+        if textField.tag == 12 {
+            print("Login TEXT ")
+            if updatedText.count > 0 && updatedText.first != "0" {return false}
+            if updatedText.count > 1 && updatedText.slice(From: 0,To: 1) != "09" {return false}
+            if updatedText.count > 11 {return false}
+        }
+        return true
+    }
     
     @IBAction func MobileTypeEnded(_ sender: Any) {
         _ = (sender as AnyObject).resignFirstResponder()
@@ -49,6 +63,11 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
         print("Converted : ",(self.MobileTextField.text ?? "").toEnglishNumbers())
         let aMobileNo = (self.MobileTextField.text ?? "").toEnglishNumbers()
         let aParameter = ["cellphone":"\(aMobileNo)"]
+        if MobileTextField.text! == "09121111111" {
+            // Enabling DEMO login
+            NetworkManager.shared.SMSConfirmed.accept(true)
+            return
+        }
         NetworkManager.shared.run(API: "login", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
     }
     
@@ -63,9 +82,13 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
 
     func doSubscribtions(){
         print("**** Subscribing **** ")
+        if MobileTextField == nil {
+            print("View is not initialized yet! : ",MobileTextField)
+            return
+        }
         let submitDisp = MobileTextField.rx.text
             .subscribe(onNext: { [unowned self] (atext) in
-                if atext?.count == 11 {
+                if atext?.count == 11 || atext == "09121111111" {
                     self.submitButton.isEnabled = true
                 }else{
                     self.submitButton.isEnabled = false
@@ -106,6 +129,7 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         self.submitButton.isEnabled = false
+        self.MobileTextField.delegate = self
         doSubscribtions()
     }
 

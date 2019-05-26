@@ -36,6 +36,7 @@ class NetworkManager {
     var content = NSDictionary()
     //var resultSubject = BehaviorRelay<NSDictionary>(value : NSDictionary())
     let baseURLString: String
+    //let websiteRootAddress = "https://www.sepantaclubs.com"
     let websiteRootAddress = "http://www.ipsepanta.ir"
     var status = BehaviorRelay<CallStatus>(value: CallStatus.ready) //No used Yet
     var shopFav = BehaviorRelay<ToggleStatus>(value: ToggleStatus.UNKNOWN)

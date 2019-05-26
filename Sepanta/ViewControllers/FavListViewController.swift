@@ -38,18 +38,22 @@ class FavListViewController :  UIViewControllerWithErrorBar,XIBView{
     @IBOutlet weak var headerLabel: UILabel!
     var headerLabelToSet : String = "فروشگاه ها"
     @IBOutlet weak var shopTable: UITableView!
+
     
-    @IBAction func backTapped(_ sender: Any) {
+    @objc override func willPop() {
         shopDataSource = nil
         NetworkManager.shared.shopObs = BehaviorRelay<[Shop]>(value: [Shop]())
+    }
+
+    @IBAction func backTapped(_ sender: Any) {
         self.coordinator!.popOneLevel()
     }
     
     @IBAction func menuTapped(_ sender: Any) {
         self.coordinator!.openButtomMenu()
     }
+    
     @IBAction func homeTapped(_ sender: Any) {
-        shopDataSource = nil
         self.coordinator!.popHome()
     }
     

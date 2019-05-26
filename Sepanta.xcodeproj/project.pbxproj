@@ -105,7 +105,6 @@
 		0FAEEDE5222F29C600A9178F /* GetRichUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAEEDE4222F29C600A9178F /* GetRichUI.swift */; };
 		0FAEEDE72230949C00A9178F /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAEEDE62230949C00A9178F /* AboutUsViewController.swift */; };
 		0FAEEDE92230957100A9178F /* AboutUsUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAEEDE82230957100A9178F /* AboutUsUI.swift */; };
-		0FB3ECD0222C8AF8009A89F7 /* MenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB3ECCF222C8AF8009A89F7 /* MenuCoordinator.swift */; };
 		0FB3ECD2222DC48F009A89F7 /* GetRichViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB3ECD1222DC48F009A89F7 /* GetRichViewController.swift */; };
 		0FD094AA226E34C600E53A07 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FD094A9226E34C600E53A07 /* Map.storyboard */; };
 		0FD094AC226E370B00E53A07 /* NearestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD094AB226E370B00E53A07 /* NearestViewController.swift */; };
@@ -113,6 +112,7 @@
 		0FDA55D32225A0A000E7C889 /* NSDictionaryToDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDA55D22225A0A000E7C889 /* NSDictionaryToDictionary.swift */; };
 		0FDA55D52225C02800E7C889 /* Catagory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDA55D42225C02800E7C889 /* Catagory.swift */; };
 		0FDA55D722260FFE00E7C889 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDA55D622260FFE00E7C889 /* GroupViewController.swift */; };
+		0FDE4B172298C053003596EC /* UIViewControllerWillPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE4B162298C053003596EC /* UIViewControllerWillPop.swift */; };
 		0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9A8220355F000C868C3 /* AppDelegate.swift */; };
 		0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9AA220355F000C868C3 /* LoginViewController.swift */; };
 		0FE8B9AE220355F000C868C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9AC220355F000C868C3 /* Main.storyboard */; };
@@ -254,7 +254,6 @@
 		0FAEEDE4222F29C600A9178F /* GetRichUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRichUI.swift; sourceTree = "<group>"; };
 		0FAEEDE62230949C00A9178F /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		0FAEEDE82230957100A9178F /* AboutUsUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsUI.swift; sourceTree = "<group>"; };
-		0FB3ECCF222C8AF8009A89F7 /* MenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCoordinator.swift; sourceTree = "<group>"; };
 		0FB3ECD1222DC48F009A89F7 /* GetRichViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRichViewController.swift; sourceTree = "<group>"; };
 		0FD094A9226E34C600E53A07 /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		0FD094AB226E370B00E53A07 /* NearestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestViewController.swift; sourceTree = "<group>"; };
@@ -264,6 +263,7 @@
 		0FDA55D22225A0A000E7C889 /* NSDictionaryToDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDictionaryToDictionary.swift; sourceTree = "<group>"; };
 		0FDA55D42225C02800E7C889 /* Catagory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catagory.swift; sourceTree = "<group>"; };
 		0FDA55D622260FFE00E7C889 /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
+		0FDE4B162298C053003596EC /* UIViewControllerWillPop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerWillPop.swift; sourceTree = "<group>"; };
 		0FE8B9A5220355F000C868C3 /* Sepanta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sepanta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FE8B9A8220355F000C868C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0FE8B9AA220355F000C868C3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -407,7 +407,6 @@
 				0F890CFD2214B4CD0091FA2E /* Coordinator.swift */,
 				0F890D012214B5310091FA2E /* AppCoordinator.swift */,
 				0F052EDA221C0790009175EA /* HomeCoordinator.swift */,
-				0FB3ECCF222C8AF8009A89F7 /* MenuCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -560,6 +559,7 @@
 				0FAE1FF42265BAC70043B077 /* UIButtonDisEnable.swift */,
 				0F1B75682238498E0087C0DB /* CacheImageForViews.swift */,
 				0F63F7232278EE8500799C8F /* UIImageSetShadow.swift */,
+				0FDE4B162298C053003596EC /* UIViewControllerWillPop.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -885,7 +885,6 @@
 				0F890D122215D21C0091FA2E /* JSONParser.swift in Sources */,
 				0F63F7142277690100799C8F /* ContactUSUI.swift in Sources */,
 				0F817A6F22354F8600F1738E /* Profile.swift in Sources */,
-				0FB3ECD0222C8AF8009A89F7 /* MenuCoordinator.swift in Sources */,
 				0F673455227A149C0064EF96 /* SignUPUI.swift in Sources */,
 				0FAE1FF52265BAC70043B077 /* UIButtonDisEnable.swift in Sources */,
 				0F1B75692238498E0087C0DB /* CacheImageForViews.swift in Sources */,
@@ -904,6 +903,7 @@
 				0F817A6D22346BAF00F1738E /* EditProfileUI.swift in Sources */,
 				0F67F75A224CD00300659842 /* Post.swift in Sources */,
 				0F63F7202278BDF200799C8F /* NewCardViewController.swift in Sources */,
+				0FDE4B172298C053003596EC /* UIViewControllerWillPop.swift in Sources */,
 				0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */,
 				0F642B99227A525800B887B8 /* AddPostImagePicker.swift in Sources */,
 				0F8571F0225CC5B50056D062 /* UIViewControllerWithErrorBar.swift in Sources */,
@@ -1133,7 +1133,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3UL3Q223ZG;
+				DEVELOPMENT_TEAM = 3NHS7XJ3UC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Sepanta/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
@@ -1141,7 +1141,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Imzich.Sepanta;
+				PRODUCT_BUNDLE_IDENTIFIER = Amir.Aslani.Iman.Sepanta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Sepanta/Bridge/Sepanta-Bridging-Header.h";
@@ -1159,7 +1159,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3UL3Q223ZG;
+				DEVELOPMENT_TEAM = 3NHS7XJ3UC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Sepanta/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
@@ -1167,7 +1167,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Imzich.Sepanta;
+				PRODUCT_BUNDLE_IDENTIFIER = Amir.Aslani.Iman.Sepanta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Sepanta/Bridge/Sepanta-Bridging-Header.h";

@@ -122,7 +122,7 @@ class AboutUsUI : NSObject,SFSafariViewControllerDelegate{
         cursurY = cursurY + aBut.frame.height + 10//marginY
         
         let siteLabel = UILabel(frame: CGRect(x: 0, y: cursurY, width: UIScreen.main.bounds.width, height: 0))
-        siteLabel.text = "http://ipsepanta.ir/"
+        siteLabel.text = "https://www.sepantaclubs.com/"
         siteLabel.font = aFont
         siteLabel.textAlignment = .center
         siteLabel.textColor = UIColor(hex: 0xD6D7D9)
@@ -137,7 +137,7 @@ class AboutUsUI : NSObject,SFSafariViewControllerDelegate{
     }
     
     @objc func openWebSite(){
-        let url = URL(string: "http://www.ipsepanta.ir")!
+        let url = URL(string: "https://www.sepantaclubs.com")!
         let safariVC = SFSafariViewController(url: url)
         self.delegate.coordinator!.navigationController.pushViewController(safariVC, animated: true)
         safariVC.delegate = self

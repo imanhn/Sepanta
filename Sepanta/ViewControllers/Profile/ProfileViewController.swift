@@ -36,21 +36,25 @@ class ProfileViewController : UIViewControllerWithErrorBar,Storyboarded {
         print("Menu Tapped")
         self.coordinator!.openButtomMenu()
     }
+    
     @IBAction func editTapped(_ sender: Any) {
         self.coordinator!.pushEditProfile()
     }
+    /*
     @IBAction func logoutTapped(_ sender: Any) {
         showProfileUI = nil
         self.coordinator!.logout()
+    }*/
+    
+    @objc override func willPop() {
+        showProfileUI = nil
     }
     
     @IBAction func backPressed(_ sender: Any) {
-        showProfileUI = nil
         self.coordinator!.popOneLevel()
     }
     
     @IBAction func homeTapped(_ sender: Any) {
-        showProfileUI = nil
         self.coordinator!.popHome()
     }
     

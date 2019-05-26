@@ -24,10 +24,12 @@ class ContactUSViewController: UIViewControllerWithKeyboardNotificationWithError
     @IBOutlet weak var badButton: UIButton!
     
 
-    
-    @IBAction func backTapped(_ sender: Any) {
+    @objc override func willPop() {
         contactUSUI!.disposeList.forEach({$0.dispose()})
         contactUSUI = nil
+    }
+
+    @IBAction func backTapped(_ sender: Any) {
         self.coordinator!.popOneLevel()
     }
     

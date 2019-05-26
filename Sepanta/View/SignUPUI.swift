@@ -57,7 +57,7 @@ class SignUPUI : NSObject , UITextFieldDelegate {
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        //BuildRow set 11 for tag of selectable textfield (See BuildRow function)
+        // IMPORTANT : *** BuildRow set 11 for tag of selectable textfield (See BuildRow function)
         if textField.tag == 11 {
             return false
             
@@ -67,6 +67,29 @@ class SignUPUI : NSObject , UITextFieldDelegate {
             return true
         }
     }
+    
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        //print("Text ",range," str : ",string," currnet : ",currentText,"  Updated :  ",updatedText)
+        if textField.tag == 13 {
+            if string.containPersianChar() { return false}
+            if string.containSymbol() { return false}
+            if updatedText.count > 0 {
+                if Int(updatedText.slice(From: 0,To: 0)) != nil {return false}
+            }
+            if updatedText.count > 25 {return false}
+        }
+        if textField.tag == 12 {
+            if updatedText.count > 0 && updatedText.first != "0" {return false}
+            if updatedText.count > 1 && updatedText.slice(From: 0,To: 1) != "09" {return false}
+            if updatedText.count > 11 {return false}
+        }
+        return true
+    }
+    
     //Create Gradient on PageView
     func showSignUpForm() {
         var cursurY : CGFloat = 0
@@ -77,7 +100,10 @@ class SignUPUI : NSObject , UITextFieldDelegate {
         let textFieldWidth = (self.delegate.signUpFormView.bounds.width) - (2 * marginX)
         
         (mobileView,mobileText) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildARowView( Image: "icon_profile_07", Selectable: false, PlaceHolderText: "شماره همراه")
-        mobileText.keyboardType = UIKeyboardType.decimalPad
+        mobileText.keyboardType = UIKeyboardType.numberPad
+        mobileText.tag = 12
+        mobileText.clearButtonMode = .whileEditing
+        mobileText.semanticContentAttribute = .forceRightToLeft
         self.delegate.signUpFormView.addSubview(mobileView)
         mobileText.delegate = self
         cursurY = cursurY + buttonHeight + marginY
@@ -85,6 +111,9 @@ class SignUPUI : NSObject , UITextFieldDelegate {
         (usernameView,usernameText) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildARowView( Image: "icon_profile_03", Selectable: false, PlaceHolderText: "نام کاربری")
         self.delegate.signUpFormView.addSubview(usernameView)
         usernameText.delegate = self
+        usernameText.tag = 13
+        usernameText.clearButtonMode = .whileEditing
+        usernameText.semanticContentAttribute = .forceRightToLeft
         cursurY = cursurY + buttonHeight + marginY
 
         (genderView,genderText) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildARowView( Image: "icon_gen_gray", Selectable: true, PlaceHolderText: "انتخاب جنسیت")

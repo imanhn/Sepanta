@@ -173,16 +173,16 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="00C-Cf-4Xx" userLabel="SlideView">
-                                <rect key="frame" x="0.0" y="395.5" width="375" height="167"/>
+                                <rect key="frame" x="0.0" y="395.5" width="375" height="187"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kEw-xu-kjy" userLabel="currentImageView" customClass="AdImageView" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="167"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="187"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yrO-9s-0mm" userLabel="leftImageView" customClass="AdImageView" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="-375" y="0.0" width="375" height="167"/>
+                                        <rect key="frame" x="-375" y="0.0" width="375" height="187"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tpf-Pf-K1m" userLabel="rightImageView" customClass="AdImageView" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="375" y="0.0" width="375" height="167"/>
+                                        <rect key="frame" x="375" y="0.0" width="375" height="187"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -201,21 +201,21 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h01-1f-URc" userLabel="FooterView">
-                                <rect key="frame" x="0.0" y="562.5" width="375" height="104.5"/>
+                                <rect key="frame" x="0.0" y="582.5" width="375" height="84.5"/>
                                 <subviews>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" currentPage="1" translatesAutoresizingMaskIntoConstraints="NO" id="Z97-MI-7W6" userLabel="pageControl">
                                         <rect key="frame" x="20" y="0.0" width="62.5" height="37"/>
                                         <color key="pageIndicatorTintColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="currentPageIndicatorTintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </pageControl>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="جای تبلیغ شما اینجاست" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syZ-L6-xEe" userLabel="commentLabel">
-                                        <rect key="frame" x="102.5" y="0.0" width="262.5" height="52"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="جای تبلیغ شما اینجاست" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syZ-L6-xEe" userLabel="commentLabel">
+                                        <rect key="frame" x="102.5" y="0.0" width="262.5" height="42"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="15"/>
                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uV3-Kf-RWE" userLabel="menu">
-                                        <rect key="frame" x="135" y="44" width="105" height="52.5"/>
+                                        <rect key="frame" x="145" y="34" width="85" height="42.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="uV3-Kf-RWE" secondAttribute="height" multiplier="2:1" id="b0n-HS-M4u"/>
                                         </constraints>
@@ -261,7 +261,7 @@
                             <constraint firstItem="i1f-TJ-lt4" firstAttribute="centerX" secondItem="5ro-eO-8c6" secondAttribute="centerX" id="MBZ-1v-JGA"/>
                             <constraint firstItem="h01-1f-URc" firstAttribute="top" secondItem="00C-Cf-4Xx" secondAttribute="bottom" id="OZV-rS-szt"/>
                             <constraint firstItem="4Hk-Yy-qxo" firstAttribute="top" secondItem="i1f-TJ-lt4" secondAttribute="bottom" id="R5k-5A-Tzz"/>
-                            <constraint firstItem="h01-1f-URc" firstAttribute="bottom" secondItem="5ro-eO-8c6" secondAttribute="bottom" id="RbL-q1-8XI"/>
+                            <constraint firstItem="h01-1f-URc" firstAttribute="bottom" secondItem="D7t-mF-4dd" secondAttribute="bottom" id="RbL-q1-8XI"/>
                             <constraint firstItem="F3V-Da-Par" firstAttribute="height" secondItem="D7t-mF-4dd" secondAttribute="height" multiplier="0.05" id="SGg-9f-Jwa"/>
                             <constraint firstItem="sdB-XE-itg" firstAttribute="height" secondItem="D7t-mF-4dd" secondAttribute="height" multiplier="0.01" id="UkY-0f-1xm"/>
                             <constraint firstItem="lB3-P9-L47" firstAttribute="height" secondItem="D7t-mF-4dd" secondAttribute="height" multiplier="0.11" id="Wic-in-fcf"/>
@@ -271,7 +271,7 @@
                             <constraint firstItem="i1f-TJ-lt4" firstAttribute="height" secondItem="D7t-mF-4dd" secondAttribute="height" multiplier="0.1" id="aHF-A1-Qmc"/>
                             <constraint firstItem="sdB-XE-itg" firstAttribute="top" secondItem="Ix2-Oq-HJW" secondAttribute="bottom" id="gPh-If-od6"/>
                             <constraint firstItem="F3V-Da-Par" firstAttribute="centerX" secondItem="5ro-eO-8c6" secondAttribute="centerX" id="ggp-od-lR7"/>
-                            <constraint firstItem="00C-Cf-4Xx" firstAttribute="height" secondItem="D7t-mF-4dd" secondAttribute="height" multiplier="0.25" id="htj-Nf-Io6"/>
+                            <constraint firstItem="00C-Cf-4Xx" firstAttribute="height" secondItem="D7t-mF-4dd" secondAttribute="height" multiplier="0.28" id="htj-Nf-Io6"/>
                             <constraint firstItem="00C-Cf-4Xx" firstAttribute="width" secondItem="D7t-mF-4dd" secondAttribute="width" id="kfk-cE-tQ8"/>
                             <constraint firstItem="h01-1f-URc" firstAttribute="centerX" secondItem="5ro-eO-8c6" secondAttribute="centerX" id="kwN-aT-Yea"/>
                             <constraint firstItem="i1f-TJ-lt4" firstAttribute="width" secondItem="D7t-mF-4dd" secondAttribute="width" id="lSJ-yV-8N2"/>
@@ -310,10 +310,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ARZ-gd-z0R" userLabel="BackMenuView">
-                                <rect key="frame" x="0.0" y="597" width="375" height="70"/>
+                                <rect key="frame" x="0.0" y="600.5" width="375" height="66.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3g-Bn-6M8" userLabel="BackButton">
-                                        <rect key="frame" x="179.5" y="0.0" width="16" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="66.5"/>
                                         <state key="normal" image="icon_mainmenu_10_arr_down"/>
                                         <connections>
                                             <action selector="backFromMenuTapped:" destination="meB-CV-uE7" eventType="touchUpInside" id="1qy-no-EMz"/>
@@ -325,11 +325,11 @@
                                     <constraint firstItem="D3g-Bn-6M8" firstAttribute="centerX" secondItem="ARZ-gd-z0R" secondAttribute="centerX" id="NCU-2S-U8w"/>
                                     <constraint firstItem="D3g-Bn-6M8" firstAttribute="centerY" secondItem="ARZ-gd-z0R" secondAttribute="centerY" id="X0c-K7-DeB"/>
                                     <constraint firstItem="D3g-Bn-6M8" firstAttribute="height" secondItem="ARZ-gd-z0R" secondAttribute="height" id="m1r-Q2-oNe"/>
-                                    <constraint firstAttribute="height" constant="70" id="qhh-ap-dTM"/>
+                                    <constraint firstItem="D3g-Bn-6M8" firstAttribute="width" secondItem="ARZ-gd-z0R" secondAttribute="width" id="rQo-lY-cDZ"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gJx-tm-rBV" userLabel="MenuTableView" customClass="MenuTableView" customModule="Sepanta" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="197" width="375" height="400"/>
+                                <rect key="frame" x="0.0" y="200.5" width="375" height="400"/>
                                 <color key="backgroundColor" red="0.8565688776" green="0.2257254132" blue="0.36172668870000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="krI-kw-AFN"/>
@@ -388,6 +388,7 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="GFw-ry-UAU" firstAttribute="bottom" secondItem="ARZ-gd-z0R" secondAttribute="bottom" id="6gJ-ze-lP3"/>
+                            <constraint firstItem="ARZ-gd-z0R" firstAttribute="height" secondItem="j6M-Aj-UMh" secondAttribute="height" multiplier="0.1" id="7Ks-w0-U1G"/>
                             <constraint firstItem="gJx-tm-rBV" firstAttribute="centerX" secondItem="GFw-ry-UAU" secondAttribute="centerX" id="Cbz-Tw-rJT"/>
                             <constraint firstItem="gJx-tm-rBV" firstAttribute="centerX" secondItem="j6M-Aj-UMh" secondAttribute="centerX" id="HUy-hQ-iSf"/>
                             <constraint firstItem="gJx-tm-rBV" firstAttribute="width" secondItem="j6M-Aj-UMh" secondAttribute="width" id="Vaj-IL-Z98"/>

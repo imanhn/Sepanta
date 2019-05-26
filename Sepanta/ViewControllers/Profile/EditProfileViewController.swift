@@ -20,15 +20,11 @@ class EditProfileViewController : UIViewControllerWithKeyboardNotificationWithEr
     weak var coordinator : HomeCoordinator?
     var editProfileUI : EditProfileUI!
     var myDisposeBag = DisposeBag()
+    var disposeList = [Disposable]()
     var imagePicker : UIImagePickerController! = UIImagePickerController()
     var imagePickerDelegate :  ImagePicker!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var profilePicture: UIImageView!
-    @IBAction func homeTapped(_ sender: Any) {
-        editProfileUI = nil
-        imagePickerDelegate = nil
-        self.coordinator?.popHome()
-    }
     
     @IBAction func selectProfileImage(_ sender: Any) {
         if PHPhotoLibrary.authorizationStatus() != PHAuthorizationStatus.authorized {
@@ -52,12 +48,20 @@ class EditProfileViewController : UIViewControllerWithKeyboardNotificationWithEr
             imagePickerDelegate = EditProfileImagePicker(self)
         }
     }
-    @IBAction func backTapped(_ sender: Any) {
+    @objc override func willPop() {
+        disposeList.forEach({$0.dispose()})
         editProfileUI = nil
         imagePickerDelegate = nil
+    }
+    
+    @IBAction func backTapped(_ sender: Any) {
         self.coordinator?.popOneLevel()
     }
     
+    @IBAction func homeTapped(_ sender: Any) {
+        self.coordinator?.popHome()
+    }
+
     @objc override func ReloadViewController(_ sender:Any) {
         super.ReloadViewController(sender)
         editProfileUI.sendEditedData(sender as! UIButton)

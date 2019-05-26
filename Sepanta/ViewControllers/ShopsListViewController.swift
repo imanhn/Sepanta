@@ -34,16 +34,21 @@ class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded{
     var fetchMechanism : dataSourceFunc!
     var shopDataSource : ShopsListDataSource!
     var sectionOfShops = BehaviorRelay<[SectionOfShopData]>(value: [SectionOfShopData]())
+    var disposeList = [Disposable]()
     weak var coordinator : HomeCoordinator?
     let myDisposeBag = DisposeBag()
     //var newShopsDataSource : ShopsListDataSource!
     @IBOutlet weak var headerLabel: UILabel!
     var headerLabelToSet : String = "فروشگاه ها"
     @IBOutlet weak var shopTable: UITableView!
-    
-    @IBAction func backTapped(_ sender: Any) {
+
+    @objc override func willPop() {
+        disposeList.forEach({$0.dispose()})
         shopDataSource = nil
-        NetworkManager.shared.shopObs = BehaviorRelay<[Shop]>(value: [Shop]())
+        NetworkManager.shared.shopObs = BehaviorRelay<[Shop]>(value: [Shop]())        
+    }
+
+    @IBAction func backTapped(_ sender: Any) {
         self.coordinator!.popOneLevel()
     }
     
@@ -62,12 +67,14 @@ class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded{
     }
     
     func bindToTableView() {
-        NetworkManager.shared.shopObs
+        let shopObsDisp = NetworkManager.shared.shopObs
             .subscribe(onNext: { shops in
                 let initsec = SectionOfShopData(original: SectionOfShopData(header: "Header", items: [Shop]()), items: shops)
                 self.sectionOfShops.accept([initsec])
                 self.shopTable.reloadData()
-            }).disposed(by: myDisposeBag)
+            })
+        shopObsDisp.disposed(by: myDisposeBag)
+        disposeList.append(shopObsDisp)
         
         let dataSource = RxTableViewSectionedAnimatedDataSource<SectionOfShopData>(configureCell: { dataSource, tableView, indexPath, item in
             //let row = indexPath.row
@@ -116,15 +123,18 @@ class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded{
             
         })
         //NetworkManager.shared.shopObs
-        sectionOfShops
+        let sectionDisp =  sectionOfShops
             .bind(to: shopTable.rx.items(dataSource: dataSource))
-            .disposed(by: myDisposeBag)
-
-        shopTable.rx.modelSelected(Shop.self)
+        sectionDisp.disposed(by: myDisposeBag)
+        disposeList.append(sectionDisp)
+        
+        let shopSelectDisp = shopTable.rx.modelSelected(Shop.self)
             .subscribe(onNext: { [unowned self] selectedShop in
                 //print("Pushing ShopVC with : ", selectedShop)
                 self.coordinator!.pushShop(Shop: selectedShop)
-            }).disposed(by: myDisposeBag)
+            })
+        shopSelectDisp.disposed(by: myDisposeBag)
+        disposeList.append(shopSelectDisp)
     }
     
     func setHeaderName(){
