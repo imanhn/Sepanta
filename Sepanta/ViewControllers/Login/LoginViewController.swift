@@ -27,9 +27,9 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-        print("Text ",range," str : ",string," currnet : ",currentText,"  Updated :  ",updatedText)
+        //print("Text ",range," str : ",string," currnet : ",currentText,"  Updated :  ",updatedText)
         if textField.tag == 12 {
-            print("Login TEXT ")
+            //print("Login TEXT ")
             if updatedText.count > 0 && updatedText.first != "0" {return false}
             if updatedText.count > 1 && updatedText.slice(From: 0,To: 1) != "09" {return false}
             if updatedText.count > 11 {return false}

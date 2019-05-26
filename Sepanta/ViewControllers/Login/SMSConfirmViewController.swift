@@ -45,7 +45,8 @@ class SMSConfirmViewController: UIViewControllerWithKeyboardNotificationWithErro
     
     @IBAction func submitTapped(_ sender: Any) {
         self.view.endEditing(true)
-        if MobileTextField.text == "0000"  && (SMSTextField.text == "1234" || SMSTextField.text == "4321"){
+        stopTimer()
+        if MobileTextField.text == "09121111111"  && (SMSTextField.text == "1234" || SMSTextField.text == "4321"){
             if SMSTextField.text == "4321" {
                 LoginKey.shared.loadShopDemoLoginCredentials()
             }
@@ -83,6 +84,7 @@ class SMSConfirmViewController: UIViewControllerWithKeyboardNotificationWithErro
     }
     
     @IBAction func signupClicked(_ sender: Any) {
+        stopTimer()
         disposeList.forEach({$0.dispose()})
         self.coordinator!.pushSignup()
     }
@@ -118,11 +120,7 @@ class SMSConfirmViewController: UIViewControllerWithKeyboardNotificationWithErro
     }
     
     func gotoHomePage(){
-        if (countdownTimer) != nil {
-            countdownTimer.invalidate()
-        } else {
-            print("Timer is already stoped")
-        }
+        stopTimer()
         disposeList.forEach({$0.dispose()})
         self.coordinator!.pushHomePage()
     }
@@ -142,8 +140,16 @@ extension SMSConfirmViewController {
     func startTimer() {
         countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
-    
+    func stopTimer() {
+        if (countdownTimer) != nil {
+            countdownTimer.invalidate()
+        } else {
+            print("Timer is already stoped")
+        }
+        countdownTimer = nil
+    }
     @objc func updateTime() {
+        print("Timer is Counting down!")
         TimerLabel.text = "\(timeFormatted(totalTime))"
         
         if totalTime != 0 {
@@ -154,6 +160,7 @@ extension SMSConfirmViewController {
     }
     
     func endTimer() {
+        print("************* ENDED TIMER ****************")
         countdownTimer.invalidate()
         //alert(Message: "وقت شما تمام شد لطفا مجددا تلاش کنید")
         disposeList.forEach({$0.dispose()})

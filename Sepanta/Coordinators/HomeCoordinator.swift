@@ -168,7 +168,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
-    func pushAGroup(GroupID anID:Int,GroupImage anImage:UIImage,GroupName aName : String,State astate : String?,City acity : String?){
+    func pushAGroup(GroupID anID:Int,GroupImage anImage:UIImage,GroupName aName : String,State astate : String?,City acity : String?,StateStr astateStr : String?,CityStr acityStr : String?){
         let storyboard = UIStoryboard(name: "SepantaGroup", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupViewController") as! GroupViewController
         //let vc = GroupViewController.instantiate()
@@ -178,6 +178,8 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         vc.currentGroupImage = anImage
         vc.selectedCity = acity
         vc.selectedState = astate
+        vc.selectedStateStr = astateStr
+        vc.selectedCityStr = acityStr
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }

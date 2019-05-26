@@ -47,6 +47,8 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     var filterIsOpen = false
     var selectedCity : String?
     var selectedState : String?
+    var selectedCityStr : String?
+    var selectedStateStr : String?
     var filterView : FilterView!
     var newShopsDataSource : ShopsListDataSource!
     @IBOutlet weak var groupHeaderTopCons: NSLayoutConstraint!
@@ -55,6 +57,8 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     @IBOutlet weak var shopTable: UITableView!
     @IBOutlet weak var HeaderLabel: UILabel!
     @IBOutlet weak var groupLabel: UILabel!
+    @IBOutlet weak var locationLabelButton: UIButton!
+    
     var currentGroupImage = UIImage()
     var catagoryId = Int()
     var currentGroupName = String()
@@ -210,6 +214,8 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
         self.groupLabel.text = currentGroupName
         self.groupLogoImage.image = currentGroupImage
         self.groupLogoImage.contentMode = .scaleAspectFit
+        let locationText = (self.selectedCityStr ?? self.selectedStateStr) ?? "کل کشور"
+        self.locationLabelButton.setTitle(locationText, for: .normal)
     }
     
 

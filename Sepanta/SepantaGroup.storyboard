@@ -232,10 +232,10 @@
                                 <rect key="frame" x="0.0" y="133.5" width="414" height="89.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KTS-dt-poH" userLabel="groupLeftView">
-                                        <rect key="frame" x="0.0" y="0.0" width="124" height="89.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="145" height="89.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dmt-4a-EPN" userLabel="LocationButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="124" height="89.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="145" height="89.5"/>
                                                 <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="13"/>
                                                 <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -258,7 +258,7 @@
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7qY-90-i2G" userLabel="ViewWithDash" customClass="UIViewWithDash" customModule="Sepanta" customModuleProvider="target">
-                                        <rect key="frame" x="124" y="0.0" width="104.5" height="89.5"/>
+                                        <rect key="frame" x="145" y="0.0" width="83.5" height="89.5"/>
                                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="رستوران و کافی شاپ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D8f-Jm-cTR" userLabel="GroupLabel">
@@ -274,7 +274,7 @@
                                     <constraint firstItem="D8f-Jm-cTR" firstAttribute="centerY" secondItem="ARE-vf-tXM" secondAttribute="centerY" id="Enj-fj-nta"/>
                                     <constraint firstItem="KTS-dt-poH" firstAttribute="leading" secondItem="ARE-vf-tXM" secondAttribute="leading" id="IUO-h0-BWR"/>
                                     <constraint firstItem="D8f-Jm-cTR" firstAttribute="leading" secondItem="7qY-90-i2G" secondAttribute="trailing" constant="10" id="KQ1-YL-FFJ"/>
-                                    <constraint firstItem="KTS-dt-poH" firstAttribute="width" secondItem="ARE-vf-tXM" secondAttribute="width" multiplier="0.3" id="NV4-N0-tKy"/>
+                                    <constraint firstItem="KTS-dt-poH" firstAttribute="width" secondItem="ARE-vf-tXM" secondAttribute="width" multiplier="0.35" id="NV4-N0-tKy"/>
                                     <constraint firstItem="KTS-dt-poH" firstAttribute="height" secondItem="ARE-vf-tXM" secondAttribute="height" id="Pcg-VS-Izu"/>
                                     <constraint firstAttribute="trailing" secondItem="sZT-FL-Gaw" secondAttribute="trailing" constant="12" id="UPq-Av-ooq"/>
                                     <constraint firstItem="D8f-Jm-cTR" firstAttribute="height" secondItem="ARE-vf-tXM" secondAttribute="height" id="VFV-OK-y3m"/>
@@ -537,6 +537,7 @@
                         <outlet property="groupLabel" destination="D8f-Jm-cTR" id="ZNA-zq-ngl"/>
                         <outlet property="groupLogoImage" destination="sZT-FL-Gaw" id="WOC-xU-yaM"/>
                         <outlet property="headerView" destination="uKR-e3-AUD" id="sLe-Th-zzA"/>
+                        <outlet property="locationLabelButton" destination="dmt-4a-EPN" id="pSY-gc-Z8Z"/>
                         <outlet property="shopTable" destination="Oc0-p0-Jfb" id="uQ0-MB-H9E"/>
                     </connections>
                 </viewController>

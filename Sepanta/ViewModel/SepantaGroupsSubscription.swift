@@ -81,10 +81,12 @@ extension SepantaGroupsViewController {
             .subscribe(onNext: { [weak self] (innerProvinceDicObs) in
                 print("innerProvinceDicObs : ",innerProvinceDicObs.count)
                 let controller = ArrayChoiceTableViewController(innerProvinceDicObs.keys.sorted(){$0 < $1}) {
-                    (selectedProvinceStr) in
-                    self?.selectProvince.text = selectedProvinceStr
+                    (selectedProvince) in
+                    self?.selectProvince.text = selectedProvince
+                    self?.selectedStateStr = selectedProvince
+                    self?.selectedCityStr = nil
                     self?.selectCity.text = ""
-                    self?.currentStateCodeObs.accept(innerProvinceDicObs[selectedProvinceStr]!)
+                    self?.currentStateCodeObs.accept(innerProvinceDicObs[selectedProvince]!)
                 }
                 controller.preferredContentSize = CGSize(width: 250, height: innerProvinceDicObs.count*60)
                 Spinner.stop()

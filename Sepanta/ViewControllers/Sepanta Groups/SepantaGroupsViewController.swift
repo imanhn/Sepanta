@@ -21,6 +21,9 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
     var groupButtons : SepantaGroupButtons?
     var catagories = [Catagory]()
     var disposableArray = [Disposable]()
+    var selectedCityStr : String?
+    var selectedStateStr : String?
+
     @IBOutlet weak var sepantaScrollView: UIScrollView!
     @IBOutlet weak var selectCity: UnderLinedSelectableTextField!
     @IBOutlet weak var selectProvince: UnderLinedSelectableTextField!
@@ -45,9 +48,10 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
     @IBAction func cityPressed(_ sender: Any) {
         let innerCityDicObs = NetworkManager.shared.cityDictionaryObs.value
         let controller = ArrayChoiceTableViewController(innerCityDicObs.keys.sorted(){$0 < $1}) {
-            (selectedCityStr) in
-            self.selectCity.text = selectedCityStr
-            self.currentCityCodeObs.accept(innerCityDicObs[selectedCityStr]!)
+            (selectedCity) in
+            self.selectCity.text = selectedCity
+            self.selectedCityStr = selectedCity
+            self.currentCityCodeObs.accept(innerCityDicObs[selectedCity]!)
         }
         controller.preferredContentSize = CGSize(width: 250, height: innerCityDicObs.count*60)
         Spinner.stop()

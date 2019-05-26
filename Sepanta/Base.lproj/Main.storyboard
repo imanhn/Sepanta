@@ -45,7 +45,7 @@
                                 <rect key="frame" x="19" y="120" width="337.5" height="67"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="hph-dd-qiT">
-                                        <rect key="frame" x="0.0" y="0.0" width="337.5" height="67"/>
+                                        <rect key="frame" x="25" y="0.0" width="287" height="67"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxo-tG-8Ao" userLabel="help">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="67"/>
@@ -55,24 +55,24 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8s7-oa-94L" userLabel="notification" customClass="UIButtonWithBadge" customModule="Sepanta" customModuleProvider="target">
-                                                <rect key="frame" x="69.5" y="0.0" width="40" height="67"/>
+                                                <rect key="frame" x="57" y="0.0" width="40" height="67"/>
                                                 <state key="normal" image="icon_news_resized"/>
                                                 <connections>
                                                     <action selector="gotoNotifications:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="z7O-m3-A85"/>
                                                 </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="icon_logo_statuse_in" translatesAutoresizingMaskIntoConstraints="NO" id="su3-Wk-zEO" userLabel="logo">
-                                                <rect key="frame" x="139" y="0.0" width="59" height="67"/>
+                                                <rect key="frame" x="114" y="0.0" width="59" height="67"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahS-up-E30" userLabel="favorites">
-                                                <rect key="frame" x="227.5" y="0.0" width="40" height="67"/>
+                                                <rect key="frame" x="190" y="0.0" width="40" height="67"/>
                                                 <state key="normal" image="icon_home_fav"/>
                                                 <connections>
                                                     <action selector="gotoFavorites:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="jh8-56-UN9"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QWN-5j-uDl" userLabel="profile">
-                                                <rect key="frame" x="297.5" y="0.0" width="40" height="67"/>
+                                                <rect key="frame" x="247" y="0.0" width="40" height="67"/>
                                                 <state key="normal" image="icon_profile_03_resized"/>
                                                 <connections>
                                                     <action selector="gotoProfile:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="n5v-ZJ-Pbc"/>
@@ -85,7 +85,7 @@
                                     <constraint firstItem="hph-dd-qiT" firstAttribute="centerX" secondItem="4Hk-Yy-qxo" secondAttribute="centerX" id="CZa-Yc-utz"/>
                                     <constraint firstItem="hph-dd-qiT" firstAttribute="height" secondItem="4Hk-Yy-qxo" secondAttribute="height" id="EgX-6Y-hxQ"/>
                                     <constraint firstItem="hph-dd-qiT" firstAttribute="centerY" secondItem="4Hk-Yy-qxo" secondAttribute="centerY" id="IHM-iC-Lgd"/>
-                                    <constraint firstItem="hph-dd-qiT" firstAttribute="width" secondItem="4Hk-Yy-qxo" secondAttribute="width" id="oba-AQ-ywx"/>
+                                    <constraint firstItem="hph-dd-qiT" firstAttribute="width" secondItem="4Hk-Yy-qxo" secondAttribute="width" multiplier="0.85" id="oba-AQ-ywx"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lB3-P9-L47" userLabel="SearchView">

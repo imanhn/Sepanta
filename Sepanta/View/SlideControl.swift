@@ -60,6 +60,7 @@ class SlideController {
     }
     
     @objc func updateSlide(){
+        if self.delegate == nil {return}
         if self.adsPage == self.slides.count - 1 {
             self.adsPage = 0
         }else{
@@ -80,6 +81,7 @@ class SlideController {
         }
     }
     @objc func handlePan(_ sender:UIPanGestureRecognizer) {
+        if self.delegate == nil {return}
         //print("Pan Status : ",aPanStarted," State : ",sender.state)
         let panStartLocation = sender.location(in: self.delegate.slideView)        
         if (sender.state == UIGestureRecognizerState.began && isOnSlideView(panStartLocation)) {
@@ -151,6 +153,7 @@ class SlideController {
     }
     
     func setupLeftAndRightImages(){
+        if self.delegate == nil {return}
         if adsPage < 1 {
             //leftImageView.image = slides[adsPage] // No left! get the current for left
             self.delegate.leftImageView.image = slides.last // No left! get a blank logo for left
@@ -189,6 +192,7 @@ class SlideController {
         }
     }
     func isOnSlideView(_ aLocation : CGPoint)->Bool{
+        if self.delegate == nil {return false}
         if aLocation.x > 0 && aLocation.x < self.delegate.slideView.frame.width &&
             aLocation.y > 0 && aLocation.y < self.delegate.slideView.frame.height{
             return true
@@ -196,6 +200,7 @@ class SlideController {
         return false
     }
     func handleTap(_ sender : UITapGestureRecognizer){
+        if self.delegate == nil {return}
         if (sender.state == UIGestureRecognizerState.ended) {
             let tapLocation = sender.location(in: self.delegate.slideView)
             if isOnSlideView(tapLocation){

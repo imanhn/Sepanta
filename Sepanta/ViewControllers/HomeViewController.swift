@@ -31,7 +31,8 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     
     @objc override func willPop() {
         self.disposeList.forEach({$0.dispose()})
-        self.slideView = nil
+        self.slideControl?.endTimer()
+        self.slideControl = nil
     }
 
     @IBAction func gotoFavorites(_ sender: Any) {

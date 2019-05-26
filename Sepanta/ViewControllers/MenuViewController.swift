@@ -98,8 +98,7 @@ class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
         bindToTableView()
     }
     
-    @objc override func okPressed(_ sender: Any) {
-        print("ok Pressed")
+    @objc override func okPressed(_ sender: Any) {        
         self.removeMenuAndDismissVC()
         LoginKey.shared.deleteTokenAndUserID()
         self.coordinator!.popLogin()
