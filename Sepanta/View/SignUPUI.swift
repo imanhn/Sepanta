@@ -259,20 +259,19 @@ class SignUPUI : NSObject , UITextFieldDelegate {
         cityDispose.disposed(by: self.delegate.myDisposeBag)
         disposeList.append(cityDispose)
     }
-    
     @objc func selectStateTapped(_ sender : Any){
-        self.delegate.view.endEditing(true)
+        self.delegate.setEditing(false, animated: true)
         let aTextField = sender as! EmptyTextField
         
-        if NetworkManager.shared.provinceDictionaryObs.value.count > 0 {
-            let options = NetworkManager.shared.provinceDictionaryObs.value.keys
-            let controller = ArrayChoiceTableViewController(options.sorted(){$0 < $1}) {
+        if NetworkManager.shared.allProvinceListObs.value.count > 0 {
+            let options = NetworkManager.shared.allProvinceListObs.value
+            let controller = ArrayChoiceTableViewController(options.filter({$0.count > 1})) {
                 (selectedOption) in
                 aTextField.text = selectedOption
                 aTextField.sendActions(for: .valueChanged)
                 self.cityCode = nil
                 self.cityText.text = ""
-                self.stateCode = NetworkManager.shared.provinceDictionaryObs.value[selectedOption]
+                self.stateCode = "\(options.index(of: selectedOption) ?? 0)"
                 NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
             }
             controller.preferredContentSize = CGSize(width: 250, height: options.count*60)
@@ -280,14 +279,14 @@ class SignUPUI : NSObject , UITextFieldDelegate {
             
         }else{
             NetworkManager.shared.run(API: "get-state-and-city",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
-            let provinceDispose = NetworkManager.shared.provinceDictionaryObs
+            let provinceDispose = NetworkManager.shared.allProvinceListObs
                 .filter({$0.count > 0})
-                .subscribe(onNext: { [unowned self] (innerProvinceDicObs) in
-                    let controller = ArrayChoiceTableViewController(innerProvinceDicObs.keys.sorted(){$0 < $1}) {
+                .subscribe(onNext: { [unowned self] (innerAllProvinceList) in
+                    let controller = ArrayChoiceTableViewController(innerAllProvinceList.filter({$0.count > 1})) {
                         (selectedOption) in
                         aTextField.text = selectedOption
                         aTextField.sendActions(for: .valueChanged)
-                        self.stateCode = innerProvinceDicObs[selectedOption]
+                        self.stateCode = "\(innerAllProvinceList.index(of: selectedOption) ?? 0)"
                         self.cityCode = nil
                         self.cityText.text = ""
                         NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())

@@ -538,6 +538,7 @@
                         <outlet property="groupLogoImage" destination="sZT-FL-Gaw" id="WOC-xU-yaM"/>
                         <outlet property="headerView" destination="uKR-e3-AUD" id="sLe-Th-zzA"/>
                         <outlet property="locationLabelButton" destination="dmt-4a-EPN" id="pSY-gc-Z8Z"/>
+                        <outlet property="locationViewSize" destination="NV4-N0-tKy" id="cVt-PL-TbZ"/>
                         <outlet property="shopTable" destination="Oc0-p0-Jfb" id="uQ0-MB-H9E"/>
                     </connections>
                 </viewController>

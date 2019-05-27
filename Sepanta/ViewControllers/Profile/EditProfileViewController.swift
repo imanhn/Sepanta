@@ -50,6 +50,7 @@ class EditProfileViewController : UIViewControllerWithKeyboardNotificationWithEr
     }
     @objc override func willPop() {
         disposeList.forEach({$0.dispose()})
+        editProfileUI?.disposeList.forEach({$0.dispose()})
         editProfileUI = nil
         imagePickerDelegate = nil
     }

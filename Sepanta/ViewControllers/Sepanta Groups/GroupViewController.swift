@@ -58,6 +58,7 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     @IBOutlet weak var HeaderLabel: UILabel!
     @IBOutlet weak var groupLabel: UILabel!
     @IBOutlet weak var locationLabelButton: UIButton!
+    @IBOutlet weak var locationViewSize: NSLayoutConstraint!
     
     var currentGroupImage = UIImage()
     var catagoryId = Int()
@@ -215,6 +216,15 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
         self.groupLogoImage.image = currentGroupImage
         self.groupLogoImage.contentMode = .scaleAspectFit
         let locationText = (self.selectedCityStr ?? self.selectedStateStr) ?? "کل کشور"
+        /*
+        if locationText.count < 6 {
+            NSLayoutConstraint.multiplier(0.2, of: &locationViewSize)
+        }else if locationText.count < 10 {
+            NSLayoutConstraint.multiplier(0.25, of: &locationViewSize)
+        }else if locationText.count >= 10 {
+            NSLayoutConstraint.multiplier(0.35, of: &locationViewSize)
+        }
+        */
         self.locationLabelButton.setTitle(locationText, for: .normal)
     }
     

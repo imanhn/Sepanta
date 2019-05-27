@@ -26,6 +26,7 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
     var submitButton = UIButton(type: .custom)
     var stateCode : String!
     var cityCode : String!
+    var disposeList = [Disposable]()
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -82,7 +83,7 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
             }
         )
         submitDisp.disposed(by: self.delegate.myDisposeBag)
-        self.delegate.disposeList.append(submitDisp)
+        self.disposeList.append(submitDisp)
         
     }
     
@@ -95,7 +96,7 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
                 self.fillEditProfileForm(With: aProfileInfo)
             })
         profileInfoWriapperDisp.disposed(by: self.delegate.myDisposeBag)
-        self.delegate.disposeList.append(profileInfoWriapperDisp)
+        self.disposeList.append(profileInfoWriapperDisp)
     }
     
     func fillEditProfileForm(With aProfileInfo : ProfileInfo){
@@ -186,7 +187,7 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
                 
             })
         updateProDisp.disposed(by: self.delegate.myDisposeBag)
-        self.delegate.disposeList.append(updateProDisp)
+        self.disposeList.append(updateProDisp)
     }
     
     func showForm() {
@@ -336,22 +337,22 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
                 self.delegate.showPopup(controller, sourceView: aTextField)
             })
         cityDispose.disposed(by: self.delegate.myDisposeBag)
-        self.delegate.disposeList.append(cityDispose)
+        self.disposeList.append(cityDispose)
     }
     
     @objc func selectStateTapped(_ sender : Any){
         self.delegate.setEditing(false, animated: true)
         let aTextField = sender as! EmptyTextField
         
-        if NetworkManager.shared.provinceDictionaryObs.value.count > 0 {
-            let options = NetworkManager.shared.provinceDictionaryObs.value.keys
-            let controller = ArrayChoiceTableViewController(options.sorted(){$0 < $1}) {
+        if NetworkManager.shared.allProvinceListObs.value.count > 0 {
+            let options = NetworkManager.shared.allProvinceListObs.value
+            let controller = ArrayChoiceTableViewController(options.filter({$0.count > 1})) {
                 (selectedOption) in
                 aTextField.text = selectedOption
                 aTextField.sendActions(for: .valueChanged)
                 self.cityCode = nil
                 self.texts["cityText"]!.text = ""
-                self.stateCode = NetworkManager.shared.provinceDictionaryObs.value[selectedOption]
+                self.stateCode = "\(options.index(of: selectedOption) ?? 0)"
                 NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
             }
             controller.preferredContentSize = CGSize(width: 250, height: options.count*60)
@@ -359,14 +360,14 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
             
         }else{
             NetworkManager.shared.run(API: "get-state-and-city",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
-            let provinceDispose = NetworkManager.shared.provinceDictionaryObs
+            let provinceDispose = NetworkManager.shared.allProvinceListObs
                 .filter({$0.count > 0})
-                .subscribe(onNext: { [unowned self] (innerProvinceDicObs) in
-                    let controller = ArrayChoiceTableViewController(innerProvinceDicObs.keys.sorted(){$0 < $1}) {
+                .subscribe(onNext: { [unowned self] (innerAllProvinceList) in
+                    let controller = ArrayChoiceTableViewController(innerAllProvinceList.filter({$0.count > 1})) {
                         (selectedOption) in
                         aTextField.text = selectedOption
                         aTextField.sendActions(for: .valueChanged)
-                        self.stateCode = innerProvinceDicObs[selectedOption]
+                        self.stateCode = "\(innerAllProvinceList.index(of: selectedOption) ?? 0)"
                         self.cityCode = nil
                         self.texts["cityText"]!.text = ""
                         NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
@@ -375,7 +376,7 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
                     self.delegate.showPopup(controller, sourceView: aTextField)
                 })
             provinceDispose.disposed(by: self.delegate.myDisposeBag)
-            self.delegate.disposeList.append(provinceDispose)
+            disposeList.append(provinceDispose)
         }
     }
     

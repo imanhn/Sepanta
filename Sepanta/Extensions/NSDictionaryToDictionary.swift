@@ -21,3 +21,12 @@ extension NSDictionary {
         return swiftDictionary
     }
 }
+/*
+protocol StringProtocol {}
+extension String: StringProtocol {}
+
+extension Dictionary where Key : StringProtocol, Value : StringProtocol{
+    func getSortedKeys() {
+    }
+    
+}*/

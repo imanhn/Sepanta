@@ -75,22 +75,23 @@ extension SepantaGroupsViewController {
     }
     
     func subscribeToStateChange() {
-        let provDisp = NetworkManager.shared.provinceDictionaryObs
+        let provDisp = NetworkManager.shared.catagoriesProvinceListObs
             //.debug()
             .filter({$0.count > 0})
-            .subscribe(onNext: { [weak self] (innerProvinceDicObs) in
-                print("innerProvinceDicObs : ",innerProvinceDicObs.count)
-                let controller = ArrayChoiceTableViewController(innerProvinceDicObs.keys.sorted(){$0 < $1}) {
-                    (selectedProvince) in
-                    self?.selectProvince.text = selectedProvince
-                    self?.selectedStateStr = selectedProvince
-                    self?.selectedCityStr = nil
-                    self?.selectCity.text = ""
-                    self?.currentStateCodeObs.accept(innerProvinceDicObs[selectedProvince]!)
+            .subscribe(onNext: { [unowned self] (innerCatProvinceListObs) in
+                print("innerCatProvinceListObs : ",innerCatProvinceListObs.count)
+                let filteredList = innerCatProvinceListObs.filter({$0.count > 1})
+                let controller = ArrayChoiceTableViewController(filteredList) {
+                    (selectedOption) in
+                    self.selectProvince.text = selectedOption
+                    self.selectedStateStr = selectedOption
+                    self.selectedCityStr = nil
+                    self.selectCity.text = ""
+                    self.currentStateCodeObs.accept("\(innerCatProvinceListObs.index(of: selectedOption) ?? 0)")
                 }
-                controller.preferredContentSize = CGSize(width: 250, height: innerProvinceDicObs.count*60)
+                controller.preferredContentSize = CGSize(width: 250, height: filteredList.count*60)
                 Spinner.stop()
-                self?.showPopup(controller, sourceView: (self?.selectProvince!)!)
+                self.showPopup(controller, sourceView: self.selectProvince!)
                 })
         provDisp.disposed(by: myDisposeBag)
         disposableArray.append(provDisp)

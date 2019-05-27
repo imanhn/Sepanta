@@ -26,15 +26,14 @@ class JSONParser {
         resultSubject.asObservable()
             //.debug()
             .filter{ $0.count > 0 }
-            .subscribe(onNext: { [weak self] (aDic) in
+            .subscribe(onNext: { [unowned self] (aDic) in
                 //print("Dictionary Received : ",aDic.count,"  ",aDic)
                 if (apiName == "get-state-and-city") && (aMethod == HTTPMethod.get){
-                    var processedDic = Dictionary<String,String>()
-                    (processedDic) = (self?.processAsProvinceList(Result: aDic))!
-                    NetworkManager.shared.provinceDictionaryObs.accept(processedDic)//onNext(processedDic)//
+                    let provinceList = self.processAsProvinceListToStringArray(Result: aDic)
+                    NetworkManager.shared.allProvinceListObs.accept(provinceList)
                 } else if (apiName == "get-state-and-city") && (aMethod == HTTPMethod.post) {
                     var processedDic = Dictionary<String,String>()
-                    processedDic = (self?.processAsCityList(Result: aDic))!
+                    processedDic = (self.processAsCityList(Result: aDic))
                     NetworkManager.shared.cityDictionaryObs.accept(processedDic)
                 } else if (apiName == "login") && (aMethod == HTTPMethod.post) {
                     if let aUserID = aDic["userId"] {
@@ -66,7 +65,7 @@ class JSONParser {
                     
                     if aDic["list_city"] != nil {
                         var processedDic = Dictionary<String,String>()
-                        processedDic = (self?.processAsCityList(Result: aDic))!
+                        processedDic = (self.processAsCityList(Result: aDic))
                         NetworkManager.shared.cityDictionaryObs.accept(processedDic)
                     }
 
@@ -93,15 +92,11 @@ class JSONParser {
                     }
                 } else if (apiName == "category-state-list") && (aMethod == HTTPMethod.get) {
                     //Returns the List of supported States (which probably have catagory
-                    var processedDic = Dictionary<String,String>()
-                    (processedDic) = (self?.processAsProvinceList(Result: aDic))!
-                    NetworkManager.shared.provinceDictionaryObs.accept(processedDic)
-                    if let cat = aDic["categories"] {
-                        NetworkManager.shared.catagoriesObs.accept([cat])
-                    }
+                    let provinceList = self.processAsProvinceListToStringArray(Result: aDic)
+                    NetworkManager.shared.catagoriesProvinceListObs.accept(provinceList)
                 } else if (apiName == "post-details") && (aMethod == HTTPMethod.post) {
                     //Returns the Post Detail
-                    let aPost = (self?.processAsPostDetails(Result: aDic))!
+                    let aPost = (self.processAsPostDetails(Result: aDic))
                     NetworkManager.shared.postDetailObs.accept(aPost)
                 } else if (apiName == "post-delete") && (aMethod == HTTPMethod.post) {
                     //Returns the Post Detail
@@ -123,7 +118,7 @@ class JSONParser {
                     
                 } else if (apiName == "profile")  {
                     //Returns Profile Data for a user Id
-                    let aProfile = (self?.processAsProfile(Result: aDic))!
+                    let aProfile = (self.processAsProfile(Result: aDic))
                     if targetObs == "SHOP" {
                         //NetworkManager.shared.shopProfileObs = BehaviorRelay<Profile>(value: aProfile)
                         NetworkManager.shared.shopProfileObs.accept(aProfile)
@@ -144,11 +139,11 @@ class JSONParser {
                     NetworkManager.shared.commentSendingSuccessful.accept(true)
                 } else if (apiName == "poll") && (aMethod == HTTPMethod.get) {
                     //Returns Profile Data for a user Id
-                    let aPollNo = (self?.processAsPollGet(Result: aDic))!
+                    let aPollNo = (self.processAsPollGet(Result: aDic))
                     NetworkManager.shared.pollObs.accept(aPollNo)
                 } else if (apiName == "rating") && (aMethod == HTTPMethod.post) {
                     //Returns Rating...
-                    let arate = (self?.processRating(Result: aDic))!
+                    let arate = (self.processRating(Result: aDic))
                     NetworkManager.shared.shopRateObs.accept(arate)
                 } else if (apiName == "contact") && (aMethod == HTTPMethod.post) {
                     // Sets True for commentSendingSuccessful to be observable by PostUI
@@ -165,7 +160,7 @@ class JSONParser {
                     }
                 } else if (apiName == "like-dislike") && (aMethod == HTTPMethod.post) {
                     // Sets True for commentSendingSuccessful to be observable by PostUI
-                    let likeStatus = self?.processLike(Result: aDic)
+                    let likeStatus = self.processLike(Result: aDic)
                     if likeStatus == 2 {
                         NetworkManager.shared.toggleLiked.accept(ToggleStatus.UNKNOWN)
                     }else if likeStatus == 1 {
@@ -178,43 +173,43 @@ class JSONParser {
                     NetworkManager.shared.updateProfileInfoSuccessful.accept(true)
                 } else if (apiName == "new-shops") || (apiName == "my-following") || (apiName == "category-shops-list") {
                     print("Starting Shops List Parser for : \(apiName)")
-                    let parsedShops = self?.processShopList(Result: aDic)
-                    NetworkManager.shared.shopObs.accept(parsedShops!)
+                    let parsedShops = self.processShopList(Result: aDic)
+                    NetworkManager.shared.shopObs.accept(parsedShops)
                 } else if (apiName == "favorite") && (aMethod == HTTPMethod.get)  {
                     print("Starting Fav Shops List Parser for : \(apiName)")
-                    let parsedShops = self?.processShopList(Result: aDic)
-                    NetworkManager.shared.favShopObs.accept(parsedShops!)
+                    let parsedShops = self.processShopList(Result: aDic)
+                    NetworkManager.shared.favShopObs.accept(parsedShops)
                 } else if (apiName == "favorite") && (aMethod == HTTPMethod.post) {
                     print("Starting Toggle Favorite on a shop Parser...")
-                    let aToggle = self?.processFavAShopToggle(Result: aDic)
-                    NetworkManager.shared.shopFav.accept(aToggle!)
+                    let aToggle = self.processFavAShopToggle(Result: aDic)
+                    NetworkManager.shared.shopFav.accept(aToggle)
                 } else if (apiName == "profile-info") && (aMethod == HTTPMethod.get) {
                     print("Starting to get profile-info from server and parse it...")
-                    let parsedProfileInfo = self?.processProfileInfo(Result: aDic)
-                    ProfileInfoWrapper.shared.profileInfoObs.accept(parsedProfileInfo!)
+                    let parsedProfileInfo = self.processProfileInfo(Result: aDic)
+                    ProfileInfoWrapper.shared.profileInfoObs.accept(parsedProfileInfo)
                 } else if (apiName == "search-shops") && (aMethod == HTTPMethod.post) {
                     print("Starting search-shops Parser...")
-                    let parsedShopSearchResults = self?.processShopSearchResultList(Result: aDic)
-                    NetworkManager.shared.shopSearchResultObs.accept(parsedShopSearchResults!)
+                    let parsedShopSearchResults = self.processShopSearchResultList(Result: aDic)
+                    NetworkManager.shared.shopSearchResultObs.accept(parsedShopSearchResults)
                 } else if (apiName == "shops-location") && (aMethod == HTTPMethod.post) {
                     print("Starting shops-location Parser...")
-                    let parsedShopLocations = self?.processShopLocationsList(Result: aDic)
-                    NetworkManager.shared.shopObs.accept(parsedShopLocations!)
+                    let parsedShopLocations = self.processShopLocationsList(Result: aDic)
+                    NetworkManager.shared.shopObs.accept(parsedShopLocations)
                 } else if (apiName == "check-bank") && (aMethod == HTTPMethod.post) {
                     print("Starting Check-Bank Parser...")
-                    let parsedBankNumber = self?.processBankNumber(Result: aDic)
-                    NetworkManager.shared.bankObs.accept(parsedBankNumber!)
+                    let parsedBankNumber = self.processBankNumber(Result: aDic)
+                    NetworkManager.shared.bankObs.accept(parsedBankNumber)
                 } else if (apiName == "card-request") && (aMethod == HTTPMethod.post) {
                     print("Starting card-request Parser...")
-                    self?.processCardRequest(Result: aDic)
+                    self.processCardRequest(Result: aDic)
                 } else if (apiName == "points-user") && (aMethod == HTTPMethod.get) {
                     print("Starting points-user Parser...")
-                    let aUserPoint = self?.processPoints(Result: aDic)
-                    NetworkManager.shared.userPointsObs.accept(aUserPoint!)
-                    NetworkManager.shared.pointsElementsObs.accept(aUserPoint!.points!)
+                    let aUserPoint = self.processPoints(Result: aDic)
+                    NetworkManager.shared.userPointsObs.accept(aUserPoint)
+                    NetworkManager.shared.pointsElementsObs.accept(aUserPoint.points!)
                 } else if (apiName == "selling-request") && (aMethod == HTTPMethod.post) {
                     print("Starting selling-request Parser...")
-                    self?.processSellRequest(Result: aDic)
+                    self.processSellRequest(Result: aDic)
                 } else if (apiName == "app-version") && (aMethod == HTTPMethod.get) {
                     print("Starting version Parser getting latest version...")
                     if let stringVersion = aDic["version_ios"] as? String {
@@ -228,7 +223,7 @@ class JSONParser {
                     }
                 } else if (apiName == "notifications") && (aMethod == HTTPMethod.get) {
                     print("Starting Notification Parser...")
-                    let (generalNotif,notifAsAny) = (self?.processNotifications(Result: aDic))!
+                    let (generalNotif,notifAsAny) = self.processNotifications(Result: aDic)
                     if let notifForShop = notifAsAny as? [NotificationForShop] {
                         NetworkManager.shared.notificationForShopObs.accept(notifForShop)
                     }else if let notifForUser = notifAsAny as? [NotificationForUser] {
@@ -239,7 +234,7 @@ class JSONParser {
                     NetworkManager.shared.generalNotifObs.accept(generalNotif)
                 } else if (apiName == "home") && (aMethod == HTTPMethod.get) {
                 print("Starting Home Parser...")
-                self?.processAndSetHomeData(Result: aDic)
+                self.processAndSetHomeData(Result: aDic)
         }
 
                 }, onDisposed: {
@@ -918,6 +913,39 @@ class JSONParser {
         //print("Parsing State List Successful")
 
         return provinceDict
+        
+    }
+    
+    func processAsProvinceListToStringArray(Result aResult : NSDictionary) -> [String] {
+        //print("*** Using Province Direct Array!")
+        var provinceList = [String]()
+        if aResult["error"] != nil {
+            print("ERROR in Province List Parsing : ",aResult["error"]!)
+        }
+        if aResult["message"] != nil {
+            print("Message Parsed : ",aResult["message"]!)
+        }
+        if let aDic = aResult["states"] as? NSDictionary {
+            for aProv in aDic
+            {
+                if let idx = aProv.value as? Int {
+                    if provinceList.count < idx + 1{
+                        for _ in (provinceList.count)...(idx+1){
+                            provinceList.append("")
+                        }
+                    }
+                    provinceList[idx] = "\(aProv.key)"
+                }else{
+                    print("ERROR Parsing ",aProv.value," to Number!")
+                }
+            }
+        } else {
+            print("JSONParser processAsProvinceListToStringArray : Dictionary does not have states key")
+        }
+        print("Province List built : ",provinceList.count," record")
+        //print("Parsing State List Successful")
+        //provinceList.forEach({print("ELEM : ",$0)})
+        return provinceList
         
     }
     

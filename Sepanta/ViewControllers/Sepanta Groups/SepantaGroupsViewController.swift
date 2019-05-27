@@ -53,6 +53,7 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
             self.selectedCityStr = selectedCity
             self.currentCityCodeObs.accept(innerCityDicObs[selectedCity]!)
         }
+        print("CITY NO : ",innerCityDicObs.count)
         controller.preferredContentSize = CGSize(width: 250, height: innerCityDicObs.count*60)
         Spinner.stop()
         self.showPopup(controller, sourceView: self.selectCity!)
@@ -77,7 +78,7 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
         //print("VL SepantaGroup self.coordinator : ",self.coordinator ?? "nil")
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
-        NetworkManager.shared.provinceDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
+        NetworkManager.shared.catagoriesProvinceListObs = BehaviorRelay<[String]>(value: [String]())
         NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
         definesPresentationContext = true
         selectCity.delegate = self

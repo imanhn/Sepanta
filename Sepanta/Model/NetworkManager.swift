@@ -48,7 +48,9 @@ class NetworkManager {
     var postsObs = BehaviorRelay<[Post]>(value: [Post]())
     var serverMessageObs = BehaviorRelay<String>(value: "")
     // Result of Parser :
-    var provinceDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
+    var allProvinceListObs = BehaviorRelay<[String]>(value: [String]())
+    var catagoriesProvinceListObs = BehaviorRelay<[String]>(value: [String]())
+
     var cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
     var catagoriesObs = BehaviorRelay<[Any]>(value: [Any]())
     var shopObs = BehaviorRelay<[Shop]>(value: [Shop]())
