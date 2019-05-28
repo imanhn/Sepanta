@@ -36,7 +36,7 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     let byOff = "بیشترین تخفیف"
     let byFollower = "بیشترین عضو"
     let byNewest = "جدید ترین"
-    let byRate = "بیشترین امتیاز"
+    let byRate = "محبوب ترین"
     let byName = "نام فروشگاه"
     let searchOption = "جستجو"
     let sortOption = "مرتب سازی با"
@@ -118,6 +118,8 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
         filterView.filterValue.addTarget(self, action: #selector(filterValueTapped(_:)), for: .allTouchEvents)
         filterView.filterType.tag = 1
         filterView.filterValue.tag = 2
+        filterView.filterType.text = sortOption
+        filterView.filterValue.text = byRate
         filterView.filterType.addTarget(self, action: #selector(filterTypeTapped(_:)), for: .allTouchEvents)
         filterView.filterValue.delegate = self
         filterView.filterType.delegate = self

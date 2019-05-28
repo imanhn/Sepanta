@@ -75,7 +75,8 @@ class JSONParser {
                         let aRole = aDic["role"] as? String {
                         LoginKey.shared.token = aToken
                         LoginKey.shared.username = aUsername
-                        LoginKey.shared.role = aRole                        
+                        LoginKey.shared.role = aRole
+                        LoginKey.shared.shopID = (aDic["shop_id"] ?? "") as? String ?? ""
                         LoginKey.shared.tokenObs.accept(LoginKey.shared.token)
                         NetworkManager.shared.loginSucceed.accept(true)
                         LoginKey.shared.userIDObs.accept(LoginKey.shared.userID)
@@ -128,7 +129,11 @@ class JSONParser {
                         NetworkManager.shared.profileObs.accept(aProfile)
                         //NetworkManager.shared.shopObs.accept(aProfile.content as! [Shop])
                     }
-                    
+                } else if (apiName == "shop-profile")  {
+                    //Returns Profile Data for a user Id
+                    let aProfile = (self.processAsProfile(Result: aDic))
+                    NetworkManager.shared.shopProfileObs.accept(aProfile)
+                    NetworkManager.shared.postsObs.accept(aProfile.content as! [Post])
                 }else if (apiName == "report-comment") || (apiName == "report-post") || (apiName == "report-comment"){
                     //Returns Profile Data for a user Id
                     if let amessage = aDic["message"] as? String {
@@ -197,8 +202,8 @@ class JSONParser {
                     NetworkManager.shared.shopObs.accept(parsedShopLocations)
                 } else if (apiName == "check-bank") && (aMethod == HTTPMethod.post) {
                     print("Starting Check-Bank Parser...")
-                    let parsedBankNumber = self.processBankNumber(Result: aDic)
-                    NetworkManager.shared.bankObs.accept(parsedBankNumber)
+                    let parsedBank = self.processBankNumber(Result: aDic)
+                    NetworkManager.shared.bankObs.accept(parsedBank)
                 } else if (apiName == "card-request") && (aMethod == HTTPMethod.post) {
                     print("Starting card-request Parser...")
                     self.processCardRequest(Result: aDic)
@@ -577,24 +582,19 @@ class JSONParser {
         return shopResults
     }
     
+    
     func processAsProfile(Result aProfileDicAsNS : NSDictionary) -> Profile {
         var profile = Profile()
-        //print("*** FETCHED IMAGE PROFILE : ",aProfileDicAsNS["image"] ?? "Image Profile")
-        //print("aProfileDicAsNS: ",aProfileDicAsNS)
-        //print("aProfileDicAsNS Keys : ",aProfileDicAsNS.allKeys)
-        if aProfileDicAsNS["id"] == nil || (aProfileDicAsNS["id"] as? Int) == 0 {
-            NetworkManager.shared.status.accept(.IncompleteData)
-            return Profile()
-        }
         profile.status = (aProfileDicAsNS["status"] as? String) ?? ""
         profile.message = (aProfileDicAsNS["message"] as? String) ?? ""
-        profile.id = (aProfileDicAsNS["id"] as? Int) ?? 0
+        profile.id = (aProfileDicAsNS["id"] as? Int) ?? (aProfileDicAsNS["user_id"] as? Int) ?? 0
         profile.image = (aProfileDicAsNS["image"] as? String) ?? ""
         profile.banner = (aProfileDicAsNS["banner"] as? String) ?? ""
         profile.bio = (aProfileDicAsNS["bio"] as? String) ?? ""
         profile.address = (aProfileDicAsNS["address"] as? String) ?? ""
         profile.shop_id = (aProfileDicAsNS["shop_id"] as? Int) ?? 0
         profile.shop_name = (aProfileDicAsNS["shop_name"] as? String) ?? ""
+        profile.total_points = (aProfileDicAsNS["total_points"] as? Int) ?? 0
         profile.category_title = (aProfileDicAsNS["category_title"] as? String) ?? ""
         profile.rate = (aProfileDicAsNS["rate"] as? String) ?? ""
         profile.rate_count = (aProfileDicAsNS["rate_count"] as? Int) ?? 0
@@ -617,9 +617,9 @@ class JSONParser {
                 //print("aPostOrShop : ",aPostOrShop)
                 //print("shop_Name : ",aPostOrShop["shop_name"])
                 if profile.role?.uppercased() == "User".uppercased() {//aPostOrShop["shop_name"] != nil || aPostOrShop["shop_off"] != nil {
-                    //print("This is a shop")
+                    //print("Role = User and This is a shop")
                     var newShop = Shop()
-                    newShop.shop_id = (aPostOrShop["shop_id"] as? Int) ?? 0
+                    newShop.shop_id = (aPostOrShop["id"] as? Int) ?? (aPostOrShop["shop_id"] as? Int) ?? 0
                     newShop.user_id = (aPostOrShop["user_id"] as? Int) ?? 0
                     newShop.shop_name = (aPostOrShop["shop_name"] as? String) ?? ""
                     newShop.shop_off = (aPostOrShop["shop_off"] as? Int) ?? 0
@@ -637,7 +637,7 @@ class JSONParser {
                     newShop.created_at = (aPostOrShop["created_at"] as? String) ?? ""
                     profile.content.append(newShop)
                 }else if profile.role?.uppercased() == "Shop".uppercased() {//else if aPostOrShop["title"] != nil {
-                    //print("This is a Post")
+                    //print("Role = Shop and This is a Post")
                     var newPost = Post(id: 0, shopId: 0, viewCount: 0, comments: [], isLiked: false, countLike: 0, title: "", content: "", image: "")
                     newPost.id = (aPostOrShop["id"] as? Int) ?? 0
                     newPost.title = (aPostOrShop["title"] as? String) ?? ""

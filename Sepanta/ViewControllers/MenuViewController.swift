@@ -26,6 +26,8 @@ class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
     @IBOutlet weak var menuTableView: MenuTableView!
     let myDisposeBag = DisposeBag()
     var disposeList = [Disposable]()
+    @IBOutlet weak var menuTableViewHeightCons: NSLayoutConstraint!
+    
     var menuItems : BehaviorRelay<[ButtomMenuItem]> = BehaviorRelay(value: [])
     
     @IBAction func backFromMenuTapped(_ sender: Any) {
@@ -42,14 +44,15 @@ class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
     
     func loadMenuItems() {
         var items = [ButtomMenuItem]()
-        items.append(ButtomMenuItem(aLabel: "داشبورد", anImageName: "icon_mainmenu_03"))
-        items.append(ButtomMenuItem(aLabel: "مراکز سپنتایی", anImageName: "icon_mainmenu_04"))
-        items.append(ButtomMenuItem(aLabel: "نزدیک من", anImageName: "icon_mainmenu_05"))
-        items.append(ButtomMenuItem(aLabel: "جدیدترین ها", anImageName: "icon_mainmenu_06"))
-        items.append(ButtomMenuItem(aLabel: "پولدار شو", anImageName: "icon_mainmenu_07"))
-        items.append(ButtomMenuItem(aLabel: "درباره ما", anImageName: "icon_mainmenu_08"))
-        items.append(ButtomMenuItem(aLabel: "ارتباط با ما", anImageName: "icon_mainmenu_09"))
-        items.append(ButtomMenuItem(aLabel: "خروج از پروفایل", anImageName: "icon_logout_white2"))
+        items.append(ButtomMenuItem(aLabel: "پروفایل", anImageName: "icon_mainmenu_03")) //0
+        items.append(ButtomMenuItem(aLabel: "مراکز سپنتایی", anImageName: "icon_mainmenu_04")) //1
+        items.append(ButtomMenuItem(aLabel: "نزدیک من", anImageName: "icon_mainmenu_05")) //2
+        items.append(ButtomMenuItem(aLabel: "جدیدترین ها", anImageName: "icon_mainmenu_06"))//3
+        items.append(ButtomMenuItem(aLabel: "پولدار شو", anImageName: "icon_mainmenu_07"))//4
+        items.append(ButtomMenuItem(aLabel: "درخواست نمایندگی", anImageName: "delegacy_icon"))//5
+        items.append(ButtomMenuItem(aLabel: "درباره ما", anImageName: "icon_mainmenu_08"))//6
+        items.append(ButtomMenuItem(aLabel: "ارتباط با ما", anImageName: "icon_mainmenu_09"))//7
+        items.append(ButtomMenuItem(aLabel: "خروج از حساب کاربری", anImageName: "icon_logout_white2"))//8
         menuItems.accept(items)
     }
     
@@ -58,6 +61,7 @@ class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
             if let aCell = cell as? MenuItemCell {
                 aCell.menuCellLabel.text = model.aLabel
                 aCell.menuCellImage.image =  UIImage(named: model.anImageName)
+                self.menuTableView.rowHeight = UIScreen.main.bounds.height*(self.menuTableViewHeightCons.multiplier)/CGFloat(self.menuItems.value.count)
             }
         }
         menuItemDisp.disposed(by: myDisposeBag)
@@ -73,8 +77,8 @@ class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
                     return
                 }
                 
-                if indexPath.row == 7 {
-                    print("Option Menu : 7")
+                if indexPath.row == 8 {
+                    //print("Option Menu : 7")
                     self.logout()
                 }else{
                     self.coordinator?.launchMenuSelection(indexPath.row)

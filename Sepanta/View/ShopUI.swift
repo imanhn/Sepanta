@@ -261,7 +261,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 if aProfile.is_follow != nil  {
                     self?.followButton.isFollowed = aProfile.is_follow ?? false
                     if aProfile.is_follow! {
-                        self?.followButton.setTitle("عضو شده اید", for: .normal)
+                        self?.followButton.setTitle("لغو عضویت", for: .normal)
                         self?.followButton.setEnable()
                     }else{
                         self?.followButton.setTitle("عضویت", for: .normal)

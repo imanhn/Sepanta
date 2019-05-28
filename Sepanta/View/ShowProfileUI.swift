@@ -157,7 +157,7 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
             self.shops.bind(to: collectionView.rx.items(cellIdentifier: "shopcell")) { [weak self] row, model, cell in
                 if let aCell = cell as? ButtonCell {
                     //if aCell.aButton == nil {aCell.aButton = UIButton(type: .custom)}
-                    //print("model : ",model)
+                    print("model : ",model)
                     let dim = ((self?.collectionView.bounds.width ?? 50) * 0.8) / (self?.numberOfFollowedShopInARow ?? 3)
                     aCell.aButton.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
                     self?.collectionView.addSubview(aCell)
@@ -179,7 +179,7 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
                     aCell.aButton.layer.shadowRadius = 2
                     aCell.aButton.layer.shadowOpacity = 0.2
                     
-                    aCell.aButton.tag = model.user_id ?? 0
+                    aCell.aButton.tag = model.shop_id ?? 0
                     aCell.aButton.addTarget(self, action: #selector(self?.showShopDetail), for: .touchUpInside)
                 }else{
                     print("\(cell) can not be casted to PostCell")
@@ -190,8 +190,12 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
     
     @objc func showShopDetail(_ sender : Any){
         let aButton = (sender as? UIButton)
+        guard (aButton?.tag != 0) else {
+            self.delegate.alert(Message: "اطلاعات این فروشگاه ناقص است")
+            return
+        }
         for ashop in shops.value {
-            if ashop.user_id == aButton?.tag {
+            if (ashop.shop_id == aButton?.tag)  && (ashop.shop_id != 0){
                 print("Shop Selected Pushing : ",ashop)
                 // this is neccessary because ShowProfile is subscribed to Profile and it will raise an error
                 // right after trying to push a shop because shop contents are post and profile contents are shops!
@@ -199,6 +203,7 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
                 // ShowProfile receives that and can not cast Content[Post] to Content[shop]
                 NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: Profile())
                 self.delegate.coordinator!.pushShop(Shop: ashop)
+                return
             }
         }
     }

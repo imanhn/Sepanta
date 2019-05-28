@@ -47,8 +47,12 @@ class SlideController {
         disposeList.append(slideObs)
         startTimer()
     }
+    
     func startTimer(){
         if slideTimer == nil {
+            slideTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(updateSlide), userInfo: nil, repeats: true)
+        }else{
+            slideTimer?.invalidate()
             slideTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(updateSlide), userInfo: nil, repeats: true)
         }
     }

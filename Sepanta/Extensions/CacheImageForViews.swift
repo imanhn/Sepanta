@@ -33,7 +33,13 @@ extension UIImageView {
         self.contentMode = acontentMode
         
         let imageSize = CGSize(width: self.frame.size.width*aScale, height: self.frame.size.height*aScale)
-        let filter = AspectScaledToFillSizeFilter(size: imageSize)//AspectScaledToFitSizeFilter(size: imageSize)
+        
+        var filter : ImageFilter
+        if acontentMode == UIViewContentMode.scaleAspectFit {
+            filter = AspectScaledToFitSizeFilter(size: imageSize)
+        } else {
+            filter = AspectScaledToFillSizeFilter(size: imageSize)
+        }
         self.image = defaultImage
         
         var cachedData : NSData?
@@ -47,6 +53,7 @@ extension UIImageView {
                 
             }else{
                 //print("Downloading....")
+                
                 self.af_setImage(withURL: imageUrl, placeholderImage: defaultImage, filter: filter,completion:
                     { (response) in
                         //print("Image Downloaded,Saving...")

@@ -40,6 +40,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         switch aRow {
         case 0:
             popHome()
+            pushShowProfile()
             break
         case 1:
             popHome()
@@ -55,17 +56,21 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
             break
         case 4:
             popHome()
-            pushGetRich(nil)
+            pushGetRich("")
             break
         case 5:
             popHome()
-            pushAboutUs()
+            pushGetRich(nil)
             break
         case 6:
             popHome()
-            pushContactUs()
+            pushAboutUs()
             break
         case 7:
+            popHome()
+            pushContactUs()
+            break
+        case 8:
             print("Menu Logout!")
             break
 
@@ -122,9 +127,8 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func pushShowProfile (){
-
         if LoginKey.shared.role == "Shop" {
-            let ashop = Shop(WithUserID: Int(LoginKey.shared.userID))
+            let ashop = Shop(WithShopID: Int(LoginKey.shared.shopID))
             self.pushShop(Shop: ashop)
         }else{
             let storyboard = UIStoryboard(name: "Profile", bundle: Bundle.main)

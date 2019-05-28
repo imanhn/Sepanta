@@ -15,6 +15,7 @@ import SwiftKeychainWrapper
 class LoginKey {
     var token = String()
     var userID = String()
+    var shopID = String()
     var username = String()
     var role = String()
     var version : Float = 1.0
@@ -30,7 +31,7 @@ class LoginKey {
         print("************************")
         print("self.token : ",self.token)
         print("************************")
-        print("Registering Token :",self.token.count,"  USERID :",self.userID,"  Role : ",self.role)
+        print("Registering Token :",self.token.count,"  USERID :",self.userID,"  Role : ",self.role,"  ShopID : ",shopID)
         let tokenSucceed = KeychainWrapper.standard.set(self.token, forKey:"TOKEN")
         if tokenSucceed { print("Token Saved Successfully") } else {
             print("Token Can not be saved")
@@ -40,6 +41,12 @@ class LoginKey {
         let useridSucceed = KeychainWrapper.standard.set(self.userID, forKey:"USERID")
         if useridSucceed { print("UserID Saved Successfully") } else {
             print("UserID Can not be saved")
+            fatalError()
+        }
+
+        let shopidSucceed = KeychainWrapper.standard.set(self.shopID, forKey:"SHOPID")
+        if shopidSucceed { print("ShopID Saved Successfully") } else {
+            print("ShopID Can not be saved")
             fatalError()
         }
 
@@ -94,6 +101,10 @@ class LoginKey {
             if let auserid = KeychainWrapper.standard.string(forKey: "USERID") {
                 self.userID = auserid
             }
+            if let ashopid = KeychainWrapper.standard.string(forKey: "SHOPID") {
+                self.shopID = ashopid
+            }
+
             if let arole = KeychainWrapper.standard.string(forKey: "ROLE") {
                 self.role = arole
             }
@@ -133,6 +144,7 @@ class LoginKey {
         print("*** DEMO (Shop) ***")
         self.userID = "81"
         self.role = "Shop"
+        self.shopID = "2162"
         self.username = "zich"
         self.token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjU2OTY0ZTJjOTk3NGQ3YjAwZjdkODZlOWQwMWNkZWM1NTI5ZGQ5OGE1ZmI2NGFiMmY5NTdkNGE5MzY2MGVjOGFlYzgwZDJhMWFlMzRkMmQ0In0.eyJhdWQiOiIzIiwianRpIjoiNTY5NjRlMmM5OTc0ZDdiMDBmN2Q4NmU5ZDAxY2RlYzU1MjlkZDk4YTVmYjY0YWIyZjk1N2Q0YTkzNjYwZWM4YWVjODBkMmExYWUzNGQyZDQiLCJpYXQiOjE1NTg2MDQ1OTAsIm5iZiI6MTU1ODYwNDU5MCwiZXhwIjoxNTkwMjI2OTkwLCJzdWIiOiI4MSIsInNjb3BlcyI6W119.UCA2X6MZFUohhfXmdKBlrsM8HE1TfLaVug55xva0otjxS8Fp1vXAaT1XIhGxyAu6j7HgL62qenY5vq08tljVWU5KBu_EuPJNiGps6uj3ZbH1coilJYj92xVZfMgAlPnZ9vp01_AQeV0gyojsBREy3eGXE7d80O6zgeemxxR-0ENTeD5-MiJn7MSThcAHrZPLXiQTnavkWTbcn4iygRVxf7tk_n8pKtqIApKKCecMahKo0YGDi8RgSVypz6Fh3K_tlk6LYiF7in1RjhkQinpgee3lPtnSTa2vRYA2lyer9zxJaTPLViY8_ZgCOjh11pRqAoAsTcx_SD2dxzdhZR3PNSnGW-Wc2rj51ZGNemYOUD7lOtnQxdmXiI3K-1YZFObl6iRprLgvmWarstNCmrTzBq1KR8VD1UkDAzJ_miLGJjQAsvtCdXR1as7ZYW9_rN7lqR05LzoAic3zOWwYGoaUjabTK37zFw8a_ioNch1S63k3_5dqw8jm4HF1OMuW2efvE1xvbdiloofzvdoqInobQ5XV6BQ0Skc2xwxO6cK-InfIpp2DJOpmy6LdrAmUvkYMfOpobwH_RCbLguhRD-Gx3jnSbYzaakiLmvT2wToNYwzihNlqsr23ttMJ10o988pOaKxXkHDK-GL5605c6keE3I1mbweWhf_YIsk5ADGz9Q4"
         _ = registerTokenAndUserID()

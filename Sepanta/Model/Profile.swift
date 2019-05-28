@@ -18,6 +18,7 @@ struct Profile {
     var address : String?
     var shop_id : Int?
     var shop_name : String?
+    var total_points : Int?
     var category_title : String?
     var rate : String?
     var rate_count : Int?

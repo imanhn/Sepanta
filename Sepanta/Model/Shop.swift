@@ -65,6 +65,11 @@ struct Shop : ShopProtocol,IdentifiableType,Equatable {
         self.user_id = auserId
     }
     
+    init(WithShopID ashopid : Int?){
+        self.init()
+        self.shop_id = ashopid
+    }
+    
     init(shop_id: Int? = 0, user_id: Int? = 0, shop_name: String? = "", shop_off: Int? = 0 , lat: Double? = 0.0, long: Double? = 0.0, image: String? = "", rate: String? = "", rate_count: Int? = 0, follower_count: Int? = 0, created_at: String? = ""){
         self.shop_id = shop_id
         self.user_id = user_id

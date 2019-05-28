@@ -87,10 +87,11 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        animateLogo()
         if slideControl == nil {
             slideControl = SlideController(parentController: self)
         } else {
-            slideControl?.startTimer()
+            slideControl!.startTimer()
         }
     }
     
@@ -102,7 +103,7 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
             logoAnimTimer = nil            
         }
         if slideControl != nil {
-            slideControl?.endTimer()
+            slideControl!.endTimer()
         }
     }
     
@@ -133,6 +134,10 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     func animateLogo(){
         if logoAnimTimer == nil {
             logoAnimTimer = Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(doAnimateLogo), userInfo: nil, repeats: true)
+        }else{
+            // Restarting....
+            logoAnimTimer?.invalidate()
+            logoAnimTimer = Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(doAnimateLogo), userInfo: nil, repeats: true)
         }
     }
     
@@ -141,7 +146,7 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
         manageVersion()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         subscribeForBadges()        
-        animateLogo()
+        //animateLogo()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTapped)))
         self.view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:))))
         
