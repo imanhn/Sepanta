@@ -274,22 +274,22 @@
                                         <rect key="frame" x="0.0" y="63.5" width="337.5" height="190"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="wFP-pZ-e0a">
-                                                <rect key="frame" x="0.0" y="19" width="337.5" height="152"/>
+                                                <rect key="frame" x="10" y="19" width="317.5" height="152"/>
                                                 <subviews>
                                                     <textField opaque="NO" tag="12" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="شماره همراه" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5Yr-ej-hbv" userLabel="MobileText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="337.5" height="48"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="317.5" height="48"/>
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="phonePad" enablesReturnKeyAutomatically="YES" textContentType="tel"/>
                                                     </textField>
                                                     <textField opaque="NO" tag="14" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ورود کد ارسال شده" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="iV8-Mh-cO6" userLabel="SMSCodeText" customClass="UnderLinedTextField" customModule="Sepanta" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="48" width="337.5" height="47.5"/>
+                                                        <rect key="frame" x="0.0" y="48" width="317.5" height="47.5"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="phonePad" enablesReturnKeyAutomatically="YES"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۰۱:۰۰" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="deo-qw-Kdt" userLabel="TimerLabel">
-                                                        <rect key="frame" x="0.0" y="95.5" width="337.5" height="56.5"/>
+                                                        <rect key="frame" x="0.0" y="95.5" width="317.5" height="56.5"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="24"/>
                                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -300,10 +300,10 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="wFP-pZ-e0a" firstAttribute="centerX" secondItem="cqJ-jR-VrW" secondAttribute="centerX" id="6bS-1H-DGS"/>
-                                            <constraint firstItem="wFP-pZ-e0a" firstAttribute="leading" secondItem="cqJ-jR-VrW" secondAttribute="leading" id="7fR-hv-7qU"/>
+                                            <constraint firstItem="wFP-pZ-e0a" firstAttribute="leading" secondItem="cqJ-jR-VrW" secondAttribute="leading" constant="10" id="7fR-hv-7qU"/>
                                             <constraint firstItem="wFP-pZ-e0a" firstAttribute="centerY" secondItem="cqJ-jR-VrW" secondAttribute="centerY" id="LQA-G0-ZDk"/>
                                             <constraint firstItem="wFP-pZ-e0a" firstAttribute="height" secondItem="cqJ-jR-VrW" secondAttribute="height" multiplier="0.8" id="RR0-wJ-eUb"/>
-                                            <constraint firstAttribute="trailing" secondItem="wFP-pZ-e0a" secondAttribute="trailing" id="zHI-fX-g5u"/>
+                                            <constraint firstAttribute="trailing" secondItem="wFP-pZ-e0a" secondAttribute="trailing" constant="10" id="zHI-fX-g5u"/>
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_mobile_gray" translatesAutoresizingMaskIntoConstraints="NO" id="vqJ-I3-Yow" userLabel="MobileIcon">

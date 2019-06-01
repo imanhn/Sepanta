@@ -615,30 +615,33 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DBB-wK-XEW" userLabel="leftView">
-                                                    <rect key="frame" x="0.0" y="25.5" width="75" height="23.5"/>
+                                                    <rect key="frame" x="10" y="25.5" width="75" height="23.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۰٪" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5q-vp-TMQ" userLabel="percentLabel">
-                                                            <rect key="frame" x="50.5" y="0.0" width="24.5" height="23.5"/>
-                                                            <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="17"/>
-                                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="haI-TW-vEL" userLabel="GotoShopButton">
-                                                            <rect key="frame" x="30.5" y="0.0" width="10" height="23.5"/>
-                                                            <state key="normal" image="icon_back_black"/>
-                                                        </button>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="wNd-oL-SGV">
+                                                            <rect key="frame" x="0.0" y="0.0" width="75" height="23.5"/>
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="haI-TW-vEL" userLabel="GotoShopButton">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="10" height="23.5"/>
+                                                                    <state key="normal" image="icon_back_black"/>
+                                                                </button>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۰٪" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5q-vp-TMQ" userLabel="percentLabel">
+                                                                    <rect key="frame" x="50.5" y="0.0" width="24.5" height="23.5"/>
+                                                                    <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="17"/>
+                                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="M5q-vp-TMQ" firstAttribute="centerY" secondItem="DBB-wK-XEW" secondAttribute="centerY" id="5Rk-Wx-sAa"/>
-                                                        <constraint firstItem="haI-TW-vEL" firstAttribute="height" secondItem="DBB-wK-XEW" secondAttribute="height" id="7Lf-B8-bQy"/>
-                                                        <constraint firstItem="M5q-vp-TMQ" firstAttribute="height" secondItem="DBB-wK-XEW" secondAttribute="height" id="BRn-8a-SR8"/>
-                                                        <constraint firstItem="haI-TW-vEL" firstAttribute="centerY" secondItem="DBB-wK-XEW" secondAttribute="centerY" id="EMH-nh-lqX"/>
-                                                        <constraint firstAttribute="trailing" secondItem="M5q-vp-TMQ" secondAttribute="trailing" id="GiF-zR-YHL"/>
-                                                        <constraint firstItem="M5q-vp-TMQ" firstAttribute="leading" secondItem="haI-TW-vEL" secondAttribute="trailing" constant="10" id="kbE-OT-o7b"/>
+                                                        <constraint firstItem="wNd-oL-SGV" firstAttribute="centerX" secondItem="DBB-wK-XEW" secondAttribute="centerX" id="KRC-Jn-Pyo"/>
+                                                        <constraint firstItem="wNd-oL-SGV" firstAttribute="width" secondItem="DBB-wK-XEW" secondAttribute="width" id="U8q-zQ-zX5"/>
+                                                        <constraint firstItem="wNd-oL-SGV" firstAttribute="centerY" secondItem="DBB-wK-XEW" secondAttribute="centerY" id="clu-YW-btM"/>
+                                                        <constraint firstItem="wNd-oL-SGV" firstAttribute="height" secondItem="DBB-wK-XEW" secondAttribute="height" id="fdL-d0-ck5"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dyB-QO-caE" userLabel="middleView">
-                                                    <rect key="frame" x="75" y="7.5" width="225" height="59.5"/>
+                                                    <rect key="frame" x="85" y="7.5" width="225" height="59.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LOg-jg-1Od" userLabel="topMiddleView">
                                                             <rect key="frame" x="0.0" y="0.0" width="225" height="19.5"/>
@@ -753,7 +756,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="1Yu-kh-UTl" userLabel="rightView">
-                                                    <rect key="frame" x="300" y="7.5" width="75" height="59.5"/>
+                                                    <rect key="frame" x="310" y="7.5" width="75" height="59.5"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NNv-hn-acj" userLabel="shopImage">
                                                             <rect key="frame" x="10.5" y="3" width="54" height="53.5"/>
@@ -787,7 +790,7 @@
                                                 <constraint firstItem="DBB-wK-XEW" firstAttribute="width" secondItem="HXI-Je-zp1" secondAttribute="width" multiplier="0.2" id="fjb-K7-I6j"/>
                                                 <constraint firstItem="1Yu-kh-UTl" firstAttribute="width" secondItem="HXI-Je-zp1" secondAttribute="width" multiplier="0.2" id="t9P-R2-lhx"/>
                                                 <constraint firstItem="dyB-QO-caE" firstAttribute="height" secondItem="HXI-Je-zp1" secondAttribute="height" multiplier="0.8" id="v6l-cK-1pi"/>
-                                                <constraint firstItem="DBB-wK-XEW" firstAttribute="leading" secondItem="HXI-Je-zp1" secondAttribute="leading" id="y4q-68-zH0"/>
+                                                <constraint firstItem="DBB-wK-XEW" firstAttribute="leading" secondItem="HXI-Je-zp1" secondAttribute="leading" constant="10" id="y4q-68-zH0"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

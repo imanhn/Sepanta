@@ -238,7 +238,6 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 self?.delegate.shop.updateFromProfile(Profile: aProfile)
                 //print("After Shop : ",self.delegate.shop)
                 self?.delegate.shopTitle.text = aProfile.shop_name
-                self?.delegate.scoreLabel.text = "امتیاز " + "\(aProfile.follower_count ?? 0)"
                 self?.delegate.followersNumLabel.text = "\(aProfile.follower_count ?? 0)"
                 self?.delegate.offLabel.text = "\(aProfile.shop_off ?? 0)%"
                 self?.delegate.rateLabel.text = "(\(aProfile.rate_count ?? 0))"
@@ -249,6 +248,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 if rate > 2.5 {self?.delegate.star3.setImage(UIImage(named: "icon_star_on"), for: .normal)}
                 if rate > 3.5 {self?.delegate.star4.setImage(UIImage(named: "icon_star_on"), for: .normal)}
                 if rate > 4.5 {self?.delegate.star5.setImage(UIImage(named: "icon_star_on"), for: .normal)}
+                self?.delegate.scoreLabel.text = "امتیاز " + "\(rate ?? 0)"
                 //print("ShopUI : setting shopui.posts to  :: ",aProfile.content)
                 /*
                 if let postContents = aProfile.content as? [Post] {

@@ -84,10 +84,10 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8tC-7E-Gc9" userLabel="FormView">
-                                <rect key="frame" x="0.0" y="251" width="414" height="591"/>
+                                <rect key="frame" x="10" y="251" width="394" height="591"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZ2-zT-5PT" userLabel="ScrollView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="591"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="591"/>
                                     </scrollView>
                                 </subviews>
                                 <constraints>
@@ -108,8 +108,8 @@
                             <constraint firstItem="2MU-xz-WeU" firstAttribute="width" secondItem="fQA-sJ-Xab" secondAttribute="width" multiplier="0.4" id="K5T-cT-VXt"/>
                             <constraint firstItem="fQA-sJ-Xab" firstAttribute="top" secondItem="J4R-bH-6hU" secondAttribute="bottom" constant="21" id="OOh-ux-DNr"/>
                             <constraint firstItem="J4R-bH-6hU" firstAttribute="centerX" secondItem="hRH-cl-FX8" secondAttribute="centerX" id="PoJ-KL-qaa"/>
-                            <constraint firstItem="8tC-7E-Gc9" firstAttribute="leading" secondItem="hRH-cl-FX8" secondAttribute="leading" id="Xq0-ru-MEW"/>
-                            <constraint firstItem="8tC-7E-Gc9" firstAttribute="trailing" secondItem="hRH-cl-FX8" secondAttribute="trailing" id="f0g-a9-yCd"/>
+                            <constraint firstItem="8tC-7E-Gc9" firstAttribute="leading" secondItem="hRH-cl-FX8" secondAttribute="leading" constant="10" id="Xq0-ru-MEW"/>
+                            <constraint firstItem="8tC-7E-Gc9" firstAttribute="trailing" secondItem="hRH-cl-FX8" secondAttribute="trailing" constant="-10" id="f0g-a9-yCd"/>
                             <constraint firstItem="J4R-bH-6hU" firstAttribute="width" secondItem="cf0-Xc-afT" secondAttribute="width" id="kJE-Y2-M5g"/>
                             <constraint firstItem="fQA-sJ-Xab" firstAttribute="width" secondItem="fQA-sJ-Xab" secondAttribute="height" multiplier="1:1" id="pzL-eC-pZ0"/>
                             <constraint firstItem="fQA-sJ-Xab" firstAttribute="centerX" secondItem="hRH-cl-FX8" secondAttribute="centerX" id="vOf-EI-Rd5"/>

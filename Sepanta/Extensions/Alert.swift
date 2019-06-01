@@ -14,7 +14,7 @@ extension UIViewController {
         if str.count == 0 {return}
         let textFont = UIFont (name: "Shabnam FD", size: 13)!
         let aView = UIView(frame: CGRect(x: -self.view.frame.width, y: self.view.frame.height*0.4, width: self.view.frame.width, height: self.view.frame.height*0.06))
-        aView.backgroundColor = UIColor(hex: 0x96336C)
+        aView.backgroundColor = UIColor(hex: 0xDA3A5C)
         self.view.addSubview(aView)
         let aLabel = UILabel(frame: CGRect(x: 0, y: aView.frame.height*0.1, width: aView.frame.width, height: aView.frame.height*0.8))
         aLabel.text = str

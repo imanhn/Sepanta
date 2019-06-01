@@ -87,7 +87,7 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        animateLogo()
+        //animateLogo()
         if slideControl == nil {
             slideControl = SlideController(parentController: self)
         } else {
@@ -145,8 +145,7 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
         super.viewDidLoad()
         manageVersion()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
-        subscribeForBadges()        
-        //animateLogo()
+        subscribeForBadges()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTapped)))
         self.view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:))))
         
