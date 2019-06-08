@@ -8,9 +8,17 @@
 
 import Foundation
 import UIKit
+
+class UIButtonWithTargetAction : UIButton{
+    var targetAction : (()->Void) = {}
+    @objc func runTargetAction(){
+        targetAction()
+    }
+}
+
 extension UIViewController {
  typealias actionFunction = ()->Void
-    func alert(Message str : String){
+    func alert(Message str : String, completion anAction :@escaping actionFunction={} ){
         if str.count == 0 {return}
         let textFont = UIFont (name: "Shabnam FD", size: 13)!
         let aView = UIView(frame: CGRect(x: -self.view.frame.width, y: self.view.frame.height*0.4, width: self.view.frame.width, height: self.view.frame.height*0.06))
@@ -33,22 +41,13 @@ extension UIViewController {
                 aView.frame = CGRect(x: self.view.frame.width, y: self.view.frame.height*0.4, width: self.view.frame.width, height: self.view.frame.height*0.06)
             }){ _ in
                 aView.removeFromSuperview()
+                anAction()
             }
         })
     }
     
-    @objc func okPressed(_ sender : Any){
-        fatalError()
-    }
-    
-    @objc func cancelPressed(_ sender : Any){
-        if let cancelButton = sender as? UIButton {
-            cancelButton.superview?.removeFromSuperview()
-        }
-    }
 
-
-    func showQuestion(Message aMessage : String,OKLabel okLabel : String, CancelLabel cancelLabel : String,QuestionTag atag : Int){
+    func showQuestion(Message aMessage : String,OKLabel okLabel : String, CancelLabel cancelLabel : String, OkAction : @escaping actionFunction={},  CancelAction : @escaping actionFunction={}){
         for av in self.view.subviews{
             if av.tag == 123 {
                 return
@@ -57,7 +56,7 @@ extension UIViewController {
         let marginX = self.view.frame.width / 30
         let textFont = UIFont (name: "Shabnam FD", size: 13)!
         let aView = UIView(frame: CGRect(x: marginX, y: self.view.frame.height*0.4, width: self.view.frame.width-2*marginX, height: self.view.frame.height*0.1))
-        aView.backgroundColor = UIColor(hex: 0x96336C)
+        aView.backgroundColor = UIColor(hex: 0xDA3A5C)
         aView.tag = 123
         aView.layer.cornerRadius = 5
         aView.layer.borderColor = UIColor.white.cgColor
@@ -74,31 +73,37 @@ extension UIViewController {
         aLabel.textColor = UIColor.white
         aView.addSubview(aLabel)
         let buttonWidth = aView.frame.width / 5
-        let aButton = UIButton(frame: CGRect(x: buttonWidth, y: aView.frame.height*0.5, width: buttonWidth, height: aView.frame.height*0.4))
+        let aButton = UIButtonWithTargetAction(frame: CGRect(x: buttonWidth, y: aView.frame.height*0.5, width: buttonWidth, height: aView.frame.height*0.4))
         aButton.setTitle(okLabel, for: .normal)
         aButton.titleLabel?.textColor = UIColor.white
         aButton.titleLabel?.font = textFont
-        aButton.tag = atag
         aButton.layer.cornerRadius = 4
         aButton.layer.borderWidth = 1
         aButton.layer.borderColor = UIColor.white.cgColor
-
-        aButton.addTarget(self, action: #selector(okPressed), for: .touchUpInside)
+        aButton.targetAction = OkAction
+        //aButton.addTarget(self, action: #selector(okPressed), for: .touchUpInside)
+        aButton.addTarget(self, action:#selector(runAction), for: .touchUpInside)
         aView.addSubview(aButton)
 
-        let bButton = UIButton(frame: CGRect(x: buttonWidth*3, y: aView.frame.height*0.5, width: buttonWidth, height: aView.frame.height*0.4))
+        let bButton = UIButtonWithTargetAction(frame: CGRect(x: buttonWidth*3, y: aView.frame.height*0.5, width: buttonWidth, height: aView.frame.height*0.4))
         bButton.setTitle(cancelLabel, for: .normal)
         bButton.titleLabel?.textColor = UIColor.white
         bButton.layer.cornerRadius = 4
         bButton.layer.borderWidth = 1
         bButton.layer.borderColor = UIColor.white.cgColor
-        bButton.addTarget(self, action: #selector(cancelPressed(_:)), for: .touchUpInside)
+        bButton.targetAction = CancelAction
+        bButton.addTarget(self, action: #selector(runAction), for: .touchUpInside)
         bButton.titleLabel?.font = textFont
         aView.addSubview(bButton)
 
     }
-    
-    func showDarkQuestion(Message aMessage : String,OKLabel okLabel : String, CancelLabel cancelLabel : String,QuestionTag atag : Int){
+    @objc func runAction(_ sender : UIButton){
+        if let abutton = sender as? UIButtonWithTargetAction {
+            abutton.runTargetAction()
+            abutton.superview?.removeFromSuperview()
+        }
+    }
+    func showDarkQuestion(Message aMessage : String,OKLabel okLabel : String, CancelLabel cancelLabel : String, OkAction : @escaping actionFunction={},  CancelAction : @escaping actionFunction={}){
         for av in self.view.subviews{
             if av.tag == 123 {
                 return
@@ -134,8 +139,8 @@ extension UIViewController {
         yesButton.setTitle(okLabel, for: .normal)
         yesButton.setTitleColor(UIColor.white, for: .normal)
         yesButton.titleLabel?.font = UIFont(name: "Shabnam FD", size: 12)
-        yesButton.addTarget(self, action: #selector(okPressed), for: .touchUpInside)
-        yesButton.tag = atag
+        yesButton.addTarget(self, action: #selector(runAction(_:)), for: .touchUpInside)
+        yesButton.targetAction = OkAction
         
         let noButton = RoundedButtonWithDarkBackground(type: .custom)
         noButton.frame = CGRect(x: contentView.frame.width*6/10, y: contentView.frame.height*4/7, width: contentView.frame.width*3/10, height: contentView.frame.height*2/7)
@@ -143,12 +148,12 @@ extension UIViewController {
         noButton.setTitle(cancelLabel, for: .normal)
         noButton.setTitleColor(UIColor.white, for: .normal)
         noButton.titleLabel?.font = UIFont(name: "Shabnam FD", size: 12)
-        noButton.addTarget(self, action: #selector(cancelPressed), for: .touchUpInside)
-        
+        noButton.addTarget(self, action: #selector(runAction(_:)), for: .touchUpInside)
+        noButton.targetAction = CancelAction
         
     }
     
-    func showAlertWithOK(Message aMessage : String,OKLabel okLabel : String,Tag tag : Int = 0){
+    func showAlertWithOK(Message aMessage : String,OKLabel okLabel : String,Completion anAction: @escaping actionFunction={}){
         for av in self.view.subviews{
             if av.tag == 123 {
                 return
@@ -175,21 +180,17 @@ extension UIViewController {
         aLabel.textColor = UIColor.white
         aView.addSubview(aLabel)
         let buttonWidth = aView.frame.width / 3
-        let aButton = UIButton(frame: CGRect(x: (aView.frame.width-buttonWidth)/2, y: aView.frame.height*0.55, width: buttonWidth, height: aView.frame.height*0.35))
+        let aButton = UIButtonWithTargetAction(frame: CGRect(x: (aView.frame.width-buttonWidth)/2, y: aView.frame.height*0.55, width: buttonWidth, height: aView.frame.height*0.35))
         aButton.setTitle(okLabel, for: .normal)
         aButton.titleLabel?.textColor = UIColor.white
         aButton.titleLabel?.font = textFont
         aButton.layer.cornerRadius = 4
         aButton.layer.borderWidth = 1
         aButton.layer.borderColor = UIColor.white.cgColor
-        aButton.tag = tag
-        aButton.addTarget(self, action: #selector(doneAlert), for: .touchUpInside)
+        aButton.targetAction = anAction
+        aButton.addTarget(self, action: #selector(runAction(_:)), for: .touchUpInside)
         aView.addSubview(aButton)
         
     }
-    @objc func doneAlert(_ sender : Any){
-        if let okButton = sender as? UIButton {
-            okButton.superview?.removeFromSuperview()
-        }
-    }
+
 }

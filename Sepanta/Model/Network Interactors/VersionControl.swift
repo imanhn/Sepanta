@@ -30,7 +30,7 @@ extension HomeViewController {
             .subscribe(onNext: { aversion in
                 if (aversion - LoginKey.shared.version >= 1.0) {
                     // NEED Update
-                    self.showAlertWithOK(Message: "برنامه نیاز به بروزرسانی دارد، ادامه عملیات ممکن نیست", OKLabel: "متوجه شدم",Tag: 3)
+                    self.showAlertWithOK(Message: "برنامه نیاز به بروزرسانی دارد، ادامه عملیات ممکن نیست", OKLabel: "متوجه شدم",Completion: {fatalError()})
                 }else if (aversion - LoginKey.shared.version >= 0.1) {
                     self.showAlertWithOK(Message: "برنامه نیاز به بروزرسانی دارد، لطفاْ در اسرع وقت بروزرسانی کنید", OKLabel: "متوجه شدم")
                 }else{
@@ -42,10 +42,4 @@ extension HomeViewController {
         disposeList.append(verDisp)
     }
     
-    override func doneAlert(_ sender: Any) {
-        super.doneAlert(sender)
-        if (sender as! UIButton).tag == 3 {
-            fatalError()
-        }
-    }
 }

@@ -102,19 +102,13 @@ class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
         bindToTableView()
     }
     
-    @objc override func okPressed(_ sender: Any) {        
-        self.removeMenuAndDismissVC()
-        LoginKey.shared.deleteTokenAndUserID()
-        self.coordinator!.popLogin()
-    }
-    
-    @objc override func cancelPressed(_ sender : Any){
-        self.removeMenuAndDismissVC()
-    }
-
     func logout() {
         print("showing Question")
-        self.showQuestion(Message: "آیا می خواهیداز پروفایل خود خارج شوید؟", OKLabel: "بلی", CancelLabel: "خیر", QuestionTag: 100)
+        self.showQuestion(Message: "آیا می خواهیداز پروفایل خود خارج شوید؟", OKLabel: "بلی", CancelLabel: "خیر", OkAction: {
+            self.removeMenuAndDismissVC()
+            LoginKey.shared.deleteTokenAndUserID()
+            self.coordinator!.popLogin()
+        },CancelAction: {self.removeMenuAndDismissVC()})
     }
 }
 

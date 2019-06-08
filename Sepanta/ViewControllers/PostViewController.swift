@@ -49,8 +49,7 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
             self.coordinator!.pushEditPost(shop_id: ashopID, post_id: apost_id, post_title: apostTitle, post_body: apostBody, post_image: postUIImage)
         }else{
             alert(Message: "اطلاعات پست برای ویرایش کامل نیست")
-        }
-        //showQuestion(Message: "آيا می خواهید این پست را ویرایش کنید؟", OKLabel: "بلی", CancelLabel: "خیر", QuestionTag: 2)
+        }        
     }
     
     @objc func reportPost(_ sender : Any) {
@@ -70,33 +69,26 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
     }
     
     @IBAction func deleteTapped(_ sender: Any) {
-        showDarkQuestion(Message: "آيا از حذف این پست مطمئن هستید؟", OKLabel: "بلی", CancelLabel: "خیر", QuestionTag: 1)
+        showDarkQuestion(Message: "آيا از حذف این پست مطمئن هستید؟", OKLabel: "بلی", CancelLabel: "خیر", OkAction: {self.deletePost(sender)})
     }
     
-    @objc override func okPressed(_ sender: Any) {
-        if let okButton = sender as? UIButton {
-            if okButton.tag == 1 {
-                print("Delete Post")
-                let aParameter = ["post_id":"\(self.postID ?? 0)"]
-                NetworkManager.shared.run(API: "post-delete", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
+    func deletePost(_ sender : Any){
+        print("Delete Post")
+        let aParameter = ["post_id":"\(self.postID ?? 0)"]
+        NetworkManager.shared.run(API: "post-delete", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
+        NetworkManager.shared.serverMessageObs = BehaviorRelay<String>(value: "")
+        NetworkManager.shared.serverMessageObs
+            .filter({$0.count > 0})
+            .subscribe(onNext: { [unowned self] amessage in
                 NetworkManager.shared.serverMessageObs = BehaviorRelay<String>(value: "")
-                NetworkManager.shared.serverMessageObs
-                    .filter({$0.count > 0})
-                    .subscribe(onNext: { [unowned self] amessage in
-                        NetworkManager.shared.serverMessageObs = BehaviorRelay<String>(value: "")
-                        //Updating my Posts!
-                        self.getMyShopFromServer()
-                        self.alert(Message: amessage)
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-                            self.BackTapped(sender)
-                        })
-                    }).disposed(by: myDisposeBag)
-            }else if okButton.tag == 2 {
-                print("Edit Post")
-            }
-            okButton.superview?.removeFromSuperview()
-        }
+                //Updating my Posts!
+                self.getMyShopFromServer()
+                self.alert(Message: amessage)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                    self.BackTapped(sender)
+                })
+            }).disposed(by: myDisposeBag)
     }
     
     func getMyShopFromServer() {

@@ -25,15 +25,21 @@ import AlamofireImage
 class FavShopCell : UITableViewCell {
     @IBOutlet weak var shopImage: UIImageView!
     @IBOutlet weak var shopName: UILabel!
-    @IBOutlet weak var discountPercentage: UILabel!
+    //@IBOutlet weak var discountPercentage: UILabel!
+    @IBOutlet weak var offImage: UIImageView!
 }
 
-class FavListViewController :  UIViewControllerWithErrorBar,XIBView{
-    typealias dataSourceFunc = (FavListViewController) -> FavListDataSource
+class FavListViewController :  UIViewControllerWithErrorBar,XIBView,ShopListOwners{
+    var disposeList = [Disposable]()
+    var myDisposeBag = DisposeBag()
+    
+    var sectionOfShops = BehaviorRelay<[SectionOfShopData]>(value: [SectionOfShopData]())
+
+    var maximumFontSize : CGFloat!
     var fetchMechanism : dataSourceFunc!
-    var shopDataSource : FavListDataSource!
+    var shopDataSource : ShopsListDataSource!
     weak var coordinator : HomeCoordinator?
-    let myDisposeBag = DisposeBag()
+    
     //var newShopsDataSource : ShopsListDataSource!
     @IBOutlet weak var headerLabel: UILabel!
     var headerLabelToSet : String = "فروشگاه ها"
@@ -63,13 +69,18 @@ class FavListViewController :  UIViewControllerWithErrorBar,XIBView{
         //newShopsDataSource.getNewShopsFromServer()
     }
     
+    func pushAShop(_ selectedShop: Shop) {
+        self.coordinator!.pushShop(Shop: selectedShop)
+    }
+    
     func bindToTableView() {
         NetworkManager.shared.favShopObs.bind(to: shopTable.rx.items(cellIdentifier: "cell")) { row, model, cell in
             if let aCell = cell as? FavShopCell {
                 //let model = aShopAsAny as! Shop
                 aCell.shopName.text = model.shop_name
                 let persianDiscount :String = "\(model.shop_off ?? 0)".toPersianNumbers()
-                aCell.discountPercentage.text = persianDiscount+"%"
+                //aCell.discountPercentage.text = persianDiscount+"%"
+                aCell.offImage.image = self.CreateOffImage(Off: persianDiscount,ViewSize: aCell.offImage.frame.size)
                 if let shopImage = aCell.shopImage{
                     //print("NetworkManager.shared.websiteRootAddress : ",NetworkManager.shared.websiteRootAddress)
                     //print("SlidesAndPaths.shared.path_profile_image : ",SlidesAndPaths.shared.path_profile_image)

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+
 class CheckBox: UIButton {
     // Images
     let checkedImage = UIImage(named: "radioChecked")! as UIImage
@@ -294,7 +295,10 @@ class RoundedButtonWithShadow : RoundedButton{
 
 class RoundedButtonWithDarkBackground: UIButton {
     var curvSize : CGFloat = 5;
-
+    var targetAction : (()->Void) = {}
+    @objc func runTargetAction(){
+        targetAction()
+    }
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         self.layer.cornerRadius = curvSize
@@ -990,4 +994,10 @@ extension UIImageView {
         shakeAnimation.toValue = NSValue(cgPoint: CGPoint(x:self.center.x + 5, y:self.center.y))
         self.layer.add(shakeAnimation, forKey: "position")
     }
+    func addBlackShadow(){
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 2, height: 3)
+        self.layer.shadowOpacity = 0.3
+    }
+
 }

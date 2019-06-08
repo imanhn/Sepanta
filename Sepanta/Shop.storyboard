@@ -615,33 +615,24 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DBB-wK-XEW" userLabel="leftView">
-                                                    <rect key="frame" x="10" y="25.5" width="75" height="23.5"/>
+                                                    <rect key="frame" x="0.0" y="-0.5" width="75" height="75.5"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="wNd-oL-SGV">
-                                                            <rect key="frame" x="0.0" y="0.0" width="75" height="23.5"/>
-                                                            <subviews>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="haI-TW-vEL" userLabel="GotoShopButton">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="10" height="23.5"/>
-                                                                    <state key="normal" image="icon_back_black"/>
-                                                                </button>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۰٪" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5q-vp-TMQ" userLabel="percentLabel">
-                                                                    <rect key="frame" x="50.5" y="0.0" width="24.5" height="23.5"/>
-                                                                    <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="17"/>
-                                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                        </stackView>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="off" translatesAutoresizingMaskIntoConstraints="NO" id="Gos-iP-8oh">
+                                                            <rect key="frame" x="15" y="15.5" width="45" height="45"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="Gos-iP-8oh" secondAttribute="height" multiplier="1:1" id="abc-l4-2aI"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="wNd-oL-SGV" firstAttribute="centerX" secondItem="DBB-wK-XEW" secondAttribute="centerX" id="KRC-Jn-Pyo"/>
-                                                        <constraint firstItem="wNd-oL-SGV" firstAttribute="width" secondItem="DBB-wK-XEW" secondAttribute="width" id="U8q-zQ-zX5"/>
-                                                        <constraint firstItem="wNd-oL-SGV" firstAttribute="centerY" secondItem="DBB-wK-XEW" secondAttribute="centerY" id="clu-YW-btM"/>
-                                                        <constraint firstItem="wNd-oL-SGV" firstAttribute="height" secondItem="DBB-wK-XEW" secondAttribute="height" id="fdL-d0-ck5"/>
+                                                        <constraint firstItem="Gos-iP-8oh" firstAttribute="height" secondItem="DBB-wK-XEW" secondAttribute="height" multiplier="0.6" id="1VS-bR-NXK"/>
+                                                        <constraint firstItem="Gos-iP-8oh" firstAttribute="centerX" secondItem="DBB-wK-XEW" secondAttribute="centerX" id="Ovf-Oh-IOO"/>
+                                                        <constraint firstItem="Gos-iP-8oh" firstAttribute="centerY" secondItem="DBB-wK-XEW" secondAttribute="centerY" id="awl-U5-Y0p"/>
+                                                        <constraint firstItem="Gos-iP-8oh" firstAttribute="width" secondItem="DBB-wK-XEW" secondAttribute="width" multiplier="0.6" id="rJ5-hc-SlA"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dyB-QO-caE" userLabel="middleView">
-                                                    <rect key="frame" x="85" y="7.5" width="225" height="59.5"/>
+                                                    <rect key="frame" x="75" y="7.5" width="225" height="59.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LOg-jg-1Od" userLabel="topMiddleView">
                                                             <rect key="frame" x="0.0" y="0.0" width="225" height="19.5"/>
@@ -756,7 +747,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="1Yu-kh-UTl" userLabel="rightView">
-                                                    <rect key="frame" x="310" y="7.5" width="75" height="59.5"/>
+                                                    <rect key="frame" x="300" y="7.5" width="75" height="59.5"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NNv-hn-acj" userLabel="shopImage">
                                                             <rect key="frame" x="10.5" y="3" width="54" height="53.5"/>
@@ -790,13 +781,12 @@
                                                 <constraint firstItem="DBB-wK-XEW" firstAttribute="width" secondItem="HXI-Je-zp1" secondAttribute="width" multiplier="0.2" id="fjb-K7-I6j"/>
                                                 <constraint firstItem="1Yu-kh-UTl" firstAttribute="width" secondItem="HXI-Je-zp1" secondAttribute="width" multiplier="0.2" id="t9P-R2-lhx"/>
                                                 <constraint firstItem="dyB-QO-caE" firstAttribute="height" secondItem="HXI-Je-zp1" secondAttribute="height" multiplier="0.8" id="v6l-cK-1pi"/>
-                                                <constraint firstItem="DBB-wK-XEW" firstAttribute="leading" secondItem="HXI-Je-zp1" secondAttribute="leading" constant="10" id="y4q-68-zH0"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                         <connections>
-                                            <outlet property="discountPercentage" destination="M5q-vp-TMQ" id="7YJ-cW-Bmv"/>
+                                            <outlet property="offImage" destination="Gos-iP-8oh" id="BYb-Rz-bbI"/>
                                             <outlet property="rateLabel" destination="YNo-Dh-lt2" id="R3P-xC-BSu"/>
                                             <outlet property="shopFollowers" destination="pey-5H-mNd" id="hOV-Px-pMV"/>
                                             <outlet property="shopImage" destination="NNv-hn-acj" id="GUQ-jf-ktu"/>
@@ -921,26 +911,20 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k0N-Ap-Jfr" userLabel="leftView">
-                                                    <rect key="frame" x="0.0" y="25.5" width="75" height="23.5"/>
+                                                    <rect key="frame" x="0.0" y="-0.5" width="75" height="75.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۰٪" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F19-Ne-oId" userLabel="percentLabel">
-                                                            <rect key="frame" x="50" y="0.0" width="25" height="23.5"/>
-                                                            <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="17"/>
-                                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dzk-iP-Hqw" userLabel="GotoShopButton">
-                                                            <rect key="frame" x="30" y="0.0" width="10" height="23.5"/>
-                                                            <state key="normal" image="icon_back_black"/>
-                                                        </button>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="off" translatesAutoresizingMaskIntoConstraints="NO" id="xRk-Kr-0en">
+                                                            <rect key="frame" x="15" y="15.5" width="45" height="45"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="xRk-Kr-0en" secondAttribute="height" multiplier="1:1" id="yIl-f8-msy"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="dzk-iP-Hqw" firstAttribute="height" secondItem="k0N-Ap-Jfr" secondAttribute="height" id="20G-ep-h8D"/>
-                                                        <constraint firstItem="F19-Ne-oId" firstAttribute="leading" secondItem="dzk-iP-Hqw" secondAttribute="trailing" constant="10" id="457-GC-fWV"/>
-                                                        <constraint firstItem="F19-Ne-oId" firstAttribute="height" secondItem="k0N-Ap-Jfr" secondAttribute="height" id="Ahp-D5-mG0"/>
-                                                        <constraint firstItem="dzk-iP-Hqw" firstAttribute="centerY" secondItem="k0N-Ap-Jfr" secondAttribute="centerY" id="NxE-iw-VWb"/>
-                                                        <constraint firstAttribute="trailing" secondItem="F19-Ne-oId" secondAttribute="trailing" id="XyK-uJ-6wZ"/>
-                                                        <constraint firstItem="F19-Ne-oId" firstAttribute="centerY" secondItem="k0N-Ap-Jfr" secondAttribute="centerY" id="jfp-po-T6V"/>
+                                                        <constraint firstItem="xRk-Kr-0en" firstAttribute="height" secondItem="k0N-Ap-Jfr" secondAttribute="height" multiplier="0.6" id="igr-Ll-teS"/>
+                                                        <constraint firstItem="xRk-Kr-0en" firstAttribute="centerX" secondItem="k0N-Ap-Jfr" secondAttribute="centerX" id="nvp-Zt-W7o"/>
+                                                        <constraint firstItem="xRk-Kr-0en" firstAttribute="centerY" secondItem="k0N-Ap-Jfr" secondAttribute="centerY" id="rrw-qC-UbM"/>
+                                                        <constraint firstItem="xRk-Kr-0en" firstAttribute="width" secondItem="k0N-Ap-Jfr" secondAttribute="width" multiplier="0.6" id="tHl-le-sDn"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F76-U8-fEV" userLabel="middleView">
@@ -1005,7 +989,7 @@
                                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                         <connections>
-                                            <outlet property="discountPercentage" destination="F19-Ne-oId" id="r46-PB-Rt8"/>
+                                            <outlet property="offImage" destination="xRk-Kr-0en" id="4iR-Vw-hm2"/>
                                             <outlet property="shopImage" destination="qh3-gp-Lj6" id="pAN-0Q-Kf6"/>
                                             <outlet property="shopName" destination="z65-fa-mM2" id="U38-aj-JJR"/>
                                         </connections>
@@ -1069,6 +1053,7 @@
         <image name="icon_star_gray" width="11" height="11"/>
         <image name="logo_home" width="86" height="25"/>
         <image name="logo_shape" width="100" height="97.5"/>
+        <image name="off" width="54" height="50"/>
         <image name="plus" width="112" height="110"/>
     </resources>
 </document>

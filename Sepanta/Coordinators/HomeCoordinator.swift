@@ -247,7 +247,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         let vc = storyboard.instantiateViewController(withIdentifier: "FavListViewController") as! FavListViewController
         vc.coordinator = self
         vc.fetchMechanism = { sFavListViewController in
-            let shopsDataSource = FavListDataSource(sFavListViewController)
+            let shopsDataSource = ShopsListDataSource(sFavListViewController)
             shopsDataSource.getFavShopsFromServer()
             return shopsDataSource
         }

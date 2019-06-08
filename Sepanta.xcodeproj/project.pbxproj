@@ -87,6 +87,8 @@
 		0F890D022214B5310091FA2E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D012214B5310091FA2E /* AppCoordinator.swift */; };
 		0F890D0E2215C7170091FA2E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D0D2215C7170091FA2E /* NetworkManager.swift */; };
 		0F890D122215D21C0091FA2E /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D112215D21C0091FA2E /* JSONParser.swift */; };
+		0F896AC322AC580400310594 /* ShopListOwners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F896AC222AC580400310594 /* ShopListOwners.swift */; };
+		0F896AC622AC595000310594 /* GroupViewControllerFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F896AC522AC595000310594 /* GroupViewControllerFilter.swift */; };
 		0F8B7D432267874B00EFAACD /* Shabnam-Bold-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F8B7D412267874600EFAACD /* Shabnam-Bold-FD.ttf */; };
 		0F8B7D442267874B00EFAACD /* Shabnam-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F8B7D422267874800EFAACD /* Shabnam-FD.ttf */; };
 		0F8B7D46226789A800EFAACD /* ShopSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8B7D45226789A800EFAACD /* ShopSearchResult.swift */; };
@@ -126,7 +128,6 @@
 		0FF55AB1227B49CE0093DEE0 /* Shop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FF55AB0227B49CE0093DEE0 /* Shop.storyboard */; };
 		0FF55AB3227B4C790093DEE0 /* EditShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF55AB2227B4C790093DEE0 /* EditShopViewController.swift */; };
 		0FF55AB5227B4CFA0093DEE0 /* EditShopUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF55AB4227B4CFA0093DEE0 /* EditShopUI.swift */; };
-		0FFCDC4C226C795B0087BFEF /* FavListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCDC4B226C795B0087BFEF /* FavListDataSource.swift */; };
 		0FFCDC4E226C91A00087BFEF /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCDC4D226C91A00087BFEF /* NotificationsViewController.swift */; };
 		0FFCDC52226C955F0087BFEF /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FFCDC51226C955F0087BFEF /* Notifications.storyboard */; };
 		0FFCDC54226CA96F0087BFEF /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCDC53226CA96F0087BFEF /* Notifications.swift */; };
@@ -236,6 +237,8 @@
 		0F890D012214B5310091FA2E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		0F890D0D2215C7170091FA2E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0F890D112215D21C0091FA2E /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
+		0F896AC222AC580400310594 /* ShopListOwners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListOwners.swift; sourceTree = "<group>"; };
+		0F896AC522AC595000310594 /* GroupViewControllerFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewControllerFilter.swift; sourceTree = "<group>"; };
 		0F8B7D412267874600EFAACD /* Shabnam-Bold-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shabnam-Bold-FD.ttf"; sourceTree = "<group>"; };
 		0F8B7D422267874800EFAACD /* Shabnam-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shabnam-FD.ttf"; sourceTree = "<group>"; };
 		0F8B7D45226789A800EFAACD /* ShopSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopSearchResult.swift; sourceTree = "<group>"; };
@@ -283,7 +286,6 @@
 		0FF55AB0227B49CE0093DEE0 /* Shop.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Shop.storyboard; sourceTree = "<group>"; };
 		0FF55AB2227B4C790093DEE0 /* EditShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditShopViewController.swift; sourceTree = "<group>"; };
 		0FF55AB4227B4CFA0093DEE0 /* EditShopUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditShopUI.swift; sourceTree = "<group>"; };
-		0FFCDC4B226C795B0087BFEF /* FavListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavListDataSource.swift; sourceTree = "<group>"; };
 		0FFCDC4D226C91A00087BFEF /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		0FFCDC51226C955F0087BFEF /* Notifications.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
 		0FFCDC53226CA96F0087BFEF /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
@@ -425,18 +427,15 @@
 		0F890D0C2215C6FD0091FA2E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0F890D0D2215C7170091FA2E /* NetworkManager.swift */,
-				0F890D112215D21C0091FA2E /* JSONParser.swift */,
+				0F896AC422AC587200310594 /* Network Interactors */,
 				0F3197B22270BD8F00CEF207 /* Bank.swift */,
 				0FFCDC53226CA96F0087BFEF /* Notifications.swift */,
 				0F1B755E2235C8460087C0DB /* Slide.swift */,
-				0F052ED8221AE8C5009175EA /* LoginKey.swift */,
-				0F1B755C2235C1080087C0DB /* SlidesAndPaths.swift */,
 				0FDA55D42225C02800E7C889 /* Catagory.swift */,
 				0FA307DD222700B100EDA829 /* Shop.swift */,
+				0F79BBAB2285D36B00795AE0 /* ShopSectionData.swift */,
 				0F056011227F92BC005F7BCE /* Rate.swift */,
 				0F817A6E22354F8600F1738E /* Profile.swift */,
-				0F70A648226BC7BF0020C33C /* ProfileInfoWrapper.swift */,
 				0FD32DCA227076C40092D6FC /* ProfileInfo.swift */,
 				0FAE1FF2226332D20043B077 /* CreditCard.swift */,
 				0F67F759224CD00300659842 /* Post.swift */,
@@ -445,7 +444,6 @@
 				0F1B75602236BA610087C0DB /* CacheManager.swift */,
 				0F50AE71226F61110028D8B6 /* MapAnnotation.swift */,
 				0F58927B2278F65E0077B655 /* UserPoints.swift */,
-				0F3BDD0D22864A120087EA97 /* VersionControl.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -482,8 +480,7 @@
 			children = (
 				0F0661AE2257E7F200A83734 /* PopUp List */,
 				0F066F98222C22EE00C8871C /* MenuController.swift */,
-				0F1B755A223580C80087C0DB /* ShopsListDataSource.swift */,
-				0FFCDC4B226C795B0087BFEF /* FavListDataSource.swift */,
+				0F896AC222AC580400310594 /* ShopListOwners.swift */,
 				0F0661AC2257E62400A83734 /* SepantaGroupsSubscription.swift */,
 				0F70A646226B97650020C33C /* EditProfileImagePicker.swift */,
 				0F642B98227A525700B887B8 /* AddPostImagePicker.swift */,
@@ -491,9 +488,22 @@
 				0F997398227BBAA400A65716 /* LogoImageForShopImagePicker.swift */,
 				0F642B96227A4D7D00B887B8 /* ImagePicker.swift */,
 				0F63F7172278947A00799C8F /* ContactUSEmoji.swift */,
-				0F79BBAB2285D36B00795AE0 /* ShopSectionData.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0F896AC422AC587200310594 /* Network Interactors */ = {
+			isa = PBXGroup;
+			children = (
+				0F890D0D2215C7170091FA2E /* NetworkManager.swift */,
+				0F890D112215D21C0091FA2E /* JSONParser.swift */,
+				0F052ED8221AE8C5009175EA /* LoginKey.swift */,
+				0F70A648226BC7BF0020C33C /* ProfileInfoWrapper.swift */,
+				0F1B755C2235C1080087C0DB /* SlidesAndPaths.swift */,
+				0F1B755A223580C80087C0DB /* ShopsListDataSource.swift */,
+				0F3BDD0D22864A120087EA97 /* VersionControl.swift */,
+			);
+			path = "Network Interactors";
 			sourceTree = "<group>";
 		};
 		0F9BCFC6222201B600C87706 /* View */ = {
@@ -506,6 +516,7 @@
 				0F817A6C22346BAF00F1738E /* EditProfileUI.swift */,
 				0FF55AB4227B4CFA0093DEE0 /* EditShopUI.swift */,
 				0F4C8EB4227FB21F00E35F8B /* FilterView.swift */,
+				0F896AC522AC595000310594 /* GroupViewControllerFilter.swift */,
 				0FAEEDE4222F29C600A9178F /* GetRichUI.swift */,
 				0F50AE73226F66950028D8B6 /* MapViewAnnotations.swift */,
 				0F63F71D2278BBDC00799C8F /* NewCardView.swift */,
@@ -866,7 +877,6 @@
 				0F052ED9221AE8C5009175EA /* LoginKey.swift in Sources */,
 				0F8B7D46226789A800EFAACD /* ShopSearchResult.swift in Sources */,
 				0FAE1FF3226332D20043B077 /* CreditCard.swift in Sources */,
-				0FFCDC4C226C795B0087BFEF /* FavListDataSource.swift in Sources */,
 				0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */,
 				0F63F71A2278A25700799C8F /* StringSlice.swift in Sources */,
 				0F63F71E2278BBDC00799C8F /* NewCardView.swift in Sources */,
@@ -907,6 +917,7 @@
 				0FE8B9AB220355F000C868C3 /* LoginViewController.swift in Sources */,
 				0F642B99227A525800B887B8 /* AddPostImagePicker.swift in Sources */,
 				0F8571F0225CC5B50056D062 /* UIViewControllerWithErrorBar.swift in Sources */,
+				0F896AC622AC595000310594 /* GroupViewControllerFilter.swift in Sources */,
 				0F7CD8A222873A8000B92CBA /* HelpViewController.swift in Sources */,
 				0F3197B32270BD8F00CEF207 /* Bank.swift in Sources */,
 				0F7FDA7D2205FAFE00703792 /* AlwaysShowPopup.swift in Sources */,
@@ -946,6 +957,7 @@
 				0F7CD8A4228749D900B92CBA /* ContentViewController.swift in Sources */,
 				0F9BCFC8222317E900C87706 /* SepantaGroupButtons.swift in Sources */,
 				0F50AE74226F66950028D8B6 /* MapViewAnnotations.swift in Sources */,
+				0F896AC322AC580400310594 /* ShopListOwners.swift in Sources */,
 				0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */,
 				0FD094AC226E370B00E53A07 /* NearestViewController.swift in Sources */,
 				0F79BBAA2285CD4900795AE0 /* FavListViewController.swift in Sources */,
