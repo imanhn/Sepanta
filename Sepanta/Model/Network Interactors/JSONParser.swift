@@ -183,7 +183,8 @@ class JSONParser {
                 } else if (apiName == "favorite") && (aMethod == HTTPMethod.get)  {
                     print("Starting Fav Shops List Parser for : \(apiName)")
                     let parsedShops = self.processShopList(Result: aDic)
-                    NetworkManager.shared.favShopObs.accept(parsedShops)
+                    //NetworkManager.shared.favShopObs.accept(parsedShops)
+                    NetworkManager.shared.shopObs.accept(parsedShops)
                 } else if (apiName == "favorite") && (aMethod == HTTPMethod.post) {
                     print("Starting Toggle Favorite on a shop Parser...")
                     let aToggle = self.processFavAShopToggle(Result: aDic)

@@ -91,20 +91,20 @@ extension ShopListOwners where Self:UIViewControllerWithErrorBar{
                 //aCell.discountPercentage.text = persianDiscount+"%"
                 aCell.offImage.image = self.CreateOffImage(Off: persianDiscount,ViewSize: aCell.offImage.frame.size)
                 let persianFollowers :String = "\(model.follower_count ?? 0)".toPersianNumbers()
-                aCell.shopFollowers.text = persianFollowers
+                aCell.shopFollowers?.text = persianFollowers
                 let persianRate :String = "\(model.rate_count ?? 0)".toPersianNumbers()
                 let rate : Float = Float(model.rate ?? "0.0") ?? 0
-                aCell.rateLabel.text = "("+persianRate+")"
-                aCell.star1.image = UIImage(named: "icon_star_gray")
-                aCell.star2.image = UIImage(named: "icon_star_gray")
-                aCell.star3.image = UIImage(named: "icon_star_gray")
-                aCell.star4.image = UIImage(named: "icon_star_gray")
-                aCell.star5.image = UIImage(named: "icon_star_gray")
-                if rate > 0.5 {aCell.star1.image = UIImage(named: "icon_star_on")}
-                if rate > 1.5 {aCell.star2.image = UIImage(named: "icon_star_on")}
-                if rate > 2.5 {aCell.star3.image = UIImage(named: "icon_star_on")}
-                if rate > 3.5 {aCell.star4.image = UIImage(named: "icon_star_on")}
-                if rate > 4.5 {aCell.star5.image = UIImage(named: "icon_star_on")}                
+                aCell.rateLabel?.text = "("+persianRate+")"
+                aCell.star1?.image = UIImage(named: "icon_star_gray")
+                aCell.star2?.image = UIImage(named: "icon_star_gray")
+                aCell.star3?.image = UIImage(named: "icon_star_gray")
+                aCell.star4?.image = UIImage(named: "icon_star_gray")
+                aCell.star5?.image = UIImage(named: "icon_star_gray")
+                if rate > 0.5 {aCell.star1?.image = UIImage(named: "icon_star_on")}
+                if rate > 1.5 {aCell.star2?.image = UIImage(named: "icon_star_on")}
+                if rate > 2.5 {aCell.star3?.image = UIImage(named: "icon_star_on")}
+                if rate > 3.5 {aCell.star4?.image = UIImage(named: "icon_star_on")}
+                if rate > 4.5 {aCell.star5?.image = UIImage(named: "icon_star_on")}                
                 if let shopImage = aCell.shopImage{
                     //print("NetworkManager.shared.websiteRootAddress : ",NetworkManager.shared.websiteRootAddress)
                     //print("SlidesAndPaths.shared.path_profile_image : ",SlidesAndPaths.shared.path_profile_image)

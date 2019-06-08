@@ -22,13 +22,13 @@ import RxCocoa
 import RxDataSources
 import Alamofire
 import AlamofireImage
-
+/*
 class FavShopCell : UITableViewCell {
     @IBOutlet weak var shopImage: UIImageView!
     @IBOutlet weak var shopName: UILabel!
     //@IBOutlet weak var discountPercentage: UILabel!
     @IBOutlet weak var offImage: UIImageView!
-}
+}*/
 
 class FavListViewController :  UIViewControllerWithErrorBar,XIBView,ShopListOwners{
     var dataSource: RxTableViewSectionedAnimatedDataSource<SectionOfShopData>!
@@ -75,10 +75,10 @@ class FavListViewController :  UIViewControllerWithErrorBar,XIBView,ShopListOwne
     func pushAShop(_ selectedShop: Shop) {
         self.coordinator!.pushShop(Shop: selectedShop)
     }
-    
+    /*
     func bindToTableView() {
         NetworkManager.shared.favShopObs.bind(to: shopTable.rx.items(cellIdentifier: "cell")) { row, model, cell in
-            if let aCell = cell as? FavShopCell {
+            if let aCell = cell as? ShopCell {
                 //let model = aShopAsAny as! Shop
                 aCell.shopName.text = model.shop_name
                 let persianDiscount :String = "\(model.shop_off ?? 0)".toPersianNumbers()
@@ -107,7 +107,7 @@ class FavListViewController :  UIViewControllerWithErrorBar,XIBView,ShopListOwne
                 self.coordinator!.pushShop(Shop: selectedShop)
             }).disposed(by: myDisposeBag)
     }
-    
+    */
     func setHeaderName(){
         self.headerLabel.text = self.headerLabelToSet
     }
