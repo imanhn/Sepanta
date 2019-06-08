@@ -18,7 +18,7 @@ import RxDataSources
 
 class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded,ShopListOwners{
     var dataSource: RxTableViewSectionedAnimatedDataSource<SectionOfShopData>!
-    
+    var sourceObeservableShops = BehaviorRelay<[Shop]>(value: [Shop]())
     var myDisposeBag = DisposeBag()
     
     //typealias dataSourceFunc = (ShopsListViewController) -> ShopsListDataSource
@@ -65,6 +65,7 @@ class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded,ShopL
         self.headerLabel.text = self.headerLabelToSet
     }
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setHeaderName()

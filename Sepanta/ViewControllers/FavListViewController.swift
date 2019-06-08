@@ -53,7 +53,7 @@ class FavListViewController :  UIViewControllerWithErrorBar,XIBView,ShopListOwne
         shopDataSource = nil
         NetworkManager.shared.shopObs = BehaviorRelay<[Shop]>(value: [Shop]())
     }
-
+    
     @IBAction func backTapped(_ sender: Any) {
         self.coordinator!.popOneLevel()
     }

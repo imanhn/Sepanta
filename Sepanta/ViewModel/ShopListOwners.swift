@@ -69,6 +69,7 @@ extension ShopListOwners where Self:UIViewControllerWithErrorBar{
         let shadowImage = newImage.addShadow(blurSize: 4)
         return shadowImage
     }
+    
     func bindToTableView() {
         let shopObsDisp = NetworkManager.shared.shopObs
             .subscribe(onNext: { shops in
@@ -104,7 +105,7 @@ extension ShopListOwners where Self:UIViewControllerWithErrorBar{
                 if rate > 1.5 {aCell.star2?.image = UIImage(named: "icon_star_on")}
                 if rate > 2.5 {aCell.star3?.image = UIImage(named: "icon_star_on")}
                 if rate > 3.5 {aCell.star4?.image = UIImage(named: "icon_star_on")}
-                if rate > 4.5 {aCell.star5?.image = UIImage(named: "icon_star_on")}                
+                if rate > 4.5 {aCell.star5?.image = UIImage(named: "icon_star_on")}
                 if let shopImage = aCell.shopImage{
                     //print("NetworkManager.shared.websiteRootAddress : ",NetworkManager.shared.websiteRootAddress)
                     //print("SlidesAndPaths.shared.path_profile_image : ",SlidesAndPaths.shared.path_profile_image)

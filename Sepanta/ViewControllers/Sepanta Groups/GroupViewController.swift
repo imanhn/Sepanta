@@ -36,6 +36,7 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     typealias SortFunction = (Shop,Shop)-> Bool    
     var maximumFontSize : CGFloat!
     var dataSource : RxTableViewSectionedAnimatedDataSource<SectionOfShopData>!
+    var sourceObsShops = BehaviorRelay<[Shop]>(value: [Shop]())
     var disposeList : [Disposable] = [Disposable]()
     weak var coordinator : HomeCoordinator?
     let byOff = "بیشترین تخفیف"
@@ -127,6 +128,7 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
         bindToTableView()
         updateGroupHeaders()
     }
+       
     
     func showPopup(_ controller: UIViewController, sourceView: UIView) {
         let presentationController = AlwaysPresentAsPopover.configurePresentation(forController: controller)
