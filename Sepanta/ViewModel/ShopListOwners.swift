@@ -33,14 +33,11 @@ extension ShopListOwners where Self:UIViewControllerWithErrorBar{
         var stillFit = true
         var FontSize : CGFloat = 10
         while stillFit {
-            print("Checking ",FontSize)
             if ViewSize.width < "88%".width(withConstrainedHeight: ViewSize.height, font: UIFont (name: "Shabnam-Bold-FD", size: FontSize)!)
             {
-                print("Not Fit!")
                 stillFit = false
                 break
             }else{
-                print("Stil Fit!")
                 FontSize = FontSize + 1
             }
         }
@@ -87,8 +84,8 @@ extension ShopListOwners where Self:UIViewControllerWithErrorBar{
             let model = item
             let cell = self.shopTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             
-            var returningCell : NewShopCell!
-            if let aCell = cell as? NewShopCell {
+            var returningCell : ShopCell!
+            if let aCell = cell as? ShopCell {
                 aCell.shopName.text = model.shop_name
                 let persianDiscount :String = "\(model.shop_off ?? 0)".toPersianNumbers()
                 //aCell.discountPercentage.text = persianDiscount+"%"

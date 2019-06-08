@@ -15,23 +15,9 @@ import Alamofire
 import AlamofireImage
 import RxDataSources
 
-class NewShopCell : UITableViewCell {
-    @IBOutlet weak var shopImage: UIImageView!
-    @IBOutlet weak var shopName: UILabel!
-    @IBOutlet weak var shopFollowers: UILabel!
-    //@IBOutlet weak var discountPercentage: UILabel!
-    @IBOutlet weak var star1: UIImageView!
-    @IBOutlet weak var star2: UIImageView!
-    @IBOutlet weak var star3: UIImageView!
-    @IBOutlet weak var star4: UIImageView!
-    @IBOutlet weak var star5: UIImageView!
-    @IBOutlet weak var rateLabel: UILabel!
-    @IBOutlet weak var offImage: UIImageView!
-    
-}
 
 class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded,ShopListOwners{
-    
+    var dataSource: RxTableViewSectionedAnimatedDataSource<SectionOfShopData>!
     
     var myDisposeBag = DisposeBag()
     
@@ -40,7 +26,7 @@ class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded,ShopL
     var shopDataSource : ShopsListDataSource!
     var sectionOfShops = BehaviorRelay<[SectionOfShopData]>(value: [SectionOfShopData]())
     var disposeList = [Disposable]()
-    weak var coordinator : HomeCoordinator?    
+    weak var coordinator : HomeCoordinator?
     var maximumFontSize : CGFloat!
     @IBOutlet weak var headerLabel: UILabel!
     var headerLabelToSet : String = "فروشگاه ها"

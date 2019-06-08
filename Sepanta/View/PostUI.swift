@@ -291,7 +291,7 @@ class PostUI {
     }
     
     func userIsCommentOwner(Comment aComment : Comment)->Bool{
-        print("Checking Comment owner commentuser: ",aComment.username ?? "NIL" ," LoginUser : ",LoginKey.shared.username)
+        //print("Checking Comment owner commentuser: ",aComment.username ?? "NIL" ," LoginUser : ",LoginKey.shared.username)
         if aComment.username == LoginKey.shared.username {
             return true
         }else{

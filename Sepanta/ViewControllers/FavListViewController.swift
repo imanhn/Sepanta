@@ -19,6 +19,7 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 import Alamofire
 import AlamofireImage
 
@@ -30,6 +31,8 @@ class FavShopCell : UITableViewCell {
 }
 
 class FavListViewController :  UIViewControllerWithErrorBar,XIBView,ShopListOwners{
+    var dataSource: RxTableViewSectionedAnimatedDataSource<SectionOfShopData>!
+    
     var disposeList = [Disposable]()
     var myDisposeBag = DisposeBag()
     
