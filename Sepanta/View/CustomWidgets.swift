@@ -9,6 +9,14 @@
 import Foundation
 import UIKit
 
+class NoDelayScrollView : UIScrollView {
+    override func touchesShouldCancel(in view: UIView) -> Bool {
+        if view is UIControl {
+            return true
+        }
+        return super.touchesShouldCancel(in: view)
+    }
+}
 
 class CheckBox: UIButton {
     // Images
@@ -328,7 +336,7 @@ class UnderLinedTextField: UITextField {
         let context = UIGraphicsGetCurrentContext()
         context?.setLineWidth(2.0)
         context?.setStrokeColor((UIColor( red: 0.84,     green: 0.84, blue:0.84, alpha: 1.0 )).cgColor)
-        context?.move(to: CGPoint(x: 0, y: self.bounds.height))
+        context?.move(to: CGPoint(x: 20, y: self.bounds.height))
         context?.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height))
         context?.drawPath(using: CGPathDrawingMode.stroke)
 
@@ -409,8 +417,8 @@ class UnderLinedSelectableTextFieldWithWhiteTri: UITextField {
     override func draw(_ rect: CGRect) {
         let sizeOfTriangle = rect.height/4;
         let context = UIGraphicsGetCurrentContext()
-        context?.setLineWidth(1.0)
-        context?.setStrokeColor((UIColor(hex: 0x515152)).cgColor)
+        context?.setLineWidth(2.0)
+        context?.setStrokeColor(UIColor.white.cgColor)
         context?.move(to: CGPoint(x: 20, y: self.bounds.height))
         context?.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height))
         context?.drawPath(using: CGPathDrawingMode.stroke)
@@ -478,6 +486,7 @@ class TabbedButton: UIButton {
 
 class CustomSearchBar: UITextField {
     var curvSize : CGFloat = 20;
+    
     override func draw(_ rect: CGRect) {
         
         let context = UIGraphicsGetCurrentContext()
@@ -505,6 +514,8 @@ class CustomSearchBar: UITextField {
         context?.setStrokeColor((UIColor( red: 0.9,     green: 0.9, blue:0.9, alpha: 0.5 )).cgColor)
         context?.addPath(boundPath)
         context?.drawPath(using: CGPathDrawingMode.stroke)
+        self.attributedPlaceholder = NSAttributedString(string: "جستجو",
+                                                        attributes: [NSAttributedStringKey.foregroundColor: UIColor(hex: 0xD6D7D9)])
 
     }
 }

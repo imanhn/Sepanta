@@ -39,13 +39,31 @@ UIImagePickerControllerDelegate {
         super.init()
         launchImagePicker()
     }
-    
-    func launchImagePicker() {
-        owner.imagePicker.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
-        owner.imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
-        owner.present(owner.imagePicker, animated: true, completion: nil)
+    func launchImagePicker(){
+        let alert = UIAlertController(title: "نحوه انتخاب عکس", message: nil, preferredStyle: .actionSheet)
+        let camAction = UIAlertAction(title: "دوربین", style: .default, handler: { _ in
+            self.openCamera()
+        })
+        alert.addAction(camAction)
+        
+        alert.addAction(UIAlertAction(title: "گالری", style: .default, handler: { _ in
+            self.openGallary()
+        }))
+        alert.addAction(UIAlertAction.init(title: "لغو", style: .cancel, handler: nil))
+        owner.present(alert, animated: true, completion: nil)
     }
     
+    func openCamera() {
+        owner.imagePicker.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        owner.imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
+        owner.present(owner.imagePicker, animated: true, completion: nil)
+    }
+    func openGallary() {
+        owner.imagePicker.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        owner.imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        owner.present(owner.imagePicker, animated: true, completion: nil)
+    }
+
     internal func imagePickerController(_ picker: UIImagePickerController,
                                         didFinishPickingMediaWithInfo info: [String : Any]) {
         

@@ -413,7 +413,7 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         texts["mobileText"]?.keyboardType = UIKeyboardType.phonePad
         views["leftFormView"]?.addSubview(views["mobileNoView"]!)
         cursurY = cursurY + buttonHeight + marginY
-
+        //texts["mobileText"]
         (views["emailView"],texts["emailText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "black-back-closed-envelope-shape", Selectable: false, PlaceHolderText: "ایمیل")
         //texts["emailText"]!.text =  aProfileInfo.email
         texts["emailText"]?.keyboardType = UIKeyboardType.emailAddress

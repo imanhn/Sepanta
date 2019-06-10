@@ -26,6 +26,8 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
     @IBOutlet weak var postTitleLabelInHeader: UILabel!
     @IBOutlet weak var toolbarStack: UIStackView!
 
+    @IBOutlet weak var toolbarWidthConsShort: NSLayoutConstraint!
+    @IBOutlet weak var toolbarWidthConsWide: NSLayoutConstraint!
     @objc override func willPop() {
         disposeList.forEach({$0.dispose()})
         postUI = nil
@@ -124,7 +126,8 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
             abuseButton = UIButton(frame: CGRect(x: 10, y: 10, width: 20, height: 20))
             abuseButton.setImage(UIImage(named: "abuseButton"), for: .normal)
             abuseButton.addTarget(self, action: #selector(reportPost(_:)), for: .touchUpInside)
-            
+            toolbarWidthConsWide.isActive = false
+            toolbarWidthConsShort.isActive = true
             toolbarStack.addSubview(abuseButton)
             toolbarStack.addArrangedSubview(abuseButton)
             toolbarStack.setNeedsUpdateConstraints()
@@ -134,6 +137,8 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
             print("*** Authorized")
             editPostButton.setImage(UIImage(named: "icon_edit"), for: .normal)
             deletePostButton.setImage(UIImage(named: "icon_delete"), for: .normal)
+            toolbarWidthConsWide.isActive = true
+            toolbarWidthConsShort.isActive = false
             editPostButton.isEnabled = true
             deletePostButton.isEnabled = true
         }

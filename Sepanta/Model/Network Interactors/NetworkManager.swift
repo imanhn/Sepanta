@@ -131,7 +131,8 @@ class NetworkManager {
         print("      Header : \(headerToSend)")
         print("      Method : \(aMethod)")
         */
-        RxAlamofire.requestJSON(aMethod, urlAddress , parameters: aParameter, encoding: JSONEncoding.default, headers: headerToSend)
+        //RxAlamofire.requestJSON(aMethod, urlAddress , parameters: aParameter, encoding: JSONEncoding.default, headers: headerToSend)
+        RxAlamofire.requestJSON(aMethod, urlAddress , parameters: aParameter, encoding: URLEncoding.httpBody, headers: headerToSend)
         .observeOn(MainScheduler.instance)
         .timeout(timeOut, scheduler: MainScheduler.instance)
         .retry(retryTime)

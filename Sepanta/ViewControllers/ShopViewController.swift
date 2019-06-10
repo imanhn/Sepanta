@@ -49,6 +49,8 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     @IBOutlet weak var offLabelLeading: NSLayoutConstraint!
     @IBOutlet weak var shopLogoTrailing: NSLayoutConstraint!
     @IBOutlet weak var shopLogoShopTitleDistance: NSLayoutConstraint!
+    @IBOutlet weak var toolbarViewWidthConsBig: NSLayoutConstraint!
+    @IBOutlet weak var toolbarViewWidthConsShort: NSLayoutConstraint!
     
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var ContactButton: UIButton!
@@ -157,8 +159,8 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     
     func getShopFromServer() {
         NetworkManager.shared.shopProfileObs = BehaviorRelay<Profile>(value: Profile())
-        print(" USERS : ","\(shop.user_id)" ," VS  ",LoginKey.shared.userID)
-        print("LoginKey.shared.role : ",LoginKey.shared.role)
+//        print(" USERS : ","\(shop.user_id)" ," VS  ",LoginKey.shared.userID)
+//       print("LoginKey.shared.role : ",LoginKey.shared.role)
 /*        if LoginKey.shared.role == "Shop" && "\(shop.user_id ?? 0)" == LoginKey.shared.userID{
             // a User with Shop role is visiting his Shop profile
             print("You are visiting your shop with UserID : ",self.shop.user_id)

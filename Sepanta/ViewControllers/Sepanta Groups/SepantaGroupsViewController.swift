@@ -46,6 +46,10 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
     }
     
     @IBAction func cityPressed(_ sender: Any) {
+        guard selectedStateStr != nil else {
+            print("First Select the State")
+            return
+        }
         let innerCityDicObs = NetworkManager.shared.cityDictionaryObs.value
         let controller = ArrayChoiceTableViewController(innerCityDicObs.keys.sorted(){$0 < $1}) {
             (selectedCity) in

@@ -36,10 +36,12 @@ class SearchViewController : UIViewControllerWithErrorBar{
     }
 
     @IBAction func BackTapped(_ sender: Any) {
+        self.view.endEditing(true)
         self.coordinator!.popOneLevel()
     }
     
     @IBAction func BackToHome(_ sender: Any) {
+        self.view.endEditing(true)
         self.coordinator!.popHome()
     }
     
@@ -53,12 +55,17 @@ class SearchViewController : UIViewControllerWithErrorBar{
         
     }
     func bindToTableView() {
+        searchResultTableView.tableFooterView = UIView()
         let searchDisp = self.searchText.rx.controlEvent([.editingChanged])
             .asObservable()
             .throttle(3, scheduler: MainScheduler.instance)
             .subscribe({ [unowned self] _ in
-                self.callNewSearch()
                 //print("My text : \(self.searchText.text ?? "")")
+                if self.searchText.text?.count == 0 {
+                    NetworkManager.shared.shopSearchResultObs.accept([ShopSearchResult]())
+                }else{
+                    self.callNewSearch()
+                }
             })
         searchDisp.disposed(by: myDisposeBag)
         disposeList.append(searchDisp)
@@ -79,6 +86,7 @@ class SearchViewController : UIViewControllerWithErrorBar{
                     self.alert(Message: "اظلاعات این فروشگاه کامل نیست")
                     return
                 }
+                self.view.endEditing(true)
                 let ashop = Shop(shop_id: aShopSearchResult.shop_id, user_id: aShopSearchResult.user_id, shop_name: aShopSearchResult.shop_name, shop_off: nil, lat: nil, long: nil, image: nil, rate: nil,rate_count: 0, follower_count: nil, created_at: nil)
                 self.coordinator!.pushShop(Shop: ashop)
             })
@@ -101,7 +109,9 @@ class SearchViewController : UIViewControllerWithErrorBar{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.searchResultTableView.rowHeight = self.view.frame.height * 0.08
+        //self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+        searchResultTableView.keyboardDismissMode = .onDrag
+        searchResultTableView.rowHeight = self.view.frame.height * 0.08
         loadData()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         bindToTableView()

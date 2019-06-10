@@ -257,7 +257,21 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                     print("aProfile.content has shops but expected to have posts : ",aProfile.content )
                     self?.delegate.alert(Message: "خطای داخلی اتفاق افتاده است")
                 }*/
-                print("Profile : ",aProfile)
+                //print("Profile : ",aProfile)
+                if aProfile.lat == nil || aProfile.long == nil {
+                    //self?.delegate.locationButton?.isHidden = true
+                    
+                    DispatchQueue.main.async {
+                        self?.delegate.locationButton?.removeFromSuperview()
+                        self?.delegate.toolbarStack?.setNeedsUpdateConstraints()
+                        self?.delegate.toolbarStack?.setNeedsLayout()
+                        self?.delegate.toolbarStack?.setNeedsDisplay()
+                        self?.delegate.toolbarViewWidthConsBig.isActive = false
+                        self?.delegate.toolbarViewWidthConsShort.isActive = true
+                    }
+                    
+                    
+                }
                 if aProfile.is_follow != nil  {
                     self?.followButton.isFollowed = aProfile.is_follow ?? false
                     if aProfile.is_follow! {

@@ -32,6 +32,13 @@
                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kW0-lX-Hmh" userLabel="BackButton">
+                                        <rect key="frame" x="0.0" y="0.0" width="103.5" height="71.5"/>
+                                        <state key="normal" image="icon_back_black"/>
+                                        <connections>
+                                            <action selector="backTapped:" destination="Egp-pF-FKM" eventType="touchUpInside" id="C5f-3f-WVh"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVJ-sN-Bdq" userLabel="HomeLogo">
                                         <rect key="frame" x="318" y="0.0" width="86" height="71.5"/>
                                         <state key="normal" image="logo_home"/>
@@ -43,10 +50,14 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="edl-UQ-tDb" firstAttribute="height" secondItem="wk0-0X-sxW" secondAttribute="height" id="BVg-0W-nDj"/>
+                                    <constraint firstItem="kW0-lX-Hmh" firstAttribute="top" secondItem="wk0-0X-sxW" secondAttribute="top" id="H0N-PV-yVg"/>
                                     <constraint firstItem="SVJ-sN-Bdq" firstAttribute="top" secondItem="wk0-0X-sxW" secondAttribute="top" id="MH2-o8-mcw"/>
                                     <constraint firstAttribute="bottom" secondItem="SVJ-sN-Bdq" secondAttribute="bottom" id="QiP-JC-dUR"/>
                                     <constraint firstItem="edl-UQ-tDb" firstAttribute="centerY" secondItem="wk0-0X-sxW" secondAttribute="centerY" id="TuJ-fH-wji"/>
+                                    <constraint firstAttribute="bottom" secondItem="kW0-lX-Hmh" secondAttribute="bottom" id="mZ2-qS-oKh"/>
                                     <constraint firstItem="edl-UQ-tDb" firstAttribute="centerX" secondItem="wk0-0X-sxW" secondAttribute="centerX" id="piR-mg-ga3"/>
+                                    <constraint firstItem="edl-UQ-tDb" firstAttribute="leading" secondItem="kW0-lX-Hmh" secondAttribute="trailing" id="qPr-6j-P2h"/>
+                                    <constraint firstItem="kW0-lX-Hmh" firstAttribute="leading" secondItem="wk0-0X-sxW" secondAttribute="leading" id="uid-eI-tKn"/>
                                     <constraint firstItem="edl-UQ-tDb" firstAttribute="width" secondItem="wk0-0X-sxW" secondAttribute="width" multiplier="0.5" id="xyV-Z9-gcv"/>
                                     <constraint firstAttribute="trailing" secondItem="SVJ-sN-Bdq" secondAttribute="trailing" constant="10" id="yMI-FC-Z1d"/>
                                 </constraints>
@@ -69,7 +80,7 @@
                                     <constraint firstItem="05K-DC-khX" firstAttribute="centerY" secondItem="8CL-6c-RLD" secondAttribute="centerY" id="ucM-qz-S2M"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="auq-T6-nHe">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auq-T6-nHe" customClass="NoDelayScrollView" customModule="Sepanta" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="115.5" width="414" height="718"/>
                             </scrollView>
                         </subviews>
@@ -102,6 +113,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon_back_black" width="10" height="16"/>
         <image name="icon_menu" width="21" height="18"/>
         <image name="logo_home" width="86" height="25"/>
     </resources>

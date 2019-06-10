@@ -124,13 +124,23 @@ class LoginViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,
         let toEnglishMobileNo =  (self.MobileTextField.text ?? "").toEnglishNumbers()
         self.coordinator!.pushSMSVerification(Set: toEnglishMobileNo)
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        doSubscribtions()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        disposeList.forEach({$0.dispose()})
+    }
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         self.submitButton.isEnabled = false
         self.MobileTextField.delegate = self
-        doSubscribtions()
     }
 
     override func didReceiveMemoryWarning() {

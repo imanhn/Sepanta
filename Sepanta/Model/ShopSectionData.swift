@@ -29,7 +29,7 @@ extension SectionOfShopData: SectionModelType {
         self = original
         self.items = items
     }
-    
+    /*
     init(original: SectionOfShopData, items: [Shop], filter : FilterFunction) {
         self = original
         self.items = items.filter({filter($0)})
@@ -39,5 +39,10 @@ extension SectionOfShopData: SectionModelType {
         self = original
         self.items = items.sorted(by: sort)
     }
-    
+     */
+    init(original: SectionOfShopData, items: [Shop], sort : SortFunction, search : FilterFunction) {
+        self = original
+        self.items = items.filter({search($0)}).sorted(by: sort)
+    }
+
 }

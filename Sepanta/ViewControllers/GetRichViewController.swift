@@ -14,7 +14,7 @@ class GetRichViewController : UIViewControllerWithKeyboardNotificationWithErrorB
    var myDisposeBag = DisposeBag()
     var profileInfo : ProfileInfo?
     var cardNo : String?
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var scrollView: NoDelayScrollView!
     var getRichUI : GetRichUI?    
     weak var coordinator : HomeCoordinator?
 
@@ -26,6 +26,10 @@ class GetRichViewController : UIViewControllerWithKeyboardNotificationWithErrorB
         getRichUI = nil
     }
 
+    @IBAction func backTapped(_ sender: Any) {
+        self.coordinator!.popOneLevel()
+    }
+    
     @IBAction func homeTapped(_ sender: Any) {
         self.coordinator!.popHome()
     }
@@ -47,6 +51,7 @@ class GetRichViewController : UIViewControllerWithKeyboardNotificationWithErrorB
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //scrollView.canCancelContentTouches = false
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         getRichUI = GetRichUI()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))

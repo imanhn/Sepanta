@@ -235,7 +235,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VoF-pB-xe1" userLabel="HomeButton">
-                                        <rect key="frame" x="349" y="0.0" width="16" height="46.5"/>
+                                        <rect key="frame" x="279" y="0.0" width="86" height="46.5"/>
                                         <state key="normal" image="logo_home"/>
                                         <connections>
                                             <action selector="homeTapped:" destination="G6t-Aa-Hug" eventType="touchUpInside" id="jHd-ae-bGN"/>
@@ -244,6 +244,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="UaR-9f-Cpb" firstAttribute="width" secondItem="1Vn-eW-zyG" secondAttribute="width" multiplier="0.4" id="CUg-Bw-rPv"/>
+                                    <constraint firstItem="UaR-9f-Cpb" firstAttribute="width" secondItem="1Vn-eW-zyG" secondAttribute="width" multiplier="0.3" id="Efk-Ba-tgl"/>
                                     <constraint firstAttribute="bottom" secondItem="VoF-pB-xe1" secondAttribute="bottom" id="Jpb-U9-2gs"/>
                                     <constraint firstItem="UaR-9f-Cpb" firstAttribute="top" secondItem="1Vn-eW-zyG" secondAttribute="top" id="KYx-R3-PS2"/>
                                     <constraint firstAttribute="trailing" secondItem="VoF-pB-xe1" secondAttribute="trailing" constant="10" id="LXe-iR-FwR"/>
@@ -251,6 +252,11 @@
                                     <constraint firstAttribute="bottom" secondItem="UaR-9f-Cpb" secondAttribute="bottom" id="gaP-gU-1c8"/>
                                     <constraint firstItem="UaR-9f-Cpb" firstAttribute="leading" secondItem="1Vn-eW-zyG" secondAttribute="leading" id="wvw-S0-pqA"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Efk-Ba-tgl"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRP-4c-iqD" userLabel="MainView">
                                 <rect key="frame" x="0.0" y="74.5" width="375" height="592.5"/>
@@ -373,7 +379,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۲۳۴۵" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imN-ni-rIc" userLabel="followersNumberLabel">
-                                                        <rect key="frame" x="91.5" y="4.5" width="33.5" height="15.5"/>
+                                                        <rect key="frame" x="89" y="3" width="36" height="18"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-Light-FD" family="Shabnam FD" pointSize="13"/>
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -544,6 +550,8 @@
                         <outlet property="star4" destination="fGR-De-k7h" id="665-Jj-cQF"/>
                         <outlet property="star5" destination="YfJ-7v-ylg" id="TLZ-qK-wkw"/>
                         <outlet property="toolbarStack" destination="4mC-T5-XeS" id="IFi-sx-lta"/>
+                        <outlet property="toolbarViewWidthConsBig" destination="CUg-Bw-rPv" id="029-vX-A13"/>
+                        <outlet property="toolbarViewWidthConsShort" destination="Efk-Ba-tgl" id="qnl-pD-do6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CUk-Ld-I4N" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -658,37 +666,37 @@
                                                                     <rect key="frame" x="135" y="0.0" width="90" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(۳.۵)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YNo-Dh-lt2" userLabel="rateLabel">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="32" height="19.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="10" height="19.5"/>
                                                                             <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                                             <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_star_gray" translatesAutoresizingMaskIntoConstraints="NO" id="Vap-mC-ONU" userLabel="star5">
-                                                                            <rect key="frame" x="32.5" y="4.5" width="11" height="11"/>
+                                                                            <rect key="frame" x="10" y="2" width="16" height="16"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="Vap-mC-ONU" secondAttribute="height" multiplier="1:1" id="ucf-RV-2CI"/>
                                                                             </constraints>
                                                                         </imageView>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_star_gray" translatesAutoresizingMaskIntoConstraints="NO" id="QtH-Bt-z4J" userLabel="star4">
-                                                                            <rect key="frame" x="44" y="4.5" width="11" height="11"/>
+                                                                            <rect key="frame" x="26" y="2" width="16" height="16"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="QtH-Bt-z4J" secondAttribute="height" multiplier="1:1" id="3az-rA-tGA"/>
                                                                             </constraints>
                                                                         </imageView>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_star_gray" translatesAutoresizingMaskIntoConstraints="NO" id="MOT-Ju-gjY" userLabel="star3">
-                                                                            <rect key="frame" x="56" y="4.5" width="11" height="11"/>
+                                                                            <rect key="frame" x="42" y="2" width="16" height="16"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="MOT-Ju-gjY" secondAttribute="height" multiplier="1:1" id="jVt-v7-lsJ"/>
                                                                             </constraints>
                                                                         </imageView>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_star_gray" translatesAutoresizingMaskIntoConstraints="NO" id="8XY-Q4-E06" userLabel="star2">
-                                                                            <rect key="frame" x="67.5" y="4.5" width="11" height="11"/>
+                                                                            <rect key="frame" x="58" y="2" width="16" height="16"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="8XY-Q4-E06" secondAttribute="height" multiplier="1:1" id="lue-yk-lEl"/>
                                                                             </constraints>
                                                                         </imageView>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_star_gray" translatesAutoresizingMaskIntoConstraints="NO" id="B6r-Bi-PXV" userLabel="star1">
-                                                                            <rect key="frame" x="79" y="4.5" width="11" height="11"/>
+                                                                            <rect key="frame" x="74" y="2" width="16" height="16"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="B6r-Bi-PXV" secondAttribute="height" multiplier="1:1" id="kBl-9b-uHB"/>
                                                                             </constraints>

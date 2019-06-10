@@ -297,7 +297,6 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="wFP-pZ-e0a" firstAttribute="centerX" secondItem="cqJ-jR-VrW" secondAttribute="centerX" id="6bS-1H-DGS"/>
                                             <constraint firstItem="wFP-pZ-e0a" firstAttribute="leading" secondItem="cqJ-jR-VrW" secondAttribute="leading" constant="10" id="7fR-hv-7qU"/>

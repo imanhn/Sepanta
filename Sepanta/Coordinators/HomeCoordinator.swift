@@ -129,6 +129,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     func pushShowProfile (){
         if LoginKey.shared.role == "Shop" {
             let ashop = Shop(WithShopID: Int(LoginKey.shared.shopID))
+            print("pushShowProfile (Shop) LoginKey.shared.shopID : ",LoginKey.shared.shopID)
             self.pushShop(Shop: ashop)
         }else{
             let storyboard = UIStoryboard(name: "Profile", bundle: Bundle.main)

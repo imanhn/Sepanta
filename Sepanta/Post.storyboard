@@ -225,7 +225,13 @@
                                     <constraint firstAttribute="bottom" secondItem="Dd6-E6-d13" secondAttribute="bottom" id="gOh-hT-gWQ"/>
                                     <constraint firstItem="El1-8U-rWN" firstAttribute="top" secondItem="dXi-H4-95f" secondAttribute="top" id="iI7-x5-sTk"/>
                                     <constraint firstItem="Dd6-E6-d13" firstAttribute="top" secondItem="dXi-H4-95f" secondAttribute="top" id="jIF-4Y-5QM"/>
+                                    <constraint firstItem="Dd6-E6-d13" firstAttribute="width" secondItem="dXi-H4-95f" secondAttribute="width" multiplier="0.23" id="wrU-rX-8UO"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="wrU-rX-8UO"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3GR-1V-UBx" userLabel="PostView">
                                 <rect key="frame" x="0.0" y="66.5" width="375" height="600.5"/>
@@ -262,6 +268,8 @@
                         <outlet property="postScrollView" destination="Sxe-G3-Uqa" id="X9e-iW-E2o"/>
                         <outlet property="postTitleLabelInHeader" destination="lTp-QW-9BC" id="Uz3-u4-CuI"/>
                         <outlet property="toolbarStack" destination="Dd6-E6-d13" id="MiB-YB-rx7"/>
+                        <outlet property="toolbarWidthConsShort" destination="wrU-rX-8UO" id="hcs-SG-dHH"/>
+                        <outlet property="toolbarWidthConsWide" destination="NDe-w8-Jbn" id="Rh4-Nn-cqO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fi1-hw-vxd" userLabel="First Responder" sceneMemberID="firstResponder"/>

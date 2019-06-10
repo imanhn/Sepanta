@@ -89,6 +89,7 @@
 		0F890D122215D21C0091FA2E /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890D112215D21C0091FA2E /* JSONParser.swift */; };
 		0F896AC322AC580400310594 /* ShopListOwners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F896AC222AC580400310594 /* ShopListOwners.swift */; };
 		0F896AC622AC595000310594 /* GroupViewControllerFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F896AC522AC595000310594 /* GroupViewControllerFilter.swift */; };
+		0F896AC822AC736400310594 /* UniversalParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F896AC722AC736400310594 /* UniversalParser.swift */; };
 		0F8B7D432267874B00EFAACD /* Shabnam-Bold-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F8B7D412267874600EFAACD /* Shabnam-Bold-FD.ttf */; };
 		0F8B7D442267874B00EFAACD /* Shabnam-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F8B7D422267874800EFAACD /* Shabnam-FD.ttf */; };
 		0F8B7D46226789A800EFAACD /* ShopSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8B7D45226789A800EFAACD /* ShopSearchResult.swift */; };
@@ -239,6 +240,7 @@
 		0F890D112215D21C0091FA2E /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
 		0F896AC222AC580400310594 /* ShopListOwners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListOwners.swift; sourceTree = "<group>"; };
 		0F896AC522AC595000310594 /* GroupViewControllerFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewControllerFilter.swift; sourceTree = "<group>"; };
+		0F896AC722AC736400310594 /* UniversalParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalParser.swift; sourceTree = "<group>"; };
 		0F8B7D412267874600EFAACD /* Shabnam-Bold-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shabnam-Bold-FD.ttf"; sourceTree = "<group>"; };
 		0F8B7D422267874800EFAACD /* Shabnam-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shabnam-FD.ttf"; sourceTree = "<group>"; };
 		0F8B7D45226789A800EFAACD /* ShopSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopSearchResult.swift; sourceTree = "<group>"; };
@@ -497,6 +499,7 @@
 			children = (
 				0F890D0D2215C7170091FA2E /* NetworkManager.swift */,
 				0F890D112215D21C0091FA2E /* JSONParser.swift */,
+				0F896AC722AC736400310594 /* UniversalParser.swift */,
 				0F052ED8221AE8C5009175EA /* LoginKey.swift */,
 				0F70A648226BC7BF0020C33C /* ProfileInfoWrapper.swift */,
 				0F1B755C2235C1080087C0DB /* SlidesAndPaths.swift */,
@@ -948,6 +951,7 @@
 				0F066F99222C22EE00C8871C /* MenuController.swift in Sources */,
 				0FD32DCB227076C40092D6FC /* ProfileInfo.swift in Sources */,
 				0F0661AD2257E62400A83734 /* SepantaGroupsSubscription.swift in Sources */,
+				0F896AC822AC736400310594 /* UniversalParser.swift in Sources */,
 				0F58927E227909080077B655 /* ScoresViewController.swift in Sources */,
 				0FAEEDE72230949C00A9178F /* AboutUsViewController.swift in Sources */,
 				0F890D022214B5310091FA2E /* AppCoordinator.swift in Sources */,

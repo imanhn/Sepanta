@@ -33,7 +33,8 @@ class ShopCell : UITableViewCell {
 class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,Storyboarded,ShopListOwners{
     var myDisposeBag = DisposeBag()
     var fetchMechanism : dataSourceFunc!
-    typealias SortFunction = (Shop,Shop)-> Bool    
+    typealias SortFunction = (Shop,Shop)-> Bool
+    typealias SearchFunction = (Shop)-> Bool
     var maximumFontSize : CGFloat!
     var dataSource : RxTableViewSectionedAnimatedDataSource<SectionOfShopData>!
     var sourceObsShops = BehaviorRelay<[Shop]>(value: [Shop]())
@@ -72,10 +73,10 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         //print("EDIT : ",textField.tag,"  ",  selectedFilterType )
         //print(textField.tag == 2 ,"  ",selectedFilterType == searchOption )
-        if textField.tag == 2 && self.filterView.filterType.text == searchOption {
-            return true
-        }else{
+        if textField.tag == 11 { // FilterView.sortFilter.tag = 11
             return false
+        }else{
+            return true
         }
     }
     

@@ -332,6 +332,7 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
     }
     
     func getProfileData() {
+        //print("Getting profile....")
         let aParameter = ["user id":"\(LoginKey.shared.userID)"]
         NetworkManager.shared.run(API: "profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
     }
