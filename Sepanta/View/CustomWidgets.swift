@@ -235,7 +235,9 @@ class FollowButton: SubmitButton {
                 if self.isEnabled {
                     if self.isFollowed {
                         self.backgroundColor = UIColor(hex: 0x515152)
+                        self.setImage(UIImage(named: "icon_tick_white"), for: .normal)
                     }else{
+                        self.setImage(UIImage(named: "icon_add_white"), for: .normal)
                         self.backgroundColor = UIColor(hex: 0x9FDA64)
                     }
                     //self.alpha = 1.0
