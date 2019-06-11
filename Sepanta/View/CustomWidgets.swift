@@ -968,7 +968,7 @@ extension CGRect {
          aView.addSubview(lineView)
          */
         aView.backgroundColor = UIColor.white
-        let icondim = rect.height / 3
+        let icondim = rect.height / 2
         let spaceIconText : CGFloat = 20
         let imageRect = CGRect(x: (rect.width-icondim), y: (rect.height - icondim)/2, width: icondim, height: icondim)
         let anIcon = UIImageView(frame: imageRect)

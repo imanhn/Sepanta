@@ -389,30 +389,30 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         disposeList.forEach({$0.dispose()})
         cursurY = 10
         let aProfile = NetworkManager.shared.shopProfileObs.value
-        let buttonHeight = self.delegate.contentView.frame.height / 7
+        let buttonHeight = self.delegate.contentView.frame.height / 6
         let textFieldWidth = (self.delegate.contentView.bounds.width) - (2 * marginX)
         var shopView = UIView()
         let sepantaText = aProfile.shop_name ?? ""
         (shopView,_) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "icon_profile_05",  LabelText: sepantaText,Lines : 3)
-        cursurY = cursurY + shopView.frame.height + marginY/2
+        cursurY = cursurY + shopView.frame.height //+ marginY/3
         self.delegate.contentView.addSubview(shopView)
         
         let sepantaAddress = aProfile.address ?? ""
         var addressView = UIView()
         (addressView,_) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "icon_profile_06",  LabelText: sepantaAddress,Lines : 2)
-        cursurY = cursurY + addressView.frame.height + marginY/2
+        cursurY = cursurY + addressView.frame.height// + marginY/3
         self.delegate.contentView.addSubview(addressView)
         
         var telView = UIView()
         let shopTel = (aProfile.phone ?? "").toPersianNumbers()
         (telView,_) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "icon_profile_07",  LabelText: shopTel,Lines: 1)
-        cursurY = cursurY + telView.frame.height + marginY/2
+        cursurY = cursurY + telView.frame.height //+ marginY/3
         self.delegate.contentView.addSubview(telView)
         
         var webView = UIView()
         let webAddress = "www.ipsepanta.ir" + (aProfile.url ?? "")
         (webView,_) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "web",  LabelText: webAddress,Lines: 1)
-        cursurY = cursurY + webView.frame.height + marginY/2
+        cursurY = cursurY + webView.frame.height //+ marginY/3
         self.delegate.contentView.addSubview(webView)
         
         /*var emailAddress = aProfile. ?? ""
