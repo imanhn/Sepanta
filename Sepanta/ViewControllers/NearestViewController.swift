@@ -23,8 +23,13 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
     weak var coordinator : HomeCoordinator?
     var myDisposeBag = DisposeBag()
     var locationManager:CLLocationManager!
-    var myLocation = CLLocation(latitude: 35.755985, longitude: 51.546742)
-    let regionRadius: CLLocationDistance = 2000
+    var destinationCRD : CLLocationCoordinate2D!
+    var annotations : Dictionary<Int,MKAnnotation> = Dictionary<Int,MKAnnotation>()
+    var installedNavigationApps : Dictionary<String,String> = ["Apple Maps":""]
+    //var myLocation = CLLocation(latitude: 35.755985, longitude: 51.546742)
+    var myLocation : CLLocation?
+    var oldLocation : CLLocation?
+    let regionRadius: CLLocationDistance = 1000
     var mapMode : MapType!
     var shopToShow : Shop!
     var shopDisposable : Disposable!
@@ -50,7 +55,7 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
     }
     
     @IBAction func gotoMyLocationTapped(_ sender: Any) {
-        centerMapOnLocation(Coordinate: myLocation.coordinate)
+        centerMapOnLocation(Coordinate: myLocation?.coordinate)
     }
     
     @IBAction func BackToHome(_ sender: Any) {
@@ -64,8 +69,12 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
         super.viewWillAppear(animated)
     }
     
-    func centerMapOnLocation(Coordinate coordinate : CLLocationCoordinate2D) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(coordinate,
+    func centerMapOnLocation(Coordinate coordinate : CLLocationCoordinate2D?) {
+        guard coordinate != nil else {
+            print("No location for now!")
+            return
+        }
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(coordinate!,
                                                                   regionRadius, regionRadius)
         mapView.setRegion(coordinateRegion, animated: true)
     }
@@ -80,13 +89,86 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         myLocation = manager.location!
+        if oldLocation == nil || (oldLocation!.distance(from: myLocation!) > Double(1000)){
+            if mapMode == MapType.NearbyShops {
+                centerMapOnLocation(Coordinate : myLocation?.coordinate)
+                getNearByShops()
+            }
+            oldLocation = myLocation!
+        }
     }
     
+    func getShopCoord(FromTag tag : Int){
+        
+    }
+    @objc func openNavigationApps(_ sender : UIButton){
+        guard myLocation != nil else {
+            alert(Message: "موقعیت شما معلوم نیست احتمالا جی پی اس شما خاموش است")
+            return
+        }
+        guard annotations[sender.tag] != nil else {
+            alert(Message: "متاسفانه مشکلی پیش آمده است")
+            print("TAG : ",sender.tag)
+            print("Annotations : ",annotations)
+            return
+        }
+        
+        destinationCRD = annotations[sender.tag]!.coordinate
 
+        
+        
+        if UIApplication.shared.canOpenURL(URL(string: "waze://")!) {
+            print("WAZE INSTALLED!")
+        }
+        let alert = UIAlertController(title: "مسیریابی", message: "مسیریاب خود را انتخاب کنید", preferredStyle: .actionSheet)
+
+        let button = UIAlertAction(title: "Apple Map", style: .default, handler: { _ in
+            self.openAppleMap()
+        })
+        alert.addAction(button)
+
+        if UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!) {
+            //Google Exists
+            let button = UIAlertAction(title: "Google Map", style: .default, handler: { _ in
+                self.openGoogleMap()
+            })
+            alert.addAction(button)
+        }
+        if UIApplication.shared.canOpenURL(URL(string:"waze://")!) {
+            //waze Exists
+            let button = UIAlertAction(title: "Waze", style: .default, handler: {_ in
+                self.openWaze()
+            })
+            alert.addAction(button)
+        }
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func openWaze(){
+        let urlStr: String = "waze://?ll=\(destinationCRD.latitude),\(destinationCRD.longitude)&navigate=yes"
+        UIApplication.shared.openURL(URL(string: urlStr)!)
+    }
+    
+    func openGoogleMap(){
+        UIApplication.shared.openURL(URL(string:
+            "comgooglemaps://?saddr=&daddr=\(destinationCRD.latitude),\(destinationCRD.longitude)&directionsmode=driving")!)
+    }
+    
+    func openAppleMap(){
+        let source = MKMapItem(placemark: MKPlacemark(coordinate: myLocation!.coordinate))
+        source.name = "Source"
+        let destination = MKMapItem(placemark: MKPlacemark(coordinate: destinationCRD!))
+        destination.name = "Destination"
+        MKMapItem.openMaps(with: [source, destination], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
+    }
     
     func getNearByShops(){
-        let aParameter = ["lat":"\(myLocation.coordinate.latitude)",
-                          "long":"\(myLocation.coordinate.longitude)"]
+        guard myLocation != nil else {
+            print("No location, Nothing fetched!")
+            return
+        }
+        let aParameter = ["lat":"\(myLocation!.coordinate.latitude)",
+                          "long":"\(myLocation!.coordinate.longitude)"]
         NetworkManager.shared.run(API: "shops-location", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: true)
         
         shopDisposable = NetworkManager.shared.shopObs
@@ -96,6 +178,7 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
                     //print("ADDING ",(ashop as! Shop).user_id)
                     //let aShopAnnotation = ShopAnnotation(WithShop: ashop as! Shop)
                     let aShopAnnotation = MapAnnotation(WithShop: ashop)
+                    self.annotations[ashop.user_id!] = aShopAnnotation
                     self.mapView.addAnnotation(aShopAnnotation)
                     
                 }
@@ -118,10 +201,12 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
         if shopToShow != nil {
             let aShopAnnotation = MapAnnotation(WithShop: shopToShow!)
             self.mapView.addAnnotation(aShopAnnotation)
+            self.annotations[shopToShow.user_id!] = aShopAnnotation
             //print("Adding label : ",aShopAnnotation.coordinate)
             centerMapOnLocation(Coordinate: aShopAnnotation.coordinate)
         }
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()        
@@ -135,7 +220,9 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
         case MapType.NearbyShops?:
             //print("Showing nearby Shops")
             getNearByShops()
-            centerMapOnLocation(Coordinate: myLocation.coordinate)
+            if myLocation != nil {
+                centerMapOnLocation(Coordinate: myLocation!.coordinate)
+            }
             break
         case MapType.SingleShop?:
             //print("Showing single shop")

@@ -31,12 +31,21 @@ extension NearestViewController: MKMapViewDelegate {
         rightButton.setImage(UIImage(named: "MapArrow"), for: .application)
         rightButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
         rightButton.backgroundColor = UIColor(hex: 0x515152)
-        
         rightButton.tag = (annotation as! MapAnnotation).userId!
         rightButton.addTarget(self, action: #selector(pushShop), for: .touchUpInside)
-        //print("rightButton.tag : ",rightButton.tag)
         rightButton.layer.cornerRadius = 5
         view.rightCalloutAccessoryView = rightButton
+
+        let leftButton = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        leftButton.setImage(UIImage(named: "car"), for: .normal)
+        leftButton.setImage(UIImage(named: "car"), for: .application)
+        leftButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+        leftButton.backgroundColor = UIColor(hex: 0x515152)
+        leftButton.tag = (annotation as! MapAnnotation).userId!
+        leftButton.addTarget(self, action: #selector(openNavigationApps), for: .touchUpInside)
+        leftButton.layer.cornerRadius = 5
+        view.leftCalloutAccessoryView = leftButton
+        
         view.calloutOffset = CGPoint(x: 0, y: 5)
         let mixedImage = CreateBallonImage(Image: UIImage(named: "icon_mainmenu_04")!)
         view.image = mixedImage
