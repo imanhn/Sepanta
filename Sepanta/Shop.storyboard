@@ -235,7 +235,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VoF-pB-xe1" userLabel="HomeButton">
-                                        <rect key="frame" x="279" y="0.0" width="86" height="46.5"/>
+                                        <rect key="frame" x="349" y="0.0" width="16" height="46.5"/>
                                         <state key="normal" image="logo_home"/>
                                         <connections>
                                             <action selector="homeTapped:" destination="G6t-Aa-Hug" eventType="touchUpInside" id="jHd-ae-bGN"/>
@@ -379,7 +379,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۲۳۴۵" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imN-ni-rIc" userLabel="followersNumberLabel">
-                                                        <rect key="frame" x="89" y="3" width="36" height="18"/>
+                                                        <rect key="frame" x="91.5" y="4.5" width="33.5" height="15.5"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-Light-FD" family="Shabnam FD" pointSize="13"/>
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -610,7 +610,7 @@
                                     <constraint firstItem="PjU-wN-fEq" firstAttribute="centerY" secondItem="Eve-Yh-3FL" secondAttribute="centerY" id="Y3c-WP-99q"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" estimatedRowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Eaq-h5-feM" userLabel="NewShopTable">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" estimatedRowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Eaq-h5-feM" userLabel="NewShopTable">
                                 <rect key="frame" x="0.0" y="86.5" width="375" height="534"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -666,7 +666,7 @@
                                                                     <rect key="frame" x="135" y="0.0" width="90" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(۳.۵)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YNo-Dh-lt2" userLabel="rateLabel">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="10" height="19.5"/>
+                                                                            <rect key="frame" x="0.0" y="1.5" width="10" height="16.5"/>
                                                                             <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                                             <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>

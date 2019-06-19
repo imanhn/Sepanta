@@ -15,6 +15,7 @@ protocol ShopListOwners : class {
     typealias dataSourceFunc = (UIViewController) -> ShopsListDataSource
     var fetchMechanism : dataSourceFunc! { get set }
     var dataSource : RxTableViewSectionedAnimatedDataSource<SectionOfShopData>! {get set}
+    var shopsObs : BehaviorRelay<[Shop]> {get set}
     var sectionOfShops : BehaviorRelay<[SectionOfShopData]> { get set }
     var maximumFontSize : CGFloat! { get set }
     var disposeList : [Disposable] { get set }

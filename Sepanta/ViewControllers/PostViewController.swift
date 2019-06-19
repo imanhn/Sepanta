@@ -43,7 +43,7 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
     
     @IBAction func editTapped(_ sender: Any) {
         if
-            let ashopID = NetworkManager.shared.postDetailObs.value.shopId,
+            let ashopID = NetworkManager.shared.postDetailObs.value.shop_id,
             let apost_id = NetworkManager.shared.postDetailObs.value.id,
             let apostTitle = NetworkManager.shared.postDetailObs.value.title,
             let apostBody = NetworkManager.shared.postDetailObs.value.content,
@@ -94,7 +94,7 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
     }
     
     func getMyShopFromServer() {
-        NetworkManager.shared.shopProfileObs = BehaviorRelay<Profile>(value: Profile())
+        NetworkManager.shared.shopProfileObs = BehaviorRelay<ShopProfile>(value: ShopProfile())
         //print("self.shop.user_id : ",self.shop.user_id)
         let aParameter = ["user id":LoginKey.shared.userID]
         NetworkManager.shared.run(API: "profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true,TargetObs: "SHOP")

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Bank : Decodable{
+struct Bank : Codable{
     var code_bank : Int?
     var bank : String?
     var logo : String?    

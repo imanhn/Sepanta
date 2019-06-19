@@ -227,7 +227,7 @@ class AddPostViewController : UIViewControllerWithKeyboardNotificationWithErrorB
     }
     
     func getMyShopFromServer() {
-        NetworkManager.shared.shopProfileObs = BehaviorRelay<Profile>(value: Profile())
+        NetworkManager.shared.shopProfileObs = BehaviorRelay<ShopProfile>(value: ShopProfile())
         //print("self.shop.user_id : ",self.shop.user_id)
         let aParameter = ["user id":LoginKey.shared.userID]
         NetworkManager.shared.run(API: "profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true,TargetObs: "SHOP")

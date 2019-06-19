@@ -19,7 +19,8 @@ extension HomeViewController {
     }
     
     func sendInUseVersion(){
-        let aParameter = ["version_ios":"\(LoginKey.shared.version)"]
+        let aParameter = ["version_ios":"\(LoginKey.shared.version)",
+                        "version_android":""]
         NetworkManager.shared.run(API: "app-version", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: true)
     }
     

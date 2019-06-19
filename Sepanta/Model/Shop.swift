@@ -10,24 +10,15 @@ import Foundation
 import UIKit
 import RxDataSources
 
-protocol ShopProtocol : CollectionCell{
+protocol ShopOrPost : Codable{
     var shop_id : Int? {get set}
-    var user_id : Int? {get set}
-    var shop_name : String? {get set}
-    var shop_off : Int? {get set}
-    var lat : Double? {get set}
-    var long : Double? {get set}
-//    var image : String? {get set}
-    var rate : String? {get set}
-    var follower_count : Int? {get set}
-    var created_at : String? {get set}
+    var image : String? {get set}
 }
 
-struct Shop : ShopProtocol,IdentifiableType,Equatable {
+struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
     static func == (lhs: Shop, rhs: Shop) -> Bool {
         if lhs.identity == rhs.identity { return true }else{return false}
     }
-    
     
     var shop_id : Int?
     var user_id : Int?
@@ -44,7 +35,7 @@ struct Shop : ShopProtocol,IdentifiableType,Equatable {
         return shop_id ?? 0
     }
     
-    mutating func updateFromProfile(Profile aprofile : Profile){
+    mutating func updateFromProfile(Profile aprofile : ShopProfile){
         user_id = aprofile.id
         shop_id = aprofile.shop_id
         shop_off = aprofile.shop_off

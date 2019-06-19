@@ -8,8 +8,9 @@
 
 import Foundation
 
-protocol CollectionCell {
-    var image : String? {get set}
+/*
+struct CollectionCell : Codable {
+    var image : String? //{get set}
 }
 
 protocol PostProtocol : CollectionCell {
@@ -23,10 +24,11 @@ protocol PostProtocol : CollectionCell {
     var content : String? {get set}
     var image : String? {get set}
 }
+*/
 
-struct Post : Decodable, Equatable,PostProtocol {
+struct Post : ShopOrPost,Codable, Equatable {
     var id : Int?
-    var shopId : Int?
+    var shop_id: Int?
     var viewCount : Int?
     var comments : [Comment]?
     var isLiked : Bool?

@@ -32,7 +32,7 @@ class SlideController {
             .filter({$0.count >= 3})
             .subscribe(onNext: { [unowned self] (innerSlides) in
                 //print("Setting new Slides....")
-                self.slides = innerSlides.map({$0.aUIImage})
+                self.slides = innerSlides.map({$0.aUIImage ?? UIImage(named: "logo_shape")!})
                 self.delegate.pageControl.numberOfPages = innerSlides.count
                 //print("  slides : ",self.slides)
                 self.setupLeftAndRightImages()

@@ -146,6 +146,7 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
         manageVersion()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         subscribeForBadges()
+        //print(LoginKey.shared.token)
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTapped)))
         self.view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:))))
         

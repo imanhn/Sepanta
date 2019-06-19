@@ -8,18 +8,17 @@
 
 import Foundation
 
-struct PointElement : Decodable{
+struct PointElement : Codable{
     var key : String?
     var total : Int?
 }
 
-struct UserPoints : Decodable{
+struct UserPoints : Codable{
     var status : String?
     var message : String?
     var points_total : Int?
     var points : [PointElement]?
     init() {
-        
     }
     
 }

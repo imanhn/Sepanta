@@ -120,6 +120,8 @@ class JSONParser {
                 } else if (apiName == "profile")  {
                     //Returns Profile Data for a user Id
                     let aProfile = (self.processAsProfile(Result: aDic))
+                    NetworkManager.shared.profileObs.accept(aProfile)
+                    /*
                     if targetObs == "SHOP" {
                         //NetworkManager.shared.shopProfileObs = BehaviorRelay<Profile>(value: aProfile)
                         NetworkManager.shared.shopProfileObs.accept(aProfile)
@@ -128,10 +130,10 @@ class JSONParser {
                         //NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: aProfile)
                         NetworkManager.shared.profileObs.accept(aProfile)
                         //NetworkManager.shared.shopObs.accept(aProfile.content as! [Shop])
-                    }
+                    }*/
                 } else if (apiName == "shop-profile")  {
                     //Returns Profile Data for a user Id
-                    let aProfile = (self.processAsProfile(Result: aDic))
+                    let aProfile = (self.processAsShopProfile(Result: aDic))
                     NetworkManager.shared.shopProfileObs.accept(aProfile)
                     NetworkManager.shared.postsObs.accept(aProfile.content as! [Post])
                 }else if (apiName == "report-comment") || (apiName == "report-post") || (apiName == "report-comment"){
@@ -617,49 +619,25 @@ class JSONParser {
                 let aPostOrShop = (aContent as! NSDictionary)
                 //print("aPostOrShop : ",aPostOrShop)
                 //print("shop_Name : ",aPostOrShop["shop_name"])
-                if profile.role?.uppercased() == "User".uppercased() {//aPostOrShop["shop_name"] != nil || aPostOrShop["shop_off"] != nil {
-                    //print("Role = User and This is a shop")
-                    var newShop = Shop()
-                    newShop.shop_id = (aPostOrShop["id"] as? Int) ?? (aPostOrShop["shop_id"] as? Int) ?? 0
-                    newShop.user_id = (aPostOrShop["user_id"] as? Int) ?? 0
-                    newShop.shop_name = (aPostOrShop["shop_name"] as? String) ?? ""
-                    newShop.shop_off = (aPostOrShop["shop_off"] as? Int) ?? 0
-                    newShop.lat = (aPostOrShop["lat"] as? String)?.toDouble()
-                    newShop.long = (aPostOrShop["lon"] as? String)?.toDouble()
-                    if let oneImage = aPostOrShop["image"] as? String {
-                        newShop.image = oneImage
-                    }else if let dicImage = aPostOrShop["image"] as? NSDictionary {
-                        newShop.image = (dicImage["image"] as? String) ?? "EmptyImage"
-                    }else{
-                        print("Can not cast followed-shop IMAGE : \(String(describing: aPostOrShop["image"]))")
-                    }
-                    newShop.rate = (aPostOrShop["rate"] as? String) ?? ""
-                    newShop.follower_count = (aPostOrShop["follower_count"] as? Int) ?? 0
-                    newShop.created_at = (aPostOrShop["created_at"] as? String) ?? ""
-                    profile.content.append(newShop)
-                }else if profile.role?.uppercased() == "Shop".uppercased() {//else if aPostOrShop["title"] != nil {
-                    //print("Role = Shop and This is a Post")
-                    var newPost = Post(id: 0, shopId: 0, viewCount: 0, comments: [], isLiked: false, countLike: 0, title: "", content: "", image: "")
-                    newPost.id = (aPostOrShop["id"] as? Int) ?? 0
-                    newPost.title = (aPostOrShop["title"] as? String) ?? ""
-                    newPost.content = (aPostOrShop["content"] as? String) ?? ""
-                    //print("Adding Content... with image : ",aPost)
-                    if let oneImage = aPostOrShop["image"] as? String {
-                        newPost.image = oneImage
-                    }else if let dicImage = aPostOrShop["image"] as? NSDictionary {
-                        newPost.image = (dicImage["image"] as? String) ?? "EmptyImage"
-                    }else{
-                        print("Can not cast POST IMAGE : \(String(describing: aPostOrShop["image"]))")
-                    }
-                    //print("     Profile Post : ",newPost)
-                    profile.content.append(newPost)
+                //print("Role = User and This is a shop")
+                var newShop = Shop()
+                newShop.shop_id = (aPostOrShop["id"] as? Int) ?? (aPostOrShop["shop_id"] as? Int) ?? 0
+                newShop.user_id = (aPostOrShop["user_id"] as? Int) ?? 0
+                newShop.shop_name = (aPostOrShop["shop_name"] as? String) ?? ""
+                newShop.shop_off = (aPostOrShop["shop_off"] as? Int) ?? 0
+                newShop.lat = (aPostOrShop["lat"] as? String)?.toDouble()
+                newShop.long = (aPostOrShop["lon"] as? String)?.toDouble()
+                if let oneImage = aPostOrShop["image"] as? String {
+                    newShop.image = oneImage
+                }else if let dicImage = aPostOrShop["image"] as? NSDictionary {
+                    newShop.image = (dicImage["image"] as? String) ?? "EmptyImage"
                 }else{
-                    if contents.count > 0
-                    {
-                        print("Error : Content has no Shop or Post role : ",profile.role ?? "NIL"," Content size : ",contents.count)
-                        fatalError()
-                    }
+                    print("Can not cast followed-shop IMAGE : \(String(describing: aPostOrShop["image"]))")
                 }
+                newShop.rate = (aPostOrShop["rate"] as? String) ?? ""
+                newShop.follower_count = (aPostOrShop["follower_count"] as? Int) ?? 0
+                newShop.created_at = (aPostOrShop["created_at"] as? String) ?? ""
+                profile.content.append(newShop)
             }
         }else{
             print("Content in Profile can not be casted as NSArray")
@@ -684,12 +662,83 @@ class JSONParser {
         return profile
     }
     
+    func processAsShopProfile(Result aProfileDicAsNS : NSDictionary) -> ShopProfile {
+        var profile = ShopProfile()
+        profile.status = (aProfileDicAsNS["status"] as? String) ?? ""
+        profile.message = (aProfileDicAsNS["message"] as? String) ?? ""
+        profile.id = (aProfileDicAsNS["id"] as? Int) ?? (aProfileDicAsNS["user_id"] as? Int) ?? 0
+        profile.image = (aProfileDicAsNS["image"] as? String) ?? ""
+        profile.banner = (aProfileDicAsNS["banner"] as? String) ?? ""
+        profile.bio = (aProfileDicAsNS["bio"] as? String) ?? ""
+        profile.address = (aProfileDicAsNS["address"] as? String) ?? ""
+        profile.shop_id = (aProfileDicAsNS["shop_id"] as? Int) ?? 0
+        profile.shop_name = (aProfileDicAsNS["shop_name"] as? String) ?? ""
+        profile.total_points = (aProfileDicAsNS["total_points"] as? Int) ?? 0
+        profile.category_title = (aProfileDicAsNS["category_title"] as? String) ?? ""
+        profile.rate = (aProfileDicAsNS["rate"] as? String) ?? ""
+        profile.rate_count = (aProfileDicAsNS["rate_count"] as? Int) ?? 0
+        profile.shop_off = (aProfileDicAsNS["shop_off"] as? Int) ?? 0
+        profile.url = (aProfileDicAsNS["url"] as? String) ?? ""
+        profile.cellphone = (aProfileDicAsNS["cellphone"] as? String) ?? ""
+        profile.phone = (aProfileDicAsNS["phone"] as? String) ?? ""
+        profile.username = (aProfileDicAsNS["username"] as? String) ?? ""
+        profile.fullName = (aProfileDicAsNS["fullName"] as? String) ?? ""
+        profile.role = (aProfileDicAsNS["role"] as? String) ?? ""
+        profile.lat = (aProfileDicAsNS["lat"] as? String)?.toDouble()
+        profile.long = (aProfileDicAsNS["lon"] as? String)?.toDouble()
+        profile.is_favorite = (aProfileDicAsNS["is_favorite"] as? Bool) ?? false
+        profile.is_follow = (aProfileDicAsNS["is_follow"] as? Bool) ?? false
+        profile.follow_count = (aProfileDicAsNS["follow_count"] as? Int) ?? 0
+        profile.follower_count = (aProfileDicAsNS["follower_count"] as? Int) ?? 0
+        if let contents = aProfileDicAsNS["content"] as? NSArray {
+            for aContent in contents {
+                let aPostOrShop = (aContent as! NSDictionary)
+                //print("aPostOrShop : ",aPostOrShop)
+                //print("shop_Name : ",aPostOrShop["shop_name"])
+                //print("Role = Shop and This is a Post")
+                var newPost = Post(id: 0, shop_id: 0, viewCount: 0, comments: [], isLiked: false, countLike: 0, title: "", content: "", image: "")
+                newPost.id = (aPostOrShop["id"] as? Int) ?? 0
+                newPost.title = (aPostOrShop["title"] as? String) ?? ""
+                newPost.content = (aPostOrShop["content"] as? String) ?? ""
+                //print("Adding Content... with image : ",aPost)
+                if let oneImage = aPostOrShop["image"] as? String {
+                    newPost.image = oneImage
+                }else if let dicImage = aPostOrShop["image"] as? NSDictionary {
+                    newPost.image = (dicImage["image"] as? String) ?? "EmptyImage"
+                }else{
+                    print("Can not cast POST IMAGE : \(String(describing: aPostOrShop["image"]))")
+                }
+                //print("     Profile Post : ",newPost)
+                profile.content.append(newPost)
+            }
+        }else{
+            print("Content in Profile can not be casted as NSArray")
+        }
+        
+        if let cards = aProfileDicAsNS["cards"] as? NSArray {
+            for aContent in cards {
+                let aCard = (aContent as! NSDictionary)
+                var newCard = CreditCard()
+                newCard.id = (aCard["id"] as? Int) ?? 0
+                newCard.first_name = (aCard["first_name"] as? String) ?? ""
+                newCard.last_name = (aCard["last_name"] as? String) ?? ""
+                newCard.card_number = (aCard["card_number"] as? String) ?? ""
+                newCard.status = (aCard["status"] as? Int) ?? 0
+                newCard.bank_name = (aCard["bank_name"] as? String) ?? ""
+                newCard.bank_logo = (aCard["bank_logo"] as? String) ?? ""
+                //print("     Profile Card : ",newCard)
+                profile.cards.append(newCard)
+            }
+        }
+        //print("FULL Profile : ",profile)
+        return profile
+    }
     func processAsPostDetails(Result aResult : NSDictionary) -> Post {
         var aPost = NetworkManager.shared.postDetailObs.value
         if let postDet = aResult["postDetail"] as? NSDictionary {
             if let aContent = postDet["content"] as? String {aPost.content = aContent}
             if let anId = postDet["id"] as? Int {aPost.id = anId}
-            if let aShopId = postDet["shop_id"] as? Int {aPost.shopId = aShopId}
+            if let aShopId = postDet["shop_id"] as? Int {aPost.shop_id = aShopId}
             if let aTitle = postDet["title"] as? String {aPost.title = aTitle}
             if let aContent = postDet["content"] as? String {aPost.content = aContent}
             if let anImage = postDet["image"] as? String {aPost.image = anImage}
@@ -775,7 +824,7 @@ class JSONParser {
                                     if let image = response.result.value {
                                         //print("image downloaded: \(self.image)")
                                         //self.anUIImage.accept(image)
-                                        SlidesAndPaths.shared.slides.append(Slide(id: anId, title: aTitle, link: aLink, user_id: aUserId, shop_id: aShopId, images: imageName,aUIImage: image))
+                                        SlidesAndPaths.shared.slides.append(Slide(id: anId, user_id: aUserId, shop_id: aShopId, title: aTitle, link: aLink, images: imageName, aUIImage: image))
                                         SlidesAndPaths.shared.slidesObs.accept(SlidesAndPaths.shared.slides)
                                         let imageData = UIImageJPEGRepresentation(image,0.5) as NSData?
                                         if imageData != nil {
@@ -793,7 +842,7 @@ class JSONParser {
                             }
                         }else{
                             //print("Slide : ",anId," exists in cache : ",img)
-                            SlidesAndPaths.shared.slides.append(Slide(id: anId, title: aTitle, link: aLink, user_id: aUserId, shop_id: aShopId, images: imageName,aUIImage: img!))
+                            SlidesAndPaths.shared.slides.append(Slide(id: anId, user_id: aUserId, shop_id: aShopId, title: aTitle, link: aLink, images: imageName, aUIImage: img))
                             SlidesAndPaths.shared.slidesObs.accept(SlidesAndPaths.shared.slides)
                         }
                     }else{

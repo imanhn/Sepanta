@@ -33,11 +33,11 @@ class ShopCell : UITableViewCell {
 class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,Storyboarded,ShopListOwners{
     var myDisposeBag = DisposeBag()
     var fetchMechanism : dataSourceFunc!
+    var shopsObs = BehaviorRelay<[Shop]>(value: [Shop]())
     typealias SortFunction = (Shop,Shop)-> Bool
     typealias SearchFunction = (Shop)-> Bool
     var maximumFontSize : CGFloat!
     var dataSource : RxTableViewSectionedAnimatedDataSource<SectionOfShopData>!
-    var sourceObsShops = BehaviorRelay<[Shop]>(value: [Shop]())
     var disposeList : [Disposable] = [Disposable]()
     weak var coordinator : HomeCoordinator?
     let byOff = "بیشترین تخفیف"

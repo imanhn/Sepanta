@@ -18,9 +18,8 @@ import RxDataSources
 
 class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded,ShopListOwners{
     var dataSource: RxTableViewSectionedAnimatedDataSource<SectionOfShopData>!
-    var sourceObeservableShops = BehaviorRelay<[Shop]>(value: [Shop]())
     var myDisposeBag = DisposeBag()
-    
+    var shopsObs = BehaviorRelay<[Shop]>(value: [Shop]())
     //typealias dataSourceFunc = (ShopsListViewController) -> ShopsListDataSource
     var fetchMechanism : dataSourceFunc!
     var shopDataSource : ShopsListDataSource!

@@ -218,7 +218,7 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
             }
         }
         NetworkManager.shared.postDetailObs = BehaviorRelay<Post>(value: Post())
-        self.delegate.coordinator!.PushAPost(PostID: selectedPost.id ?? (aButton?.tag)!, OwnerUserID: selectedPost.shopId!)
+        self.delegate.coordinator!.PushAPost(PostID: selectedPost.id ?? (aButton?.tag)!, OwnerUserID: selectedPost.shop_id!)
     }
     
     func showContacts() {

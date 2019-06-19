@@ -158,7 +158,7 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     }
     
     func getShopFromServer() {
-        NetworkManager.shared.shopProfileObs = BehaviorRelay<Profile>(value: Profile())
+        NetworkManager.shared.shopProfileObs = BehaviorRelay<ShopProfile>(value: ShopProfile())
 //        print(" USERS : ","\(shop.user_id)" ," VS  ",LoginKey.shared.userID)
 //       print("LoginKey.shared.role : ",LoginKey.shared.role)
 /*        if LoginKey.shared.role == "Shop" && "\(shop.user_id ?? 0)" == LoginKey.shared.userID{

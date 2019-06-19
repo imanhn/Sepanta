@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct NotificationForUser {
+struct NotificationForUser : Codable{
     var post_id : Int?
     var user_id : Int?
     var created_at : String?
@@ -18,7 +18,7 @@ struct NotificationForUser {
     var body : String?
 }
 
-struct NotificationForShop {
+struct NotificationForShop : Codable {
     var post_id : Int?
     var user_id : Int?
     var created_at : String?
@@ -30,7 +30,7 @@ struct NotificationForShop {
 }
 
 
-struct GeneralNotification {
+struct GeneralNotification : Codable{
     var title : String?
     var body : String?
     var image : String?

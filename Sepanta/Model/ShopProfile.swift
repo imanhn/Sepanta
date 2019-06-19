@@ -1,14 +1,14 @@
 //
-//  Profile.swift
+//  ShopProfile.swift
 //  Sepanta
 //
-//  Created by Iman on 12/19/1397 AP.
-//  Copyright © 1397 AP Imzich. All rights reserved.
+//  Created by Iman on 3/29/1398 AP.
+//  Copyright © 1398 AP Imzich. All rights reserved.
 //
 
 import Foundation
 
-struct Profile : Codable{
+struct ShopProfile : Codable{
     var status : String?
     var message : String?
     var id : Int?
@@ -35,6 +35,6 @@ struct Profile : Codable{
     var is_follow : Bool?
     var follow_count : Int?
     var follower_count : Int?
-    var content : [Shop] = [Shop]()
+    var content : [Post] = [Post]()
     var cards : [CreditCard] = [CreditCard]()
 }

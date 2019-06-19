@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ShopSearchResult {
+struct ShopSearchResult : Codable{
     var shop_id : Int?
     var user_id : Int?
     var shop_name : String?

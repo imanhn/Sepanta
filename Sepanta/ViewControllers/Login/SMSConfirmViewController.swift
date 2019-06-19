@@ -46,17 +46,14 @@ class SMSConfirmViewController: UIViewControllerWithKeyboardNotificationWithErro
     @IBAction func submitTapped(_ sender: Any) {
         self.view.endEditing(true)
         stopTimer()
-        if MobileTextField.text == "09121111111"  && (SMSTextField.text == "1234" || SMSTextField.text == "4321"){
-            if SMSTextField.text == "4321" {
-                LoginKey.shared.loadShopDemoLoginCredentials()
-            }
-            if SMSTextField.text == "1234" {
-                LoginKey.shared.loadUserDemoLoginCredentials()
-            }
-            self.coordinator!.pushHomePage()
-        }
         let aParameter = ["userId":"\(LoginKey.shared.userID)",
-                            "sms_verification_code":"\(self.SMSTextField.text ?? "")"]
+                            "sms_verification_code":"\(self.SMSTextField.text ?? "")",
+            "os_version":UIDevice.current.systemVersion,
+            "os_mobile":"iOS",
+            "push_platform":"abc",
+            "push_token":"abc",
+            "device_model":UIDevice.current.model
+        ]
         NetworkManager.shared.messageObs = BehaviorRelay<String>(value: "")
         NetworkManager.shared.run(API: "check-sms-code", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
         let messageDisp = NetworkManager.shared.messageObs
@@ -95,9 +92,7 @@ class SMSConfirmViewController: UIViewControllerWithKeyboardNotificationWithErro
             ])
             .subscribe(onNext: { (combinedTexts) in
                 //print("combinedTexts : ",combinedTexts)
-                if (combinedTexts[0]?.count == 11 && combinedTexts[1]?.count == 5) ||
-                    (combinedTexts[0] == "09121111111" && combinedTexts[1] == "1234") || // DEMO Login as User
-                    (combinedTexts[0] == "09121111111" && combinedTexts[1] == "4321"){   // DEMO Login as Shop
+                if (combinedTexts[0]?.count == 11 && combinedTexts[1]?.count == 5) {
                     self.submitButton.isEnabled = true
                 }else{
                     self.submitButton.isEnabled = false

@@ -32,7 +32,7 @@ class FavShopCell : UITableViewCell {
 
 class FavListViewController :  UIViewControllerWithErrorBar,XIBView,ShopListOwners{
     var dataSource: RxTableViewSectionedAnimatedDataSource<SectionOfShopData>!
-    
+    var shopsObs = BehaviorRelay<[Shop]>(value: [Shop]())
     var disposeList = [Disposable]()
     var myDisposeBag = DisposeBag()
     

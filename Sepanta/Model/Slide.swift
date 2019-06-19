@@ -9,12 +9,15 @@
 import Foundation
 import UIKit
 
-struct Slide  {
+struct Slide : Codable{
     var id : Int
-    var title : String
-    var link : String
     var user_id : Int
     var shop_id : Int
+    var title : String
+    var link : String
     var images : String
-    var aUIImage : UIImage
+    var aUIImage : UIImage?
+    private enum CodingKeys: String, CodingKey { case id, user_id,shop_id,title,link,images }
 }
+
+

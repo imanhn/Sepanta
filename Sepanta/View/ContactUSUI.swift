@@ -171,7 +171,18 @@ class ContactUSUI : NSObject , UITextFieldDelegate,SFSafariViewControllerDelegat
         self.delegate.view.endEditing(true)
         let aParameter = ["title":self.subjectText.text ?? "",
                           "body":self.commentText.text ?? ""]
-        NetworkManager.shared.run(API: "contact", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
+        //NetworkManager.shared.run(API: "contact", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
+/*
+        let submitObs : Observable<GenericNetworkResponse> = ApiClient().request(API: "contact", aMethod: HTTPMethod.post, Parameter: aParameter)
+        submitObs.subscribe(onNext: { genericRes in
+            print("GENERIC : ",genericRes)
+        })
+  */
+        (ApiClient().request(API: "contact", aMethod: HTTPMethod.post, Parameter: aParameter) as Observable<GenericNetworkResponse>)
+            .subscribe(onNext: { genericRes in
+                print("GENERIC : ",genericRes)
+            }).disposed(by: self.delegate.myDisposeBag)
+
         let contactDisp = NetworkManager.shared.contactSendingSuccessful
             .filter({$0 != ToggleStatus.UNKNOWN})
             .subscribe(onNext: { aStatus in

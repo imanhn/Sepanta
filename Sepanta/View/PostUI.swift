@@ -38,7 +38,7 @@ class PostUI {
         self.delegate.view.endEditing(true)
         Spinner.start()
         (sender as! UIButton).setDisable()
-        let aParameter = ["shop_id":"\(NetworkManager.shared.postDetailObs.value.shopId!)","post_id":"\(NetworkManager.shared.postDetailObs.value.id!)","body":"\(commentText.text!)"]
+        let aParameter = ["shop_id":"\(NetworkManager.shared.postDetailObs.value.shop_id!)","post_id":"\(NetworkManager.shared.postDetailObs.value.id!)","body":"\(commentText.text!)"]
         print("Sending comment .... : ",aParameter)
         NetworkManager.shared.run(API: "send-comment", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: false)
         let commentSendDisp = NetworkManager.shared.commentSendingSuccessful
@@ -69,7 +69,7 @@ class PostUI {
         let sharedPostObs = NetworkManager.shared.postDetailObs
             //.share(replay: 1, scope: .whileConnected)
             .observeOn(MainScheduler.instance)
-            .filter({$0.id != nil && $0.shopId != nil})
+            .filter({$0.id != nil && $0.shop_id != nil})
             .subscribe(onNext: { aPostDetail in
                 let aCommentsArray = aPostDetail.comments
                 print("Updating/Building POSTVIEW  ")
@@ -230,7 +230,7 @@ class PostUI {
     @objc func toggleLike(_ sender : Any){
         Spinner.start()
         (sender as! UIButton).isEnabled = false
-        let aParameter = ["shop_id":"\(NetworkManager.shared.postDetailObs.value.shopId!)","post_id":"\(NetworkManager.shared.postDetailObs.value.id!)"]
+        let aParameter = ["shop_id":"\(NetworkManager.shared.postDetailObs.value.shop_id!)","post_id":"\(NetworkManager.shared.postDetailObs.value.id!)"]
         print("Toggling Like/Unlike .... : ",aParameter)
         NetworkManager.shared.run(API: "like-dislike", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: false)
         let toggleLikeDisp = NetworkManager.shared.toggleLiked
