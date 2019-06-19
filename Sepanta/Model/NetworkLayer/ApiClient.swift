@@ -10,10 +10,10 @@ import Alamofire
 import RxSwift
 
 class ApiClient : NSObject,Codable {
-    func request<T:Codable>(API anApiName : String,aMethod : HTTPMethod,Parameter aParam : Dictionary<String,String>) -> Observable<T> {
+    func request<T:Codable>(API anApiName : String,aMethod : HTTPMethod,Parameter aParam : Dictionary<String,String>?) -> Observable<T> {
         return Observable.create { observer -> Disposable in
             Alamofire.request(NetworkConstants.baseURLString + "/" + anApiName, method: aMethod, parameters: aParam, encoding: URLEncoding.httpBody, headers: NetworkManager.shared.headers)
-                .validate()
+                .validate(statusCode: 200..<600)
                 .responseJSON { response in
                     switch response.result {
                     case .success:

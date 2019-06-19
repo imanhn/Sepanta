@@ -89,6 +89,14 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
     
     func getAndSubscribeToProfileInfo(){
         //let aParameter = ["user id":"\(LoginKey.shared.userID)"]
+        
+        (ApiClient().request(API: "profile-info", aMethod: HTTPMethod.get, Parameter: nil) as Observable<ProfileInfo>)
+            .subscribe(onNext: { aProfileInfo in
+                print("aProfileInfo : ",aProfileInfo)
+                self.fillEditProfileForm(With: aProfileInfo)
+            }).disposed(by: self.delegate.myDisposeBag)
+        
+        /*
         NetworkManager.shared.run(API: "profile-info", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
         let profileInfoWriapperDisp = ProfileInfoWrapper.shared.profileInfoObs
             .subscribe(onNext: { [unowned self] (aProfileInfo) in
@@ -97,6 +105,7 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
             })
         profileInfoWriapperDisp.disposed(by: self.delegate.myDisposeBag)
         self.disposeList.append(profileInfoWriapperDisp)
+         */
     }
     
     func fillEditProfileForm(With aProfileInfo : ProfileInfo){
@@ -144,8 +153,9 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
     @objc func doneDatePicker(_ sender : Any) {
         self.delegate.view.endEditing(true)
         let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY/MM/DD"
+        formatter.dateFormat = "yyyy/MM/dd"
         formatter.locale = Locale(identifier: "fa_IR")
+        print("datePicker.date : ",formatter.string(from: datePicker.date))
         texts["birthDateText"]?.text = formatter.string(from: datePicker.date)
         texts["birthDateText"]?.sendActions(for: .valueChanged)
     }
@@ -174,6 +184,19 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
             "city":"\(texts["cityText"]!.text ?? "")",
             "address":"\(texts["regionText"]!.text ?? "")"
         ]
+        
+        (ApiClient().request(API: "profile-info", aMethod: HTTPMethod.post, Parameter: aParameter) as Observable<GenericNetworkResponse>)
+            .subscribe(onNext: { genericRes in
+                print("genericRes : ",genericRes)
+                self.delegate.alert(Message: genericRes.message ?? "اطلاعات شما بروز شد.")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                    self.delegate.backTapped(sender)
+                    Spinner.stop()
+                })
+
+            }).disposed(by: self.delegate.myDisposeBag)
+
+        /*
         NetworkManager.shared.run(API: "profile-info", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
         let updateProDisp = NetworkManager.shared.updateProfileInfoSuccessful
             .filter({$0 == true})
@@ -188,6 +211,7 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
             })
         updateProDisp.disposed(by: self.delegate.myDisposeBag)
         self.disposeList.append(updateProDisp)
+ */
     }
     
     func showForm() {
@@ -200,7 +224,7 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
         gradient.frame = self.delegate.view.bounds
         gradient.colors = [UIColor(hex: 0xF7F7F7).cgColor, UIColor.white.cgColor]
         self.delegate.topView.layer.insertSublayer(gradient, at: 0)
-        self.delegate.scrollView.contentSize = CGSize(width: self.delegate.formView.frame.width-2*marginX, height: self.delegate.formView.frame.height-2*marginY)
+        self.delegate.scrollView.contentSize = CGSize(width: self.delegate.formView.frame.width, height: self.delegate.formView.frame.height-2*marginY)
         views["rightFormView"] = RoundedUIViewWithWhitePanel(frame: CGRect(x: marginX, y: marginY, width: self.delegate.formView.frame.width-2*marginX, height: self.delegate.formView.frame.height-2*marginY))
         views["rightFormView"]?.backgroundColor = UIColor.white
         

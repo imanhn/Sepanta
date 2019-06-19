@@ -72,7 +72,11 @@ class EditProfileViewController : UIViewControllerWithKeyboardNotificationWithEr
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
-        editProfileUI = EditProfileUI(self)        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        editProfileUI = EditProfileUI(self)
     }
     
     func showPopup(_ controller: UIViewController, sourceView: UIView) {

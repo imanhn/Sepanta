@@ -171,34 +171,18 @@ class ContactUSUI : NSObject , UITextFieldDelegate,SFSafariViewControllerDelegat
         self.delegate.view.endEditing(true)
         let aParameter = ["title":self.subjectText.text ?? "",
                           "body":self.commentText.text ?? ""]
-        //NetworkManager.shared.run(API: "contact", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
-/*
-        let submitObs : Observable<GenericNetworkResponse> = ApiClient().request(API: "contact", aMethod: HTTPMethod.post, Parameter: aParameter)
-        submitObs.subscribe(onNext: { genericRes in
-            print("GENERIC : ",genericRes)
-        })
-  */
         (ApiClient().request(API: "contact", aMethod: HTTPMethod.post, Parameter: aParameter) as Observable<GenericNetworkResponse>)
             .subscribe(onNext: { genericRes in
                 print("GENERIC : ",genericRes)
-            }).disposed(by: self.delegate.myDisposeBag)
-
-        let contactDisp = NetworkManager.shared.contactSendingSuccessful
-            .filter({$0 != ToggleStatus.UNKNOWN})
-            .subscribe(onNext: { aStatus in
-                if aStatus == ToggleStatus.YES {
-                    let aMessage = NetworkManager.shared.message
+                
+                if genericRes.status == "successful" {
                     self.subjectText.text = ""
                     self.commentText.text = ""
-                    self.delegate.alert(Message: aMessage)
-                    NetworkManager.shared.contactSendingSuccessful.accept(ToggleStatus.UNKNOWN)
-                }else if aStatus == ToggleStatus.NO {
+                    self.delegate.alert(Message: genericRes.message ?? "نظر شما ارسال گردید")
+                }else{
                     self.delegate.alert(Message: "متاسفانه خطایی در هنگام ثبت نظر شما اتفاق افتاد")
-                    NetworkManager.shared.contactSendingSuccessful.accept(ToggleStatus.UNKNOWN)
                 }
-            })
-        contactDisp.disposed(by: self.delegate.myDisposeBag)
-        disposeList.append(contactDisp)
+            }).disposed(by: self.delegate.myDisposeBag)
     }
     
     @objc func openWebSite(){
