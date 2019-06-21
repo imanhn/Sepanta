@@ -29,6 +29,7 @@
 		0F1B75692238498E0087C0DB /* CacheImageForViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1B75682238498E0087C0DB /* CacheImageForViews.swift */; };
 		0F237E1F2267654B004CC7BC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F237E1E2267654B004CC7BC /* SearchViewController.swift */; };
 		0F237E41226783CF004CC7BC /* Shabnam-Light-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F237E3E226783C9004CC7BC /* Shabnam-Light-FD.ttf */; };
+		0F2739A322BD6CC6005E24F2 /* UIResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2739A222BD6CC6005E24F2 /* UIResponder.swift */; };
 		0F3197B32270BD8F00CEF207 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3197B22270BD8F00CEF207 /* Bank.swift */; };
 		0F3BDD0C228649BE0087EA97 /* terms.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0F3BDD0B228649BE0087EA97 /* terms.rtf */; };
 		0F3BDD0E22864A120087EA97 /* VersionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3BDD0D22864A120087EA97 /* VersionControl.swift */; };
@@ -183,6 +184,7 @@
 		0F1B75682238498E0087C0DB /* CacheImageForViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImageForViews.swift; sourceTree = "<group>"; };
 		0F237E1E2267654B004CC7BC /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		0F237E3E226783C9004CC7BC /* Shabnam-Light-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shabnam-Light-FD.ttf"; sourceTree = "<group>"; };
+		0F2739A222BD6CC6005E24F2 /* UIResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIResponder.swift; sourceTree = "<group>"; };
 		0F3197B22270BD8F00CEF207 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		0F3BDD0B228649BE0087EA97 /* terms.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = terms.rtf; sourceTree = "<group>"; };
 		0F3BDD0D22864A120087EA97 /* VersionControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionControl.swift; sourceTree = "<group>"; };
@@ -600,6 +602,7 @@
 				0F1B75682238498E0087C0DB /* CacheImageForViews.swift */,
 				0F63F7232278EE8500799C8F /* UIImageSetShadow.swift */,
 				0FDE4B162298C053003596EC /* UIViewControllerWillPop.swift */,
+				0F2739A222BD6CC6005E24F2 /* UIResponder.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -938,6 +941,7 @@
 				0FB3ECD2222DC48F009A89F7 /* GetRichViewController.swift in Sources */,
 				0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */,
 				0F50AE72226F61110028D8B6 /* MapAnnotation.swift in Sources */,
+				0F2739A322BD6CC6005E24F2 /* UIResponder.swift in Sources */,
 				0F642B97227A4D7D00B887B8 /* ImagePicker.swift in Sources */,
 				0F817A6B2234635A00F1738E /* EditProfileViewController.swift in Sources */,
 				0F817A6922341D8E00F1738E /* ShowProfileUI.swift in Sources */,

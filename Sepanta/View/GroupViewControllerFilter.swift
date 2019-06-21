@@ -42,15 +42,6 @@ extension GroupViewController {
     
     @objc func applyFilterTapped(_ sender : UIButton){
         self.view.endEditing(true)
-        /*
-        if self.filterView.filterType.text == searchOption {
-         
-            sectionOfShops.accept([aFilteredData])
-        }else
-        if ((self.filterView.filterValue.text ?? "") == byNewest) || self.filterView.filterType.text == noFilterOption {
-            let aNormalList = SectionOfShopData(original: self.sectionOfShops.value[0], items: NetworkManager.shared.shopObs.value)
-            sectionOfShops.accept([aNormalList])
-        }else*/
         let aSearchFilter : SearchFunction = {
             (ashop)->Bool in
             guard (self.filterView.searchFilter.text ?? "").count > 0 else{return true}
@@ -77,7 +68,7 @@ extension GroupViewController {
                 if ((ashop.follower_count ?? 0) > (bshop.follower_count ?? 0)) {return true}else{return false}
             }
         }
-        let aSortedData = SectionOfShopData(original: self.sectionOfShops.value[0], items: NetworkManager.shared.shopObs.value, sort: sortFunc,search:aSearchFilter )
+        let aSortedData = SectionOfShopData(original: self.sectionOfShops.value[0], items: self.shopsObs.value, sort: sortFunc,search:aSearchFilter )
         sectionOfShops.accept([aSortedData])
     }
     

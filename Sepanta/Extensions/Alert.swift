@@ -55,45 +55,52 @@ extension UIViewController {
         }
         let marginX = self.view.frame.width / 30
         let textFont = UIFont (name: "Shabnam FD", size: 13)!
-        let aView = UIView(frame: CGRect(x: marginX, y: self.view.frame.height*0.4, width: self.view.frame.width-2*marginX, height: self.view.frame.height*0.1))
-        aView.backgroundColor = UIColor(hex: 0xDA3A5C)
+        let aView = UIView(frame: CGRect(x: marginX, y: self.view.frame.height*0.4, width: self.view.frame.width-2*marginX, height: self.view.frame.height*0.2))
+        aView.backgroundColor = UIColor.white//UIColor(hex: 0xDA3A5C)
         aView.tag = 123
         aView.layer.cornerRadius = 5
-        aView.layer.borderColor = UIColor.white.cgColor
+        aView.layer.borderColor = UIColor(hex: 0x515152).cgColor
         aView.layer.borderWidth = 1
         aView.layer.shadowColor = UIColor.black.cgColor
         aView.layer.shadowOffset = CGSize(width: 2, height: 3)
         aView.layer.shadowOpacity = 0.3
         self.view.addSubview(aView)
-        let aLabel = UILabel(frame: CGRect(x: marginX, y: aView.frame.height*0.1, width: aView.frame.width-2*marginX, height: aView.frame.height*0.3))
+        let aLogo = UIImageView(frame: CGRect(x: aView.frame.width*0.4, y: aView.frame.height*0.05, width: aView.frame.width*0.2, height: aView.frame.height*0.3))
+        aLogo.image = UIImage(named: "logo_text2")
+        aLogo.contentMode = .scaleAspectFit
+        aView.addSubview(aLogo)
+        let aLabel = UILabel(frame: CGRect(x: marginX, y: aView.frame.height*0.05+aLogo.frame.height, width: aView.frame.width-2*marginX, height: aView.frame.height*0.3))
         aLabel.text = aMessage
         aLabel.font = textFont
         aLabel.semanticContentAttribute = .forceRightToLeft
         aLabel.textAlignment = .right
-        aLabel.textColor = UIColor.white
+        aLabel.numberOfLines = 0
+        aLabel.adjustsFontSizeToFitWidth = true
+        aLabel.textColor = UIColor(hex: 0xDA3A5C)
         aView.addSubview(aLabel)
-        let buttonWidth = aView.frame.width / 5
-        let aButton = UIButtonWithTargetAction(frame: CGRect(x: buttonWidth, y: aView.frame.height*0.5, width: buttonWidth, height: aView.frame.height*0.4))
+        let buttonWidth = aView.frame.width / 2
+        let aButton = UIButtonWithTargetAction(frame: CGRect(x: 0, y: aView.frame.height*0.7, width: buttonWidth, height: aView.frame.height*0.3))
         aButton.setTitle(okLabel, for: .normal)
+        aButton.backgroundColor = UIColor(hex: 0xDA3A5C)
         aButton.titleLabel?.textColor = UIColor.white
         aButton.titleLabel?.font = textFont
-        aButton.layer.cornerRadius = 4
+        //aButton.layer.cornerRadius = 4
         aButton.layer.borderWidth = 1
-        aButton.layer.borderColor = UIColor.white.cgColor
+        aButton.layer.borderColor = UIColor(hex: 0x515152).cgColor
         aButton.targetAction = OkAction
-        //aButton.addTarget(self, action: #selector(okPressed), for: .touchUpInside)
         aButton.addTarget(self, action:#selector(runAction), for: .touchUpInside)
         aView.addSubview(aButton)
 
-        let bButton = UIButtonWithTargetAction(frame: CGRect(x: buttonWidth*3, y: aView.frame.height*0.5, width: buttonWidth, height: aView.frame.height*0.4))
+        let bButton = UIButtonWithTargetAction(frame: CGRect(x: buttonWidth, y: aView.frame.height*0.7, width: buttonWidth-1, height: aView.frame.height*0.3))
         bButton.setTitle(cancelLabel, for: .normal)
+        bButton.backgroundColor = UIColor(hex: 0xDA3A5C)
         bButton.titleLabel?.textColor = UIColor.white
-        bButton.layer.cornerRadius = 4
+        bButton.titleLabel?.font = textFont
+        //bButton.layer.cornerRadius = 4
         bButton.layer.borderWidth = 1
-        bButton.layer.borderColor = UIColor.white.cgColor
+        bButton.layer.borderColor = UIColor(hex: 0x515152).cgColor
         bButton.targetAction = CancelAction
         bButton.addTarget(self, action: #selector(runAction), for: .touchUpInside)
-        bButton.titleLabel?.font = textFont
         aView.addSubview(bButton)
 
     }

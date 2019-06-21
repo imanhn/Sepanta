@@ -51,6 +51,10 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
             return
         }
         let innerCityDicObs = NetworkManager.shared.cityDictionaryObs.value
+        if innerCityDicObs.count == 0 {
+            self.alert(Message: "هیچ شهری یافت نشد.")
+            return
+        }
         let controller = ArrayChoiceTableViewController(innerCityDicObs.keys.sorted(){$0 < $1}) {
             (selectedCity) in
             self.selectCity.text = selectedCity

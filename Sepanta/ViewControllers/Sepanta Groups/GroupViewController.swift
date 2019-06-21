@@ -117,7 +117,8 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
         print("Going for reload in GroupViewController")
         super.ReloadViewController(sender)
         newShopsDataSource = ShopsListDataSource(self)
-        newShopsDataSource.getShopListForACatagory(Catagory: "\(self.catagoryId)", State: selectedState, City: selectedCity)
+        let aparam = newShopsDataSource.buildParameters(Catagory: "\(self.catagoryId)", State: selectedState, City: selectedCity)
+        newShopsDataSource.getShops(Api: "category-shops-list", Method: HTTPMethod.post, Parameters: aparam)
     }
     
     override func viewDidLoad() {
@@ -125,7 +126,8 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
         createFilterView()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         newShopsDataSource = ShopsListDataSource(self)
-        newShopsDataSource.getShopListForACatagory(Catagory: "\(self.catagoryId)", State: selectedState, City: selectedCity)
+        let aparam = newShopsDataSource.buildParameters(Catagory: "\(self.catagoryId)", State: selectedState, City: selectedCity)
+        newShopsDataSource.getShops(Api: "category-shops-list", Method: HTTPMethod.post, Parameters: aparam)
         bindToTableView()
         updateGroupHeaders()
     }

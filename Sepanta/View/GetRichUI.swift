@@ -14,6 +14,12 @@ import AlamofireImage
 import Alamofire
 
 class GetRichUI : NSObject , UITextFieldDelegate {
+    let buttonsFont = UIFont(name: "Shabnam-Bold-FD", size: 14)
+    var cursurY : CGFloat = 0
+    let marginY : CGFloat = 10
+    let marginX : CGFloat = 20
+    var buttonHeight : CGFloat = 0
+    var textFieldWidth : CGFloat = 0
     var delegate : GetRichViewController!
     var views = Dictionary<String,UIView>()
     var texts = Dictionary<String,UITextField>()
@@ -34,6 +40,7 @@ class GetRichUI : NSObject , UITextFieldDelegate {
     var cityCode : String!
     var cardNoPrefix = ""
     var aProfileInfo = ProfileInfo()
+    var submitDispose : Disposable!
     var disposeList = [Disposable]()
 
     override init() {
@@ -67,9 +74,6 @@ class GetRichUI : NSObject , UITextFieldDelegate {
             disposeList.forEach({$0.dispose()})
             views["leftFormView"]?.removeFromSuperview()
         }
-        var cursurY : CGFloat = 0
-        let marginY : CGFloat = 10
-        let marginX : CGFloat = 20
         let gradient = CAGradientLayer()
         gradient.frame = self.delegate.view.bounds
         gradient.colors = [UIColor(hex: 0xF7F7F7).cgColor, UIColor.white.cgColor]
@@ -84,9 +88,9 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         views["rightFormView"]?.backgroundColor = UIColor.clear
         
         
-        let buttonsFont = UIFont(name: "Shabnam-Bold-FD", size: 14)
-        let buttonHeight = (views["rightFormView"] as! RightTabbedViewWithWhitePanel).getHeight()
-        let textFieldWidth = (views["rightFormView"]?.bounds.width)! - (2 * marginX)
+        
+        buttonHeight = (views["rightFormView"] as! RightTabbedViewWithWhitePanel).getHeight()
+        textFieldWidth = (views["rightFormView"]?.bounds.width)! - (2 * marginX)
         
         buttons["leftButton"] = UIButton(frame: CGRect(x: 0, y: 0, width: (views["rightFormView"]?.bounds.width)!/2, height: buttonHeight))
         buttons["leftButton"]!.setTitle("درخواست کارت", for: .normal)
@@ -215,7 +219,7 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         views["rightFormView"]?.frame = CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: cursurY+buttonHeight*1.5)
         self.delegate.scrollView.addSubview(views["rightFormView"]!)
         self.fillEditProfileForm(With: aProfileInfo)
-        let submitDispose = handleResellerSubmitButtonEnableOrDisable()
+        submitDispose = handleResellerSubmitButtonEnableOrDisable()
         disposeList.append(submitDispose)
 
     }
@@ -441,6 +445,74 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         views["leftFormView"]?.addSubview(views["orgView"]!)
         cursurY = cursurY + buttonHeight + marginY
 
+        
+        let checkFont = UIFont(name: "Shabnam-FD", size: 12)!
+        let newCardText = "درخواست کارت جدید"
+        let otherCardText = "تعریف روی کارت دیگر"
+        let newCardWidth = newCardText.width(withConstrainedHeight: buttonHeight, font: checkFont)
+        let otherCardWidth = newCardText.width(withConstrainedHeight: buttonHeight, font: checkFont)
+        let spaceBTWChecks = (textFieldWidth - otherCardWidth - newCardWidth - buttonHeight)/3
+        var cursurX : CGFloat = marginX
+        //print("spaceBTWChecks : ",spaceBTWChecks)
+        
+        newCardCheck.frame = CGRect(x: cursurX, y: cursurY+buttonHeight/4, width: buttonHeight/2, height: buttonHeight/2)
+        newCardCheck.setImage(UIImage(named: "radioChecked"), for: .normal)
+        newCardCheck.tag = 1
+        newCardCheck.addTarget(self, action: #selector(newCardCheckTapped(_:)), for: .touchUpInside)
+        cursurX = cursurX + spaceBTWChecks + buttonHeight/2
+        views["leftFormView"]?.addSubview(newCardCheck)
+        let newCardLabel = UILabel(frame: CGRect(x: cursurX, y: cursurY, width: newCardWidth, height: buttonHeight))
+        newCardLabel.text = newCardText
+        newCardLabel.font = checkFont
+        newCardLabel.adjustsFontSizeToFitWidth = true
+        newCardLabel.textAlignment = .center
+        newCardLabel.textColor = UIColor(hex: 0x515152)
+        views["leftFormView"]?.addSubview(newCardLabel)
+        cursurX = cursurX + spaceBTWChecks + newCardWidth
+        
+        otherCardCheck.frame = CGRect(x: cursurX, y: cursurY+buttonHeight/4, width: buttonHeight/2, height: buttonHeight/2)
+        otherCardCheck.setImage(UIImage(named: "radioUnChecked"), for: .normal)
+        otherCardCheck.addTarget(self, action: #selector(otherCardCheckTapped(_:)), for: .touchUpInside)
+        otherCardCheck.tag = 0
+        cursurX = cursurX + spaceBTWChecks + buttonHeight/2
+        views["leftFormView"]?.addSubview(otherCardCheck)
+        let otherCardLabel = UILabel(frame: CGRect(x: cursurX, y: cursurY, width: newCardWidth, height: buttonHeight))
+        otherCardLabel.text = otherCardText
+        otherCardLabel.font = checkFont
+        otherCardLabel.textAlignment = .center
+        otherCardLabel.adjustsFontSizeToFitWidth = true
+        otherCardLabel.textColor = UIColor(hex: 0x515152)
+        views["leftFormView"]?.addSubview(otherCardLabel)
+        cursurY = cursurY + buttonHeight + marginY
+        print("FIRST Submit cursurY : ",cursurY)
+        cardSubmitButton = SubmitButton(type: .custom)
+        cardSubmitButton.frame = CGRect(x: marginX+(textFieldWidth/2)-1.5*buttonHeight, y: cursurY, width: 3*buttonHeight, height: buttonHeight)
+        cardSubmitButton.setTitle("ارسال", for: .normal)
+        cardSubmitButton.addTarget(self, action: #selector(self.cardRequestSubmitTapped(_:)), for: .touchUpInside)
+        views["leftFormView"]?.addSubview(cardSubmitButton)
+        cursurY = cursurY + buttonHeight + marginY
+        
+        let formSize = CGSize(width: UIScreen.main.bounds.width, height: cursurY*1.2)
+        self.delegate.scrollView.contentSize = formSize
+        views["leftFormView"]?.frame = CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: cursurY+buttonHeight*1.5)
+        
+        self.fillEditProfileForm(With: aProfileInfo)
+        submitDispose = handleCardSubmitButtonEnableOrDisable()
+        disposeList.append(submitDispose)
+
+    }
+    
+    func addCardRows(){
+        // removing submit button height from cursurY
+        print("buttonHeight : ",buttonHeight)
+        cursurY = cursurY - buttonHeight - marginY
+        // removing submitbutton
+        cardSubmitButton.removeFromSuperview()
+        // removing submit button enable/disable handler
+        disposeList.forEach({$0.dispose()})
+        submitDispose.dispose()
+        print("card instead f Submit cursurY : ",cursurY)
+        
         (views["cardNoView"],texts["cardNoText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "credit-card", Selectable: false, PlaceHolderText: "شماره کارت")
         views["leftFormView"]?.addSubview(views["cardNoView"]!)
         texts["cardNoText"]?.keyboardType = UIKeyboardType.decimalPad
@@ -494,47 +566,34 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         cardDispose.disposed(by: self.delegate.myDisposeBag)
         disposeList.append(cardDispose)
         
-        let checkFont = UIFont(name: "Shabnam-FD", size: 12)!
-        let newCardText = "درخواست کارت جدید"
-        let otherCardText = "تعریف روی کارت دیگر"
-        let newCardWidth = newCardText.width(withConstrainedHeight: buttonHeight, font: checkFont)
-        let otherCardWidth = newCardText.width(withConstrainedHeight: buttonHeight, font: checkFont)
-        let spaceBTWChecks = (textFieldWidth - otherCardWidth - newCardWidth - buttonHeight)/3
-        var cursurX : CGFloat = marginX
-        //print("spaceBTWChecks : ",spaceBTWChecks)
-        
-        newCardCheck.frame = CGRect(x: cursurX, y: cursurY+buttonHeight/4, width: buttonHeight/2, height: buttonHeight/2)
-        newCardCheck.setImage(UIImage(named: "radioChecked"), for: .normal)
-        newCardCheck.tag = 1
-        newCardCheck.addTarget(self, action: #selector(newCardCheckTapped(_:)), for: .touchUpInside)
-        cursurX = cursurX + spaceBTWChecks + buttonHeight/2
-        views["leftFormView"]?.addSubview(newCardCheck)
-        let newCardLabel = UILabel(frame: CGRect(x: cursurX, y: cursurY, width: newCardWidth, height: buttonHeight))
-        newCardLabel.text = newCardText
-        newCardLabel.font = checkFont
-        newCardLabel.adjustsFontSizeToFitWidth = true
-        newCardLabel.textAlignment = .center
-        newCardLabel.textColor = UIColor(hex: 0x515152)
-        views["leftFormView"]?.addSubview(newCardLabel)
-        cursurX = cursurX + spaceBTWChecks + newCardWidth
-        
-        
-        otherCardCheck.frame = CGRect(x: cursurX, y: cursurY+buttonHeight/4, width: buttonHeight/2, height: buttonHeight/2)
-        otherCardCheck.setImage(UIImage(named: "radioUnChecked"), for: .normal)
-        otherCardCheck.addTarget(self, action: #selector(otherCardCheckTapped(_:)), for: .touchUpInside)
-        otherCardCheck.tag = 0
-        cursurX = cursurX + spaceBTWChecks + buttonHeight/2
-        views["leftFormView"]?.addSubview(otherCardCheck)
-        let otherCardLabel = UILabel(frame: CGRect(x: cursurX, y: cursurY, width: newCardWidth, height: buttonHeight))
-        otherCardLabel.text = otherCardText
-        otherCardLabel.font = checkFont
-        otherCardLabel.textAlignment = .center
-        otherCardLabel.adjustsFontSizeToFitWidth = true
-        otherCardLabel.textColor = UIColor(hex: 0x515152)
-        views["leftFormView"]?.addSubview(otherCardLabel)
-
-        
+        cardSubmitButton = SubmitButton(type: .custom)
+        cardSubmitButton.frame = CGRect(x: marginX+(textFieldWidth/2)-1.5*buttonHeight, y: cursurY, width: 3*buttonHeight, height: buttonHeight)
+        cardSubmitButton.setTitle("ارسال", for: .normal)
+        cardSubmitButton.addTarget(self, action: #selector(self.cardRequestSubmitTapped(_:)), for: .touchUpInside)
+        views["leftFormView"]?.addSubview(cardSubmitButton)
         cursurY = cursurY + buttonHeight + marginY
+        
+        let formSize = CGSize(width: UIScreen.main.bounds.width, height: cursurY*1.2)
+        self.delegate.scrollView.contentSize = formSize
+        views["leftFormView"]?.frame = CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: cursurY+buttonHeight*1.5)
+        
+        //self.fillEditProfileForm(With: aProfileInfo)
+        submitDispose = handleCardSubmitButtonEnableOrDisable()
+        disposeList.append(submitDispose)
+
+    }
+    
+    func removeCardRows(){
+        views["cardNoView"]?.removeFromSuperview()
+        views["bankView"]?.removeFromSuperview()
+        cursurY = cursurY - (2 * (buttonHeight + marginY))
+        cursurY = cursurY - buttonHeight - (1 * marginY)
+        // removing submitbutton
+        cardSubmitButton.removeFromSuperview()
+        // removing submit button enable/disable handler
+        disposeList.forEach({$0.dispose()})
+        submitDispose.dispose()
+        
         
         cardSubmitButton = SubmitButton(type: .custom)
         cardSubmitButton.frame = CGRect(x: marginX+(textFieldWidth/2)-1.5*buttonHeight, y: cursurY, width: 3*buttonHeight, height: buttonHeight)
@@ -547,12 +606,12 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         self.delegate.scrollView.contentSize = formSize
         views["leftFormView"]?.frame = CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: cursurY+buttonHeight*1.5)
         
-        self.fillEditProfileForm(With: aProfileInfo)
-        let submitDispose = handleCardSubmitButtonEnableOrDisable()
+        //self.fillEditProfileForm(With: aProfileInfo)
+        submitDispose = handleCardSubmitButtonEnableOrDisable()
         disposeList.append(submitDispose)
 
     }
-    
+
     @objc func otherCardCheckTapped(_ sender : UIButton) {
         if otherCardCheck.tag == 1 {return}
         //OtherCard should be checked
@@ -560,6 +619,7 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         newCardCheck.tag = 0
         otherCardCheck.setImage(UIImage(named: "radioChecked"), for: .normal)
         newCardCheck.setImage(UIImage(named: "radioUnChecked"), for: .normal)
+        addCardRows()
     }
     
     @objc func newCardCheckTapped(_ sender : UIButton) {
@@ -569,6 +629,7 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         newCardCheck.tag = 1
         otherCardCheck.setImage(UIImage(named: "radioUnChecked"), for: .normal)
         newCardCheck.setImage(UIImage(named: "radioChecked"), for: .normal)
+        removeCardRows()
     }
     
     @objc func cardRequestSubmitTapped(_ sender : Any){
@@ -621,7 +682,7 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         let stateTextValid = texts["stateText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
         let cityTextValid = texts["cityText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
         let regionTextValid = texts["regionText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-        let cardNoTextValid = texts["cardNoText"]!.rx.text.map({($0?.count == 16)}).share(replay: 1, scope: .whileConnected)
+        //let cardNoTextValid = texts["cardNoText"]?.rx.text.map({($0?.count == 16)}).share(replay: 1, scope: .whileConnected)
         
         let enableSubmitButton = Observable.combineLatest([familtyTextValid,
                                                            nameTextValid,
@@ -633,14 +694,14 @@ class GetRichUI : NSObject , UITextFieldDelegate {
                                                            mobileTextValid,
                                                            stateTextValid,
                                                            cityTextValid,
-                                                           regionTextValid,
-                                                           cardNoTextValid]) { (allChecks) -> Bool in
+                                                           regionTextValid]) { (allChecks) -> Bool in
                                                             //print("ALL : ",allChecks)
                                                             let reducedAllChecks = allChecks.reduce(true) {
                                                                 (accumulation: Bool, nextValue: Bool) -> Bool in
                                                                 return accumulation && nextValue
                                                             }
                                                             //print("   Reduced to \(reducedAllChecks)")
+                                                            if self.texts["cardNoText"] == nil || self.texts["cardNoText"]?.text?.count != 16 { return false }
                                                             return reducedAllChecks
         }
         return enableSubmitButton.bind(to: cardSubmitButton.rx.isEnabled)

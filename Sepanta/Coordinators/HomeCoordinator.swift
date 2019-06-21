@@ -200,23 +200,6 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
-    func pushNewShops(){
-        SlidesAndPaths.shared.count_new_shop.accept(0)
-        let storyboard = UIStoryboard(name: "Shop", bundle: Bundle.main)
-        let vc = storyboard.instantiateViewController(withIdentifier: "ShopsListViewController") as! ShopsListViewController
-        //let vc = ShopsListViewController.instantiate()
-        vc.coordinator = self
-        vc.fetchMechanism = { aShopListViewController in
-            let shopsDataSource = ShopsListDataSource(aShopListViewController)
-            shopsDataSource.getNewShopsFromServer()
-            return shopsDataSource
-        }
-        vc.headerLabelToSet = "جدیدترین ها"
-        navigationController.delegate = self
-        navigationController.pushViewController(vc, animated: true)
-        navigationController.setNavigationBarHidden(true, animated: false)
-    }
-
     func pushHelp() {
         let storyboard = UIStoryboard(name: "Help", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "HelpViewController") as! HelpViewController
@@ -227,14 +210,33 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
+    func pushNewShops(){
+        SlidesAndPaths.shared.count_new_shop.accept(0)
+        let storyboard = UIStoryboard(name: "Shop", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ShopsListViewController") as! ShopsListViewController
+        //let vc = ShopsListViewController.instantiate()
+        vc.coordinator = self
+        vc.fetchMechanism = { aShopListViewController in
+            let shopsDataSource = ShopsListDataSource(aShopListViewController as! ShopListOwners)
+            //shopsDataSource.getNewShopsFromServer()
+            shopsDataSource.getShops(Api: "new-shops",Method: HTTPMethod.get,Parameters: nil)
+            return shopsDataSource
+        }
+        vc.headerLabelToSet = "جدیدترین ها"
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+
     func pushMyFollowingShops(){
         let storyboard = UIStoryboard(name: "Shop", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "ShopsListViewController") as! ShopsListViewController
 //        let vc = ShopsListViewController.instantiate()
         vc.coordinator = self
         vc.fetchMechanism = { aShopListViewController in
-            let shopsDataSource = ShopsListDataSource(aShopListViewController)
-            shopsDataSource.getMyFollowingFromServer()
+            let shopsDataSource = ShopsListDataSource(aShopListViewController as! ShopListOwners)
+            //shopsDataSource.getMyFollowingFromServer()
+            shopsDataSource.getShops(Api: "my-following",Method: HTTPMethod.get,Parameters: nil)
             return shopsDataSource
         }
         vc.headerLabelToSet = "باشگاه های من"
@@ -248,8 +250,9 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         let vc = storyboard.instantiateViewController(withIdentifier: "FavListViewController") as! FavListViewController
         vc.coordinator = self
         vc.fetchMechanism = { sFavListViewController in
-            let shopsDataSource = ShopsListDataSource(sFavListViewController)
-            shopsDataSource.getFavShopsFromServer()
+            let shopsDataSource = ShopsListDataSource(sFavListViewController as! ShopListOwners)
+            //shopsDataSource.getFavShopsFromServer()
+            shopsDataSource.getShops(Api: "favorite",Method: HTTPMethod.get,Parameters: nil)
             return shopsDataSource
         }
         vc.headerLabelToSet = "علاقه مندی ها"

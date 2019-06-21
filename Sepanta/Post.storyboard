@@ -164,7 +164,7 @@
         <scene sceneID="ods-uf-EVV">
             <objects>
                 <viewController storyboardIdentifier="PostViewController" id="IYT-dM-O2c" userLabel="PostViewController" customClass="PostViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Vhg-hJ-dz6">
+                    <view key="view" contentMode="scaleToFill" id="Vhg-hJ-dz6" userLabel="UIViewWithAbuseHitTest" customClass="UIViewWithAbuseHitTest" customModule="Sepanta" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -274,7 +274,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fi1-hw-vxd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2918" y="776"/>
+            <point key="canvasLocation" x="870" y="-187"/>
         </scene>
     </scenes>
     <resources>

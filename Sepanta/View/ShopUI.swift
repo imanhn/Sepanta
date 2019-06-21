@@ -369,13 +369,28 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
 
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 10
-        let collectionViewRect = CGRect(x: marginX, y: marginY, width: self.delegate.contentView.frame.width-(2*marginX), height: self.delegate.contentView.frame.height-2*marginY)
-        collectionView = UICollectionView(frame: collectionViewRect, collectionViewLayout: flowLayout)
-        collectionView.register(ButtonCell.self, forCellWithReuseIdentifier: "buttoncell")
-        collectionView.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0)
-        _ = collectionView.rx.setDelegate(self) //Delegate method to call
-        bindCollectionView()
-        self.delegate.contentView.addSubview(collectionView)
+        NetworkManager.shared.postsObs
+            .subscribe(onNext: {posts in
+                if posts.count == 0 {
+                    let collectionViewRect = CGRect(x: self.marginX, y: self.marginY, width: self.delegate.contentView.frame.width-(2*self.marginX), height: self.delegate.contentView.frame.height-2*self.marginY)
+                    let anImage = UIImageView(frame: collectionViewRect)
+                    anImage.image = UIImage(named: "noPost")
+                    anImage.contentMode = .scaleAspectFit
+                    //noPost
+                    self.delegate.contentView.addSubview(anImage)
+                }else{
+                    self.delegate.contentView.subviews.forEach({$0.removeFromSuperview()})
+                    let collectionViewRect = CGRect(x: self.marginX, y: self.marginY, width: self.delegate.contentView.frame.width-(2*self.marginX), height: self.delegate.contentView.frame.height-2*self.marginY)
+                    self.collectionView = UICollectionView(frame: collectionViewRect, collectionViewLayout: flowLayout)
+                    self.collectionView.register(ButtonCell.self, forCellWithReuseIdentifier: "buttoncell")
+                    self.collectionView.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0)
+                    _ = self.collectionView.rx.setDelegate(self) //Delegate method to call
+                    self.bindCollectionView()
+                    self.delegate.contentView.addSubview(self.collectionView)
+                }
+
+            }).disposed(by: myDisposeBag)
+        
     }
     
     func showContacts() {

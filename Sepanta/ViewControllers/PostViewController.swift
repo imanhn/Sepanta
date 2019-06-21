@@ -19,6 +19,7 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
     var disposeList = [Disposable]()
     var postID : Int?
     var postOwnerUserID : Int?
+    var aRepPostView : ReportPostView!
     var abuseButton = UIButton(type: .custom)
     @IBOutlet weak var editPostButton: UIButton!
     @IBOutlet weak var deletePostButton: UIButton!
@@ -59,7 +60,7 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
         let offsetX : CGFloat = 20
         let w = self.view.frame.width - (2 * offsetX)
         let h = w/2
-        let aRepPostView = ReportPostView(frame: CGRect(x: offsetX, y: offsetY, width:w, height: h), PostID: postID!)
+        aRepPostView = ReportPostView(frame: CGRect(x: offsetX, y: offsetY, width:w, height: h), PostID: postID!)
         self.view.addSubview(aRepPostView)
         NetworkManager.shared.serverMessageObs = BehaviorRelay<String>(value: "")
         NetworkManager.shared.serverMessageObs
@@ -199,5 +200,31 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+}
+
+
+class UIViewWithAbuseHitTest : UIView {
+    weak var postViewController : PostViewController!
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if postViewController == nil {
+            print("Setting postViewController")
+            postViewController = self.parentViewController as? PostViewController
+        }
+        let aview = super.hitTest(point, with: event)
+        if postViewController.aRepPostView != nil {
+            if point.x > postViewController.aRepPostView.frame.minX &&
+                point.y > postViewController.aRepPostView.frame.minY &&
+                point.x < postViewController.aRepPostView.frame.minX + postViewController.aRepPostView.frame.width &&
+                point.y < postViewController.aRepPostView.frame.minY + postViewController.aRepPostView.frame.height {
+                //print("INSIDE!",shopViewController.rateView.frame,"  ",point)
+            }else{
+                if postViewController.aRepPostView.descText.text == nil || postViewController.aRepPostView.descText.text?.count == 0 {
+                    postViewController.aRepPostView.removeFromSuperview()
+                }
+                //print("OUTSIDE!",shopViewController.rateView.frame,"  ",point)
+            }
+        }
+        return aview
     }
 }

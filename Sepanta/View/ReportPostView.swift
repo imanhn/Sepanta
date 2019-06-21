@@ -41,7 +41,7 @@ class ReportPostView: UIView {
     func commonInit(){
         let contentView = UIView(frame: CGRect(x: self.frame.width*0.05, y: self.frame.height*0.05, width: self.frame.width*0.9, height: self.frame.height*0.9))
         contentView.layer.cornerRadius = 10
-        contentView.backgroundColor = UIColor(hex: 0xF7F7F7)
+        contentView.backgroundColor = UIColor.white//UIColor(hex: 0xF7F7F7)
         contentView.layer.shadowColor = UIColor.black.cgColor
         contentView.layer.shadowOpacity = 0.3
         contentView.layer.shadowOffset = CGSize(width: 3, height: 3)
@@ -50,15 +50,15 @@ class ReportPostView: UIView {
         
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: contentView.frame.width, height: contentView.frame.height/3))
         titleLabel.text = "آیا این پست دارای تخلف است؟"
-        titleLabel.font = UIFont(name: "Shabnam FD", size: 13)
-        titleLabel.textColor = UIColor(hex: 0x515152)
+        titleLabel.font = UIFont(name: "Shabnam-Bold-FD", size: 13)
+        titleLabel.textColor = UIColor(hex: 0xDA3A5C)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textAlignment = .center
         contentView.addSubview(titleLabel)
         
         descText = UITextField(frame: CGRect(x: 10, y: contentView.frame.height/3, width: contentView.frame.width - 20, height: contentView.frame.height*2/9))
         descText.font = UIFont(name: "Shabnam FD", size: 13)
-        descText.textColor = UIColor(hex: 0x515152)
+        descText.textColor = UIColor(hex: 0xDA3A5C)
         descText.backgroundColor = UIColor.white
         descText.layer.cornerRadius = 5
         descText.layer.masksToBounds = true
@@ -75,23 +75,32 @@ class ReportPostView: UIView {
 
         
         
-        let yesButton = RoundedButtonWithDarkBackground(type: .custom)
-        yesButton.frame = CGRect(x: contentView.frame.width/10, y: contentView.frame.height*2/3, width: contentView.frame.width*3/10, height: contentView.frame.height/4)
-        contentView.addSubview(yesButton)
+        let yesButton = UIButton(type: .custom)
+        yesButton.frame = CGRect(x: 0, y: contentView.frame.height*3/4, width: contentView.frame.width/2, height: contentView.frame.height/4)
+        
+        yesButton.backgroundColor = UIColor(hex: 0xDA3A5C)
+        yesButton.layer.borderWidth = 1
+        yesButton.layer.borderColor = UIColor(hex: 0x515152).cgColor
+        
         yesButton.setTitle("بلی", for: .normal)
         yesButton.setTitleColor(UIColor.white, for: .normal)
         yesButton.titleLabel?.font = UIFont(name: "Shabnam FD", size: 12)
         yesButton.addTarget(self, action: #selector(yesTapped), for: .touchUpInside)
+        contentView.addSubview(yesButton)
         
 
-        let noButton = RoundedButtonWithDarkBackground(type: .custom)
-        noButton.frame = CGRect(x: contentView.frame.width*6/10, y: contentView.frame.height*2/3, width: contentView.frame.width*3/10, height: contentView.frame.height/4)
-        contentView.addSubview(noButton)
+        let noButton = UIButton(type: .custom)
+        noButton.frame = CGRect(x: contentView.frame.width/2, y: contentView.frame.height*3/4, width: contentView.frame.width/2, height: contentView.frame.height/4)
+
+        noButton.backgroundColor = UIColor(hex: 0xDA3A5C)
+        noButton.layer.borderWidth = 1
+        noButton.layer.borderColor = UIColor(hex: 0x515152).cgColor
+
         noButton.setTitle("خیر", for: .normal)
         noButton.setTitleColor(UIColor.white, for: .normal)
         noButton.titleLabel?.font = UIFont(name: "Shabnam FD", size: 12)
         noButton.addTarget(self, action: #selector(noTapped), for: .touchUpInside)
-        
+        contentView.addSubview(noButton)
 
     }
     

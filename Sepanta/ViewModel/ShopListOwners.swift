@@ -73,8 +73,8 @@ extension ShopListOwners where Self:UIViewControllerWithErrorBar{
     
     func bindToTableView() {
         shopTable.tableFooterView = UIView()
-        let shopObsDisp = NetworkManager.shared.shopObs
-            .subscribe(onNext: { shops in
+        //let shopObsDisp = NetworkManager.shared.shopObs
+        let shopObsDisp = shopsObs.subscribe(onNext: { shops in
                 let initsec = SectionOfShopData(original: SectionOfShopData(header: "Header", items: [Shop]()), items: shops)
                 self.sectionOfShops.accept([initsec])
                 self.shopTable.reloadData()

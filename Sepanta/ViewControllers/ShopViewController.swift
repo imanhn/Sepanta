@@ -22,6 +22,7 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     var shopRateDisp : Disposable!
     var shop : Shop!
     var shopUI : ShopUI!
+    var rateView : RateView!
     //var shopDataSource : ShopDataSource!
     @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
@@ -60,13 +61,13 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
         
         print("RateTApped : ",shop.shop_id ?? 0)
         let rWidth = (self.view.frame.width * 0.9)
-        let rHeight = rWidth / 2
+        let rHeight = rWidth / 2.5
         let xOffset = self.view.frame.width * 0.05
         let yOffset = (self.view.frame.height - rHeight) / 2
         
         let rateViewRect = CGRect(x: xOffset, y: yOffset, width: rWidth, height: rHeight)
         if let ashopID = shop.shop_id  {
-            let rateView = RateView(frame: rateViewRect,ShopID: ashopID)
+            rateView = RateView(frame: rateViewRect,ShopID: ashopID)
             self.view.addSubview(rateView)
             shopRateDisp = NetworkManager.shared.shopRateObs
                 .filter({$0.rate_avg != nil && $0.rate_avg! > 0})
@@ -96,6 +97,7 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
         self.alert(Message: aRate.message ?? "امتیاز شما ثبت گردید")
         shopRateDisp?.dispose()
     }
+
     
     @IBAction func showPostsTapped(_ sender: Any) {
         self.panelView.tabJust = .Right
@@ -248,6 +250,28 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
 }
 
 
+class UIViewHitTested : UIView {
+    weak var shopViewController : ShopViewController!
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if shopViewController == nil {
+            print("Setting shopViewController")
+            shopViewController = self.parentViewController as? ShopViewController
+        }
+        let aview = super.hitTest(point, with: event)
+        if shopViewController.rateView != nil {
+            if point.x > shopViewController.rateView.frame.minX &&
+                point.y > shopViewController.rateView.frame.minY &&
+                point.x < shopViewController.rateView.frame.minX + shopViewController.rateView.frame.width &&
+                point.y < shopViewController.rateView.frame.minY + shopViewController.rateView.frame.height {
+                //print("INSIDE!",shopViewController.rateView.frame,"  ",point)
+            }else{                
+                shopViewController.rateView.removeFromSuperview()
+                //print("OUTSIDE!",shopViewController.rateView.frame,"  ",point)
+            }
+        }
+        return aview
+    }
+}
 
 
 

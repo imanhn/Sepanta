@@ -34,7 +34,7 @@ class RateView: UIView {
     func commonInit(){
         let contentView = UIView(frame: CGRect(x: self.frame.width*0.05, y: self.frame.height*0.05, width: self.frame.width*0.9, height: self.frame.height*0.9))
         contentView.layer.cornerRadius = 10
-        contentView.backgroundColor = UIColor(hex: 0xF7F7F7)
+        contentView.backgroundColor = UIColor(hex: 0xDA3A5C)//UIColor(hex: 0xF7F7F7)
         contentView.layer.shadowColor = UIColor.black.cgColor
         contentView.layer.shadowOpacity = 0.2
         contentView.layer.shadowOffset = CGSize(width: 3, height: 3)
@@ -43,8 +43,8 @@ class RateView: UIView {
         
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: contentView.frame.width, height: contentView.frame.height/3))
         titleLabel.text = "لطفاْ امتیاز خود را وارد فرمایید"
-        titleLabel.font = UIFont(name: "Shabnam FD", size: 13)
-        titleLabel.textColor = UIColor(hex: 0x515152)
+        titleLabel.font = UIFont(name: "Shabnam-Bold-FD", size: 13)
+        titleLabel.textColor = UIColor.white//UIColor(hex: 0x515152)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textAlignment = .center
         contentView.addSubview(titleLabel)
@@ -58,13 +58,21 @@ class RateView: UIView {
         stars.append(createStar(No: 4, Parent: starView))
         stars.append(createStar(No: 5, Parent: starView))
         
-        let submitButton = SubmitButton(type: .custom)
-        submitButton.frame = CGRect(x: contentView.frame.width/3, y: contentView.frame.height*2/3, width: contentView.frame.width/3, height: contentView.frame.height/4)
-        contentView.addSubview(submitButton)
+        let submitButton = UIButton(type: .custom)
+        submitButton.frame = CGRect(x: contentView.frame.width/3, y: contentView.frame.height*2/3, width: contentView.frame.width/3, height: (contentView.frame.height/3)-3)
+        submitButton.backgroundColor = UIColor(hex: 0xFFFFFF)
+        submitButton.setTitleColor(UIColor(hex: 0xDA3A5C), for: .normal)
+        submitButton.layer.cornerRadius = 5
+        submitButton.semanticContentAttribute = .forceRightToLeft
+        submitButton.layer.borderColor = UIColor.white.cgColor
+        submitButton.layer.borderWidth = 1
+        submitButton.layer.masksToBounds = true
+        submitButton.setImage(UIImage(named: "icon_tick_dark"), for: .normal)
+        submitButton.imageEdgeInsets = UIEdgeInsetsMake(0, frame.height/2, 0, 0)
         submitButton.setTitle("ثبت امتیاز", for: .normal)
         submitButton.titleLabel?.font = UIFont(name: "Shabnam FD", size: 12)
         submitButton.addTarget(self, action: #selector(submitTapped), for: .touchUpInside)
-        submitButton.setEnable()
+        contentView.addSubview(submitButton)
     }
     
     @objc func submitTapped(_ sender : UIButton){

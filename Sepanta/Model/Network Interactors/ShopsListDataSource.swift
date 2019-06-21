@@ -14,12 +14,10 @@ import Alamofire
 import AlamofireImage
 
 class ShopsListDataSource {
-    var delegate : UIViewController
+    var delegate : ShopListOwners
     let myDisposeBag = DisposeBag()
-    var fetchedShops = [Shop]()
-    
 
-    func getShopListForACatagory(Catagory catagoryID:String,State state : String?,City city:String?){
+    func buildParameters(Catagory catagoryID:String,State state : String?,City city:String?)->Dictionary<String,String>{
         var aParameter : Dictionary<String, String> = [:]
         if (state == nil || state == "") && (city == nil || city == "") {
            // "http://www.ipsepanta.ir/api/v1/category-shops-list?slug=3&category_id=4"
@@ -37,24 +35,131 @@ class ShopsListDataSource {
                           "category_id":"\(catagoryID)",
                 "code":"\(city!)"]
         }
-
-        print("Running network request category-shops-list... \(aParameter)  state : \(state!)  City : \(city!)")
-        NetworkManager.shared.run(API: "category-shops-list", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
+        return aParameter
     }
     
-    func getFavShopsFromServer(){
-        NetworkManager.shared.run(API: "favorite", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
+    
+    func getShops(Api apiName : String,Method amethod : HTTPMethod,Parameters param : Dictionary<String,String>?){
+        let urlAddress = NetworkManager.shared.baseURLString + "/" + apiName
+        RxAlamofire.requestJSON(amethod, urlAddress , parameters: param, encoding: URLEncoding.httpBody, headers: NetworkManager.shared.headers)
+            //.observeOn(MainScheduler.instance)
+            .timeout(3, scheduler: MainScheduler.instance)
+            .retry(4)
+            .subscribe(onNext: { [unowned self] (ahttpURLRes,jsonResult) in
+                print(" \(apiName) Response Code : ",ahttpURLRes.statusCode)
+                if let aresult = jsonResult as? NSDictionary {
+                    let shops = self.processShopList(Result: aresult)
+                    self.delegate.shopsObs.accept(shops)
+                    if ahttpURLRes.statusCode >= 400 {
+                        print("Result All Key : ",aresult.allKeys)
+                        print("Error : ",aresult["error"] ?? "[Error happened but no Error Key in response!]")
+                        if let amessage = aresult["message"] as? String {
+                            print("Setting : ",amessage)
+                        }
+                    }
+                }
+                Spinner.stop()
+                }, onError: { (err) in
+                    if err.localizedDescription == "The Internet connection appears to be offline." {
+                        print("No Internet")
+                    }
+                    if err.localizedDescription == "Could not connect to the server." {
+                        print("No Server Connection")
+                    }
+                    if err.localizedDescription == "The operation couldn’t be completed." {
+                        print("Server is too lazy to repond!")
+                    }
+                    print("NetworkManager RXAlamofire Raised an Error : >",err.localizedDescription,"<")
+                    Spinner.stop()
+            }, onCompleted: {
+                //print("NetWorkManager Completed")
+                Spinner.stop()
+            }, onDisposed: {
+                Spinner.stop()
+                //print("NetworkManager Disposed")
+            }).disposed(by: myDisposeBag)
     }
     
-    func getNewShopsFromServer(){
-        NetworkManager.shared.run(API: "new-shops", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
+    func processShopList(Result aResult : NSDictionary) -> [Shop] {
+        var shops = [Shop]()
+        if aResult["error"] != nil {
+            print("ERROR in Shop List Parsing : ",aResult["error"]!)
+        }
+        if aResult["message"] != nil {
+            print("Message Parsed : ",aResult["message"]!)
+        }
+        
+        //print("Shop Result keys : ",aResult.allKeys)
+        //print("Result : ",aResult)
+        
+        if let aDic = aResult["shops"] as? NSDictionary ?? aResult["categoryShops"] as? NSDictionary ?? aResult["favorite"] as? NSDictionary{
+            if let dataOfShops = aDic["data"] as? NSArray {
+                for shopDic in dataOfShops
+                {
+                    if let shopElemAsNSDic = shopDic as? NSDictionary{
+                        
+                        if let shopElem = shopElemAsNSDic as? Dictionary<String, Any>{
+                            //print("shopElem : ",shopElem)
+                            if shopElem["user_id"] != nil && shopElem["shop_id"] != nil {
+                                let aNewShop = Shop(shop_id: shopElem["shop_id"] as? Int ?? 0,
+                                                    user_id: shopElem["user_id"] as? Int ?? 0,
+                                                    shop_name: shopElem["shop_name"] as? String ?? "",
+                                                    shop_off: shopElem["shop_off"] as? Int ?? 0,
+                                                    lat: (shopElem["lat"] as? String)?.toDouble() ?? 0.0,
+                                                    long: (shopElem["lon"] as? String)?.toDouble() ?? 0.0,
+                                                    image: shopElem["image"] as? String ?? "",
+                                                    rate: shopElem["rate"] as? String ?? "" ,
+                                                    rate_count: shopElem["rate_count"] as? Int ?? 0 ,
+                                                    follower_count: shopElem["follower_count"] as? Int ?? 0,
+                                                    created_at: shopElem["created_at"] as? String ?? "")
+                                shops.append(aNewShop)
+                            }
+                        }
+                    }else{
+                        print("shopElm not casted.")
+                    }
+                }
+            } else{
+                print("aresult[shops or categoryShops][data] is empty or can not be casted")
+            }
+        }else if let dataOfShops = aResult["shops"] as? NSArray ?? aResult["categoryShops"] as? NSArray ?? aResult["favorite"] as? NSArray{
+            for shopDic in dataOfShops
+            {
+                if let shopElemAsNSDic = shopDic as? NSDictionary{
+                    
+                    if let shopElem = shopElemAsNSDic as? Dictionary<String, Any>{
+                        //print("shopElem : ",shopElem)
+                        if shopElem["user_id"] != nil && shopElem["shop_id"] != nil {
+                            let aNewShop = Shop(shop_id: shopElem["shop_id"] as? Int ?? 0,
+                                                user_id: shopElem["user_id"] as? Int ?? 0,
+                                                shop_name: shopElem["shop_name"] as? String ?? "",
+                                                shop_off: shopElem["shop_off"] as? Int ?? 0,
+                                                lat: (shopElem["lat"] as? String)?.toDouble() ?? 0.0,
+                                                long: (shopElem["lon"] as? String)?.toDouble() ?? 0.0,
+                                                image: shopElem["image"] as? String ?? "",
+                                                rate: shopElem["rate"] as? String ?? "" ,
+                                                rate_count: shopElem["rate_count"] as? Int ?? 0 ,
+                                                follower_count: shopElem["follower_count"] as? Int ?? 0,
+                                                created_at: shopElem["created_at"] as? String ?? "")
+                            shops.append(aNewShop)
+                        }
+                    }
+                }else{
+                    print("shopElm not casted.")
+                }
+            }
+        }else {
+            print("Couldnt cast Result[shops] or [categoryShops] ")
+            print("Shop Result keys : ",aResult.allKeys)
+            print("aResult[categoryShops] ",aResult["categoryShops"] ?? "EMPTY")
+        }
+        print("Shops Fetched : ",shops.count," record")
+        //print("Parsing State List Successful")
+        
+        return shops
+        
     }
-    
-    func getMyFollowingFromServer(){
-        NetworkManager.shared.run(API: "my-following", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
-    }
-    
-    init (_ vc : UIViewController){
+    init (_ vc : ShopListOwners){
         self.delegate = vc
         //subscribeToShop()
     }

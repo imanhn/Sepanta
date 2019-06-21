@@ -135,7 +135,7 @@ class JSONParser {
                     //Returns Profile Data for a user Id
                     let aProfile = (self.processAsShopProfile(Result: aDic))
                     NetworkManager.shared.shopProfileObs.accept(aProfile)
-                    NetworkManager.shared.postsObs.accept(aProfile.content as! [Post])
+                    NetworkManager.shared.postsObs.accept(aProfile.content)
                 }else if (apiName == "report-comment") || (apiName == "report-post") || (apiName == "report-comment"){
                     //Returns Profile Data for a user Id
                     if let amessage = aDic["message"] as? String {
@@ -178,6 +178,7 @@ class JSONParser {
                 } else if (apiName == "profile-info") && (aMethod == HTTPMethod.post) {
                     // Sets True for profile-info to be observable by PostUI
                     NetworkManager.shared.updateProfileInfoSuccessful.accept(true)
+                    /*
                 } else if (apiName == "new-shops") || (apiName == "my-following") || (apiName == "category-shops-list") {
                     print("Starting Shops List Parser for : \(apiName)")
                     let parsedShops = self.processShopList(Result: aDic)
@@ -187,6 +188,7 @@ class JSONParser {
                     let parsedShops = self.processShopList(Result: aDic)
                     //NetworkManager.shared.favShopObs.accept(parsedShops)
                     NetworkManager.shared.shopObs.accept(parsedShops)
+                    */
                 } else if (apiName == "favorite") && (aMethod == HTTPMethod.post) {
                     print("Starting Toggle Favorite on a shop Parser...")
                     let aToggle = self.processFavAShopToggle(Result: aDic)
@@ -431,14 +433,25 @@ class JSONParser {
         if aResult["message"] != nil {
             print("Like : Message Parsed : ",aResult["message"]!)
         }
-        //print("Processlike : ",aResult["is_like"])
-        //print("casting Processlike : ",aResult["is_like"] as? String)
-        
-        if let likeStr = aResult["is_like"] as? String {
-            if likeStr == "1" {return 1}else{return 0}
+        print("\(aResult["is_like"]!)")
+        if "\(aResult["is_like"]!)" == "1" {
+            return 1
+        }else if "\(aResult["is_like"]!)" == "0" {
+            return 0
         }else{
             return 2
         }
+        /*
+        print("Processlike : ",aResult["is_like"])
+        print("casting Processlike : ",aResult["is_like"] as? Int)
+        
+        if let likeStr = aResult["is_like"] as? String{
+            if likeStr == "1" {return 1}else{return 0}
+        }else{
+            print("is_like is not there! : ",aResult)
+            return 2
+        }
+         */
     }
     
     func processShopLocationsList(Result aResult : NSDictionary) -> [Shop] {

@@ -221,28 +221,100 @@ class PostUI {
         self.delegate.postScrollView.addSubview(sendCommentButton)
         cursorX = cursorX + sendCommentButton.frame.width + self.marginX/2
         
+        print("Adding comment row ")
         let rowRect : CGRect = CGRect(x: cursorX, y: self.cursurY, width: self.delegate.postScrollView.frame.width-cursorX-self.marginX, height: sendCommentButton.frame.height)
         (self.commentView,self.commentText) = rowRect.buildARowView(Image: "icon_comment", Selectable: false, PlaceHolderText: "ثبت نظر")
         self.delegate.postScrollView.addSubview(self.commentView)
         self.cursurY = self.cursurY + self.marginY + rowRect.height
+    }
+
+    func buildCommentView(With comments : [Comment]){
+        if peopleCommentsView.superview != nil {
+            peopleCommentsView = UIView(frame: .zero)
+            peopleCommentsView.removeFromSuperview()
+        }
+        if comments.count == 0 {
+            self.delegate.postScrollView.contentSize = CGSize(width: self.delegate.postScrollView.frame.width, height: (self.marginY+self.cursurY)*1.2)
+            return
+        }
+        //print("Comments to Load : ",comments)
+        peopleCommentsView = UIView(frame: CGRect(x: self.marginX, y: self.cursurY, width: self.delegate.postScrollView.frame.width - 2*self.marginX, height: 200))
+        peopleCommentsView.backgroundColor = UIColor(hex: 0xF7F7F7)
+        let profilePicturedim = peopleCommentsView.frame.width/10
+        let usernameFont = UIFont(name: "Shabnam-Bold-FD", size: 12)
+        let commentFont = UIFont(name: "Shabnam-FD", size: 12)
+        var commentCursurY : CGFloat = self.marginY
+        for aComment in comments {
+            let menuButtonWidth = profilePicturedim / 2
+            let commentWidth : CGFloat = peopleCommentsView.frame.width - profilePicturedim - 3*self.marginX - menuButtonWidth
+            
+            let menuButton = UIButton(type: .custom)
+            menuButton.frame = CGRect(x: self.marginX, y: commentCursurY+(menuButtonWidth/2), width: menuButtonWidth, height: menuButtonWidth)
+            menuButton.setImage(UIImage(named: "postMenu"), for: .normal)
+            menuButton.addTarget(self, action: #selector(menuOnCommentTapped), for: .touchUpInside)
+            menuButton.tag = aComment.comment_id ?? 0
+            
+            peopleCommentsView.addSubview(menuButton)
+            
+            let usernameLabel = UILabel(frame: CGRect(x: (self.marginX*3/2)+menuButtonWidth, y: commentCursurY, width: commentWidth, height: profilePicturedim))
+            usernameLabel.font = usernameFont
+            usernameLabel.textColor = UIColor(hex: 0xD6D7D9)
+            usernameLabel.contentMode = .right
+            usernameLabel.semanticContentAttribute = .forceRightToLeft
+            usernameLabel.text = (aComment.first_name ?? "")+" "+(aComment.last_name ?? "")
+            peopleCommentsView.addSubview(usernameLabel)
+            let profilePictureImageView = UIImageView(frame: CGRect(x: 3*self.marginX+usernameLabel.frame.width, y: commentCursurY, width: profilePicturedim, height: profilePicturedim))
+            profilePictureImageView.backgroundColor = UIColor.white
+            profilePictureImageView.layer.cornerRadius = (profilePicturedim / 2) - 2
+            profilePictureImageView.image = UIImage(named: "icon_profile_03")
+            profilePictureImageView.contentMode = .scaleAspectFill
+            profilePictureImageView.clipsToBounds = true
+            if aComment.image != nil {
+                let imageStr = NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_profile_image+aComment.image!
+                if let imageUrl = URL(string: imageStr) {
+                    profilePictureImageView.af_setImage(withURL: imageUrl, placeholderImage: UIImage(named: "icon_profile_03"), filter: nil)
+                }
+            }
+            
+            peopleCommentsView.addSubview(profilePictureImageView)
+            commentCursurY = commentCursurY + self.marginY/3 + profilePicturedim
+            var commentHeight = profilePicturedim
+            if let commentText = aComment.body {
+                commentHeight = commentText.height(withConstrainedWidth: commentWidth, font: commentFont!)
+            }
+            
+            let commentBody = UILabel(frame: CGRect(x: self.marginX+menuButtonWidth, y: commentCursurY, width: commentWidth, height: commentHeight))
+            commentBody.font = commentFont
+            commentBody.numberOfLines = 10
+            commentBody.textColor = UIColor(hex: 0x515152)
+            commentBody.contentMode = .right
+            commentBody.semanticContentAttribute = .forceRightToLeft
+            commentBody.text = aComment.body ?? "نظری ندارم"
+            peopleCommentsView.addSubview(commentBody)
+            commentCursurY = commentCursurY + self.marginY + commentHeight
+        }
+        peopleCommentsView.frame = CGRect(x: self.marginX, y: self.cursurY, width: peopleCommentsView.frame.width, height: commentCursurY)
+        self.delegate.postScrollView.contentSize = CGSize(width: self.delegate.postScrollView.frame.width, height: (commentCursurY+self.cursurY)*1.2)
+        self.delegate.postScrollView.addSubview(peopleCommentsView)
     }
     
     @objc func toggleLike(_ sender : Any){
         Spinner.start()
         (sender as! UIButton).isEnabled = false
         let aParameter = ["shop_id":"\(NetworkManager.shared.postDetailObs.value.shop_id!)","post_id":"\(NetworkManager.shared.postDetailObs.value.id!)"]
-        print("Toggling Like/Unlike .... : ",aParameter)
+        print("Toggling Like/Unlike .... : ",aParameter,"      ToggleStatus : ",NetworkManager.shared.toggleLiked.value)
         NetworkManager.shared.run(API: "like-dislike", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: false)
         let toggleLikeDisp = NetworkManager.shared.toggleLiked
             .observeOn(MainScheduler.instance)
+            .debug()
             .filter({$0 != ToggleStatus.UNKNOWN})
             .subscribe(onNext: { [unowned self] (toggleStatus) in
                 print("*Toggling... : ",self.likeNoLabel.text ?? "NIL")
                 (sender as! UIButton).isEnabled = true
                 DispatchQueue.main.async {
-                    print("self.likeNoLabel.text : ",self.likeNoLabel.text ?? "NIL")
-                    print("Current countPostLines : ",self.countPostLikes)
-                    print("ToggleStatus : ",toggleStatus)
+                    print("         self.likeNoLabel.text : ",self.likeNoLabel.text ?? "NIL")
+                    print("         Current countPostLines : ",self.countPostLikes)
+                    print("         ToggleStatus : ",toggleStatus)
                     
                     if toggleStatus == ToggleStatus.NO && self.isPostLiked {
                         self.countPostLikes = self.countPostLikes - 1
@@ -274,6 +346,7 @@ class PostUI {
                     postDet.isLiked = !(postDet.isLiked ?? false)
                     NetworkManager.shared.postDetailObs.accept(postDet)
                 }
+                print("Setting UNKNOWN")
                 NetworkManager.shared.toggleLiked = BehaviorRelay<ToggleStatus>(value: ToggleStatus.UNKNOWN)
             })
         toggleLikeDisp.disposed(by: myDisposeBag)
@@ -364,72 +437,5 @@ class PostUI {
     }
     func editComment(Comment aComment : Comment){
         
-    }
-
-    func buildCommentView(With comments : [Comment]){
-        if peopleCommentsView.superview != nil {
-            peopleCommentsView = UIView(frame: .zero)
-            peopleCommentsView.removeFromSuperview()
-        }
-        if comments.count == 0 {return}
-        //print("Comments to Load : ",comments)
-        peopleCommentsView = UIView(frame: CGRect(x: self.marginX, y: self.cursurY, width: self.delegate.postScrollView.frame.width - 2*self.marginX, height: 200))
-        peopleCommentsView.backgroundColor = UIColor(hex: 0xF7F7F7)
-        let profilePicturedim = peopleCommentsView.frame.width/10
-        let usernameFont = UIFont(name: "Shabnam-Bold-FD", size: 12)
-        let commentFont = UIFont(name: "Shabnam-FD", size: 12)
-        var commentCursurY : CGFloat = self.marginY
-        for aComment in comments {
-            let menuButtonWidth = profilePicturedim / 2
-            let commentWidth : CGFloat = peopleCommentsView.frame.width - profilePicturedim - 3*self.marginX - menuButtonWidth
-            
-            let menuButton = UIButton(type: .custom)
-            menuButton.frame = CGRect(x: self.marginX, y: commentCursurY+(menuButtonWidth/2), width: menuButtonWidth, height: menuButtonWidth)
-            menuButton.setImage(UIImage(named: "postMenu"), for: .normal)
-            menuButton.addTarget(self, action: #selector(menuOnCommentTapped), for: .touchUpInside)
-            menuButton.tag = aComment.comment_id ?? 0
-            
-            peopleCommentsView.addSubview(menuButton)
-            
-            let usernameLabel = UILabel(frame: CGRect(x: (self.marginX*3/2)+menuButtonWidth, y: commentCursurY, width: commentWidth, height: profilePicturedim))
-            usernameLabel.font = usernameFont
-            usernameLabel.textColor = UIColor(hex: 0xD6D7D9)
-            usernameLabel.contentMode = .right
-            usernameLabel.semanticContentAttribute = .forceRightToLeft
-            usernameLabel.text = (aComment.first_name ?? "")+" "+(aComment.last_name ?? "")
-            peopleCommentsView.addSubview(usernameLabel)
-            let profilePictureImageView = UIImageView(frame: CGRect(x: 3*self.marginX+usernameLabel.frame.width, y: commentCursurY, width: profilePicturedim, height: profilePicturedim))
-            profilePictureImageView.backgroundColor = UIColor.white
-            profilePictureImageView.layer.cornerRadius = (profilePicturedim / 2) - 2
-            profilePictureImageView.image = UIImage(named: "icon_profile_03")
-            profilePictureImageView.contentMode = .scaleAspectFill
-            profilePictureImageView.clipsToBounds = true
-            if aComment.image != nil {
-                let imageStr = NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_profile_image+aComment.image!
-                if let imageUrl = URL(string: imageStr) {
-                    profilePictureImageView.af_setImage(withURL: imageUrl, placeholderImage: UIImage(named: "icon_profile_03"), filter: nil)
-                }
-            }
-            
-            peopleCommentsView.addSubview(profilePictureImageView)
-            commentCursurY = commentCursurY + self.marginY/3 + profilePicturedim
-            var commentHeight = profilePicturedim
-            if let commentText = aComment.body {
-                commentHeight = commentText.height(withConstrainedWidth: commentWidth, font: commentFont!)
-            }
-            
-            let commentBody = UILabel(frame: CGRect(x: self.marginX+menuButtonWidth, y: commentCursurY, width: commentWidth, height: commentHeight))
-            commentBody.font = commentFont
-            commentBody.numberOfLines = 10
-            commentBody.textColor = UIColor(hex: 0x515152)
-            commentBody.contentMode = .right
-            commentBody.semanticContentAttribute = .forceRightToLeft
-            commentBody.text = aComment.body ?? "نظری ندارم"
-            peopleCommentsView.addSubview(commentBody)
-            commentCursurY = commentCursurY + self.marginY + commentHeight
-        }
-        peopleCommentsView.frame = CGRect(x: self.marginX, y: self.cursurY, width: peopleCommentsView.frame.width, height: commentCursurY)
-        self.delegate.postScrollView.contentSize = CGSize(width: self.delegate.postScrollView.frame.width, height: (commentCursurY+self.cursurY)*1.2)
-        self.delegate.postScrollView.addSubview(peopleCommentsView)
     }
 }
