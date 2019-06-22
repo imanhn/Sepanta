@@ -11,6 +11,7 @@ import MapKit
 
 class MapAnnotation : NSObject,MKAnnotation{
     var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 35.765985, longitude: 51.546742)
+    var identifier = "MapAnnotation"
     var title: String?
     var subtitle: String?
     var userId: Int?
@@ -24,11 +25,12 @@ class MapAnnotation : NSObject,MKAnnotation{
         self.coordinate = CLLocationCoordinate2D(latitude: aShop.lat ?? 35.765985, longitude: aShop.long ?? 51.546742)
         //print("NEW : ",self.coordinate,"  ",self.title)
     }
-    init(title: String, locationName: String, coordinate: CLLocationCoordinate2D) {
+    init(title: String, locationName: String, coordinate: CLLocationCoordinate2D, identifier : String?) {
         super.init()
         self.userId = 0
         self.title = title
         self.subtitle = locationName
         self.coordinate = coordinate
+        self.identifier = identifier ?? "MapAnnotation"
     }
 }

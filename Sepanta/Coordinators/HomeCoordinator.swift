@@ -82,7 +82,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
     }
     
     func popOneLevel(){
-            print("*** POPING One Level....")
+            print("*** POPING One Level....",navigationController.topViewController ?? "Unknown")
             navigationController.topViewController?.willPop()
             navigationController.popViewController(animated: true)
     }
@@ -338,6 +338,17 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         vc.coordinator = self
         vc.mapMode = MapType.SingleShop
         vc.shopToShow = ashop
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+    
+    func pushSelectOnMap(_ aName : String){
+        let storyboard = UIStoryboard(name: "Map", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "NearestViewController") as! NearestViewController
+        vc.coordinator = self
+        vc.mapMode = MapType.selectOnMap
+        vc.pinPointName = aName
         navigationController.delegate = self
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)

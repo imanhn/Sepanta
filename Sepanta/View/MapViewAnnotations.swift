@@ -15,7 +15,7 @@ extension NearestViewController: MKMapViewDelegate {
         //guard let annotation = annotation as? ShopAnnotation else { return nil }
         // 3
         if annotation is MKUserLocation { return nil}
-        let identifier = "MapAnnotation"
+        let identifier = (annotation as? MapAnnotation)?.identifier ?? "MapAnnotation"
         var view: MKAnnotationView
         // 4
         if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) {
@@ -24,39 +24,63 @@ extension NearestViewController: MKMapViewDelegate {
             //view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
         }
-        view.canShowCallout = true
-        
-        let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        rightButton.setImage(UIImage(named: "MapArrow"), for: .normal)
-        rightButton.setImage(UIImage(named: "MapArrow"), for: .application)
-        rightButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
-        rightButton.backgroundColor = UIColor(hex: 0x515152)
-        rightButton.tag = (annotation as! MapAnnotation).userId!
-        rightButton.addTarget(self, action: #selector(pushShop), for: .touchUpInside)
-        rightButton.layer.cornerRadius = 5
-        view.rightCalloutAccessoryView = rightButton
+        let annotationDim = UIScreen.main.bounds.width / 7
+        let calloutDim = UIScreen.main.bounds.width / 10
+        if identifier == "MapAnnotation" {
+            view.canShowCallout = true
+            let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: calloutDim, height: calloutDim))
+            rightButton.setImage(UIImage(named: "MapArrow"), for: .normal)
+            rightButton.setImage(UIImage(named: "MapArrow"), for: .application)
+            rightButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+            rightButton.backgroundColor = UIColor(hex: 0x515152)
+            rightButton.tag = (annotation as! MapAnnotation).userId!
+            rightButton.addTarget(self, action: #selector(pushShop), for: .touchUpInside)
+            rightButton.layer.cornerRadius = 5
+            view.rightCalloutAccessoryView = rightButton
+            
+            let leftButton = UIButton(frame: CGRect(x: 0, y: 0, width: calloutDim, height: calloutDim))
+            leftButton.setImage(UIImage(named: "car"), for: .normal)
+            leftButton.setImage(UIImage(named: "car"), for: .application)
+            leftButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+            leftButton.backgroundColor = UIColor(hex: 0x515152)
+            leftButton.tag = (annotation as! MapAnnotation).userId!
+            leftButton.addTarget(self, action: #selector(openNavigationApps), for: .touchUpInside)
+            leftButton.layer.cornerRadius = 5
+            view.leftCalloutAccessoryView = leftButton
+            
+            view.calloutOffset = CGPoint(x: 0, y: 5)
+            let mixedImage = CreateBallonImage(Image: UIImage(named: "icon_mainmenu_04")!)
+            view.image = mixedImage
+        }else if  identifier ==  "SelectAnnotation" {
+            view.canShowCallout = true
+            let leftButton = UIButton(frame: CGRect(x: 0, y: 0, width: calloutDim, height: calloutDim))
+            leftButton.setImage(UIImage(named: "icon_tick_white"), for: .normal)
+            leftButton.setImage(UIImage(named: "icon_tick_white"), for: .application)
+            leftButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+            leftButton.backgroundColor = UIColor(hex: 0x515152)
+            leftButton.tag = (annotation as! MapAnnotation).userId!
+            leftButton.addTarget(self, action: #selector(backOneLevel), for: .touchUpInside)
+            leftButton.layer.cornerRadius = 5
+            view.leftCalloutAccessoryView = leftButton
+            view.calloutOffset = CGPoint(x: 0, y: 5)
 
-        let leftButton = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        leftButton.setImage(UIImage(named: "car"), for: .normal)
-        leftButton.setImage(UIImage(named: "car"), for: .application)
-        leftButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
-        leftButton.backgroundColor = UIColor(hex: 0x515152)
-        leftButton.tag = (annotation as! MapAnnotation).userId!
-        leftButton.addTarget(self, action: #selector(openNavigationApps), for: .touchUpInside)
-        leftButton.layer.cornerRadius = 5
-        view.leftCalloutAccessoryView = leftButton
-        
-        view.calloutOffset = CGPoint(x: 0, y: 5)
-        let mixedImage = CreateBallonImage(Image: UIImage(named: "icon_mainmenu_04")!)
-        view.image = mixedImage
+/*            view.image = UIImage(named: "icon_place_black")
+            view.frame = CGRect(x: 0, y: 0, width: annotationDim*14/19, height: annotationDim)
+            view.contentMode = .scaleAspectFit
+            view.image?.addShadow()
+ */
+            let mixedImage = CreateSelectPinPoint()
+            view.image = mixedImage
+        }
         return view
     }
     
     func CreateBallonImage(Image iconImage : UIImage)->UIImage{
         
         let backgroundImage = UIImage(named: "icon_place_map")
-        
-        let size = CGSize(width: 35, height: 50)
+        let annotationDim = UIScreen.main.bounds.width / 7
+        let size = CGSize(width: annotationDim*14/19, height: annotationDim)
+//        let size = CGSize(width: 35, height: 50)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)        
         let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         backgroundImage?.draw(in: areaSize)
@@ -67,6 +91,24 @@ extension NearestViewController: MKMapViewDelegate {
         UIGraphicsEndImageContext()
         let shadowImage = newImage.addShadow()
         return shadowImage
+    }
+    
+    func CreateSelectPinPoint()->UIImage{
+        
+        let backgroundImage = UIImage(named: "icon_place_black")
+        let annotationDim = UIScreen.main.bounds.width / 7
+        let size = CGSize(width: annotationDim*14/19, height: annotationDim)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        backgroundImage?.draw(in: areaSize)
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        let shadowImage = newImage.addShadow(blurSize: 2)
+        return shadowImage
+    }
+    
+    @objc func backOneLevel(_ sender : Any){
+        self.coordinator!.popOneLevel()
     }
     
     @objc func pushShop(_ sender : Any){

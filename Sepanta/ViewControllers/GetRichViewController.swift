@@ -9,11 +9,12 @@
 import Foundation
 import UIKit
 import RxSwift
+import RxCocoa
 
 class GetRichViewController : UIViewControllerWithKeyboardNotificationWithErrorBar,UITextFieldDelegate,Storyboarded{
    var myDisposeBag = DisposeBag()
     var profileInfo : ProfileInfo?
-    var cardNo : String?
+    var cardNo : String?    
     @IBOutlet weak var scrollView: NoDelayScrollView!
     var getRichUI : GetRichUI?    
     weak var coordinator : HomeCoordinator?
@@ -70,7 +71,7 @@ class GetRichViewController : UIViewControllerWithKeyboardNotificationWithErrorB
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         //print("View DID Disapear!")
-        self.getRichUI = nil
+        //self.getRichUI = nil
     }
     
     func showPopup(_ controller: UIViewController, sourceView: UIView) {

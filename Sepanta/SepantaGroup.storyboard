@@ -239,7 +239,7 @@
                                                 <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="13"/>
                                                 <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="تهران" image="icon_place_black">
+                                                <state key="normal" title="تهران" image="small_location">
                                                     <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                             </button>
@@ -545,10 +545,10 @@
         <image name="icon_back_black" width="10" height="16"/>
         <image name="icon_filter_black" width="17" height="17"/>
         <image name="icon_menu" width="21" height="18"/>
-        <image name="icon_place_black" width="14" height="19"/>
         <image name="icon_profile_04" width="26" height="17"/>
         <image name="icon_star_gray" width="11" height="11"/>
         <image name="logo_home" width="86" height="25"/>
         <image name="off" width="54" height="50"/>
+        <image name="small_location" width="14" height="19"/>
     </resources>
 </document>

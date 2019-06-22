@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import Alamofire
 import RxAlamofire
+import MapKit
 
 enum CallStatus {
     case ready
@@ -50,7 +51,9 @@ class NetworkManager {
     // Result of Parser :
     var allProvinceListObs = BehaviorRelay<[String]>(value: [String]())
     var catagoriesProvinceListObs = BehaviorRelay<[String]>(value: [String]())
-
+    var serviceTypeObs = BehaviorRelay<[String]>(value: [String]())
+    var selectedLocation = BehaviorRelay<CLLocationCoordinate2D>(value: CLLocationCoordinate2D(latitude: 0, longitude: 0))
+    
     var cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
     var catagoriesObs = BehaviorRelay<[Any]>(value: [Any]())
     var shopObs = BehaviorRelay<[Shop]>(value: [Shop]())

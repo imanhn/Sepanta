@@ -410,7 +410,7 @@ class PostUI {
                 print("Should not get here, but if it gets its fine! really!")
             }
         }
-        controller.preferredContentSize = CGSize(width: 150, height: 100)
+        controller.preferredContentSize = CGSize(width: 150, height: 50)
         self.delegate.showPopup(controller, sourceView: menuButton)
     }
     

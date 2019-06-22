@@ -17,11 +17,14 @@ enum MapType {
     case NearbyShops
     case SingleShop
     case GroupOfShops
+    case selectOnMap
 }
 
 class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationManagerDelegate {
     weak var coordinator : HomeCoordinator?
     var myDisposeBag = DisposeBag()
+    var aPinPointAnnotation : MapAnnotation!
+    var pinPointName : String!
     var locationManager:CLLocationManager!
     var destinationCRD : CLLocationCoordinate2D!
     var annotations : Dictionary<Int,MKAnnotation> = Dictionary<Int,MKAnnotation>()
@@ -90,9 +93,12 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         myLocation = manager.location!
         if oldLocation == nil || (oldLocation!.distance(from: myLocation!) > Double(1000)){
-            if mapMode == MapType.NearbyShops {
+            if mapMode == MapType.NearbyShops{
                 centerMapOnLocation(Coordinate : myLocation?.coordinate)
                 getNearByShops()
+            }
+            if  mapMode == MapType.selectOnMap {
+                centerMapOnLocation(Coordinate : myLocation?.coordinate)
             }
             oldLocation = myLocation!
         }
@@ -141,6 +147,12 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
             })
             alert.addAction(button)
         }
+        let cancelButton = UIAlertAction(title: "منصرف شدم", style: .default, handler: {_ in
+                alert.dismiss(animated: true, completion: {})
+            })
+        alert.addAction(cancelButton)
+    
+            
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -215,11 +227,20 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
         initLocationManager()
         mapView.delegate = self
         mapView.showsUserLocation = true
-        
+        print("mapMode : ",mapMode)
         switch mapMode {
         case MapType.NearbyShops?:
             //print("Showing nearby Shops")
             getNearByShops()
+            if myLocation != nil {
+                centerMapOnLocation(Coordinate: myLocation!.coordinate)
+            }
+            break
+        case MapType.selectOnMap?:
+            print("*** Select On  Map")
+            let longPress = UILongPressGestureRecognizer(target: self, action: #selector(selectLocation))
+            longPress.minimumPressDuration = 0.5
+            self.mapView.addGestureRecognizer(longPress)
             if myLocation != nil {
                 centerMapOnLocation(Coordinate: myLocation!.coordinate)
             }
@@ -232,5 +253,21 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
             print("Default Mode...")
             //getNearByShops()
         }
+    }
+    @objc func selectLocation(_ agesture : UILongPressGestureRecognizer){
+        print("State : ",agesture)
+        if agesture.state == .ended || agesture.state == .began{
+            let locationInView = agesture.location(in: self.mapView)
+            let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
+            //addAnnotation(location: locationOnMap)
+            print("LOCA : ",locationOnMap)
+            if aPinPointAnnotation != nil {
+                self.mapView.removeAnnotation(aPinPointAnnotation)
+            }
+            aPinPointAnnotation = MapAnnotation(title: self.pinPointName ?? "فروشگاه جدید", locationName: self.pinPointName ?? "فروشگاه جدید", coordinate: locationOnMap,identifier: "SelectAnnotation")
+            self.mapView.addAnnotation(aPinPointAnnotation)
+            NetworkManager.shared.selectedLocation.accept(locationOnMap)
+        }
+        
     }
 }

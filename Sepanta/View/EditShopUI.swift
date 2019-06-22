@@ -121,7 +121,7 @@ class EditShopUI :  NSObject, UITextFieldDelegate{
     @objc func doneDatePicker(_ sender : Any) {
         self.delegate.view.endEditing(true)
         let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY/MM/DD"
+        formatter.dateFormat = "yyyy/MM/dd"
         formatter.locale = Locale(identifier: "fa_IR")
         texts["birthDateText"]?.text = formatter.string(from: datePicker.date)
         texts["birthDateText"]?.sendActions(for: .valueChanged)

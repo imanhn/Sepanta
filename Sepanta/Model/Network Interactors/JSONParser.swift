@@ -31,6 +31,9 @@ class JSONParser {
                 if (apiName == "get-state-and-city") && (aMethod == HTTPMethod.get){
                     let provinceList = self.processAsProvinceListToStringArray(Result: aDic)
                     NetworkManager.shared.allProvinceListObs.accept(provinceList)
+                } else if (apiName == "get-categories") && (aMethod == HTTPMethod.get){
+                    let aList = self.processAsCategoryListToStringArray(Result: aDic)
+                    NetworkManager.shared.serviceTypeObs.accept(aList)
                 } else if (apiName == "get-state-and-city") && (aMethod == HTTPMethod.post) {
                     var processedDic = Dictionary<String,String>()
                     processedDic = (self.processAsCityList(Result: aDic))
@@ -978,7 +981,38 @@ class JSONParser {
         return provinceDict
         
     }
-    
+    func processAsCategoryListToStringArray(Result aResult : NSDictionary) -> [String] {
+        //print("*** Using Province Direct Array!")
+        var aList = [String]()
+        if aResult["error"] != nil {
+            print("ERROR in Province List Parsing : ",aResult["error"]!)
+        }
+        if aResult["message"] != nil {
+            print("Message Parsed : ",aResult["message"]!)
+        }
+        if let aDic = aResult["categories"] as? NSDictionary {
+            for aProv in aDic
+            {
+                if let idx = aProv.value as? Int {
+                    if aList.count < idx + 1{
+                        for _ in (aList.count)...(idx+1){
+                            aList.append("")
+                        }
+                    }
+                    aList[idx] = "\(aProv.key)"
+                }else{
+                    print("ERROR Parsing ",aProv.value," to Number!")
+                }
+            }
+        } else {
+            print("JSONParser processAsProvinceListToStringArray : Dictionary does not have states key")
+        }
+        print("Province List built : ",aList.count," record")
+        //print("Parsing State List Successful")
+        //provinceList.forEach({print("ELEM : ",$0)})
+        return aList
+
+    }
     func processAsProvinceListToStringArray(Result aResult : NSDictionary) -> [String] {
         //print("*** Using Province Direct Array!")
         var provinceList = [String]()

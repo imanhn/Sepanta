@@ -19,6 +19,7 @@ class GetRichUI : NSObject , UITextFieldDelegate {
     let marginY : CGFloat = 10
     let marginX : CGFloat = 20
     var buttonHeight : CGFloat = 0
+    var shopLoc : CGPoint!
     var textFieldWidth : CGFloat = 0
     var delegate : GetRichViewController!
     var views = Dictionary<String,UIView>()
@@ -26,18 +27,21 @@ class GetRichUI : NSObject , UITextFieldDelegate {
     var labels = Dictionary<String,UILabel>()
     var buttons = Dictionary<String,UIButton>()
     var datePicker = UIDatePicker()    
+    var locationButton = RoundedButton(type: .custom)
     var awareCheckButton = UIButton(type: .custom)
     var areYouOwnerCheckButton = UIButton(type: .custom)
     var licenceCheckButton = UIButton(type: .custom)
     var cardSubmitButton = UIButton(type: .custom)
     var otherCardCheck = UIButton(type: .custom)
     var newCardCheck = UIButton(type: .custom)
+    var bankLogo = UIImageView()
     var haveLicence = false
     var shopAwareness = false
     var areYouOwner = false
     var resellerSubmitButton = UIButton(type: .custom)
     var stateCode : String!
     var cityCode : String!
+    var serviceCode : String!
     var cardNoPrefix = ""
     var aProfileInfo = ProfileInfo()
     var submitDispose : Disposable!
@@ -74,6 +78,7 @@ class GetRichUI : NSObject , UITextFieldDelegate {
             disposeList.forEach({$0.dispose()})
             views["leftFormView"]?.removeFromSuperview()
         }
+        var cursurY : CGFloat = 0
         let gradient = CAGradientLayer()
         gradient.frame = self.delegate.view.bounds
         gradient.colors = [UIColor(hex: 0xF7F7F7).cgColor, UIColor.white.cgColor]
@@ -111,7 +116,8 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         views["rightFormView"]?.addSubview(views["shopView"]!)
         cursurY = cursurY + buttonHeight + marginY
         
-        (views["serviceView"],texts["serviceText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_02", Selectable: false, PlaceHolderText: "نوع خدمت")
+        (views["serviceView"],texts["serviceText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_02", Selectable: true, PlaceHolderText: "نوع خدمت")
+        texts["serviceText"]?.addTarget(self, action: #selector(selectServiceTypeTapped), for: .touchDown)
         views["rightFormView"]?.addSubview(views["serviceView"]!)
         cursurY = cursurY + buttonHeight + marginY
         
@@ -145,8 +151,9 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         (views["locationView"],texts["locationText"]) = buildARowView(CGRect: CGRect(x: marginX+buttonHeight+marginX, y: cursurY, width: textFieldWidth-(buttonHeight+marginX), height: buttonHeight), Image: "icon_profile_05", Selectable: false, PlaceHolderText: "آدرس")
         views["rightFormView"]?.addSubview(views["locationView"]!)
         //texts["locationText"]!.text =  aProfileInfo.address
-        let locationButton = RoundedButton(frame: CGRect(x: marginX, y: cursurY, width: buttonHeight, height: buttonHeight))
-        locationButton.setImage(UIImage(named: "icon_profile_06"), for: .normal)
+        locationButton = RoundedButton(frame: CGRect(x: marginX, y: cursurY, width: buttonHeight, height: buttonHeight))
+        locationButton.setImage(UIImage(named: "icon_location"), for: .normal)
+        locationButton.addTarget(self, action: #selector(selectOnMapTapped), for: .touchUpInside)
         views["rightFormView"]?.addSubview(locationButton)
         cursurY = cursurY + buttonHeight + marginY
 
@@ -322,7 +329,7 @@ class GetRichUI : NSObject , UITextFieldDelegate {
     @objc func doneDatePicker(_ sender : Any) {
         self.delegate.view.endEditing(true)
         let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY/MM/DD"
+        formatter.dateFormat = "yyyy/MM/dd"
         formatter.locale = Locale(identifier: "fa_IR")
         texts["birthDateText"]?.text = formatter.string(from: datePicker.date)
         texts["birthDateText"]?.sendActions(for: .valueChanged)
@@ -484,49 +491,15 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         otherCardLabel.textColor = UIColor(hex: 0x515152)
         views["leftFormView"]?.addSubview(otherCardLabel)
         cursurY = cursurY + buttonHeight + marginY
-        print("FIRST Submit cursurY : ",cursurY)
-        cardSubmitButton = SubmitButton(type: .custom)
-        cardSubmitButton.frame = CGRect(x: marginX+(textFieldWidth/2)-1.5*buttonHeight, y: cursurY, width: 3*buttonHeight, height: buttonHeight)
-        cardSubmitButton.setTitle("ارسال", for: .normal)
-        cardSubmitButton.addTarget(self, action: #selector(self.cardRequestSubmitTapped(_:)), for: .touchUpInside)
-        views["leftFormView"]?.addSubview(cardSubmitButton)
-        cursurY = cursurY + buttonHeight + marginY
         
-        let formSize = CGSize(width: UIScreen.main.bounds.width, height: cursurY*1.2)
-        self.delegate.scrollView.contentSize = formSize
-        views["leftFormView"]?.frame = CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: cursurY+buttonHeight*1.5)
-        
-        self.fillEditProfileForm(With: aProfileInfo)
-        submitDispose = handleCardSubmitButtonEnableOrDisable()
-        disposeList.append(submitDispose)
-
-    }
-    
-    func addCardRows(){
-        // removing submit button height from cursurY
-        print("buttonHeight : ",buttonHeight)
-        cursurY = cursurY - buttonHeight - marginY
-        // removing submitbutton
-        cardSubmitButton.removeFromSuperview()
-        // removing submit button enable/disable handler
-        disposeList.forEach({$0.dispose()})
-        submitDispose.dispose()
-        print("card instead f Submit cursurY : ",cursurY)
-        
-        (views["cardNoView"],texts["cardNoText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "credit-card", Selectable: false, PlaceHolderText: "شماره کارت")
+        (views["cardNoView"],texts["cardNoText"]) = buildARowView(CGRect: CGRect(x: marginX+buttonHeight+marginX, y: cursurY, width: textFieldWidth-(buttonHeight+marginX), height: buttonHeight), Image: "credit-card", Selectable: false, PlaceHolderText: "شماره کارت")
         views["leftFormView"]?.addSubview(views["cardNoView"]!)
         texts["cardNoText"]?.keyboardType = UIKeyboardType.decimalPad
         if self.delegate.cardNo != nil {
             texts["cardNoText"]!.text = self.delegate.cardNo
             texts["cardNoText"]!.sendActions(for: .valueChanged)
         }
-        cursurY = cursurY + buttonHeight + marginY
-        
-        (views["bankView"],texts["bankText"]) = buildARowView(CGRect: CGRect(x: marginX+buttonHeight+marginX, y: cursurY, width: textFieldWidth-(buttonHeight+marginX), height: buttonHeight), Image: "bank-building", Selectable: false, PlaceHolderText: "بانک")
-        texts["bankText"]?.isEnabled = false
-        views["leftFormView"]?.addSubview(views["bankView"]!)
-        //texts["locationText"]!.text =  aProfileInfo.address
-        let bankLogo = UIImageView(frame: CGRect(x: marginX, y: cursurY, width: buttonHeight, height: buttonHeight))
+        bankLogo = UIImageView(frame: CGRect(x: marginX, y: cursurY, width: buttonHeight, height: buttonHeight))
         views["leftFormView"]?.addSubview(bankLogo)
         cursurY = cursurY + buttonHeight + marginY
         let bankDispose = NetworkManager.shared.bankObs
@@ -537,15 +510,14 @@ class GetRichUI : NSObject , UITextFieldDelegate {
                     print("imageStrUrl : ",imageStrUrl)
                     if let imageURL = URL(string: imageStrUrl) {
                         print("imageURL : ",imageURL)
-                        bankLogo.af_setImage(withURL: imageURL, placeholderImage: UIImage(named: "bank-building"), filter: AspectScaledToFitSizeFilter(size: bankLogo.frame.size))
+                        self.bankLogo.af_setImage(withURL: imageURL, placeholderImage: UIImage(named: "bank-building"), filter: AspectScaledToFitSizeFilter(size: self.bankLogo.frame.size))
                         //bankLogo.setImageFromCache(PlaceHolderName: "bank-building", Scale: 1, ImageURL: imageURL, ImageName: aBank.logo!,ContentMode: UIViewContentMode.scaleAspectFit)
                     }
                 }
-                self.texts["bankText"]?.text = aBank.bank
+                //self.texts["bankText"]?.text = aBank.bank
             })
         bankDispose.disposed(by: self.delegate.myDisposeBag)
         disposeList.append(bankDispose)
-        
         let cardDispose = texts["cardNoText"]!.rx.text
             .subscribe(onNext: { aCardNumber in
                 if (aCardNumber?.count)! >= 6 {
@@ -556,18 +528,21 @@ class GetRichUI : NSObject , UITextFieldDelegate {
                         NetworkManager.shared.run(API: "check-bank", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: true)
                     }
                 }else{
-                    bankLogo.image = nil //UIImage(named: "bank-building")
-                    bankLogo.contentScaleFactor = 0.5
+                    self.bankLogo.image = nil //UIImage(named: "bank-building")
+                    self.bankLogo.contentScaleFactor = 0.5
                     self.cardNoPrefix = ""
-                    self.texts["bankText"]?.text = nil
+                    //self.texts["bankText"]?.text = nil
                 }
             }
         )
         cardDispose.disposed(by: self.delegate.myDisposeBag)
         disposeList.append(cardDispose)
+        views["cardNoView"]?.isHidden = true
+        bankLogo.isHidden = true
+        cursurY = cursurY + buttonHeight/2
         
         cardSubmitButton = SubmitButton(type: .custom)
-        cardSubmitButton.frame = CGRect(x: marginX+(textFieldWidth/2)-1.5*buttonHeight, y: cursurY, width: 3*buttonHeight, height: buttonHeight)
+        cardSubmitButton.frame = CGRect(x: marginX+(textFieldWidth/2)-1.5*buttonHeight, y: cursurY-buttonHeight, width: 3*buttonHeight, height: buttonHeight)
         cardSubmitButton.setTitle("ارسال", for: .normal)
         cardSubmitButton.addTarget(self, action: #selector(self.cardRequestSubmitTapped(_:)), for: .touchUpInside)
         views["leftFormView"]?.addSubview(cardSubmitButton)
@@ -575,41 +550,24 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         
         let formSize = CGSize(width: UIScreen.main.bounds.width, height: cursurY*1.2)
         self.delegate.scrollView.contentSize = formSize
-        views["leftFormView"]?.frame = CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: cursurY+buttonHeight*1.5)
+        views["leftFormView"]?.frame = CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: cursurY+buttonHeight*0.5)
         
-        //self.fillEditProfileForm(With: aProfileInfo)
+        self.fillEditProfileForm(With: aProfileInfo)
         submitDispose = handleCardSubmitButtonEnableOrDisable()
         disposeList.append(submitDispose)
 
     }
     
+    func addCardRows(){
+        cardSubmitButton.frame = CGRect(x: cardSubmitButton.frame.minX, y: cardSubmitButton.frame.minY+buttonHeight, width: cardSubmitButton.frame.width, height: cardSubmitButton.frame.height)
+        views["cardNoView"]?.isHidden = false
+        bankLogo.isHidden = false
+    }
+    
     func removeCardRows(){
-        views["cardNoView"]?.removeFromSuperview()
-        views["bankView"]?.removeFromSuperview()
-        cursurY = cursurY - (2 * (buttonHeight + marginY))
-        cursurY = cursurY - buttonHeight - (1 * marginY)
-        // removing submitbutton
-        cardSubmitButton.removeFromSuperview()
-        // removing submit button enable/disable handler
-        disposeList.forEach({$0.dispose()})
-        submitDispose.dispose()
-        
-        
-        cardSubmitButton = SubmitButton(type: .custom)
-        cardSubmitButton.frame = CGRect(x: marginX+(textFieldWidth/2)-1.5*buttonHeight, y: cursurY, width: 3*buttonHeight, height: buttonHeight)
-        cardSubmitButton.setTitle("ارسال", for: .normal)
-        cardSubmitButton.addTarget(self, action: #selector(self.cardRequestSubmitTapped(_:)), for: .touchUpInside)
-        views["leftFormView"]?.addSubview(cardSubmitButton)
-        cursurY = cursurY + buttonHeight + (1 * marginY)
-        
-        let formSize = CGSize(width: UIScreen.main.bounds.width, height: cursurY*1.2)
-        self.delegate.scrollView.contentSize = formSize
-        views["leftFormView"]?.frame = CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: cursurY+buttonHeight*1.5)
-        
-        //self.fillEditProfileForm(With: aProfileInfo)
-        submitDispose = handleCardSubmitButtonEnableOrDisable()
-        disposeList.append(submitDispose)
-
+        cardSubmitButton.frame = CGRect(x: cardSubmitButton.frame.minX, y: cardSubmitButton.frame.minY-buttonHeight, width: cardSubmitButton.frame.width, height: cardSubmitButton.frame.height)
+        views["cardNoView"]?.isHidden = true
+        bankLogo.isHidden = true
     }
 
     @objc func otherCardCheckTapped(_ sender : UIButton) {
@@ -768,6 +726,40 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         disposeList.append(cityDispose)
     }
     
+    @objc func selectServiceTypeTapped(_ sender : Any){
+        self.delegate.setEditing(false, animated: true)
+        let aTextField = sender as! EmptyTextField
+        
+        if NetworkManager.shared.serviceTypeObs.value.count > 0 {
+            let options = NetworkManager.shared.serviceTypeObs.value
+            let controller = ArrayChoiceTableViewController(options.filter({$0.count > 1})) {
+                (selectedOption) in
+                aTextField.text = selectedOption
+                aTextField.sendActions(for: .valueChanged)
+                self.serviceCode = "\(options.index(of: selectedOption) ?? 0)"
+            }
+            controller.preferredContentSize = CGSize(width: 250, height: options.count*60)
+            self.delegate.showPopup(controller, sourceView: aTextField)
+            
+        }else{
+            NetworkManager.shared.run(API: "get-categories",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
+            let serviceDispose = NetworkManager.shared.serviceTypeObs
+                .filter({$0.count > 0})
+                .subscribe(onNext: { [unowned self] (innerServiceTypes) in
+                    let controller = ArrayChoiceTableViewController(innerServiceTypes.filter({$0.count > 1})) {
+                        (selectedOption) in
+                        aTextField.text = selectedOption
+                        aTextField.sendActions(for: .valueChanged)
+                        self.serviceCode = "\(innerServiceTypes.index(of: selectedOption) ?? 0)"
+                    }
+                    controller.preferredContentSize = CGSize(width: 250, height: 300)
+                    self.delegate.showPopup(controller, sourceView: aTextField)
+                })
+            serviceDispose.disposed(by: self.delegate.myDisposeBag)
+            disposeList.append(serviceDispose)
+        }
+    }
+    
     @objc func selectStateTapped(_ sender : Any){
         self.delegate.setEditing(false, animated: true)
         let aTextField = sender as! EmptyTextField
@@ -865,5 +857,18 @@ class GetRichUI : NSObject , UITextFieldDelegate {
             }
         }
         //texts["**********"]!.text = aProfileInfo.bio
+    }
+    
+    @objc func selectOnMapTapped(_ sender : UIButton){
+        NetworkManager.shared.selectedLocation
+            .filter({$0.latitude != 0 && $0.longitude != 0 })
+            .subscribe(onNext: {aLoc in
+                print("selected location  : ",aLoc)
+                //self.locationButton.backgroundColor = UIColor(hex: 0x9FDA64)
+                self.locationButton.setImage(UIImage(named: "icon_location_green"), for: .normal)
+                self.locationButton.layer.borderColor = UIColor(hex: 0x9FDA64).cgColor
+                self.locationButton.layer.borderWidth = 1
+            }).disposed(by: self.delegate.myDisposeBag)
+        self.delegate.coordinator!.pushSelectOnMap(texts["shopText"]?.text ?? "بدون نام")
     }
 }
