@@ -179,21 +179,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
-    func pushAGroup(GroupID anID:Int,GroupImage anImage:UIImage,GroupName aName : String,State astate : String?,City acity : String?,StateStr astateStr : String?,CityStr acityStr : String?){
-        let storyboard = UIStoryboard(name: "SepantaGroup", bundle: Bundle.main)
-        let vc = storyboard.instantiateViewController(withIdentifier: "GroupViewController") as! GroupViewController
-        //let vc = GroupViewController.instantiate()
-        vc.coordinator = self
-        vc.catagoryId = anID
-        vc.currentGroupName = aName
-        vc.currentGroupImage = anImage
-        vc.selectedCity = acity
-        vc.selectedState = astate
-        vc.selectedStateStr = astateStr
-        vc.selectedCityStr = acityStr
-        navigationController.pushViewController(vc, animated: true)
-        navigationController.setNavigationBarHidden(true, animated: false)
-    }
+
     
     func pushGetRich(_ aCardNo : String?){
         let storyboard = UIStoryboard(name: "GetRich", bundle: Bundle.main)
@@ -212,6 +198,28 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         //let vc = ShopsListViewController.instantiate()
         vc.coordinator = self
         navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+    
+    func pushAGroup(GroupID anID:Int,GroupImage anImage:UIImage,GroupName aName : String,State astate : String?,City acity : String?,StateStr astateStr : String?,CityStr acityStr : String?){
+        let storyboard = UIStoryboard(name: "SepantaGroup", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "GroupViewController") as! GroupViewController
+        //let vc = GroupViewController.instantiate()
+        vc.coordinator = self
+        vc.catagoryId = anID
+        vc.currentGroupName = aName
+        vc.currentGroupImage = anImage
+        vc.selectedCity = acity
+        vc.selectedState = astate
+        vc.selectedStateStr = astateStr
+        vc.selectedCityStr = acityStr
+        vc.fetchMechanism = { aGroupViewController in
+            let groupDataSource = ShopsListDataSource(aGroupViewController as! ShopListOwners)
+            let aparam = groupDataSource.buildParameters(Catagory: "\(anID)", State: astate, City: acity)
+            groupDataSource.getShops(Api: "category-shops-list", Method: HTTPMethod.post, Parameters: aparam)
+            return groupDataSource
+        }
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }

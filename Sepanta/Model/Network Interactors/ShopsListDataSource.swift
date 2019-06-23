@@ -15,8 +15,14 @@ import AlamofireImage
 
 class ShopsListDataSource {
     var delegate : ShopListOwners
+    var page = 1
+    var last_page : Int!
     let myDisposeBag = DisposeBag()
-
+    var API : String!
+    var METHOD : HTTPMethod!
+    var PARAMETERS : Dictionary<String,String>!
+    var isFetching = false
+    
     func buildParameters(Catagory catagoryID:String,State state : String?,City city:String?)->Dictionary<String,String>{
         var aParameter : Dictionary<String, String> = [:]
         if (state == nil || state == "") && (city == nil || city == "") {
@@ -38,9 +44,20 @@ class ShopsListDataSource {
         return aParameter
     }
     
+    func fetchNextPage(){
+        self.page = self.page + 1
+        self.getShops(Api : API,Method : METHOD ,Parameters : PARAMETERS)
+    }
     
     func getShops(Api apiName : String,Method amethod : HTTPMethod,Parameters param : Dictionary<String,String>?){
         let urlAddress = NetworkManager.shared.baseURLString + "/" + apiName
+        self.API = apiName
+        self.PARAMETERS = param
+        self.METHOD = amethod
+        var pagedParam = param ?? [:]
+        pagedParam["page"] = "\(self.page)"
+        print("URLAddress : ",urlAddress)
+        print("*** Getting shops : ",pagedParam)
         RxAlamofire.requestJSON(amethod, urlAddress , parameters: param, encoding: URLEncoding.httpBody, headers: NetworkManager.shared.headers)
             //.observeOn(MainScheduler.instance)
             .timeout(3, scheduler: MainScheduler.instance)
@@ -49,7 +66,24 @@ class ShopsListDataSource {
                 print(" \(apiName) Response Code : ",ahttpURLRes.statusCode)
                 if let aresult = jsonResult as? NSDictionary {
                     let shops = self.processShopList(Result: aresult)
-                    self.delegate.shopsObs.accept(shops)
+                    /*
+                    var shops = [Shop]()
+                    let ashop = self.processShopList(Result: aresult).first!
+                    let idx = self.delegate.shopsObs.value.count
+                    for i in (idx+1)..<(idx+20){
+                        var newshop = ashop
+                        newshop.shop_id = i
+                        newshop.user_id = i
+                        shops.append(newshop)
+                    }
+                    */
+                    if self.page > 1 {
+                        let unionShops = self.delegate.shopsObs.value + shops
+                        print("Union shops : ",unionShops.count)
+                        self.delegate.shopsObs.accept(unionShops)
+                    }else{
+                        self.delegate.shopsObs.accept(shops)
+                    }
                     if ahttpURLRes.statusCode >= 400 {
                         print("Result All Key : ",aresult.allKeys)
                         print("Error : ",aresult["error"] ?? "[Error happened but no Error Key in response!]")
@@ -93,6 +127,10 @@ class ShopsListDataSource {
         //print("Result : ",aResult)
         
         if let aDic = aResult["shops"] as? NSDictionary ?? aResult["categoryShops"] as? NSDictionary ?? aResult["favorite"] as? NSDictionary{
+            if let lastPage = aDic["last_page"] as? Int {
+                print("Setting Last page : ",lastPage)
+                self.last_page = lastPage
+            }
             if let dataOfShops = aDic["data"] as? NSArray {
                 for shopDic in dataOfShops
                 {

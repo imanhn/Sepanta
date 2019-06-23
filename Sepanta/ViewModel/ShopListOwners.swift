@@ -14,6 +14,7 @@ import RxDataSources
 protocol ShopListOwners : class {
     typealias dataSourceFunc = (UIViewController) -> ShopsListDataSource
     var fetchMechanism : dataSourceFunc! { get set }
+    var shopDataSource : ShopsListDataSource! {get set}
     var dataSource : RxTableViewSectionedAnimatedDataSource<SectionOfShopData>! {get set}
     var shopsObs : BehaviorRelay<[Shop]> {get set}
     var sectionOfShops : BehaviorRelay<[SectionOfShopData]> { get set }
@@ -75,10 +76,13 @@ extension ShopListOwners where Self:UIViewControllerWithErrorBar{
         shopTable.tableFooterView = UIView()
         //let shopObsDisp = NetworkManager.shared.shopObs
         let shopObsDisp = shopsObs.subscribe(onNext: { shops in
-                let initsec = SectionOfShopData(original: SectionOfShopData(header: "Header", items: [Shop]()), items: shops)
-                self.sectionOfShops.accept([initsec])
-                self.shopTable.reloadData()
-            })
+            let initsec = SectionOfShopData(original: SectionOfShopData(header: "Header", items: [Shop]()), items: shops)
+            self.sectionOfShops.accept([initsec])
+            self.shopTable.tableFooterView = UIView()
+            self.shopTable.reloadData()
+            if self.shopDataSource != nil {self.shopDataSource.isFetching = false}
+            
+        })
         shopObsDisp.disposed(by: myDisposeBag)
         disposeList.append(shopObsDisp)
         

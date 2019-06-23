@@ -30,7 +30,8 @@ class ShopCell : UITableViewCell {
     
 }
 
-class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,Storyboarded,ShopListOwners{
+class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,Storyboarded,ShopListOwners,UITableViewDelegate{
+    var shopDataSource: ShopsListDataSource!    
     var myDisposeBag = DisposeBag()
     var fetchMechanism : dataSourceFunc!
     var shopsObs = BehaviorRelay<[Shop]>(value: [Shop]())
@@ -70,6 +71,23 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     var catagoryId = Int()
     var currentGroupName = String()
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        //print("WILL DISPLAY \(indexPath)")
+        if !self.shopDataSource.isFetching && indexPath.row >= (self.shopsObs.value.count - 1) {
+            print("Reach to the END",self.shopDataSource.last_page,"   ",self.shopDataSource.page)
+            if self.shopDataSource.last_page != nil && self.shopDataSource.last_page == self.shopDataSource.page {
+                print("Already at the Last page")
+                return
+            }
+            let spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+            spinner.activityIndicatorViewStyle = .gray
+            spinner.startAnimating()
+            tableView.tableFooterView = spinner
+            self.shopDataSource.isFetching = true
+            shopDataSource.fetchNextPage()
+        }
+    }
+
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         //print("EDIT : ",textField.tag,"  ",  selectedFilterType )
         //print(textField.tag == 2 ,"  ",selectedFilterType == searchOption )
@@ -125,11 +143,10 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
         super.viewDidLoad()
         createFilterView()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
-        newShopsDataSource = ShopsListDataSource(self)
-        let aparam = newShopsDataSource.buildParameters(Catagory: "\(self.catagoryId)", State: selectedState, City: selectedCity)
-        newShopsDataSource.getShops(Api: "category-shops-list", Method: HTTPMethod.post, Parameters: aparam)
         bindToTableView()
         updateGroupHeaders()
+        shopDataSource = fetchMechanism(self)
+        shopTable.delegate = self
     }
        
     

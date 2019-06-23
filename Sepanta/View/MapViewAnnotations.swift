@@ -103,7 +103,7 @@ extension NearestViewController: MKMapViewDelegate {
         backgroundImage?.draw(in: areaSize)
         let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-        let shadowImage = newImage.addShadow(blurSize: 2)
+        let shadowImage = newImage.addShadow(blurSize: 1)
         return shadowImage
     }
     

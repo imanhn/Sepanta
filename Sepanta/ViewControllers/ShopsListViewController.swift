@@ -16,7 +16,7 @@ import AlamofireImage
 import RxDataSources
 
 
-class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded,ShopListOwners{
+class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded,ShopListOwners,UITableViewDelegate{
     var dataSource: RxTableViewSectionedAnimatedDataSource<SectionOfShopData>!
     var myDisposeBag = DisposeBag()
     var shopsObs = BehaviorRelay<[Shop]>(value: [Shop]())
@@ -30,6 +30,24 @@ class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded,ShopL
     @IBOutlet weak var headerLabel: UILabel!
     var headerLabelToSet : String = "فروشگاه ها"
     @IBOutlet weak var shopTable: UITableView!
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        //print("WILL DISPLAY \(indexPath)")
+        if !self.shopDataSource.isFetching && indexPath.row >= (self.shopsObs.value.count - 1) {
+            print("Reach to the END",self.shopDataSource.last_page,"   ",self.shopDataSource.page)
+            if self.shopDataSource.last_page != nil && self.shopDataSource.last_page == self.shopDataSource.page {
+                print("Already at the Last page")
+                return
+            }
+
+            let spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+                spinner.activityIndicatorViewStyle = .gray
+            spinner.startAnimating()
+            tableView.tableFooterView = spinner
+            self.shopDataSource.isFetching = true
+            shopDataSource.fetchNextPage()
+        }
+    }
 
     @objc override func willPop() {
         disposeList.forEach({$0.dispose()})
@@ -71,6 +89,7 @@ class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded,ShopL
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         bindToTableView()
         shopDataSource = fetchMechanism(self)
+        shopTable.delegate = self
         
         //let newShopsDataSource = ShopsListDataSource(self)
         //newShopsDataSource.getNewShopsFromServer()

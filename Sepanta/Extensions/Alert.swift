@@ -55,15 +55,15 @@ extension UIViewController {
         }
         let marginX = self.view.frame.width / 30
         let textFont = UIFont (name: "Shabnam FD", size: 13)!
-        let aView = UIView(frame: CGRect(x: marginX, y: self.view.frame.height*0.4, width: self.view.frame.width-2*marginX, height: self.view.frame.height*0.2))
+        let aView = UIView(frame: CGRect(x: marginX, y: self.view.frame.height*0.3, width: self.view.frame.width-2*marginX, height: self.view.frame.height*0.2))
         aView.backgroundColor = UIColor.white//UIColor(hex: 0xDA3A5C)
         aView.tag = 123
         aView.layer.cornerRadius = 5
         aView.layer.borderColor = UIColor(hex: 0x515152).cgColor
         aView.layer.borderWidth = 1
         aView.layer.shadowColor = UIColor.black.cgColor
-        aView.layer.shadowOffset = CGSize(width: 2, height: 3)
-        aView.layer.shadowOpacity = 0.3
+        aView.layer.shadowOffset = CGSize(width: 4, height: 4)
+        aView.layer.shadowOpacity = 0.5
         self.view.addSubview(aView)
         let aLogo = UIImageView(frame: CGRect(x: aView.frame.width*0.4, y: aView.frame.height*0.05, width: aView.frame.width*0.2, height: aView.frame.height*0.3))
         aLogo.image = UIImage(named: "logo_text2")
