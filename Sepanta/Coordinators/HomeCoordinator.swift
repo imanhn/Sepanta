@@ -61,12 +61,15 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         case 5:
             popHome()
             let aMessage = "جهت مشاهده شرایط و اخذ نمایندگی به وب سایت ما مراجعه فرمایید"
-            navigationController.topViewController?.showQuestion(Message: aMessage, OKLabel: "برو به وبسایت", CancelLabel: "نه! خیلی ممنون", OkAction: {
-                if let vc = self.navigationController.topViewController as? HomeViewController {
-                    vc.openWebSite()
-                }
-                
-            }, CancelAction: {})
+            if let vc = self.navigationController.topViewController as? HomeViewController {
+                vc.questionView = vc.showQuestion(Message: aMessage, OKLabel: "برو به وبسایت", CancelLabel: "نه! خیلی ممنون", OkAction: {
+                    if let vc = self.navigationController.topViewController as? HomeViewController {
+                        vc.openWebSite()
+                    }
+                    
+                }, CancelAction: {})
+            }
+            //navigationController.topViewController?
             break
         case 6:
             popHome()

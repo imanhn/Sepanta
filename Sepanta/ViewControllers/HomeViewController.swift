@@ -18,6 +18,7 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded,SFSafariView
     var logoAnimTimer : Timer?
     var slideControl : SlideController?
     var disposeList = [Disposable]()
+    var questionView : UIView!
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var pageControl: UIPageControl!
     
@@ -192,3 +193,25 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded,SFSafariView
 }
 
 
+class UIViewWithQuestionTest : UIView {
+    weak var homeViewController : HomeViewController!
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if homeViewController == nil {
+            print("Setting homeViewController")
+            homeViewController = self.parentViewController as? HomeViewController
+        }
+        let aview = super.hitTest(point, with: event)
+        if homeViewController.questionView != nil {
+            if point.x > homeViewController.questionView.frame.minX &&
+                point.y > homeViewController.questionView.frame.minY &&
+                point.x < homeViewController.questionView.frame.minX + homeViewController.questionView.frame.width &&
+                point.y < homeViewController.questionView.frame.minY + homeViewController.questionView.frame.height {
+                //print("INSIDE!",shopViewController.rateView.frame,"  ",point)
+            }else{
+                homeViewController.questionView.removeFromSuperview()
+                //print("OUTSIDE!",shopViewController.rateView.frame,"  ",point)
+            }
+        }
+        return aview
+    }
+}

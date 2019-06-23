@@ -18,7 +18,7 @@ class GetRichUI : NSObject , UITextFieldDelegate {
     var cursurY : CGFloat = 0
     let marginY : CGFloat = 10
     let marginX : CGFloat = 20
-    var buttonHeight : CGFloat = 0
+    var buttonHeight : CGFloat = 10
     var shopLoc : CGPoint!
     var textFieldWidth : CGFloat = 0
     var delegate : GetRichViewController!
@@ -277,6 +277,7 @@ class GetRichUI : NSObject , UITextFieldDelegate {
     }
     
     func createMobileLogo(CursurY cursurY : CGFloat)->UIImageView{
+        print("MOBILE : ", CGRect(x: marginX+buttonHeight*0.2, y: cursurY+buttonHeight*0.2, width: buttonHeight*0.6, height: buttonHeight*0.6))
         mobileLogo = UIImageView(frame: CGRect(x: marginX+buttonHeight*0.2, y: cursurY+buttonHeight*0.2, width: buttonHeight*0.6, height: buttonHeight*0.6))
         //cursurY = cursurY + buttonHeight + marginY
         let mobileDispose = NetworkManager.shared.mobileObs
@@ -287,6 +288,7 @@ class GetRichUI : NSObject , UITextFieldDelegate {
                     print("imageStrUrl : ",imageStrUrl)
                     if let imageURL = URL(string: imageStrUrl) {
                         print("imageURL : ",imageURL)
+                        print("size : ",self.mobileLogo.frame.size)
                         self.mobileLogo.af_setImage(withURL: imageURL, placeholderImage: nil, filter: AspectScaledToFitSizeFilter(size: self.mobileLogo.frame.size))
                     }
                 }
@@ -439,6 +441,7 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         let marginX : CGFloat = 20
         views["leftFormView"] = LeftTabbedViewWithWhitePanel(frame: CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: UIScreen.main.bounds.height * 1))
         views["leftFormView"]!.backgroundColor = UIColor.clear
+        buttonHeight = (views["leftFormView"] as! LeftTabbedViewWithWhitePanel).getHeight()
         self.delegate.scrollView.addSubview(views["leftFormView"]!)
         
         let buttonsFont = UIFont(name: "Shabnam-Bold-FD", size: 14)
@@ -604,6 +607,7 @@ class GetRichUI : NSObject , UITextFieldDelegate {
                     print("imageStrUrl : ",imageStrUrl)
                     if let imageURL = URL(string: imageStrUrl) {
                         print("imageURL : ",imageURL)
+                        print("size : ",self.bankLogo.frame.size)
                         self.bankLogo.af_setImage(withURL: imageURL, placeholderImage: UIImage(named: "bank-building"), filter: AspectScaledToFitSizeFilter(size: self.bankLogo.frame.size))
                         //bankLogo.setImageFromCache(PlaceHolderName: "bank-building", Scale: 1, ImageURL: imageURL, ImageName: aBank.logo!,ContentMode: UIViewContentMode.scaleAspectFit)
                     }

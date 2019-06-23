@@ -47,10 +47,10 @@ extension UIViewController {
     }
     
 
-    func showQuestion(Message aMessage : String,OKLabel okLabel : String, CancelLabel cancelLabel : String, OkAction : @escaping actionFunction={},  CancelAction : @escaping actionFunction={}){
+    func showQuestion(Message aMessage : String,OKLabel okLabel : String, CancelLabel cancelLabel : String, OkAction : @escaping actionFunction={},  CancelAction : @escaping actionFunction={})->UIView?{
         for av in self.view.subviews{
             if av.tag == 123 {
-                return
+                return nil
             }
         }
         let marginX = self.view.frame.width / 30
@@ -58,7 +58,7 @@ extension UIViewController {
         let aView = UIView(frame: CGRect(x: marginX, y: self.view.frame.height*0.3, width: self.view.frame.width-2*marginX, height: self.view.frame.height*0.2))
         aView.backgroundColor = UIColor.white//UIColor(hex: 0xDA3A5C)
         aView.tag = 123
-        aView.layer.cornerRadius = 5
+        aView.layer.cornerRadius = 10
         aView.layer.borderColor = UIColor(hex: 0x515152).cgColor
         aView.layer.borderWidth = 1
         aView.layer.shadowColor = UIColor.black.cgColor
@@ -84,7 +84,7 @@ extension UIViewController {
         aButton.backgroundColor = UIColor(hex: 0xDA3A5C)
         aButton.titleLabel?.textColor = UIColor.white
         aButton.titleLabel?.font = textFont
-        //aButton.layer.cornerRadius = 4
+        aButton.layer.masksToBounds = true
         aButton.layer.borderWidth = 1
         aButton.layer.borderColor = UIColor(hex: 0x515152).cgColor
         aButton.targetAction = OkAction
@@ -97,12 +97,13 @@ extension UIViewController {
         bButton.titleLabel?.textColor = UIColor.white
         bButton.titleLabel?.font = textFont
         //bButton.layer.cornerRadius = 4
+        bButton.layer.masksToBounds = true
         bButton.layer.borderWidth = 1
         bButton.layer.borderColor = UIColor(hex: 0x515152).cgColor
         bButton.targetAction = CancelAction
         bButton.addTarget(self, action: #selector(runAction), for: .touchUpInside)
         aView.addSubview(bButton)
-
+        return aView
     }
     @objc func runAction(_ sender : UIButton){
         if let abutton = sender as? UIButtonWithTargetAction {

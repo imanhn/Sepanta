@@ -19,7 +19,7 @@
         <scene sceneID="tQk-oV-gy1">
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" hidesBottomBarWhenPushed="YES" id="jPv-Ez-8v9" userLabel="HomeViewController" customClass="HomeViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="D7t-mF-4dd">
+                    <view key="view" contentMode="scaleToFill" id="D7t-mF-4dd" customClass="UIViewWithQuestionTest" customModule="Sepanta" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
