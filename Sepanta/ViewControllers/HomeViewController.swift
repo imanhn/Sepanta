@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 import RxCocoa
 import RxSwift
+import SafariServices
 
-class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
+class HomeViewController: UIViewControllerWithErrorBar,Storyboarded,SFSafariViewControllerDelegate {
     weak var coordinator : HomeCoordinator?
     var myDisposeBag = DisposeBag()
     var logoAnimTimer : Timer?
@@ -177,6 +178,17 @@ class HomeViewController: UIViewControllerWithErrorBar,Storyboarded {
         
     }
     
+    func openWebSite(){
+        let url = URL(string: "https://www.sepantaclubs.com")!
+        let safariVC = SFSafariViewController(url: url)
+        self.coordinator!.navigationController.pushViewController(safariVC, animated: true)
+        safariVC.delegate = self
+    }
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: false, completion: {})
+        self.coordinator!.popOneLevel()
+    }
 }
 
 

@@ -116,6 +116,7 @@
 		0FAEEDE72230949C00A9178F /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAEEDE62230949C00A9178F /* AboutUsViewController.swift */; };
 		0FAEEDE92230957100A9178F /* AboutUsUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAEEDE82230957100A9178F /* AboutUsUI.swift */; };
 		0FB3ECD2222DC48F009A89F7 /* GetRichViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB3ECD1222DC48F009A89F7 /* GetRichViewController.swift */; };
+		0FBE002022BFD1E30024AB68 /* Mobile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBE001F22BFD1E30024AB68 /* Mobile.swift */; };
 		0FD094AA226E34C600E53A07 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FD094A9226E34C600E53A07 /* Map.storyboard */; };
 		0FD094AC226E370B00E53A07 /* NearestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD094AB226E370B00E53A07 /* NearestViewController.swift */; };
 		0FD32DCB227076C40092D6FC /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD32DCA227076C40092D6FC /* ProfileInfo.swift */; };
@@ -274,6 +275,7 @@
 		0FAEEDE62230949C00A9178F /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		0FAEEDE82230957100A9178F /* AboutUsUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsUI.swift; sourceTree = "<group>"; };
 		0FB3ECD1222DC48F009A89F7 /* GetRichViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRichViewController.swift; sourceTree = "<group>"; };
+		0FBE001F22BFD1E30024AB68 /* Mobile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mobile.swift; sourceTree = "<group>"; };
 		0FD094A9226E34C600E53A07 /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		0FD094AB226E370B00E53A07 /* NearestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestViewController.swift; sourceTree = "<group>"; };
 		0FD32DCA227076C40092D6FC /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 				0F823D4822BAA7530071E92B /* NetworkLayer */,
 				0F896AC422AC587200310594 /* Network Interactors */,
 				0F3197B22270BD8F00CEF207 /* Bank.swift */,
+				0FBE001F22BFD1E30024AB68 /* Mobile.swift */,
 				0FFCDC53226CA96F0087BFEF /* Notifications.swift */,
 				0F823D5322BABF2D0071E92B /* GenericResponse.swift */,
 				0F1B755E2235C8460087C0DB /* Slide.swift */,
@@ -930,6 +933,7 @@
 				0F890D122215D21C0091FA2E /* JSONParser.swift in Sources */,
 				0F63F7142277690100799C8F /* ContactUSUI.swift in Sources */,
 				0F817A6F22354F8600F1738E /* Profile.swift in Sources */,
+				0FBE002022BFD1E30024AB68 /* Mobile.swift in Sources */,
 				0F673455227A149C0064EF96 /* SignUPUI.swift in Sources */,
 				0FAE1FF52265BAC70043B077 /* UIButtonDisEnable.swift in Sources */,
 				0F1B75692238498E0087C0DB /* CacheImageForViews.swift in Sources */,

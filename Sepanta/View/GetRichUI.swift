@@ -35,14 +35,19 @@ class GetRichUI : NSObject , UITextFieldDelegate {
     var otherCardCheck = UIButton(type: .custom)
     var newCardCheck = UIButton(type: .custom)
     var bankLogo = UIImageView()
+    var mobileLogo = UIImageView()
+    var nationalCodeCity = UILabel()
     var haveLicence = false
     var shopAwareness = false
     var areYouOwner = false
     var resellerSubmitButton = UIButton(type: .custom)
     var stateCode : String!
     var cityCode : String!
+    var regionCode : String!
     var serviceCode : String!
     var cardNoPrefix = ""
+    var mobilePrefix = ""
+    var codePrefix = ""
     var aProfileInfo = ProfileInfo()
     var submitDispose : Disposable!
     var disposeList = [Disposable]()
@@ -77,6 +82,9 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         {
             disposeList.forEach({$0.dispose()})
             views["leftFormView"]?.removeFromSuperview()
+            codePrefix = ""
+            mobilePrefix = ""
+            cardNoPrefix = ""
         }
         var cursurY : CGFloat = 0
         let gradient = CAGradientLayer()
@@ -133,8 +141,10 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         //texts["nationalCodeText"]!.text =  aProfileInfo.national_code
         texts["nationalCodeText"]?.keyboardType = UIKeyboardType.numberPad
         views["rightFormView"]?.addSubview(views["nationalCodeView"]!)
+        nationalCodeCity =  createNationalCodeCity(CursurY: cursurY)
+        views["rightFormView"]?.addSubview(nationalCodeCity)
         cursurY = cursurY + buttonHeight + marginY
-
+        
         (views["stateView"],texts["stateText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "map", Selectable: true, PlaceHolderText: "استان")
         //texts["stateText"]!.text =  aProfileInfo.state
         texts["stateText"]?.addTarget(self, action: #selector(selectStateTapped), for: .touchDown)
@@ -161,7 +171,10 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         //texts["mobileText"]!.text =  aProfileInfo.phone
         texts["mobileText"]?.keyboardType = UIKeyboardType.phonePad
         views["rightFormView"]?.addSubview(views["mobileNoView"]!)
+        mobileLogo = createMobileLogo(CursurY: cursurY)
+        views["rightFormView"]?.addSubview(mobileLogo)
         cursurY = cursurY + buttonHeight + marginY
+
 
         (views["discountRateView"],texts["discountText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_08", Selectable: false, PlaceHolderText: "درصد تخفیف پیشنهادی")
         texts["discountText"]?.keyboardType = UIKeyboardType.numberPad
@@ -229,6 +242,78 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         submitDispose = handleResellerSubmitButtonEnableOrDisable()
         disposeList.append(submitDispose)
 
+    }
+    func createNationalCodeCity(CursurY cursurY : CGFloat)->UILabel{
+        print("CREATEING.....")
+        nationalCodeCity = UILabel(frame: CGRect(x: marginX, y: cursurY+buttonHeight*0.2, width: buttonHeight*2 , height: buttonHeight*0.6))
+        nationalCodeCity.font = UIFont(name: "Shabnam FD", size: 12)
+        nationalCodeCity.textAlignment = .center
+        let nccDispose = NetworkManager.shared.nationalCodeCityObs
+            .filter({$0.count > 0})
+            .subscribe(onNext: { aCityName in
+                self.nationalCodeCity.text = aCityName
+                
+            })
+        nccDispose.disposed(by: self.delegate.myDisposeBag)
+        disposeList.append(nccDispose)
+        
+        let nccText = texts["nationalCodeText"]!.rx.text
+            .subscribe(onNext: { aCode in
+                if (aCode?.count)! >= 3 {
+                    let aCodePrefix = aCode!.prefix(3).description
+                    if self.codePrefix != aCodePrefix{
+                        let aParameter = ["code":"\(String(describing: aCodePrefix))"]
+                        self.codePrefix = aCodePrefix
+                        NetworkManager.shared.run(API: "national-codes", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: true)
+                    }
+                }else{
+                    self.nationalCodeCity.text = ""
+                }
+            }
+        )
+        nccText.disposed(by: self.delegate.myDisposeBag)
+        disposeList.append(nccText)
+        return nationalCodeCity
+    }
+    
+    func createMobileLogo(CursurY cursurY : CGFloat)->UIImageView{
+        mobileLogo = UIImageView(frame: CGRect(x: marginX+buttonHeight*0.2, y: cursurY+buttonHeight*0.2, width: buttonHeight*0.6, height: buttonHeight*0.6))
+        //cursurY = cursurY + buttonHeight + marginY
+        let mobileDispose = NetworkManager.shared.mobileObs
+            .filter({$0.name != nil})
+            .subscribe(onNext: { aMobile in
+                if aMobile.logo != nil {
+                    let imageStrUrl = NetworkManager.shared.websiteRootAddress + aMobile.logo!
+                    print("imageStrUrl : ",imageStrUrl)
+                    if let imageURL = URL(string: imageStrUrl) {
+                        print("imageURL : ",imageURL)
+                        self.mobileLogo.af_setImage(withURL: imageURL, placeholderImage: nil, filter: AspectScaledToFitSizeFilter(size: self.mobileLogo.frame.size))
+                    }
+                }
+                
+            })
+        mobileDispose.disposed(by: self.delegate.myDisposeBag)
+        disposeList.append(mobileDispose)
+        let mobileTextDispose = texts["mobileText"]!.rx.text
+            .subscribe(onNext: { aCardNumber in
+                if (aCardNumber?.count)! >= 4 {
+                    let mobileNumberPrefix = aCardNumber!.prefix(4).description
+                    if self.mobilePrefix != mobileNumberPrefix{
+                        let aParameter = ["code":"\(String(describing: mobileNumberPrefix))"]
+                        self.mobilePrefix = mobileNumberPrefix
+                        NetworkManager.shared.run(API: "mobile-operators", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: true)
+                    }
+                }else{
+                    self.mobileLogo.image = nil //UIImage(named: "bank-building")
+                    self.mobileLogo.contentScaleFactor = 0.5
+                    self.mobilePrefix = ""
+                    //self.texts["bankText"]?.text = nil
+                }
+            }
+        )
+        mobileTextDispose.disposed(by: self.delegate.myDisposeBag)
+        disposeList.append(mobileTextDispose)
+        return mobileLogo
     }
     
     @objc func sellRequestSubmitTapped(_ sender : Any){
@@ -344,6 +429,9 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         if views["rightFormView"]?.superview != nil {
             disposeList.forEach({$0.dispose()})
             views["rightFormView"]?.removeFromSuperview()
+            codePrefix = ""
+            mobilePrefix = ""
+            cardNoPrefix = ""
         }
         
         var cursurY : CGFloat = 0
@@ -385,6 +473,8 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         //texts["nationalCodeText"]!.text =  aProfileInfo.national_code
         texts["nationalCodeText"]?.keyboardType = UIKeyboardType.numberPad
         views["leftFormView"]?.addSubview(views["nationalCodeView"]!)
+        nationalCodeCity =  createNationalCodeCity(CursurY: cursurY)
+        views["leftFormView"]?.addSubview(nationalCodeCity)
         cursurY = cursurY + buttonHeight + marginY
         
         (views["birthDateView"],texts["birthDateText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "calendar-page-empty", Selectable: false, PlaceHolderText: "تاریخ تولد")
@@ -423,7 +513,10 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         //texts["mobileText"]!.text =  aProfileInfo.phone
         texts["mobileText"]?.keyboardType = UIKeyboardType.phonePad
         views["leftFormView"]?.addSubview(views["mobileNoView"]!)
+        mobileLogo = createMobileLogo(CursurY: cursurY)
+        views["leftFormView"]?.addSubview(mobileLogo)
         cursurY = cursurY + buttonHeight + marginY
+        
         //texts["mobileText"]
         (views["emailView"],texts["emailText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "black-back-closed-envelope-shape", Selectable: false, PlaceHolderText: "ایمیل")
         //texts["emailText"]!.text =  aProfileInfo.email
@@ -443,8 +536,9 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         views["leftFormView"]?.addSubview(views["cityView"]!)
         cursurY = cursurY + buttonHeight + marginY
 
-        (views["regionView"],texts["regionText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "NOIMAGE", Selectable: false, PlaceHolderText: "منطقه")
+        (views["regionView"],texts["regionText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "NOIMAGE", Selectable: true, PlaceHolderText: "منطقه")
         //texts["regionText"]!.text =  aProfileInfo.address
+        texts["regionText"]?.addTarget(self, action: #selector(selectRegionTapped), for: .touchDown)
         views["leftFormView"]?.addSubview(views["regionView"]!)
         cursurY = cursurY + buttonHeight + marginY
 
@@ -468,13 +562,13 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         newCardCheck.addTarget(self, action: #selector(newCardCheckTapped(_:)), for: .touchUpInside)
         cursurX = cursurX + spaceBTWChecks + buttonHeight/2
         views["leftFormView"]?.addSubview(newCardCheck)
-        let newCardLabel = UILabel(frame: CGRect(x: cursurX, y: cursurY, width: newCardWidth, height: buttonHeight))
-        newCardLabel.text = newCardText
-        newCardLabel.font = checkFont
-        newCardLabel.adjustsFontSizeToFitWidth = true
-        newCardLabel.textAlignment = .center
-        newCardLabel.textColor = UIColor(hex: 0x515152)
-        views["leftFormView"]?.addSubview(newCardLabel)
+        labels["newCardLabel"] = UILabel(frame: CGRect(x: cursurX, y: cursurY, width: newCardWidth, height: buttonHeight))
+        labels["newCardLabel"]?.text = newCardText
+        labels["newCardLabel"]?.font = checkFont
+        labels["newCardLabel"]?.adjustsFontSizeToFitWidth = true
+        labels["newCardLabel"]?.textAlignment = .center
+        labels["newCardLabel"]?.textColor = UIColor(hex: 0x515152)
+        views["leftFormView"]?.addSubview(labels["newCardLabel"]!)
         cursurX = cursurX + spaceBTWChecks + newCardWidth
         
         otherCardCheck.frame = CGRect(x: cursurX, y: cursurY+buttonHeight/4, width: buttonHeight/2, height: buttonHeight/2)
@@ -483,13 +577,13 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         otherCardCheck.tag = 0
         cursurX = cursurX + spaceBTWChecks + buttonHeight/2
         views["leftFormView"]?.addSubview(otherCardCheck)
-        let otherCardLabel = UILabel(frame: CGRect(x: cursurX, y: cursurY, width: newCardWidth, height: buttonHeight))
-        otherCardLabel.text = otherCardText
-        otherCardLabel.font = checkFont
-        otherCardLabel.textAlignment = .center
-        otherCardLabel.adjustsFontSizeToFitWidth = true
-        otherCardLabel.textColor = UIColor(hex: 0x515152)
-        views["leftFormView"]?.addSubview(otherCardLabel)
+        labels["otherCardLabel"] = UILabel(frame: CGRect(x: cursurX, y: cursurY, width: newCardWidth, height: buttonHeight))
+        labels["otherCardLabel"]?.text = otherCardText
+        labels["otherCardLabel"]?.font = checkFont
+        labels["otherCardLabel"]?.textAlignment = .center
+        labels["otherCardLabel"]?.adjustsFontSizeToFitWidth = true
+        labels["otherCardLabel"]?.textColor = UIColor(hex: 0x515152)
+        views["leftFormView"]?.addSubview(labels["otherCardLabel"]!)
         cursurY = cursurY + buttonHeight + marginY
         
         (views["cardNoView"],texts["cardNoText"]) = buildARowView(CGRect: CGRect(x: marginX+buttonHeight+marginX, y: cursurY, width: textFieldWidth-(buttonHeight+marginX), height: buttonHeight), Image: "credit-card", Selectable: false, PlaceHolderText: "شماره کارت")
@@ -699,6 +793,24 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         return enableSubmitButton.bind(to: resellerSubmitButton.rx.isEnabled)
     }
     
+    @objc func selectRegionTapped(_ sender : Any){
+        self.delegate.setEditing(false, animated: true)
+        let aTextField = sender as! EmptyTextField
+        if self.cityCode == nil || self.cityCode == "" {
+            self.delegate.alert(Message: "لطفاْ ابتدا شهر را انتخاب نمایید")
+            return
+        }
+        let innerRegionList = NetworkManager.shared.regionListObs.value
+        let controller = ArrayChoiceTableViewController(innerRegionList.filter({$0.count > 0})) {
+            (selectedOption) in
+            aTextField.text = selectedOption
+            aTextField.sendActions(for: .valueChanged)
+            self.regionCode = "\(innerRegionList.index(of: selectedOption))"
+        }
+        controller.preferredContentSize = CGSize(width: 250, height: 300)
+        self.delegate.showPopup(controller, sourceView: aTextField)
+    }
+    
     @objc func selectCityTapped(_ sender : Any){
         self.delegate.setEditing(false, animated: true)
         let aTextField = sender as! EmptyTextField
@@ -718,12 +830,47 @@ class GetRichUI : NSObject , UITextFieldDelegate {
                     aTextField.text = selectedOption
                     aTextField.sendActions(for: .valueChanged)
                     self.cityCode = innerCityDicObs[selectedOption]
+                    self.regionCode = ""
+                    self.texts["regionText"]?.text = ""
+                    let parameters = [
+                        "city id": self.cityCode!
+                    ]
+                    NetworkManager.shared.run(API: "get-area",QueryString: "", Method: HTTPMethod.post, Parameters: parameters, Header: nil,WithRetry: true)
+
                 }
                 controller.preferredContentSize = CGSize(width: 250, height: 300)
                 self.delegate.showPopup(controller, sourceView: aTextField)
             })
         cityDispose.disposed(by: self.delegate.myDisposeBag)
         disposeList.append(cityDispose)
+        let regDispose = NetworkManager.shared.regionListObs
+            .subscribe(onNext: {aList in
+                if aList.count == 0 && (self.views["regionView"]?.isHidden == false) && self.views["orgView"] != nil{
+                    // Need to move others to top and make region hidden
+                    self.views["regionView"]?.isHidden = true
+                    self.views["orgView"]!.frame = CGRect(x: (self.views["orgView"]?.frame.minX)!, y: (self.views["orgView"]?.frame.minY)!-self.buttonHeight, width: (self.views["orgView"]?.frame.width)!, height: (self.views["orgView"]?.frame.height)!)
+                    self.newCardCheck.frame = CGRect(x: self.newCardCheck.frame.minX, y: self.newCardCheck.frame.minY-self.buttonHeight, width: self.newCardCheck.frame.width, height: self.newCardCheck.frame.height)
+                    self.otherCardCheck.frame = CGRect(x: self.otherCardCheck.frame.minX, y: self.otherCardCheck.frame.minY-self.buttonHeight, width: self.otherCardCheck.frame.width, height: self.otherCardCheck.frame.height)
+                    self.labels["newCardLabel"]!.frame = CGRect(x: (self.labels["newCardLabel"]?.frame.minX)!, y: (self.labels["newCardLabel"]?.frame.minY)!-self.buttonHeight, width: (self.labels["newCardLabel"]?.frame.width)!, height: (self.labels["newCardLabel"]?.frame.height)!)
+                    self.labels["otherCardLabel"]!.frame = CGRect(x: (self.labels["otherCardLabel"]?.frame.minX)!, y: (self.labels["otherCardLabel"]?.frame.minY)!-self.buttonHeight, width: (self.labels["otherCardLabel"]?.frame.width)!, height: (self.labels["otherCardLabel"]?.frame.height)!)
+                    self.views["cardNoView"]!.frame = CGRect(x: (self.views["cardNoView"]?.frame.minX)!, y: (self.views["cardNoView"]?.frame.minY)!-self.buttonHeight, width: (self.views["cardNoView"]?.frame.width)!, height: (self.views["cardNoView"]?.frame.height)!)
+                    self.cardSubmitButton.frame = CGRect(x: (self.cardSubmitButton.frame.minX), y: (self.cardSubmitButton.frame.minY)-self.buttonHeight, width: (self.cardSubmitButton.frame.width), height: (self.cardSubmitButton.frame.height))
+                    
+                }else if aList.count > 0 && (self.views["regionView"]?.isHidden == true) && self.views["orgView"] != nil{
+                    self.views["regionView"]?.isHidden = false
+                    self.views["orgView"]!.frame = CGRect(x: (self.views["orgView"]?.frame.minX)!, y: (self.views["orgView"]?.frame.minY)!+self.buttonHeight, width: (self.views["orgView"]?.frame.width)!, height: (self.views["orgView"]?.frame.height)!)
+                    
+                    self.newCardCheck.frame = CGRect(x: self.newCardCheck.frame.minX, y: self.newCardCheck.frame.minY+self.buttonHeight, width: self.newCardCheck.frame.width, height: self.newCardCheck.frame.height)
+                    self.otherCardCheck.frame = CGRect(x: self.otherCardCheck.frame.minX, y: self.otherCardCheck.frame.minY+self.buttonHeight, width: self.otherCardCheck.frame.width, height: self.otherCardCheck.frame.height)
+                    self.labels["newCardLabel"]!.frame = CGRect(x: (self.labels["newCardLabel"]?.frame.minX)!, y: (self.labels["newCardLabel"]?.frame.minY)!+self.buttonHeight, width: (self.labels["newCardLabel"]?.frame.width)!, height: (self.labels["newCardLabel"]?.frame.height)!)
+                    self.labels["otherCardLabel"]!.frame = CGRect(x: (self.labels["otherCardLabel"]?.frame.minX)!, y: (self.labels["otherCardLabel"]?.frame.minY)!+self.buttonHeight, width: (self.labels["otherCardLabel"]?.frame.width)!, height: (self.labels["otherCardLabel"]?.frame.height)!)
+                    self.views["cardNoView"]!.frame = CGRect(x: (self.views["cardNoView"]?.frame.minX)!, y: (self.views["cardNoView"]?.frame.minY)!+self.buttonHeight, width: (self.views["cardNoView"]?.frame.width)!, height: (self.views["cardNoView"]?.frame.height)!)
+                    self.cardSubmitButton.frame = CGRect(x: (self.cardSubmitButton.frame.minX), y: (self.cardSubmitButton.frame.minY)+self.buttonHeight, width: (self.cardSubmitButton.frame.width), height: (self.cardSubmitButton.frame.height))
+
+                }
+            })
+        regDispose.disposed(by: self.delegate.myDisposeBag)
+        disposeList.append(regDispose)
     }
     
     @objc func selectServiceTypeTapped(_ sender : Any){

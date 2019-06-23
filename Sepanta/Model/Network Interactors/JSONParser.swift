@@ -38,6 +38,11 @@ class JSONParser {
                     var processedDic = Dictionary<String,String>()
                     processedDic = (self.processAsCityList(Result: aDic))
                     NetworkManager.shared.cityDictionaryObs.accept(processedDic)
+                } else if (apiName == "get-area") && (aMethod == HTTPMethod.post) {
+                    
+                    var areaList = [String]()
+                    areaList = (self.processAsRegionList(Result: aDic))
+                    NetworkManager.shared.regionListObs.accept(areaList)
                 } else if (apiName == "login") && (aMethod == HTTPMethod.post) {
                     if let aUserID = aDic["userId"] {
                         LoginKey.shared.userID = String(describing: aUserID)
@@ -212,6 +217,15 @@ class JSONParser {
                     print("Starting Check-Bank Parser...")
                     let parsedBank = self.processBankNumber(Result: aDic)
                     NetworkManager.shared.bankObs.accept(parsedBank)
+                } else if (apiName == "mobile-operators") && (aMethod == HTTPMethod.post) {
+                    print("Starting mobile-operators Parser...")
+                    let parsedMobile = self.processMobileNumber(Result: aDic)
+                    NetworkManager.shared.mobileObs.accept(parsedMobile)
+                } else if (apiName == "national-codes") && (aMethod == HTTPMethod.post) {
+                    print("Starting national-codes Parser...")
+                    if let aCode = aDic["city"] as? String {
+                        NetworkManager.shared.nationalCodeCityObs.accept(aCode)
+                    }
                 } else if (apiName == "card-request") && (aMethod == HTTPMethod.post) {
                     print("Starting card-request Parser...")
                     self.processCardRequest(Result: aDic)
@@ -347,7 +361,18 @@ class JSONParser {
         }
         //if  == "خطا : این کارت قبلا ثبت شده است" {
     }
-    
+    func processMobileNumber(Result aResult : NSDictionary) -> Mobile {
+        var aMobile = Mobile()
+        if aResult["error"] != nil {
+            print("ERROR in Bank Parsing : ",aResult["error"]!)
+        }
+        aMobile.message = aResult["message"] as? String
+        aMobile.status = aResult["status"] as? String
+        aMobile.name = aResult["name"] as? String
+        aMobile.logo = aResult["logo"] as? String
+        print("aMobile",aMobile)
+        return aMobile
+    }
     func processBankNumber(Result aResult : NSDictionary) -> (Bank) {
         var aBank = Bank()
         if aResult["error"] != nil {
@@ -1044,6 +1069,41 @@ class JSONParser {
         //provinceList.forEach({print("ELEM : ",$0)})
         return provinceList
         
+    }
+    
+    func processAsRegionList(Result aResult : NSDictionary) -> [String]{//(Dictionary<String,String>) {
+        var aList = [String]()
+        var regionDict = Dictionary<String,String>()
+        print("Result AllKeys : ",aResult.allKeys)
+        if aResult["error"] != nil {
+            print("ERROR in Cities List Parsing : ",aResult["error"]!)
+        }
+        if aResult["message"] != nil {
+            print("Message Parsed : ",aResult["message"]!)
+        }
+        
+        //print("aResult cities : ",aResult["state"])
+        
+        if let regions = aResult["areas"] as? NSArray{
+            for aDic in regions {
+                if let aCastedDic = aDic as? NSDictionary {
+                //print(aCity.key," ",aCity.value)
+                    if let idx = aCastedDic["id"] as? Int ,
+                        let anArea = aCastedDic["area"] as? String{
+                        if aList.count < idx + 1{
+                            for _ in (aList.count)...(idx+1){
+                                aList.append("")
+                            }
+                        }
+                        aList[idx] = anArea
+                        regionDict[anArea] = "\(idx)"
+                    }
+                }
+            }
+        } else {
+            print("Parser : Result with areas is empty or not array!")
+        }
+        return aList//regionDict
     }
     
     func processAsCityList(Result aResult : NSDictionary) -> (Dictionary<String,String>) {

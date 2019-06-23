@@ -55,6 +55,9 @@ class NetworkManager {
     var selectedLocation = BehaviorRelay<CLLocationCoordinate2D>(value: CLLocationCoordinate2D(latitude: 0, longitude: 0))
     
     var cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
+    //var regionDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
+    var regionListObs = BehaviorRelay<[String]>(value: [String]())
+    
     var catagoriesObs = BehaviorRelay<[Any]>(value: [Any]())
     var shopObs = BehaviorRelay<[Shop]>(value: [Shop]())
     var newShopObs = BehaviorRelay<[Shop]>(value: [Shop]())
@@ -71,6 +74,9 @@ class NetworkManager {
     var loginSucceed =  BehaviorRelay<Bool>(value: false)
     var SMSConfirmed =  BehaviorRelay<Bool>(value: false)
     var bankObs = BehaviorRelay<Bank>(value: Bank())
+    var mobileObs = BehaviorRelay<Mobile>(value: Mobile())
+    var nationalCodeCityObs = BehaviorRelay<String>(value: "")
+    
     var pollObs = BehaviorRelay<Int>(value: 0)
     var userPointsObs = BehaviorRelay<UserPoints>(value: UserPoints())
     var pointsElementsObs = BehaviorRelay<[PointElement]>(value: [PointElement]())
