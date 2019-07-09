@@ -77,7 +77,7 @@ class ContactUSUI : NSObject , UITextFieldDelegate,SFSafariViewControllerDelegat
         self.delegate.contentView.addSubview(shopView)
 
         
-        /*
+        
         let sepantaAddress = "تهران میدان آرژانتین خیابان الوند نبش الوند ۳۳ شرقی پلاک ۴۵ واحد ۶"
         
         var addressView = UIView()
@@ -89,7 +89,7 @@ class ContactUSUI : NSObject , UITextFieldDelegate,SFSafariViewControllerDelegat
         (telView,_) = CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight).buildALabelView(Image: "icon_profile_07",  LabelText: "۰۲۱-۴۵۲۲۷",Lines: 1)
         cursurY = cursurY + telView.frame.height + marginY/2
         self.delegate.contentView.addSubview(telView)
-         */
+         
         
         var webView = UIView()
         var aLab = UILabel()

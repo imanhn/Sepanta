@@ -26,6 +26,7 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
     var submitButton = UIButton(type: .custom)
     var stateCode : String!
     var cityCode : String!
+    var regionCode : String!
     var disposeList = [Disposable]()
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -62,7 +63,7 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
                                   texts["emailText"]!.rx.text,
                                   texts["stateText"]!.rx.text,
                                   texts["cityText"]!.rx.text,
-                                  texts["regionText"]!.rx.text,
+                                  //texts["regionText"]!.rx.text,
                                   texts["genderText"]!.rx.text
             ])
             
@@ -138,7 +139,7 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
         texts["emailText"]!.text = aProfileInfo.email
         texts["stateText"]!.text = aProfileInfo.state
         texts["cityText"]!.text = aProfileInfo.city
-        texts["regionText"]!.text = aProfileInfo.address
+//        texts["regionText"]!.text = aProfileInfo.address
         texts["genderText"]!.text = aProfileInfo.gender
         for akey in texts.keys{
             if let aTextField = texts[akey]
@@ -171,7 +172,10 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
         if texts["genderText"]!.text == "زن" { gender_code = "0"}
         var marital_status_code = "2"  //متاهل
         if texts["maritalStatusText"]!.text == "مجرد" { marital_status_code = "1"}
-
+        guard self.cityCode != nil else {
+            self.delegate.alert(Message: "لطفاْ شهر را انتخاب کنید")
+            return
+        }
         let aParameter = [
             "lastname":"\(texts["familyText"]!.text ?? "")",
             "firstname":"\(texts["nameText"]!.text ?? "")",
@@ -181,8 +185,10 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
             "gender":"\(gender_code)",
             "email":"\(texts["emailText"]!.text ?? "")",
             "state":"\(texts["stateText"]!.text ?? "")",
-            "city":"\(texts["cityText"]!.text ?? "")",
-            "address":"\(texts["regionText"]!.text ?? "")"
+            //"city_id":"\(texts["cityText"]!.text ?? "")",
+            "city_id":"\(self.cityCode!)",
+            "address":""
+            //"address":"\(texts["regionText"]!.text ?? "")"
         ]
         
         (ApiClient().request(API: "profile-info", aMethod: HTTPMethod.post, Parameter: aParameter) as Observable<GenericNetworkResponse>)
@@ -272,6 +278,7 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
         cursurY = cursurY + buttonHeight + marginY
 
         (views["emailView"],texts["emailText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "black-back-closed-envelope-shape", Selectable: false, PlaceHolderText: "ایمیل")
+        texts["emailText"]?.keyboardType = .emailAddress
         views["rightFormView"]?.addSubview(views["emailView"]!)
         cursurY = cursurY + buttonHeight + marginY
         
@@ -284,11 +291,11 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
         views["rightFormView"]?.addSubview(views["cityView"]!)
         texts["cityText"]?.addTarget(self, action: #selector(selectCityTapped), for: .touchDown)
         cursurY = cursurY + buttonHeight + marginY
-        
+        /*
         (views["regionView"],texts["regionText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "NOIMAGE", Selectable: false, PlaceHolderText: "منطقه")
         views["rightFormView"]?.addSubview(views["regionView"]!)
         cursurY = cursurY + buttonHeight + buttonHeight
-
+         */
         
         submitButton = SubmitButton(type: .custom)
         submitButton.frame = CGRect(x: marginX+(textFieldWidth/2)-1.5*buttonHeight, y: cursurY, width: 3*buttonHeight, height: buttonHeight)
@@ -356,6 +363,14 @@ class EditProfileUI :  NSObject, UITextFieldDelegate{
                     aTextField.text = selectedOption
                     aTextField.sendActions(for: .valueChanged)
                     self.cityCode = innerCityDicObs[selectedOption]
+                    /*
+                    self.regionCode = ""
+                    self.texts["regionText"]?.text = ""
+                    let parameters = [
+                        "city id": self.cityCode!
+                    ]
+                    NetworkManager.shared.run(API: "get-area",QueryString: "", Method: HTTPMethod.post, Parameters: parameters, Header: nil,WithRetry: true)
+                    */
                 }
                 controller.preferredContentSize = CGSize(width: 250, height: 300)
                 self.delegate.showPopup(controller, sourceView: aTextField)

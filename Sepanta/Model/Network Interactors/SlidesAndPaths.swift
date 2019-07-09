@@ -17,6 +17,7 @@ class SlidesAndPaths {
     var path_profile_image : String = "/upload/profile/"
     var path_slider_image : String = "/upload/profile/"
     var path_category_image : String = "/upload/category/"
+    var path_category_logo_map : String = "/upload/location/"
     var path_bank_logo_image : String = "/upload/logo_bank/"
     var path_banner_image : String = "/upload/banner/"
     var path_operator_image : String = "/upload/operator"

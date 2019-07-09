@@ -82,7 +82,6 @@
 		0F817A6D22346BAF00F1738E /* EditProfileUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A6C22346BAF00F1738E /* EditProfileUI.swift */; };
 		0F817A6F22354F8600F1738E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A6E22354F8600F1738E /* Profile.swift */; };
 		0F817A71223567E200F1738E /* ShopsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F817A70223567E200F1738E /* ShopsListViewController.swift */; };
-		0F823D4722BAA4530071E92B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F823D4622BAA4530071E92B /* NetworkService.swift */; };
 		0F823D4A22BAA7660071E92B /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F823D4922BAA7660071E92B /* NetworkConstants.swift */; };
 		0F823D5022BAA9E90071E92B /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F823D4F22BAA9E90071E92B /* ApiClient.swift */; };
 		0F823D5222BAAFB90071E92B /* ShopProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F823D5122BAAFB90071E92B /* ShopProfile.swift */; };
@@ -241,7 +240,6 @@
 		0F817A6C22346BAF00F1738E /* EditProfileUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileUI.swift; sourceTree = "<group>"; };
 		0F817A6E22354F8600F1738E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		0F817A70223567E200F1738E /* ShopsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopsListViewController.swift; sourceTree = "<group>"; };
-		0F823D4622BAA4530071E92B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		0F823D4922BAA7660071E92B /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		0F823D4F22BAA9E90071E92B /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		0F823D5122BAAFB90071E92B /* ShopProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopProfile.swift; sourceTree = "<group>"; };
@@ -529,7 +527,6 @@
 			isa = PBXGroup;
 			children = (
 				0F890D0D2215C7170091FA2E /* NetworkManager.swift */,
-				0F823D4622BAA4530071E92B /* NetworkService.swift */,
 				0F890D112215D21C0091FA2E /* JSONParser.swift */,
 				0F052ED8221AE8C5009175EA /* LoginKey.swift */,
 				0F70A648226BC7BF0020C33C /* ProfileInfoWrapper.swift */,
@@ -928,7 +925,6 @@
 				0F066F93222B198900C8871C /* UIColorFromHex.swift in Sources */,
 				0F1B755F2235C8460087C0DB /* Slide.swift in Sources */,
 				0F71A38B2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift in Sources */,
-				0F823D4722BAA4530071E92B /* NetworkService.swift in Sources */,
 				0F984E29220B727B004AFB06 /* SepantaGroupsViewController.swift in Sources */,
 				0F890D122215D21C0091FA2E /* JSONParser.swift in Sources */,
 				0F63F7142277690100799C8F /* ContactUSUI.swift in Sources */,

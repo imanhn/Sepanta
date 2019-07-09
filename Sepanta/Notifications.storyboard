@@ -40,16 +40,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="اعلانات" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dmw-oI-xQ6" userLabel="Header">
-                                        <rect key="frame" x="112.5" y="0.0" width="150" height="46.5"/>
+                                        <rect key="frame" x="56.5" y="0.0" width="262.5" height="46.5"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNB-yF-qTN" userLabel="BackButton">
-                                        <rect key="frame" x="8" y="0.0" width="31" height="46.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="dNB-yF-qTN" secondAttribute="height" multiplier="1:1.5" id="8ok-8W-DYm"/>
-                                        </constraints>
+                                        <rect key="frame" x="0.0" y="0.0" width="56.5" height="46.5"/>
                                         <state key="normal" image="icon_back_black"/>
                                         <connections>
                                             <action selector="backTapped:" destination="UkE-hc-6W2" eventType="touchUpInside" id="CaK-pk-vh2"/>
@@ -61,12 +58,13 @@
                                     <constraint firstItem="hVd-uT-rYE" firstAttribute="centerY" secondItem="tjg-ZS-dxd" secondAttribute="centerY" id="4JV-qE-gDX"/>
                                     <constraint firstItem="hVd-uT-rYE" firstAttribute="width" secondItem="tjg-ZS-dxd" secondAttribute="width" multiplier="0.25" id="4dO-Uj-Ngt"/>
                                     <constraint firstItem="dNB-yF-qTN" firstAttribute="centerY" secondItem="tjg-ZS-dxd" secondAttribute="centerY" id="FPp-K1-Bii"/>
-                                    <constraint firstItem="dNB-yF-qTN" firstAttribute="leading" secondItem="tjg-ZS-dxd" secondAttribute="leading" constant="8" id="KQ8-0W-qxD"/>
+                                    <constraint firstItem="dNB-yF-qTN" firstAttribute="leading" secondItem="tjg-ZS-dxd" secondAttribute="leading" id="KQ8-0W-qxD"/>
                                     <constraint firstItem="Dmw-oI-xQ6" firstAttribute="height" secondItem="tjg-ZS-dxd" secondAttribute="height" id="LnC-Fi-Xcs"/>
+                                    <constraint firstItem="Dmw-oI-xQ6" firstAttribute="leading" secondItem="dNB-yF-qTN" secondAttribute="trailing" id="QSJ-wi-ySU"/>
                                     <constraint firstItem="Dmw-oI-xQ6" firstAttribute="centerY" secondItem="tjg-ZS-dxd" secondAttribute="centerY" id="YhH-Bf-JVx"/>
                                     <constraint firstItem="Dmw-oI-xQ6" firstAttribute="centerX" secondItem="tjg-ZS-dxd" secondAttribute="centerX" id="ZC9-fi-Lli"/>
                                     <constraint firstAttribute="trailing" secondItem="hVd-uT-rYE" secondAttribute="trailing" constant="10" id="fAa-dy-5aP"/>
-                                    <constraint firstItem="Dmw-oI-xQ6" firstAttribute="width" secondItem="tjg-ZS-dxd" secondAttribute="width" multiplier="0.4" id="h4f-dc-uhA"/>
+                                    <constraint firstItem="Dmw-oI-xQ6" firstAttribute="width" secondItem="tjg-ZS-dxd" secondAttribute="width" multiplier="0.7" id="h4f-dc-uhA"/>
                                     <constraint firstItem="dNB-yF-qTN" firstAttribute="height" secondItem="tjg-ZS-dxd" secondAttribute="height" id="upQ-kN-xlY"/>
                                 </constraints>
                             </view>

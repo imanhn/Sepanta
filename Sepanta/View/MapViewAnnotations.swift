@@ -49,8 +49,28 @@ extension NearestViewController: MKMapViewDelegate {
             view.leftCalloutAccessoryView = leftButton
             
             view.calloutOffset = CGPoint(x: 0, y: 5)
-            let mixedImage = CreateBallonImage(Image: UIImage(named: "icon_mainmenu_04")!)
-            view.image = mixedImage
+            if let aMapAnnotation = (annotation as? MapAnnotation) {
+                if aMapAnnotation.logo_map_image == nil {
+                    view.image = UIImage(named: "map_pin_category")
+                    let aSize = view.frame.size
+                    let aScale = min(aSize.width/50,aSize.height/50)
+                    view.frame.size = CGSize(width: aSize.width/aScale, height: aSize.height/aScale)
+                }else{
+                    if let logo_image = aMapAnnotation.logo_map_image {
+                        view.image = logo_image
+                        let aSize = view.frame.size
+                        let aScale = min(aSize.width/50,aSize.height/50)
+                        view.frame.size = CGSize(width: aSize.width/aScale, height: aSize.height/aScale)
+                    }else{
+                        view.image = UIImage(named: "map_pin_category")
+                        let aSize = view.frame.size
+                        let aScale = min(aSize.width/50,aSize.height/50)
+                        view.frame.size = CGSize(width: aSize.width/aScale, height: aSize.height/aScale)
+                    }
+                        
+                    //view.image = resizeMapLogo(Image: aMapAnnotation.logo_map_image!)
+                }
+            }
         }else if  identifier ==  "SelectAnnotation" {
             view.canShowCallout = true
             let leftButton = UIButton(frame: CGRect(x: 0, y: 0, width: calloutDim, height: calloutDim))
@@ -73,6 +93,18 @@ extension NearestViewController: MKMapViewDelegate {
             view.image = mixedImage
         }
         return view
+    }
+    
+    func resizeMapLogo(Image anUIImage : UIImage)->UIImage{
+        
+        let size = CGSize(width: 50, height: 50)
+        UIGraphicsBeginImageContext(size)
+        anUIImage.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        if let resizedImage = UIGraphicsGetImageFromCurrentImageContext() {
+            return resizedImage
+        }else{
+            return CreateBallonImage(Image: UIImage(named: "icon_mainmenu_04")!)
+        }
     }
     
     func CreateBallonImage(Image iconImage : UIImage)->UIImage{

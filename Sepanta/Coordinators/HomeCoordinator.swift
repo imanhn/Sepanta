@@ -236,7 +236,7 @@ class HomeCoordinator: NSObject,Coordinator,UINavigationControllerDelegate {
         vc.fetchMechanism = { aShopListViewController in
             let shopsDataSource = ShopsListDataSource(aShopListViewController as! ShopListOwners)
             //shopsDataSource.getNewShopsFromServer()
-            shopsDataSource.getShops(Api: "new-shops",Method: HTTPMethod.get,Parameters: nil)
+            shopsDataSource.getShops(Api: "new-shops",Method: HTTPMethod.post,Parameters: nil)
             return shopsDataSource
         }
         vc.headerLabelToSet = "جدیدترین ها"

@@ -244,7 +244,7 @@ class GetRichUI : NSObject , UITextFieldDelegate {
 
     }
     func createNationalCodeCity(CursurY cursurY : CGFloat)->UILabel{
-        print("CREATEING.....")
+        //print("CREATEING.....")
         nationalCodeCity = UILabel(frame: CGRect(x: marginX, y: cursurY+buttonHeight*0.2, width: buttonHeight*2 , height: buttonHeight*0.6))
         nationalCodeCity.font = UIFont(name: "Shabnam FD", size: 12)
         nationalCodeCity.textAlignment = .center

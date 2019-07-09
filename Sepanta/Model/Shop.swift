@@ -31,6 +31,7 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
     var rate_count : Int?
     var follower_count : Int?
     var created_at : String?
+    var shop_logo_map : String?
     var identity: Int {
         return shop_id ?? 0
     }
@@ -73,5 +74,15 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
         self.rate_count = rate_count
         self.follower_count = follower_count
         self.created_at = created_at
+    }
+}
+
+extension Array where Element:ShopOrPost{
+    func add(newShops : [Shop])->[Shop]{
+        var ashop = self as! [Shop]
+        newShops.forEach({
+            if !self.map({$0.shop_id}).contains($0.shop_id) {ashop.append($0)}
+        })
+        return ashop
     }
 }

@@ -248,7 +248,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 if rate > 2.5 {self?.delegate.star3.setImage(UIImage(named: "icon_star_on"), for: .normal)}
                 if rate > 3.5 {self?.delegate.star4.setImage(UIImage(named: "icon_star_on"), for: .normal)}
                 if rate > 4.5 {self?.delegate.star5.setImage(UIImage(named: "icon_star_on"), for: .normal)}
-                self?.delegate.scoreLabel.text = "امتیاز " + "\(rate ?? 0)"
+                self?.delegate.scoreLabel.text = "امتیاز " + "\(rate)"
                 //print("ShopUI : setting shopui.posts to  :: ",aProfile.content)
                 /*
                 if let postContents = aProfile.content as? [Post] {
@@ -372,12 +372,14 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         NetworkManager.shared.postsObs
             .subscribe(onNext: {posts in
                 if posts.count == 0 {
-                    let collectionViewRect = CGRect(x: self.marginX, y: self.marginY, width: self.delegate.contentView.frame.width-(2*self.marginX), height: self.delegate.contentView.frame.height-2*self.marginY)
-                    let anImage = UIImageView(frame: collectionViewRect)
-                    anImage.image = UIImage(named: "noPost")
-                    anImage.contentMode = .scaleAspectFit
-                    //noPost
-                    self.delegate.contentView.addSubview(anImage)
+                    if self.delegate.contentView.subviews.count == 0 {
+                        let collectionViewRect = CGRect(x: self.marginX, y: self.marginY, width: self.delegate.contentView.frame.width-(2*self.marginX), height: self.delegate.contentView.frame.height-2*self.marginY)
+                        let anImage = UIImageView(frame: collectionViewRect)
+                        anImage.image = UIImage(named: "noPost")
+                        anImage.contentMode = .scaleAspectFit
+                        //noPost
+                        self.delegate.contentView.addSubview(anImage)
+                    }
                 }else{
                     self.delegate.contentView.subviews.forEach({$0.removeFromSuperview()})
                     let collectionViewRect = CGRect(x: self.marginX, y: self.marginY, width: self.delegate.contentView.frame.width-(2*self.marginX), height: self.delegate.contentView.frame.height-2*self.marginY)

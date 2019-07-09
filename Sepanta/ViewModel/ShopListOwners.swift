@@ -141,7 +141,7 @@ extension ShopListOwners where Self:UIViewControllerWithErrorBar{
         
         let shopSelectDisp = shopTable.rx.modelSelected(Shop.self)
             .subscribe(onNext: { [unowned self] selectedShop in
-                //print("Pushing ShopVC with : ", selectedShop)
+                print("Pushing ShopVC with : ", selectedShop)
                 //self.coordinator!.pushShop(Shop: selectedShop)
                 self.pushAShop(selectedShop)
             })

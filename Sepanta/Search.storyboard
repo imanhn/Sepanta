@@ -30,7 +30,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="46.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="جستجو " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nXj-LM-ca2" userLabel="HeaderText">
-                                        <rect key="frame" x="161" y="7" width="53" height="32.5"/>
+                                        <rect key="frame" x="56.5" y="7" width="262.5" height="32.5"/>
                                         <fontDescription key="fontDescription" name="Shabnam-Bold-FD" family="Shabnam FD" pointSize="16"/>
                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -43,10 +43,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xmh-Zb-oP4" userLabel="BackToMainView">
-                                        <rect key="frame" x="20" y="0.0" width="32" height="46.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="32" id="UAI-g0-WlE"/>
-                                        </constraints>
+                                        <rect key="frame" x="0.0" y="0.0" width="56.5" height="46.5"/>
                                         <state key="normal" image="icon_back_black"/>
                                         <connections>
                                             <action selector="BackTapped:" destination="Lfa-ez-xqn" eventType="touchUpInside" id="eeh-pU-DcG"/>
@@ -58,11 +55,13 @@
                                     <constraint firstItem="nXj-LM-ca2" firstAttribute="centerX" secondItem="aJ8-Wu-sy8" secondAttribute="centerX" id="4sQ-1f-xNQ"/>
                                     <constraint firstItem="xmh-Zb-oP4" firstAttribute="top" secondItem="aJ8-Wu-sy8" secondAttribute="top" id="5MZ-3Q-eTz"/>
                                     <constraint firstItem="xmh-Zb-oP4" firstAttribute="top" secondItem="QiF-bb-ACy" secondAttribute="top" id="GzJ-nK-VT2"/>
+                                    <constraint firstItem="nXj-LM-ca2" firstAttribute="leading" secondItem="xmh-Zb-oP4" secondAttribute="trailing" id="L9j-es-Q5i"/>
+                                    <constraint firstItem="nXj-LM-ca2" firstAttribute="width" secondItem="aJ8-Wu-sy8" secondAttribute="width" multiplier="0.7" id="Mci-hB-OEu"/>
                                     <constraint firstItem="nXj-LM-ca2" firstAttribute="top" secondItem="aJ8-Wu-sy8" secondAttribute="top" constant="7" id="NVv-Ih-g7m"/>
                                     <constraint firstAttribute="bottom" secondItem="xmh-Zb-oP4" secondAttribute="bottom" id="SLi-J7-Wly"/>
                                     <constraint firstItem="xmh-Zb-oP4" firstAttribute="bottom" secondItem="QiF-bb-ACy" secondAttribute="bottom" id="U3L-oA-yQZ"/>
                                     <constraint firstAttribute="trailing" secondItem="QiF-bb-ACy" secondAttribute="trailing" constant="10" id="cXG-bM-hFt"/>
-                                    <constraint firstItem="xmh-Zb-oP4" firstAttribute="leading" secondItem="aJ8-Wu-sy8" secondAttribute="leading" constant="20" id="haB-7A-Sba"/>
+                                    <constraint firstItem="xmh-Zb-oP4" firstAttribute="leading" secondItem="aJ8-Wu-sy8" secondAttribute="leading" id="haB-7A-Sba"/>
                                     <constraint firstItem="xmh-Zb-oP4" firstAttribute="centerY" secondItem="nXj-LM-ca2" secondAttribute="centerY" id="tke-d1-JL6"/>
                                 </constraints>
                             </view>

@@ -179,6 +179,7 @@ class NearestViewController : UIViewControllerWithErrorBar,XIBView,CLLocationMan
             print("No location, Nothing fetched!")
             return
         }
+        print("MyLocation : ",myLocation)
         let aParameter = ["lat":"\(myLocation!.coordinate.latitude)",
                           "long":"\(myLocation!.coordinate.longitude)"]
         NetworkManager.shared.run(API: "shops-location", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: true)

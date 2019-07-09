@@ -85,11 +85,12 @@ class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded,ShopL
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        shopTable.delegate = self
         setHeaderName()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         bindToTableView()
         shopDataSource = fetchMechanism(self)
-        shopTable.delegate = self
+        
         
         //let newShopsDataSource = ShopsListDataSource(self)
         //newShopsDataSource.getNewShopsFromServer()

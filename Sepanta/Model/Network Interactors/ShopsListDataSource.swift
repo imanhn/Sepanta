@@ -58,7 +58,7 @@ class ShopsListDataSource {
         pagedParam["page"] = "\(self.page)"
         print("URLAddress : ",urlAddress)
         print("*** Getting shops : ",pagedParam)
-        RxAlamofire.requestJSON(amethod, urlAddress , parameters: param, encoding: URLEncoding.httpBody, headers: NetworkManager.shared.headers)
+        RxAlamofire.requestJSON(amethod, urlAddress , parameters: pagedParam, encoding: URLEncoding.httpBody, headers: NetworkManager.shared.headers)
             //.observeOn(MainScheduler.instance)
             .timeout(3, scheduler: MainScheduler.instance)
             .retry(4)
@@ -78,7 +78,7 @@ class ShopsListDataSource {
                     }
                     */
                     if self.page > 1 {
-                        let unionShops = self.delegate.shopsObs.value + shops
+                        let unionShops = self.delegate.shopsObs.value.add(newShops: shops)
                         print("Union shops : ",unionShops.count)
                         self.delegate.shopsObs.accept(unionShops)
                     }else{
@@ -134,6 +134,7 @@ class ShopsListDataSource {
             if let dataOfShops = aDic["data"] as? NSArray {
                 for shopDic in dataOfShops
                 {
+                    //print("a Shop****")
                     if let shopElemAsNSDic = shopDic as? NSDictionary{
                         
                         if let shopElem = shopElemAsNSDic as? Dictionary<String, Any>{
@@ -151,6 +152,7 @@ class ShopsListDataSource {
                                                     follower_count: shopElem["follower_count"] as? Int ?? 0,
                                                     created_at: shopElem["created_at"] as? String ?? "")
                                 shops.append(aNewShop)
+                                print("SHOP : ",aNewShop)
                             }
                         }
                     }else{

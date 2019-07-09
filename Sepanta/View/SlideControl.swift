@@ -75,7 +75,7 @@ class SlideController {
             self.delegate.currentImageView.layer.frame = CGRect(x: -1 * UIScreen.main.bounds.width, y: self.delegate.currentImageView.layer.frame.origin.y, width: self.delegate.currentImageView.layer.bounds.width, height: self.delegate.currentImageView.layer.bounds.height)
             self.delegate.rightImageView.layer.frame = CGRect(x: 0, y: self.delegate.rightImageView.layer.frame.origin.y, width: self.delegate.rightImageView.layer.bounds.width, height: self.delegate.rightImageView.layer.bounds.height)
         }) { _ in
-            
+            if self.delegate == nil {return}
             //Temporary make current the right image so when moving back the frames it would be felt by the user
             self.delegate.currentImageView.image = self.delegate.rightImageView.image
             //Moving back frames to their original location

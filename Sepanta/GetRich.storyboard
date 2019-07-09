@@ -27,13 +27,13 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="71.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="پولدارشو" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edl-UQ-tDb" userLabel="HeaderLabel">
-                                        <rect key="frame" x="103.5" y="0.0" width="207" height="71.5"/>
+                                        <rect key="frame" x="62" y="0.0" width="290" height="71.5"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kW0-lX-Hmh" userLabel="BackButton">
-                                        <rect key="frame" x="0.0" y="0.0" width="103.5" height="71.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="62" height="71.5"/>
                                         <state key="normal" image="icon_back_black"/>
                                         <connections>
                                             <action selector="backTapped:" destination="Egp-pF-FKM" eventType="touchUpInside" id="C5f-3f-WVh"/>
@@ -58,7 +58,7 @@
                                     <constraint firstItem="edl-UQ-tDb" firstAttribute="centerX" secondItem="wk0-0X-sxW" secondAttribute="centerX" id="piR-mg-ga3"/>
                                     <constraint firstItem="edl-UQ-tDb" firstAttribute="leading" secondItem="kW0-lX-Hmh" secondAttribute="trailing" id="qPr-6j-P2h"/>
                                     <constraint firstItem="kW0-lX-Hmh" firstAttribute="leading" secondItem="wk0-0X-sxW" secondAttribute="leading" id="uid-eI-tKn"/>
-                                    <constraint firstItem="edl-UQ-tDb" firstAttribute="width" secondItem="wk0-0X-sxW" secondAttribute="width" multiplier="0.5" id="xyV-Z9-gcv"/>
+                                    <constraint firstItem="edl-UQ-tDb" firstAttribute="width" secondItem="wk0-0X-sxW" secondAttribute="width" multiplier="0.7" id="xyV-Z9-gcv"/>
                                     <constraint firstAttribute="trailing" secondItem="SVJ-sN-Bdq" secondAttribute="trailing" constant="10" id="yMI-FC-Z1d"/>
                                 </constraints>
                             </view>

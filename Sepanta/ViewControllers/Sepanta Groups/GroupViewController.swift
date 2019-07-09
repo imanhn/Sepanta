@@ -141,12 +141,13 @@ class GroupViewController :  UIViewControllerWithErrorBar,UITextFieldDelegate,St
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        shopTable.delegate = self
         createFilterView()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         bindToTableView()
         updateGroupHeaders()
         shopDataSource = fetchMechanism(self)
-        shopTable.delegate = self
+        
     }
        
     

@@ -449,9 +449,9 @@ class JSONParser {
             }
         }
         print("@@@ ERROR : Result does not contain >notification_user or shop<")
-        fatalError()
+        //fatalError()
         
-        //return (generalNotif,[])
+        return (generalNotif,[])
     }
 
     func processLike(Result aResult : NSDictionary) -> Int {
@@ -461,14 +461,19 @@ class JSONParser {
         if aResult["message"] != nil {
             print("Like : Message Parsed : ",aResult["message"]!)
         }
-        print("\(aResult["is_like"]!)")
-        if "\(aResult["is_like"]!)" == "1" {
-            return 1
-        }else if "\(aResult["is_like"]!)" == "0" {
-            return 0
+        if let is_liked = aResult["is_like"] as? String {
+            print("is_liked : ",is_liked)
+            if is_liked == "1" {
+                return 1
+            }else if is_liked == "0" {
+                return 0
+            }else{
+                return 2
+            }
         }else{
             return 2
         }
+
         /*
         print("Processlike : ",aResult["is_like"])
         print("casting Processlike : ",aResult["is_like"] as? Int)
@@ -498,23 +503,44 @@ class JSONParser {
                 {
                     if let shopElemAsNSDic = shopDic as? NSDictionary{                        
                         if let shopElem = shopElemAsNSDic as? Dictionary<String, Any>{
-                            //print("shopElem : ",shopElem)
+                            /*
+                            print("shopElem : ",shopElem)
+                            print("uid = ",shopElem["user_id"] as? Int)
+                            print("shopid = ",shopElem["shop_id"] as? Int)
+                            print("shop_name = ",shopElem["shop_name"] as? String)
+                            print("lat = ",(shopElem["lat"] as? String)?.toDouble())
+                            print("lon = ",(shopElem["lon"] as? String)?.toDouble())
+                            print("map_logo = ",(shopElem["category_logo"] as? String))
+                            */
                             if let uid = shopElem["user_id"] as? Int,
-                                let shopid = shopElem["shop_id"] as? Int
+                                let shopid = shopElem["shop_id"] as? Int,
+                                let shop_name = shopElem["shop_name"] as? String,
+                                let lat = (shopElem["lat"] as? String)?.toDouble(),
+                                let long = (shopElem["lon"] as? String)?.toDouble(),
+                                let map_logo = (shopElem["category_logo"] as? String)
                                 {
+                                    var aShop = Shop(WithShopID: shopid)
+                                    aShop.lat = lat
+                                    aShop.long = long
+                                    aShop.shop_logo_map = map_logo
+                                    aShop.shop_name = shop_name
+                                    aShop.user_id = uid
+                                    /*
                                     let aNewShop = Shop(shop_id: shopid,
                                                         user_id: uid,
-                                                        shop_name: shopElem["shop_name"] as? String ?? "",
-                                                        shop_off: shopElem["shop_off"] as? Int ?? 0,
-                                                        lat: ((shopElem["lat"] as? String)?.toDouble()) ?? 0.0,
-                                                        long: (shopElem["lon"] as? String)?.toDouble() ?? 0.0,
-                                                        image: shopElem["image"] as? String ?? "",
-                                                        rate: shopElem["rate"] as? String ?? "" ,
-                                                        rate_count: shopElem["rate_count"] as? Int ?? 0 ,
-                                                        follower_count: shopElem["follower_count"] as? Int ?? 0,
-                                                        created_at: shopElem["created_at"] as? String ?? "")
+                                                        shop_name: shop_name ,
+                                                        shop_off: 0,
+                                                        lat: lat,
+                                                        long: long,
+                                                        image: "",
+                                                        rate: "",
+                                                        rate_count: 0,
+                                                        follower_count: 0,
+                                                        created_at: "",
+                                                        shop_logo_map: shopElem["category_logo"] as? String)
+                                    */
                                     //print("UserID : \(uid) ShopID : \(shopid) Lat : \(aNewShop.lat) Long : \(aNewShop.long)")
-                                    shops.append(aNewShop)
+                                    shops.append(aShop)
                             }
                         }
                     }else{
@@ -526,7 +552,7 @@ class JSONParser {
             print("Shop Result keys : ",aResult.allKeys)
             print("aResult[categoryShops] ",aResult["categoryShops"] ?? "EMPTY")
         }
-        print("Shops Fetched : ",shops.count," record")
+        print("**Shops Fetched : ",shops.count," record")
         //print("Parsing State List Successful")
         
         return shops
@@ -831,7 +857,10 @@ class JSONParser {
             SlidesAndPaths.shared.path_profile_image = (aResult["path_profile_image"] as? String) ?? SlidesAndPaths.shared.path_profile_image
             SlidesAndPaths.shared.path_slider_image = (aResult["path_slider_image"] as? String) ?? SlidesAndPaths.shared.path_slider_image
             SlidesAndPaths.shared.path_category_image = (aResult["path_category_image"] as? String) ?? SlidesAndPaths.shared.path_category_image
+            SlidesAndPaths.shared.path_category_logo_map = (aResult["path_category_logo_map"] as? String) ?? SlidesAndPaths.shared.path_category_logo_map
             SlidesAndPaths.shared.path_bank_logo_image = (aResult["path_bank_logo_image"] as? String) ?? SlidesAndPaths.shared.path_bank_logo_image
+            SlidesAndPaths.shared.path_banner_image = (aResult["path_banner_image"] as? String) ?? SlidesAndPaths.shared.path_banner_image
+            SlidesAndPaths.shared.path_operator_image = (aResult["path_operator_image"] as? String) ?? SlidesAndPaths.shared.path_operator_image
             if let notificationsCount = aResult["notifications_count"] as? Int {
                 //SlidesAndPaths.shared.notifications_count.accept(120)
                 SlidesAndPaths.shared.notifications_count.accept(notificationsCount)
@@ -969,7 +998,7 @@ class JSONParser {
             print("Shop Result keys : ",aResult.allKeys)
             print("aResult[categoryShops] ",aResult["categoryShops"] ?? "EMPTY")
         }
-        print("Shops Fetched : ",shops.count," record")
+        print("**Shops Fetched : ",shops.count," record")
         //print("Parsing State List Successful")
         
         return shops

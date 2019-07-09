@@ -129,15 +129,21 @@ class NetworkManager {
         print("      Header : \(headerToSend)")
         print("      Method : \(aMethod)")
         */
-
-        RxAlamofire.requestJSON(aMethod, urlAddress , parameters: aParameter, encoding: URLEncoding.httpBody, headers: headerToSend)
+        var anEncoding = URLEncoding.httpBody
+        if aMethod == HTTPMethod.get {anEncoding = URLEncoding.default}
+        RxAlamofire.requestJSON(aMethod, urlAddress , parameters: aParameter, encoding: anEncoding, headers: headerToSend)
         .observeOn(MainScheduler.instance)
         .timeout(timeOut, scheduler: MainScheduler.instance)
         .retry(retryTime)
         //.debug()
         .subscribe(onNext: { [unowned self] (ahttpURLRes,jsonResult) in
             
+            print("urlAddress : ",urlAddress)
             print(" \(apiName) Response Code : ",ahttpURLRes.statusCode)
+            print(" Parameters : ",aParameter)
+            print(" Method : ",aMethod)
+            print("Heeader : ",headerToSend)
+             
             if let aresult = jsonResult as? NSDictionary {
                 
                 self.result = aresult
@@ -160,7 +166,10 @@ class NetworkManager {
                 
                 self.status.accept(CallStatus.error)
             }
-            if ahttpURLRes.statusCode == 500 { self.status.accept(CallStatus.InternalServerError)}
+            if ahttpURLRes.statusCode == 500 {
+                self.status.accept(CallStatus.InternalServerError)
+                print("Result with Error : ",self.result)
+            }
             Spinner.stop()
             }, onError: { (err) in
                 if err.localizedDescription == "The Internet connection appears to be offline." {
