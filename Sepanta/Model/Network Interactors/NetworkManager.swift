@@ -140,7 +140,7 @@ class NetworkManager {
             
             print("urlAddress : ",urlAddress)
             print(" \(apiName) Response Code : ",ahttpURLRes.statusCode)
-            print(" Parameters : ",aParameter)
+            //print(" Parameters : ",aParameter)
             print(" Method : ",aMethod)
             print("Heeader : ",headerToSend)
              
