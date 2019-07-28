@@ -86,8 +86,7 @@
 		0F823D5022BAA9E90071E92B /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F823D4F22BAA9E90071E92B /* ApiClient.swift */; };
 		0F823D5222BAAFB90071E92B /* ShopProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F823D5122BAAFB90071E92B /* ShopProfile.swift */; };
 		0F823D5422BABF2D0071E92B /* GenericResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F823D5322BABF2D0071E92B /* GenericResponse.swift */; };
-		0F823D5622BAC1BB0071E92B /* ApiConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F823D5522BAC1BB0071E92B /* ApiConfiguration.swift */; };
-		0F823D5822BAC2020071E92B /* UserEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F823D5722BAC2020071E92B /* UserEndPoint.swift */; };
+		0F823D5822BAC2020071E92B /* EndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F823D5722BAC2020071E92B /* EndPoints.swift */; };
 		0F8571F0225CC5B50056D062 /* UIViewControllerWithErrorBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8571EF225CC5B50056D062 /* UIViewControllerWithErrorBar.swift */; };
 		0F890CFE2214B4CD0091FA2E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890CFD2214B4CD0091FA2E /* Coordinator.swift */; };
 		0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F890CFF2214B4E90091FA2E /* Storyboarded.swift */; };
@@ -128,7 +127,7 @@
 		0FE8B9AE220355F000C868C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9AC220355F000C868C3 /* Main.storyboard */; };
 		0FE8B9B0220355F100C868C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9AF220355F100C868C3 /* Assets.xcassets */; };
 		0FE8B9B3220355F100C868C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B9B1220355F100C868C3 /* LaunchScreen.storyboard */; };
-		0FE8B9BE220355F200C868C3 /* SepantaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9BD220355F200C868C3 /* SepantaTests.swift */; };
+		0FE8B9BE220355F200C868C3 /* NetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9BD220355F200C868C3 /* NetworkLayerTests.swift */; };
 		0FE8B9C9220355F200C868C3 /* SepantaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B9C8220355F200C868C3 /* SepantaUITests.swift */; };
 		0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */; };
 		0FE8BA042205082100C868C3 /* SMSConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8BA032205082100C868C3 /* SMSConfirmViewController.swift */; };
@@ -244,8 +243,7 @@
 		0F823D4F22BAA9E90071E92B /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		0F823D5122BAAFB90071E92B /* ShopProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopProfile.swift; sourceTree = "<group>"; };
 		0F823D5322BABF2D0071E92B /* GenericResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericResponse.swift; sourceTree = "<group>"; };
-		0F823D5522BAC1BB0071E92B /* ApiConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiConfiguration.swift; sourceTree = "<group>"; };
-		0F823D5722BAC2020071E92B /* UserEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEndPoint.swift; sourceTree = "<group>"; };
+		0F823D5722BAC2020071E92B /* EndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoints.swift; sourceTree = "<group>"; };
 		0F8571EF225CC5B50056D062 /* UIViewControllerWithErrorBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerWithErrorBar.swift; sourceTree = "<group>"; };
 		0F890CFD2214B4CD0091FA2E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		0F890CFF2214B4E90091FA2E /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
@@ -291,7 +289,7 @@
 		0FE8B9B2220355F100C868C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0FE8B9B4220355F100C868C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0FE8B9B9220355F200C868C3 /* SepantaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SepantaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0FE8B9BD220355F200C868C3 /* SepantaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaTests.swift; sourceTree = "<group>"; };
+		0FE8B9BD220355F200C868C3 /* NetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayerTests.swift; sourceTree = "<group>"; };
 		0FE8B9BF220355F200C868C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0FE8B9C4220355F200C868C3 /* SepantaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SepantaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FE8B9C8220355F200C868C3 /* SepantaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SepantaUITests.swift; sourceTree = "<group>"; };
@@ -424,8 +422,7 @@
 			children = (
 				0F823D4922BAA7660071E92B /* NetworkConstants.swift */,
 				0F823D4F22BAA9E90071E92B /* ApiClient.swift */,
-				0F823D5522BAC1BB0071E92B /* ApiConfiguration.swift */,
-				0F823D5722BAC2020071E92B /* UserEndPoint.swift */,
+				0F823D5722BAC2020071E92B /* EndPoints.swift */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -653,7 +650,7 @@
 		0FE8B9BC220355F200C868C3 /* SepantaTests */ = {
 			isa = PBXGroup;
 			children = (
-				0FE8B9BD220355F200C868C3 /* SepantaTests.swift */,
+				0FE8B9BD220355F200C868C3 /* NetworkLayerTests.swift */,
 				0FE8B9BF220355F200C868C3 /* Info.plist */,
 			);
 			path = SepantaTests;
@@ -719,6 +716,7 @@
 				0FE8B9B5220355F200C868C3 /* Sources */,
 				0FE8B9B6220355F200C868C3 /* Frameworks */,
 				0FE8B9B7220355F200C868C3 /* Resources */,
+				7D9AE3266383CB40A09AB92D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -876,6 +874,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7D9AE3266383CB40A09AB92D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SepantaTests/Pods-SepantaTests-resources.sh",
+				"${PODS_ROOT}/RSKImageCropper/RSKImageCropper/RSKImageCropperStrings.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RSKImageCropperStrings.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SepantaTests/Pods-SepantaTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FC66C1D6B86DF07010DB7EF4 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -913,7 +933,7 @@
 				0F63F71A2278A25700799C8F /* StringSlice.swift in Sources */,
 				0F63F71E2278BBDC00799C8F /* NewCardView.swift in Sources */,
 				0F1B75632236E39B0087C0DB /* ShopViewController.swift in Sources */,
-				0F823D5822BAC2020071E92B /* UserEndPoint.swift in Sources */,
+				0F823D5822BAC2020071E92B /* EndPoints.swift in Sources */,
 				0F066F95222B19AB00C8871C /* UIViewRotate.swift in Sources */,
 				0F70A649226BC7BF0020C33C /* ProfileInfoWrapper.swift in Sources */,
 				0F823D5022BAA9E90071E92B /* ApiClient.swift in Sources */,
@@ -972,7 +992,6 @@
 				0FF55AB5227B4CFA0093DEE0 /* EditShopUI.swift in Sources */,
 				0F997399227BBAA400A65716 /* LogoImageForShopImagePicker.swift in Sources */,
 				0FE8BA062205239E00C868C3 /* HomeViewController.swift in Sources */,
-				0F823D5622BAC1BB0071E92B /* ApiConfiguration.swift in Sources */,
 				0FE8B9A9220355F000C868C3 /* AppDelegate.swift in Sources */,
 				0FE8BA022204CE8200C868C3 /* CustomWidgets.swift in Sources */,
 				0FA307DE222700B100EDA829 /* Shop.swift in Sources */,
@@ -1016,7 +1035,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FE8B9BE220355F200C868C3 /* SepantaTests.swift in Sources */,
+				0FE8B9BE220355F200C868C3 /* NetworkLayerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1234,6 +1253,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3UL3Q223ZG;
 				INFOPLIST_FILE = SepantaTests/Info.plist;
@@ -1244,6 +1264,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Imzich.SepantaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sepanta.app/Sepanta";
@@ -1256,6 +1277,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3UL3Q223ZG;
 				INFOPLIST_FILE = SepantaTests/Info.plist;
@@ -1266,6 +1288,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Imzich.SepantaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sepanta.app/Sepanta";
@@ -1276,6 +1299,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3UL3Q223ZG;
 				INFOPLIST_FILE = SepantaUITests/Info.plist;
@@ -1286,6 +1310,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Imzich.SepantaUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Sepanta;
@@ -1296,6 +1321,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3UL3Q223ZG;
 				INFOPLIST_FILE = SepantaUITests/Info.plist;
@@ -1306,6 +1332,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Imzich.SepantaUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Sepanta;

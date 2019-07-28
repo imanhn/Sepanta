@@ -239,7 +239,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                 //print("After Shop : ",self.delegate.shop)
                 self?.delegate.shopTitle.text = aProfile.shop_name
                 self?.delegate.followersNumLabel.text = "\(aProfile.follower_count ?? 0)"
-                self?.delegate.offLabel.text = "\(aProfile.shop_off ?? 0)%"
+                self?.delegate.offLabel.text = "\(aProfile.shop_off ?? "0")%"
                 self?.delegate.rateLabel.text = "(\(aProfile.rate_count ?? 0))"
                 self?.delegate.shopDescription.text = "\(aProfile.bio ?? aProfile.shop_name ?? "")"
                 let rate : Float = Float(aProfile.rate ?? "0.0") ?? 0
@@ -258,7 +258,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                     self?.delegate.alert(Message: "خطای داخلی اتفاق افتاده است")
                 }*/
                 //print("Profile : ",aProfile)
-                if aProfile.lat == nil || aProfile.long == nil {
+                if aProfile.lat == nil || aProfile.lon == nil {
                     //self?.delegate.locationButton?.isHidden = true
                     
                     DispatchQueue.main.async {

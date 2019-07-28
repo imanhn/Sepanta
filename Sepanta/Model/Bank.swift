@@ -9,6 +9,8 @@
 import Foundation
 
 struct Bank : Codable{
+    var status : String?
+    var message : String?
     var code_bank : Int?
     var bank : String?
     var logo : String?    

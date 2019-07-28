@@ -87,7 +87,7 @@ class SearchViewController : UIViewControllerWithErrorBar{
                     return
                 }
                 self.view.endEditing(true)
-                let ashop = Shop(shop_id: aShopSearchResult.shop_id, user_id: aShopSearchResult.user_id, shop_name: aShopSearchResult.shop_name, shop_off: nil, lat: nil, long: nil, image: nil, rate: nil,rate_count: 0, follower_count: nil, created_at: nil)
+                let ashop = Shop(shop_id: aShopSearchResult.shop_id, user_id: aShopSearchResult.user_id, shop_name: aShopSearchResult.shop_name, shop_off: nil, lat: nil, lon: nil, image: nil, rate: nil,rate_count: 0, follower_count: nil, created_at: nil)
                 self.coordinator!.pushShop(Shop: ashop)
             })
         selectDisp.disposed(by: myDisposeBag)

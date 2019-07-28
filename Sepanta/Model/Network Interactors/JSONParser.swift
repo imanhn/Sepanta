@@ -516,12 +516,12 @@ class JSONParser {
                                 let shopid = shopElem["shop_id"] as? Int,
                                 let shop_name = shopElem["shop_name"] as? String,
                                 let lat = (shopElem["lat"] as? String)?.toDouble(),
-                                let long = (shopElem["lon"] as? String)?.toDouble(),
+                                let lon = (shopElem["lon"] as? String)?.toDouble(),
                                 let map_logo = (shopElem["category_logo"] as? String)
                                 {
                                     var aShop = Shop(WithShopID: shopid)
                                     aShop.lat = lat
-                                    aShop.long = long
+                                    aShop.lon = lon
                                     aShop.shop_logo_map = map_logo
                                     aShop.shop_name = shop_name
                                     aShop.user_id = uid
@@ -531,7 +531,7 @@ class JSONParser {
                                                         shop_name: shop_name ,
                                                         shop_off: 0,
                                                         lat: lat,
-                                                        long: long,
+                                                        lon: lon,
                                                         image: "",
                                                         rate: "",
                                                         rate_count: 0,
@@ -539,7 +539,7 @@ class JSONParser {
                                                         created_at: "",
                                                         shop_logo_map: shopElem["category_logo"] as? String)
                                     */
-                                    //print("UserID : \(uid) ShopID : \(shopid) Lat : \(aNewShop.lat) Long : \(aNewShop.long)")
+                                    //print("UserID : \(uid) ShopID : \(shopid) Lat : \(aNewShop.lat) Lon : \(aNewShop.lon)")
                                     shops.append(aShop)
                             }
                         }
@@ -676,7 +676,7 @@ class JSONParser {
         profile.fullName = (aProfileDicAsNS["fullName"] as? String) ?? ""
         profile.role = (aProfileDicAsNS["role"] as? String) ?? ""
         profile.lat = (aProfileDicAsNS["lat"] as? String)?.toDouble()
-        profile.long = (aProfileDicAsNS["lon"] as? String)?.toDouble()
+        profile.lon = (aProfileDicAsNS["lon"] as? String)?.toDouble()
         profile.is_favorite = (aProfileDicAsNS["is_favorite"] as? Bool) ?? false
         profile.is_follow = (aProfileDicAsNS["is_follow"] as? Bool) ?? false
         profile.follow_count = (aProfileDicAsNS["follow_count"] as? Int) ?? 0
@@ -691,9 +691,9 @@ class JSONParser {
                 newShop.shop_id = (aPostOrShop["id"] as? Int) ?? (aPostOrShop["shop_id"] as? Int) ?? 0
                 newShop.user_id = (aPostOrShop["user_id"] as? Int) ?? 0
                 newShop.shop_name = (aPostOrShop["shop_name"] as? String) ?? ""
-                newShop.shop_off = (aPostOrShop["shop_off"] as? Int) ?? 0
+                newShop.shop_off = (aPostOrShop["shop_off"] as? String) ?? "0"
                 newShop.lat = (aPostOrShop["lat"] as? String)?.toDouble()
-                newShop.long = (aPostOrShop["lon"] as? String)?.toDouble()
+                newShop.lon = (aPostOrShop["lon"] as? String)?.toDouble()
                 if let oneImage = aPostOrShop["image"] as? String {
                     newShop.image = oneImage
                 }else if let dicImage = aPostOrShop["image"] as? NSDictionary {
@@ -744,7 +744,7 @@ class JSONParser {
         profile.category_title = (aProfileDicAsNS["category_title"] as? String) ?? ""
         profile.rate = (aProfileDicAsNS["rate"] as? String) ?? ""
         profile.rate_count = (aProfileDicAsNS["rate_count"] as? Int) ?? 0
-        profile.shop_off = (aProfileDicAsNS["shop_off"] as? Int) ?? 0
+        profile.shop_off = (aProfileDicAsNS["shop_off"] as? String) ?? "0"
         profile.url = (aProfileDicAsNS["url"] as? String) ?? ""
         profile.cellphone = (aProfileDicAsNS["cellphone"] as? String) ?? ""
         profile.phone = (aProfileDicAsNS["phone"] as? String) ?? ""
@@ -752,7 +752,7 @@ class JSONParser {
         profile.fullName = (aProfileDicAsNS["fullName"] as? String) ?? ""
         profile.role = (aProfileDicAsNS["role"] as? String) ?? ""
         profile.lat = (aProfileDicAsNS["lat"] as? String)?.toDouble()
-        profile.long = (aProfileDicAsNS["lon"] as? String)?.toDouble()
+        profile.lon = (aProfileDicAsNS["lon"] as? String)?.toDouble()
         profile.is_favorite = (aProfileDicAsNS["is_favorite"] as? Bool) ?? false
         profile.is_follow = (aProfileDicAsNS["is_follow"] as? Bool) ?? false
         profile.follow_count = (aProfileDicAsNS["follow_count"] as? Int) ?? 0
@@ -949,9 +949,9 @@ class JSONParser {
                                 let aNewShop = Shop(shop_id: shopElem["shop_id"] as? Int ?? 0,
                                                     user_id: shopElem["user_id"] as? Int ?? 0,
                                                     shop_name: shopElem["shop_name"] as? String ?? "",
-                                                    shop_off: shopElem["shop_off"] as? Int ?? 0,
+                                                    shop_off: shopElem["shop_off"] as? String ?? "0",
                                                     lat: (shopElem["lat"] as? String)?.toDouble() ?? 0.0,
-                                                    long: (shopElem["lon"] as? String)?.toDouble() ?? 0.0,
+                                                    lon: (shopElem["lon"] as? String)?.toDouble() ?? 0.0,
                                                     image: shopElem["image"] as? String ?? "",
                                                     rate: shopElem["rate"] as? String ?? "" ,
                                                     rate_count: shopElem["rate_count"] as? Int ?? 0 ,
@@ -978,9 +978,9 @@ class JSONParser {
                             let aNewShop = Shop(shop_id: shopElem["shop_id"] as? Int ?? 0,
                                                 user_id: shopElem["user_id"] as? Int ?? 0,
                                                 shop_name: shopElem["shop_name"] as? String ?? "",
-                                                shop_off: shopElem["shop_off"] as? Int ?? 0,
+                                                shop_off: shopElem["shop_off"] as? String ?? "0",
                                                 lat: (shopElem["lat"] as? String)?.toDouble() ?? 0.0,
-                                                long: (shopElem["lon"] as? String)?.toDouble() ?? 0.0,
+                                                lon: (shopElem["lon"] as? String)?.toDouble() ?? 0.0,
                                                 image: shopElem["image"] as? String ?? "",
                                                 rate: shopElem["rate"] as? String ?? "" ,
                                                 rate_count: shopElem["rate_count"] as? Int ?? 0 ,

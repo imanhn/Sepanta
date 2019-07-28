@@ -26,7 +26,7 @@ class MapAnnotation : NSObject,MKAnnotation{
         self.userId = aShop.user_id ?? 0
         self.shop = aShop
         self.logo_map = aShop.shop_logo_map
-        self.coordinate = CLLocationCoordinate2D(latitude: aShop.lat ?? 35.765985, longitude: aShop.long ?? 51.546742)
+        self.coordinate = CLLocationCoordinate2D(latitude: aShop.lat ?? 35.765985, longitude: aShop.lon ?? 51.546742)
         load_image()
         //print("NEW : ",self.coordinate,"  ",self.title)
     }

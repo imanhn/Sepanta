@@ -22,7 +22,7 @@ struct ShopProfile : Codable{
     var category_title : String?
     var rate : String?
     var rate_count : Int?
-    var shop_off: Int?
+    var shop_off: String?
     var url : String?
     var cellphone : String?
     var phone : String?
@@ -30,7 +30,7 @@ struct ShopProfile : Codable{
     var fullName : String?
     var role : String?
     var lat : Double?
-    var long : Double?
+    var lon : Double?
     var is_favorite : Bool?
     var is_follow : Bool?
     var follow_count : Int?

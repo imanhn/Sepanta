@@ -94,7 +94,7 @@ extension ShopListOwners where Self:UIViewControllerWithErrorBar{
             var returningCell : ShopCell!
             if let aCell = cell as? ShopCell {
                 aCell.shopName.text = model.shop_name
-                let persianDiscount :String = "\(model.shop_off ?? 0)".toPersianNumbers()
+                let persianDiscount :String = "\(model.shop_off ?? "0")".toPersianNumbers()
                 //aCell.discountPercentage.text = persianDiscount+"%"
                 aCell.offImage.image = self.CreateOffImage(Off: persianDiscount,ViewSize: aCell.offImage.frame.size)
                 let persianFollowers :String = "\(model.follower_count ?? 0)".toPersianNumbers()
