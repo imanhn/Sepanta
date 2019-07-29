@@ -167,6 +167,15 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
                 fatalError()
             }
         }
+        if values.contains(.image) {
+            do{
+                image  = try values.decode(String.self, forKey: .image)
+            }catch{
+                print("Decoder Error 1st String->String: image can not be casted")
+                fatalError()
+            }
+        }
+
         if values.contains(.lat) {
             do {
                 lat = try values.decode(String.self, forKey: .lat).toDouble()

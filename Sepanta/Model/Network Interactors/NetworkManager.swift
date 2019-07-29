@@ -110,7 +110,7 @@ class NetworkManager {
         return escapedString!
     }
     func run(API apiName : String, QueryString aQuery : String, Method aMethod : HTTPMethod, Parameters aParameter : Dictionary<String, String>?, Header  aHeader : HTTPHeaders? ,WithRetry : Bool,TargetObs targetObs : String = "") {
-        return 
+        
         var retryTime = 4
         var timeOut : Double = 5
         if WithRetry == false {

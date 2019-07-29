@@ -12,5 +12,5 @@ struct Rate : Codable{
     var status : String?
     var message : String?
     var rate_count : Int?
-    var rate_avg : Int?
+    var rate_avg : Float?
 }

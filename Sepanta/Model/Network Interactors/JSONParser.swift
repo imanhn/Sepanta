@@ -283,7 +283,7 @@ class JSONParser {
         if let arate_count = aResult["rate_count"] as? Int{
             aRate.rate_count = arate_count
         }
-        if let arate_avg = aResult["rate_avg"] as? Int{
+        if let arate_avg = aResult["rate_avg"] as? Float{
             aRate.rate_avg = arate_avg
         }
         return aRate
@@ -417,7 +417,6 @@ class JSONParser {
                         if let avalue = aNSDic["shop_name"] { newNotif.shop_name = avalue as? String ?? ""}
                         if let avalue = aNSDic["shop_image"] { newNotif.shop_image = avalue as? String ?? ""}
                         if let avalue = aNSDic["post_image"] { newNotif.post_image = avalue as? String ?? ""}
-                        if let avalue = aNSDic["body"] { newNotif.body = avalue as? String ?? "پست جدید ما را ببینید"}
                         notifForUser.append(newNotif)
                     }
                 }

@@ -14,17 +14,24 @@ import Alamofire
 import AlamofireImage
 import RxAlamofire
 
-class Catagory : NSObject {
-    var content = String()
-    var banner = String()
-    var created_at = String()
-    var updated_at = String()
+class Catagory : NSObject,Codable {
+//    var content = String()
+ //   var banner = String()
+//    var created_at = String()
+//    var updated_at = String()
     var image = String()
     var title = String()
     var id = Int()
-    var shop_number = Int()
+//    var shop_number = Int()
     var anUIImage : BehaviorRelay<UIImage> = BehaviorRelay(value: UIImage())
     var myDisposeBag = DisposeBag()
+    
+    private enum CodingKeys : String,CodingKey{
+        case id
+        case title
+        case image
+    }
+    
     override init () {
         super.init()
     }
