@@ -19,7 +19,7 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
     static func == (lhs: Shop, rhs: Shop) -> Bool {
         if lhs.identity == rhs.identity { return true }else{return false}
     }
-    var id : Int? //Virtual field just make Decoder work for Network response that return id instead of shop_id (shop in [Content] of Profile
+    private var id : Int? //Virtual field just make Decoder work for Network response that return id instead of shop_id (shop in [Content] of Profile
     var shop_id : Int?
     var user_id : Int?
     var shop_name : String?
@@ -31,6 +31,8 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
     var rate_count : Int?
     var follower_count : Int?
     var created_at : String?
+    var category_id : Int?
+    var category_logo : String?
     var shop_logo_map : String?
     var identity: Int {
         return shop_id ?? user_id ?? 0
@@ -88,7 +90,7 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
                     id = shop_id
                 }catch{
                     print("id or shop_id not found while decoding!")
-                    fatalError()
+                    //fatalError()
                 }
                 
             }
@@ -98,7 +100,7 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
                 user_id = try values.decode(Int.self, forKey: .user_id)
             }catch{
                 print("Decoder Error : user_id can not be casted")
-                fatalError()
+                //fatalError()
             }
         }
         if values.contains(.shop_name) {
@@ -106,7 +108,7 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
                 shop_name = try values.decode(String.self, forKey: .shop_name)
             }catch{
                 print("Decoder Error : shop_name can not be casted")
-                fatalError()
+                //fatalError()
             }
         }
         if values.contains(.shop_off) {
@@ -117,7 +119,7 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
                     shop_off = try "\(values.decode(Float.self, forKey: .shop_off))"
                 }catch{
                     print("Decoder Error 2nd Try Float->String: shop_off can not be casted")
-                    fatalError()
+                    //fatalError()
                 }
             }
         }
@@ -130,7 +132,7 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
                     rate = try "\(values.decode(Float.self, forKey: .rate))"
                 }catch{
                     print("Decoder Error 2st Float->String: rate can not be casted")
-                    fatalError()
+                    //fatalError()
                 }
                 
             }
@@ -140,7 +142,7 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
                 rate_count = try values.decode(Int.self, forKey: .rate_count)
             }catch{
                 print("Decoder Error 1st Int->String: rate_count can not be casted")
-                fatalError()
+                //fatalError()
             }
         }
         if values.contains(.follower_count) {
@@ -148,7 +150,7 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
                 follower_count = try values.decode(Int.self, forKey: .follower_count)
             }catch{
                 print("Decoder Error 1st Int->String: follower_count can not be casted")
-                fatalError()
+                //fatalError()
             }
         }
         if values.contains(.created_at) {
@@ -156,7 +158,7 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
                 created_at = try values.decode(String.self, forKey: .created_at)
             }catch{
                 print("Decoder Error 1st String->String: created_at can not be casted")
-                fatalError()
+                //fatalError()
             }
         }
         if values.contains(.shop_logo_map) {
@@ -164,7 +166,7 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
                 shop_logo_map  = try values.decode(String.self, forKey: .shop_logo_map)
             }catch{
                 print("Decoder Error 1st String->String: shop_logo_map can not be casted")
-                fatalError()
+                //fatalError()
             }
         }
         if values.contains(.image) {
@@ -172,7 +174,7 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
                 image  = try values.decode(String.self, forKey: .image)
             }catch{
                 print("Decoder Error 1st String->String: image can not be casted")
-                fatalError()
+                //fatalError()
             }
         }
 
@@ -187,7 +189,7 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
                     lat = try values.decode(Double.self, forKey: .lat)
                 }catch{
                     print("Decoder Error 2nd Try Double->Double : Lat can not be casted")
-                    fatalError()
+                    //fatalError()
                 }
             }
         }
@@ -202,10 +204,36 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
                     lon = try values.decode(Double.self, forKey: .lon)
                 }catch{
                     print("Decoder Error 2nd Try Double->Double : Lat can not be casted")
-                    fatalError()
+                    //fatalError()
                 }
             }
         }
+        
+        if values.contains(.category_id) {
+            do {
+                category_id = try values.decode(Int.self, forKey: .category_id)
+            }catch{
+                //print("Decoder Error 1st Try String->Double : Lat can not be casted")
+            }
+            if (category_id == nil) {
+                do {
+                    category_id = try Int(values.decode(String.self, forKey: .category_id))
+                }catch{
+                    print("Decoder Error 2nd Try String-Int -> Int : category_id can not be casted")
+                    //fatalError()
+                }
+            }
+        }
+
+        if values.contains(.category_logo) {
+            do {
+                category_logo = try values.decode(String.self, forKey: .category_logo)
+            }catch{
+                print("Decoder Error : category_logo can not be casted")
+                //fatalError()
+            }
+        }
+
     }
     
     private enum CodingKeys : String, CodingKey {
@@ -222,7 +250,8 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
         case follower_count
         case created_at
         case shop_logo_map
-        
+        case category_id
+        case category_logo
     }
 }
 

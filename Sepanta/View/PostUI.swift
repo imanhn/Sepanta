@@ -73,9 +73,9 @@ class PostUI {
             .subscribe(onNext: { aPostDetail in
                 let aCommentsArray = aPostDetail.comments
                 print("Updating/Building POSTVIEW  ")
-                self.isPostLiked = aPostDetail.isLiked!
-                if self.countPostLikes == -1 {
-                    self.countPostLikes = aPostDetail.countLike!
+                self.isPostLiked = (aPostDetail.is_like == 1)
+                if self.countPostLikes < 0 {
+                    self.countPostLikes = Int(aPostDetail.count_like ?? "0") ?? 0
                 }
                 print("isPostLiked : ",self.isPostLiked,"  self.countPostLikes : ",self.countPostLikes)
                 DispatchQueue.main.async {
@@ -155,8 +155,8 @@ class PostUI {
         
         var cursorX = self.marginX
         //print("innerPost : ",innerPost)
-        print("innerPostLIKE : ",innerPost.isLiked)
-        if innerPost.isLiked == false {
+        print("innerPostLIKE : ",innerPost.is_like)
+        if innerPost.is_like == 0 {
             likeButton.setImage(UIImage(named: "icon_like"), for: .normal)
         }else{
             likeButton.setImage(UIImage(named: "icon_like_dark"), for: .normal)
@@ -165,8 +165,8 @@ class PostUI {
         likeButton.frame = CGRect(x: cursorX, y: self.cursurY, width: buttonDim, height: buttonDim)
         self.delegate.postScrollView.addSubview(likeButton)
         cursorX = cursorX + buttonDim + self.marginX/2
-        print("innerPost.countLike : ",innerPost.countLike,"  ",countPostLikes)
-        var likeNoString = "\(innerPost.countLike ?? 0)"
+        print("innerPost.countLike : ",innerPost.count_like,"  ",countPostLikes)
+        var likeNoString = "\(innerPost.count_like ?? "0")"
         if countPostLikes != -1 {
             likeNoString = "\(self.countPostLikes)"
         }
@@ -339,11 +339,11 @@ class PostUI {
                     print("  *Toggled... : ",self.likeNoLabel.text ?? "NIL")
                 }
                 
-                if NetworkManager.shared.postDetailObs.value.isLiked.map({if $0 {return ToggleStatus.YES}else{return ToggleStatus.NO}}) != toggleStatus {
+                if NetworkManager.shared.postDetailObs.value.is_like.map({if $0==1 {return ToggleStatus.YES}else{return ToggleStatus.NO}}) != toggleStatus {
                     //Like is updating
                     print("Updating post data...")
                     var postDet = NetworkManager.shared.postDetailObs.value
-                    postDet.isLiked = !(postDet.isLiked ?? false)
+                    postDet.is_like = (!(postDet.is_like == 1)) ? (1) : (0)
                     NetworkManager.shared.postDetailObs.accept(postDet)
                 }
                 print("Setting UNKNOWN")

@@ -10,9 +10,10 @@ import Foundation
 struct Notifications : Codable{
     var status : String?
     var message : String?
-    var notifications_user : NotificationUser
-    var notifications_manager : [GeneralNotification]
-
+    var notifications_user : NotificationUser?
+    var notifications_manager : [GeneralNotification]?
+    init(){
+    }
 }
 // Added to cover pagination system
 struct NotificationUser : Codable {

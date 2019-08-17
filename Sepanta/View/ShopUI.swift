@@ -73,13 +73,15 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
         if (NetworkManager.shared.userPointsObs.value.status ?? "").count == 0 {
             NetworkManager.shared.run(API: "points-user", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
         }
-        NetworkManager.shared.userPointsObs
+        let userDisp = NetworkManager.shared.userPointsObs
             .filter({($0.status ?? "").count > 0})
             .share(replay: 1, scope: .whileConnected)
             .subscribe(onNext: { [unowned self] aUserPoint in
                 //print("Subscribed and Received : ",aUserPoint)
                 self.delegate.coordinator!.pushScores()
-            }).disposed(by: myDisposeBag)
+            })
+        userDisp.disposed(by: myDisposeBag)
+        disposeList.append(userDisp)
     }
     
     @objc func sepantaieTapped(sender : Any){
@@ -369,7 +371,7 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
 
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 10
-        NetworkManager.shared.postsObs
+        let postsDisp = NetworkManager.shared.postsObs
             .subscribe(onNext: {posts in
                 if posts.count == 0 {
                     if self.delegate.contentView.subviews.count == 0 {
@@ -391,7 +393,9 @@ class ShopUI : NSObject, UICollectionViewDelegateFlowLayout {
                     self.delegate.contentView.addSubview(self.collectionView)
                 }
 
-            }).disposed(by: myDisposeBag)
+            })
+        postsDisp.disposed(by: myDisposeBag)
+        disposeList.append(postsDisp)
         
     }
     

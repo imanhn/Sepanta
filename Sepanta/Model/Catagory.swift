@@ -15,14 +15,9 @@ import AlamofireImage
 import RxAlamofire
 
 class Catagory : NSObject,Codable {
-//    var content = String()
- //   var banner = String()
-//    var created_at = String()
-//    var updated_at = String()
     var image = String()
     var title = String()
     var id = Int()
-//    var shop_number = Int()
     var anUIImage : BehaviorRelay<UIImage> = BehaviorRelay(value: UIImage())
     var myDisposeBag = DisposeBag()
     

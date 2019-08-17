@@ -8,6 +8,19 @@
 
 import Foundation
 extension NSDictionary {
+    func toDictionary()->Dictionary<String,String>{
+        var swiftDictionary = Dictionary<String, String>()
+        
+        for key : Any in self.allKeys {
+            let stringKey = key as! String
+            if let keyValue = self.value(forKey: stringKey){
+                swiftDictionary[stringKey] = "\(keyValue)"
+            }
+        }
+        
+        return swiftDictionary
+    }
+    
     var toStringDictionary: Dictionary<String, String> {
         var swiftDictionary = Dictionary<String, String>()
         

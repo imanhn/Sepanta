@@ -13,6 +13,8 @@ class TermsView: UIView {
     
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var contentView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var okButton: UIButton!
     
     let kContent_XIB_NAME = "TermsView"
     

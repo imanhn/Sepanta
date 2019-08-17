@@ -14,7 +14,7 @@ import Alamofire
 import AlamofireImage
 
 class ShopsListDataSource {
-    var delegate : ShopListOwners
+    weak var delegate : ShopListOwners!
     var page = 1
     var last_page : Int!
     let myDisposeBag = DisposeBag()
@@ -66,17 +66,7 @@ class ShopsListDataSource {
                 print(" \(apiName) Response Code : ",ahttpURLRes.statusCode)
                 if let aresult = jsonResult as? NSDictionary {
                     let shops = self.processShopList(Result: aresult)
-                    /*
-                    var shops = [Shop]()
-                    let ashop = self.processShopList(Result: aresult).first!
-                    let idx = self.delegate.shopsObs.value.count
-                    for i in (idx+1)..<(idx+20){
-                        var newshop = ashop
-                        newshop.shop_id = i
-                        newshop.user_id = i
-                        shops.append(newshop)
-                    }
-                    */
+  
                     if self.page > 1 {
                         let unionShops = self.delegate.shopsObs.value.add(newShops: shops)
                         print("Union shops : ",unionShops.count)

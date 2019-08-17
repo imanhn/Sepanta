@@ -762,7 +762,7 @@ class JSONParser {
                 //print("aPostOrShop : ",aPostOrShop)
                 //print("shop_Name : ",aPostOrShop["shop_name"])
                 //print("Role = Shop and This is a Post")
-                var newPost = Post(id: 0, shop_id: 0, viewCount: 0, comments: [], isLiked: false, countLike: 0, title: "", content: "", image: "")
+                var newPost = Post()
                 newPost.id = (aPostOrShop["id"] as? Int) ?? 0
                 newPost.title = (aPostOrShop["title"] as? String) ?? ""
                 newPost.content = (aPostOrShop["content"] as? String) ?? ""
@@ -808,12 +808,13 @@ class JSONParser {
             if let aTitle = postDet["title"] as? String {aPost.title = aTitle}
             if let aContent = postDet["content"] as? String {aPost.content = aContent}
             if let anImage = postDet["image"] as? String {aPost.image = anImage}
-            if let aViewCount = postDet["viewCount"] as? Int {aPost.viewCount = aViewCount}
             //print("JSON Parser : Parsed Post : ",aPost)
+            print("postDet : ",postDet)
         }else{
             print("*** Error : Post Detail is NULL - Parser Failed!")
             NetworkManager.shared.messageObs.accept("این پست حذف شده است")
         }
+        
         if let someComments = aResult["comments"] as? NSArray {
             aPost.comments = [Comment]()
             for aComment in someComments {
@@ -836,14 +837,14 @@ class JSONParser {
             print("comments before case as Array : ",aResult["comments"] ?? "EMPTY Comment")
         }
 
-        if let aLike = aResult["is_like"] as? Bool {
+        if let aLike = aResult["is_like"] as? Int {
             print("Reading isLike : ",aLike)
-            aPost.isLiked = aLike
+            aPost.is_like = aLike
             
         }
-        if let aCountLike = aResult["count_like"] as? Int {
+        if let aCountLike = aResult["count_like"] as? String {
             print("Reading Count Like : ",aCountLike)
-            aPost.countLike = aCountLike
+            aPost.count_like = aCountLike
         }
 
         return aPost

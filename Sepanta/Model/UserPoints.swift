@@ -18,7 +18,14 @@ struct UserPoints : Codable{
     var message : String?
     var points_total : Int?
     var points : [PointElement]?
+    
     init() {
     }
     
+    enum CodingKeys : String , CodingKey{
+        case status
+        case message
+        case points_total = "points_total "
+        case points
+    }
 }

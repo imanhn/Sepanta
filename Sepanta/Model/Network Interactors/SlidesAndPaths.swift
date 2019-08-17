@@ -32,13 +32,13 @@ class SlidesAndPaths {
         NetworkManager.shared.run(API: "home", QueryString: "?user_id=\(LoginKey.shared.userID)", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
     }
 
-    func getNotifications(){
-        NetworkManager.shared.run(API: "notifications", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
-    }
+//    func getNotifications(){
+//        NetworkManager.shared.run(API: "notifications", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
+//    }
 
     private init() {
         self.getHomeData()
-        self.getNotifications()
+        //self.getNotifications()
     }
 
 }

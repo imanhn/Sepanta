@@ -62,7 +62,7 @@ class NetworkManager {
     var shopObs = BehaviorRelay<[Shop]>(value: [Shop]())
     var newShopObs = BehaviorRelay<[Shop]>(value: [Shop]())
     var favShopObs = BehaviorRelay<[Shop]>(value: [Shop]())
-    var postDetailObs = BehaviorRelay<Post>(value: Post(id: 0, shop_id: 0, viewCount: 0, comments: [], isLiked: false, countLike: 0, title: "", content: "", image: ""))
+    var postDetailObs = BehaviorRelay<Post>(value: Post())
     var postCommentsObs = BehaviorRelay<[Comment]>(value: [Comment]())
     var commentSendingSuccessful = BehaviorRelay<Bool>(value: false)
     var contactSendingSuccessful = BehaviorRelay<ToggleStatus>(value: ToggleStatus.UNKNOWN)
@@ -110,7 +110,7 @@ class NetworkManager {
         return escapedString!
     }
     func run(API apiName : String, QueryString aQuery : String, Method aMethod : HTTPMethod, Parameters aParameter : Dictionary<String, String>?, Header  aHeader : HTTPHeaders? ,WithRetry : Bool,TargetObs targetObs : String = "") {
-        
+
         var retryTime = 4
         var timeOut : Double = 5
         if WithRetry == false {

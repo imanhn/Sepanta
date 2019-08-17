@@ -32,7 +32,7 @@ class Endpoints<T:Codable> {
     }
 }
 
-final class getProfileInfo : Endpoints<Profile>{
+final class getProfile : Endpoints<Profile>{
     init(){
         super.init(API: "profile", Method: HTTPMethod.post, Parameters: ["user id":LoginKey.shared.userID], Retry: 3, Timeout: 10)
     }
@@ -85,3 +85,93 @@ final class setRate : Endpoints<Rate>{
         super.init(API: "rating", Method: HTTPMethod.post, Parameters: ["rate":rate,"shop_id":"\(shopid)"], Retry: 3, Timeout: 10)
     }
 }
+
+final class getProfileInfo : Endpoints<ProfileInfo>{
+    init(){
+        super.init(API: "profile-info", Method: HTTPMethod.get, Parameters: nil, Retry: 3, Timeout: 10)
+    }
+}
+
+final class setProfileInfo : Endpoints<ProfileInfo>{
+    init(ProfileInfo aprofileInfo : ProfileInfo){
+        super.init(API: "profile-info", Method: HTTPMethod.post, Parameters: aprofileInfo.encodeToDictionary(), Retry: 3, Timeout: 10)
+    }
+}
+
+final class getFavoriteList : Endpoints<FavoriteList>{
+    init(){
+        super.init(API: "favorite", Method: HTTPMethod.get, Parameters: nil, Retry: 3, Timeout: 10)
+    }
+}
+
+final class toggleFavorite : Endpoints<MakeFavorite>{
+    init(ShopId : String){
+        super.init(API: "favorite", Method: HTTPMethod.post, Parameters: ["shop_id":ShopId], Retry: 3, Timeout: 10)
+    }
+}
+
+final class toggleFollow : Endpoints<Follow>{
+    init(ShopId : String){
+        super.init(API: "follow-unfollow-request", Method: HTTPMethod.post, Parameters: ["shop id":ShopId], Retry: 3, Timeout: 10)
+    }
+}
+
+final class getShopsLocation : Endpoints<ShopsLocation>{
+    init(lat : Double,long : Double){
+        super.init(API: "shops-location", Method: HTTPMethod.post, Parameters: ["lat":lat,"long":long], Retry: 3, Timeout: 10)
+    }
+}
+
+final class sendContactUs : Endpoints<Contact>{
+    init(title : String,body : String){
+        super.init(API: "contact", Method: HTTPMethod.post, Parameters: ["title":title,"body":body], Retry: 3, Timeout: 10)
+    }
+}
+
+final class getLastCard : Endpoints<LastCard>{
+    init(){
+        super.init(API: "last-card", Method: HTTPMethod.get, Parameters: nil, Retry: 3, Timeout: 10)
+    }
+}
+
+
+final class getPointsScore : Endpoints<UserPoints>{
+    init(){
+        super.init(API: "points-user", Method: HTTPMethod.get, Parameters: nil, Retry: 3, Timeout: 10)
+    }
+}
+
+final class getPostDetails : Endpoints<Post>{
+    init(PostID : Int){
+        super.init(API: "post-details", Method: HTTPMethod.post, Parameters: ["post_id":PostID], Retry: 3, Timeout: 10)
+    }
+}
+
+final class reportComment : Endpoints<GenericNetworkResponse>{
+    init(CommentID : Int,Description : String){
+        super.init(API: "report-comment", Method: HTTPMethod.post, Parameters: ["comment_id":CommentID,"description":Description], Retry: 1, Timeout: 10)
+    }
+}
+
+final class reportPost : Endpoints<GenericNetworkResponse>{
+    init(PostID : Int,Description : String){
+        super.init(API: "report-post", Method: HTTPMethod.post, Parameters: ["post_id":PostID,"description":Description], Retry: 1, Timeout: 10)
+    }
+}
+
+final class getCatagoryShops : Endpoints<ShopList>{
+
+    init(CategoryID : Int){
+        // Slug = 3 for the whole country
+        super.init(API: "category-shops-list", Method: HTTPMethod.post, Parameters: ["category_id":"\(CategoryID)","slug":"3"], Retry: 3, Timeout: 10)
+    }
+
+    init(CategoryID : Int,Slug : Int,Code : Int){
+        // For both City and State this is the method
+        // Slug = 2 for City and code should by city code
+        // Slug = 1 for State and code should be state code
+        super.init(API: "category-shops-list", Method: HTTPMethod.post, Parameters: ["category_id":"\(CategoryID)","slug":"\(Slug)","code":"\(Code)"], Retry: 3, Timeout: 10)
+    }
+
+}
+

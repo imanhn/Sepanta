@@ -112,10 +112,13 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
         self.shopUI!.showContacts()
     }
     
-    @objc override func willPop() {
+    @objc override func willPop() {        
+        if (shopUI != nil) {shopUI.disposeList.forEach({$0.dispose()})}
         shopUI = nil
         NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: Profile())
         NetworkManager.shared.shopFav = BehaviorRelay<ToggleStatus>(value: ToggleStatus.UNKNOWN)
+        disposeList.forEach({$0.dispose()})
+        
     }
 
     @IBAction func homeTapped(_ sender: Any) {
@@ -145,12 +148,23 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
                 }else{
                     self.favButton.setImage(UIImage(named: "icon_star_fav_dark"), for: .normal)
                 }
+            }        
+            if let shop_id = self.shop.shop_id {
+                let toggleFavDisp = toggleFavorite(ShopId: "\(shop_id)")
+                    .results()
+                    .subscribe(onNext: {makeFav in
+                        if makeFav.isFave == "1" {
+                            // Make favorite
+                            self.favButton.setImage(UIImage(named: "icon_star_fav_dark"), for: .normal)
+                        }else{
+                            // Remove from Faborites
+                            self.favButton.setImage(UIImage(named: "icon_star_fav_gray"), for: .normal)
+                        }
+                    }, onError: { _ in })
+                toggleFavDisp.disposed(by: myDisposeBag)
+                disposeList.append(toggleFavDisp)
             }
         }
-        let aParameter = ["shop_id":"\(self.shop.shop_id ?? 0)"]
-        NetworkManager.shared.run(API: "favorite", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
-        // Update Favorite list
-        NetworkManager.shared.run(API: "favorite", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil, WithRetry: false)
     }
     
     
@@ -161,28 +175,13 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     
     func getShopFromServer() {
         NetworkManager.shared.shopProfileObs = BehaviorRelay<ShopProfile>(value: ShopProfile())
-//        print(" USERS : ","\(shop.user_id)" ," VS  ",LoginKey.shared.userID)
-//       print("LoginKey.shared.role : ",LoginKey.shared.role)
-/*        if LoginKey.shared.role == "Shop" && "\(shop.user_id ?? 0)" == LoginKey.shared.userID{
-            // a User with Shop role is visiting his Shop profile
-            print("You are visiting your shop with UserID : ",self.shop.user_id)
-            guard self.shop.user_id != 0 && self.shop.user_id != nil else {
-                alert(Message: "اظلاعات فروشگاه شما کامل نیست لطفاْ با پشتیبانی تماس بگیرید")
-                return
-            }
-            let aParameter = ["user id":"\(self.shop.user_id!)"]
-            NetworkManager.shared.run(API: "profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true,TargetObs: "SHOP")
-
-        }else{*/
-            //a Shop is being shown to a user(any role)
-            print("a Shop is being shown to a user(any role) shopID : ",self.shop.shop_id)
-            guard self.shop.shop_id != 0 && self.shop.shop_id != nil else {
-                alert(Message: "اظلاعات این فروشگاه کامل نیست")
-                return
-            }
-            let aParameter = ["shop_id":"\(self.shop.shop_id!)"]
-            NetworkManager.shared.run(API: "shop-profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
-      //  }
+        print("a Shop is being shown to a user(any role) shopID : ",self.shop.shop_id)
+        guard self.shop.shop_id != 0 && self.shop.shop_id != nil else {
+            alert(Message: "اظلاعات این فروشگاه کامل نیست")
+            return
+        }
+        let aParameter = ["shop_id":"\(self.shop.shop_id!)"]
+        NetworkManager.shared.run(API: "shop-profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
 
     }
     

@@ -544,11 +544,12 @@ class GetRichUI : NSObject , UITextFieldDelegate {
         texts["regionText"]?.addTarget(self, action: #selector(selectRegionTapped), for: .touchDown)
         views["leftFormView"]?.addSubview(views["regionView"]!)
         cursurY = cursurY + buttonHeight + marginY
-
+        
+/*
         (views["orgView"],texts["orgText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "three-buildings", Selectable: false, PlaceHolderText: "نام سازمان")
         views["leftFormView"]?.addSubview(views["orgView"]!)
         cursurY = cursurY + buttonHeight + marginY
-
+*/
         
         let checkFont = UIFont(name: "Shabnam-FD", size: 12)!
         let newCardText = "درخواست کارت جدید"

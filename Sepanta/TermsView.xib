@@ -18,14 +18,16 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="TermView" customClass="TermView">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="TermView" customClass="TermsView" customModule="Sepanta" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="o1d-H4-AJV"/>
+                <outlet property="okButton" destination="dcg-SF-5uX" id="aZ5-1d-uXd"/>
                 <outlet property="textView" destination="E07-Du-cuH" id="IJh-Ri-ESw"/>
+                <outlet property="titleLabel" destination="OjV-tY-33p" id="kad-PT-PcG"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="Content View">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="TermsView">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
