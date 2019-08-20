@@ -15,7 +15,6 @@ import RxSwift
 import RxBlocking
 
 @testable import Sepanta
-
 class NetworkLayerTests: XCTestCase {
     
     override func setUp() {

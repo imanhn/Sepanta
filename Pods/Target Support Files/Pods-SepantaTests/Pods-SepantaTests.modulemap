@@ -1,0 +1,6 @@
+module Pods_SepantaTests {
+  umbrella header "Pods-SepantaTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+module Pods_Sepanta {
+  umbrella header "Pods-Sepanta-umbrella.h"
+
+  export *
+  module * { export * }
+}
