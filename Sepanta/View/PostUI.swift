@@ -155,7 +155,7 @@ class PostUI {
         
         var cursorX = self.marginX
         //print("innerPost : ",innerPost)
-        print("innerPostLIKE : ",innerPost.is_like)
+        print("innerPostLIKE : ",innerPost.is_like ?? "")
         if innerPost.is_like == 0 {
             likeButton.setImage(UIImage(named: "icon_like"), for: .normal)
         }else{
@@ -165,7 +165,7 @@ class PostUI {
         likeButton.frame = CGRect(x: cursorX, y: self.cursurY, width: buttonDim, height: buttonDim)
         self.delegate.postScrollView.addSubview(likeButton)
         cursorX = cursorX + buttonDim + self.marginX/2
-        print("innerPost.countLike : ",innerPost.count_like,"  ",countPostLikes)
+        print("innerPost.countLike : ",innerPost.count_like ?? "","  ",countPostLikes)
         var likeNoString = "\(innerPost.count_like ?? "0")"
         if countPostLikes != -1 {
             likeNoString = "\(self.countPostLikes)"

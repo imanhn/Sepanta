@@ -111,9 +111,9 @@ class ShowProfileUI : NSObject,UICollectionViewDelegateFlowLayout {
             self?.delegate.clubNumLabel.text = "\(aProfile.follow_count ?? 0)"
             //print("aProfile.content : ",aProfile.content)
             if LoginKey.shared.role == "Shop" {
-                self?.posts.accept(aProfile.content as! [Post])
+                //self?.posts.accept(aProfile.content as! [Post])
             }else{
-                self?.shops.accept(aProfile.content as! [Shop])
+                //self?.shops.accept(aProfile.content as! [Shop])
             }
         }).disposed(by: myDisposeBag)
     }

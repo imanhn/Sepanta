@@ -29,7 +29,7 @@ class SepantaGroupButtons {
         let targetCatagory = self.getCatagory(ByID: theButton.tag!)
         let selectedCity = self.delegate.currentCityCodeObs.value//self.delegate.selectCity.text
         let selectedState = self.delegate.currentStateCodeObs.value//self.delegate.selectProvince.text
-        print("State: ",self.delegate.selectedStateStr,"City: ",self.delegate.selectedCityStr)
+        print("State: ",self.delegate.selectedStateStr ?? "","City: ",self.delegate.selectedCityStr ?? "")
         self.delegate.coordinator!.pushAGroup(GroupID: targetCatagory.id, GroupImage: targetCatagory.anUIImage.value, GroupName: targetCatagory.title,State: selectedState,City: selectedCity,StateStr: self.delegate.selectedStateStr,CityStr: self.delegate.selectedCityStr )
     }
         

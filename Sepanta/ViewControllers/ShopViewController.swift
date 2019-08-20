@@ -175,7 +175,7 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     
     func getShopFromServer() {
         NetworkManager.shared.shopProfileObs = BehaviorRelay<ShopProfile>(value: ShopProfile())
-        print("a Shop is being shown to a user(any role) shopID : ",self.shop.shop_id)
+        print("a Shop is being shown to a user(any role) shopID : ",self.shop.shop_id ?? "")
         guard self.shop.shop_id != 0 && self.shop.shop_id != nil else {
             alert(Message: "اظلاعات این فروشگاه کامل نیست")
             return

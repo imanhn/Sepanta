@@ -149,7 +149,7 @@ struct ProfileInfo : Codable{
         let mirror = Mirror(reflecting: elm)
         var dic : Dictionary<String,String> = [:]
         for child in mirror.children  {
-            print("key: \(child.label as? String ?? ""), value: \(child.value as? String ?? "")")
+            print("key: \(child.label ?? ""), value: \(child.value as? String ?? "")")
             dic[child.label!] = (child.value as? String) ?? ""
         }
         return dic

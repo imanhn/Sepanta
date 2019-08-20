@@ -39,7 +39,7 @@ final class ApiClient {
                         }
                         do {
                             let strData = String(data: data, encoding: .utf8)
-                            print("Data : ",strData)
+                            print("Data : ",strData ?? "")
                             let decodedData = try JSONDecoder().decode(T.self, from: data)
                             print("DecodedData : ",decodedData)
                             observer.onNext(decodedData)

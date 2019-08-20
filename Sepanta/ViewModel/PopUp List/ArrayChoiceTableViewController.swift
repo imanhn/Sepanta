@@ -1,7 +1,10 @@
-// Copyright 2018, Ralf Ebert
-// License   https://opensource.org/licenses/MIT
-// License   https://creativecommons.org/publicdomain/zero/1.0/
-// Source    https://www.ralfebert.de/ios-examples/uikit/choicepopover/
+//
+//  ArrayChoiceTableViewController.swift
+//  Sepanta
+//
+//  Created by Iman on 11/13/1397 AP.
+//  Copyright © 1397 AP Imzich. All rights reserved.
+//
 
 import UIKit
 

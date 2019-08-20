@@ -810,7 +810,7 @@ class GetRichUI : NSObject , UITextFieldDelegate {
             (selectedOption) in
             aTextField.text = selectedOption
             aTextField.sendActions(for: .valueChanged)
-            self.regionCode = "\(innerRegionList.index(of: selectedOption))"
+            self.regionCode = "\(String(describing: innerRegionList.index(of: selectedOption)))"
         }
         controller.preferredContentSize = CGSize(width: 250, height: 300)
         self.delegate.showPopup(controller, sourceView: aTextField)
