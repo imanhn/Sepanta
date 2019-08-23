@@ -25,14 +25,11 @@ class HomeCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
 
     func removeChild(_ aCoordinator: Coordinator) {
 
-        for (index, coordinator) in childCoordinators.enumerated() {
-            if (coordinator === aCoordinator) {
-                childCoordinators.remove(at: index)
-                print("     HomeCoord Removing ", aCoordinator)
-                break
-            }
+        for (index,coordinator) in childCoordinators.enumerated() where coordinator === aCoordinator {
+            childCoordinators.remove(at: index)
+            print("     HomeCoord Removing ", aCoordinator)
+            break
         }
-
     }
 
     func launchMenuSelection(_ aRow: Int) {
@@ -40,23 +37,18 @@ class HomeCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         case 0:
             popHome()
             pushShowProfile()
-            break
         case 1:
             popHome()
             pushSepantaieGroup()
-            break
         case 2:
             popHome()
             pushNearest()
-            break
         case 3:
             popHome()
             pushNewShops()
-            break
         case 4:
             popHome()
             pushGetRich("")
-            break
         case 5:
             popHome()
             let aMessage = "جهت مشاهده شرایط و اخذ نمایندگی به وب سایت ما مراجعه فرمایید"
@@ -68,20 +60,14 @@ class HomeCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
 
                 }, CancelAction: {})
             }
-            //navigationController.topViewController?
-            break
         case 6:
             popHome()
             pushAboutUs()
-            break
         case 7:
             popHome()
             pushContactUs()
-            break
         case 8:
             print("Menu Logout!")
-            break
-
         default:
             print("Wrong Menu Number")
             fatalError()
@@ -201,7 +187,7 @@ class HomeCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
-
+    // swiftlint:disable function_parameter_count
     func pushAGroup(GroupID anID: Int, GroupImage anImage: UIImage, GroupName aName: String, State astate: String?, City acity: String?, StateStr astateStr: String?, CityStr acityStr: String?) {
         let storyboard = UIStoryboard(name: "SepantaGroup", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupViewController") as! GroupViewController

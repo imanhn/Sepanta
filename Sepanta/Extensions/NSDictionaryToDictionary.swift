@@ -8,8 +8,8 @@
 
 import Foundation
 extension NSDictionary {
-    func toDictionary()->Dictionary<String, String> {
-        var swiftDictionary = Dictionary<String, String>()
+    func toDictionary()->[String:String] {
+        var swiftDictionary = [String:String]()
 
         for key: Any in self.allKeys {
             let stringKey = key as! String
@@ -21,8 +21,8 @@ extension NSDictionary {
         return swiftDictionary
     }
 
-    var toStringDictionary: Dictionary<String, String> {
-        var swiftDictionary = Dictionary<String, String>()
+    var toStringDictionary: [String:String] {
+        var swiftDictionary = [String:String]()
 
         for key: Any in self.allKeys {
             let stringKey = key as! String

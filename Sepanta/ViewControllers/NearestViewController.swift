@@ -27,8 +27,8 @@ class NearestViewController: UIViewControllerWithErrorBar, XIBView, CLLocationMa
     var pinPointName: String!
     var locationManager: CLLocationManager!
     var destinationCRD: CLLocationCoordinate2D!
-    var annotations: Dictionary<Int, MKAnnotation> = Dictionary<Int, MKAnnotation>()
-    var installedNavigationApps: Dictionary<String, String> = ["Apple Maps": ""]
+    var annotations = [Int : MKAnnotation]()
+    var installedNavigationApps = ["Apple Maps": ""]
     //var myLocation = CLLocation(latitude: 35.755985, longitude: 51.546742)
     var myLocation: CLLocation?
     var oldLocation: CLLocation?

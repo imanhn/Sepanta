@@ -19,12 +19,10 @@ class AppCoordinator: Coordinator {
 
     func removeChild(_ aCoordinator: Coordinator) {
 
-        for (index, coordinator) in childCoordinators.enumerated() {
-            if (coordinator === aCoordinator) {
-                childCoordinators.remove(at: index)
-                print("     AppCoord Removing ", aCoordinator)
-                break
-            }
+        for (index, coordinator) in childCoordinators.enumerated() where coordinator === aCoordinator {
+            childCoordinators.remove(at: index)
+            print("     AppCoord Removing ", aCoordinator)
+            break
         }
 
     }

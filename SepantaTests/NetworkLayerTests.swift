@@ -15,6 +15,8 @@ import RxSwift
 import RxBlocking
 
 @testable import Sepanta
+
+// swiftlint:disable xctfail_message
 class NetworkLayerTests: XCTestCase {
 
     override func setUp() {

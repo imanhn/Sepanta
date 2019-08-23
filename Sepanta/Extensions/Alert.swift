@@ -47,10 +47,8 @@ extension UIViewController {
     }
 
     func showQuestion(Message aMessage: String, OKLabel okLabel: String, CancelLabel cancelLabel: String, OkAction : @escaping actionFunction = {}, CancelAction : @escaping actionFunction = {}) -> UIView? {
-        for av in self.view.subviews {
-            if av.tag == 123 {
-                return nil
-            }
+        for av in self.view.subviews where av.tag == 123 {
+            return nil
         }
         let marginX = self.view.frame.width / 30
         let textFont = UIFont (name: "Shabnam FD", size: 13)!
@@ -111,10 +109,8 @@ extension UIViewController {
         }
     }
     func showDarkQuestion(Message aMessage: String, OKLabel okLabel: String, CancelLabel cancelLabel: String, OkAction : @escaping actionFunction = {}, CancelAction : @escaping actionFunction = {}) {
-        for av in self.view.subviews {
-            if av.tag == 123 {
-                return
-            }
+        for av in self.view.subviews where av.tag == 123 {
+            return
         }
         let offsetY = (self.view.frame.height) / 4
         let offsetX: CGFloat = 20
@@ -160,10 +156,8 @@ extension UIViewController {
     }
 
     func showAlertWithOK(Message aMessage: String, OKLabel okLabel: String, Completion anAction: @escaping actionFunction = {}) {
-        for av in self.view.subviews {
-            if av.tag == 123 {
-                return
-            }
+        for av in self.view.subviews where av.tag == 123 {
+            return
         }
         let marginX = self.view.frame.width / 30
         let textFont = UIFont (name: "Shabnam FD", size: 13)!

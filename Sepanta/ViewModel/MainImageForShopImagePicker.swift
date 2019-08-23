@@ -7,16 +7,6 @@
 //
 
 import Foundation
-//
-//  AddPostImagePicker.swift
-//  Sepanta
-//
-//  Created by Iman on 2/12/1398 AP.
-//  Copyright © 1398 AP Imzich. All rights reserved.
-//
-
-import Foundation
-import Foundation
 import UIKit
 import Alamofire
 import RxAlamofire

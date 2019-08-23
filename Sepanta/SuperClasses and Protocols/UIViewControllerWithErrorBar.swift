@@ -27,10 +27,8 @@ class UIViewControllerWithErrorBar: UIViewController, ReloadableViewController {
     }
 
     func showInternetDisconnection() {
-        for av in self.view.subviews {
-            if av.tag == 123456 {
-                return
-            }
+        for av in self.view.subviews where av.tag == 123456 {
+            return
         }
         let textFont = UIFont (name: "Shabnam FD", size: 13)!
         let aView = UIView(frame: CGRect(x: 0, y: -(self.view.frame.height*0.1), width: self.view.frame.width, height: self.view.frame.height*0.1))

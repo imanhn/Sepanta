@@ -20,7 +20,7 @@ extension SepantaGroupsViewController {
         let stateDisp = self.currentStateCodeObs
             .filter({$0 != ""})
             .subscribe(onNext: { (innerCurrentState) in
-                let aParameter: Dictionary<String, String> = [
+                let aParameter: [String:String] = [
                     "state code": innerCurrentState
                 ]
                 self.fetchCatagories(aParameter)
@@ -31,7 +31,7 @@ extension SepantaGroupsViewController {
         let cityDisp = self.currentCityCodeObs
             .filter({$0 != ""})
             .subscribe(onNext: {  (innerCurrentCity) in
-                let aParameter: Dictionary<String, String> = [
+                let aParameter: [String:String] = [
                     "city_code": innerCurrentCity
                 ]
                 self.fetchCatagories(aParameter)
@@ -80,8 +80,7 @@ extension SepantaGroupsViewController {
             .subscribe(onNext: { [unowned self] (innerCatProvinceListObs) in
                 print("innerCatProvinceListObs : ", innerCatProvinceListObs.count)
                 let filteredList = innerCatProvinceListObs.filter({$0.count > 1})
-                let controller = ArrayChoiceTableViewController(filteredList) {
-                    (selectedOption) in
+                let controller = ArrayChoiceTableViewController(filteredList) { (selectedOption) in
                     self.selectProvince.text = selectedOption
                     self.selectedStateStr = selectedOption
                     self.selectedCityStr = nil
@@ -97,7 +96,7 @@ extension SepantaGroupsViewController {
 
     }
 
-    func fetchCatagories(_ parameters: Dictionary<String, String>?) {
+    func fetchCatagories(_ parameters: [String:String]?) {
         var aMethod = HTTPMethod.get
         if parameters != nil { aMethod = HTTPMethod.post}
         NetworkManager.shared.run(API: "categories-filter", QueryString: "", Method: aMethod, Parameters: parameters, Header: nil, WithRetry: true)
