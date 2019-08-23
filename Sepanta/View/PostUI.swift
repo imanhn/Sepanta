@@ -397,12 +397,11 @@ class PostUI {
             //menuList = [abuse,del,edit]
         }
 
-        let controller = MenuLister(menuList) {
-            (selectedOption) in
+        let controller = MenuLister(menuList) { (selectedOption) in
             switch selectedOption {
-            case abuse : self.reportCommentAbuse(Comment: selectedComment!);break
-            case del : self.deleteComment(Comment: selectedComment!);break
-            case edit : self.editComment(Comment: selectedComment!);break
+            case abuse : self.reportCommentAbuse(Comment: selectedComment!)
+            case del : self.deleteComment(Comment: selectedComment!)
+            case edit : self.editComment(Comment: selectedComment!)
             default :
                 print("Should not get here, but if it gets its fine! really!")
             }

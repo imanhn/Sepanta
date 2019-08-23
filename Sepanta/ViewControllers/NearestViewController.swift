@@ -231,7 +231,6 @@ class NearestViewController: UIViewControllerWithErrorBar, XIBView, CLLocationMa
             if myLocation != nil {
                 centerMapOnLocation(Coordinate: myLocation!.coordinate)
             }
-            break
         case MapType.selectOnMap?:
             print("*** Select On  Map")
             let longPress = UILongPressGestureRecognizer(target: self, action: #selector(selectLocation))
@@ -240,11 +239,9 @@ class NearestViewController: UIViewControllerWithErrorBar, XIBView, CLLocationMa
             if myLocation != nil {
                 centerMapOnLocation(Coordinate: myLocation!.coordinate)
             }
-            break
         case MapType.SingleShop?:
             //print("Showing single shop")
             showSingleShop()
-            break
         default:
             print("Default Mode...")
             //getNearByShops()

@@ -781,8 +781,7 @@ class GetRichUI: NSObject, UITextFieldDelegate {
                                                           locationTextValid,
                                                           discountTextValid]) { (allChecks) -> Bool in
                                                             //print("ALL : ",allChecks)
-                                                            let reducedAllChecks = allChecks.reduce(true) {
-                                                                (accumulation: Bool, nextValue: Bool) -> Bool in
+                                                            let reducedAllChecks = allChecks.reduce(true) { (accumulation: Bool, nextValue: Bool) -> Bool in
                                                                 return accumulation && nextValue
                                                             }
                                                             //print("   Reduced to \(reducedAllChecks)")
@@ -799,8 +798,7 @@ class GetRichUI: NSObject, UITextFieldDelegate {
             return
         }
         let innerRegionList = NetworkManager.shared.regionListObs.value
-        let controller = ArrayChoiceTableViewController(innerRegionList.filter({$0.count > 0})) {
-            (selectedOption) in
+        let controller = ArrayChoiceTableViewController(innerRegionList.filter({$0.count > 0})) { (selectedOption) in
             aTextField.text = selectedOption
             aTextField.sendActions(for: .valueChanged)
             self.regionCode = "\(String(describing: innerRegionList.index(of: selectedOption)))"
