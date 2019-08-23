@@ -10,35 +10,35 @@ import Foundation
 import UIKit
 import RxDataSources
 
-protocol ShopOrPost : Codable{
-    var shop_id : Int? {get set}
-    var image : String? {get set}
+protocol ShopOrPost: Codable {
+    var shop_id: Int? {get set}
+    var image: String? {get set}
 }
 
-struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
+struct Shop: ShopOrPost, IdentifiableType, Equatable, Codable {
     static func == (lhs: Shop, rhs: Shop) -> Bool {
-        if lhs.identity == rhs.identity { return true }else{return false}
+        if lhs.identity == rhs.identity { return true } else {return false}
     }
-    private var id : Int? //Virtual field just make Decoder work for Network response that return id instead of shop_id (shop in [Content] of Profile
-    var shop_id : Int?
-    var user_id : Int?
-    var shop_name : String?
-    var shop_off : String?
-    var lat : Double?
-    var lon : Double?
-    var image : String?
-    var rate : String?
-    var rate_count : Int?
-    var follower_count : Int?
-    var created_at : String?
-    var category_id : Int?
-    var category_logo : String?
-    var shop_logo_map : String?
+    private var id: Int? //Virtual field just make Decoder work for Network response that return id instead of shop_id (shop in [Content] of Profile
+    var shop_id: Int?
+    var user_id: Int?
+    var shop_name: String?
+    var shop_off: String?
+    var lat: Double?
+    var lon: Double?
+    var image: String?
+    var rate: String?
+    var rate_count: Int?
+    var follower_count: Int?
+    var created_at: String?
+    var category_id: Int?
+    var category_logo: String?
+    var shop_logo_map: String?
     var identity: Int {
         return shop_id ?? user_id ?? 0
     }
-    
-    mutating func updateFromProfile(Profile aprofile : ShopProfile){
+
+    mutating func updateFromProfile(Profile aprofile: ShopProfile) {
         user_id = aprofile.id
         shop_id = aprofile.shop_id
         shop_off = aprofile.shop_off
@@ -50,21 +50,21 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
         shop_name = aprofile.shop_name
         follower_count = aprofile.follower_count
     }
-    init(){
-        
+    init() {
+
     }
-    
-    init(WithUserID auserId : Int?){
+
+    init(WithUserID auserId: Int?) {
         self.init()
         self.user_id = auserId
     }
-    
-    init(WithShopID ashopid : Int?){
+
+    init(WithShopID ashopid: Int?) {
         self.init()
         self.shop_id = ashopid
     }
-    
-    init(shop_id: Int? = 0, user_id: Int? = 0, shop_name: String? = "", shop_off: String? = "0" , lat: Double? = 0.0, lon: Double? = 0.0, image: String? = "", rate: String? = "", rate_count: Int? = 0, follower_count: Int? = 0, created_at: String? = ""){
+
+    init(shop_id: Int? = 0, user_id: Int? = 0, shop_name: String? = "", shop_off: String? = "0", lat: Double? = 0.0, lon: Double? = 0.0, image: String? = "", rate: String? = "", rate_count: Int? = 0, follower_count: Int? = 0, created_at: String? = "") {
         self.shop_id = shop_id
         self.user_id = user_id
         self.shop_name = shop_name
@@ -77,102 +77,102 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
         self.follower_count = follower_count
         self.created_at = created_at
     }
-    
-    init(from decoder : Decoder) throws {
+
+    init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         do {
             shop_id = try values.decode(Int.self, forKey: .id)
             id = shop_id
-        }catch{
+        } catch {
             if (shop_id == nil) {
                 do {
                     shop_id = try values.decode(Int.self, forKey: .shop_id)
                     id = shop_id
-                }catch{
+                } catch {
                     print("id or shop_id not found while decoding!")
                     //fatalError()
                 }
-                
+
             }
         }
         if values.contains(.user_id) {
-            do{
+            do {
                 user_id = try values.decode(Int.self, forKey: .user_id)
-            }catch{
+            } catch {
                 print("Decoder Error : user_id can not be casted")
                 //fatalError()
             }
         }
         if values.contains(.shop_name) {
-            do{
+            do {
                 shop_name = try values.decode(String.self, forKey: .shop_name)
-            }catch{
+            } catch {
                 print("Decoder Error : shop_name can not be casted")
                 //fatalError()
             }
         }
         if values.contains(.shop_off) {
-            do{
+            do {
                 shop_off = try values.decode(String.self, forKey: .shop_off)
-            }catch{
+            } catch {
                 do {
                     shop_off = try "\(values.decode(Float.self, forKey: .shop_off))"
-                }catch{
+                } catch {
                     print("Decoder Error 2nd Try Float->String: shop_off can not be casted")
                     //fatalError()
                 }
             }
         }
         if values.contains(.rate) {
-            do{
+            do {
                 rate = try values.decode(String.self, forKey: .rate)
-            }catch{
+            } catch {
                 print("Decoder Error 1st String->String: rate can not be casted")
                 do {
                     rate = try "\(values.decode(Float.self, forKey: .rate))"
-                }catch{
+                } catch {
                     print("Decoder Error 2st Float->String: rate can not be casted")
                     //fatalError()
                 }
-                
+
             }
         }
         if values.contains(.rate_count) {
-            do{
+            do {
                 rate_count = try values.decode(Int.self, forKey: .rate_count)
-            }catch{
+            } catch {
                 print("Decoder Error 1st Int->String: rate_count can not be casted")
                 //fatalError()
             }
         }
         if values.contains(.follower_count) {
-            do{
+            do {
                 follower_count = try values.decode(Int.self, forKey: .follower_count)
-            }catch{
+            } catch {
                 print("Decoder Error 1st Int->String: follower_count can not be casted")
                 //fatalError()
             }
         }
         if values.contains(.created_at) {
-            do{
+            do {
                 created_at = try values.decode(String.self, forKey: .created_at)
-            }catch{
+            } catch {
                 print("Decoder Error 1st String->String: created_at can not be casted")
                 //fatalError()
             }
         }
         if values.contains(.shop_logo_map) {
-            do{
+            do {
                 shop_logo_map  = try values.decode(String.self, forKey: .shop_logo_map)
-            }catch{
+            } catch {
                 print("Decoder Error 1st String->String: shop_logo_map can not be casted")
                 //fatalError()
             }
         }
         if values.contains(.image) {
-            do{
+            do {
                 image  = try values.decode(String.self, forKey: .image)
-            }catch{
+            } catch {
                 print("Decoder Error 1st String->String: image can not be casted")
                 //fatalError()
             }
@@ -181,13 +181,13 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
         if values.contains(.lat) {
             do {
                 lat = try values.decode(String.self, forKey: .lat).toDouble()
-            }catch{
+            } catch {
                 //print("Decoder Error 1st Try String->Double : Lat can not be casted")
             }
             if (lat == nil) {
                 do {
                     lat = try values.decode(Double.self, forKey: .lat)
-                }catch{
+                } catch {
                     print("Decoder Error 2nd Try Double->Double : Lat can not be casted")
                     //fatalError()
                 }
@@ -196,29 +196,29 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
         if values.contains(.lon) {
             do {
                 lon = try values.decode(String.self, forKey: .lon).toDouble()
-            }catch{
+            } catch {
                 //print("Decoder Error 1st Try String->Double : Lat can not be casted")
             }
             if (lon == nil) {
                 do {
                     lon = try values.decode(Double.self, forKey: .lon)
-                }catch{
+                } catch {
                     print("Decoder Error 2nd Try Double->Double : Lat can not be casted")
                     //fatalError()
                 }
             }
         }
-        
+
         if values.contains(.category_id) {
             do {
                 category_id = try values.decode(Int.self, forKey: .category_id)
-            }catch{
+            } catch {
                 //print("Decoder Error 1st Try String->Double : Lat can not be casted")
             }
             if (category_id == nil) {
                 do {
                     category_id = try Int(values.decode(String.self, forKey: .category_id))
-                }catch{
+                } catch {
                     print("Decoder Error 2nd Try String-Int -> Int : category_id can not be casted")
                     //fatalError()
                 }
@@ -228,15 +228,15 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
         if values.contains(.category_logo) {
             do {
                 category_logo = try values.decode(String.self, forKey: .category_logo)
-            }catch{
+            } catch {
                 print("Decoder Error : category_logo can not be casted")
                 //fatalError()
             }
         }
 
     }
-    
-    private enum CodingKeys : String, CodingKey {
+
+    private enum CodingKeys: String, CodingKey {
         case id
         case shop_id
         case user_id
@@ -255,8 +255,8 @@ struct Shop : ShopOrPost,IdentifiableType,Equatable,Codable {
     }
 }
 
-extension Array where Element:ShopOrPost{
-    func add(newShops : [Shop])->[Shop]{
+extension Array where Element: ShopOrPost {
+    func add(newShops: [Shop]) -> [Shop] {
         var ashop = self as! [Shop]
         newShops.forEach({
             if !self.map({$0.shop_id}).contains($0.shop_id) {ashop.append($0)}

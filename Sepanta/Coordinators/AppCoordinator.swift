@@ -12,25 +12,23 @@ import UIKit
 class AppCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
-    
+
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
-    
-    func removeChild(_ aCoordinator : Coordinator){
-        
-        for (index,coordinator) in childCoordinators.enumerated() {
+
+    func removeChild(_ aCoordinator: Coordinator) {
+
+        for (index, coordinator) in childCoordinators.enumerated() {
             if (coordinator === aCoordinator) {
                 childCoordinators.remove(at: index)
-                print("     AppCoord Removing ",aCoordinator)
+                print("     AppCoord Removing ", aCoordinator)
                 break
             }
         }
-        
+
     }
 
-
-    
     func start() {
         let homeCoordinator = HomeCoordinator(navigationController: navigationController)
         childCoordinators.append(homeCoordinator)

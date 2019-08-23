@@ -12,17 +12,17 @@ import RxSwift
 import RxCocoa
 
 class SlideController {
-    weak var delegate : HomeViewController!
+    weak var delegate: HomeViewController!
     var slideTimer: Timer?
     var disposeList = [Disposable]()
-    var adsPage = 1;
+    var adsPage = 1
     var startLocation = CGPoint(x: 0, y: 0)
     var endLocation = CGPoint(x: 0, y: 0)
-    var slides : [UIImage] = [UIImage(named: "logo_shape")!,UIImage(named: "logo_shape")!,UIImage(named: "logo_shape")!,UIImage(named: "logo_shape")!]
+    var slides: [UIImage] = [UIImage(named: "logo_shape")!, UIImage(named: "logo_shape")!, UIImage(named: "logo_shape")!, UIImage(named: "logo_shape")!]
     var aPanStarted = false
     let myDisposeBag = DisposeBag()
-    
-    init(parentController : HomeViewController){
+
+    init(parentController: HomeViewController) {
         self.delegate = parentController
         setupLeftAndRightImages()
         self.delegate.pageControl.numberOfPages = slides.count
@@ -37,21 +37,21 @@ class SlideController {
                 //print("  slides : ",self.slides)
                 self.setupLeftAndRightImages()
             }, onError: {_ in
-                
+
             }, onCompleted: {
-                
+
             }, onDisposed: {
-                
+
             })
         slideObs.disposed(by: myDisposeBag)
         disposeList.append(slideObs)
         startTimer()
     }
-    
-    func startTimer(){
+
+    func startTimer() {
         if slideTimer == nil {
             slideTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(updateSlide), userInfo: nil, repeats: true)
-        }else{
+        } else {
             slideTimer?.invalidate()
             slideTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(updateSlide), userInfo: nil, repeats: true)
         }
@@ -62,13 +62,13 @@ class SlideController {
             slideTimer?.invalidate()
         }
     }
-    
-    @objc func updateSlide(){
+
+    @objc func updateSlide() {
         if self.delegate == nil {return}
         if self.adsPage == self.slides.count - 1 {
             self.adsPage = 0
-        }else{
-            self.adsPage = self.adsPage + 1
+        } else {
+            self.adsPage += 1
         }
         let animDurationInterval = 0.3
         UIView.animate(withDuration: animDurationInterval, animations: {
@@ -84,10 +84,10 @@ class SlideController {
             self.setupLeftAndRightImages()
         }
     }
-    @objc func handlePan(_ sender:UIPanGestureRecognizer) {
+    @objc func handlePan(_ sender: UIPanGestureRecognizer) {
         if self.delegate == nil {return}
         //print("Pan Status : ",aPanStarted," State : ",sender.state)
-        let panStartLocation = sender.location(in: self.delegate.slideView)        
+        let panStartLocation = sender.location(in: self.delegate.slideView)
         if (sender.state == UIGestureRecognizerState.began && isOnSlideView(panStartLocation)) {
             //print("Pan STARTED")
             startLocation = sender.location(in: self.delegate.view)
@@ -100,14 +100,14 @@ class SlideController {
             let animDurationInterval = TimeInterval(1/(abs(sender.velocity(in: self.delegate.view).x/1000)))
             //print("Velocity : ",sender.velocity(in: self.delegate.view))
             let deltaX = endLocation.x - startLocation.x
-            if (deltaX > 40) && (adsPage > 0)  {
+            if (deltaX > 40) && (adsPage > 0) {
                 //print("Sliding to left ",self.adsPage)
                 UIView.animate(withDuration: animDurationInterval, animations: {
                     self.delegate.currentImageView.layer.frame = CGRect(x: UIScreen.main.bounds.width, y: self.delegate.currentImageView.layer.frame.origin.y, width: self.delegate.currentImageView.layer.bounds.width, height: self.delegate.currentImageView.layer.bounds.height)
                     self.delegate.leftImageView.layer.frame = CGRect(x: 0, y: self.delegate.leftImageView.layer.frame.origin.y, width: self.delegate.leftImageView.layer.bounds.width, height: self.delegate.leftImageView.layer.bounds.height)
                 }) { _ in
                     if self.adsPage < 1 {return}
-                    self.adsPage = self.adsPage - 1
+                    self.adsPage -= 1
                     //Temporary make current the left image so when moving back the frames it would be felt by the user
                     self.delegate.currentImageView.image = self.delegate.leftImageView.image
                     //Moving back frames to their original location
@@ -115,7 +115,7 @@ class SlideController {
                     self.delegate.leftImageView.layer.frame = CGRect(x: -1 * UIScreen.main.bounds.width, y: self.delegate.leftImageView.layer.frame.origin.y, width: self.delegate.leftImageView.layer.bounds.width, height: self.delegate.leftImageView.layer.bounds.height)
                     self.setupLeftAndRightImages()
                 }
-                
+
             } else if (deltaX < -40) && (adsPage < slides.count-1) {
                 //print("Sliding to right ",self.adsPage)
                 UIView.animate(withDuration: animDurationInterval, animations: {
@@ -123,7 +123,7 @@ class SlideController {
                     self.delegate.rightImageView.layer.frame = CGRect(x: 0, y: self.delegate.rightImageView.layer.frame.origin.y, width: self.delegate.rightImageView.layer.bounds.width, height: self.delegate.rightImageView.layer.bounds.height)
                 }) { _ in
                     if self.adsPage > self.slides.count-2 {return}
-                    self.adsPage = self.adsPage + 1
+                    self.adsPage += 1
                     //Temporary make current the right image so when moving back the frames it would be felt by the user
                     self.delegate.currentImageView.image = self.delegate.rightImageView.image
                     //Moving back frames to their original location
@@ -131,7 +131,7 @@ class SlideController {
                     self.delegate.rightImageView.layer.frame = CGRect(x: UIScreen.main.bounds.width, y: self.delegate.rightImageView.layer.frame.origin.y, width: self.delegate.rightImageView.layer.bounds.width, height: self.delegate.rightImageView.layer.bounds.height)
                     self.setupLeftAndRightImages()
                 }
-            }else{
+            } else {
                 // Moving Back to their locations
                 //print("Rolling Back ",self.adsPage)
                 UIView.animate(withDuration: 0.2, animations: {
@@ -145,18 +145,18 @@ class SlideController {
         } else if (sender.state == UIGestureRecognizerState.changed && aPanStarted) {
             let midLocation = sender.location(in: self.delegate.view)
             var deltaX = midLocation.x - startLocation.x
-            if (deltaX < 0) && (adsPage == slides.count-1) ||  (deltaX > 0) && (adsPage == 0){
-                deltaX = deltaX / 4
+            if (deltaX < 0) && (adsPage == slides.count-1) ||  (deltaX > 0) && (adsPage == 0) {
+                deltaX /= 4
             }
             //print("Moving Images ",self.adsPage," ",deltaX)
             self.delegate.currentImageView.layer.frame = CGRect(x: deltaX, y: self.delegate.currentImageView.layer.frame.origin.y, width: self.delegate.currentImageView.layer.bounds.width, height: self.delegate.currentImageView.layer.bounds.height)
             self.delegate.rightImageView.layer.frame = CGRect(x: UIScreen.main.bounds.width + deltaX, y: self.delegate.rightImageView.layer.frame.origin.y, width: self.delegate.rightImageView.layer.bounds.width, height: self.delegate.rightImageView.layer.bounds.height)
             self.delegate.leftImageView.layer.frame = CGRect(x: deltaX - UIScreen.main.bounds.width, y: self.delegate.leftImageView.layer.frame.origin.y, width: self.delegate.leftImageView.layer.bounds.width, height: self.delegate.leftImageView.layer.bounds.height)
-            
+
         }
     }
-    
-    func setupLeftAndRightImages(){
+
+    func setupLeftAndRightImages() {
         if self.delegate == nil {return}
         if adsPage < 1 {
             //leftImageView.image = slides[adsPage] // No left! get the current for left
@@ -195,19 +195,19 @@ class SlideController {
             self.delegate.commentLabel.text = SlidesAndPaths.shared.slides[adsPage].title
         }
     }
-    func isOnSlideView(_ aLocation : CGPoint)->Bool{
+    func isOnSlideView(_ aLocation: CGPoint) -> Bool {
         if self.delegate == nil {return false}
         if aLocation.x > 0 && aLocation.x < self.delegate.slideView.frame.width &&
-            aLocation.y > 0 && aLocation.y < self.delegate.slideView.frame.height{
+            aLocation.y > 0 && aLocation.y < self.delegate.slideView.frame.height {
             return true
         }
         return false
     }
-    func handleTap(_ sender : UITapGestureRecognizer){
+    func handleTap(_ sender: UITapGestureRecognizer) {
         if self.delegate == nil {return}
         if (sender.state == UIGestureRecognizerState.ended) {
             let tapLocation = sender.location(in: self.delegate.slideView)
-            if isOnSlideView(tapLocation){
+            if isOnSlideView(tapLocation) {
                 let ashop = Shop(shop_id: SlidesAndPaths.shared.slides[adsPage].shop_id,
                                  user_id: SlidesAndPaths.shared.slides[adsPage].user_id,
                                  shop_name: "",

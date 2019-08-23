@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-class GenderPickerDelegateSource : NSObject, UIPickerViewDataSource ,UIPickerViewDelegate {
-    let genderTypes : Array = ["زن","مرد"]
+class GenderPickerDelegateSource: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
+    let genderTypes: Array = ["زن", "مرد"]
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1;
+        return 1
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         guard row > 0 && row < 2 else {
@@ -24,5 +24,3 @@ class GenderPickerDelegateSource : NSObject, UIPickerViewDataSource ,UIPickerVie
         return 2
     }
 }
-
-

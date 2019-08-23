@@ -19,9 +19,7 @@ import Differentiator
  This is commented becuse collection view has bugs when doing animated updates. 
  Take a look at randomized sections.
 */
-open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
-    : CollectionViewSectionedDataSource<S>
-    , RxCollectionViewDataSourceType {
+open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>: CollectionViewSectionedDataSource<S>, RxCollectionViewDataSourceType {
     public typealias Element = [S]
     public typealias DecideViewTransition = (CollectionViewSectionedDataSource<S>, UICollectionView, [Changeset<S>]) -> ViewTransition
 

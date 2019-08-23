@@ -6,7 +6,6 @@
 //  Copyright © 1397 AP Imzich. All rights reserved.
 //
 
-
 import Foundation
 import UIKit
 import RxSwift
@@ -14,21 +13,20 @@ import RxCocoa
 import Alamofire
 import AlamofireImage
 
-
-class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
-    weak var coordinator : HomeCoordinator?
+class ShopViewController: UIViewControllerWithErrorBar, Storyboarded {
+    weak var coordinator: HomeCoordinator?
     let myDisposeBag = DisposeBag()
     var disposeList = [Disposable]()
-    var shopRateDisp : Disposable!
-    var shop : Shop!
-    var shopUI : ShopUI!
-    var rateView : RateView!
+    var shopRateDisp: Disposable!
+    var shop: Shop!
+    var shopUI: ShopUI!
+    var rateView: RateView!
     //var shopDataSource : ShopDataSource!
     @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
-    
+
     @IBOutlet weak var locationButton: UIButton!
-    var editShopButton : UIButton!
+    var editShopButton: UIButton!
     @IBOutlet weak var toolbarStack: UIStackView!
     @IBOutlet weak var shopImage: UIImageView!
     @IBOutlet weak var shopLogo: UIImageView!
@@ -46,28 +44,28 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
     @IBOutlet weak var panelView: TabbedViewWithWhitePanel!
     @IBOutlet weak var PostToolbarView: UIView!
     @IBOutlet weak var mainScrollView: UIScrollView!
-    
+
     @IBOutlet weak var offLabelLeading: NSLayoutConstraint!
     @IBOutlet weak var shopLogoTrailing: NSLayoutConstraint!
     @IBOutlet weak var shopLogoShopTitleDistance: NSLayoutConstraint!
     @IBOutlet weak var toolbarViewWidthConsBig: NSLayoutConstraint!
     @IBOutlet weak var toolbarViewWidthConsShort: NSLayoutConstraint!
-    
+
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var ContactButton: UIButton!
     @IBOutlet weak var PostsButton: UIButton!
 
     @IBAction func rateTapped(_ sender: Any) {
-        
-        print("RateTApped : ",shop.shop_id ?? 0)
+
+        print("RateTApped : ", shop.shop_id ?? 0)
         let rWidth = (self.view.frame.width * 0.9)
         let rHeight = rWidth / 2.5
         let xOffset = self.view.frame.width * 0.05
         let yOffset = (self.view.frame.height - rHeight) / 2
-        
+
         let rateViewRect = CGRect(x: xOffset, y: yOffset, width: rWidth, height: rHeight)
-        if let ashopID = shop.shop_id  {
-            rateView = RateView(frame: rateViewRect,ShopID: ashopID)
+        if let ashopID = shop.shop_id {
+            rateView = RateView(frame: rateViewRect, ShopID: ashopID)
             self.view.addSubview(rateView)
             shopRateDisp = NetworkManager.shared.shopRateObs
                 .filter({$0.rate_avg != nil && $0.rate_avg! > 0})
@@ -79,8 +77,8 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
             disposeList.append(shopRateDisp)
         }
     }
-    
-    func updateNewRate(_ aRate : Rate){
+
+    func updateNewRate(_ aRate: Rate) {
         if let rate = aRate.rate_avg {
             self.star1.setImage(UIImage(named: "icon_star_gray"), for: .normal)
             self.star2.setImage(UIImage(named: "icon_star_gray"), for: .normal)
@@ -98,57 +96,55 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
         shopRateDisp?.dispose()
     }
 
-    
     @IBAction func showPostsTapped(_ sender: Any) {
         self.panelView.tabJust = .Right
         self.panelView.setNeedsDisplay()
         self.shopUI!.showShopPosts()
     }
-    
 
     @IBAction func showContactTapped(_ sender: Any) {
         self.panelView.tabJust = .Left
         self.panelView.setNeedsDisplay()
         self.shopUI!.showContacts()
     }
-    
-    @objc override func willPop() {        
+
+    @objc override func willPop() {
         if (shopUI != nil) {shopUI.disposeList.forEach({$0.dispose()})}
         shopUI = nil
         NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: Profile())
         NetworkManager.shared.shopFav = BehaviorRelay<ToggleStatus>(value: ToggleStatus.UNKNOWN)
         disposeList.forEach({$0.dispose()})
-        
+
     }
 
     @IBAction func homeTapped(_ sender: Any) {
         self.coordinator!.popHome()
     }
-    
+
     @IBAction func backTapped(_ sender: Any) {
         self.coordinator!.popOneLevel()
     }
-    
+
     @IBAction func locationTapped(_ sender: Any) {
         self.coordinator!.pushShopMapOrPopMapVC(self.shop)
     }
-    
+
     @IBAction func favoriteTapped(_ sender: Any) {
         //favButton
-        guard self.shop != nil else{
+        guard self.shop != nil else {
             alert(Message: "اطلاعات فروشگاه ناقص است امکان اضافه به علاقه مندی ها وجود ندارد")
             return
         }
-        
+
         // Toggle Favorite the shop Icon immediately
-        if (self.favButton != nil){
-            if NetworkManager.shared.shopProfileObs.value.is_favorite != nil{
+        if (self.favButton != nil) {
+            if NetworkManager.shared.shopProfileObs.value.is_favorite != nil {
                 if NetworkManager.shared.shopProfileObs.value.is_favorite! {
                     self.favButton.setImage(UIImage(named: "icon_star_fav_gray"), for: .normal)
-                }else{
+                } else {
                     self.favButton.setImage(UIImage(named: "icon_star_fav_dark"), for: .normal)
                 }
-            }        
+            }
             if let shop_id = self.shop.shop_id {
                 let toggleFavDisp = toggleFavorite(ShopId: "\(shop_id)")
                     .results()
@@ -156,7 +152,7 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
                         if makeFav.isFave == "1" {
                             // Make favorite
                             self.favButton.setImage(UIImage(named: "icon_star_fav_dark"), for: .normal)
-                        }else{
+                        } else {
                             // Remove from Faborites
                             self.favButton.setImage(UIImage(named: "icon_star_fav_gray"), for: .normal)
                         }
@@ -166,46 +162,45 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
             }
         }
     }
-    
-    
-    @objc override func ReloadViewController(_ sender:Any) {
+
+    @objc override func ReloadViewController(_ sender: Any) {
         super.ReloadViewController(sender)
         getShopFromServer()
     }
-    
+
     func getShopFromServer() {
         NetworkManager.shared.shopProfileObs = BehaviorRelay<ShopProfile>(value: ShopProfile())
-        print("a Shop is being shown to a user(any role) shopID : ",self.shop.shop_id ?? "")
+        print("a Shop is being shown to a user(any role) shopID : ", self.shop.shop_id ?? "")
         guard self.shop.shop_id != 0 && self.shop.shop_id != nil else {
             alert(Message: "اظلاعات این فروشگاه کامل نیست")
             return
         }
-        let aParameter = ["shop_id":"\(self.shop.shop_id!)"]
-        NetworkManager.shared.run(API: "shop-profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
+        let aParameter = ["shop_id": "\(self.shop.shop_id!)"]
+        NetworkManager.shared.run(API: "shop-profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: true)
 
     }
-    
-    func editAuthorized()-> Bool{
+
+    func editAuthorized() -> Bool {
         //print("***Check Authorization : ","\(self.shop.user_id ?? 0)" ,"  ",LoginKey.shared.userID)
         if "\(self.shop.shop_id ?? 0)" == LoginKey.shared.shopID {
             return true
-        }else{
+        } else {
             return false
         }
     }
-    
-    @objc func gotoEditShop(){
-        print("Editing : ",shop)
-        self.coordinator!.pushEditShop(Shop : shop)
+
+    @objc func gotoEditShop() {
+        print("Editing : ", shop)
+        self.coordinator!.pushEditShop(Shop: shop)
     }
-    
+
     func changeToShopOwnerIfNeeded() {
         if editAuthorized() {
             self.locationButton.removeFromSuperview()
             self.favButton.removeFromSuperview()
             editShopButton = UIButton(frame: CGRect(x: 10, y: 10, width: 20, height: 20))
             editShopButton.setImage(UIImage(named: "icon_edit"), for: .normal)
-            
+
             editShopButton.addTarget(self, action: #selector(gotoEditShop), for: .touchUpInside)
             toolbarStack.addSubview(editShopButton)
             toolbarStack.addArrangedSubview(editShopButton)
@@ -216,41 +211,40 @@ class ShopViewController :  UIViewControllerWithErrorBar,Storyboarded{
             toolbarStack.setNeedsDisplay()
         }
     }
-    
+
     override func viewDidLayoutSubviews() {
         let calculatedHeight = UIScreen.main.bounds.height * 1.2
         //print("Calculated Height : ",calculatedHeight)
         mainScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: calculatedHeight)
-        
+
     }
     /*
     override func viewWillAppear(_ animated: Bool) {
         getShopFromServer()
     }*/
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         getShopFromServer()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         changeToShopOwnerIfNeeded()
-        self.shopUI = ShopUI(self)        
+        self.shopUI = ShopUI(self)
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         guard (self.shopUI != nil) && (self.shopUI.collectionView != nil) else {
             return
         }
-        DispatchQueue.main.async{
+        DispatchQueue.main.async {
             self.shopUI!.collectionView.reloadData()
         }
     }
-    
+
 }
 
-
-class UIViewHitTested : UIView {
-    weak var shopViewController : ShopViewController!
+class UIViewHitTested: UIView {
+    weak var shopViewController: ShopViewController!
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         if shopViewController == nil {
             print("Setting shopViewController")
@@ -263,7 +257,7 @@ class UIViewHitTested : UIView {
                 point.x < shopViewController.rateView.frame.minX + shopViewController.rateView.frame.width &&
                 point.y < shopViewController.rateView.frame.minY + shopViewController.rateView.frame.height {
                 //print("INSIDE!",shopViewController.rateView.frame,"  ",point)
-            }else{                
+            } else {
                 shopViewController.rateView.removeFromSuperview()
                 //print("OUTSIDE!",shopViewController.rateView.frame,"  ",point)
             }
@@ -271,8 +265,3 @@ class UIViewHitTested : UIView {
         return aview
     }
 }
-
-
-
-
-

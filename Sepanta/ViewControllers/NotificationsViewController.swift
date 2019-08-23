@@ -11,13 +11,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class ShopNotifCell : UITableViewCell {
+class ShopNotifCell: UITableViewCell {
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var bodyLabel: UILabel!
 }
 
-class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITableViewDelegate{
+class NotificationsViewController: UIViewControllerWithErrorBar, XIBView, UITableViewDelegate {
     @IBOutlet weak var NotifTableView: UITableView!
     var generalNotificationObs = BehaviorRelay<[GeneralNotification]>(value: [GeneralNotification]())
     var clubsNotificationObs = BehaviorRelay<[NotificationForUser]>(value: [NotificationForUser]())
@@ -25,8 +25,8 @@ class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITable
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var tabbedView: TabbedViewWithWhitePanel!
     var disposeList = [Disposable]()
-    
-    weak var coordinator : HomeCoordinator?
+
+    weak var coordinator: HomeCoordinator?
 
     @objc override func willPop() {
         disposeList.forEach({$0.dispose()})
@@ -35,8 +35,8 @@ class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITable
     @IBAction func backTapped(_ sender: Any) {
         self.coordinator!.popOneLevel()
     }
-    
-    @IBAction func homeTapped(_ sender: Any) {        
+
+    @IBAction func homeTapped(_ sender: Any) {
         self.coordinator!.popHome()
     }
 
@@ -51,20 +51,19 @@ class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITable
         bindGeneralNotification()
         self.tabbedView.tabJust = TabViewJustification.Left
         self.tabbedView.setNeedsDisplay()
-        
+
     }
-    
-    @objc override func ReloadViewController(_ sender:Any) {
+
+    @objc override func ReloadViewController(_ sender: Any) {
         super.ReloadViewController(sender)
     }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         getAndSubscribeToNotifications()
         bindNotificationForUser()
-        
+
     }
     @IBAction func menuClicked(_ sender: Any) {
         //print("self.coordinator : ",self.coordinator ?? "was Nil in GetRichViewController")
@@ -74,5 +73,5 @@ class NotificationsViewController : UIViewControllerWithErrorBar,XIBView,UITable
         super.viewDidDisappear(animated)
         //print("View DID Disapear!")
     }
-    
+
 }

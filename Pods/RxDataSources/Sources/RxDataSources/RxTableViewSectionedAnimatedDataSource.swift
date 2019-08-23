@@ -15,9 +15,7 @@ import RxCocoa
 #endif
 import Differentiator
 
-open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
-    : TableViewSectionedDataSource<S>
-    , RxTableViewDataSourceType {
+open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>: TableViewSectionedDataSource<S>, RxTableViewDataSourceType {
     public typealias Element = [S]
     public typealias DecideViewTransition = (TableViewSectionedDataSource<S>, UITableView, [Changeset<S>]) -> ViewTransition
 
@@ -84,8 +82,7 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
                 self.dataSet = true
                 dataSource.setSections(newSections)
                 tableView.reloadData()
-            }
-            else {
+            } else {
                 DispatchQueue.main.async {
                     // if view is not in view hierarchy, performing batch updates will crash the app
                     if tableView.window == nil {
@@ -109,8 +106,7 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
                             tableView.reloadData()
                             return
                         }
-                    }
-                    catch let e {
+                    } catch let e {
                         rxDebugFatalError(e)
                         self.setSections(newSections)
                         tableView.reloadData()

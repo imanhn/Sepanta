@@ -9,13 +9,13 @@
 import Foundation
 
 struct NetworkConstants {
-    
+
     //The API's base URL
     static let websiteRootAddress = "https://www.ipsepanta.ir"
     static let baseURLString = websiteRootAddress + "/api/v1"
     var aheaders = [
     "Accept": "application/json",
-    "Content-Type":"application/x-www-form-urlencoded",
+    "Content-Type": "application/x-www-form-urlencoded",
     "Authorization": "Bearer "+LoginKey.shared.token
     ]
     //The parameters (Queries) that we're gonna use
@@ -29,7 +29,7 @@ struct NetworkConstants {
         case acceptType = "Accept"
         case acceptEncoding = "Accept-Encoding"
     }
-    
+
     //The content type (JSON)
     enum ContentType: String {
         case json = "application/json"

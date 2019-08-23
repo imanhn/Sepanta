@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Contact : Codable{
-    var status : String?
-    var message : String?
+struct Contact: Codable {
+    var status: String?
+    var message: String?
 }

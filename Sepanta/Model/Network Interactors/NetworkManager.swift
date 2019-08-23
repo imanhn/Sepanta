@@ -28,11 +28,11 @@ enum ToggleStatus {
 }
 
 class NetworkManager {
-    
+
     // MARK: - Properties
-    
+
     static let shared = NetworkManager()
-    var parser : JSONParser?
+    var parser: JSONParser?
     var result = NSDictionary()
     var content = NSDictionary()
     //var resultSubject = BehaviorRelay<NSDictionary>(value : NSDictionary())
@@ -42,9 +42,9 @@ class NetworkManager {
     var status = BehaviorRelay<CallStatus>(value: CallStatus.ready) //No used Yet
     var shopFav = BehaviorRelay<ToggleStatus>(value: ToggleStatus.UNKNOWN)
     let netObjectsDispose = DisposeBag()
-    var headers : HTTPHeaders
-    var statusMessage : String
-    var message : String
+    var headers: HTTPHeaders
+    var statusMessage: String
+    var message: String
     var messageObs = BehaviorRelay<String>(value: "")
     var postsObs = BehaviorRelay<[Post]>(value: [Post]())
     var serverMessageObs = BehaviorRelay<String>(value: "")
@@ -53,11 +53,11 @@ class NetworkManager {
     var catagoriesProvinceListObs = BehaviorRelay<[String]>(value: [String]())
     var serviceTypeObs = BehaviorRelay<[String]>(value: [String]())
     var selectedLocation = BehaviorRelay<CLLocationCoordinate2D>(value: CLLocationCoordinate2D(latitude: 0, longitude: 0))
-    
-    var cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
+
+    var cityDictionaryObs = BehaviorRelay<Dictionary<String, String>>(value: Dictionary<String, String>())
     //var regionDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
     var regionListObs = BehaviorRelay<[String]>(value: [String]())
-    
+
     var catagoriesObs = BehaviorRelay<[Any]>(value: [Any]())
     var shopObs = BehaviorRelay<[Shop]>(value: [Shop]())
     var newShopObs = BehaviorRelay<[Shop]>(value: [Shop]())
@@ -76,7 +76,7 @@ class NetworkManager {
     var bankObs = BehaviorRelay<Bank>(value: Bank())
     var mobileObs = BehaviorRelay<Mobile>(value: Mobile())
     var nationalCodeCityObs = BehaviorRelay<String>(value: "")
-    
+
     var pollObs = BehaviorRelay<Int>(value: 0)
     var userPointsObs = BehaviorRelay<UserPoints>(value: UserPoints())
     var pointsElementsObs = BehaviorRelay<[PointElement]>(value: [PointElement]())
@@ -86,22 +86,22 @@ class NetworkManager {
     var shopRateObs = BehaviorRelay<Rate>(value: Rate())
     var versionObs = BehaviorRelay<Float>(value: 0.0)
     // Initialization
-    
+
     private init() {
         self.baseURLString = websiteRootAddress + "/api/v1"
         self.message = ""
         self.statusMessage = ""
         self.headers = [
             "Accept": "application/json",
-            "Content-Type":"application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded"
         ]
-        
+
     }
-    func buildQueryStringSuffix(_ aDic : Dictionary<String,String>) -> String{
+    func buildQueryStringSuffix(_ aDic: Dictionary<String, String>) -> String {
         if aDic.count == 0 {return ""}
-        var queryString : String = "?"
+        var queryString: String = "?"
         for akey in aDic.keys {
-            queryString = queryString + "\(akey)=\(aDic[akey]!)&"
+            queryString += "\(akey)=\(aDic[akey]!)&"
         }
         _ = queryString.removeLast()
         //return queryString
@@ -109,22 +109,22 @@ class NetworkManager {
         //print(escapedString!)
         return escapedString!
     }
-    func run(API apiName : String, QueryString aQuery : String, Method aMethod : HTTPMethod, Parameters aParameter : Dictionary<String, String>?, Header  aHeader : HTTPHeaders? ,WithRetry : Bool,TargetObs targetObs : String = "") {
+    func run(API apiName: String, QueryString aQuery: String, Method aMethod: HTTPMethod, Parameters aParameter: Dictionary<String, String>?, Header  aHeader: HTTPHeaders?, WithRetry: Bool, TargetObs targetObs: String = "") {
 
         var retryTime = 4
-        var timeOut : Double = 5
+        var timeOut: Double = 5
         if WithRetry == false {
             print("NOT Retrying / High Timeout - \(apiName)")
             retryTime = 1
             timeOut = 10
         }
-        
+
         self.status.accept(CallStatus.inprogress)
         Spinner.start()
         let urlAddress = self.baseURLString + "/" + apiName
         let headerToSend = self.headers
-        
-        print("RXAlamofire : Requesting JSON over URL : ",urlAddress)
+
+        print("RXAlamofire : Requesting JSON over URL : ", urlAddress)
         /*
         print("      Parameter : \(aParameter)")
         print("      Header : \(headerToSend)")
@@ -132,44 +132,43 @@ class NetworkManager {
         */
         var anEncoding = URLEncoding.httpBody
         if aMethod == HTTPMethod.get {anEncoding = URLEncoding.default}
-        RxAlamofire.requestJSON(aMethod, urlAddress , parameters: aParameter, encoding: anEncoding, headers: headerToSend)
+        RxAlamofire.requestJSON(aMethod, urlAddress, parameters: aParameter, encoding: anEncoding, headers: headerToSend)
         .observeOn(MainScheduler.instance)
         .timeout(timeOut, scheduler: MainScheduler.instance)
         .retry(retryTime)
         //.debug()
-        .subscribe(onNext: { [unowned self] (ahttpURLRes,jsonResult) in
-            
-            print("urlAddress : ",urlAddress)
-            print(" \(apiName) Response Code : ",ahttpURLRes.statusCode)
-            //print(" Parameters : ",aParameter)
-            print(" Method : ",aMethod)
-            print("Heeader : ",headerToSend)
-             
-            if let aresult = jsonResult as? NSDictionary {
-                
-                self.result = aresult
-                self.parser = JSONParser(API: apiName,Method : aMethod,TargetObs : targetObs)
+        .subscribe(onNext: { [unowned self] (ahttpURLRes, jsonResult) in
 
+            print("urlAddress : ", urlAddress)
+            print(" \(apiName) Response Code : ", ahttpURLRes.statusCode)
+            //print(" Parameters : ",aParameter)
+            print(" Method : ", aMethod)
+            print("Heeader : ", headerToSend)
+
+            if let aresult = jsonResult as? NSDictionary {
+
+                self.result = aresult
+                self.parser = JSONParser(API: apiName, Method: aMethod, TargetObs: targetObs)
 
                 if let aparser = self.parser {
-                    aparser.resultSubject.accept(aresult)                    
+                    aparser.resultSubject.accept(aresult)
                 }
                 if ahttpURLRes.statusCode >= 400 {
-                    print("Result All Key : ",self.result.allKeys)
-                    print("Error : ",self.result["error"] ?? "[Error happened but no Error Key in response!]")
+                    print("Result All Key : ", self.result.allKeys)
+                    print("Error : ", self.result["error"] ?? "[Error happened but no Error Key in response!]")
                     if let amessage = self.result["message"] as? String {
-                        print("Setting : ",amessage)
+                        print("Setting : ", amessage)
                         self.messageObs.accept(amessage)
                     }
                 }
                 self.status.accept(CallStatus.ready)
             } else {
-                
+
                 self.status.accept(CallStatus.error)
             }
             if ahttpURLRes.statusCode == 500 {
                 self.status.accept(CallStatus.InternalServerError)
-                print("Result with Error : ",self.result)
+                print("Result with Error : ", self.result)
             }
             Spinner.stop()
             }, onError: { (err) in
@@ -180,9 +179,9 @@ class NetworkManager {
                     print("No Server Connection")
                 }
                 if err.localizedDescription == "The operation couldn’t be completed." {
-                    print("Server is too lazy to repond!")                    
+                    print("Server is too lazy to repond!")
                 }
-                print("NetworkManager RXAlamofire Raised an Error : >",err.localizedDescription,"<")
+                print("NetworkManager RXAlamofire Raised an Error : >", err.localizedDescription, "<")
                 Spinner.stop()
                 self.status.accept(CallStatus.error)
             }, onCompleted: {
@@ -196,5 +195,5 @@ class NetworkManager {
                 //print("NetworkManager Disposed")
         }).disposed(by: netObjectsDispose)
     }
-    
+
 }

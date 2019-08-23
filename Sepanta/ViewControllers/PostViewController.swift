@@ -12,14 +12,14 @@ import Alamofire
 import RxCocoa
 import RxSwift
 
-class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar,Storyboarded{
-    var postUI : PostUI!
-    var coordinator : HomeCoordinator!
+class PostViewController: UIViewControllerWithKeyboardNotificationWithErrorBar, Storyboarded {
+    var postUI: PostUI!
+    var coordinator: HomeCoordinator!
     var myDisposeBag = DisposeBag()
     var disposeList = [Disposable]()
-    var postID : Int?
-    var postOwnerUserID : Int?
-    var aRepPostView : ReportPostView!
+    var postID: Int?
+    var postOwnerUserID: Int?
+    var aRepPostView: ReportPostView!
     var abuseButton = UIButton(type: .custom)
     @IBOutlet weak var editPostButton: UIButton!
     @IBOutlet weak var deletePostButton: UIButton!
@@ -37,11 +37,11 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
     @IBAction func BackTapped(_ sender: Any) {
         self.coordinator!.popOneLevel()
     }
-    
+
     @IBAction func BackToHome(_ sender: Any) {
         self.coordinator!.popHome()
     }
-    
+
     @IBAction func editTapped(_ sender: Any) {
         if
             let ashopID = NetworkManager.shared.postDetailObs.value.shop_id,
@@ -50,17 +50,17 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
             let apostBody = NetworkManager.shared.postDetailObs.value.content,
             let postUIImage = postUI.postImage.image {
             self.coordinator!.pushEditPost(shop_id: ashopID, post_id: apost_id, post_title: apostTitle, post_body: apostBody, post_image: postUIImage)
-        }else{
+        } else {
             alert(Message: "اطلاعات پست برای ویرایش کامل نیست")
-        }        
+        }
     }
-    
-    @objc func reportPost(_ sender : Any) {
+
+    @objc func reportPost(_ sender: Any) {
         let offsetY = (self.view.frame.height) / 2
-        let offsetX : CGFloat = 20
+        let offsetX: CGFloat = 20
         let w = self.view.frame.width - (2 * offsetX)
         let h = w/2
-        aRepPostView = ReportPostView(frame: CGRect(x: offsetX, y: offsetY, width:w, height: h), PostID: postID!)
+        aRepPostView = ReportPostView(frame: CGRect(x: offsetX, y: offsetY, width: w, height: h), PostID: postID!)
         self.view.addSubview(aRepPostView)
         NetworkManager.shared.serverMessageObs = BehaviorRelay<String>(value: "")
         NetworkManager.shared.serverMessageObs
@@ -70,14 +70,14 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
                 self.alert(Message: amessage)
             }).disposed(by: myDisposeBag)
     }
-    
+
     @IBAction func deleteTapped(_ sender: Any) {
         showDarkQuestion(Message: "آيا از حذف این پست مطمئن هستید؟", OKLabel: "بلی", CancelLabel: "خیر", OkAction: {self.deletePost(sender)})
     }
-    
-    func deletePost(_ sender : Any){
+
+    func deletePost(_ sender: Any) {
         print("Delete Post")
-        let aParameter = ["post_id":"\(self.postID ?? 0)"]
+        let aParameter = ["post_id": "\(self.postID ?? 0)"]
         NetworkManager.shared.run(API: "post-delete", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
         NetworkManager.shared.serverMessageObs = BehaviorRelay<String>(value: "")
         NetworkManager.shared.serverMessageObs
@@ -87,43 +87,42 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
                 //Updating my Posts!
                 self.getMyShopFromServer()
                 self.alert(Message: amessage)
-                
+
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                     self.BackTapped(sender)
                 })
             }).disposed(by: myDisposeBag)
     }
-    
+
     func getMyShopFromServer() {
         NetworkManager.shared.shopProfileObs = BehaviorRelay<ShopProfile>(value: ShopProfile())
         //print("self.shop.user_id : ",self.shop.user_id)
-        let aParameter = ["user id":LoginKey.shared.userID]
-        NetworkManager.shared.run(API: "profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true,TargetObs: "SHOP")
+        let aParameter = ["user id": LoginKey.shared.userID]
+        NetworkManager.shared.run(API: "profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: true, TargetObs: "SHOP")
     }
 
-    func editAuthorized()-> Bool{
-        if "\(postOwnerUserID ?? 0)" == LoginKey.shared.userID
-        {
+    func editAuthorized() -> Bool {
+        if "\(postOwnerUserID ?? 0)" == LoginKey.shared.userID {
             print("PostOwner is Logged!")
             return true
-        }else{
-            print("postownerUserID : \(postOwnerUserID ?? 0)","  Login userID",LoginKey.shared.userID)
+        } else {
+            print("postownerUserID : \(postOwnerUserID ?? 0)", "  Login userID", LoginKey.shared.userID)
         }
-        print("***Check Post Authorization : ","\(NetworkManager.shared.shopProfileObs.value.id ?? 0)" ,"  ",LoginKey.shared.userID)
+        print("***Check Post Authorization : ", "\(NetworkManager.shared.shopProfileObs.value.id ?? 0)", "  ", LoginKey.shared.userID)
         if "\(NetworkManager.shared.profileObs.value.id ?? 0)" == LoginKey.shared.userID {
             return true
-        }else{
+        } else {
             return false
         }
     }
-    
-    func initUI(){
+
+    func initUI() {
         let authorized = editAuthorized()
         if !authorized {
             print("*** NOT Authorized")
             deletePostButton.isHidden = true
             editPostButton.isHidden = true
-            
+
             abuseButton = UIButton(frame: CGRect(x: 10, y: 10, width: 20, height: 20))
             abuseButton.setImage(UIImage(named: "abuseButton"), for: .normal)
             abuseButton.addTarget(self, action: #selector(reportPost(_:)), for: .touchUpInside)
@@ -134,7 +133,7 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
             toolbarStack.setNeedsUpdateConstraints()
             toolbarStack.setNeedsLayout()
             toolbarStack.setNeedsDisplay()
-        }else{
+        } else {
             print("*** Authorized")
             editPostButton.setImage(UIImage(named: "icon_edit"), for: .normal)
             deletePostButton.setImage(UIImage(named: "icon_delete"), for: .normal)
@@ -144,16 +143,16 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
             deletePostButton.isEnabled = true
         }
     }
-    
-    func getPostData(){
+
+    func getPostData() {
         if postID == nil {
             print("Unable to get data")
             self.alert(Message: "اطلاعات این پست ناقص است")
             return
         }
         Spinner.start()
-        let aParameter = ["post_id":"\(postID!)"]
-        NetworkManager.shared.run(API: "post-details", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
+        let aParameter = ["post_id": "\(postID!)"]
+        NetworkManager.shared.run(API: "post-details", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: true)
         let messageDisp = NetworkManager.shared.messageObs
             .filter({$0.count > 0})
             .subscribe(onNext: { [unowned self] amessage in
@@ -163,18 +162,18 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
         messageDisp.disposed(by: myDisposeBag)
         disposeList.append(messageDisp)
     }
-    
-    @objc override func ReloadViewController(_ sender:Any) {
+
+    @objc override func ReloadViewController(_ sender: Any) {
         super.ReloadViewController(sender)
         getPostData()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         //print("WILL APEAR : POST ID : ",postID)
         super.viewWillAppear(animated)
         //getPostData()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         getPostData()
@@ -187,7 +186,7 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
         super.viewWillDisappear(animated)
         //NetworkManager.shared.postDetailObs.accept(Post())
     }
-    
+
     func showPopup(_ controller: UIViewController, sourceView: UIView) {
         //print("Showing POPUP : ",sourceView)
         let presentationController = AlwaysPresentAsPopover.configurePresentation(forController: controller)
@@ -203,9 +202,8 @@ class PostViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar
     }
 }
 
-
-class UIViewWithAbuseHitTest : UIView {
-    weak var postViewController : PostViewController!
+class UIViewWithAbuseHitTest: UIView {
+    weak var postViewController: PostViewController!
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         if postViewController == nil {
             print("Setting postViewController")
@@ -218,7 +216,7 @@ class UIViewWithAbuseHitTest : UIView {
                 point.x < postViewController.aRepPostView.frame.minX + postViewController.aRepPostView.frame.width &&
                 point.y < postViewController.aRepPostView.frame.minY + postViewController.aRepPostView.frame.height {
                 //print("INSIDE!",shopViewController.rateView.frame,"  ",point)
-            }else{
+            } else {
                 if postViewController.aRepPostView.descText.text == nil || postViewController.aRepPostView.descText.text?.count == 0 {
                     postViewController.aRepPostView.removeFromSuperview()
                 }

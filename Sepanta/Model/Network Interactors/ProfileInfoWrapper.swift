@@ -11,7 +11,6 @@ import RxSwift
 import RxCocoa
 import Alamofire
 
-
 class ProfileInfoWrapper {
     static let shared = ProfileInfoWrapper()
     var profileInfoObs = BehaviorRelay<ProfileInfo>(value: ProfileInfo())
@@ -20,9 +19,9 @@ class ProfileInfoWrapper {
     private init() {
         getProfileInfo()
     }
-    
-    func getProfileInfo(){
+
+    func getProfileInfo() {
         //Subscrition in NetworkManager- Data will be accept to profileInfoObs in this Singleton
-        NetworkManager.shared.run(API: "profile-info", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
+        NetworkManager.shared.run(API: "profile-info", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil, WithRetry: true)
     }
 }

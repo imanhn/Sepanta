@@ -15,23 +15,22 @@ enum PageType {
 }
 
 class ContentViewController: UIViewController {
-    weak var coordinator : HomeCoordinator?
+    weak var coordinator: HomeCoordinator?
     @IBOutlet weak var slideImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var helpTextView: UIView!
     @IBOutlet weak var labelViewToTopCons: NSLayoutConstraint!
-    
+
     var titleString = ""
-    var pageNo : Int = 0
+    var pageNo: Int = 0
     var pageType = PageType.Series
-    
+
     @IBOutlet weak var doneButton: UIButton!
-    
-    
+
     @IBAction func doneButtonTapped(_ sender: Any) {
         self.coordinator!.popHome()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         helpTextView.layer.shadowColor = UIColor.black.cgColor
@@ -48,8 +47,7 @@ class ContentViewController: UIViewController {
 
         self.titleLabel.text = titleString
         slideImageView.image = UIImage(named: "P\(pageNo+1)")
-        if pageType == PageType.End {doneButton.isHidden = false}else{doneButton.isHidden = true}
+        if pageType == PageType.End {doneButton.isHidden = false} else {doneButton.isHidden = true}
     }
-    
 
 }

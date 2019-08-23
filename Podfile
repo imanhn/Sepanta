@@ -1,4 +1,8 @@
 platform :ios, '11.0'
+
+# ignore all warnings from all dependencies
+inhibit_all_warnings!
+
 workspace 'Sepanta'
 target 'Sepanta' do
   pod 'RxSwift',    '~> 4.0'

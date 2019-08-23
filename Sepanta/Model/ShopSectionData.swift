@@ -9,13 +9,13 @@
 import Foundation
 import RxDataSources
 
-struct SectionOfShopData : AnimatableSectionModelType{
+struct SectionOfShopData: AnimatableSectionModelType {
     var identity: String {
         return header
     }
-    
+
     typealias Identity = String
-    
+
     var header: String
     var items: [Shop]
 }
@@ -23,8 +23,8 @@ struct SectionOfShopData : AnimatableSectionModelType{
 extension SectionOfShopData: SectionModelType {
     typealias Item = Shop
     typealias FilterFunction = (Shop) -> Bool
-    typealias SortFunction = (Shop,Shop) -> Bool
-    
+    typealias SortFunction = (Shop, Shop) -> Bool
+
     init(original: SectionOfShopData, items: [Shop]) {
         self = original
         self.items = items
@@ -40,7 +40,7 @@ extension SectionOfShopData: SectionModelType {
         self.items = items.sorted(by: sort)
     }
      */
-    init(original: SectionOfShopData, items: [Shop], sort : SortFunction, search : FilterFunction) {
+    init(original: SectionOfShopData, items: [Shop], sort: SortFunction, search: FilterFunction) {
         self = original
         self.items = items.filter({search($0)}).sorted(by: sort)
     }

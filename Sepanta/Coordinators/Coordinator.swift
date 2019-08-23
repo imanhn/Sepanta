@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-protocol Coordinator:AnyObject {
+protocol Coordinator: AnyObject {
     var childCoordinators: [Coordinator] { get set }
     var navigationController: UINavigationController { get set }
-    func removeChild(_ aCoordinator : Coordinator)
+    func removeChild(_ aCoordinator: Coordinator)
     func start()
 }

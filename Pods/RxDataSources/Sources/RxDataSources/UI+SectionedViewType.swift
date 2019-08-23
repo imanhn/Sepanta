@@ -23,7 +23,7 @@ func indexSet(_ values: [Int]) -> IndexSet {
     return indexSet as IndexSet
 }
 
-extension UITableView : SectionedViewType {
+extension UITableView: SectionedViewType {
   
     public func insertItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableViewRowAnimation) {
         self.insertRows(at: paths, with: animationStyle)
@@ -64,7 +64,7 @@ extension UITableView : SectionedViewType {
     }
 }
 
-extension UICollectionView : SectionedViewType {
+extension UICollectionView: SectionedViewType {
     public func insertItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableViewRowAnimation) {
         self.insertItems(at: paths)
     }
@@ -119,7 +119,7 @@ public protocol SectionedViewType {
     func performBatchUpdates<S>(_ changes: Changeset<S>, animationConfiguration: AnimationConfiguration)
 }
 
-func _performBatchUpdates<V: SectionedViewType, S>(_ view: V, changes: Changeset<S>, animationConfiguration:AnimationConfiguration) {
+func _performBatchUpdates<V: SectionedViewType, S>(_ view: V, changes: Changeset<S>, animationConfiguration: AnimationConfiguration) {
     typealias I = S.Item
   
     view.deleteSections(changes.deletedSections, animationStyle: animationConfiguration.deleteAnimation)

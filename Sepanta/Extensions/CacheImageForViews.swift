@@ -11,11 +11,10 @@ import UIKit
 import AlamofireImage
 
 extension UIImage {
-    func getImageFromCache(ImageName imageName : String )->UIImage? {
-        var cachedData : NSData?
-        if imageName.count > 0
-        {
-            cachedData = CacheManager.shared.readFile(Filename:imageName)
+    func getImageFromCache(ImageName imageName: String ) -> UIImage? {
+        var cachedData: NSData?
+        if imageName.count > 0 {
+            cachedData = CacheManager.shared.readFile(Filename: imageName)
             if cachedData != nil {
                 //print("Image is already cached ")
                 let cachedImage = UIImage(data: cachedData! as Data)
@@ -27,44 +26,42 @@ extension UIImage {
 }
 
 extension UIImageView {
-    
-    func setImageFromCache(PlaceHolderName defaultImageName : String, Scale aScale : CGFloat,ImageURL imageUrl : URL,ImageName imageName : String,ContentMode acontentMode : UIViewContentMode = UIViewContentMode.scaleAspectFit ){
+
+    func setImageFromCache(PlaceHolderName defaultImageName: String, Scale aScale: CGFloat, ImageURL imageUrl: URL, ImageName imageName: String, ContentMode acontentMode: UIViewContentMode = UIViewContentMode.scaleAspectFit ) {
         let defaultImage = UIImage(named: defaultImageName)
         self.contentMode = acontentMode
-        
+
         let imageSize = CGSize(width: self.frame.size.width*aScale, height: self.frame.size.height*aScale)
-        
-        var filter : ImageFilter
+
+        var filter: ImageFilter
         if acontentMode == UIViewContentMode.scaleAspectFit {
             filter = AspectScaledToFitSizeFilter(size: imageSize)
         } else {
             filter = AspectScaledToFillSizeFilter(size: imageSize)
         }
         self.image = defaultImage
-        
-        var cachedData : NSData?
-        if imageName.count > 0
-        {
-            cachedData = CacheManager.shared.readFile(Filename:imageName)
+
+        var cachedData: NSData?
+        if imageName.count > 0 {
+            cachedData = CacheManager.shared.readFile(Filename: imageName)
             if cachedData != nil {
                // print("Image is already cached ")
                 let cachedImage = UIImage(data: cachedData! as Data)
                 self.image = cachedImage
-                
-            }else{
+
+            } else {
                 //print("Downloading....")
-                
-                self.af_setImage(withURL: imageUrl, placeholderImage: defaultImage, filter: filter,completion:
-                    { (response) in
+
+                self.af_setImage(withURL: imageUrl, placeholderImage: defaultImage, filter: filter, completion: { (_) in
                         //print("Image Downloaded,Saving...")
                         // UIImage(data: response.data!)!
                         if let downloadedImage = self.image {
                             let imageData = UIImageJPEGRepresentation(downloadedImage, 0.5) as NSData?
                             if imageData != nil {
                                 //print("   Saving \(imageName)")
-                                CacheManager.shared.saveFile(Data:imageData!, Filename:imageName)
+                                CacheManager.shared.saveFile(Data: imageData!, Filename: imageName)
                             }
-                        }else{
+                        } else {
                             //print("AFImage finished downloading but no image yielded!")
                         }
 
@@ -75,43 +72,41 @@ extension UIImageView {
 }
 
 extension UIButton {
-    
-    func setImageFromCache(PlaceHolderName defaultImageName : String, Scale aScale : CGFloat,ImageURL imageUrl : URL,ImageName imageName : String,ContentMode acontentMode : UIViewContentMode = UIViewContentMode.scaleAspectFit  ){
+
+    func setImageFromCache(PlaceHolderName defaultImageName: String, Scale aScale: CGFloat, ImageURL imageUrl: URL, ImageName imageName: String, ContentMode acontentMode: UIViewContentMode = UIViewContentMode.scaleAspectFit  ) {
         let defaultImage = UIImage(named: defaultImageName)
-        
+
         self.contentMode = acontentMode
         let imageSize = CGSize(width: self.frame.size.width*aScale, height: self.frame.size.height*aScale)
         let filter = AspectScaledToFitSizeFilter(size: imageSize)
         self.setImage(defaultImage, for: .normal)
-        
+
         //let imageUrl = URL(string: NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_profile_image+imageName)!
         //print("SetFrom Cache : ",imageUrl)
-        var cachedData : NSData?
-        if imageName.count > 0
-        {
-            cachedData = CacheManager.shared.readFile(Filename:imageName)
+        var cachedData: NSData?
+        if imageName.count > 0 {
+            cachedData = CacheManager.shared.readFile(Filename: imageName)
             if cachedData != nil {
                 //print("Image is already cached ")
                 let cachedImage = UIImage(data: cachedData! as Data)
                // print("    Cached Image from Data is : ",cachedImage)
                 self.setImage(cachedImage, for: .normal)
-            }else{
+            } else {
                // print("Downloading....")
-                self.af_setImage(for: .normal, url: imageUrl, placeholderImage: defaultImage, filter: filter, completion: { (response) in
+                self.af_setImage(for: .normal, url: imageUrl, placeholderImage: defaultImage, filter: filter, completion: { (_) in
                     //print("Image Downloaded : ",self.image(for: .normal))
                     let downloadedImage = self.image(for: .normal)// UIImage(data: response.data!)!
                     if downloadedImage != nil {
                         let imageData = UIImageJPEGRepresentation(downloadedImage!, 0.8) as NSData?
                         if imageData != nil {
                            // print("   Saving \(imageName)")
-                            CacheManager.shared.saveFile(Data:imageData!, Filename:imageName)
+                            CacheManager.shared.saveFile(Data: imageData!, Filename: imageName)
                         }
                     }
                 })
             }
-        }else{
+        } else {
             //print("imageName is empty")
         }
     }
 }
-

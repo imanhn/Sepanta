@@ -7,8 +7,8 @@
 //
 
 import Foundation
-struct LastCard : Codable{
-    var status : String?
-    var message : String?
-    var card : CreditCard
+struct LastCard: Codable {
+    var status: String?
+    var message: String?
+    var card: CreditCard
 }

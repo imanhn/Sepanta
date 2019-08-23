@@ -13,37 +13,36 @@ import RxSwift
 import Alamofire
 import RxAlamofire
 
-
 extension SepantaGroupsViewController {
-    
-    func subscribeToUpdateCategories(){
-        
+
+    func subscribeToUpdateCategories() {
+
         let stateDisp = self.currentStateCodeObs
             .filter({$0 != ""})
             .subscribe(onNext: { (innerCurrentState) in
-                let aParameter : Dictionary<String,String> = [
-                    "state code" : innerCurrentState
+                let aParameter: Dictionary<String, String> = [
+                    "state code": innerCurrentState
                 ]
                 self.fetchCatagories(aParameter)
             })
         stateDisp.disposed(by: myDisposeBag)
         disposableArray.append(stateDisp)
-        
+
         let cityDisp = self.currentCityCodeObs
             .filter({$0 != ""})
             .subscribe(onNext: {  (innerCurrentCity) in
-                let aParameter : Dictionary<String, String> = [
+                let aParameter: Dictionary<String, String> = [
                     "city_code": innerCurrentCity
                 ]
                 self.fetchCatagories(aParameter)
             })
         cityDisp.disposed(by: myDisposeBag)
         disposableArray.append(cityDisp)
-        
+
         let catDisp = NetworkManager.shared.catagoriesObs
             //.filter({$0.count > 0})
             .subscribe(onNext: { [unowned self] (innerCatagories) in
-                if innerCatagories.count > 0 {
+                if !innerCatagories.isEmpty {
                     self.groupButtons = SepantaGroupButtons(self)
                     let catagories = innerCatagories[0] as! NSArray
                     self.catagories = [Catagory]()
@@ -61,7 +60,7 @@ extension SepantaGroupsViewController {
                     if (self.catagories.count) > 0 {Spinner.start()}
                     self.groupButtons?.counter = 0
                     self.groupButtons?.buttons = [UIButton]()
-                    for aSubView in (self.sepantaScrollView.subviews){
+                    for aSubView in (self.sepantaScrollView.subviews) {
                         aSubView.removeFromSuperview()
                     }
                     //print("Total Catagory Loaded : ",self?.catagories.count)
@@ -73,13 +72,13 @@ extension SepantaGroupsViewController {
         disposableArray.append(catDisp)
 
     }
-    
+
     func subscribeToStateChange() {
         let provDisp = NetworkManager.shared.catagoriesProvinceListObs
             //.debug()
-            .filter({$0.count > 0})
+            .filter({!$0.isEmpty})
             .subscribe(onNext: { [unowned self] (innerCatProvinceListObs) in
-                print("innerCatProvinceListObs : ",innerCatProvinceListObs.count)
+                print("innerCatProvinceListObs : ", innerCatProvinceListObs.count)
                 let filteredList = innerCatProvinceListObs.filter({$0.count > 1})
                 let controller = ArrayChoiceTableViewController(filteredList) {
                     (selectedOption) in
@@ -97,12 +96,11 @@ extension SepantaGroupsViewController {
         disposableArray.append(provDisp)
 
     }
-    
-    func fetchCatagories(_ parameters : Dictionary<String,String>?){
+
+    func fetchCatagories(_ parameters: Dictionary<String, String>?) {
         var aMethod = HTTPMethod.get
         if parameters != nil { aMethod = HTTPMethod.post}
-        NetworkManager.shared.run(API: "categories-filter",QueryString: "", Method: aMethod, Parameters: parameters, Header: nil,WithRetry: true)
+        NetworkManager.shared.run(API: "categories-filter", QueryString: "", Method: aMethod, Parameters: parameters, Header: nil, WithRetry: true)
     }
-    
 
 }

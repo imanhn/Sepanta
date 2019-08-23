@@ -13,19 +13,19 @@ import RxAlamofire
 import RxSwift
 import Photos
 
-class EditProfileViewController : UIViewControllerWithKeyboardNotificationWithErrorBar,Storyboarded,UIViewControllerWithImagePicker{
+class EditProfileViewController: UIViewControllerWithKeyboardNotificationWithErrorBar, Storyboarded, UIViewControllerWithImagePicker {
 
     @IBOutlet weak var formView: UIView!
     @IBOutlet var topView: UIView!
-    weak var coordinator : HomeCoordinator?
-    var editProfileUI : EditProfileUI!
+    weak var coordinator: HomeCoordinator?
+    var editProfileUI: EditProfileUI!
     var myDisposeBag = DisposeBag()
     var disposeList = [Disposable]()
-    var imagePicker : UIImagePickerController! = UIImagePickerController()
-    var imagePickerDelegate :  ImagePicker!
+    var imagePicker: UIImagePickerController! = UIImagePickerController()
+    var imagePickerDelegate: ImagePicker!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var profilePicture: UIImageView!
-    
+
     @IBAction func selectProfileImage(_ sender: Any) {
         if PHPhotoLibrary.authorizationStatus() != PHAuthorizationStatus.authorized {
             PHPhotoLibrary.requestAuthorization({ (status: PHAuthorizationStatus) in
@@ -44,7 +44,7 @@ class EditProfileViewController : UIViewControllerWithKeyboardNotificationWithEr
                     break
                 }
             })
-        }else{
+        } else {
             imagePickerDelegate = EditProfileImagePicker(self)
         }
     }
@@ -54,31 +54,30 @@ class EditProfileViewController : UIViewControllerWithKeyboardNotificationWithEr
         editProfileUI = nil
         imagePickerDelegate = nil
     }
-    
+
     @IBAction func backTapped(_ sender: Any) {
         self.coordinator?.popOneLevel()
     }
-    
+
     @IBAction func homeTapped(_ sender: Any) {
         self.coordinator?.popHome()
     }
 
-    @objc override func ReloadViewController(_ sender:Any) {
+    @objc override func ReloadViewController(_ sender: Any) {
         super.ReloadViewController(sender)
         editProfileUI.sendEditedData(sender as! UIButton)
     }
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         editProfileUI = EditProfileUI(self)
     }
-    
+
     func showPopup(_ controller: UIViewController, sourceView: UIView) {
         //print("Showing POPUP : ",sourceView)
         let presentationController = AlwaysPresentAsPopover.configurePresentation(forController: controller)
@@ -87,7 +86,7 @@ class EditProfileViewController : UIViewControllerWithKeyboardNotificationWithEr
         presentationController.permittedArrowDirections = [.down, .up]
         self.present(controller, animated: true)
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)

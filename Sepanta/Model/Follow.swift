@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct Follow : Codable {
-    var status : String?
-    var message : String?
-    var relation : String?
-    var followers : Int?
+struct Follow: Codable {
+    var status: String?
+    var message: String?
+    var relation: String?
+    var followers: Int?
 }

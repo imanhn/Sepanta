@@ -6,7 +6,6 @@
 //  Copyright © 1397 AP Imzich. All rights reserved.
 //
 
-
 import Foundation
 import UIKit
 import RxSwift
@@ -15,26 +14,25 @@ import Alamofire
 import AlamofireImage
 import RxDataSources
 
-
-class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded,ShopListOwners,UITableViewDelegate{
+class ShopsListViewController: UIViewControllerWithErrorBar, Storyboarded, ShopListOwners, UITableViewDelegate {
     var dataSource: RxTableViewSectionedAnimatedDataSource<SectionOfShopData>!
     var myDisposeBag = DisposeBag()
     var shopsObs = BehaviorRelay<[Shop]>(value: [Shop]())
-    //typealias dataSourceFunc = (ShopsListViewController) -> ShopsListDataSource
-    var fetchMechanism : dataSourceFunc!
-    var shopDataSource : ShopsListDataSource!
+    //typealias DataSourceFunc = (ShopsListViewController) -> ShopsListDataSource
+    var fetchMechanism: DataSourceFunc!
+    var shopDataSource: ShopsListDataSource!
     var sectionOfShops = BehaviorRelay<[SectionOfShopData]>(value: [SectionOfShopData]())
     var disposeList = [Disposable]()
-    weak var coordinator : HomeCoordinator?
-    var maximumFontSize : CGFloat!
+    weak var coordinator: HomeCoordinator?
+    var maximumFontSize: CGFloat!
     @IBOutlet weak var headerLabel: UILabel!
-    var headerLabelToSet : String = "فروشگاه ها"
+    var headerLabelToSet: String = "فروشگاه ها"
     @IBOutlet weak var shopTable: UITableView!
-    
+
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         //print("WILL DISPLAY \(indexPath)")
         if !self.shopDataSource.isFetching && indexPath.row >= (self.shopsObs.value.count - 1) {
-            print("Reach to the END",self.shopDataSource.last_page,"   ",self.shopDataSource.page)
+            print("Reach to the END", self.shopDataSource.last_page, "   ", self.shopDataSource.page)
             if self.shopDataSource.last_page != nil && self.shopDataSource.last_page == self.shopDataSource.page {
                 print("Already at the Last page")
                 return
@@ -52,13 +50,13 @@ class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded,ShopL
     @objc override func willPop() {
         disposeList.forEach({$0.dispose()})
         shopDataSource = nil
-        NetworkManager.shared.shopObs = BehaviorRelay<[Shop]>(value: [Shop]())        
+        NetworkManager.shared.shopObs = BehaviorRelay<[Shop]>(value: [Shop]())
     }
 
     @IBAction func backTapped(_ sender: Any) {
         self.coordinator!.popOneLevel()
     }
-    
+
     @IBAction func menuTapped(_ sender: Any) {
          self.coordinator!.openButtomMenu()
     }
@@ -67,21 +65,19 @@ class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded,ShopL
         self.coordinator!.popHome()
     }
 
-    @objc override func ReloadViewController(_ sender:Any) {
+    @objc override func ReloadViewController(_ sender: Any) {
         super.ReloadViewController(sender)
         shopDataSource = fetchMechanism(self)
         //newShopsDataSource.getNewShopsFromServer()
     }
-    
+
     func pushAShop(_ selectedShop: Shop) {
         self.coordinator!.pushShop(Shop: selectedShop)
     }
 
-    
-    func setHeaderName(){
+    func setHeaderName() {
         self.headerLabel.text = self.headerLabelToSet
     }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,17 +86,9 @@ class ShopsListViewController :  UIViewControllerWithErrorBar,Storyboarded,ShopL
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         bindToTableView()
         shopDataSource = fetchMechanism(self)
-        
-        
+
         //let newShopsDataSource = ShopsListDataSource(self)
         //newShopsDataSource.getNewShopsFromServer()
     }
-    
+
 }
-
-
-
-
-
-
-

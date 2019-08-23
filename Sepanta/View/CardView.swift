@@ -9,7 +9,7 @@
 import UIKit
 
 class CardView: UIView {
-    
+
     @IBOutlet weak var bankLogo: UIImageView!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var contentView: UIView!
@@ -19,20 +19,19 @@ class CardView: UIView {
     @IBOutlet weak var cardNo4: UILabel!
     @IBOutlet weak var expiryDate: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
-    
+
     let kContent_XIB_NAME = "CardView"
-    var nib : [Any]?
+    var nib: [Any]?
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
-    
+
     func commonInit() {
         Bundle.main.loadNibNamed(kContent_XIB_NAME, owner: self, options: nil)
         contentView.fixInView(self)
@@ -44,7 +43,7 @@ class CardView: UIView {
         layer.shadowOpacity = 0.2
         layer.shadowOffset = CGSize(width: 3, height: 3)
         layer.shadowRadius = 2
-        
+
     }
 
 }

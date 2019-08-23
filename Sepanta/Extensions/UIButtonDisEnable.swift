@@ -10,14 +10,14 @@ import Foundation
 import UIKit
 
 extension UIButton {
-    func setEnable(){
+    func setEnable() {
         self.isEnabled = true
         self.backgroundColor = UIColor(hex: 0x515152)
     }
 
-    func setDisable(){
+    func setDisable() {
         self.isEnabled = false
         self.backgroundColor = UIColor(hex: 0xD6D7D9)
     }
-    
+
 }

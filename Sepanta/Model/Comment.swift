@@ -8,14 +8,12 @@
 
 import Foundation
 
-struct Comment : Codable, Equatable {
-    var comment_id : Int?
-    var body : String?
-    var username : String?
-    var user_id : Int?
-    var first_name : String?
-    var last_name : String?
-    var image : String?
+struct Comment: Codable, Equatable {
+    var comment_id: Int?
+    var body: String?
+    var username: String?
+    var user_id: Int?
+    var first_name: String?
+    var last_name: String?
+    var image: String?
 }
-
-

@@ -14,60 +14,59 @@ import Alamofire
 import AlamofireImage
 import RxAlamofire
 
-class Catagory : NSObject,Codable {
+class Catagory: NSObject, Codable {
     var image = String()
     var title = String()
     var id = Int()
-    var anUIImage : BehaviorRelay<UIImage> = BehaviorRelay(value: UIImage())
+    var anUIImage: BehaviorRelay<UIImage> = BehaviorRelay(value: UIImage())
     var myDisposeBag = DisposeBag()
-    
-    private enum CodingKeys : String,CodingKey{
+
+    private enum CodingKeys: String, CodingKey {
         case id
         case title
         case image
     }
-    
+
     override init () {
         super.init()
     }
-    
-    init(Id anId : Int, Title aTitle : String, Image anImage : String) {
+
+    init(Id anId: Int, Title aTitle: String, Image anImage: String) {
         super.init()
         self.id = anId
         self.title = aTitle
         self.image = anImage
         downloadImage()
     }
-    
+
     func downloadImage() {
         let imageUrl = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_category_image + self.image
         let imageURLCasted = URL(string: imageUrl)
-        if imageURLCasted == nil
-        {
-            print("Catagory.swift : Wrong path for Catagory image : ",imageUrl)
+        if imageURLCasted == nil {
+            print("Catagory.swift : Wrong path for Catagory image : ", imageUrl)
             self.anUIImage.accept(UIImage(named: "logo_shape")!)
             return
         }
-        let anImage = UIImage().getImageFromCache(ImageName : self.image)
+        let anImage = UIImage().getImageFromCache(ImageName: self.image)
         if anImage != nil {
             //print("Catagory Image cache used.")
             self.anUIImage.accept(anImage!)
             return
         }
-        print("Lets Download Catagory Image from : ",imageUrl)
+        print("Lets Download Catagory Image from : ", imageUrl)
         Alamofire.request(imageUrl).responseImage { [weak self] response in
             if let image = response.result.value {
                 //print("image downloaded: \(self.image)")
                 self?.anUIImage.accept(image)
-                let imageData = UIImageJPEGRepresentation(image,0.5) as NSData?
+                let imageData = UIImageJPEGRepresentation(image, 0.5) as NSData?
                 if imageData != nil {
                     //print("Saving catagory image for future use : ",self.image)
-                    if let afilename = self?.image{
-                        CacheManager.shared.saveFile(Data:imageData!, Filename:afilename)
+                    if let afilename = self?.image {
+                        CacheManager.shared.saveFile(Data: imageData!, Filename: afilename)
                     }
                 }
             }
         }
-         
+
     }
 }

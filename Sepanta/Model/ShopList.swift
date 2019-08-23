@@ -8,17 +8,17 @@
 
 import Foundation
 
-struct ShopList : Codable{
-    var status : String?
-    var message : String?
-    var shopList : [Shop]?
-    var currentPage : Int?
-    var lastPage : Int?
-    var shops : [PaginatedShops]?
-    var categoryShops : [PaginatedShops]?
-    var favorite : [PaginatedShops]?
-    
-    enum CodingKeys : String,CodingKey{
+struct ShopList: Codable {
+    var status: String?
+    var message: String?
+    var shopList: [Shop]?
+    var currentPage: Int?
+    var lastPage: Int?
+    var shops: [PaginatedShops]?
+    var categoryShops: [PaginatedShops]?
+    var favorite: [PaginatedShops]?
+
+    enum CodingKeys: String, CodingKey {
         case status
         case message
         case shops
@@ -26,13 +26,13 @@ struct ShopList : Codable{
         case favorite
     }
 
-    enum ShopsKeys : CodingKey{
+    enum ShopsKeys: CodingKey {
         case current_page
         case data
         case last_page
     }
 
-    init(from decoder : Decoder) throws {
+    init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         let categoryShopsValues = try values.nestedContainer(keyedBy: ShopsKeys.self, forKey: .categoryShops)
         //let favoriteValues = try values.nestedContainer(keyedBy: ShopsKeys.self, forKey: .favorite)
@@ -56,21 +56,21 @@ struct ShopList : Codable{
 
 }
 
-struct PaginatedShops : Codable{
-    var current_page : Int?
-    var data : [Shop]?
-    var first_page_url : String?
-    var from : Int?
-    var last_page : Int?
-    var last_page_url : String?
-    var next_page_url : String?
-    var path : String?
-    var per_page : String?
-    var prev_page_url : String?
-    var to : Int?
-    var total : Int?
-    
-    enum ShopsKeys : CodingKey{
+struct PaginatedShops: Codable {
+    var current_page: Int?
+    var data: [Shop]?
+    var first_page_url: String?
+    var from: Int?
+    var last_page: Int?
+    var last_page_url: String?
+    var next_page_url: String?
+    var path: String?
+    var per_page: String?
+    var prev_page_url: String?
+    var to: Int?
+    var total: Int?
+
+    enum ShopsKeys: CodingKey {
         case current_page
         case data
         case last_page

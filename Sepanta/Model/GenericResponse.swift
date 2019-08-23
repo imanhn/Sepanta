@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct GenericNetworkResponse : Codable{
-    var message : String?
-    var error : String?
-    var status : String?
+struct GenericNetworkResponse: Codable {
+    var message: String?
+    var error: String?
+    var status: String?
 }

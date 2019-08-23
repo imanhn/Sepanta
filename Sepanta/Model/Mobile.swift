@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct Mobile : Codable{
-    var status : String?
-    var message : String?
-    var name : String?
-    var logo : String?
+struct Mobile: Codable {
+    var status: String?
+    var message: String?
+    var name: String?
+    var logo: String?
 }

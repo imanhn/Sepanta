@@ -4,5 +4,4 @@ import UIKit
 import PlaygroundSupport
 import PlaygroundFramework
 
-
 var str = "Hello, playground"

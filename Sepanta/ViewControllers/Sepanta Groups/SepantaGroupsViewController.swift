@@ -12,29 +12,28 @@ import RxSwift
 import RxCocoa
 import Alamofire
 
-class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDelegate,Storyboarded{
-    weak var coordinator : HomeCoordinator?
-    var currentStateCodeObs = BehaviorRelay<String>(value : String())
-    var currentCityCodeObs = BehaviorRelay<String>(value : String())
+class SepantaGroupsViewController: UIViewControllerWithErrorBar, UITextFieldDelegate, Storyboarded {
+    weak var coordinator: HomeCoordinator?
+    var currentStateCodeObs = BehaviorRelay<String>(value: String())
+    var currentCityCodeObs = BehaviorRelay<String>(value: String())
     var cityPressed = BehaviorRelay<Bool>(value: false)
     let myDisposeBag  = DisposeBag()
-    var groupButtons : SepantaGroupButtons?
+    var groupButtons: SepantaGroupButtons?
     var catagories = [Catagory]()
     var disposableArray = [Disposable]()
-    var selectedCityStr : String?
-    var selectedStateStr : String?
+    var selectedCityStr: String?
+    var selectedStateStr: String?
 
     @IBOutlet weak var sepantaScrollView: UIScrollView!
     @IBOutlet weak var selectCity: UnderLinedSelectableTextField!
     @IBOutlet weak var selectProvince: UnderLinedSelectableTextField!
 
-    
     @IBAction func menuClicked(_ sender: Any) {
         self.coordinator!.openButtomMenu()
     }
     @objc override func willPop() {
         self.groupButtons = nil
-        disposableArray.forEach{$0.dispose()}
+        disposableArray.forEach {$0.dispose()}
     }
 
     @IBAction func homeTapped(_ sender: Any) {
@@ -44,7 +43,7 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
     @IBAction func backButtonTapped(_ sender: Any) {
         self.coordinator!.popOneLevel()
     }
-    
+
     @IBAction func cityPressed(_ sender: Any) {
         guard selectedStateStr != nil else {
             print("First Select the State")
@@ -55,13 +54,13 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
             self.alert(Message: "هیچ شهری یافت نشد.")
             return
         }
-        let controller = ArrayChoiceTableViewController(innerCityDicObs.keys.sorted(){$0 < $1}) {
+        let controller = ArrayChoiceTableViewController(innerCityDicObs.keys.sorted {$0 < $1}) {
             (selectedCity) in
             self.selectCity.text = selectedCity
             self.selectedCityStr = selectedCity
             self.currentCityCodeObs.accept(innerCityDicObs[selectedCity]!)
         }
-        print("CITY NO : ",innerCityDicObs.count)
+        print("CITY NO : ", innerCityDicObs.count)
         controller.preferredContentSize = CGSize(width: 250, height: innerCityDicObs.count*60)
         Spinner.stop()
         self.showPopup(controller, sourceView: self.selectCity!)
@@ -72,22 +71,22 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
     }
 
     @IBAction func provincePressed(_ sender: Any) {
-        NetworkManager.shared.run(API: "category-state-list",QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil,WithRetry: true)
+        NetworkManager.shared.run(API: "category-state-list", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil, WithRetry: true)
     }
-    
-    @objc override func ReloadViewController(_ sender:Any) {
+
+    @objc override func ReloadViewController(_ sender: Any) {
         super.ReloadViewController(sender)
         selectProvince.text = ""
         selectCity.text = ""
         fetchCatagories(nil)
     }
-    
+
     override func viewDidLoad() {
         //print("VL SepantaGroup self.coordinator : ",self.coordinator ?? "nil")
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         NetworkManager.shared.catagoriesProvinceListObs = BehaviorRelay<[String]>(value: [String]())
-        NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
+        NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String, String>>(value: Dictionary<String, String>())
         definesPresentationContext = true
         selectCity.delegate = self
         selectProvince.delegate = self
@@ -96,11 +95,10 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
         fetchCatagories(nil)
     }
 
-    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
     }
-    
+
     func showPopup(_ controller: UIViewController, sourceView: UIView) {
         let presentationController = AlwaysPresentAsPopover.configurePresentation(forController: controller)
         presentationController.sourceView = sourceView
@@ -108,5 +106,5 @@ class SepantaGroupsViewController : UIViewControllerWithErrorBar,UITextFieldDele
         presentationController.permittedArrowDirections = [.down, .up]
         self.present(controller, animated: true)
     }
-    
+
 }

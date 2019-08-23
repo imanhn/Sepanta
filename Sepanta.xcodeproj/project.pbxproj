@@ -184,6 +184,7 @@
 		0F066F98222C22EE00C8871C /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		0F066F9C222C2D5600C8871C /* MenuPopUpConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPopUpConfiguration.swift; sourceTree = "<group>"; };
 		0F066F9E222C704B00C8871C /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		0F177B4B230BFD31002BDF27 /* Sepanta-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Sepanta-Bridging-Header.h"; sourceTree = "<group>"; };
 		0F1B755A223580C80087C0DB /* ShopsListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopsListDataSource.swift; sourceTree = "<group>"; };
 		0F1B755C2235C1080087C0DB /* SlidesAndPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidesAndPaths.swift; sourceTree = "<group>"; };
 		0F1B755E2235C8460087C0DB /* Slide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slide.swift; sourceTree = "<group>"; };
@@ -224,7 +225,6 @@
 		0F6EC4662231751E0078136C /* StringWithFontSizeCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringWithFontSizeCalc.swift; sourceTree = "<group>"; };
 		0F6F39C222078DC900393CD7 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		0F6F39C722079FB600393CD7 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
-		0F70A645226B8ABB0020C33C /* Sepanta-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sepanta-Bridging-Header.h"; sourceTree = "<group>"; };
 		0F70A646226B97650020C33C /* EditProfileImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileImagePicker.swift; sourceTree = "<group>"; };
 		0F70A648226BC7BF0020C33C /* ProfileInfoWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoWrapper.swift; sourceTree = "<group>"; };
 		0F71A38A2231924000F4EB6B /* UIViewControllerWithKeyboardNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerWithKeyboardNotification.swift; sourceTree = "<group>"; };
@@ -369,6 +369,14 @@
 			path = "PopUp List";
 			sourceTree = "<group>";
 		};
+		0F177B4A230BFD10002BDF27 /* Bridge */ = {
+			isa = PBXGroup;
+			children = (
+				0F177B4B230BFD31002BDF27 /* Sepanta-Bridging-Header.h */,
+			);
+			path = Bridge;
+			sourceTree = "<group>";
+		};
 		0F1B75572235775F0087C0DB /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,14 +417,6 @@
 				6C05E9B6E581875EFEE60FA1 /* libPods-SepantaTests.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		0F70A644226B8AA00020C33C /* Bridge */ = {
-			isa = PBXGroup;
-			children = (
-				0F70A645226B8ABB0020C33C /* Sepanta-Bridging-Header.h */,
-			);
-			path = Bridge;
 			sourceTree = "<group>";
 		};
 		0F79BBA22285C62500795AE0 /* CreditCard */ = {
@@ -658,7 +658,7 @@
 		0FE8B9A7220355F000C868C3 /* Sepanta */ = {
 			isa = PBXGroup;
 			children = (
-				0F70A644226B8AA00020C33C /* Bridge */,
+				0F177B4A230BFD10002BDF27 /* Bridge */,
 				0FAE1FF722673F0B0043B077 /* Storyboards */,
 				0FDA55D12225A08100E7C889 /* Extensions */,
 				0F9BCFC6222201B600C87706 /* View */,
@@ -728,6 +728,7 @@
 				0FE8B9A2220355F000C868C3 /* Frameworks */,
 				0FE8B9A3220355F000C868C3 /* Resources */,
 				FC66C1D6B86DF07010DB7EF4 /* [CP] Copy Pods Resources */,
+				0F349D7723107DA8007D86A4 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -868,6 +869,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0F349D7723107DA8007D86A4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		42ADFD1418D4B76349ACF5C1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

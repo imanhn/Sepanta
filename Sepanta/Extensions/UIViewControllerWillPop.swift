@@ -8,7 +8,7 @@
 
 import Foundation
 extension UIViewController {
-    @objc func willPop(){
-        print("Will Pop ",self)
+    @objc func willPop() {
+        print("Will Pop ", self)
     }
 }

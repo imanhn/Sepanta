@@ -9,29 +9,28 @@
 import UIKit
 
 class TermsView: UIView {
-    
-    
+
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var okButton: UIButton!
-    
+
     let kContent_XIB_NAME = "TermsView"
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
+
     @IBAction func okTapped(_ sender: Any) {
         self.removeFromSuperview()
     }
-    
+
     func commonInit() {
         Bundle.main.loadNibNamed(kContent_XIB_NAME, owner: self, options: nil)
         contentView.fixInView(self)
@@ -43,7 +42,7 @@ class TermsView: UIView {
         layer.shadowOpacity = 0.3
         layer.shadowOffset = CGSize(width: 5, height: 5)
         layer.shadowRadius = 10
-        
+
     }
-    
+
 }

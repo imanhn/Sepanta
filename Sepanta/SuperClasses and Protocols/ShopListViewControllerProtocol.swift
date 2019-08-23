@@ -11,5 +11,5 @@ import RxCocoa
 import RxSwift
 
 protocol ShopListViewControllerProtocol {
-    var shops : BehaviorRelay<[Shop]> {get set}
+    var shops: BehaviorRelay<[Shop]> {get set}
 }

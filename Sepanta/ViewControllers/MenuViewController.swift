@@ -11,37 +11,37 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-struct ButtomMenuItem : Decodable {
-    let aLabel : String
-    let anImageName : String
+struct ButtomMenuItem: Decodable {
+    let aLabel: String
+    let anImageName: String
 }
 
-class MenuItemCell : UITableViewCell {
+class MenuItemCell: UITableViewCell {
     @IBOutlet weak var menuCellLabel: UILabel!
     @IBOutlet weak var menuCellImage: UIImageView!
 }
 
-class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
-    weak var coordinator : HomeCoordinator?
+class MenuViewController: UIViewController, Storyboarded, UITableViewDelegate {
+    weak var coordinator: HomeCoordinator?
     @IBOutlet weak var menuTableView: MenuTableView!
     let myDisposeBag = DisposeBag()
     var disposeList = [Disposable]()
     @IBOutlet weak var menuTableViewHeightCons: NSLayoutConstraint!
-    
-    var menuItems : BehaviorRelay<[ButtomMenuItem]> = BehaviorRelay(value: [])
-    
+
+    var menuItems: BehaviorRelay<[ButtomMenuItem]> = BehaviorRelay(value: [])
+
     @IBAction func backFromMenuTapped(_ sender: Any) {
         removeMenuAndDismissVC()
     }
-    
-    func removeMenuAndDismissVC(){
+
+    func removeMenuAndDismissVC() {
         print("Dismissing menu...")
         menuItems  = BehaviorRelay<[ButtomMenuItem]>(value: [ButtomMenuItem]())
         disposeList.forEach({$0.dispose()})
         //self.removeFromParentViewController()
         self.dismiss(animated: true, completion: {})
     }
-    
+
     func loadMenuItems() {
         var items = [ButtomMenuItem]()
         items.append(ButtomMenuItem(aLabel: "پروفایل", anImageName: "icon_mainmenu_03")) //0
@@ -55,9 +55,9 @@ class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
         items.append(ButtomMenuItem(aLabel: "خروج از حساب کاربری", anImageName: "icon_logout_white2"))//8
         menuItems.accept(items)
     }
-    
+
     func bindToTableView() {
-        let menuItemDisp = menuItems.bind(to: menuTableView.rx.items(cellIdentifier: "menuCell")) { row, model, cell in
+        let menuItemDisp = menuItems.bind(to: menuTableView.rx.items(cellIdentifier: "menuCell")) { _, model, cell in
             if let aCell = cell as? MenuItemCell {
                 aCell.menuCellLabel.text = model.aLabel
                 aCell.menuCellImage.image =  UIImage(named: model.anImageName)
@@ -66,7 +66,7 @@ class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
         }
         menuItemDisp.disposed(by: myDisposeBag)
         disposeList.append(menuItemDisp)
-        
+
         let selectDisp = Observable
             .zip(menuTableView.rx.itemSelected, menuTableView.rx.modelSelected(ButtomMenuItem.self))
             .bind { [unowned self] indexPath, model in
@@ -76,44 +76,44 @@ class MenuViewController : UIViewController,Storyboarded,UITableViewDelegate {
                     print("MenuViewController : Coordinator for MenuViewController is nil")
                     return
                 }
-                
+
                 if indexPath.row == 8 {
                     //print("Option Menu : 7")
                     self.logout()
-                }else{
+                } else {
                     self.coordinator?.launchMenuSelection(indexPath.row)
                     self.removeMenuAndDismissVC()
                 }
             }
         selectDisp.disposed(by: myDisposeBag)
         disposeList.append(selectDisp)
-        
+
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         print("Removing Subscription for MenuVC")
         disposeList.forEach({$0.dispose()})
     }
-    
+
     override func viewDidLoad() {
         loadMenuItems()
         menuTableView.menuViewController = self
         bindToTableView()
     }
-    
+
     func logout() {
         print("showing Question")
         self.showQuestion(Message: "آیا می خواهیداز پروفایل خود خارج شوید؟", OKLabel: "بلی", CancelLabel: "خیر", OkAction: {
             self.removeMenuAndDismissVC()
             LoginKey.shared.deleteTokenAndUserID()
             self.coordinator!.popLogin()
-        },CancelAction: {self.removeMenuAndDismissVC()})
+        }, CancelAction: {self.removeMenuAndDismissVC()})
     }
 }
 
-class MenuTableView : UITableView {
-    weak var menuViewController : MenuViewController!
+class MenuTableView: UITableView {
+    weak var menuViewController: MenuViewController!
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let aview = super.hitTest(point, with: event)
         if point.y < 0 {

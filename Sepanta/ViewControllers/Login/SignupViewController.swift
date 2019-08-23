@@ -12,23 +12,22 @@ import Alamofire
 import RxSwift
 import RxCocoa
 
-
-class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar,UITextFieldDelegate,Storyboarded   {
-    weak var coordinator : HomeCoordinator?
+class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar, UITextFieldDelegate, Storyboarded {
+    weak var coordinator: HomeCoordinator?
     var disposeList = [Disposable]()
-    var userID : String = ""
-    var signupUI : SignUPUI!
-    var smsVerificationCode : String = ""
-    var currentStateCodeObs = BehaviorRelay<String>(value : String())
-    var currentCityCodeObs = BehaviorRelay<String>(value : String())
+    var userID: String = ""
+    var signupUI: SignUPUI!
+    var smsVerificationCode: String = ""
+    var currentStateCodeObs = BehaviorRelay<String>(value: String())
+    var currentCityCodeObs = BehaviorRelay<String>(value: String())
     var myDisposeBag = DisposeBag()
-    var TermsAgreed = false;
-    
+    var TermsAgreed = false
+
     @IBOutlet weak var submitButton: SubmitButtonOnRedBar!
     @IBOutlet weak var enterButton: TabbedButton!
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var signUpFormView: UIView!
-    
+
     @IBAction func enterTapped(_ sender: Any) {
         //self.coordinator!.popLogin(Set: self.mobileNoText.text ?? "")
     }
@@ -38,7 +37,7 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
     @IBAction func gotoLogin(_ sender: Any) {
         self.coordinator!.popLogin()
     }
-    
+
     func showPopup(_ controller: UIViewController, sourceView: UIView) {
         //print("Showing POPUP : ",sourceView)
         let presentationController = AlwaysPresentAsPopover.configurePresentation(forController: controller)
@@ -47,30 +46,29 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
         presentationController.permittedArrowDirections = [.down, .up]
         self.present(controller, animated: true)
     }
- 
-    override func viewDidLoad() {        
+
+    override func viewDidLoad() {
         super.viewDidLoad()
         submitButton.isEnabled = false
         signupUI = SignUPUI(self)
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
+
     @IBAction func SubmitSignupFormClicked(_ sender: Any) {
         var gender_code = 1 // default to Men
         if self.signupUI.genderText.text == "زن" || self.signupUI.genderText.text?.count == 2 {gender_code = 0}
-        
+
         let aParameter = [
-            "cellphone":"\(self.signupUI.mobileText.text ?? "")",
-            "username":"\(self.signupUI.usernameText.text ?? "")",
-            "gender":"\(gender_code)",
-            "state":"\(self.signupUI.stateCode!)",
-            "city_code":"\(self.signupUI.cityCode!)",
+            "cellphone": "\(self.signupUI.mobileText.text ?? "")",
+            "username": "\(self.signupUI.usernameText.text ?? "")",
+            "gender": "\(gender_code)",
+            "state": "\(self.signupUI.stateCode!)",
+            "city_code": "\(self.signupUI.cityCode!)"
         ]
         print("aParameter : \(aParameter)")
         NetworkManager.shared.run(API: "register", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
@@ -82,11 +80,11 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
             })
         messageDisp.disposed(by: myDisposeBag)
         disposeList.append(messageDisp)
-        
+
         let useridDisp = LoginKey.shared.userIDObs
             .share(replay: 1, scope: .whileConnected)
             .filter({$0.count > 0})
-            .subscribe(onNext: { innerUserID in
+            .subscribe(onNext: { _ in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
                     self.coordinator!.pushSMSVerification(Set: self.signupUI.mobileText.text ?? "")
                 })
@@ -94,7 +92,7 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
         useridDisp.disposed(by: myDisposeBag)
         disposeList.append(useridDisp)
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -102,5 +100,3 @@ class SignupViewController: UIViewControllerWithKeyboardNotificationWithErrorBar
     }
 
 }
-
-

@@ -14,7 +14,7 @@ open class Spinner {
     public static var style: UIActivityIndicatorViewStyle = .whiteLarge
     public static var baseBackColor = UIColor(white: 0, alpha: 0.6)
     public static var baseColor = UIColor.init(red: 0.84, green: 0.84, blue: 0.84, alpha: 1.0)
-    
+
     public static func start() {
         if spinner == nil, let window = UIApplication.shared.keyWindow {
             let frame = UIScreen.main.bounds
@@ -25,7 +25,7 @@ open class Spinner {
             spinner!.startAnimating()
         }
     }
-    
+
     public static func stop() {
         if spinner != nil {
             spinner!.stopAnimating()
@@ -33,5 +33,5 @@ open class Spinner {
             spinner = nil
         }
     }
-        
+
 }

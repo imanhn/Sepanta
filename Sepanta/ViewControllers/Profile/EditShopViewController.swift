@@ -14,24 +14,23 @@ import Alamofire
 import AlamofireImage
 import Photos
 
-class EditShopViewController :  UIViewControllerWithKeyboardNotificationWithErrorBar,Storyboarded,UIViewControllerWithImagePicker{
-    var imagePicker : UIImagePickerController! = UIImagePickerController()
-    
+class EditShopViewController: UIViewControllerWithKeyboardNotificationWithErrorBar, Storyboarded, UIViewControllerWithImagePicker {
+    var imagePicker: UIImagePickerController! = UIImagePickerController()
+
     var imagePickerDelegate: ImagePicker!
-    
+
     @IBOutlet weak var shopBanner: UIImageView!
     @IBOutlet weak var shopLogo: UIImageView!
-    
-    
+
     @IBOutlet weak var mainScrollView: UIScrollView!
     @IBOutlet weak var shopLogoTrailing: NSLayoutConstraint!
     @IBOutlet weak var textFormView: UIView!
-    
-    weak var coordinator : HomeCoordinator?
+
+    weak var coordinator: HomeCoordinator?
     let myDisposeBag = DisposeBag()
-    var shop : Shop!
-    var editshopUI : EditShopUI!
-    
+    var shop: Shop!
+    var editshopUI: EditShopUI!
+
     @objc override func willPop() {
         editshopUI.disposeList.forEach({$0.dispose()})
         editshopUI = nil
@@ -39,11 +38,11 @@ class EditShopViewController :  UIViewControllerWithKeyboardNotificationWithErro
     @IBAction func homeTapped(_ sender: Any) {
         self.coordinator!.popHome()
     }
-    
+
     @IBAction func backTapped(_ sender: Any) {
         self.coordinator!.popOneLevel()
     }
-    
+
     @IBAction func mainImageSelectTapped(_ sender: Any) {
         if PHPhotoLibrary.authorizationStatus() != PHAuthorizationStatus.authorized {
             PHPhotoLibrary.requestAuthorization({ (status: PHAuthorizationStatus) in
@@ -62,11 +61,11 @@ class EditShopViewController :  UIViewControllerWithKeyboardNotificationWithErro
                     break
                 }
             })
-        }else{
+        } else {
             imagePickerDelegate = MainImageForShopImagePicker(self)
         }
     }
-    
+
     @IBAction func logoImageSelectTapped(_ sender: Any) {
         if PHPhotoLibrary.authorizationStatus() != PHAuthorizationStatus.authorized {
             PHPhotoLibrary.requestAuthorization({ (status: PHAuthorizationStatus) in
@@ -85,12 +84,12 @@ class EditShopViewController :  UIViewControllerWithKeyboardNotificationWithErro
                     break
                 }
             })
-        }else{
+        } else {
             imagePickerDelegate = LogoImageForShopImagePicker(self)
         }
     }
-    
-    @objc override func ReloadViewController(_ sender:Any) {
+
+    @objc override func ReloadViewController(_ sender: Any) {
         super.ReloadViewController(sender)
         getShopFromServer()
     }
@@ -99,27 +98,27 @@ class EditShopViewController :  UIViewControllerWithKeyboardNotificationWithErro
             alert(Message: "اظلاعات این فروشگاه کامل نیست")
             return
         }
-        let aParameter = ["user id":"\(self.shop.user_id!)"]
-        NetworkManager.shared.run(API: "profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil,WithRetry: true)
+        let aParameter = ["user id": "\(self.shop.user_id!)"]
+        NetworkManager.shared.run(API: "profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: true)
     }
     override func viewDidLayoutSubviews() {
-        
+
         let calculatedHeight = UIScreen.main.bounds.height * 1.2
         //print("Calculated Height : ",calculatedHeight)
         mainScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: calculatedHeight)
-        
+
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         getShopFromServer()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         self.editshopUI = EditShopUI(self)
     }
-    
+
     func showPopup(_ controller: UIViewController, sourceView: UIView) {
         //print("Showing POPUP : ",sourceView)
         let presentationController = AlwaysPresentAsPopover.configurePresentation(forController: controller)
@@ -128,7 +127,7 @@ class EditShopViewController :  UIViewControllerWithKeyboardNotificationWithErro
         presentationController.permittedArrowDirections = [.down, .up]
         self.present(controller, animated: true)
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)

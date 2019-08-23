@@ -9,14 +9,14 @@
 import Foundation
 
 extension String {
-    func slice(From from : Int , To to : Int)->String{
-        var result : String = ""
+    func slice(From from: Int, To to: Int) -> String {
+        var result: String = ""
         var i = 0
         for aChar in self {
             if i >= from && i <= to {
-                result = result + "\(aChar)"
+                result += "\(aChar)"
             }
-            i = i + 1
+            i += 1
         }
         return result
     }

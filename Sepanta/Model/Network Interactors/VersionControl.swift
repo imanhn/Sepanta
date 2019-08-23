@@ -13,28 +13,28 @@ import RxSwift
 
 extension HomeViewController {
 
-    func manageVersion(){
+    func manageVersion() {
         getLatestVersion()
         sendInUseVersion()
     }
-    
-    func sendInUseVersion(){
-        let aParameter = ["version_ios":"\(LoginKey.shared.version)",
-                        "version_android":""]
+
+    func sendInUseVersion() {
+        let aParameter = ["version_ios": "\(LoginKey.shared.version)",
+                        "version_android": ""]
         NetworkManager.shared.run(API: "app-version", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: true)
     }
-    
-    func getLatestVersion(){
+
+    func getLatestVersion() {
         NetworkManager.shared.run(API: "app-version", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil, WithRetry: true)
         let verDisp = NetworkManager.shared.versionObs
             .filter({$0 != 0.0})
             .subscribe(onNext: { aversion in
                 if (aversion - LoginKey.shared.version >= 1.0) {
                     // NEED Update
-                    self.showAlertWithOK(Message: "برنامه نیاز به بروزرسانی دارد، ادامه عملیات ممکن نیست", OKLabel: "متوجه شدم",Completion: {fatalError()})
-                }else if (aversion - LoginKey.shared.version >= 0.1) {
+                    self.showAlertWithOK(Message: "برنامه نیاز به بروزرسانی دارد، ادامه عملیات ممکن نیست", OKLabel: "متوجه شدم", Completion: {fatalError()})
+                } else if (aversion - LoginKey.shared.version >= 0.1) {
                     self.showAlertWithOK(Message: "برنامه نیاز به بروزرسانی دارد، لطفاْ در اسرع وقت بروزرسانی کنید", OKLabel: "متوجه شدم")
-                }else{
+                } else {
                     //print("Latest : \(aversion) current : \(LoginKey.shared.version)")
                 }
                 NetworkManager.shared.versionObs = BehaviorRelay<Float>(value: 0.0)
@@ -42,5 +42,5 @@ extension HomeViewController {
         verDisp.disposed(by: myDisposeBag)
         disposeList.append(verDisp)
     }
-    
+
 }

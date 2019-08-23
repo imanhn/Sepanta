@@ -12,12 +12,12 @@ import RxCocoa
 import RxSwift
 
 protocol ReloadableViewController {
-    func ReloadViewController(_ sender:Any)
+    func ReloadViewController(_ sender: Any)
 }
 
-class UIViewControllerWithErrorBar : UIViewController,ReloadableViewController {
-    
-    @objc func ReloadViewController(_ sender:Any) {
+class UIViewControllerWithErrorBar: UIViewController, ReloadableViewController {
+
+    @objc func ReloadViewController(_ sender: Any) {
         if let retryButton = sender as? UIButton {
             if retryButton.superview != nil {
                 retryButton.superview!.removeFromSuperview()
@@ -25,9 +25,9 @@ class UIViewControllerWithErrorBar : UIViewController,ReloadableViewController {
         }
         //alert(Message: "امکان تلاش مجدد نیست")
     }
-    
-    func showInternetDisconnection(){
-        for av in self.view.subviews{
+
+    func showInternetDisconnection() {
+        for av in self.view.subviews {
             if av.tag == 123456 {
                 return
             }
@@ -53,28 +53,28 @@ class UIViewControllerWithErrorBar : UIViewController,ReloadableViewController {
         UIView.animate(withDuration: 0.5, animations: {
             aView.frame = CGRect(x: 0, y: self.view.frame.height*0.1, width: self.view.frame.width, height: self.view.frame.height*0.1)
         })
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: {
             UIView.animate(withDuration: 0.3, animations: {
                 aView.frame = CGRect(x: 0, y: -(self.view.frame.height*0.1), width: self.view.frame.width, height: self.view.frame.height*0.1)
-            }){ _ in
+            }) { _ in
                 aView.removeFromSuperview()
             }
         })
     }
 
-    func subscribeToInternetDisconnection()->Disposable{
+    func subscribeToInternetDisconnection() -> Disposable {
         return NetworkManager.shared.status
             .filter({$0 == CallStatus.error || $0 == CallStatus.InternalServerError})
             .subscribe(onNext: { [unowned self] innerStatus in
                 if innerStatus == CallStatus.InternalServerError {
                     if (self.viewIfLoaded?.window != nil) {
-                        print("Alerting Internal Error ",self)
+                        print("Alerting Internal Error ", self)
                         self.alert(Message: "اشکال در سرور بوجود آمده است")
                     }
-                }else if innerStatus == CallStatus.IncompleteData {
+                } else if innerStatus == CallStatus.IncompleteData {
                     self.alert(Message: "اطلاعات این پست کامل نیست")
-                }else if innerStatus == CallStatus.error {
+                } else if innerStatus == CallStatus.error {
                     self.showInternetDisconnection()
                 }
                 NetworkManager.shared.status = BehaviorRelay<CallStatus>(value: CallStatus.ready)

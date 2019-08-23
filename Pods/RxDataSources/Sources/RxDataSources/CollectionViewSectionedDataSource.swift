@@ -14,15 +14,12 @@ import RxCocoa
 #endif
 import Differentiator
     
-open class CollectionViewSectionedDataSource<S: SectionModelType>
-    : NSObject
-    , UICollectionViewDataSource
-    , SectionedViewDataSourceType {
+open class CollectionViewSectionedDataSource<S: SectionModelType>: NSObject, UICollectionViewDataSource, SectionedViewDataSourceType {
     public typealias I = S.Item
     public typealias Section = S
     public typealias ConfigureCell = (CollectionViewSectionedDataSource<S>, UICollectionView, IndexPath, I) -> UICollectionViewCell
     public typealias ConfigureSupplementaryView = (CollectionViewSectionedDataSource<S>, UICollectionView, String, IndexPath) -> UICollectionReusableView
-    public typealias MoveItem = (CollectionViewSectionedDataSource<S>, _ sourceIndexPath:IndexPath, _ destinationIndexPath:IndexPath) -> Void
+    public typealias MoveItem = (CollectionViewSectionedDataSource<S>, _ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void
     public typealias CanMoveItemAtIndexPath = (CollectionViewSectionedDataSource<S>, IndexPath) -> Bool
 
 
@@ -155,8 +152,7 @@ open class CollectionViewSectionedDataSource<S: SectionModelType>
     override open func responds(to aSelector: Selector!) -> Bool {
         if aSelector == #selector(UICollectionViewDataSource.collectionView(_:viewForSupplementaryElementOfKind:at:)) {
             return configureSupplementaryView != nil
-        }
-        else {
+        } else {
             return super.responds(to: aSelector)
         }
     }

@@ -13,33 +13,33 @@ import RxSwift
 import RxCocoa
 
 class JSONParser {
-    
+
     // MARK: - Properties
-    
+
     var netObjectsDispose = DisposeBag()
-    var resultSubject = BehaviorRelay<NSDictionary>(value : NSDictionary())
+    var resultSubject = BehaviorRelay<NSDictionary>(value: NSDictionary())
 //    var result : JSON
-    init(API apiName : String, Method aMethod : HTTPMethod,TargetObs targetObs : String) {
+    init(API apiName: String, Method aMethod: HTTPMethod, TargetObs targetObs: String) {
        // aMethod is not being used here for network operation.
        // It has only added to distinguish services with same API name and different Method
        // So they need their own Observable type
         resultSubject
             //.debug()
-            .filter{ $0.count > 0 }
+            .filter { $0.count > 0 }
             .subscribe(onNext: { [unowned self] (aDic) in
                 //print("Dictionary Received : ",aDic.count,"  ",aDic)
-                if (apiName == "get-state-and-city") && (aMethod == HTTPMethod.get){
+                if (apiName == "get-state-and-city") && (aMethod == HTTPMethod.get) {
                     let provinceList = self.processAsProvinceListToStringArray(Result: aDic)
                     NetworkManager.shared.allProvinceListObs.accept(provinceList)
-                } else if (apiName == "get-categories") && (aMethod == HTTPMethod.get){
+                } else if (apiName == "get-categories") && (aMethod == HTTPMethod.get) {
                     let aList = self.processAsCategoryListToStringArray(Result: aDic)
                     NetworkManager.shared.serviceTypeObs.accept(aList)
                 } else if (apiName == "get-state-and-city") && (aMethod == HTTPMethod.post) {
-                    var processedDic = Dictionary<String,String>()
+                    var processedDic = Dictionary<String, String>()
                     processedDic = (self.processAsCityList(Result: aDic))
                     NetworkManager.shared.cityDictionaryObs.accept(processedDic)
                 } else if (apiName == "get-area") && (aMethod == HTTPMethod.post) {
-                    
+
                     var areaList = [String]()
                     areaList = (self.processAsRegionList(Result: aDic))
                     NetworkManager.shared.regionListObs.accept(areaList)
@@ -48,19 +48,19 @@ class JSONParser {
                         LoginKey.shared.userID = String(describing: aUserID)
                         LoginKey.shared.userIDObs.accept(LoginKey.shared.userID)
                         NetworkManager.shared.SMSConfirmed.accept(true)
-                    }else{
+                    } else {
                         if let amessage =  aDic["message"] as? String {
                             NetworkManager.shared.messageObs.accept(amessage)
-                            
-                        }else if let amessage =  aDic["status"] as? String {
+
+                        } else if let amessage =  aDic["status"] as? String {
                             NetworkManager.shared.messageObs.accept(amessage)
-                        }else{
+                        } else {
                             NetworkManager.shared.messageObs.accept("عملیات با خطا مواجه شده است")
                         }
                     }
                 } else if (apiName == "categories-filter") && (aMethod == HTTPMethod.get) {
                     //Returns All Catagories (while SepantaGroupsVC pushed/No state/City has selected yet //?? aDic["categoryShops"]  is redundant but who knows!
-                    if let cat = aDic["categories"] ?? aDic["categoryShops"]  {
+                    if let cat = aDic["categories"] ?? aDic["categoryShops"] {
                         //print("Setting All Catagories  : ",[cat])
                         NetworkManager.shared.catagoriesObs.accept([cat])
                     }
@@ -70,9 +70,9 @@ class JSONParser {
                         //print("Setting Catagories for a state/city : ",[cat])
                         NetworkManager.shared.catagoriesObs.accept([cat])
                     }
-                    
+
                     if aDic["list_city"] != nil {
-                        var processedDic = Dictionary<String,String>()
+                        var processedDic = Dictionary<String, String>()
                         processedDic = (self.processAsCityList(Result: aDic))
                         NetworkManager.shared.cityDictionaryObs.accept(processedDic)
                     }
@@ -89,13 +89,13 @@ class JSONParser {
                         NetworkManager.shared.loginSucceed.accept(true)
                         LoginKey.shared.userIDObs.accept(LoginKey.shared.userID)
                         _ = LoginKey.shared.registerTokenAndUserID()
-                    }else{
+                    } else {
                         if let amessage =  aDic["message"] as? String {
                             NetworkManager.shared.messageObs.accept(amessage)
-                            
-                        }else if let amessage =  aDic["status"] as? String {
+
+                        } else if let amessage =  aDic["status"] as? String {
                             NetworkManager.shared.messageObs.accept(amessage)
-                        }else{
+                        } else {
                             NetworkManager.shared.messageObs.accept("عملیات با خطا مواجه شده است")
                         }
                     }
@@ -116,16 +116,16 @@ class JSONParser {
                     //set a message for register when things go wrong or right!
                     if aDic["cellphone"] != nil {
                         NetworkManager.shared.messageObs.accept("این شماره همراه قبلاْ ثبت نام نموده است")
-                    }else if aDic["username"] != nil {
+                    } else if aDic["username"] != nil {
                         NetworkManager.shared.messageObs.accept("این شناسه کاربری قبلاْ ثبت نام نموده است")
-                    }else if let amessage = aDic["message"] as? String ,
+                    } else if let amessage = aDic["message"] as? String ,
                             let auserID = aDic["userId"] as? Int {
                             LoginKey.shared.userID = "\(auserID)"
                         LoginKey.shared.userIDObs.accept("\(auserID)")
                         NetworkManager.shared.messageObs.accept(amessage)
                     }
-                    
-                } else if (apiName == "profile")  {
+
+                } else if (apiName == "profile") {
                     //Returns Profile Data for a user Id
                     let aProfile = (self.processAsProfile(Result: aDic))
                     NetworkManager.shared.profileObs.accept(aProfile)
@@ -139,12 +139,12 @@ class JSONParser {
                         NetworkManager.shared.profileObs.accept(aProfile)
                         //NetworkManager.shared.shopObs.accept(aProfile.content as! [Shop])
                     }*/
-                } else if (apiName == "shop-profile")  {
+                } else if (apiName == "shop-profile") {
                     //Returns Profile Data for a user Id
                     let aProfile = (self.processAsShopProfile(Result: aDic))
                     NetworkManager.shared.shopProfileObs.accept(aProfile)
                     NetworkManager.shared.postsObs.accept(aProfile.content)
-                }else if (apiName == "report-comment") || (apiName == "report-post") || (apiName == "report-comment"){
+                } else if (apiName == "report-comment") || (apiName == "report-post") || (apiName == "report-comment") {
                     //Returns Profile Data for a user Id
                     if let amessage = aDic["message"] as? String {
                         NetworkManager.shared.serverMessageObs.accept(amessage)
@@ -163,13 +163,13 @@ class JSONParser {
                 } else if (apiName == "contact") && (aMethod == HTTPMethod.post) {
                     // Sets True for commentSendingSuccessful to be observable by PostUI
                     NetworkManager.shared.message = (aDic["message"] as? String) ?? "نظر شما ثبت گردید"
-                    if let aStatus =  aDic["status"] as? String{
+                    if let aStatus =  aDic["status"] as? String {
                         if aStatus == "successful" {
                             NetworkManager.shared.contactSendingSuccessful.accept(ToggleStatus.YES)
-                        }else{
+                        } else {
                             NetworkManager.shared.contactSendingSuccessful.accept(ToggleStatus.NO)
                         }
-                    }else{
+                    } else {
                         // if server response does not contain "status" key then its a no!
                         NetworkManager.shared.contactSendingSuccessful.accept(ToggleStatus.NO)
                     }
@@ -178,9 +178,9 @@ class JSONParser {
                     let likeStatus = self.processLike(Result: aDic)
                     if likeStatus == 2 {
                         NetworkManager.shared.toggleLiked.accept(ToggleStatus.UNKNOWN)
-                    }else if likeStatus == 1 {
+                    } else if likeStatus == 1 {
                         NetworkManager.shared.toggleLiked.accept(ToggleStatus.YES)
-                    }else if likeStatus == 0 {
+                    } else if likeStatus == 0 {
                         NetworkManager.shared.toggleLiked.accept(ToggleStatus.NO)
                     }
                 } else if (apiName == "profile-info") && (aMethod == HTTPMethod.post) {
@@ -246,16 +246,16 @@ class JSONParser {
                 } else if (apiName == "app-version") && (aMethod == HTTPMethod.post) {
                     print("Starting version Parser - sending in use...")
                     if let amessage = aDic["message"] as? String {
-                        print("Server : ",amessage)
+                        print("Server : ", amessage)
                     }
                 } else if (apiName == "notifications") && (aMethod == HTTPMethod.get) {
                     print("Starting Notification Parser...")
-                    let (generalNotif,notifAsAny) = self.processNotifications(Result: aDic)
+                    let (generalNotif, notifAsAny) = self.processNotifications(Result: aDic)
                     if let notifForShop = notifAsAny as? [NotificationForShop] {
                         NetworkManager.shared.notificationForShopObs.accept(notifForShop)
-                    }else if let notifForUser = notifAsAny as? [NotificationForUser] {
+                    } else if let notifForUser = notifAsAny as? [NotificationForUser] {
                         NetworkManager.shared.notificationForUserObs.accept(notifForUser)
-                    }else{
+                    } else {
                         fatalError()
                     }
                     NetworkManager.shared.generalNotifObs.accept(generalNotif)
@@ -269,131 +269,131 @@ class JSONParser {
                 }
             ).disposed(by: netObjectsDispose)
     }
-    func processRating(Result aResult : NSDictionary) -> Rate {
+    func processRating(Result aResult: NSDictionary) -> Rate {
         var aRate = Rate()
         if aResult["error"] != nil {
-            print("ERROR in Card Request Parsing : ",aResult["error"]!)
+            print("ERROR in Card Request Parsing : ", aResult["error"]!)
         }
-        if let amessage = aResult["message"] as? String{
+        if let amessage = aResult["message"] as? String {
             aRate.message = amessage
         }
-        if let astatus = aResult["status"] as? String{
+        if let astatus = aResult["status"] as? String {
             aRate.status = astatus
         }
-        if let arate_count = aResult["rate_count"] as? Int{
+        if let arate_count = aResult["rate_count"] as? Int {
             aRate.rate_count = arate_count
         }
-        if let arate_avg = aResult["rate_avg"] as? Float{
+        if let arate_avg = aResult["rate_avg"] as? Float {
             aRate.rate_avg = arate_avg
         }
         return aRate
     }
 
-    func processPoints(Result aResult : NSDictionary) -> UserPoints {
+    func processPoints(Result aResult: NSDictionary) -> UserPoints {
         var aUserPoints = UserPoints()
         aUserPoints.points = [PointElement]()
         if aResult["error"] != nil {
-            print("ERROR in Card Request Parsing : ",aResult["error"]!)
+            print("ERROR in Card Request Parsing : ", aResult["error"]!)
         }
-        if let amessage = aResult["message"] as? String{
+        if let amessage = aResult["message"] as? String {
             aUserPoints.message = amessage
         }
-        if let astatus = aResult["status"] as? String{
+        if let astatus = aResult["status"] as? String {
             aUserPoints.status = astatus
         }
 
-        if let points_total = aResult["points_total"] as? Int ?? aResult["points_total "] as? Int{
+        if let points_total = aResult["points_total"] as? Int ?? aResult["points_total "] as? Int {
             aUserPoints.points_total = points_total
-        }else{
+        } else {
             print("*** ERORR : key : points_total not found")
         }
-        if let pointsElements = aResult["points"] as? NSArray{
-            for anElement in pointsElements{
+        if let pointsElements = aResult["points"] as? NSArray {
+            for anElement in pointsElements {
                 if let castedElement = anElement as? NSDictionary {
                     let aPointElem = PointElement(key: (castedElement["key"] as? String) ?? "", total: (castedElement["total"] as? Int) ?? 0)
                     aUserPoints.points?.append(aPointElem)
-                }else{
+                } else {
                     print("*** Error : points element is not a Dictionary!")
                 }
             }
-        }else{
+        } else {
             print("*** Error : userpoints should have a key with name points!")
-            print("Keys : ",aResult.allKeys)
+            print("Keys : ", aResult.allKeys)
         }
-        
+
         return aUserPoints
-        
+
     }
-    
-    func processAsPollGet(Result aResult : NSDictionary) -> Int {
+
+    func processAsPollGet(Result aResult: NSDictionary) -> Int {
         if aResult["error"] != nil {
-            print("ERROR in Card Request Parsing : ",aResult["error"]!)
+            print("ERROR in Card Request Parsing : ", aResult["error"]!)
         }
-        if let aPoll = aResult["poll"] as? Int{
+        if let aPoll = aResult["poll"] as? Int {
             return aPoll
         }
         return 0
     }
-    
-    func processSellRequest(Result aResult : NSDictionary)  {
+
+    func processSellRequest(Result aResult: NSDictionary) {
         if aResult["error"] != nil {
-            print("ERROR in Card Request Parsing : ",aResult["error"]!)
+            print("ERROR in Card Request Parsing : ", aResult["error"]!)
         }
         if let aMessage = aResult["message"] {
-            if let castedMessage = aMessage as? String{
+            if let castedMessage = aMessage as? String {
                 NetworkManager.shared.messageObs.accept(castedMessage)
-            }else{
+            } else {
                 NetworkManager.shared.messageObs.accept("نتیجه عملیات نامشخص بود،لطفاْ مجدداْ تلاش فرمایید")
             }
         }
     }
-    
-    func processCardRequest(Result aResult : NSDictionary)  {
+
+    func processCardRequest(Result aResult: NSDictionary) {
         if aResult["error"] != nil {
-            print("ERROR in Card Request Parsing : ",aResult["error"]!)
+            print("ERROR in Card Request Parsing : ", aResult["error"]!)
         }
         if let aMessage = aResult["message"] {
-            if let castedMessage = aMessage as? String{
+            if let castedMessage = aMessage as? String {
                 NetworkManager.shared.messageObs.accept(castedMessage)
-            }else{
+            } else {
                 NetworkManager.shared.messageObs.accept("نتیجه عملیات نامشخص بود،لطفاْ مجدداْ تلاش فرمایید")
             }
         }
         //if  == "خطا : این کارت قبلا ثبت شده است" {
     }
-    func processMobileNumber(Result aResult : NSDictionary) -> Mobile {
+    func processMobileNumber(Result aResult: NSDictionary) -> Mobile {
         var aMobile = Mobile()
         if aResult["error"] != nil {
-            print("ERROR in Bank Parsing : ",aResult["error"]!)
+            print("ERROR in Bank Parsing : ", aResult["error"]!)
         }
         aMobile.message = aResult["message"] as? String
         aMobile.status = aResult["status"] as? String
         aMobile.name = aResult["name"] as? String
         aMobile.logo = aResult["logo"] as? String
-        print("aMobile",aMobile)
+        print("aMobile", aMobile)
         return aMobile
     }
-    func processBankNumber(Result aResult : NSDictionary) -> (Bank) {
+    func processBankNumber(Result aResult: NSDictionary) -> (Bank) {
         var aBank = Bank()
         if aResult["error"] != nil {
-            print("ERROR in Bank Parsing : ",aResult["error"]!)
+            print("ERROR in Bank Parsing : ", aResult["error"]!)
         }
         aBank.code_bank = aResult["code_bank"] as? Int
         aBank.bank = aResult["bank"] as? String
         aBank.logo = aResult["logo"] as? String
-        print("Bank",aBank)
+        print("Bank", aBank)
         return aBank
     }
-    
-    func processNotifications(Result aResult : NSDictionary) -> ([GeneralNotification],[Any]) {
+
+    func processNotifications(Result aResult: NSDictionary) -> ([GeneralNotification], [Any]) {
         var generalNotif = [GeneralNotification]()
         var notifForUser = [NotificationForUser]()
         var notifForShop = [NotificationForShop]()
-        
+
         if aResult["notifications_manager"] != nil {
             if let notifs = aResult["notifications_manager"] as? NSArray {
                 for anotif in notifs {
-                    if let aNSDic = anotif as? NSDictionary{
+                    if let aNSDic = anotif as? NSDictionary {
                         var newGeneralNotif = GeneralNotification()
                         if let avalue = aNSDic["title"] { newGeneralNotif.title = avalue as? String ?? ""}
                         if let avalue = aNSDic["body"] { newGeneralNotif.body = avalue as? String ?? "پست جدید ما را ببینید"}
@@ -409,7 +409,7 @@ class JSONParser {
         if aResult["notifications_user"] != nil {
             if let notifs = aResult["notifications_user"] as? NSArray {
                 for anotif in notifs {
-                    if let aNSDic = anotif as? NSDictionary{
+                    if let aNSDic = anotif as? NSDictionary {
                         var newNotif = NotificationForUser()
                         if let avalue = aNSDic["post_id"] { newNotif.post_id = avalue as? Int ?? 0}
                         if let avalue = aNSDic["user_id"] { newNotif.user_id = avalue as? Int ?? 0}
@@ -420,7 +420,7 @@ class JSONParser {
                         notifForUser.append(newNotif)
                     }
                 }
-                return (generalNotif,notifForUser)
+                return (generalNotif, notifForUser)
             } else {
                 print("notifications_user can not be casted as array")
             }
@@ -429,7 +429,7 @@ class JSONParser {
         if aResult["notifications_shop"] != nil {
             if let notifs = aResult["notifications_shop"] as? NSArray {
                 for anotif in notifs {
-                    if let aNSDic = anotif as? NSDictionary{
+                    if let aNSDic = anotif as? NSDictionary {
                         var newNotif = NotificationForShop()
                         if let avalue = aNSDic["post_id"] { newNotif.post_id = avalue as? Int ?? 0}
                         if let avalue = aNSDic["user_id"] { newNotif.user_id = avalue as? Int ?? 0}
@@ -442,34 +442,34 @@ class JSONParser {
                         notifForShop.append(newNotif)
                     }
                 }
-                return (generalNotif,notifForShop)
+                return (generalNotif, notifForShop)
             } else {
                 print("notifications_shop can not be casted as array")
             }
         }
         print("@@@ ERROR : Result does not contain >notification_user or shop<")
         //fatalError()
-        
-        return (generalNotif,[])
+
+        return (generalNotif, [])
     }
 
-    func processLike(Result aResult : NSDictionary) -> Int {
+    func processLike(Result aResult: NSDictionary) -> Int {
         if aResult["error"] != nil {
-            print("ERROR in Like Parsing : ",aResult["error"]!)
+            print("ERROR in Like Parsing : ", aResult["error"]!)
         }
         if aResult["message"] != nil {
-            print("Like : Message Parsed : ",aResult["message"]!)
+            print("Like : Message Parsed : ", aResult["message"]!)
         }
         if let is_liked = aResult["is_like"] as? String {
-            print("is_liked : ",is_liked)
+            print("is_liked : ", is_liked)
             if is_liked == "1" {
                 return 1
-            }else if is_liked == "0" {
+            } else if is_liked == "0" {
                 return 0
-            }else{
+            } else {
                 return 2
             }
-        }else{
+        } else {
             return 2
         }
 
@@ -485,23 +485,22 @@ class JSONParser {
         }
          */
     }
-    
-    func processShopLocationsList(Result aResult : NSDictionary) -> [Shop] {
+
+    func processShopLocationsList(Result aResult: NSDictionary) -> [Shop] {
         var shops = [Shop]()
         if aResult["error"] != nil {
-            print("ERROR in Shop List Parsing : ",aResult["error"]!)
+            print("ERROR in Shop List Parsing : ", aResult["error"]!)
         }
         if aResult["message"] != nil {
-            print("Message Parsed : ",aResult["message"]!)
+            print("Message Parsed : ", aResult["message"]!)
         }
-        
+
         //print("Shop Result keys : ",aResult.allKeys)
         //print("Result : ",aResult)
-        if let dataOfShops = aResult["shops"] as? NSArray{
-                for shopDic in dataOfShops
-                {
-                    if let shopElemAsNSDic = shopDic as? NSDictionary{                        
-                        if let shopElem = shopElemAsNSDic as? Dictionary<String, Any>{
+        if let dataOfShops = aResult["shops"] as? NSArray {
+                for shopDic in dataOfShops {
+                    if let shopElemAsNSDic = shopDic as? NSDictionary {
+                        if let shopElem = shopElemAsNSDic as? Dictionary<String, Any> {
                             /*
                             print("shopElem : ",shopElem)
                             print("uid = ",shopElem["user_id"] as? Int)
@@ -516,8 +515,7 @@ class JSONParser {
                                 let shop_name = shopElem["shop_name"] as? String,
                                 let lat = (shopElem["lat"] as? String)?.toDouble(),
                                 let lon = (shopElem["lon"] as? String)?.toDouble(),
-                                let map_logo = (shopElem["category_logo"] as? String)
-                                {
+                                let map_logo = (shopElem["category_logo"] as? String) {
                                     var aShop = Shop(WithShopID: shopid)
                                     aShop.lat = lat
                                     aShop.lon = lon
@@ -542,39 +540,38 @@ class JSONParser {
                                     shops.append(aShop)
                             }
                         }
-                    }else{
+                    } else {
                         print("shopElm not casted.")
                     }
                 }
         } else {
             print("Parser for ShopLocation : Couldnt cast Result[shops]  ")
-            print("Shop Result keys : ",aResult.allKeys)
-            print("aResult[categoryShops] ",aResult["categoryShops"] ?? "EMPTY")
+            print("Shop Result keys : ", aResult.allKeys)
+            print("aResult[categoryShops] ", aResult["categoryShops"] ?? "EMPTY")
         }
-        print("**Shops Fetched : ",shops.count," record")
+        print("**Shops Fetched : ", shops.count, " record")
         //print("Parsing State List Successful")
-        
+
         return shops
-        
+
     }
 
-    func processFavAShopToggle(Result aProfileDicAsNS : NSDictionary) -> ToggleStatus {
+    func processFavAShopToggle(Result aProfileDicAsNS: NSDictionary) -> ToggleStatus {
         if aProfileDicAsNS["isFave"] == nil { return ToggleStatus.UNKNOWN}
-        
+
         if let isFave = aProfileDicAsNS["isFave"] as? String {
             if isFave == "1" {
                 return ToggleStatus.YES
-            }else if isFave == "0" {
+            } else if isFave == "0" {
                 return ToggleStatus.NO
-            }else{
+            } else {
                 return ToggleStatus.UNKNOWN
             }
         }
         return ToggleStatus.UNKNOWN
     }
-    
-    
-    func processProfileInfo(Result aProfileDicAsNS : NSDictionary) -> ProfileInfo {
+
+    func processProfileInfo(Result aProfileDicAsNS: NSDictionary) -> ProfileInfo {
         var maritalStatusStr = ""
         var genderStr = ""
         var profileInfo = ProfileInfo()
@@ -592,17 +589,15 @@ class JSONParser {
         profileInfo.email = (aProfileDicAsNS["email"] as? String) ?? ""
         profileInfo.phone = (aProfileDicAsNS["phone"] as? String) ?? ""
         profileInfo.birthdate = (aProfileDicAsNS["birthdate"] as? String) ?? ""
-        if let genderCode = aProfileDicAsNS["gender"] as? Int
-        {
+        if let genderCode = aProfileDicAsNS["gender"] as? Int {
             if genderCode == 1 {genderStr = "مرد"} else if genderCode == 0 {genderStr = "زن"}
             //print("genderStr : \(genderStr) from \(genderCode)")
             profileInfo.gender = genderStr
         }
-        
+
         profileInfo.birthdate = (aProfileDicAsNS["birthdate"] as? String) ?? ""
         profileInfo.email = (aProfileDicAsNS["email"] as? String) ?? ""
-        if let maritalCode = aProfileDicAsNS["marital_status"] as? Int
-        {
+        if let maritalCode = aProfileDicAsNS["marital_status"] as? Int {
             if maritalCode == 1 {maritalStatusStr = "مجرد"} else if maritalCode == 2 {maritalStatusStr = "متاهل"}
             //print("maritalStatusStr : \(maritalStatusStr) from \(maritalCode) ")
             profileInfo.marital_status = maritalStatusStr
@@ -610,22 +605,21 @@ class JSONParser {
         //print("FULL ProfileInfo : ",profileInfo)
         return profileInfo
     }
-    
-    func processShopSearchResultList (Result aResult : NSDictionary) -> [ShopSearchResult] {
+
+    func processShopSearchResultList (Result aResult: NSDictionary) -> [ShopSearchResult] {
         var shopResults = [ShopSearchResult]()
         if aResult["error"] != nil {
-            print("ERROR in Shop List Parsing : ",aResult["error"]!)
+            print("ERROR in Shop List Parsing : ", aResult["error"]!)
         }
         if aResult["message"] != nil {
-            print("Message Parsed : ",aResult["message"]!)
+            print("Message Parsed : ", aResult["message"]!)
         }
-        
+
         //print("Shop Result keys : ",aResult.allKeys)
         //print("Result : ",aResult)
         if let shopsInResult = aResult["shops"] as? NSArray {
-            for shopResultDic in shopsInResult
-            {
-                if let shopElemAsNSDic = shopResultDic as? NSDictionary{
+            for shopResultDic in shopsInResult {
+                if let shopElemAsNSDic = shopResultDic as? NSDictionary {
                     if let shopElem = shopElemAsNSDic as? Dictionary<String, Any> {
                         //print("shopElem : ",shopElem)
                         if shopElem["user_id"] != nil && shopElem["shop_id"] != nil {
@@ -633,26 +627,25 @@ class JSONParser {
                                                 user_id: shopElem["user_id"] as? Int ?? 0,
                                                 shop_name: shopElem["shop_name"] as? String ?? "")
                             shopResults.append(aShopResult)
-                        }else{
+                        } else {
                             print("Warning : Shop Result is not Complete!")
                         }
                     }
-                }else{
+                } else {
                     print("shopElm not casted.")
                 }
             }
         } else {
             print("Couldnt cast Result[shops] as Array ")
-            print("Shop Result keys : ",aResult.allKeys)
-            print("aResult[categoryShops] ",aResult["categoryShops"] ?? "EMPTY")
+            print("Shop Result keys : ", aResult.allKeys)
+            print("aResult[categoryShops] ", aResult["categoryShops"] ?? "EMPTY")
         }
-        print("Shop Results Fetched : ",shopResults.count," record")
+        print("Shop Results Fetched : ", shopResults.count, " record")
         //print("Parsing State List Successful")
         return shopResults
     }
-    
-    
-    func processAsProfile(Result aProfileDicAsNS : NSDictionary) -> Profile {
+
+    func processAsProfile(Result aProfileDicAsNS: NSDictionary) -> Profile {
         var profile = Profile()
         profile.status = (aProfileDicAsNS["status"] as? String) ?? ""
         profile.message = (aProfileDicAsNS["message"] as? String) ?? ""
@@ -695,9 +688,9 @@ class JSONParser {
                 newShop.lon = (aPostOrShop["lon"] as? String)?.toDouble()
                 if let oneImage = aPostOrShop["image"] as? String {
                     newShop.image = oneImage
-                }else if let dicImage = aPostOrShop["image"] as? NSDictionary {
+                } else if let dicImage = aPostOrShop["image"] as? NSDictionary {
                     newShop.image = (dicImage["image"] as? String) ?? "EmptyImage"
-                }else{
+                } else {
                     print("Can not cast followed-shop IMAGE : \(String(describing: aPostOrShop["image"]))")
                 }
                 newShop.rate = (aPostOrShop["rate"] as? String) ?? ""
@@ -705,10 +698,10 @@ class JSONParser {
                 newShop.created_at = (aPostOrShop["created_at"] as? String) ?? ""
                 profile.content.append(newShop)
             }
-        }else{
+        } else {
             print("Content in Profile can not be casted as NSArray")
         }
-        
+
         if let cards = aProfileDicAsNS["cards"] as? NSArray {
             for aContent in cards {
                 let aCard = (aContent as! NSDictionary)
@@ -727,8 +720,8 @@ class JSONParser {
         //print("FULL Profile : ",profile)
         return profile
     }
-    
-    func processAsShopProfile(Result aProfileDicAsNS : NSDictionary) -> ShopProfile {
+
+    func processAsShopProfile(Result aProfileDicAsNS: NSDictionary) -> ShopProfile {
         var profile = ShopProfile()
         profile.status = (aProfileDicAsNS["status"] as? String) ?? ""
         profile.message = (aProfileDicAsNS["message"] as? String) ?? ""
@@ -769,18 +762,18 @@ class JSONParser {
                 //print("Adding Content... with image : ",aPost)
                 if let oneImage = aPostOrShop["image"] as? String {
                     newPost.image = oneImage
-                }else if let dicImage = aPostOrShop["image"] as? NSDictionary {
+                } else if let dicImage = aPostOrShop["image"] as? NSDictionary {
                     newPost.image = (dicImage["image"] as? String) ?? "EmptyImage"
-                }else{
+                } else {
                     print("Can not cast POST IMAGE : \(String(describing: aPostOrShop["image"]))")
                 }
                 //print("     Profile Post : ",newPost)
                 profile.content.append(newPost)
             }
-        }else{
+        } else {
             print("Content in Profile can not be casted as NSArray")
         }
-        
+
         if let cards = aProfileDicAsNS["cards"] as? NSArray {
             for aContent in cards {
                 let aCard = (aContent as! NSDictionary)
@@ -799,7 +792,7 @@ class JSONParser {
         //print("FULL Profile : ",profile)
         return profile
     }
-    func processAsPostDetails(Result aResult : NSDictionary) -> Post {
+    func processAsPostDetails(Result aResult: NSDictionary) -> Post {
         var aPost = NetworkManager.shared.postDetailObs.value
         if let postDet = aResult["postDetail"] as? NSDictionary {
             if let aContent = postDet["content"] as? String {aPost.content = aContent}
@@ -809,16 +802,16 @@ class JSONParser {
             if let aContent = postDet["content"] as? String {aPost.content = aContent}
             if let anImage = postDet["image"] as? String {aPost.image = anImage}
             //print("JSON Parser : Parsed Post : ",aPost)
-            print("postDet : ",postDet)
-        }else{
+            print("postDet : ", postDet)
+        } else {
             print("*** Error : Post Detail is NULL - Parser Failed!")
             NetworkManager.shared.messageObs.accept("این پست حذف شده است")
         }
-        
+
         if let someComments = aResult["comments"] as? NSArray {
             aPost.comments = [Comment]()
             for aComment in someComments {
-                if let castedComment = aComment as? NSDictionary{
+                if let castedComment = aComment as? NSDictionary {
                     let newComment = Comment(comment_id: castedComment["comment_id"] as? Int,
                                              body: castedComment["body"] as? String,
                                              username: castedComment["username"] as? String,
@@ -829,29 +822,29 @@ class JSONParser {
                                              )
                     //print("Casted : ",newComment)
                     aPost.comments!.append(newComment)
-                }else{
-                    print("Error : Comment is incorrect and can not be casted : ",aComment)
+                } else {
+                    print("Error : Comment is incorrect and can not be casted : ", aComment)
                 }
             }
-        }else {
-            print("comments before case as Array : ",aResult["comments"] ?? "EMPTY Comment")
+        } else {
+            print("comments before case as Array : ", aResult["comments"] ?? "EMPTY Comment")
         }
 
         if let aLike = aResult["is_like"] as? Int {
-            print("Reading isLike : ",aLike)
+            print("Reading isLike : ", aLike)
             aPost.is_like = aLike
-            
+
         }
         if let aCountLike = aResult["count_like"] as? String {
-            print("Reading Count Like : ",aCountLike)
+            print("Reading Count Like : ", aCountLike)
             aPost.count_like = aCountLike
         }
 
         return aPost
     }
-    
-    func processAndSetHomeData(Result aResult : NSDictionary) {
-        if let post_image = aResult["path_post_image"] as? String{
+
+    func processAndSetHomeData(Result aResult: NSDictionary) {
+        if let post_image = aResult["path_post_image"] as? String {
             SlidesAndPaths.shared.fetched = true
             SlidesAndPaths.shared.path_post_image = post_image
             SlidesAndPaths.shared.path_profile_image = (aResult["path_profile_image"] as? String) ?? SlidesAndPaths.shared.path_profile_image
@@ -864,19 +857,19 @@ class JSONParser {
             if let notificationsCount = aResult["notifications_count"] as? Int {
                 //SlidesAndPaths.shared.notifications_count.accept(120)
                 SlidesAndPaths.shared.notifications_count.accept(notificationsCount)
-            }else{
+            } else {
                 print("Parser : Error : INVALID Notification count in HOME api")
             }
             if let newShopCount = aResult["count_new_shop"] as? Int {
                 //SlidesAndPaths.shared.count_new_shop.accept(5)
                 SlidesAndPaths.shared.count_new_shop.accept(newShopCount)
-            }else{
+            } else {
                 print("Parser : Error : INVALID new shop count in HOME api")
             }
 
-            if let slides = aResult["sliders"] as? NSArray{
+            if let slides = aResult["sliders"] as? NSArray {
                 for aSlide in slides {
-                    if let aSlideAsNsDic = aSlide as? NSDictionary{
+                    if let aSlideAsNsDic = aSlide as? NSDictionary {
                         let anId = aSlideAsNsDic["id"] as? Int ?? 0
                         let aTitle = aSlideAsNsDic["title"] as? String ?? "بدون نام"
                         let aLink = aSlideAsNsDic["link"] as? String ?? ""
@@ -884,11 +877,10 @@ class JSONParser {
                         let aShopId = aSlideAsNsDic["shop_id"] as? Int ?? 0
                         let imageName = aSlideAsNsDic["images"] as? String ?? ""
                         let img = UIImage().getImageFromCache(ImageName: imageName)
-                        if img == nil{
+                        if img == nil {
                             //print("Downloading slide : \(anId) with name : \(imageName)")
                             let imageUrlStr = NetworkManager.shared.websiteRootAddress+SlidesAndPaths.shared.path_slider_image+imageName
-                            if let imageUrl = URL(string: imageUrlStr)
-                            {
+                            if let imageUrl = URL(string: imageUrlStr) {
                                 //print("Alamofire : ",imageUrlStr)
                                 Alamofire.request(imageUrl).responseImage {  response in
                                     if let image = response.result.value {
@@ -896,26 +888,26 @@ class JSONParser {
                                         //self.anUIImage.accept(image)
                                         SlidesAndPaths.shared.slides.append(Slide(id: anId, user_id: aUserId, shop_id: aShopId, title: aTitle, link: aLink, images: imageName, aUIImage: image))
                                         SlidesAndPaths.shared.slidesObs.accept(SlidesAndPaths.shared.slides)
-                                        let imageData = UIImageJPEGRepresentation(image,0.5) as NSData?
+                                        let imageData = UIImageJPEGRepresentation(image, 0.5) as NSData?
                                         if imageData != nil {
                                             //print("Saving slider : ",imageName)
-                                            CacheManager.shared.saveFile(Data:imageData!, Filename:imageName)
+                                            CacheManager.shared.saveFile(Data: imageData!, Filename: imageName)
                                         }
-                                    }else{
+                                    } else {
                                         NetworkManager.shared.status.accept(CallStatus.error)
                                         print("No response from alamofire requesting image")
                                     }
                                 }
-                            }else{
+                            } else {
                                 NetworkManager.shared.status.accept(CallStatus.InternalServerError)
-                                print("URL for Slide is invalid : ",imageUrlStr)
+                                print("URL for Slide is invalid : ", imageUrlStr)
                             }
-                        }else{
+                        } else {
                             //print("Slide : ",anId," exists in cache : ",img)
                             SlidesAndPaths.shared.slides.append(Slide(id: anId, user_id: aUserId, shop_id: aShopId, title: aTitle, link: aLink, images: imageName, aUIImage: img))
                             SlidesAndPaths.shared.slidesObs.accept(SlidesAndPaths.shared.slides)
                         }
-                    }else{
+                    } else {
                         NetworkManager.shared.status.accept(CallStatus.InternalServerError)
                         print("Error : Slide element is not a NSDictionary")
                     }
@@ -924,26 +916,25 @@ class JSONParser {
             print("Home data updated....")
         }
     }
-    
-    func processShopList(Result aResult : NSDictionary) -> [Shop] {
+
+    func processShopList(Result aResult: NSDictionary) -> [Shop] {
         var shops = [Shop]()
         if aResult["error"] != nil {
-            print("ERROR in Shop List Parsing : ",aResult["error"]!)
+            print("ERROR in Shop List Parsing : ", aResult["error"]!)
         }
         if aResult["message"] != nil {
-            print("Message Parsed : ",aResult["message"]!)
+            print("Message Parsed : ", aResult["message"]!)
         }
-        
+
         //print("Shop Result keys : ",aResult.allKeys)
         //print("Result : ",aResult)
-        
-        if let aDic = aResult["shops"] as? NSDictionary ?? aResult["categoryShops"] as? NSDictionary ?? aResult["favorite"] as? NSDictionary{
+
+        if let aDic = aResult["shops"] as? NSDictionary ?? aResult["categoryShops"] as? NSDictionary ?? aResult["favorite"] as? NSDictionary {
             if let dataOfShops = aDic["data"] as? NSArray {
-                for shopDic in dataOfShops
-                {
-                    if let shopElemAsNSDic = shopDic as? NSDictionary{
-                        
-                        if let shopElem = shopElemAsNSDic as? Dictionary<String, Any>{
+                for shopDic in dataOfShops {
+                    if let shopElemAsNSDic = shopDic as? NSDictionary {
+
+                        if let shopElem = shopElemAsNSDic as? Dictionary<String, Any> {
                             //print("shopElem : ",shopElem)
                             if shopElem["user_id"] != nil && shopElem["shop_id"] != nil {
                                 let aNewShop = Shop(shop_id: shopElem["shop_id"] as? Int ?? 0,
@@ -960,19 +951,18 @@ class JSONParser {
                                 shops.append(aNewShop)
                             }
                         }
-                    }else{
+                    } else {
                         print("shopElm not casted.")
                     }
                 }
-            } else{
+            } else {
                 print("aresult[shops or categoryShops][data] is empty or can not be casted")
             }
-        }else if let dataOfShops = aResult["shops"] as? NSArray ?? aResult["categoryShops"] as? NSArray ?? aResult["favorite"] as? NSArray{
-            for shopDic in dataOfShops
-            {
-                if let shopElemAsNSDic = shopDic as? NSDictionary{
-                    
-                    if let shopElem = shopElemAsNSDic as? Dictionary<String, Any>{
+        } else if let dataOfShops = aResult["shops"] as? NSArray ?? aResult["categoryShops"] as? NSArray ?? aResult["favorite"] as? NSArray {
+            for shopDic in dataOfShops {
+                if let shopElemAsNSDic = shopDic as? NSDictionary {
+
+                    if let shopElem = shopElemAsNSDic as? Dictionary<String, Any> {
                         //print("shopElem : ",shopElem)
                         if shopElem["user_id"] != nil && shopElem["shop_id"] != nil {
                             let aNewShop = Shop(shop_id: shopElem["shop_id"] as? Int ?? 0,
@@ -989,138 +979,135 @@ class JSONParser {
                             shops.append(aNewShop)
                         }
                     }
-                }else{
+                } else {
                     print("shopElm not casted.")
                 }
             }
-        }else {
+        } else {
             print("Couldnt cast Result[shops] or [categoryShops] ")
-            print("Shop Result keys : ",aResult.allKeys)
-            print("aResult[categoryShops] ",aResult["categoryShops"] ?? "EMPTY")
+            print("Shop Result keys : ", aResult.allKeys)
+            print("aResult[categoryShops] ", aResult["categoryShops"] ?? "EMPTY")
         }
-        print("**Shops Fetched : ",shops.count," record")
+        print("**Shops Fetched : ", shops.count, " record")
         //print("Parsing State List Successful")
-        
+
         return shops
 
     }
-    
-    func processAsProvinceList(Result aResult : NSDictionary) -> (Dictionary<String,String>) {
-        var provinceDict = Dictionary<String,String>()
-        var provName : String
+
+    func processAsProvinceList(Result aResult: NSDictionary) -> (Dictionary<String, String>) {
+        var provinceDict = Dictionary<String, String>()
+        var provName: String
         if aResult["error"] != nil {
-            print("ERROR in Province List Parsing : ",aResult["error"]!)
+            print("ERROR in Province List Parsing : ", aResult["error"]!)
         }
         if aResult["message"] != nil {
-            print("Message Parsed : ",aResult["message"]!)
+            print("Message Parsed : ", aResult["message"]!)
         }
 
         //print("aResult states : ",aResult["states"])
         if let aDic = aResult["states"] as? NSDictionary {
-            for aProv in aDic
-            {
+            for aProv in aDic {
                 //print(aProv.key," ",aProv.value)
                 provName = "\(aProv.key)"
                 provinceDict[provName] = "\(aProv.value)"
                 //if let aName = aProv.key as? String {provName = aName} else { print("Error in Key of State data from Backend");continue}
                 //if let idx = aProv.value as? String {provinceDict[provName] = idx} else { print("Error in Value of State data from Backend");continue}
-                
+
             }
         } else {
-            
+
         }
-        print("Province Fetched : ",provinceDict.count," record")
+        print("Province Fetched : ", provinceDict.count, " record")
         //print("Parsing State List Successful")
 
         return provinceDict
-        
+
     }
-    func processAsCategoryListToStringArray(Result aResult : NSDictionary) -> [String] {
+    func processAsCategoryListToStringArray(Result aResult: NSDictionary) -> [String] {
         //print("*** Using Province Direct Array!")
         var aList = [String]()
         if aResult["error"] != nil {
-            print("ERROR in Province List Parsing : ",aResult["error"]!)
+            print("ERROR in Province List Parsing : ", aResult["error"]!)
         }
         if aResult["message"] != nil {
-            print("Message Parsed : ",aResult["message"]!)
+            print("Message Parsed : ", aResult["message"]!)
         }
         if let aDic = aResult["categories"] as? NSDictionary {
-            for aProv in aDic
-            {
+            for aProv in aDic {
                 if let idx = aProv.value as? Int {
-                    if aList.count < idx + 1{
-                        for _ in (aList.count)...(idx+1){
+                    if aList.count < idx + 1 {
+                        for _ in (aList.count)...(idx+1) {
                             aList.append("")
                         }
                     }
                     aList[idx] = "\(aProv.key)"
-                }else{
-                    print("ERROR Parsing ",aProv.value," to Number!")
+                } else {
+                    print("ERROR Parsing ", aProv.value, " to Number!")
                 }
             }
         } else {
             print("JSONParser processAsProvinceListToStringArray : Dictionary does not have states key")
         }
-        print("Province List built : ",aList.count," record")
+        print("Province List built : ", aList.count, " record")
         //print("Parsing State List Successful")
         //provinceList.forEach({print("ELEM : ",$0)})
         return aList
 
     }
-    func processAsProvinceListToStringArray(Result aResult : NSDictionary) -> [String] {
+    func processAsProvinceListToStringArray(Result aResult: NSDictionary) -> [String] {
         //print("*** Using Province Direct Array!")
         var provinceList = [String]()
         if aResult["error"] != nil {
-            print("ERROR in Province List Parsing : ",aResult["error"]!)
+            print("ERROR in Province List Parsing : ", aResult["error"]!)
         }
         if aResult["message"] != nil {
-            print("Message Parsed : ",aResult["message"]!)
+            print("Message Parsed : ", aResult["message"]!)
         }
         if let aDic = aResult["states"] as? NSDictionary {
-            for aProv in aDic
-            {
+            for aProv in aDic {
                 if let idx = aProv.value as? Int {
-                    if provinceList.count < idx + 1{
-                        for _ in (provinceList.count)...(idx+1){
+                    if provinceList.count < idx + 1 {
+                        for _ in (provinceList.count)...(idx+1) {
                             provinceList.append("")
                         }
                     }
                     provinceList[idx] = "\(aProv.key)"
-                }else{
-                    print("ERROR Parsing ",aProv.value," to Number!")
+                } else {
+                    print("ERROR Parsing ", aProv.value, " to Number!")
                 }
             }
         } else {
             print("JSONParser processAsProvinceListToStringArray : Dictionary does not have states key")
         }
-        print("Province List built : ",provinceList.count," record")
+        print("Province List built : ", provinceList.count, " record")
         //print("Parsing State List Successful")
         //provinceList.forEach({print("ELEM : ",$0)})
         return provinceList
-        
+
     }
-    
-    func processAsRegionList(Result aResult : NSDictionary) -> [String]{//(Dictionary<String,String>) {
+
+    func processAsRegionList(Result aResult: NSDictionary) -> [String] {//(Dictionary<String,String>) {
         var aList = [String]()
-        var regionDict = Dictionary<String,String>()
-        print("Result AllKeys : ",aResult.allKeys)
+        var regionDict = Dictionary<String, String>()
+        print("Result AllKeys : ", aResult.allKeys)
         if aResult["error"] != nil {
-            print("ERROR in Cities List Parsing : ",aResult["error"]!)
+            print("ERROR in Cities List Parsing : ", aResult["error"]!)
         }
         if aResult["message"] != nil {
-            print("Message Parsed : ",aResult["message"]!)
+            print("Message Parsed : ", aResult["message"]!)
         }
-        
+
         //print("aResult cities : ",aResult["state"])
-        
-        if let regions = aResult["areas"] as? NSArray{
+
+        if let regions = aResult["areas"] as? NSArray {
             for aDic in regions {
                 if let aCastedDic = aDic as? NSDictionary {
                 //print(aCity.key," ",aCity.value)
                     if let idx = aCastedDic["id"] as? Int ,
-                        let anArea = aCastedDic["area"] as? String{
-                        if aList.count < idx + 1{
-                            for _ in (aList.count)...(idx+1){
+                        let anArea = aCastedDic["area"] as? String {
+                        if aList.count < idx + 1 {
+                            for _ in (aList.count)...(idx+1) {
                                 aList.append("")
                             }
                         }
@@ -1134,23 +1121,22 @@ class JSONParser {
         }
         return aList//regionDict
     }
-    
-    func processAsCityList(Result aResult : NSDictionary) -> (Dictionary<String,String>) {
-        var cityDict = Dictionary<String,String>()
-        var cityName : String
-        print("Result AllKeys : ",aResult.allKeys)
+
+    func processAsCityList(Result aResult: NSDictionary) -> (Dictionary<String, String>) {
+        var cityDict = Dictionary<String, String>()
+        var cityName: String
+        print("Result AllKeys : ", aResult.allKeys)
         if aResult["error"] != nil {
-            print("ERROR in Cities List Parsing : ",aResult["error"]!)
+            print("ERROR in Cities List Parsing : ", aResult["error"]!)
         }
         if aResult["message"] != nil {
-            print("Message Parsed : ",aResult["message"]!)
+            print("Message Parsed : ", aResult["message"]!)
         }
-        
+
         //print("aResult cities : ",aResult["state"])
 
-        if let aDic = aResult["state"] as? NSDictionary ?? aResult["list_city"] as? NSDictionary{
-            for aCity in aDic
-            {
+        if let aDic = aResult["state"] as? NSDictionary ?? aResult["list_city"] as? NSDictionary {
+            for aCity in aDic {
                 //print(aCity.key," ",aCity.value)
                 cityName = "\(aCity.key)"
                 cityDict[cityName] = "\(aCity.value)"
@@ -1163,10 +1149,10 @@ class JSONParser {
         } else {
             print("Parser : Result for cities is empty!")
         }
-        print("City Fetched : ",cityDict.count," record")
+        print("City Fetched : ", cityDict.count, " record")
         //print("Parsing City List Successful")
         return cityDict
-        
+
     }
 
 }

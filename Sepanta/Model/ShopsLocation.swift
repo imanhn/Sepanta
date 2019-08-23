@@ -7,8 +7,8 @@
 //
 
 import Foundation
-struct ShopsLocation : Codable{
-    var status : String?
-    var message : String?
-    var shops : [Shop]?
+struct ShopsLocation: Codable {
+    var status: String?
+    var message: String?
+    var shops: [Shop]?
 }

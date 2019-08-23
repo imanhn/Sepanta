@@ -8,23 +8,23 @@
 
 import Foundation
 
-struct Post : ShopOrPost, Codable, Equatable {
+struct Post: ShopOrPost, Codable, Equatable {
     static func == (lhs: Post, rhs: Post) -> Bool {
         return (lhs.id == rhs.id)
     }
-    var status : String?
-    var message : String?
+    var status: String?
+    var message: String?
 
-    var id : Int?
+    var id: Int?
     var shop_id: Int?
     var image: String?
     var title: String?
-    var content : String?
-    var is_like : Int?
-    var count_like : String?
-    var postDetail : PostDetail?
-    var comments : [Comment]?
-    init(){
+    var content: String?
+    var is_like: Int?
+    var count_like: String?
+    var postDetail: PostDetail?
+    var comments: [Comment]?
+    init() {
     }
     enum CodingKeys: String, CodingKey {
         case id
@@ -37,7 +37,7 @@ struct Post : ShopOrPost, Codable, Equatable {
         case postDetail
         case comments
     }
-    
+
     enum PostDetailKeys: CodingKey {
         case id
         case shop_id
@@ -46,7 +46,7 @@ struct Post : ShopOrPost, Codable, Equatable {
         case image
         case likeCount
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         let postDetailValues = try values.nestedContainer(keyedBy: PostDetailKeys.self, forKey: .postDetail)
@@ -64,19 +64,18 @@ struct Post : ShopOrPost, Codable, Equatable {
         message = try values.decode(String.self, forKey: .message)
         is_like = try values.decode(Int.self, forKey: .is_like)
         count_like = try values.decode(String.self, forKey: .count_like)
-        
+
     }
 }
 
-
-struct PostDetail : Codable {
-    var id : Int?
+struct PostDetail: Codable {
+    var id: Int?
     var shop_id: Int?
-    var title : String?
-    var content : String?
-    var image : String?
-    var likeCount : String?
-    
+    var title: String?
+    var content: String?
+    var image: String?
+    var likeCount: String?
+
     enum PostDetailKeys: CodingKey {
         case id
         case shop_id
