@@ -7,14 +7,14 @@
 //
 
 import Foundation
-struct CategoryFilter : Codable {
-    var status : String?
-    var message : String?
-    var categories : [Categories]
+struct CategoryFilter: Codable {
+    var status: String?
+    var message: String?
+    var categories: [Categories]
 }
 
-struct Categories : Codable{
-    var id : Int
-    var title : String
-    var image : String
+struct Categories: Codable {
+    var id: Int
+    var title: String
+    var image: String
 }

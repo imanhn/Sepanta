@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct FavoriteList : Codable {
-    var message : String?
-    var status : String?
-    var favorite : [Shop]?
+struct FavoriteList: Codable {
+    var message: String?
+    var status: String?
+    var favorite: [Shop]?
 }
 
-struct MakeFavorite : Codable {
-    var message : String?
-    var status : String?
-    var isFave : String?
+struct MakeFavorite: Codable {
+    var message: String?
+    var status: String?
+    var isFave: String?
 }
