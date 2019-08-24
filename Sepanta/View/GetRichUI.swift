@@ -22,10 +22,10 @@ class GetRichUI: NSObject, UITextFieldDelegate {
     var shopLoc: CGPoint!
     var textFieldWidth: CGFloat = 0
     var delegate: GetRichViewController!
-    var views = Dictionary<String, UIView>()
-    var texts = Dictionary<String, UITextField>()
-    var labels = Dictionary<String, UILabel>()
-    var buttons = Dictionary<String, UIButton>()
+    var views = [String:UIView]()
+    var texts = [String:UITextField]()
+    var labels = [String:UILabel]()
+    var buttons = [String:UIButton]()
     var datePicker = UIDatePicker()
     var locationButton = RoundedButton(type: .custom)
     var awareCheckButton = UIButton(type: .custom)

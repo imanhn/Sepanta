@@ -16,10 +16,10 @@ import RxSwift
 class EditProfileUI: NSObject, UITextFieldDelegate {
 
     var delegate: EditProfileViewController
-    var views = Dictionary<String, UIView>()
-    var texts = Dictionary<String, UITextField>()
-    var labels = Dictionary<String, UILabel>()
-    var buttons = Dictionary<String, UIButton>()
+    var views = [String:UIView]()
+    var texts = [String:UITextField]()
+    var labels = [String:UILabel]()
+    var buttons = [String:UIButton]()
     var datePicker = UIDatePicker()
     var submitButton = UIButton(type: .custom)
     var stateCode: String!
@@ -426,8 +426,7 @@ class EditProfileUI: NSObject, UITextFieldDelegate {
         self.delegate.setEditing(false, animated: true)
         let aTextField = sender as! EmptyTextField
         let options = ["مرد", "زن"]
-        let controller = ArrayChoiceTableViewController(options.sorted {$0 < $1}) {
-            (selectedOption) in
+        let controller = ArrayChoiceTableViewController(options.sorted {$0 < $1}) { (selectedOption) in
             aTextField.text = selectedOption
             aTextField.sendActions(for: .valueChanged)
         }

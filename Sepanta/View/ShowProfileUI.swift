@@ -211,11 +211,9 @@ class ShowProfileUI: NSObject, UICollectionViewDelegateFlowLayout {
         let aButton = (sender as? UIButton)
         guard aButton?.tag != nil else {return}
         var selectedPost: Post!
-        for apost in self.posts.value {
-            if apost.id == aButton?.tag {
-                selectedPost = apost
-                break
-            }
+        for apost in self.posts.value where apost.id == aButton?.tag{
+            selectedPost = apost
+            break
         }
         NetworkManager.shared.postDetailObs = BehaviorRelay<Post>(value: Post())
         self.delegate.coordinator!.PushAPost(PostID: selectedPost.id ?? (aButton?.tag)!, OwnerUserID: selectedPost.shop_id!)
