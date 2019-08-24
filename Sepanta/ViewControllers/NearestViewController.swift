@@ -155,12 +155,12 @@ class NearestViewController: UIViewControllerWithErrorBar, XIBView, CLLocationMa
 
     func openWaze() {
         let urlStr: String = "waze://?ll=\(destinationCRD.latitude),\(destinationCRD.longitude)&navigate=yes"
-        UIApplication.shared.openURL(URL(string: urlStr)!)
+        UIApplication.shared.open(URL(string: urlStr)!, options: [:], completionHandler: nil)
     }
 
     func openGoogleMap() {
-        UIApplication.shared.openURL(URL(string:
-            "comgooglemaps://?saddr=&daddr=\(destinationCRD.latitude),\(destinationCRD.longitude)&directionsmode=driving")!)
+        UIApplication.shared.open(URL(string:
+            "comgooglemaps://?saddr=&daddr=\(destinationCRD.latitude),\(destinationCRD.longitude)&directionsmode=driving")!, options: [:], completionHandler: nil)
     }
 
     func openAppleMap() {
@@ -176,7 +176,7 @@ class NearestViewController: UIViewControllerWithErrorBar, XIBView, CLLocationMa
             print("No location, Nothing fetched!")
             return
         }
-        print("MyLocation : ", myLocation)
+        //print("MyLocation : ", myLocation)
         let aParameter = ["lat": "\(myLocation!.coordinate.latitude)",
                           "long": "\(myLocation!.coordinate.longitude)"]
         NetworkManager.shared.run(API: "shops-location", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: true)

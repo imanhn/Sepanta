@@ -109,6 +109,7 @@ class NetworkManager {
         //print(escapedString!)
         return escapedString!
     }
+    // swiftlint:disable function_parameter_count
     func run(API apiName: String, QueryString aQuery: String, Method aMethod: HTTPMethod, Parameters aParameter: [String:String]?, Header  aHeader: HTTPHeaders?, WithRetry: Bool, TargetObs targetObs: String = "") {
 
         var retryTime = 4

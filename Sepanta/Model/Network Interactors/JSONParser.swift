@@ -41,7 +41,7 @@ class JSONParser {
                 } else if (apiName == "get-area") && (aMethod == HTTPMethod.post) {
 
                     var areaList = [String]()
-                    areaList = (self.processAsRegionList(Result: aDic))
+                    areaList = (self.processAsRegionList(Result: aDic))
                     NetworkManager.shared.regionListObs.accept(areaList)
                 } else if (apiName == "login") && (aMethod == HTTPMethod.post) {
                     if let aUserID = aDic["userId"] {

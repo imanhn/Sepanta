@@ -211,7 +211,7 @@ class ShowProfileUI: NSObject, UICollectionViewDelegateFlowLayout {
         let aButton = (sender as? UIButton)
         guard aButton?.tag != nil else {return}
         var selectedPost: Post!
-        for apost in self.posts.value where apost.id == aButton?.tag{
+        for apost in self.posts.value where apost.id == aButton?.tag {
             selectedPost = apost
             break
         }

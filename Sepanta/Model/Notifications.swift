@@ -42,7 +42,7 @@ struct NotificationForUser: Codable {
     var post_image: String?
     var created_at: String?
 }
-// FIXME : not tested yet-need a shop account
+
 struct NotificationForShop: Codable {
     var item_id: Int?
     var post_id: Int?

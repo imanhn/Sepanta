@@ -104,7 +104,7 @@ class MenuViewController: UIViewController, Storyboarded, UITableViewDelegate {
 
     func logout() {
         print("showing Question")
-        self.showQuestion(Message: "آیا می خواهیداز پروفایل خود خارج شوید؟", OKLabel: "بلی", CancelLabel: "خیر", OkAction: {
+        _ = self.showQuestion(Message: "آیا می خواهیداز پروفایل خود خارج شوید؟", OKLabel: "بلی", CancelLabel: "خیر", OkAction: {
             self.removeMenuAndDismissVC()
             LoginKey.shared.deleteTokenAndUserID()
             self.coordinator!.popLogin()

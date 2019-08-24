@@ -115,12 +115,14 @@ extension NotificationsViewController {
     }
 
     func getAndSubscribeToNotifications() {
-        getNotifications(Page: 1)
+       let notifDisp = getNotifications(Page: 1)
             .results()
             .subscribe(onNext: { [unowned self] notifs in
                 self.generalNotificationObs.accept(notifs.notifications_manager ?? [GeneralNotification]())
                 self.clubsNotificationObs.accept(notifs.notifications_user?.data ?? [NotificationForUser]())
                 }, onError: {_ in })
+        notifDisp.disposed(by: myDisposeBag)
+        disposeList.append(notifDisp)
 
     }
 }
