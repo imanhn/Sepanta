@@ -11,7 +11,7 @@ import RxSwift
 typealias APIParameters = [String: Any]
 
 final class ApiClient {
-    var headers: Dictionary<String, String>
+    var headers: [String:String]
     init() {
         self.headers = [
             "Accept": "application/json",
@@ -24,7 +24,7 @@ final class ApiClient {
         return Observable.create { observer -> Disposable in
             print("*** Route : ", NetworkConstants.baseURLString + "/" + anApiName)
             print("*** Method : ", aMethod)
-            print("*** Parameters : ", aParam as? String ?? "UNKNOWN/NIL")
+            print("*** Parameters : ", aParam)
             print("*** Encoding : ", URLEncoding.httpBody)
             print("*** Headers : ", self.headers)
             Alamofire.request(NetworkConstants.baseURLString + "/" + anApiName, method: aMethod, parameters: aParam, encoding: URLEncoding.httpBody, headers: self.headers)

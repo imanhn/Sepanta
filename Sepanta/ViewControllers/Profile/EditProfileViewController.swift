@@ -31,17 +31,13 @@ class EditProfileViewController: UIViewControllerWithKeyboardNotificationWithErr
             PHPhotoLibrary.requestAuthorization({ (status: PHAuthorizationStatus) in
                 switch status {
                 case PHAuthorizationStatus.denied :
-                    //self.alert(Message: "دسترسی به تصاویر داده نشد")
-                    break
+                    self.alert(Message: "دسترسی به تصاویر داده نشد")                    
                 case PHAuthorizationStatus.restricted :
-                    //self.alert(Message: "دسترسی به تصاویر لازم است")
-                    break
+                    self.alert(Message: "دسترسی به تصاویر لازم است")
                 case .notDetermined:
-                    //self.alert(Message: "دسترسی به تصاویر لازم است")
-                    break
+                    self.alert(Message: "دسترسی به تصاویر لازم است")
                 case .authorized:
                     self.imagePickerDelegate = EditProfileImagePicker(self)
-                    break
                 }
             })
         } else {

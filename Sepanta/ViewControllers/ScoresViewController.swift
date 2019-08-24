@@ -7,15 +7,6 @@
 //
 
 import Foundation
-//
-//  NotificationsViewController.swift
-//  Sepanta
-//
-//  Created by Iman on 2/1/1398 AP.
-//  Copyright © 1398 AP Imzich. All rights reserved.
-//
-
-import Foundation
 import UIKit
 import RxSwift
 

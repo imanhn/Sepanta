@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Foundation
 import UIKit
 import RxCocoa
 import RxSwift
@@ -23,8 +22,8 @@ class ShopUI: NSObject, UICollectionViewDelegateFlowLayout {
     var delegate: ShopViewController
     var disposeList = [Disposable]()
     var updateFromProfileDisposable: Disposable!
-    var views = Dictionary<String, UIView>()
-    var buttons = Dictionary<String, UIButton>()
+    var views = [String:UIView]()
+    var buttons = [String:UIButton]()
     var followButton = FollowButton(type: .custom)
     var postsView = UIView()
     let myDisposeBag = DisposeBag()
@@ -441,11 +440,9 @@ class ShopUI: NSObject, UICollectionViewDelegateFlowLayout {
         let aButton = (sender as? UIButton)
         guard aButton?.tag != nil else {return}
         var selectedPost: Post!
-        for apost in NetworkManager.shared.postsObs.value {
-            if apost.id == aButton?.tag {
-                selectedPost = apost
-                break
-            }
+        for apost in NetworkManager.shared.postsObs.value where apost.id == aButton?.tag {
+            selectedPost = apost
+            break
         }
         NetworkManager.shared.postDetailObs = BehaviorRelay<Post>(value: Post())
         self.delegate.coordinator!.PushAPost(PostID: selectedPost.id ?? (aButton?.tag)!, OwnerUserID: self.delegate.shop.user_id!)

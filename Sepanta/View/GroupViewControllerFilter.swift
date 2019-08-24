@@ -12,8 +12,7 @@ extension GroupViewController {
     @objc func sortFilterTapped(_ sender: Any) {
         self.view.endEditing(true)
         let allfilterValues = [byNewest, byName, byRate, byOff, byFollower]
-        let controller = ArrayChoiceTableViewController(allfilterValues) {
-            (selectedFilter) in
+        let controller = ArrayChoiceTableViewController(allfilterValues) { (selectedFilter) in
             self.filterView.sortFilter.text = selectedFilter
         }
         controller.preferredContentSize = CGSize(width: 250, height: allfilterValues.count*45)

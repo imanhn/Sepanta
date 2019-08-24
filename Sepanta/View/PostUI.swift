@@ -370,10 +370,8 @@ class PostUI {
     }
 
     func getComment(ByID commentID: Int) -> Comment? {
-        for aComment in NetworkManager.shared.postDetailObs.value.comments ?? [Comment]() {
-            if aComment.comment_id == commentID {
-                return aComment
-            }
+        for aComment in NetworkManager.shared.postDetailObs.value.comments ?? [Comment]() where aComment.comment_id == commentID {
+            return aComment            
         }
         return nil
     }

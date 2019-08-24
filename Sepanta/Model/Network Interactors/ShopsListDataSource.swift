@@ -20,11 +20,11 @@ class ShopsListDataSource {
     let myDisposeBag = DisposeBag()
     var API: String!
     var METHOD: HTTPMethod!
-    var PARAMETERS: Dictionary<String, String>!
+    var PARAMETERS: [String:String]!
     var isFetching = false
 
-    func buildParameters(Catagory catagoryID: String, State state: String?, City city: String?)->Dictionary<String, String> {
-        var aParameter: Dictionary<String, String> = [:]
+    func buildParameters(Catagory catagoryID: String, State state: String?, City city: String?)->[String:String] {
+        var aParameter = [String:String]()
         if (state == nil || state == "") && (city == nil || city == "") {
            // "http://www.ipsepanta.ir/api/v1/category-shops-list?slug=3&category_id=4"
             aParameter = ["slug": "3", "category_id": "\(catagoryID)"]
@@ -49,7 +49,7 @@ class ShopsListDataSource {
         self.getShops(Api: API, Method: METHOD, Parameters: PARAMETERS)
     }
 
-    func getShops(Api apiName: String, Method amethod: HTTPMethod, Parameters param: Dictionary<String, String>?) {
+    func getShops(Api apiName: String, Method amethod: HTTPMethod, Parameters param: [String:String]?) {
         let urlAddress = NetworkManager.shared.baseURLString + "/" + apiName
         self.API = apiName
         self.PARAMETERS = param
@@ -126,7 +126,7 @@ class ShopsListDataSource {
                     //print("a Shop****")
                     if let shopElemAsNSDic = shopDic as? NSDictionary {
 
-                        if let shopElem = shopElemAsNSDic as? Dictionary<String, Any> {
+                        if let shopElem = shopElemAsNSDic as? [String:Any] {
                             //print("shopElem : ",shopElem)
                             if shopElem["user_id"] != nil && shopElem["shop_id"] != nil {
                                 let aNewShop = Shop(shop_id: shopElem["shop_id"] as? Int ?? 0,
@@ -155,7 +155,7 @@ class ShopsListDataSource {
             for shopDic in dataOfShops {
                 if let shopElemAsNSDic = shopDic as? NSDictionary {
 
-                    if let shopElem = shopElemAsNSDic as? Dictionary<String, Any> {
+                    if let shopElem = shopElemAsNSDic as? [String:Any] {
                         //print("shopElem : ",shopElem)
                         if shopElem["user_id"] != nil && shopElem["shop_id"] != nil {
                             let aNewShop = Shop(shop_id: shopElem["shop_id"] as? Int ?? 0,

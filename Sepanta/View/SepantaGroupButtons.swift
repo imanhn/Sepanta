@@ -34,8 +34,8 @@ class SepantaGroupButtons {
     }
 
     func getCatagory(ByID  anID: Int) -> Catagory {
-        for aCat in self.delegate.catagories {
-            if aCat.id == anID {return aCat}
+        for aCat in self.delegate.catagories where aCat.id == anID {
+            return aCat
         }
         return Catagory()
     }

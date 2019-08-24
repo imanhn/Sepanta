@@ -16,11 +16,11 @@ import RxSwift
 class EditShopUI: NSObject, UITextFieldDelegate {
 
     var delegate: EditShopViewController
-    var views = Dictionary<String, UIView>()
+    var views = [String:UIView]()
     var formView = UIView()
-    var texts = Dictionary<String, UITextField>()
-    var labels = Dictionary<String, UILabel>()
-    var buttons = Dictionary<String, UIButton>()
+    var texts = [String:UITextField]()
+    var labels = [String:UILabel]()
+    var buttons = [String:UIButton]()
     var datePicker = UIDatePicker()
     var submitButton = UIButton(type: .custom)
     var stateCode: String!
@@ -296,8 +296,7 @@ class EditShopUI: NSObject, UITextFieldDelegate {
         let cityDispose = NetworkManager.shared.cityDictionaryObs
             .filter({$0.count > 0})
             .subscribe(onNext: { [unowned self] (innerCityDicObs) in
-                let controller = ArrayChoiceTableViewController(innerCityDicObs.keys.sorted {$0 < $1}) {
-                    (selectedOption) in
+                let controller = ArrayChoiceTableViewController(innerCityDicObs.keys.sorted {$0 < $1}) { (selectedOption) in
                     aTextField.text = selectedOption
                     aTextField.sendActions(for: .valueChanged)
                     self.cityCode = innerCityDicObs[selectedOption]
@@ -315,14 +314,13 @@ class EditShopUI: NSObject, UITextFieldDelegate {
 
         if NetworkManager.shared.allProvinceListObs.value.count > 0 {
             let options = NetworkManager.shared.allProvinceListObs.value
-            let controller = ArrayChoiceTableViewController(options.filter({$0.count > 1})) {
-                (selectedOption) in
+            let controller = ArrayChoiceTableViewController(options.filter({$0.count > 1})) { (selectedOption) in
                 aTextField.text = selectedOption
                 aTextField.sendActions(for: .valueChanged)
                 self.cityCode = nil
                 self.texts["cityText"]!.text = ""
                 self.stateCode = "\(options.index(of: selectedOption) ?? 0)"
-                NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String, String>>(value: Dictionary<String, String>())
+                NetworkManager.shared.cityDictionaryObs = BehaviorRelay<[String:String]>(value: [String:String]())
             }
             controller.preferredContentSize = CGSize(width: 250, height: options.count*60)
             self.delegate.showPopup(controller, sourceView: aTextField)
@@ -332,14 +330,13 @@ class EditShopUI: NSObject, UITextFieldDelegate {
             let provinceDispose = NetworkManager.shared.allProvinceListObs
                 .filter({$0.count > 0})
                 .subscribe(onNext: { [unowned self] (innerAllProvinceList) in
-                    let controller = ArrayChoiceTableViewController(innerAllProvinceList.filter({$0.count > 1})) {
-                        (selectedOption) in
+                    let controller = ArrayChoiceTableViewController(innerAllProvinceList.filter({$0.count > 1})) { (selectedOption) in
                         aTextField.text = selectedOption
                         aTextField.sendActions(for: .valueChanged)
                         self.stateCode = "\(innerAllProvinceList.index(of: selectedOption) ?? 0)"
                         self.cityCode = nil
                         self.texts["cityText"]!.text = ""
-                        NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String, String>>(value: Dictionary<String, String>())
+                        NetworkManager.shared.cityDictionaryObs = BehaviorRelay<[String:String]>(value: [String:String]())
                     }
                     controller.preferredContentSize = CGSize(width: 250, height: 300)
                     self.delegate.showPopup(controller, sourceView: aTextField)
@@ -353,8 +350,7 @@ class EditShopUI: NSObject, UITextFieldDelegate {
         self.delegate.setEditing(false, animated: true)
         let aTextField = sender as! EmptyTextField
         let options = ["مجرد", "متاهل"]
-        let controller = ArrayChoiceTableViewController(options.sorted {$0 < $1}) {
-            (selectedOption) in
+        let controller = ArrayChoiceTableViewController(options.sorted {$0 < $1}) { (selectedOption) in
             aTextField.text = selectedOption
             aTextField.sendActions(for: .valueChanged)
         }
@@ -366,8 +362,7 @@ class EditShopUI: NSObject, UITextFieldDelegate {
         self.delegate.setEditing(false, animated: true)
         let aTextField = sender as! EmptyTextField
         let options = ["مرد", "زن"]
-        let controller = ArrayChoiceTableViewController(options.sorted {$0 < $1}) {
-            (selectedOption) in
+        let controller = ArrayChoiceTableViewController(options.sorted {$0 < $1}) { (selectedOption) in
             aTextField.text = selectedOption
             aTextField.sendActions(for: .valueChanged)
         }

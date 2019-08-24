@@ -24,7 +24,7 @@ extension NearestViewController: MKMapViewDelegate {
             //view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
         }
-        let annotationDim = UIScreen.main.bounds.width / 7
+        //let annotationDim = UIScreen.main.bounds.width / 7
         let calloutDim = UIScreen.main.bounds.width / 10
         if identifier == "MapAnnotation" {
             view.canShowCallout = true

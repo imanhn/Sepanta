@@ -15,8 +15,8 @@ import RxAlamofire
 
 class ShowProfileUI: NSObject, UICollectionViewDelegateFlowLayout {
     var delegate: ProfileViewController!
-    var views = Dictionary<String, UIView>()
-    var buttons = Dictionary<String, UIButton>()
+    var views = [String:UIView]()
+    var buttons = [String:UIButton]()
     var collectionView: UICollectionView!
     var myDisposeBag = DisposeBag()
     var shops = BehaviorRelay<[Shop]>(value: [Shop]())

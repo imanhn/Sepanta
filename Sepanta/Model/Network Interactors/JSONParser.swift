@@ -35,7 +35,7 @@ class JSONParser {
                     let aList = self.processAsCategoryListToStringArray(Result: aDic)
                     NetworkManager.shared.serviceTypeObs.accept(aList)
                 } else if (apiName == "get-state-and-city") && (aMethod == HTTPMethod.post) {
-                    var processedDic = Dictionary<String, String>()
+                    var processedDic = [String:String]()
                     processedDic = (self.processAsCityList(Result: aDic))
                     NetworkManager.shared.cityDictionaryObs.accept(processedDic)
                 } else if (apiName == "get-area") && (aMethod == HTTPMethod.post) {
@@ -72,7 +72,7 @@ class JSONParser {
                     }
 
                     if aDic["list_city"] != nil {
-                        var processedDic = Dictionary<String, String>()
+                        var processedDic = [String:String]()
                         processedDic = (self.processAsCityList(Result: aDic))
                         NetworkManager.shared.cityDictionaryObs.accept(processedDic)
                     }
@@ -500,7 +500,7 @@ class JSONParser {
         if let dataOfShops = aResult["shops"] as? NSArray {
                 for shopDic in dataOfShops {
                     if let shopElemAsNSDic = shopDic as? NSDictionary {
-                        if let shopElem = shopElemAsNSDic as? Dictionary<String, Any> {
+                        if let shopElem = shopElemAsNSDic as? [String:Any] {
                             /*
                             print("shopElem : ",shopElem)
                             print("uid = ",shopElem["user_id"] as? Int)
@@ -620,7 +620,7 @@ class JSONParser {
         if let shopsInResult = aResult["shops"] as? NSArray {
             for shopResultDic in shopsInResult {
                 if let shopElemAsNSDic = shopResultDic as? NSDictionary {
-                    if let shopElem = shopElemAsNSDic as? Dictionary<String, Any> {
+                    if let shopElem = shopElemAsNSDic as? [String:Any] {
                         //print("shopElem : ",shopElem)
                         if shopElem["user_id"] != nil && shopElem["shop_id"] != nil {
                             let aShopResult = ShopSearchResult(shop_id: shopElem["shop_id"] as? Int ?? 0,
@@ -934,7 +934,7 @@ class JSONParser {
                 for shopDic in dataOfShops {
                     if let shopElemAsNSDic = shopDic as? NSDictionary {
 
-                        if let shopElem = shopElemAsNSDic as? Dictionary<String, Any> {
+                        if let shopElem = shopElemAsNSDic as? [String:Any] {
                             //print("shopElem : ",shopElem)
                             if shopElem["user_id"] != nil && shopElem["shop_id"] != nil {
                                 let aNewShop = Shop(shop_id: shopElem["shop_id"] as? Int ?? 0,
@@ -962,7 +962,7 @@ class JSONParser {
             for shopDic in dataOfShops {
                 if let shopElemAsNSDic = shopDic as? NSDictionary {
 
-                    if let shopElem = shopElemAsNSDic as? Dictionary<String, Any> {
+                    if let shopElem = shopElemAsNSDic as? [String:Any] {
                         //print("shopElem : ",shopElem)
                         if shopElem["user_id"] != nil && shopElem["shop_id"] != nil {
                             let aNewShop = Shop(shop_id: shopElem["shop_id"] as? Int ?? 0,
@@ -995,8 +995,8 @@ class JSONParser {
 
     }
 
-    func processAsProvinceList(Result aResult: NSDictionary) -> (Dictionary<String, String>) {
-        var provinceDict = Dictionary<String, String>()
+    func processAsProvinceList(Result aResult: NSDictionary) -> ([String:String]) {
+        var provinceDict = [String:String]()
         var provName: String
         if aResult["error"] != nil {
             print("ERROR in Province List Parsing : ", aResult["error"]!)
@@ -1089,7 +1089,7 @@ class JSONParser {
 
     func processAsRegionList(Result aResult: NSDictionary) -> [String] {//(Dictionary<String,String>) {
         var aList = [String]()
-        var regionDict = Dictionary<String, String>()
+        var regionDict = [String:String]()
         print("Result AllKeys : ", aResult.allKeys)
         if aResult["error"] != nil {
             print("ERROR in Cities List Parsing : ", aResult["error"]!)
@@ -1122,8 +1122,8 @@ class JSONParser {
         return aList//regionDict
     }
 
-    func processAsCityList(Result aResult: NSDictionary) -> (Dictionary<String, String>) {
-        var cityDict = Dictionary<String, String>()
+    func processAsCityList(Result aResult: NSDictionary) -> ([String:String]) {
+        var cityDict = [String:String]()
         var cityName: String
         print("Result AllKeys : ", aResult.allKeys)
         if aResult["error"] != nil {

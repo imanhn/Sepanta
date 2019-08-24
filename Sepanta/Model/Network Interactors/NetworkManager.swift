@@ -54,7 +54,7 @@ class NetworkManager {
     var serviceTypeObs = BehaviorRelay<[String]>(value: [String]())
     var selectedLocation = BehaviorRelay<CLLocationCoordinate2D>(value: CLLocationCoordinate2D(latitude: 0, longitude: 0))
 
-    var cityDictionaryObs = BehaviorRelay<Dictionary<String, String>>(value: Dictionary<String, String>())
+    var cityDictionaryObs = BehaviorRelay<[String:String]>(value: [String:String]())
     //var regionDictionaryObs = BehaviorRelay<Dictionary<String,String>>(value: Dictionary<String,String>())
     var regionListObs = BehaviorRelay<[String]>(value: [String]())
 
@@ -97,7 +97,7 @@ class NetworkManager {
         ]
 
     }
-    func buildQueryStringSuffix(_ aDic: Dictionary<String, String>) -> String {
+    func buildQueryStringSuffix(_ aDic: [String:String]) -> String {
         if aDic.count == 0 {return ""}
         var queryString: String = "?"
         for akey in aDic.keys {
@@ -109,7 +109,7 @@ class NetworkManager {
         //print(escapedString!)
         return escapedString!
     }
-    func run(API apiName: String, QueryString aQuery: String, Method aMethod: HTTPMethod, Parameters aParameter: Dictionary<String, String>?, Header  aHeader: HTTPHeaders?, WithRetry: Bool, TargetObs targetObs: String = "") {
+    func run(API apiName: String, QueryString aQuery: String, Method aMethod: HTTPMethod, Parameters aParameter: [String:String]?, Header  aHeader: HTTPHeaders?, WithRetry: Bool, TargetObs targetObs: String = "") {
 
         var retryTime = 4
         var timeOut: Double = 5

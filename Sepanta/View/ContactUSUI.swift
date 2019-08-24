@@ -7,15 +7,6 @@
 //
 
 import Foundation
-//
-//  GetRichUI.swift
-//  Sepanta
-//
-//  Created by Iman on 12/15/1397 AP.
-//  Copyright © 1397 AP Imzich. All rights reserved.
-//
-
-import Foundation
 import UIKit
 import RxCocoa
 import RxSwift
@@ -24,10 +15,10 @@ import SafariServices
 
 class ContactUSUI: NSObject, UITextFieldDelegate, SFSafariViewControllerDelegate {
     var delegate: ContactUSViewController!
-    var views = Dictionary<String, UIView>()
-    var texts = Dictionary<String, UITextField>()
-    var labels = Dictionary<String, UILabel>()
-    var buttons = Dictionary<String, UIButton>()
+    var views = [String:UIView]()
+    var texts = [String:UITextField]()
+    var labels = [String:UILabel]()
+    var buttons = [String:UIButton]()
     var submitButton = UIButton(type: .custom)
     var disposeList = [Disposable]()
     var subjectText = UITextField(frame: .zero)

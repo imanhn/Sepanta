@@ -146,7 +146,7 @@ struct ProfileInfo: Codable {
     func encodeToDictionary() -> [String: String] {
         let elm = self
         let mirror = Mirror(reflecting: elm)
-        var dic: Dictionary<String, String> = [:]
+        var dic = [String:String]()
         for child in mirror.children {
             print("key: \(child.label ?? ""), value: \(child.value as? String ?? "")")
             dic[child.label!] = (child.value as? String) ?? ""

@@ -54,8 +54,7 @@ class SepantaGroupsViewController: UIViewControllerWithErrorBar, UITextFieldDele
             self.alert(Message: "هیچ شهری یافت نشد.")
             return
         }
-        let controller = ArrayChoiceTableViewController(innerCityDicObs.keys.sorted {$0 < $1}) {
-            (selectedCity) in
+        let controller = ArrayChoiceTableViewController(innerCityDicObs.keys.sorted {$0 < $1}) { (selectedCity) in
             self.selectCity.text = selectedCity
             self.selectedCityStr = selectedCity
             self.currentCityCodeObs.accept(innerCityDicObs[selectedCity]!)
@@ -86,7 +85,7 @@ class SepantaGroupsViewController: UIViewControllerWithErrorBar, UITextFieldDele
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         NetworkManager.shared.catagoriesProvinceListObs = BehaviorRelay<[String]>(value: [String]())
-        NetworkManager.shared.cityDictionaryObs = BehaviorRelay<Dictionary<String, String>>(value: Dictionary<String, String>())
+        NetworkManager.shared.cityDictionaryObs = BehaviorRelay<[String:String]>(value: [String:String]())
         definesPresentationContext = true
         selectCity.delegate = self
         selectProvince.delegate = self
