@@ -706,13 +706,15 @@ class JSONParser {
             for aContent in cards {
                 let aCard = (aContent as! NSDictionary)
                 var newCard = CreditCard()
-                newCard.id = (aCard["id"] as? Int) ?? 0
+                newCard.card_id = (aCard["card_id"] as? Int) ?? 0
                 newCard.first_name = (aCard["first_name"] as? String) ?? ""
                 newCard.last_name = (aCard["last_name"] as? String) ?? ""
                 newCard.card_number = (aCard["card_number"] as? String) ?? ""
                 newCard.status = (aCard["status"] as? Int) ?? 0
                 newCard.bank_name = (aCard["bank_name"] as? String) ?? ""
                 newCard.bank_logo = (aCard["bank_logo"] as? String) ?? ""
+                newCard.created_at = (aCard["created_at"] as? String) ?? ""
+                newCard.status = (aCard["status"] as? Int) ?? 0
                 //print("     Profile Card : ",newCard)
                 profile.cards.append(newCard)
             }
@@ -778,13 +780,15 @@ class JSONParser {
             for aContent in cards {
                 let aCard = (aContent as! NSDictionary)
                 var newCard = CreditCard()
-                newCard.id = (aCard["id"] as? Int) ?? 0
+                newCard.card_id = (aCard["card_id"] as? Int) ?? 0
                 newCard.first_name = (aCard["first_name"] as? String) ?? ""
                 newCard.last_name = (aCard["last_name"] as? String) ?? ""
                 newCard.card_number = (aCard["card_number"] as? String) ?? ""
                 newCard.status = (aCard["status"] as? Int) ?? 0
                 newCard.bank_name = (aCard["bank_name"] as? String) ?? ""
                 newCard.bank_logo = (aCard["bank_logo"] as? String) ?? ""
+                newCard.created_at = (aCard["created_at"] as? String) ?? ""
+                newCard.status = (aCard["status"] as? Int) ?? 0
                 //print("     Profile Card : ",newCard)
                 profile.cards.append(newCard)
             }

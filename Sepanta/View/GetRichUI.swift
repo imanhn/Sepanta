@@ -12,6 +12,7 @@ import RxCocoa
 import RxSwift
 import AlamofireImage
 import Alamofire
+import MapKit
 
 class GetRichUI: NSObject, UITextFieldDelegate {
     let buttonsFont = UIFont(name: "Shabnam-Bold-FD", size: 14)
@@ -20,6 +21,7 @@ class GetRichUI: NSObject, UITextFieldDelegate {
     let marginX: CGFloat = 20
     var buttonHeight: CGFloat = 10
     var shopLoc: CGPoint!
+    var sellerLocation: CLLocationCoordinate2D!
     var textFieldWidth: CGFloat = 0
     var delegate: GetRichViewController!
     var views = [String:UIView]()
@@ -142,6 +144,23 @@ class GetRichUI: NSObject, UITextFieldDelegate {
         views["rightFormView"]?.addSubview(nationalCodeCity)
         cursurY += buttonHeight + marginY
 
+        (views["birthDateView"], texts["birthDateText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "calendar-page-empty", Selectable: false, PlaceHolderText: "تاریخ تولد")
+        datePicker.calendar = Calendar(identifier: Calendar.Identifier.persian)
+        datePicker.locale = Locale(identifier: "fa_IR")
+        datePicker.datePickerMode = .date
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        //done button & cancel button
+        let doneButton = UIBarButtonItem(title: "ثبت", style: UIBarButtonItemStyle.done, target: self, action: #selector(self.doneDatePicker(_:)))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "لغو", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.cancelDatePicker(_:)))
+        toolbar.setItems([doneButton, spaceButton, cancelButton], animated: false)
+        //adatePicker.inp
+        texts["birthDateText"]?.inputAccessoryView = toolbar
+        texts["birthDateText"]?.inputView = datePicker
+        views["rightFormView"]?.addSubview(views["birthDateView"]!)
+        cursurY += buttonHeight + marginY
+
         (views["stateView"], texts["stateText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "map", Selectable: true, PlaceHolderText: "استان")
         //texts["stateText"]!.text =  aProfileInfo.state
         texts["stateText"]?.addTarget(self, action: #selector(selectStateTapped), for: .touchDown)
@@ -154,6 +173,12 @@ class GetRichUI: NSObject, UITextFieldDelegate {
         views["rightFormView"]?.addSubview(views["cityView"]!)
         cursurY += buttonHeight + marginY
 
+        (views["regionView"], texts["regionText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "NOIMAGE", Selectable: true, PlaceHolderText: "منطقه")
+        //texts["regionText"]!.text =  aProfileInfo.address
+        texts["regionText"]?.addTarget(self, action: #selector(selectRegionTapped), for: .touchDown)
+        views["rightFormView"]?.addSubview(views["regionView"]!)
+        cursurY += buttonHeight + marginY
+
         (views["locationView"], texts["locationText"]) = buildARowView(CGRect: CGRect(x: marginX+buttonHeight+marginX, y: cursurY, width: textFieldWidth-(buttonHeight+marginX), height: buttonHeight), Image: "icon_profile_05", Selectable: false, PlaceHolderText: "آدرس")
         views["rightFormView"]?.addSubview(views["locationView"]!)
         //texts["locationText"]!.text =  aProfileInfo.address
@@ -162,6 +187,11 @@ class GetRichUI: NSObject, UITextFieldDelegate {
         locationButton.addTarget(self, action: #selector(selectOnMapTapped), for: .touchUpInside)
         views["rightFormView"]?.addSubview(locationButton)
         cursurY += buttonHeight + marginY
+        
+        (views["phoneNumberView"], texts["phoneNumberText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_08", Selectable: false, PlaceHolderText: "تلفن ثابت")
+        texts["phoneNumberText"]?.keyboardType = UIKeyboardType.numberPad
+        views["rightFormView"]?.addSubview(views["phoneNumberView"]!)
+        cursurY += buttonHeight + (2 * marginY)
 
         (views["mobileNoView"], texts["mobileText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_07", Selectable: false, PlaceHolderText: "شماره همراه")
         //texts["mobileText"]!.text =  aProfileInfo.phone
@@ -314,18 +344,24 @@ class GetRichUI: NSObject, UITextFieldDelegate {
 
     @objc func sellRequestSubmitTapped(_ sender: Any) {
         let aParameter = [
-            "first_name": "\(texts["nameText"]!.text ?? "")",
-            "last_name": "\(texts["familyText"]!.text ?? "")",
-            "shop_name": "\(texts["shopText"]!.text ?? "")",
-            "Phone_number": "\(texts["mobileText"]!.text ?? "")",
+            "first_name": "\(texts["nameText"]?.text ?? "")",
+            "last_name": "\(texts["familyText"]?.text ?? "")",
+            "address": "\(texts["locationText"]?.text ?? "")",
+            "off_guess": "\(texts["discountText"]?.text ?? "")",
+            "city_code":"\(self.cityCode ?? "0")",
+            "state_code":"\(self.stateCode ?? "0")",
+            "birth_date":"\(texts["birthDateText"]?.text ?? "")",
+            "shop_name": "\(texts["shopText"]?.text ?? "")",
+            "categoriesId":"\(self.serviceCode ?? "")",
+            "phone_number": "\(texts["phoneNumberText"]?.text ?? "")",
+            "cellphone": "\(texts["mobileText"]?.text ?? "")",
             "is_aware": "\(awareCheckButton.tag)",
-            "address": "\(texts["locationText"]!.text ?? "")",
-            //"city_code":"",
-            "off_guess": "\(texts["discountText"]!.text ?? "")",
-            "latitude": "35.1",
-            "longitude": "51.1"
-            //"national_code":"",
-            //"categoriesId":"",
+            "is_license": "\(licenceCheckButton.tag)",
+            "is_owner": "\(areYouOwnerCheckButton.tag)",
+            "lat": "\(self.sellerLocation.latitude) ?? 35.2",
+            "long": "\(self.sellerLocation.longitude) ?? 51.2",
+            "national_code": "\(self.texts["nationalCodeText"]?.text ?? "")",
+            "area":"\(self.regionCode ?? "")"
         ]
         print("aParameter : \(aParameter)")
         NetworkManager.shared.run(API: "selling-request", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
@@ -475,8 +511,6 @@ class GetRichUI: NSObject, UITextFieldDelegate {
         cursurY += buttonHeight + marginY
 
         (views["birthDateView"], texts["birthDateText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "calendar-page-empty", Selectable: false, PlaceHolderText: "تاریخ تولد")
-        //texts["birthDateText"]!.text =  aProfileInfo.birthdate
-
         datePicker.calendar = Calendar(identifier: Calendar.Identifier.persian)
         datePicker.locale = Locale(identifier: "fa_IR")
         datePicker.datePickerMode = .date
@@ -760,24 +794,26 @@ class GetRichUI: NSObject, UITextFieldDelegate {
     func handleResellerSubmitButtonEnableOrDisable() -> Disposable {
         let familtyTextValid = texts["familyText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
         let nameTextValid = texts["nameText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        let locationTextValid = texts["locationText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        let discountTextValid = texts["discountText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        let stateTextValid = texts["stateText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        let cityTextValid = texts["cityText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
         let shopTextValid = texts["shopText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
         let serviceTextValid = texts["serviceText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
         let mobileTextValid = texts["mobileText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-        let locationTextValid = texts["locationText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-        let discountTextValid = texts["discountText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-
-        /*
-        let awareCheckValid = awareCheckButton.rx.tap.map({ _ -> Bool in
-            if self.awareCheckButton.tag == 1 {return true}else{return false}
-        }).share(replay: 1, scope: .whileConnected)
-        */
-
+        let phoneNumberTextValid = texts["phoneNumberText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        let birthDateTextValid = texts["birthDateText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        
         let enableSubmitButton = Observable.combineLatest([familtyTextValid,
                                                           nameTextValid,
                                                           shopTextValid,
+                                                          stateTextValid,
+                                                          cityTextValid,
                                                           serviceTextValid,
                                                           mobileTextValid,
+                                                          phoneNumberTextValid,
                                                           locationTextValid,
+                                                          birthDateTextValid,
                                                           discountTextValid]) { (allChecks) -> Bool in
                                                             //print("ALL : ",allChecks)
                                                             let reducedAllChecks = allChecks.reduce(true) { (accumulation: Bool, nextValue: Bool) -> Bool in
@@ -998,6 +1034,7 @@ class GetRichUI: NSObject, UITextFieldDelegate {
             .filter({$0.latitude != 0 && $0.longitude != 0 })
             .subscribe(onNext: {aLoc in
                 print("selected location  : ", aLoc)
+                self.sellerLocation = aLoc
                 //self.locationButton.backgroundColor = UIColor(hex: 0x9FDA64)
                 self.locationButton.setImage(UIImage(named: "icon_location_green"), for: .normal)
                 self.locationButton.layer.borderColor = UIColor(hex: 0x9FDA64).cgColor
