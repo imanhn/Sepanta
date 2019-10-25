@@ -903,7 +903,7 @@ class UIButtonWithBadge: UIButton {
     }
 
     func removeBadge() {
-        self.subviews.forEach({if $0.tag == 123 {$0.removeFromSuperview()} })
+        //self.subviews.forEach({if $0.tag == 123 {$0.removeFromSuperview()} })
     }
 
     func manageBadge(_ no: Int) {

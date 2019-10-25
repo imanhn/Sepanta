@@ -44,6 +44,7 @@ class SepantaGroupButtons {
         let rows = Int(noOfIcons / 3)
         self.delegate.sepantaScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: CGFloat(rows+1)*buttonsDim*1.3)
     }
+    /*
     func createButton(Row row: Int, Col col: Int, Tag tag: Int) {
         let but = UIButton(frame: CGRect(x: xMargin+CGFloat(col)*buttonsDim*0.9, y: CGFloat(row) * buttonsDim * 1.2, width: buttonsDim*1.3, height: buttonsDim*1.3))
         but.setImage(UIImage(named: "g\(tag)"), for: .normal)
@@ -52,6 +53,7 @@ class SepantaGroupButtons {
         self.buttons.append(but)
         self.delegate.sepantaScrollView.addSubview(but)
     }
+     */
 
     func createGroups(Catagories catagories: [Catagory]) {
         let xMargin = UIScreen.main.bounds.width / 20
@@ -71,7 +73,7 @@ class SepantaGroupButtons {
                     if foundButton.count == 0 {
                         //print(i," Addin image ",catagories[i].title)
                         let but = UIButton(frame: CGRect(x: xMargin+CGFloat(col)*buttonsDim*0.9, y: CGFloat(row) * buttonsDim * 1.2, width: buttonsDim*1.3, height: buttonsDim*1.3))
-                        let mergedImage = self.buttonImage(Image: innerImage, Label: catagories[i].title, Up: upsideDown)
+                        let mergedImage = self.buttonImage(Image: innerImage, Label: catagories[i].title,ShopCount: catagories[i].shopCount, Up: upsideDown)
                         but.setImage(mergedImage, for: .normal)
                         but.tag = catagories[i].id
                         but.addTarget(self, action: #selector(self.aGroupTapped), for: .touchUpInside)
@@ -79,7 +81,7 @@ class SepantaGroupButtons {
                         self.delegate.sepantaScrollView.addSubview(but)
                     } else {
                         //print(i," Updating Image",catagories[i].title)
-                        let mergedImage = self.buttonImage(Image: innerImage, Label: catagories[i].title, Up: upsideDown)
+                        let mergedImage = self.buttonImage(Image: innerImage, Label: catagories[i].title,ShopCount: catagories[i].shopCount, Up: upsideDown)
                         foundButton[0].setImage(mergedImage, for: .normal)
                     }
                     if self.counter == catagories.count-1 {Spinner.stop()}
@@ -95,7 +97,7 @@ class SepantaGroupButtons {
 
     }
 
-    func buttonImage(Image iconImage: UIImage, Label aLabel: String, Up upside: Bool) -> UIImage {
+    func buttonImage(Image iconImage: UIImage, Label aLabel: String,ShopCount aShopCount : Int, Up upside: Bool) -> UIImage {
 
         var fontSize: CGFloat = 14
         if aLabel.count < 13 { fontSize = 14} else if aLabel.count < 15 {fontSize = 13} else if aLabel.count < 20 {fontSize = 12} else if aLabel.count < 25 {fontSize = 11} else {fontSize = 10}
@@ -109,29 +111,41 @@ class SepantaGroupButtons {
         let size = CGSize(width: buttonsDim*1.3, height: buttonsDim*1.3)
         //UIGraphicsBeginImageContext(size)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
-        var textBox = CGRect()
+        var titleBox = CGRect()
+        var iconBox = CGRect()
+        var shopCountBox = CGRect()
         let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        //print("upside : ",upside)
-        if upside {
+        let scale = (size.width/3.33)/max(iconImage.size.width, iconImage.size.height)
+        
+        if upside { // Vertex is at down
             backgroundImageDown?.draw(in: areaSize)
-            textBox = CGRect(x: 0, y: 0, width: size.width, height: size.height/2)
+            titleBox = CGRect(x: 0, y: 0, width: size.width, height: size.height/3)
+            shopCountBox = CGRect(x: 0, y: (size.height/2)+(size.height/12), width: size.width, height: size.height/3)
+            iconBox = CGRect(x: (size.width/2)-(iconImage.size.width*scale/2), y: (size.height/3)-(iconImage.size.height*scale/4), width: iconImage.size.width*scale, height: iconImage.size.height*scale)
         } else {
             backgroundImageUp?.draw(in: areaSize)
-            textBox = CGRect(x: 0, y: size.height/2, width: size.width, height: size.height/2)
+            titleBox = CGRect(x: 0, y: size.height*2/3, width: size.width, height: size.height/3)
+            shopCountBox = CGRect(x: 0, y: (size.height/12), width: size.width, height: size.height/3)
+            iconBox = CGRect(x: (size.width/2)-(iconImage.size.width*scale/2), y: (size.height/3)+(iconImage.size.height*scale/4), width: iconImage.size.width*scale, height: iconImage.size.height*scale)
+
         }
-        let scale = (size.width/3.33)/max(iconImage.size.width, iconImage.size.height)
-        let iconSize = CGRect(x: (size.width/2)-(iconImage.size.width*scale/2), y: (size.height/2)-(iconImage.size.height*scale/2), width: iconImage.size.width*scale, height: iconImage.size.height*scale)
-        iconImage.draw(in: iconSize, blendMode: .normal, alpha: 1)
+        iconImage.draw(in: iconBox, blendMode: .normal, alpha: 1)
+        let titleLabel = UILabel(frame: titleBox)
+        titleLabel.text = aLabel
+        titleLabel.font = textFont
+        titleLabel.textColor = textColor
+        titleLabel.textAlignment = .center
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.drawText(in: titleBox)
 
-//        NSString(string: aLabel).draw(in: textBox, withAttributes: textFontAttributes)
-        let lab = UILabel(frame: textBox)
-        lab.text = aLabel
-        lab.font = textFont
-        lab.textColor = textColor
-        lab.textAlignment = .center
-        lab.adjustsFontSizeToFitWidth = true
+        let shopCountLabel = UILabel(frame: shopCountBox)
+        shopCountLabel.text = "(\(aShopCount))"
+        shopCountLabel.font = UIFont (name: "Shabnam FD", size: 14)!
+        shopCountLabel.textColor = textColor
+        shopCountLabel.textAlignment = .center
+        shopCountLabel.adjustsFontSizeToFitWidth = true
+        shopCountLabel.drawText(in: shopCountBox)
 
-        lab.drawText(in: textBox)
         let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return newImage

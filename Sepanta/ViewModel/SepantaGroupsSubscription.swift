@@ -51,9 +51,10 @@ extension SepantaGroupsViewController {
                         if
                             let anId = catDic.value(forKey: "id") as? Int,
                             let aTitle = catDic.value(forKey: "title") as? String,
-                            let anImage = catDic.value(forKey: "image") as? String
+                            let anImage = catDic.value(forKey: "image") as? String,
+                            let numOfShops = catDic.value(forKey: "shops_count") as? Int
                         {
-                            let newCatagory = Catagory(Id: anId, Title: aTitle, Image: anImage)
+                            let newCatagory = Catagory(Id: anId, Title: aTitle,ShopCount: numOfShops, Image: anImage)
                             self.catagories.append(newCatagory)
                         }
                     }

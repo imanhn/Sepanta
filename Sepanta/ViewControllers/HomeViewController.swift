@@ -29,6 +29,8 @@ class HomeViewController: UIViewControllerWithErrorBar, Storyboarded, SFSafariVi
     @IBOutlet weak var rightImageView: AdImageView!
     @IBOutlet weak var newShopsButton: UIButtonWithBadge!
     @IBOutlet weak var notificationsButton: UIButtonWithBadge!
+    @IBOutlet weak var sepantaieButton: UIButtonWithBadge!
+    
     @IBOutlet weak var slideView: UIView!
 
     @objc override func willPop() {
@@ -109,10 +111,21 @@ class HomeViewController: UIViewControllerWithErrorBar, Storyboarded, SFSafariVi
     }
 
     func subscribeForBadges() {
+        let sepantaieShopDisp = SlidesAndPaths.shared.sepantaie_count
+            .subscribe(onNext: { [unowned self] shopCount in
+                print("Badge sepantaie Shops : \(shopCount)")
+                self.sepantaieButton.manageBadge(shopCount)
+                //SlidesAndPaths.shared.count_new_shop = BehaviorRelay<Int>(value: 0)
+                }
+        )
+        sepantaieShopDisp.disposed(by: myDisposeBag)
+        disposeList.append(sepantaieShopDisp)
+
         let newShopDisp = SlidesAndPaths.shared.count_new_shop
             .subscribe(onNext: { [unowned self] newShopNo in
+                print("Badge New Shops : \(newShopNo)")
                 self.newShopsButton.manageBadge(newShopNo)
-                SlidesAndPaths.shared.count_new_shop = BehaviorRelay<Int>(value: 0)
+                //SlidesAndPaths.shared.count_new_shop = BehaviorRelay<Int>(value: 0)
                 }
         )
         newShopDisp.disposed(by: myDisposeBag)
@@ -120,8 +133,9 @@ class HomeViewController: UIViewControllerWithErrorBar, Storyboarded, SFSafariVi
 
         let notDisp = SlidesAndPaths.shared.notifications_count
             .subscribe(onNext: { [unowned self] notiCount in
+                print("Badge Notifications : \(notiCount)")
                 self.notificationsButton.manageBadge(notiCount)
-                SlidesAndPaths.shared.notifications_count = BehaviorRelay<Int>(value: 0)
+                //SlidesAndPaths.shared.notifications_count = BehaviorRelay<Int>(value: 0)
                 }
             )
         notDisp.disposed(by: myDisposeBag)

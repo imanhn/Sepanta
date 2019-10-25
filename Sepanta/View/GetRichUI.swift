@@ -45,12 +45,15 @@ class GetRichUI: NSObject, UITextFieldDelegate {
     var resellerSubmitButton = UIButton(type: .custom)
     var stateCode: String!
     var cityCode: String!
+    var genderCode : String!
+    var maritalStatusCode : String!
     var regionCode: String!
     var serviceCode: String!
     var cardNoPrefix = ""
     var mobilePrefix = ""
     var codePrefix = ""
     var aProfileInfo = ProfileInfo()
+    var aProfile = Profile()
     var submitDispose: Disposable!
     var disposeList = [Disposable]()
 
@@ -172,16 +175,14 @@ class GetRichUI: NSObject, UITextFieldDelegate {
         texts["cityText"]?.addTarget(self, action: #selector(selectCityTapped), for: .touchDown)
         views["rightFormView"]?.addSubview(views["cityView"]!)
         cursurY += buttonHeight + marginY
-
+        /*
         (views["regionView"], texts["regionText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "NOIMAGE", Selectable: true, PlaceHolderText: "منطقه")
-        //texts["regionText"]!.text =  aProfileInfo.address
         texts["regionText"]?.addTarget(self, action: #selector(selectRegionTapped), for: .touchDown)
         views["rightFormView"]?.addSubview(views["regionView"]!)
         cursurY += buttonHeight + marginY
-
-        (views["locationView"], texts["locationText"]) = buildARowView(CGRect: CGRect(x: marginX+buttonHeight+marginX, y: cursurY, width: textFieldWidth-(buttonHeight+marginX), height: buttonHeight), Image: "icon_profile_05", Selectable: false, PlaceHolderText: "آدرس")
+        */
+        (views["locationView"], texts["addressText"]) = buildARowView(CGRect: CGRect(x: marginX+buttonHeight+marginX, y: cursurY, width: textFieldWidth-(buttonHeight+marginX), height: buttonHeight), Image: "icon_profile_05", Selectable: false, PlaceHolderText: "آدرس")
         views["rightFormView"]?.addSubview(views["locationView"]!)
-        //texts["locationText"]!.text =  aProfileInfo.address
         locationButton = RoundedButton(frame: CGRect(x: marginX, y: cursurY, width: buttonHeight, height: buttonHeight))
         locationButton.setImage(UIImage(named: "icon_location"), for: .normal)
         locationButton.addTarget(self, action: #selector(selectOnMapTapped), for: .touchUpInside)
@@ -262,7 +263,7 @@ class GetRichUI: NSObject, UITextFieldDelegate {
         self.delegate.scrollView.contentSize = formSize
         views["rightFormView"]?.frame = CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: cursurY+buttonHeight*1.5)
         self.delegate.scrollView.addSubview(views["rightFormView"]!)
-        self.fillEditProfileForm(With: aProfileInfo)
+        self.fillEditProfileInfoForm(With: aProfileInfo)
         submitDispose = handleResellerSubmitButtonEnableOrDisable()
         disposeList.append(submitDispose)
 
@@ -346,7 +347,7 @@ class GetRichUI: NSObject, UITextFieldDelegate {
         let aParameter = [
             "first_name": "\(texts["nameText"]?.text ?? "")",
             "last_name": "\(texts["familyText"]?.text ?? "")",
-            "address": "\(texts["locationText"]?.text ?? "")",
+            "address": "\(texts["addressText"]?.text ?? "")",
             "off_guess": "\(texts["discountText"]?.text ?? "")",
             "city_code":"\(self.cityCode ?? "0")",
             "state_code":"\(self.stateCode ?? "0")",
@@ -360,8 +361,7 @@ class GetRichUI: NSObject, UITextFieldDelegate {
             "is_owner": "\(areYouOwnerCheckButton.tag)",
             "lat": "\(self.sellerLocation.latitude) ?? 35.2",
             "long": "\(self.sellerLocation.longitude) ?? 51.2",
-            "national_code": "\(self.texts["nationalCodeText"]?.text ?? "")",
-            "area":"\(self.regionCode ?? "")"
+            "national_code": "\(self.texts["nationalCodeText"]?.text ?? "")"
         ]
         print("aParameter : \(aParameter)")
         NetworkManager.shared.run(API: "selling-request", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
@@ -510,6 +510,12 @@ class GetRichUI: NSObject, UITextFieldDelegate {
         views["leftFormView"]?.addSubview(nationalCodeCity)
         cursurY += buttonHeight + marginY
 
+        (views["birthCertCodeView"], texts["birthCertCodeText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "identity-card", Selectable: false, PlaceHolderText: "شماره شناسنامه")
+        //texts["nationalCodeText"]!.text =  aProfileInfo.national_code
+        texts["birthCertCodeText"]?.keyboardType = UIKeyboardType.numberPad
+        views["leftFormView"]?.addSubview(views["birthCertCodeView"]!)
+        cursurY += buttonHeight + marginY
+
         (views["birthDateView"], texts["birthDateText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "calendar-page-empty", Selectable: false, PlaceHolderText: "تاریخ تولد")
         datePicker.calendar = Calendar(identifier: Calendar.Identifier.persian)
         datePicker.locale = Locale(identifier: "fa_IR")
@@ -535,9 +541,13 @@ class GetRichUI: NSObject, UITextFieldDelegate {
         cursurY += buttonHeight + marginY
 
         (views["maritalStatusView"], texts["maritalStatusText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "marriage-rings-couple-with-a-heart", Selectable: true, PlaceHolderText: "وضعیت تاهل")
-        //texts["maritalStatusText"]!.text =  aProfileInfo.marital_status
         texts["maritalStatusText"]?.addTarget(self, action: #selector(selectMaritalStatusTapped), for: .touchDown)
         views["leftFormView"]?.addSubview(views["maritalStatusView"]!)
+        cursurY += buttonHeight + marginY
+
+        (views["emailView"], texts["emailText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "black-back-closed-envelope-shape", Selectable: false, PlaceHolderText: "ایمیل")
+        texts["emailText"]?.keyboardType = UIKeyboardType.emailAddress
+        views["leftFormView"]?.addSubview(views["emailView"]!)
         cursurY += buttonHeight + marginY
 
         (views["mobileNoView"], texts["mobileText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_07", Selectable: false, PlaceHolderText: "شماره همراه")
@@ -549,10 +559,13 @@ class GetRichUI: NSObject, UITextFieldDelegate {
         cursurY += buttonHeight + marginY
 
         //texts["mobileText"]
-        (views["emailView"], texts["emailText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "black-back-closed-envelope-shape", Selectable: false, PlaceHolderText: "ایمیل")
-        //texts["emailText"]!.text =  aProfileInfo.email
-        texts["emailText"]?.keyboardType = UIKeyboardType.emailAddress
-        views["leftFormView"]?.addSubview(views["emailView"]!)
+        (views["addressView"], texts["addressText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_05", Selectable: false, PlaceHolderText: "آدرس")
+        views["leftFormView"]?.addSubview(views["addressView"]!)
+        cursurY += buttonHeight + marginY
+
+        (views["postalCodeView"], texts["postalCodeText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_05", Selectable: false, PlaceHolderText: "کد پستی")
+        texts["postalCodeText"]?.keyboardType = UIKeyboardType.numberPad
+        views["leftFormView"]?.addSubview(views["postalCodeView"]!)
         cursurY += buttonHeight + marginY
 
         (views["stateView"], texts["stateText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "map", Selectable: true, PlaceHolderText: "استان")
@@ -567,17 +580,17 @@ class GetRichUI: NSObject, UITextFieldDelegate {
         views["leftFormView"]?.addSubview(views["cityView"]!)
         cursurY += buttonHeight + marginY
 
-        (views["regionView"], texts["regionText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "NOIMAGE", Selectable: true, PlaceHolderText: "منطقه")
-        //texts["regionText"]!.text =  aProfileInfo.address
+        /*(views["regionView"], texts["regionText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "NOIMAGE", Selectable: true, PlaceHolderText: "منطقه")
         texts["regionText"]?.addTarget(self, action: #selector(selectRegionTapped), for: .touchDown)
         views["leftFormView"]?.addSubview(views["regionView"]!)
         cursurY += buttonHeight + marginY
+ 
 
-/*
         (views["orgView"],texts["orgText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "three-buildings", Selectable: false, PlaceHolderText: "نام سازمان")
         views["leftFormView"]?.addSubview(views["orgView"]!)
         cursurY += buttonHeight + marginY
-*/
+         */
+
 
         let checkFont = UIFont(name: "Shabnam-FD", size: 12)!
         let newCardText = "درخواست کارت جدید"
@@ -679,7 +692,7 @@ class GetRichUI: NSObject, UITextFieldDelegate {
         self.delegate.scrollView.contentSize = formSize
         views["leftFormView"]?.frame = CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: cursurY+buttonHeight*0.5)
 
-        self.fillEditProfileForm(With: aProfileInfo)
+        self.fillEditProfileInfoForm(With: aProfileInfo)
         submitDispose = handleCardSubmitButtonEnableOrDisable()
         disposeList.append(submitDispose)
 
@@ -718,33 +731,27 @@ class GetRichUI: NSObject, UITextFieldDelegate {
     }
 
     @objc func cardRequestSubmitTapped(_ sender: Any) {
-        var cityCode = ""
-        let cityDic = NetworkManager.shared.cityDictionaryObs.value
-        if cityDic.count == 0 {
-            print("Dic is Empty!")
-            return
-        }
-
-        if let acityText = texts["cityText"]!.text {
-            if let acode = cityDic[acityText] {
-                cityCode = acode
-            } else {
-                print("Code not found")
-            }
-        } else {
-            print("CityText is empty!!!! Which is odd!")
-        }
-        //
+        var cardIdString : String = ""
+        if aProfile.cards.last?.card_id != nil { cardIdString = "\(aProfile.cards.last?.card_id ?? 0)"}
         let aParameter = [
-            "first_name": "\(texts["nameText"]!.text ?? "")",
-            "last_name": "\(texts["familyText"]!.text ?? "")",
-            "national_code": "\(texts["nationalCodeText"]!.text ?? "")",
-            "addres": "\(texts["regionText"]!.text ?? "")",
-            "birthdate": "\(texts["birthDateText"]!.text ?? "")",
-            "city": cityCode,
-            "cardnumber": "\(texts["cardNoText"]!.text ?? "")"
+            "first_name": "\(texts["nameText"]?.text ?? "")",
+            "last_name": "\(texts["familyText"]?.text ?? "")",
+            "national_code": "\(texts["nationalCodeText"]?.text ?? "")",
+            "gender": "\(genderCode ?? "")", // FIXME is ""
+            "marital_status":"\(maritalStatusCode ?? "")", // FIXME is ""
+            "email":"\(texts["emailText"]?.text ?? "")",
+            "sh_code":"\(texts["birthCertCodeText"]?.text ?? "")",
+            "cellphone": "\(texts["mobileText"]?.text ?? "")",
+            "addres": "\(texts["addressText"]?.text ?? "")",
+            "birthdate": "\(texts["birthDateText"]?.text ?? "")",
+            "post_code": "\(texts["postalCodeText"]?.text ?? "")",
+            "city_code":"\(self.cityCode ?? "0")",
+            "state_code":"\(self.stateCode ?? "0")",
+            "cardnumber": "\(texts["cardNoText"]?.text ?? "")",
+            "card_id": cardIdString // FIXME is nil!
         ]
         print("aParameter : \(aParameter)")
+        return
         NetworkManager.shared.run(API: "card-request", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
         let messageDisp = NetworkManager.shared.messageObs
             .filter({$0.count > 0})
@@ -762,30 +769,43 @@ class GetRichUI: NSObject, UITextFieldDelegate {
         let birthDateTextValid = texts["birthDateText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
         let genderTextValid = texts["genderText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
         let maritalStatusTextValid = texts["maritalStatusText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-        let emailTextValid = texts["emailText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        let postalCodeTextValid = texts["postalCodeText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
         let mobileTextValid = texts["mobileText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
         let stateTextValid = texts["stateText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
         let cityTextValid = texts["cityText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-        let regionTextValid = texts["regionText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-        //let cardNoTextValid = texts["cardNoText"]?.rx.text.map({($0?.count == 16)}).share(replay: 1, scope: .whileConnected)
-
+        //let regionTextValid = texts["regionText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        let cardNoTextValid = texts["cardNoText"]!.rx.text.map({($0?.count == 16)}).share(replay: 1, scope: .whileConnected)
+        let bankCardForOthers = Observable<Bool>.create { [unowned self] observer -> Disposable in
+            if self.otherCardCheck.tag == 0 {
+                observer.onNext(true)
+            } else {
+                if self.texts["cardNoText"]?.text?.count == 16 {
+                    observer.onNext(true)
+                } else {
+                    observer.onNext(false)
+                }
+            }
+            return Disposables.create()
+        }
+        
         let enableSubmitButton = Observable.combineLatest([familtyTextValid,
                                                            nameTextValid,
                                                            nationalCodeValid,
                                                            birthDateTextValid,
                                                            genderTextValid,
                                                            maritalStatusTextValid,
-                                                           emailTextValid,
+                                                           postalCodeTextValid,
                                                            mobileTextValid,
                                                            stateTextValid,
                                                            cityTextValid,
-                                                           regionTextValid]) { (allChecks) -> Bool in
+                                                           cardNoTextValid,
+                                                           bankCardForOthers]) { (allChecks) -> Bool in
                                                             //print("ALL : ",allChecks)
                                                             let reducedAllChecks = allChecks.reduce(true) { (accumulation: Bool, nextValue: Bool) -> Bool in
                                                                 return accumulation && nextValue
                                                             }
                                                             //print("   Reduced to \(reducedAllChecks)")
-                                                            if self.texts["cardNoText"] == nil || self.texts["cardNoText"]?.text?.count != 16 { return false }
+                                                            //if self.texts["cardNoText"] == nil || self.texts["cardNoText"]?.text?.count != 16 { return false }
                                                             return reducedAllChecks
         }
         return enableSubmitButton.bind(to: cardSubmitButton.rx.isEnabled)
@@ -794,7 +814,7 @@ class GetRichUI: NSObject, UITextFieldDelegate {
     func handleResellerSubmitButtonEnableOrDisable() -> Disposable {
         let familtyTextValid = texts["familyText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
         let nameTextValid = texts["nameText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-        let locationTextValid = texts["locationText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        let addressTextValid = texts["addressText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
         let discountTextValid = texts["discountText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
         let stateTextValid = texts["stateText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
         let cityTextValid = texts["cityText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
@@ -803,7 +823,6 @@ class GetRichUI: NSObject, UITextFieldDelegate {
         let mobileTextValid = texts["mobileText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
         let phoneNumberTextValid = texts["phoneNumberText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
         let birthDateTextValid = texts["birthDateText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-        
         let enableSubmitButton = Observable.combineLatest([familtyTextValid,
                                                           nameTextValid,
                                                           shopTextValid,
@@ -812,7 +831,7 @@ class GetRichUI: NSObject, UITextFieldDelegate {
                                                           serviceTextValid,
                                                           mobileTextValid,
                                                           phoneNumberTextValid,
-                                                          locationTextValid,
+                                                          addressTextValid,
                                                           birthDateTextValid,
                                                           discountTextValid]) { (allChecks) -> Bool in
                                                             //print("ALL : ",allChecks)
@@ -861,7 +880,7 @@ class GetRichUI: NSObject, UITextFieldDelegate {
                     aTextField.sendActions(for: .valueChanged)
                     self.cityCode = innerCityDicObs[selectedOption]
                     self.regionCode = ""
-                    self.texts["regionText"]?.text = ""
+                    //self.texts["regionText"]?.text = ""
                     let parameters = [
                         "city id": self.cityCode!
                     ]
@@ -873,6 +892,7 @@ class GetRichUI: NSObject, UITextFieldDelegate {
             })
         cityDispose.disposed(by: self.delegate.myDisposeBag)
         disposeList.append(cityDispose)
+        /*
         let regDispose = NetworkManager.shared.regionListObs
             .subscribe(onNext: {aList in
                 if aList.count == 0 && (self.views["regionView"]?.isHidden == false) && self.views["orgView"] != nil {
@@ -901,6 +921,7 @@ class GetRichUI: NSObject, UITextFieldDelegate {
             })
         regDispose.disposed(by: self.delegate.myDisposeBag)
         disposeList.append(regDispose)
+         */
     }
 
     @objc func selectServiceTypeTapped(_ sender: Any) {
@@ -979,6 +1000,7 @@ class GetRichUI: NSObject, UITextFieldDelegate {
         let options = ["مجرد", "متاهل"]
         let controller = ArrayChoiceTableViewController(options.sorted {$0 < $1}) { (selectedOption) in
             aTextField.text = selectedOption
+            if selectedOption == "متاهل" {self.maritalStatusCode = "2"} else {self.maritalStatusCode = "1"}
             aTextField.sendActions(for: .valueChanged)
         }
         controller.preferredContentSize = CGSize(width: 250, height: options.count*60)
@@ -991,6 +1013,7 @@ class GetRichUI: NSObject, UITextFieldDelegate {
         let options = ["مرد", "زن"]
         let controller = ArrayChoiceTableViewController(options.sorted {$0 < $1}) { (selectedOption) in
             aTextField.text = selectedOption
+            if selectedOption == "مرد" {self.genderCode = "1"} else {self.genderCode = "0"}
             aTextField.sendActions(for: .valueChanged)
         }
         controller.preferredContentSize = CGSize(width: 250, height: options.count*60)
@@ -1004,20 +1027,21 @@ class GetRichUI: NSObject, UITextFieldDelegate {
             .subscribe(onNext: { [unowned self] (innerProfileInfo) in
                 //print("***FillingEDit")
                 self.aProfileInfo = innerProfileInfo
-                self.fillEditProfileForm(With: innerProfileInfo)
+                self.fillEditProfileInfoForm(With: innerProfileInfo)
             })
     }
-
-    func fillEditProfileForm(With aProfileInfo: ProfileInfo) {
+    func fillEditProfileInfoForm(With aProfileInfo: ProfileInfo) {
+        //print(" profile Info in GetRichUI : \(aProfileInfo)")
         if texts["familyText"] != nil { texts["familyText"]!.text = aProfileInfo.last_name}
         if texts["nameText"] != nil { texts["nameText"]!.text = aProfileInfo.first_name}
         if texts["nationalCodeText"] != nil { texts["nationalCodeText"]!.text = aProfileInfo.national_code}
         if texts["birthDateText"] != nil { texts["birthDateText"]!.text = aProfileInfo.birthdate}
         if texts["maritalStatusText"] != nil { texts["maritalStatusText"]!.text = aProfileInfo.marital_status}
+        if texts["addressText"] != nil { texts["addressText"]!.text = aProfileInfo.address}
         if texts["emailText"] != nil { texts["emailText"]!.text = aProfileInfo.email}
         //if texts["stateText"] != nil { texts["stateText"]!.text = aProfileInfo.state}
         //if texts["cityText"] != nil { texts["cityText"]!.text = aProfileInfo.city}
-        if texts["regionText"] != nil { texts["regionText"]!.text = aProfileInfo.address}
+        if texts["addressText"] != nil { texts["addressText"]!.text = aProfileInfo.address}
         if texts["mobileText"] != nil { texts["mobileText"]!.text = aProfileInfo.phone}
         if texts["genderText"] != nil { texts["genderText"]!.text = aProfileInfo.gender}
         for akey in texts.keys {
@@ -1026,7 +1050,6 @@ class GetRichUI: NSObject, UITextFieldDelegate {
                 aTextField.sendActions(for: .valueChanged)
             }
         }
-        //texts["**********"]!.text = aProfileInfo.bio
     }
 
     @objc func selectOnMapTapped(_ sender: UIButton) {

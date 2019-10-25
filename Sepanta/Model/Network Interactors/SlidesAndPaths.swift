@@ -23,6 +23,7 @@ class SlidesAndPaths {
     var path_operator_image: String = "/upload/operator"
     var count_new_shop = BehaviorRelay<Int>(value: 0)
     var notifications_count = BehaviorRelay<Int>(value: 0)
+    var sepantaie_count = BehaviorRelay<Int>(value: 0) //shops_count
     var slides = [Slide]()
     var slidesObs = BehaviorRelay<[Slide]>(value: [])
 

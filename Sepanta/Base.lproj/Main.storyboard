@@ -154,7 +154,7 @@
                                                     <action selector="gotoMapNearestShop:" destination="jPv-Ez-8v9" eventType="touchUpInside" id="gFm-AK-BXG"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TM7-rv-Nf9" userLabel="sepantaie">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TM7-rv-Nf9" userLabel="sepantaie" customClass="UIButtonWithBadge" customModule="Sepanta" customModuleProvider="target">
                                                 <rect key="frame" x="279.5" y="0.0" width="133.5" height="117"/>
                                                 <state key="normal" image="sepantaie"/>
                                                 <connections>
@@ -294,6 +294,7 @@
                         <outlet property="rightImageView" destination="Tpf-Pf-K1m" id="rS8-Re-pOd"/>
                         <outlet property="searchText" destination="DlX-a3-BK0" id="JcN-Wc-PFx"/>
                         <outlet property="searchTextField" destination="DlX-a3-BK0" id="tQ2-Bj-CKj"/>
+                        <outlet property="sepantaieButton" destination="TM7-rv-Nf9" id="FFx-Xh-SDZ"/>
                         <outlet property="slideView" destination="00C-Cf-4Xx" id="zxR-jo-L93"/>
                     </connections>
                 </viewController>

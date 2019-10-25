@@ -870,6 +870,14 @@ class JSONParser {
             } else {
                 print("Parser : Error : INVALID new shop count in HOME api")
             }
+            if let sepantaieShopsCount = aResult["shops_count"] as? Int {
+                //SlidesAndPaths.shared.sepantaieShopsCount.accept(5)
+                SlidesAndPaths.shared.sepantaie_count.accept(sepantaieShopsCount)
+            } else {
+                print("Parser : Error : INVALID new shop count in HOME api")
+            }
+
+            
 
             if let slides = aResult["sliders"] as? NSArray {
                 for aSlide in slides {

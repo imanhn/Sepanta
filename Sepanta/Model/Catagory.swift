@@ -17,6 +17,7 @@ import RxAlamofire
 class Catagory: NSObject, Codable {
     var image = String()
     var title = String()
+    var shopCount = Int()
     var id = Int()
     var anUIImage: BehaviorRelay<UIImage> = BehaviorRelay(value: UIImage())
     var myDisposeBag = DisposeBag()
@@ -25,17 +26,19 @@ class Catagory: NSObject, Codable {
         case id
         case title
         case image
+        case shopCount
     }
 
     override init () {
         super.init()
     }
 
-    init(Id anId: Int, Title aTitle: String, Image anImage: String) {
+    init(Id anId: Int, Title aTitle: String, ShopCount aShopCount : Int, Image anImage: String) {
         super.init()
         self.id = anId
         self.title = aTitle
         self.image = anImage
+        self.shopCount = aShopCount
         downloadImage()
     }
 
