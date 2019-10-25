@@ -436,7 +436,17 @@ class GetRichUI: NSObject, UITextFieldDelegate {
         
         let regDispose = NetworkManager.shared.regionListObs
             .subscribe(onNext: {aList in
-
+                if (aList.count == 0) && (self.views["regionView"]?.isHidden == false) {
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.views["afterRegionView"]?.frame.origin.y -= (self.buttonHeight + self.marginY)
+                    })
+                    self.views["regionView"]?.isHidden = true
+                } else if (aList.count > 0) && (self.views["regionView"]?.isHidden == true) {
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.views["afterRegionView"]?.frame.origin.y += (self.buttonHeight + self.marginY)
+                    })
+                    self.views["regionView"]?.isHidden = false
+                }
             })
         regDispose.disposed(by: self.delegate.myDisposeBag)
         disposeList.append(regDispose)
@@ -486,6 +496,7 @@ class GetRichUI: NSObject, UITextFieldDelegate {
                 aTextField.sendActions(for: .valueChanged)
                 self.cityCode = nil
                 self.texts["cityText"]!.text = ""
+                NetworkManager.shared.regionListObs.accept([String]())
                 self.stateCode = "\(options.index(of: selectedOption) ?? 0)"
                 NetworkManager.shared.cityDictionaryObs = BehaviorRelay<[String:String]>(value: [String:String]())
             }

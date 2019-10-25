@@ -14,6 +14,7 @@ extension GetRichUI {
         //print("reseller Request : ",views["leftFormView"] ?? "Nil")
         if views["leftFormView"] != nil && views["leftFormView"]?.superview != nil {
             disposeList.forEach({$0.dispose()})
+            views["afterRegionView"]?.subviews.forEach({$0.removeFromSuperview()})
             views["leftFormView"]?.removeFromSuperview()
             codePrefix = ""
             mobilePrefix = ""
@@ -32,8 +33,8 @@ extension GetRichUI {
         
         views["rightFormView"] = RightTabbedViewWithWhitePanel(frame: CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: UIScreen.main.bounds.height * 2))
         views["rightFormView"]?.backgroundColor = UIColor.clear
-        
         buttonHeight = (views["rightFormView"] as! RightTabbedViewWithWhitePanel).getHeight()
+        self.delegate.scrollView.addSubview(views["rightFormView"]!)
         textFieldWidth = (views["rightFormView"]?.bounds.width)! - (2 * marginX)
         
         buttons["leftButton"] = UIButton(frame: CGRect(x: 0, y: 0, width: (views["rightFormView"]?.bounds.width)!/2, height: buttonHeight))
@@ -109,94 +110,106 @@ extension GetRichUI {
         texts["cityText"]?.addTarget(self, action: #selector(selectCityTapped), for: .touchDown)
         views["rightFormView"]?.addSubview(views["cityView"]!)
         cursurY += buttonHeight + marginY
-        /*
-         (views["regionView"], texts["regionText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "NOIMAGE", Selectable: true, PlaceHolderText: "منطقه")
-         texts["regionText"]?.addTarget(self, action: #selector(selectRegionTapped), for: .touchDown)
-         views["rightFormView"]?.addSubview(views["regionView"]!)
-         cursurY += buttonHeight + marginY
-         */
-        (views["locationView"], texts["addressText"]) = buildARowView(CGRect: CGRect(x: marginX+buttonHeight+marginX, y: cursurY, width: textFieldWidth-(buttonHeight+marginX), height: buttonHeight), Image: "icon_profile_05", Selectable: false, PlaceHolderText: "آدرس")
-        views["rightFormView"]?.addSubview(views["locationView"]!)
-        locationButton = RoundedButton(frame: CGRect(x: marginX, y: cursurY, width: buttonHeight, height: buttonHeight))
+
+        // When there is no region, the rest of items should get scrolled up and the regionView should be hided
+        // in order to do this I have defined a new View (afterRegionView) and added all view items below regionView to it
+        // when ever it is needed to hide region afterRegionView is moved up and when there is a region list for the selected city
+        // I just move the afterRegionView down and make regionView.hidden=false (this is done in selectCityTapped
+        views["afterRegionView"] = UIView(frame: CGRect(x: 20, y: cursurY+20, width: UIScreen.main.bounds.width-40, height: UIScreen.main.bounds.height * 1))
+        self.delegate.scrollView.addSubview(views["afterRegionView"]!)
+        
+        (views["regionView"], texts["regionText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "NOIMAGE", Selectable: true, PlaceHolderText: "منطقه")
+        texts["regionText"]?.addTarget(self, action: #selector(selectRegionTapped), for: .touchDown)
+        views["rightFormView"]?.addSubview(views["regionView"]!)
+        views["regionView"]?.isHidden = true
+        //cursurY += buttonHeight + marginY  // Commented because the default value for regionView.isHidden is true! for false it should be uncommented
+        
+        var animatedPartCursurY : CGFloat = 0
+        
+        (views["locationView"], texts["addressText"]) = buildARowView(CGRect: CGRect(x: marginX+buttonHeight+marginX, y: animatedPartCursurY, width: textFieldWidth-(buttonHeight+marginX), height: buttonHeight), Image: "icon_profile_05", Selectable: false, PlaceHolderText: "آدرس")
+        views["afterRegionView"]?.addSubview(views["locationView"]!)
+        locationButton = RoundedButton(frame: CGRect(x: marginX, y: animatedPartCursurY, width: buttonHeight, height: buttonHeight))
         locationButton.setImage(UIImage(named: "icon_location"), for: .normal)
         locationButton.addTarget(self, action: #selector(selectOnMapTapped), for: .touchUpInside)
-        views["rightFormView"]?.addSubview(locationButton)
-        cursurY += buttonHeight + marginY
+        views["afterRegionView"]?.addSubview(locationButton)
+        animatedPartCursurY += buttonHeight + marginY
         
-        (views["phoneNumberView"], texts["phoneNumberText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_08", Selectable: false, PlaceHolderText: "تلفن فروشگاه")
+        (views["phoneNumberView"], texts["phoneNumberText"]) = buildARowView(CGRect: CGRect(x: marginX, y: animatedPartCursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_08", Selectable: false, PlaceHolderText: "تلفن فروشگاه")
         texts["phoneNumberText"]?.keyboardType = UIKeyboardType.numberPad
-        views["rightFormView"]?.addSubview(views["phoneNumberView"]!)
-        cursurY += buttonHeight + (2 * marginY)
+        views["afterRegionView"]?.addSubview(views["phoneNumberView"]!)
+        animatedPartCursurY += buttonHeight + (2 * marginY)
         
-        (views["mobileNoView"], texts["mobileText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_07", Selectable: false, PlaceHolderText: "شماره همراه")
+        (views["mobileNoView"], texts["mobileText"]) = buildARowView(CGRect: CGRect(x: marginX, y: animatedPartCursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_07", Selectable: false, PlaceHolderText: "شماره همراه")
         //texts["mobileText"]!.text =  aProfileInfo.phone
         texts["mobileText"]?.keyboardType = UIKeyboardType.phonePad
-        views["rightFormView"]?.addSubview(views["mobileNoView"]!)
-        mobileLogo = createMobileLogo(CursurY: cursurY)
-        views["rightFormView"]?.addSubview(mobileLogo)
-        cursurY += buttonHeight + marginY
+        views["afterRegionView"]?.addSubview(views["mobileNoView"]!)
+        mobileLogo = createMobileLogo(CursurY: animatedPartCursurY)
+        views["afterRegionView"]?.addSubview(mobileLogo)
+        animatedPartCursurY += buttonHeight + marginY
         
-        (views["discountRateView"], texts["discountText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_08", Selectable: false, PlaceHolderText: "درصد تخفیف پیشنهادی")
+        (views["discountRateView"], texts["discountText"]) = buildARowView(CGRect: CGRect(x: marginX, y: animatedPartCursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_08", Selectable: false, PlaceHolderText: "درصد تخفیف پیشنهادی")
         texts["discountText"]?.keyboardType = UIKeyboardType.numberPad
-        views["rightFormView"]?.addSubview(views["discountRateView"]!)
-        cursurY += buttonHeight + (2 * marginY)
+        views["afterRegionView"]?.addSubview(views["discountRateView"]!)
+        animatedPartCursurY += buttonHeight + (2 * marginY)
         
         awareCheckButton = UIButton(type: .custom)
-        awareCheckButton.frame = CGRect(x: marginX+textFieldWidth-buttonHeight, y: cursurY, width: buttonHeight, height: buttonHeight)
+        awareCheckButton.frame = CGRect(x: marginX+textFieldWidth-buttonHeight, y: animatedPartCursurY, width: buttonHeight, height: buttonHeight)
         awareCheckButton.backgroundColor = UIColor(hex: 0xD6D7D9)
         awareCheckButton.setImage(UIImage(named: "icon_tick_white"), for: .normal)
         awareCheckButton.contentMode = .scaleAspectFit
         awareCheckButton.addTarget(self, action: #selector(self.awareButtonTapped(_:)), for: .touchUpInside)
-        views["rightFormView"]?.addSubview(awareCheckButton)
-        labels["awareLabel"] = UILabel(frame: CGRect(x: marginX, y: cursurY, width: textFieldWidth-buttonHeight-(marginX/2), height: buttonHeight))
+        views["afterRegionView"]?.addSubview(awareCheckButton)
+        labels["awareLabel"] = UILabel(frame: CGRect(x: marginX, y: animatedPartCursurY, width: textFieldWidth-buttonHeight-(marginX/2), height: buttonHeight))
         labels["awareLabel"]!.textColor = UIColor(hex: 0xD6D7D9)
         labels["awareLabel"]!.text = "آیا فروشگاه آگاه است"
         labels["awareLabel"]!.textAlignment = .right
         labels["awareLabel"]!.font = UIFont(name: "Shabnam-FD", size: 14)
-        views["rightFormView"]?.addSubview(labels["awareLabel"]!)
-        cursurY += buttonHeight + (1 * marginY)
+        views["afterRegionView"]?.addSubview(labels["awareLabel"]!)
+        animatedPartCursurY += buttonHeight + (1 * marginY)
         
         areYouOwnerCheckButton = UIButton(type: .custom)
-        areYouOwnerCheckButton.frame = CGRect(x: marginX+textFieldWidth-buttonHeight, y: cursurY, width: buttonHeight, height: buttonHeight)
+        areYouOwnerCheckButton.frame = CGRect(x: marginX+textFieldWidth-buttonHeight, y: animatedPartCursurY, width: buttonHeight, height: buttonHeight)
         areYouOwnerCheckButton.backgroundColor = UIColor(hex: 0xD6D7D9)
         areYouOwnerCheckButton.setImage(UIImage(named: "icon_tick_white"), for: .normal)
         areYouOwnerCheckButton.contentMode = .scaleAspectFit
         areYouOwnerCheckButton.addTarget(self, action: #selector(self.areYouOwnerButtonTapped(_:)), for: .touchUpInside)
-        views["rightFormView"]?.addSubview(areYouOwnerCheckButton)
-        labels["areYouOwnerLabel"] = UILabel(frame: CGRect(x: marginX, y: cursurY, width: textFieldWidth-buttonHeight-(marginX/2), height: buttonHeight))
+        views["afterRegionView"]?.addSubview(areYouOwnerCheckButton)
+        labels["areYouOwnerLabel"] = UILabel(frame: CGRect(x: marginX, y: animatedPartCursurY, width: textFieldWidth-buttonHeight-(marginX/2), height: buttonHeight))
         labels["areYouOwnerLabel"]!.textColor = UIColor(hex: 0xD6D7D9)
         labels["areYouOwnerLabel"]!.text = "آیا مالک فروشگاه هستید؟"
         labels["areYouOwnerLabel"]!.textAlignment = .right
         labels["areYouOwnerLabel"]!.font = UIFont(name: "Shabnam-FD", size: 14)
-        views["rightFormView"]?.addSubview(labels["areYouOwnerLabel"]!)
-        cursurY += buttonHeight + (1 * marginY)
+        views["afterRegionView"]?.addSubview(labels["areYouOwnerLabel"]!)
+        animatedPartCursurY += buttonHeight + (1 * marginY)
         
         licenceCheckButton = UIButton(type: .custom)
-        licenceCheckButton.frame = CGRect(x: marginX+textFieldWidth-buttonHeight, y: cursurY, width: buttonHeight, height: buttonHeight)
+        licenceCheckButton.frame = CGRect(x: marginX+textFieldWidth-buttonHeight, y: animatedPartCursurY, width: buttonHeight, height: buttonHeight)
         licenceCheckButton.backgroundColor = UIColor(hex: 0xD6D7D9)
         licenceCheckButton.setImage(UIImage(named: "icon_tick_white"), for: .normal)
         licenceCheckButton.contentMode = .scaleAspectFit
         licenceCheckButton.addTarget(self, action: #selector(self.licenceButtonTapped(_:)), for: .touchUpInside)
-        views["rightFormView"]?.addSubview(licenceCheckButton)
-        labels["licenceLabel"] = UILabel(frame: CGRect(x: marginX, y: cursurY, width: textFieldWidth-buttonHeight-(marginX/2), height: buttonHeight))
+        views["afterRegionView"]?.addSubview(licenceCheckButton)
+        labels["licenceLabel"] = UILabel(frame: CGRect(x: marginX, y: animatedPartCursurY, width: textFieldWidth-buttonHeight-(marginX/2), height: buttonHeight))
         labels["licenceLabel"]!.textColor = UIColor(hex: 0xD6D7D9)
         labels["licenceLabel"]!.text = "آیا مجوز صنفی دارید؟"
         labels["licenceLabel"]!.textAlignment = .right
         labels["licenceLabel"]!.font = UIFont(name: "Shabnam-FD", size: 14)
-        views["rightFormView"]?.addSubview(labels["licenceLabel"]!)
-        cursurY += buttonHeight + buttonHeight*2/3
+        views["afterRegionView"]?.addSubview(labels["licenceLabel"]!)
+        animatedPartCursurY += buttonHeight + buttonHeight*2/3
         
         resellerSubmitButton = SubmitButton(type: .custom)
-        resellerSubmitButton.frame = CGRect(x: marginX+(textFieldWidth/2)-1.5*buttonHeight, y: cursurY, width: 3*buttonHeight, height: buttonHeight)
+        resellerSubmitButton.frame = CGRect(x: marginX+(textFieldWidth/2)-1.5*buttonHeight, y: animatedPartCursurY, width: 3*buttonHeight, height: buttonHeight)
         resellerSubmitButton.setTitle("ارسال", for: .normal)
         resellerSubmitButton.addTarget(self, action: #selector(self.sellRequestSubmitTapped(_:)), for: .touchUpInside)
-        views["rightFormView"]?.addSubview(resellerSubmitButton)
-        cursurY += buttonHeight + (1 * marginY)
+        views["afterRegionView"]?.addSubview(resellerSubmitButton)
+        animatedPartCursurY += buttonHeight + (1 * marginY)
         
+        views["afterRegionView"]?.frame = CGRect(x: 20, y: cursurY+20, width: UIScreen.main.bounds.width-40, height: animatedPartCursurY)
+        cursurY += animatedPartCursurY
+         self.delegate.scrollView.addSubview(views["afterRegionView"]!)
         let formSize = CGSize(width: UIScreen.main.bounds.width, height: cursurY*1.2)
         self.delegate.scrollView.contentSize = formSize
         views["rightFormView"]?.frame = CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: cursurY+buttonHeight*1.5)
-        self.delegate.scrollView.addSubview(views["rightFormView"]!)
         self.fillEditProfileInfoForm(With: aProfileInfo)
         submitDispose = handleResellerSubmitButtonEnableOrDisable()
         disposeList.append(submitDispose)

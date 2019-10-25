@@ -19,6 +19,7 @@ extension GetRichUI {
         //print("Card Request  : ",views["rightFormView"]!,"  SuperView : ",views["rightFormView"]!.superview ?? "Nil")
         if views["rightFormView"]?.superview != nil {
             disposeList.forEach({$0.dispose()})
+            views["afterRegionView"]?.subviews.forEach({$0.removeFromSuperview()})
             views["rightFormView"]?.removeFromSuperview()
             codePrefix = ""
             mobilePrefix = ""
@@ -34,7 +35,6 @@ extension GetRichUI {
         self.delegate.scrollView.addSubview(views["leftFormView"]!)
         
         let buttonsFont = UIFont(name: "Shabnam-Bold-FD", size: 14)
-        let buttonHeight = (views["leftFormView"] as! LeftTabbedViewWithWhitePanel).getHeight()
         let textFieldWidth = (views["leftFormView"]!.bounds.width) - (2 * marginX)
         
         buttons["leftButton"] = UIButton(frame: CGRect(x: 0, y: 0, width: views["leftFormView"]!.bounds.width/2, height: buttonHeight))
@@ -122,14 +122,6 @@ extension GetRichUI {
         cursurY += buttonHeight + marginY
         
         //texts["mobileText"]
-        (views["addressView"], texts["addressText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_05", Selectable: false, PlaceHolderText: "آدرس")
-        views["leftFormView"]?.addSubview(views["addressView"]!)
-        cursurY += buttonHeight + marginY
-        
-        (views["postalCodeView"], texts["postalCodeText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_05", Selectable: false, PlaceHolderText: "کد پستی")
-        texts["postalCodeText"]?.keyboardType = UIKeyboardType.numberPad
-        views["leftFormView"]?.addSubview(views["postalCodeView"]!)
-        cursurY += buttonHeight + marginY
         
         (views["stateView"], texts["stateText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "map", Selectable: true, PlaceHolderText: "استان")
         //texts["stateText"]!.text =  aProfileInfo.state
@@ -143,15 +135,34 @@ extension GetRichUI {
         views["leftFormView"]?.addSubview(views["cityView"]!)
         cursurY += buttonHeight + marginY
         
-        views["afterRegionView"] = UIView()
+        // When there is no region, the rest of items should get scrolled up and the regionView should be hided
+        // in order to do this I have defined a new View (afterRegionView) and added all view items below regionView to it
+        // when ever it is needed to hide region afterRegionView is moved up and when there is a region list for the selected city
+        // I just move the afterRegionView down and make regionView.hidden=false (this is done in selectCityTapped
+        views["afterRegionView"] = UIView(frame: CGRect(x: 20, y: cursurY+20, width: UIScreen.main.bounds.width-40, height: UIScreen.main.bounds.height * 1))
+        //self.delegate.scrollView.addSubview(views["afterRegionView"]!)
+        
         (views["regionView"], texts["regionText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "NOIMAGE", Selectable: true, PlaceHolderText: "منطقه")
          texts["regionText"]?.addTarget(self, action: #selector(selectRegionTapped), for: .touchDown)
-         views["leftFormView"]?.addSubview(views["regionView"]!)
-         cursurY += buttonHeight + marginY
+        views["leftFormView"]?.addSubview(views["regionView"]!)
+        views["regionView"]?.isHidden = true
+        //cursurY += buttonHeight + marginY  // Commented because the default value for regionView.isHidden is true! for false it should be uncommented
 
-        cardRequestType = RadioView(frame: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight),items: ["درخواست کارت جدید","تعریف روی کارت دیگر"])
-        views["leftFormView"]?.addSubview(cardRequestType)
-        cursurY += buttonHeight + marginY
+        var animatedPartCursurY : CGFloat = 0
+        
+        (views["addressView"], texts["addressText"]) = buildARowView(CGRect: CGRect(x: marginX, y: animatedPartCursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_05", Selectable: false, PlaceHolderText: "آدرس")
+        views["afterRegionView"]?.addSubview(views["addressView"]!)
+        animatedPartCursurY += buttonHeight + marginY
+        
+        (views["postalCodeView"], texts["postalCodeText"]) = buildARowView(CGRect: CGRect(x: marginX, y: animatedPartCursurY, width: textFieldWidth, height: buttonHeight), Image: "icon_profile_05", Selectable: false, PlaceHolderText: "کد پستی")
+        texts["postalCodeText"]?.keyboardType = UIKeyboardType.numberPad
+        views["afterRegionView"]?.addSubview(views["postalCodeView"]!)
+        animatedPartCursurY += buttonHeight + marginY
+
+        cardRequestType = RadioView(frame: CGRect(x: marginX, y: animatedPartCursurY, width: textFieldWidth, height: buttonHeight),items: ["درخواست کارت جدید","تعریف روی کارت دیگر"])
+        //views["leftFormView"]?.addSubview(cardRequestType)
+        views["afterRegionView"]?.addSubview(cardRequestType)
+        animatedPartCursurY += buttonHeight + marginY
         let cardRequestTypeDisp = cardRequestType.selectedItem.subscribe(
             onNext: { aSelectedItem in
                 if (aSelectedItem == 1) {
@@ -163,16 +174,18 @@ extension GetRichUI {
         disposeList.append(cardRequestTypeDisp)
         cardRequestTypeDisp.disposed(by: myDisposeBag)
         
-        (views["cardNoView"], texts["cardNoText"]) = buildARowView(CGRect: CGRect(x: marginX+buttonHeight+marginX, y: cursurY, width: textFieldWidth-(buttonHeight+marginX), height: buttonHeight), Image: "credit-card", Selectable: false, PlaceHolderText: "شماره کارت")
-        views["leftFormView"]?.addSubview(views["cardNoView"]!)
+        (views["cardNoView"], texts["cardNoText"]) = buildARowView(CGRect: CGRect(x: marginX+buttonHeight+marginX, y: animatedPartCursurY, width: textFieldWidth-(buttonHeight+marginX), height: buttonHeight), Image: "credit-card", Selectable: false, PlaceHolderText: "شماره کارت")
+        //views["leftFormView"]?.addSubview(views["cardNoView"]!)
+        views["afterRegionView"]?.addSubview(views["cardNoView"]!)
         texts["cardNoText"]?.keyboardType = UIKeyboardType.decimalPad
         if self.delegate.cardNo != nil {
             texts["cardNoText"]!.text = self.delegate.cardNo
             texts["cardNoText"]!.sendActions(for: .valueChanged)
         }
-        bankLogo = UIImageView(frame: CGRect(x: marginX, y: cursurY, width: buttonHeight, height: buttonHeight))
-        views["leftFormView"]?.addSubview(bankLogo)
-        cursurY += buttonHeight + marginY
+        bankLogo = UIImageView(frame: CGRect(x: marginX, y: animatedPartCursurY, width: buttonHeight, height: buttonHeight))
+        //views["leftFormView"]?.addSubview(bankLogo)
+        views["afterRegionView"]?.addSubview(bankLogo)
+        animatedPartCursurY += buttonHeight + marginY
         let bankDispose = NetworkManager.shared.bankObs
             .filter({$0.bank != nil && $0.bank!.count > 0})
             .subscribe(onNext: { aBank in
@@ -211,15 +224,19 @@ extension GetRichUI {
         disposeList.append(cardDispose)
         views["cardNoView"]?.isHidden = true
         bankLogo.isHidden = true
-        cursurY += buttonHeight/2
+        animatedPartCursurY += buttonHeight/2
         
         cardSubmitButton = SubmitButton(type: .custom)
-        cardSubmitButton.frame = CGRect(x: marginX+(textFieldWidth/2)-1.5*buttonHeight, y: cursurY-buttonHeight, width: 3*buttonHeight, height: buttonHeight)
+        cardSubmitButton.frame = CGRect(x: marginX+(textFieldWidth/2)-1.5*buttonHeight, y: animatedPartCursurY-buttonHeight, width: 3*buttonHeight, height: buttonHeight)
         cardSubmitButton.setTitle("ارسال", for: .normal)
         cardSubmitButton.addTarget(self, action: #selector(self.cardRequestSubmitTapped(_:)), for: .touchUpInside)
-        views["leftFormView"]?.addSubview(cardSubmitButton)
-        cursurY += buttonHeight + marginY
+        views["afterRegionView"]?.addSubview(cardSubmitButton)
+        animatedPartCursurY += buttonHeight + marginY
         
+        views["afterRegionView"]?.frame = CGRect(x: 20, y: cursurY+20, width: UIScreen.main.bounds.width-40, height: animatedPartCursurY)
+        self.delegate.scrollView.addSubview(views["afterRegionView"]!)        
+        
+        cursurY += animatedPartCursurY
         let formSize = CGSize(width: UIScreen.main.bounds.width, height: cursurY*1.2)
         self.delegate.scrollView.contentSize = formSize
         views["leftFormView"]?.frame = CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: cursurY+buttonHeight*0.5)
