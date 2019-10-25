@@ -31,6 +31,11 @@
 		0F237E41226783CF004CC7BC /* Shabnam-Light-FD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F237E3E226783C9004CC7BC /* Shabnam-Light-FD.ttf */; };
 		0F2739A322BD6CC6005E24F2 /* UIResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2739A222BD6CC6005E24F2 /* UIResponder.swift */; };
 		0F3197B32270BD8F00CEF207 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3197B22270BD8F00CEF207 /* Bank.swift */; };
+		0F37F155236340E200F5BA96 /* GetRichUISaleRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F37F154236340E200F5BA96 /* GetRichUISaleRequest.swift */; };
+		0F37F1572363414500F5BA96 /* GetRichUICardRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F37F1562363414500F5BA96 /* GetRichUICardRequest.swift */; };
+		0F37F15A2363531C00F5BA96 /* CustomButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F37F1592363531C00F5BA96 /* CustomButtons.swift */; };
+		0F37F15C2363538D00F5BA96 /* CustomTextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F37F15B2363538D00F5BA96 /* CustomTextFields.swift */; };
+		0F37F15E236353E700F5BA96 /* RadioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F37F15D236353E700F5BA96 /* RadioView.swift */; };
 		0F3BDD0C228649BE0087EA97 /* terms.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0F3BDD0B228649BE0087EA97 /* terms.rtf */; };
 		0F3BDD0E22864A120087EA97 /* VersionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3BDD0D22864A120087EA97 /* VersionControl.swift */; };
 		0F4C8EB5227FB21F00E35F8B /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4C8EB4227FB21F00E35F8B /* FilterView.swift */; };
@@ -196,6 +201,11 @@
 		0F237E3E226783C9004CC7BC /* Shabnam-Light-FD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shabnam-Light-FD.ttf"; sourceTree = "<group>"; };
 		0F2739A222BD6CC6005E24F2 /* UIResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIResponder.swift; sourceTree = "<group>"; };
 		0F3197B22270BD8F00CEF207 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		0F37F154236340E200F5BA96 /* GetRichUISaleRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRichUISaleRequest.swift; sourceTree = "<group>"; };
+		0F37F1562363414500F5BA96 /* GetRichUICardRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRichUICardRequest.swift; sourceTree = "<group>"; };
+		0F37F1592363531C00F5BA96 /* CustomButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtons.swift; sourceTree = "<group>"; };
+		0F37F15B2363538D00F5BA96 /* CustomTextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFields.swift; sourceTree = "<group>"; };
+		0F37F15D236353E700F5BA96 /* RadioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioView.swift; sourceTree = "<group>"; };
 		0F3BDD0B228649BE0087EA97 /* terms.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = terms.rtf; sourceTree = "<group>"; };
 		0F3BDD0D22864A120087EA97 /* VersionControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionControl.swift; sourceTree = "<group>"; };
 		0F4C8EB4227FB21F00E35F8B /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
@@ -406,6 +416,27 @@
 			path = "Sepanta Groups";
 			sourceTree = "<group>";
 		};
+		0F37F153236340AD00F5BA96 /* GetRichUI */ = {
+			isa = PBXGroup;
+			children = (
+				0FAEEDE4222F29C600A9178F /* GetRichUI.swift */,
+				0F37F154236340E200F5BA96 /* GetRichUISaleRequest.swift */,
+				0F37F1562363414500F5BA96 /* GetRichUICardRequest.swift */,
+			);
+			path = GetRichUI;
+			sourceTree = "<group>";
+		};
+		0F37F158236352F300F5BA96 /* CustomUIView */ = {
+			isa = PBXGroup;
+			children = (
+				0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */,
+				0F37F1592363531C00F5BA96 /* CustomButtons.swift */,
+				0F37F15B2363538D00F5BA96 /* CustomTextFields.swift */,
+				0F37F15D236353E700F5BA96 /* RadioView.swift */,
+			);
+			path = CustomUIView;
+			sourceTree = "<group>";
+		};
 		0F6F39C122078DC900393CD7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -566,15 +597,15 @@
 		0F9BCFC6222201B600C87706 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0F37F158236352F300F5BA96 /* CustomUIView */,
+				0F37F153236340AD00F5BA96 /* GetRichUI */,
 				0FAEEDE82230957100A9178F /* AboutUsUI.swift */,
 				0F8E3F6F2275CCF300E51B17 /* CardView.swift */,
-				0FE8BA012204CE8200C868C3 /* CustomWidgets.swift */,
 				0F63F7132277690100799C8F /* ContactUSUI.swift */,
 				0F817A6C22346BAF00F1738E /* EditProfileUI.swift */,
 				0FF55AB4227B4CFA0093DEE0 /* EditShopUI.swift */,
 				0F4C8EB4227FB21F00E35F8B /* FilterView.swift */,
 				0F896AC522AC595000310594 /* GroupViewControllerFilter.swift */,
-				0FAEEDE4222F29C600A9178F /* GetRichUI.swift */,
 				0F50AE73226F66950028D8B6 /* MapViewAnnotations.swift */,
 				0F63F71D2278BBDC00799C8F /* NewCardView.swift */,
 				0F0661B1225BEA6A00A83734 /* PostUI.swift */,
@@ -980,6 +1011,7 @@
 				0FAE1FF3226332D20043B077 /* CreditCard.swift in Sources */,
 				0F6EC4672231751E0078136C /* StringWithFontSizeCalc.swift in Sources */,
 				0F63F71A2278A25700799C8F /* StringSlice.swift in Sources */,
+				0F37F15E236353E700F5BA96 /* RadioView.swift in Sources */,
 				0F63F71E2278BBDC00799C8F /* NewCardView.swift in Sources */,
 				0F1B75632236E39B0087C0DB /* ShopViewController.swift in Sources */,
 				0F823D5822BAC2020071E92B /* EndPoints.swift in Sources */,
@@ -1005,6 +1037,7 @@
 				0FAE1FF52265BAC70043B077 /* UIButtonDisEnable.swift in Sources */,
 				0F1B75692238498E0087C0DB /* CacheImageForViews.swift in Sources */,
 				0F0661B4225BF93E00A83734 /* Comment.swift in Sources */,
+				0F37F1572363414500F5BA96 /* GetRichUICardRequest.swift in Sources */,
 				0F066F9F222C704B00C8871C /* MenuViewController.swift in Sources */,
 				0F1B75652236E42A0087C0DB /* ShopUI.swift in Sources */,
 				0F237E1F2267654B004CC7BC /* SearchViewController.swift in Sources */,
@@ -1064,6 +1097,7 @@
 				0FC220C222EF2BBB00794A6F /* Follow.swift in Sources */,
 				0F890D022214B5310091FA2E /* AppCoordinator.swift in Sources */,
 				0FAEEDE5222F29C600A9178F /* GetRichUI.swift in Sources */,
+				0F37F15C2363538D00F5BA96 /* CustomTextFields.swift in Sources */,
 				0F997397227BB84600A65716 /* MainImageForShopImagePicker.swift in Sources */,
 				0F890D0E2215C7170091FA2E /* NetworkManager.swift in Sources */,
 				0F7CD8A4228749D900B92CBA /* ContentViewController.swift in Sources */,
@@ -1072,8 +1106,10 @@
 				0F50AE74226F66950028D8B6 /* MapViewAnnotations.swift in Sources */,
 				0F896AC322AC580400310594 /* ShopListOwners.swift in Sources */,
 				0F890D002214B4E90091FA2E /* Storyboarded.swift in Sources */,
+				0F37F155236340E200F5BA96 /* GetRichUISaleRequest.swift in Sources */,
 				0FD094AC226E370B00E53A07 /* NearestViewController.swift in Sources */,
 				0F79BBAA2285CD4900795AE0 /* FavListViewController.swift in Sources */,
+				0F37F15A2363531C00F5BA96 /* CustomButtons.swift in Sources */,
 				0F642B95227A418100B887B8 /* AddPostViewController.swift in Sources */,
 				0F0661B2225BEA6A00A83734 /* PostUI.swift in Sources */,
 				0F63F71622776A5400799C8F /* ContactUSViewController.swift in Sources */,
