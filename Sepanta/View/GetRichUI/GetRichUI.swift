@@ -288,7 +288,8 @@ class GetRichUI: NSObject, UITextFieldDelegate {
             "card_id": cardIdString // FIXME is nil!
         ]
         print("aParameter : \(aParameter)")
-        return
+        self.delegate.coordinator?.pushPayment()
+/*
         NetworkManager.shared.run(API: "card-request", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
         let messageDisp = NetworkManager.shared.messageObs
             .filter({$0.count > 0})
@@ -297,6 +298,8 @@ class GetRichUI: NSObject, UITextFieldDelegate {
                 NetworkManager.shared.messageObs = BehaviorRelay<String>(value: "")
             })
         disposeList.append(messageDisp)
+ */
+        
     }
 
     func handleCardSubmitButtonEnableOrDisable() -> Disposable {

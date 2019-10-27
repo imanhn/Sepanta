@@ -454,7 +454,16 @@ class HomeCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
-
+    
+    func pushPayment() {
+        let storyboard = UIStoryboard(name: "GetRich", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "PaymentViewController") as! PaymentViewController
+        vc.coordinator = self
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+    
     func start() {
         pushLoginPage()
         if LoginKey.shared.isLoggedIn() {

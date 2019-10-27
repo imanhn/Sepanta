@@ -242,7 +242,8 @@ extension GetRichUI {
         views["leftFormView"]?.frame = CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: cursurY+buttonHeight*0.5)
         
         self.fillEditProfileInfoForm(With: aProfileInfo)
-        submitDispose = handleCardSubmitButtonEnableOrDisable()
+        //submitDispose = handleCardSubmitButtonEnableOrDisable()
+        cardSubmitButton.isEnabled = true
         disposeList.append(submitDispose)
         
     }

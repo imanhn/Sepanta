@@ -158,6 +158,13 @@ final class reportPost: Endpoints<GenericNetworkResponse> {
     }
 }
 
+final class GetPaymentGatewayList: Endpoints<PaymentGatewayList> {
+    init() {
+        super.init(API: "payment-port-list", Method: HTTPMethod.get, Parameters: nil, Retry: 3, Timeout: 10)
+    }
+}
+
+
 final class getCatagoryShops: Endpoints<ShopList> {
 
     init(CategoryID: Int) {

@@ -8,6 +8,18 @@
 
 import Foundation
 
+class GatewayButton : UIButton {
+    var gateway : PaymentGateway!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+
 class FilterButton: UIButton {
     var curvSize: CGFloat = 5
     override var isEnabled: Bool {
