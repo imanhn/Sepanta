@@ -36,6 +36,7 @@
 		0F37F15A2363531C00F5BA96 /* CustomButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F37F1592363531C00F5BA96 /* CustomButtons.swift */; };
 		0F37F15C2363538D00F5BA96 /* CustomTextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F37F15B2363538D00F5BA96 /* CustomTextFields.swift */; };
 		0F37F15E236353E700F5BA96 /* RadioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F37F15D236353E700F5BA96 /* RadioView.swift */; };
+		0F37F160236396AB00F5BA96 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F37F15F236396AB00F5BA96 /* PaymentViewController.swift */; };
 		0F3BDD0C228649BE0087EA97 /* terms.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0F3BDD0B228649BE0087EA97 /* terms.rtf */; };
 		0F3BDD0E22864A120087EA97 /* VersionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3BDD0D22864A120087EA97 /* VersionControl.swift */; };
 		0F4C8EB5227FB21F00E35F8B /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4C8EB4227FB21F00E35F8B /* FilterView.swift */; };
@@ -206,6 +207,7 @@
 		0F37F1592363531C00F5BA96 /* CustomButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtons.swift; sourceTree = "<group>"; };
 		0F37F15B2363538D00F5BA96 /* CustomTextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFields.swift; sourceTree = "<group>"; };
 		0F37F15D236353E700F5BA96 /* RadioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioView.swift; sourceTree = "<group>"; };
+		0F37F15F236396AB00F5BA96 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		0F3BDD0B228649BE0087EA97 /* terms.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = terms.rtf; sourceTree = "<group>"; };
 		0F3BDD0D22864A120087EA97 /* VersionControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionControl.swift; sourceTree = "<group>"; };
 		0F4C8EB4227FB21F00E35F8B /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
@@ -551,6 +553,7 @@
 				0FD094AB226E370B00E53A07 /* NearestViewController.swift */,
 				0F63F71F2278BDF200799C8F /* NewCardViewController.swift */,
 				0FFCDC4D226C91A00087BFEF /* NotificationsViewController.swift */,
+				0F37F15F236396AB00F5BA96 /* PaymentViewController.swift */,
 				0F0661AF225BE98100A83734 /* PostViewController.swift */,
 				0F237E1E2267654B004CC7BC /* SearchViewController.swift */,
 				0F58927D227909080077B655 /* ScoresViewController.swift */,
@@ -1043,6 +1046,7 @@
 				0F237E1F2267654B004CC7BC /* SearchViewController.swift in Sources */,
 				0F1B755B223580C80087C0DB /* ShopsListDataSource.swift in Sources */,
 				0FC220CA22EF55D000794A6F /* NotificationBindings.swift in Sources */,
+				0F37F160236396AB00F5BA96 /* PaymentViewController.swift in Sources */,
 				0FB3ECD2222DC48F009A89F7 /* GetRichViewController.swift in Sources */,
 				0F512C052205B5C300B99C9E /* SignupViewController.swift in Sources */,
 				0F50AE72226F61110028D8B6 /* MapAnnotation.swift in Sources */,
