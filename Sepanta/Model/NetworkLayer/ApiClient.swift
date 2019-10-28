@@ -24,9 +24,9 @@ final class ApiClient {
         return Observable.create { observer -> Disposable in
             print("*** Route : ", NetworkConstants.baseURLString + "/" + anApiName)
             print("*** Method : ", aMethod)
-            //print("*** Parameters : ", aParam)
             print("*** Encoding : ", URLEncoding.httpBody)
             print("*** Headers : ", self.headers)
+            print("*** Parameters : ", aParam)
             Alamofire.request(NetworkConstants.baseURLString + "/" + anApiName, method: aMethod, parameters: aParam, encoding: URLEncoding.httpBody, headers: self.headers)
                 .validate(statusCode: 200..<600)
                 .responseJSON { response in
@@ -36,11 +36,10 @@ final class ApiClient {
                             observer.onError(response.error!)
                             return
                         }
-                        do {
-                            let strData = String(data: data, encoding: .utf8)
-                            print("Data : ", strData ?? "")
+                        do {                            
+                            // print("Data : ", String(data: data, encoding: .utf8) ?? "")
                             let decodedData = try JSONDecoder().decode(T.self, from: data)
-                            print("DecodedData : ", decodedData)
+                            //print("DecodedData : ", decodedData)
                             observer.onNext(decodedData)
                         } catch {
                             print("ERROR in Decoding ", T.self, " from ", data.description)

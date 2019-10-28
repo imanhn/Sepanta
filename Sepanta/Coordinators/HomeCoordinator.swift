@@ -80,6 +80,12 @@ class HomeCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
             navigationController.topViewController?.willPop()
             navigationController.popViewController(animated: true)
     }
+    func popOneLevel(Message aMessage : String) {
+        print("*** POPING One Level....", navigationController.topViewController ?? "Unknown")
+        navigationController.topViewController?.willPop()
+        navigationController.popViewController(animated: true)
+        navigationController.topViewController?.alert(Message: aMessage)
+    }
 
     func popHome() {
         while !navigationController.topViewController!.isKind(of: HomeViewController.self) {
@@ -455,10 +461,36 @@ class HomeCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
-    func pushPayment() {
+    func pushPayment(CardId cardId : String,Type cardType : CardType) {
         let storyboard = UIStoryboard(name: "GetRich", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "PaymentViewController") as! PaymentViewController
         vc.coordinator = self
+        if (cardId.count > 0) {
+            vc.cardId = cardId
+        } else {
+            vc.cardId = "1"
+        }
+        vc.cardType = cardType
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+    
+    func pushPaymentWKWebView(WebAddress aWebAddress : String) {
+        let storyboard = UIStoryboard(name: "GetRich", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "PaymentWKWebViewController") as! PaymentWKWebViewController
+        vc.coordinator = self
+        vc.webAddress = aWebAddress
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+    
+    func pushPaymentUIWebView(WebAddress aWebAddress : String) {
+        let storyboard = UIStoryboard(name: "GetRich", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "PaymentUIWebViewController") as! PaymentUIWebViewController
+        vc.coordinator = self
+        vc.webAddress = aWebAddress
         navigationController.delegate = self
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)

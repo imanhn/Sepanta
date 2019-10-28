@@ -21,7 +21,8 @@ extension SepantaGroupsViewController {
             .filter({$0 != ""})
             .subscribe(onNext: { (innerCurrentState) in
                 let aParameter: [String:String] = [
-                    "state code": innerCurrentState
+                    "state_code": innerCurrentState,
+                    "city_code": ""
                 ]
                 self.fetchCatagories(aParameter)
             })
@@ -32,7 +33,8 @@ extension SepantaGroupsViewController {
             .filter({$0 != ""})
             .subscribe(onNext: {  (innerCurrentCity) in
                 let aParameter: [String:String] = [
-                    "city_code": innerCurrentCity
+                    "city_code": innerCurrentCity,
+                    "state_code": "",
                 ]
                 self.fetchCatagories(aParameter)
             })

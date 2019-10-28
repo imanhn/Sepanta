@@ -18,6 +18,70 @@
         </array>
     </customFonts>
     <scenes>
+        <!--PaymentUI Web View Controller-->
+        <scene sceneID="Dhm-f4-d0z">
+            <objects>
+                <viewController storyboardIdentifier="PaymentUIWebViewController" id="FZI-iG-Z74" customClass="PaymentUIWebViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jvl-Jw-o3v">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WEV-b8-3ln" userLabel="webView">
+                                <rect key="frame" x="0.0" y="5" width="414" height="896"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="WEV-b8-3ln" firstAttribute="centerX" secondItem="6EB-sR-mPb" secondAttribute="centerX" id="NoR-6Q-bB1"/>
+                            <constraint firstItem="WEV-b8-3ln" firstAttribute="height" secondItem="jvl-Jw-o3v" secondAttribute="height" id="XSz-w9-pTr"/>
+                            <constraint firstItem="WEV-b8-3ln" firstAttribute="centerY" secondItem="6EB-sR-mPb" secondAttribute="centerY" id="Xux-Wz-fLd"/>
+                            <constraint firstItem="WEV-b8-3ln" firstAttribute="width" secondItem="jvl-Jw-o3v" secondAttribute="width" id="zrx-bh-l9B"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6EB-sR-mPb"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="WEV-b8-3ln" id="3t2-z4-y5g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xBB-RU-6RN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-683" y="29"/>
+        </scene>
+        <!--PaymentWKWebViewController-->
+        <scene sceneID="atn-jT-dqv">
+            <objects>
+                <viewController storyboardIdentifier="PaymentWKWebViewController" id="Ub0-4S-vSX" userLabel="PaymentWKWebViewController" customClass="PaymentWKWebViewController" customModule="Sepanta" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6Rz-Am-KRz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B8F-vQ-U7H">
+                                <rect key="frame" x="0.0" y="5" width="414" height="896"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="B8F-vQ-U7H" firstAttribute="centerY" secondItem="xWR-kF-qyz" secondAttribute="centerY" id="0hK-eL-tL2"/>
+                            <constraint firstItem="B8F-vQ-U7H" firstAttribute="centerX" secondItem="xWR-kF-qyz" secondAttribute="centerX" id="JSF-sL-qz2"/>
+                            <constraint firstItem="B8F-vQ-U7H" firstAttribute="height" secondItem="6Rz-Am-KRz" secondAttribute="height" id="T3k-tw-9kR"/>
+                            <constraint firstItem="B8F-vQ-U7H" firstAttribute="width" secondItem="6Rz-Am-KRz" secondAttribute="width" id="wu9-u4-AT0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xWR-kF-qyz"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="B8F-vQ-U7H" id="52j-fv-vlL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w8t-St-XYF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-8" y="30"/>
+        </scene>
         <!--PaymentViewController-->
         <scene sceneID="gk3-yy-I0U">
             <objects>

@@ -52,6 +52,8 @@ class SMSConfirmViewController: UIViewControllerWithKeyboardNotificationWithErro
             "os_mobile": "iOS",
             "push_platform": "abc",
             "push_token": "abc",
+            "market": "anardoni",
+            "reagent_code": "",
             "device_model": UIDevice.current.model
         ]
         NetworkManager.shared.messageObs = BehaviorRelay<String>(value: "")

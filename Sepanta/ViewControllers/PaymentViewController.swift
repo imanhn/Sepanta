@@ -17,6 +17,11 @@ class GatewayCell: UICollectionViewCell {
     var aButton: GatewayButton = GatewayButton(type: .custom)
 }
 
+enum CardType {
+    case Sepanta
+    case Other
+}
+
 class PaymentViewController : UIViewControllerWithKeyboardNotificationWithErrorBar, Storyboarded, UICollectionViewDelegateFlowLayout {
     var myDisposeBag = DisposeBag()
     var disposeList = [Disposable]()
@@ -31,12 +36,29 @@ class PaymentViewController : UIViewControllerWithKeyboardNotificationWithErrorB
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var applyOffButton: UIButton!
     var selectedGateway : PaymentGateway?
+    var cardId : String!
+    var cardType : CardType!
     
     @IBAction func applyOffTapped(_ sender: Any) {
     }
     
     @IBAction func payButtonTapped(_ sender: Any) {
-        self.alert(Message: selectedGateway?.name ?? "هیچی" + "انتخاب شد")
+        //self.alert(Message: selectedGateway?.name ?? "هیچی" + "انتخاب شد")
+        let aDiscount : String = self.offText.text ?? ""
+        let aServerBankLink = selectedGateway?.link
+        let bankLinkDisp = GetBankLink(serverLink: aServerBankLink ?? "/api/v1/parsian", discountCode: aDiscount, cardId: cardId ?? "1").results()
+            .subscribe(onNext: { aBankLink in
+                // This is Shaparak (PSP) redirection
+                if let shaparakLink = aBankLink.link_bank {
+                    //self.coordinator?.pushPaymentWKWebView(WebAddress: shaparakLink)
+                    self.coordinator?.pushPaymentUIWebView(WebAddress: shaparakLink)
+                } else {
+                    self.alert(Message: "خطایی در یافتن درگاه شاپرک اتفاق افتاد")
+                }
+            }, onError: {_ in })
+        bankLinkDisp.disposed(by: myDisposeBag)
+        disposeList.append(bankLinkDisp)
+        
     }
     
     func bindCollectionView() {
@@ -86,7 +108,18 @@ class PaymentViewController : UIViewControllerWithKeyboardNotificationWithErrorB
         //return CGSize(width: 50 , height: 50)
         return CGSize(width: cellWidth, height: cellWidth)
     }
-
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let cellSpacing : CGFloat = 10
+        let cellWidth = (collectionView.bounds.width - 30) / numberOfCellsInARow
+        let cellCount = collectionView.numberOfItems(inSection: 0)
+        let totalCellwidth = CGFloat(cellCount) * cellWidth
+        let cellSpace = CGFloat(cellCount - 1) * cellSpacing
+        let spaceLeft = collectionView.bounds.width - totalCellwidth - cellSpace
+        var inset = spaceLeft / 2
+        inset = max(inset, 0.0)
+        return UIEdgeInsets.init(top: 0, left: inset, bottom: 0, right: 0)
+    }
     
     @objc override func willPop() {
         disposeList.forEach({$0.dispose()})
@@ -112,8 +145,6 @@ class PaymentViewController : UIViewControllerWithKeyboardNotificationWithErrorB
             } , onError: {_ in })
         paymentCallDisp.disposed(by: myDisposeBag)
         disposeList.append(paymentCallDisp)
-
-    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -125,6 +156,7 @@ class PaymentViewController : UIViewControllerWithKeyboardNotificationWithErrorB
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         self.collectionView.delegate = self
         self.collectionView.register(GatewayCell.self, forCellWithReuseIdentifier: "gatewayCellId")
+        
         bindCollectionView()
     }
     

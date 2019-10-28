@@ -11,12 +11,13 @@ import Foundation
 struct NetworkConstants {
 
     //The API's base URL
-    static let websiteRootAddress = "https://www.ipsepanta.ir"
+    //static let websiteRootAddress = "https://www.ipsepanta.ir"
+    static let websiteRootAddress = "https://www.sepantaclubs.com"
     static let baseURLString = websiteRootAddress + "/api/v1"
     var aheaders = [
     "Accept": "application/json",
     "Content-Type": "application/x-www-form-urlencoded",
-    "Authorization": "Bearer "+LoginKey.shared.token
+    "Authorization": "Bearer " + LoginKey.shared.token
     ]
     //The parameters (Queries) that we're gonna use
     struct Parameters {

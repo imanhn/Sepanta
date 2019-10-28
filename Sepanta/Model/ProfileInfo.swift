@@ -20,6 +20,7 @@ struct ProfileInfo: Codable {
     var bio: String?
     var banner: String?
     var address: String?
+    var sh_code : String?
     var image: String?
     var national_code: String?
     var state: String?

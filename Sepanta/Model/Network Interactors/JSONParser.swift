@@ -128,7 +128,7 @@ class JSONParser {
                 } else if (apiName == "profile") {
                     //Returns Profile Data for a user Id
                     let aProfile = (self.processAsProfile(Result: aDic))
-                    NetworkManager.shared.profileObs.accept(aProfile)
+                    NetworkManager.shared.userProfileObs.accept(aProfile)
                     /*
                     if targetObs == "SHOP" {
                         //NetworkManager.shared.shopProfileObs = BehaviorRelay<Profile>(value: aProfile)
@@ -237,17 +237,6 @@ class JSONParser {
                 } else if (apiName == "selling-request") && (aMethod == HTTPMethod.post) {
                     print("Starting selling-request Parser...")
                     self.processSellRequest(Result: aDic)
-                } else if (apiName == "app-version") && (aMethod == HTTPMethod.get) {
-                    print("Starting version Parser getting latest version...")
-                    if let stringVersion = aDic["version_ios"] as? String {
-                        //print("Version fetched : ",stringVersion)
-                        NetworkManager.shared.versionObs.accept(Float(stringVersion)!)
-                    }
-                } else if (apiName == "app-version") && (aMethod == HTTPMethod.post) {
-                    print("Starting version Parser - sending in use...")
-                    if let amessage = aDic["message"] as? String {
-                        print("Server : ", amessage)
-                    }
                 } else if (apiName == "notifications") && (aMethod == HTTPMethod.get) {
                     print("Starting Notification Parser...")
                     let (generalNotif, notifAsAny) = self.processNotifications(Result: aDic)
@@ -472,18 +461,6 @@ class JSONParser {
         } else {
             return 2
         }
-
-        /*
-        print("Processlike : ",aResult["is_like"])
-        print("casting Processlike : ",aResult["is_like"] as? Int)
-        
-        if let likeStr = aResult["is_like"] as? String{
-            if likeStr == "1" {return 1}else{return 0}
-        }else{
-            print("is_like is not there! : ",aResult)
-            return 2
-        }
-         */
     }
 
     func processShopLocationsList(Result aResult: NSDictionary) -> [Shop] {
@@ -495,21 +472,11 @@ class JSONParser {
             print("Message Parsed : ", aResult["message"]!)
         }
 
-        //print("Shop Result keys : ",aResult.allKeys)
-        //print("Result : ",aResult)
         if let dataOfShops = aResult["shops"] as? NSArray {
                 for shopDic in dataOfShops {
                     if let shopElemAsNSDic = shopDic as? NSDictionary {
                         if let shopElem = shopElemAsNSDic as? [String:Any] {
-                            /*
-                            print("shopElem : ",shopElem)
-                            print("uid = ",shopElem["user_id"] as? Int)
-                            print("shopid = ",shopElem["shop_id"] as? Int)
-                            print("shop_name = ",shopElem["shop_name"] as? String)
-                            print("lat = ",(shopElem["lat"] as? String)?.toDouble())
-                            print("lon = ",(shopElem["lon"] as? String)?.toDouble())
-                            print("map_logo = ",(shopElem["category_logo"] as? String))
-                            */
+
                             if let uid = shopElem["user_id"] as? Int,
                                 let shopid = shopElem["shop_id"] as? Int,
                                 let shop_name = shopElem["shop_name"] as? String,
@@ -522,21 +489,6 @@ class JSONParser {
                                     aShop.shop_logo_map = map_logo
                                     aShop.shop_name = shop_name
                                     aShop.user_id = uid
-                                    /*
-                                    let aNewShop = Shop(shop_id: shopid,
-                                                        user_id: uid,
-                                                        shop_name: shop_name ,
-                                                        shop_off: 0,
-                                                        lat: lat,
-                                                        lon: lon,
-                                                        image: "",
-                                                        rate: "",
-                                                        rate_count: 0,
-                                                        follower_count: 0,
-                                                        created_at: "",
-                                                        shop_logo_map: shopElem["category_logo"] as? String)
-                                    */
-                                    //print("UserID : \(uid) ShopID : \(shopid) Lat : \(aNewShop.lat) Lon : \(aNewShop.lon)")
                                     shops.append(aShop)
                             }
                         }
@@ -645,8 +597,8 @@ class JSONParser {
         return shopResults
     }
 
-    func processAsProfile(Result aProfileDicAsNS: NSDictionary) -> Profile {
-        var profile = Profile()
+    func processAsProfile(Result aProfileDicAsNS: NSDictionary) -> ProfileOfUser {
+        var profile = ProfileOfUser()
         profile.status = (aProfileDicAsNS["status"] as? String) ?? ""
         profile.message = (aProfileDicAsNS["message"] as? String) ?? ""
         profile.id = (aProfileDicAsNS["id"] as? Int) ?? (aProfileDicAsNS["user_id"] as? Int) ?? 0
@@ -660,7 +612,7 @@ class JSONParser {
         profile.category_title = (aProfileDicAsNS["category_title"] as? String) ?? ""
         profile.rate = (aProfileDicAsNS["rate"] as? String) ?? ""
         profile.rate_count = (aProfileDicAsNS["rate_count"] as? Int) ?? 0
-        profile.shop_off = (aProfileDicAsNS["shop_off"] as? Int) ?? 0
+        profile.shop_off = (aProfileDicAsNS["shop_off"] as? String) ?? "0"
         profile.url = (aProfileDicAsNS["url"] as? String) ?? ""
         profile.cellphone = (aProfileDicAsNS["cellphone"] as? String) ?? ""
         profile.phone = (aProfileDicAsNS["phone"] as? String) ?? ""
@@ -676,7 +628,7 @@ class JSONParser {
         if let contents = aProfileDicAsNS["content"] as? NSArray {
             for aContent in contents {
                 let aPostOrShop = (aContent as! NSDictionary)
-                //print("aPostOrShop : ",aPostOrShop)
+                print("aPostOrShop : ",aPostOrShop)
                 //print("shop_Name : ",aPostOrShop["shop_name"])
                 //print("Role = User and This is a shop")
                 var newShop = Shop()
@@ -723,8 +675,8 @@ class JSONParser {
         return profile
     }
 
-    func processAsShopProfile(Result aProfileDicAsNS: NSDictionary) -> ShopProfile {
-        var profile = ShopProfile()
+    func processAsShopProfile(Result aProfileDicAsNS: NSDictionary) -> ProfileOfShop {
+        var profile = ProfileOfShop()
         profile.status = (aProfileDicAsNS["status"] as? String) ?? ""
         profile.message = (aProfileDicAsNS["message"] as? String) ?? ""
         profile.id = (aProfileDicAsNS["id"] as? Int) ?? (aProfileDicAsNS["user_id"] as? Int) ?? 0

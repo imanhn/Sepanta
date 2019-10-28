@@ -37,8 +37,8 @@ class NetworkManager {
     var content = NSDictionary()
     //var resultSubject = BehaviorRelay<NSDictionary>(value : NSDictionary())
     let baseURLString: String
-    //let websiteRootAddress = "https://www.sepantaclubs.com"
-    let websiteRootAddress = "https://www.ipsepanta.ir"
+    let websiteRootAddress = "https://www.sepantaclubs.com"
+    //let websiteRootAddress = "https://www.ipsepanta.ir"
     var status = BehaviorRelay<CallStatus>(value: CallStatus.ready) //No used Yet
     var shopFav = BehaviorRelay<ToggleStatus>(value: ToggleStatus.UNKNOWN)
     let netObjectsDispose = DisposeBag()
@@ -69,8 +69,8 @@ class NetworkManager {
     var toggleLiked = BehaviorRelay<ToggleStatus>(value: ToggleStatus.UNKNOWN)
     var updateProfileInfoSuccessful = BehaviorRelay<Bool>(value: false)
     var shopSearchResultObs = BehaviorRelay<[ShopSearchResult]>(value: [ShopSearchResult]())
-    var profileObs = BehaviorRelay<Profile>(value: Profile())
-    var shopProfileObs = BehaviorRelay<ShopProfile>(value: ShopProfile())
+    var userProfileObs = BehaviorRelay<ProfileOfUser>(value: ProfileOfUser())
+    var shopProfileObs = BehaviorRelay<ProfileOfShop>(value: ProfileOfShop())
     var loginSucceed =  BehaviorRelay<Bool>(value: false)
     var SMSConfirmed =  BehaviorRelay<Bool>(value: false)
     var bankObs = BehaviorRelay<Bank>(value: Bank())
@@ -142,9 +142,9 @@ class NetworkManager {
 
             print("urlAddress : ", urlAddress)
             print(" \(apiName) Response Code : ", ahttpURLRes.statusCode)
-            //print(" Parameters : ",aParameter)
+            print(" Parameters : ",aParameter)
             print(" Method : ", aMethod)
-            print("Heeader : ", headerToSend)
+            //print("Heeader : ", headerToSend)
 
             if let aresult = jsonResult as? NSDictionary {
 

@@ -32,13 +32,31 @@ class Endpoints<T: Codable> {
     }
 }
 
-final class getProfile: Endpoints<Profile> {
+final class GetStates: Endpoints<States> {
+    init() {
+        super.init(API: "get-state-and-city", Method: HTTPMethod.get, Parameters: nil, Retry: 3, Timeout: 10)
+    }
+}
+
+final class GetCities: Endpoints<Cities> {
+    init(StateCode aStateCode : String) {
+        super.init(API: "get-state-and-city", Method: HTTPMethod.post, Parameters: ["state code" : aStateCode], Retry: 3, Timeout: 10)
+    }
+}
+
+final class GetProfileOfUser: Endpoints<ProfileOfUser> {
     init() {
         super.init(API: "profile", Method: HTTPMethod.post, Parameters: ["user id": LoginKey.shared.userID], Retry: 3, Timeout: 10)
     }
 }
 
-final class checkBank: Endpoints<Bank> {
+final class GetProfileOfShop: Endpoints<ProfileOfShop> {
+    init() {
+        super.init(API: "profile", Method: HTTPMethod.post, Parameters: ["user id": LoginKey.shared.userID], Retry: 3, Timeout: 10)
+    }
+}
+
+final class CheckBank: Endpoints<Bank> {
     init(SixDigitPrefix prefix: String) {
         super.init(API: "check-bank", Method: HTTPMethod.post, Parameters: ["card_number": prefix], Retry: 3, Timeout: 10)
     }
@@ -128,13 +146,13 @@ final class sendContactUs: Endpoints<Contact> {
     }
 }
 
-final class getLastCard: Endpoints<LastCard> {
+final class GetLastCard: Endpoints<LastCard> {
     init() {
         super.init(API: "last-card", Method: HTTPMethod.get, Parameters: nil, Retry: 3, Timeout: 10)
     }
 }
 
-final class getPointsScore: Endpoints<UserPoints> {
+final class GetPointsScore: Endpoints<UserPoints> {
     init() {
         super.init(API: "points-user", Method: HTTPMethod.get, Parameters: nil, Retry: 3, Timeout: 10)
     }
@@ -164,6 +182,34 @@ final class GetPaymentGatewayList: Endpoints<PaymentGatewayList> {
     }
 }
 
+final class GetBankLink: Endpoints<BankLink> {
+    init(serverLink: String,discountCode: String, cardId : String) {
+        let bankName = serverLink.split(separator: "/")
+        if bankName.count > 0 {
+            super.init(API: String(bankName.last!), Method: HTTPMethod.post, Parameters: ["discount_code": discountCode, "card_id": cardId], Retry: 1, Timeout: 10)
+        } else {
+            super.init(API: "parsian" , Method: HTTPMethod.post, Parameters: ["discount_code": discountCode, "card_id": cardId], Retry: 1, Timeout: 10)
+        }
+    }
+}
+
+final class CardRequest: Endpoints<GenericNetworkResponse> {
+    init(Parameter aParam : [String : String]) {
+        super.init(API: "card-request", Method: HTTPMethod.post, Parameters: aParam, Retry: 1, Timeout: 10)
+    }
+}
+
+final class DeleteCard: Endpoints<GenericNetworkResponse> {
+    init(CardID cardId : String) {
+        super.init(API: "delete-card", Method: HTTPMethod.post, Parameters: ["card_id" : cardId], Retry: 1, Timeout: 10)
+    }
+}
+
+final class AppVersionCheck: Endpoints<AppUpdateCheck> {
+    init(Parameter aParam : [String : String]) {
+        super.init(API: "check-version", Method: HTTPMethod.post, Parameters: aParam, Retry: 3, Timeout: 10)
+    }
+}
 
 final class getCatagoryShops: Endpoints<ShopList> {
 

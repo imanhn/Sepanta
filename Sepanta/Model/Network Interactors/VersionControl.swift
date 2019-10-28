@@ -15,29 +15,23 @@ extension HomeViewController {
 
     func manageVersion() {
         getLatestVersion()
-        sendInUseVersion()
-    }
-
-    func sendInUseVersion() {
-        let aParameter = ["version_ios": "\(LoginKey.shared.version)",
-                        "version_android": ""]
-        NetworkManager.shared.run(API: "app-version", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: true)
     }
 
     func getLatestVersion() {
-        NetworkManager.shared.run(API: "app-version", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil, WithRetry: true)
-        let verDisp = NetworkManager.shared.versionObs
-            .filter({$0 != 0.0})
-            .subscribe(onNext: { aversion in
-                if (aversion - LoginKey.shared.version >= 1.0) {
+        let aParameter = ["market":"anardoni",
+                          "app_version": "\(LoginKey.shared.version)",
+                          "os_mobile": "IOS"]
+
+        let verDisp = AppVersionCheck(Parameter : aParameter).results()
+            .subscribe(onNext: { aVersionCheck in
+                if (aVersionCheck.force_update ?? false) {
                     // NEED Update
                     self.showAlertWithOK(Message: "برنامه نیاز به بروزرسانی دارد، ادامه عملیات ممکن نیست", OKLabel: "متوجه شدم", Completion: {fatalError()})
-                } else if (aversion - LoginKey.shared.version >= 0.1) {
+                } else if (aVersionCheck.optional_update ?? false) {
                     self.showAlertWithOK(Message: "برنامه نیاز به بروزرسانی دارد، لطفاْ در اسرع وقت بروزرسانی کنید", OKLabel: "متوجه شدم")
                 } else {
-                    //print("Latest : \(aversion) current : \(LoginKey.shared.version)")
+                    print("VERSION Latest : \(LoginKey.shared.version)")
                 }
-                NetworkManager.shared.versionObs = BehaviorRelay<Float>(value: 0.0)
             })
         verDisp.disposed(by: myDisposeBag)
         disposeList.append(verDisp)

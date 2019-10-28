@@ -16,10 +16,15 @@ struct PaymentGatewayList : Codable {
     var link : [PaymentGateway]?
 }
 
-
 struct PaymentGateway : Codable {
     var logo : String?
     var name : String?
     var link : String?
     var status : Int?
+}
+
+struct BankLink : Codable {
+    var status : String?
+    var message : String?
+    var link_bank : String?
 }

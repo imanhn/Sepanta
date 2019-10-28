@@ -38,7 +38,7 @@ struct Shop: ShopOrPost, IdentifiableType, Equatable, Codable {
         return shop_id ?? user_id ?? 0
     }
 
-    mutating func updateFromProfile(Profile aprofile: ShopProfile) {
+    mutating func updateFromProfile(Profile aprofile: ProfileOfShop) {
         user_id = aprofile.id
         shop_id = aprofile.shop_id
         shop_off = aprofile.shop_off

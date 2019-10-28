@@ -95,7 +95,7 @@ class PostViewController: UIViewControllerWithKeyboardNotificationWithErrorBar, 
     }
 
     func getMyShopFromServer() {
-        NetworkManager.shared.shopProfileObs = BehaviorRelay<ShopProfile>(value: ShopProfile())
+        NetworkManager.shared.shopProfileObs = BehaviorRelay<ProfileOfShop>(value: ProfileOfShop())
         //print("self.shop.user_id : ",self.shop.user_id)
         let aParameter = ["user id": LoginKey.shared.userID]
         NetworkManager.shared.run(API: "profile", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: true, TargetObs: "SHOP")
@@ -109,7 +109,7 @@ class PostViewController: UIViewControllerWithKeyboardNotificationWithErrorBar, 
             print("postownerUserID : \(postOwnerUserID ?? 0)", "  Login userID", LoginKey.shared.userID)
         }
         print("***Check Post Authorization : ", "\(NetworkManager.shared.shopProfileObs.value.id ?? 0)", "  ", LoginKey.shared.userID)
-        if "\(NetworkManager.shared.profileObs.value.id ?? 0)" == LoginKey.shared.userID {
+        if "\(NetworkManager.shared.shopProfileObs.value.id ?? 0)" == LoginKey.shared.userID {
             return true
         } else {
             return false

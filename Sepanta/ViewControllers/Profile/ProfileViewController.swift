@@ -14,7 +14,7 @@ import RxSwift
 
 class ProfileViewController: UIViewControllerWithErrorBar, Storyboarded {
     weak var coordinator: HomeCoordinator?
-    var showProfileUI: ShowProfileUI!
+    var showUserProfileUI: ShowUserProfileUI!
     var myDisposeBag = DisposeBag()
     @IBOutlet weak var cupLabel: UILabel!
     @IBOutlet weak var cupScoreLabel: UILabel!
@@ -47,7 +47,8 @@ class ProfileViewController: UIViewControllerWithErrorBar, Storyboarded {
     }*/
 
     @objc override func willPop() {
-        showProfileUI = nil
+        showUserProfileUI.disposeList.forEach({$0.dispose()})
+        showUserProfileUI = nil
     }
 
     @IBAction func backPressed(_ sender: Any) {
@@ -59,16 +60,16 @@ class ProfileViewController: UIViewControllerWithErrorBar, Storyboarded {
     }
 
     @objc func myClubTapped(_ sender: Any) {
-        showProfileUI!.showMyClub()
-    }
-
-    @objc func contactTapped(_ sender: Any) {
-        showProfileUI!.showContacts()
+        showUserProfileUI!.showMyClub()
     }
 
     @objc override func ReloadViewController(_ sender: Any) {
         super.ReloadViewController(sender)
-        showProfileUI = ShowProfileUI(self)
+        if LoginKey.shared.role == "User" {
+            showUserProfileUI = ShowUserProfileUI(self)
+        } else {
+            //showShopProfileUI = ShowShopProfileUI(self)
+        }
 
     }
 
@@ -83,7 +84,15 @@ class ProfileViewController: UIViewControllerWithErrorBar, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
-        showProfileUI = ShowProfileUI(self)
+        showUserProfileUI = ShowUserProfileUI(self)
     }
-
+    
+    func showPopup(_ controller: UIViewController, sourceView: UIView) {
+        //print("Showing POPUP : ",sourceView)
+        let presentationController = AlwaysPresentAsPopover.configurePresentation(forController: controller)
+        presentationController.sourceView = sourceView
+        presentationController.sourceRect = sourceView.bounds
+        presentationController.permittedArrowDirections = [.down, .up]
+        self.present(controller, animated: true)
+    }
 }

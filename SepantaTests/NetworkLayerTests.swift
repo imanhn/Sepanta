@@ -61,7 +61,7 @@ class NetworkLayerTests: XCTestCase {
 
     func testGetProfile() {
         do {
-            let pinfo = try getProfile().results().toBlocking().first()
+            let pinfo = try GetProfileOfUser().results().toBlocking().first()
             XCTAssertEqual(pinfo?.status, "successful", "API Route Failed")
             XCTAssertEqual(pinfo?.id, 49, "API Route Failed")
         } catch let error as NSError {
@@ -226,7 +226,7 @@ class NetworkLayerTests: XCTestCase {
 
     func testGetPointScore() {
         do {
-            let points = try getPointsScore().results().toBlocking().first()
+            let points = try GetPointsScore().results().toBlocking().first()
             XCTAssertEqual(points?.status, "successful", "API Route Failed")
             XCTAssertTrue((points?.points!.count)! > 0, "Points is empty")
             XCTAssertTrue((points?.points_total)! > 100, "total points is empty")

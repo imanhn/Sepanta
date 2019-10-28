@@ -110,8 +110,7 @@ class ShopViewController: UIViewControllerWithErrorBar, Storyboarded {
 
     @objc override func willPop() {
         if (shopUI != nil) {shopUI.disposeList.forEach({$0.dispose()})}
-        shopUI = nil
-        NetworkManager.shared.profileObs = BehaviorRelay<Profile>(value: Profile())
+        shopUI = nil        
         NetworkManager.shared.shopFav = BehaviorRelay<ToggleStatus>(value: ToggleStatus.UNKNOWN)
         disposeList.forEach({$0.dispose()})
 
@@ -169,7 +168,7 @@ class ShopViewController: UIViewControllerWithErrorBar, Storyboarded {
     }
 
     func getShopFromServer() {
-        NetworkManager.shared.shopProfileObs = BehaviorRelay<ShopProfile>(value: ShopProfile())
+        NetworkManager.shared.shopProfileObs = BehaviorRelay<ProfileOfShop>(value: ProfileOfShop())
         print("a Shop is being shown to a user(any role) shopID : ", self.shop.shop_id ?? "")
         guard self.shop.shop_id != 0 && self.shop.shop_id != nil else {
             alert(Message: "اظلاعات این فروشگاه کامل نیست")

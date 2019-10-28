@@ -46,21 +46,21 @@ class GetRichUI: NSObject, UITextFieldDelegate {
     var cityCode: String!
     var genderCode : String!
     var maritalStatusCode : String!
+    var cardId : Int!
     var regionCode: String!
     var serviceCode: String!
     var cardNoPrefix = ""
     var mobilePrefix = ""
     var codePrefix = ""
     var aProfileInfo = ProfileInfo()
-    var aProfile = Profile()
+    var aProfile = ProfileOfUser()
     var submitDispose: Disposable!
     var disposeList = [Disposable]()
     var myDisposeBag = DisposeBag()
 
     override init() {
         super.init()
-        let profileInfoDispose = getAndSubscribeToProfileInfo()
-        disposeList.append(profileInfoDispose)
+        //getAndSubscribeToLastCard()
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -267,90 +267,6 @@ class GetRichUI: NSObject, UITextFieldDelegate {
         self.delegate.view.endEditing(true)
     }
 
-    @objc func cardRequestSubmitTapped(_ sender: Any) {
-        var cardIdString : String = ""
-        if aProfile.cards.last?.card_id != nil { cardIdString = "\(aProfile.cards.last?.card_id ?? 0)"}
-        let aParameter = [
-            "first_name": "\(texts["nameText"]?.text ?? "")",
-            "last_name": "\(texts["familyText"]?.text ?? "")",
-            "national_code": "\(texts["nationalCodeText"]?.text ?? "")",
-            "gender": "\(genderCode ?? "")", // FIXME is ""
-            "marital_status":"\(maritalStatusCode ?? "")", // FIXME is ""
-            "email":"\(texts["emailText"]?.text ?? "")",
-            "sh_code":"\(texts["birthCertCodeText"]?.text ?? "")",
-            "cellphone": "\(texts["mobileText"]?.text ?? "")",
-            "addres": "\(texts["addressText"]?.text ?? "")",
-            "birthdate": "\(texts["birthDateText"]?.text ?? "")",
-            "post_code": "\(texts["postalCodeText"]?.text ?? "")",
-            "city_code":"\(self.cityCode ?? "0")",
-            "state_code":"\(self.stateCode ?? "0")",
-            "cardnumber": "\(texts["cardNoText"]?.text ?? "")",
-            "card_id": cardIdString // FIXME is nil!
-        ]
-        print("aParameter : \(aParameter)")
-        self.delegate.coordinator?.pushPayment()
-/*
-        NetworkManager.shared.run(API: "card-request", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: false)
-        let messageDisp = NetworkManager.shared.messageObs
-            .filter({$0.count > 0})
-            .subscribe(onNext: { aMessage in
-                self.delegate.alert(Message: aMessage)
-                NetworkManager.shared.messageObs = BehaviorRelay<String>(value: "")
-            })
-        disposeList.append(messageDisp)
- */
-        
-    }
-
-    func handleCardSubmitButtonEnableOrDisable() -> Disposable {
-        let familtyTextValid = texts["familyText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-        let nameTextValid = texts["nameText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-        let nationalCodeValid = texts["nationalCodeText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-        let birthDateTextValid = texts["birthDateText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-        let genderTextValid = texts["genderText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-        let maritalStatusTextValid = texts["maritalStatusText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-        let postalCodeTextValid = texts["postalCodeText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-        let mobileTextValid = texts["mobileText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-        let stateTextValid = texts["stateText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-        let cityTextValid = texts["cityText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-        //let regionTextValid = texts["regionText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
-        let cardNoTextValid = texts["cardNoText"]!.rx.text.map({($0?.count == 16)}).share(replay: 1, scope: .whileConnected)
-        let bankCardForOthers = Observable<Bool>.create { [unowned self] observer -> Disposable in
-            if self.cardRequestType.selectedItem.value == 0 {
-                observer.onNext(true)
-            } else {
-                if self.texts["cardNoText"]?.text?.count == 16 {
-                    observer.onNext(true)
-                } else {
-                    observer.onNext(false)
-                }
-            }
-            return Disposables.create()
-        }
-        
-        let enableSubmitButton = Observable.combineLatest([familtyTextValid,
-                                                           nameTextValid,
-                                                           nationalCodeValid,
-                                                           birthDateTextValid,
-                                                           genderTextValid,
-                                                           maritalStatusTextValid,
-                                                           postalCodeTextValid,
-                                                           mobileTextValid,
-                                                           stateTextValid,
-                                                           cityTextValid,
-                                                           cardNoTextValid,
-                                                           bankCardForOthers]) { (allChecks) -> Bool in
-                                                            //print("ALL : ",allChecks)
-                                                            let reducedAllChecks = allChecks.reduce(true) { (accumulation: Bool, nextValue: Bool) -> Bool in
-                                                                return accumulation && nextValue
-                                                            }
-                                                            //print("   Reduced to \(reducedAllChecks)")
-                                                            //if self.texts["cardNoText"] == nil || self.texts["cardNoText"]?.text?.count != 16 { return false }
-                                                            return reducedAllChecks
-        }
-        return enableSubmitButton.bind(to: cardSubmitButton.rx.isEnabled)
-
-    }
     func handleResellerSubmitButtonEnableOrDisable() -> Disposable {
         let familtyTextValid = texts["familyText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
         let nameTextValid = texts["nameText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
@@ -553,35 +469,67 @@ class GetRichUI: NSObject, UITextFieldDelegate {
         self.delegate.showPopup(controller, sourceView: aTextField)
     }
 
-    func getAndSubscribeToProfileInfo() -> Disposable {
-        //let aParameter = ["user id":"\(LoginKey.shared.userID)"]
-        NetworkManager.shared.run(API: "profile-info", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil, WithRetry: true)
-        return ProfileInfoWrapper.shared.profileInfoObs
-            .subscribe(onNext: { [unowned self] (innerProfileInfo) in
-                //print("***FillingEDit")
-                self.aProfileInfo = innerProfileInfo
-                self.fillEditProfileInfoForm(With: innerProfileInfo)
-            })
+    func getAndSubscribeToLastCard() {
+        let lastCardDisp = GetLastCard().results()
+            .subscribe(onNext: { aLastCard in
+                print("GET LAST CARD : \(aLastCard)")
+                self.fillForm(With: aLastCard)
+            } , onError: {_ in })
+        lastCardDisp.disposed(by: myDisposeBag)
+        disposeList.append(lastCardDisp)
     }
-    func fillEditProfileInfoForm(With aProfileInfo: ProfileInfo) {
-        //print(" profile Info in GetRichUI : \(aProfileInfo)")
-        if texts["familyText"] != nil { texts["familyText"]!.text = aProfileInfo.last_name}
-        if texts["nameText"] != nil { texts["nameText"]!.text = aProfileInfo.first_name}
-        if texts["nationalCodeText"] != nil { texts["nationalCodeText"]!.text = aProfileInfo.national_code}
-        if texts["birthDateText"] != nil { texts["birthDateText"]!.text = aProfileInfo.birthdate}
-        if texts["maritalStatusText"] != nil { texts["maritalStatusText"]!.text = aProfileInfo.marital_status}
-        if texts["addressText"] != nil { texts["addressText"]!.text = aProfileInfo.address}
-        if texts["emailText"] != nil { texts["emailText"]!.text = aProfileInfo.email}
-        //if texts["stateText"] != nil { texts["stateText"]!.text = aProfileInfo.state}
-        //if texts["cityText"] != nil { texts["cityText"]!.text = aProfileInfo.city}
-        if texts["addressText"] != nil { texts["addressText"]!.text = aProfileInfo.address}
-        if texts["mobileText"] != nil { texts["mobileText"]!.text = aProfileInfo.phone}
-        if texts["genderText"] != nil { texts["genderText"]!.text = aProfileInfo.gender}
-        for akey in texts.keys {
-            if let aTextField = texts[akey] {
-                //print("Sending Value Changed : ",akey,"   ",aTextField)
-                aTextField.sendActions(for: .valueChanged)
+    
+    func fillForm(With aLastCard: LastCard) {
+        if let aLastCardData = aLastCard.card {
+            //print(" profile Info in GetRichUI : \(aLastCardData)")
+            self.cardId = aLastCard.card?.card_id
+            if texts["familyText"] != nil { texts["familyText"]!.text = aLastCardData.last_name}
+            if texts["nameText"] != nil { texts["nameText"]!.text = aLastCardData.first_name}
+            if texts["nationalCodeText"] != nil { texts["nationalCodeText"]!.text = aLastCardData.melli_code}
+            if texts["birthDateText"] != nil { texts["birthDateText"]!.text = aLastCardData.birthday}
+            if texts["maritalStatusText"] != nil {
+                if aLastCardData.martial_status == "متاهل" {self.maritalStatusCode = "2"} else {self.maritalStatusCode = "1"}
+                texts["maritalStatusText"]!.text = aLastCardData.martial_status
             }
+            if texts["addressText"] != nil { texts["addressText"]!.text = aLastCardData.address}
+            if texts["emailText"] != nil { texts["emailText"]!.text = aLastCardData.email}
+            if texts["birthCertCodeText"] != nil { texts["birthCertCodeText"]?.text = aLastCardData.sh_code}
+            //if texts["stateText"] != nil { texts["stateText"]!.text = aLastCardData.state}
+            //if texts["cityText"] != nil { texts["cityText"]!.text = aLastCardData.city}
+            if texts["addressText"] != nil { texts["addressText"]!.text = aLastCardData.address}
+            if texts["mobileText"] != nil { texts["mobileText"]!.text = aLastCardData.cellphone}
+            if texts["genderText"] != nil {
+                if aLastCardData.gender == "مرد" {self.genderCode = "1"} else {self.genderCode = "0"}
+                texts["genderText"]!.text = aLastCardData.gender
+            }
+            for akey in texts.keys {
+                if let aTextField = texts[akey] {
+                    //print("Sending Value Changed : ",akey,"   ",aTextField)
+                    aTextField.sendActions(for: .valueChanged)
+                }
+            }
+            let statesDisp = GetStates().results()
+                .subscribe(onNext: { aSetOfStates in
+                    let aStateName = aSetOfStates.getState(FromCode: Int(aLastCardData.state_code ?? "0")!)
+                    self.stateCode = aLastCardData.state_code
+                    if self.texts["stateText"] != nil {
+                        self.texts["stateText"]!.text = aStateName
+                        self.texts["stateText"]!.sendActions(for: .valueChanged)
+                    }
+                    let cityDisp = GetCities(StateCode : self.stateCode).results()
+                        .subscribe(onNext: { aSetOfCities in
+                            let aCityName = aSetOfCities.getCity(FromCode: Int(aLastCardData.city_code ?? "0")!)
+                            if self.texts["cityText"] != nil {
+                                self.texts["cityText"]!.text = aCityName
+                                self.texts["cityText"]!.sendActions(for: .valueChanged)
+                            }
+                            self.cityCode = aLastCardData.city_code
+                        }, onError: {_ in })
+                    cityDisp.disposed(by: self.myDisposeBag)
+                    self.disposeList.append(cityDisp)
+                }, onError: {_ in })
+            statesDisp.disposed(by: myDisposeBag)
+            disposeList.append(statesDisp)
         }
     }
 

@@ -210,7 +210,7 @@ extension GetRichUI {
         let formSize = CGSize(width: UIScreen.main.bounds.width, height: cursurY*1.2)
         self.delegate.scrollView.contentSize = formSize
         views["rightFormView"]?.frame = CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: cursurY+buttonHeight*1.5)
-        self.fillEditProfileInfoForm(With: aProfileInfo)
+        getAndSubscribeToLastCard()
         submitDispose = handleResellerSubmitButtonEnableOrDisable()
         disposeList.append(submitDispose)
         

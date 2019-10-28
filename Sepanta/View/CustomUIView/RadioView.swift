@@ -34,13 +34,13 @@ class RadioView : UIView {
         var totalLabelsWidth : CGFloat = 0
         var marginX : CGFloat = 0
         for fontSize in [16,15,14,13,12,11,10] {
-            print("Checking Font : \(fontSize)")
+            //print("Checking Font : \(fontSize)")
             labelFont = UIFont(name: "Shabnam-FD", size: CGFloat(fontSize))!
             totalLabelsWidth = self.labels.reduce(0.0, {totalWidth, aString in
                 totalWidth + aString.width(withConstrainedHeight: buttonDim, font: labelFont)
             })
             let totalRadioViewWidth = totalLabelsWidth + (widthOfEachSpace * CGFloat(numOfSpaces))
-            print(" comparing \(totalRadioViewWidth) \(rect.width) result : \(totalRadioViewWidth < rect.width)")
+            //print(" comparing \(totalRadioViewWidth) \(rect.width) result : \(totalRadioViewWidth < rect.width)")
             if totalRadioViewWidth < rect.width {
                 marginX = (rect.width - totalRadioViewWidth) / 2
                 break

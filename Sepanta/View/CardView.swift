@@ -11,7 +11,7 @@ import UIKit
 class CardView: UIView {
 
     @IBOutlet weak var bankLogo: UIImageView!
-    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var cardNo1: UILabel!
     @IBOutlet weak var cardNo2: UILabel!

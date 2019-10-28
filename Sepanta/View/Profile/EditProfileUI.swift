@@ -121,7 +121,7 @@ class EditProfileUI: NSObject, UITextFieldDelegate {
             } else {
                 print("URL Can not be casted : ", imageUrl)
             }
-        } else if let aCacheImage = UIImage().getImageFromCache(ImageName: NetworkManager.shared.profileObs.value.image ?? "") {
+        } else if let aCacheImage = UIImage().getImageFromCache(ImageName: NetworkManager.shared.userProfileObs.value.image ?? "") {
             self.delegate.profilePicture.image = aCacheImage
             self.delegate.profilePicture.layer.cornerRadius = self.delegate.profilePicture.frame.width/2
             self.delegate.profilePicture.layer.masksToBounds = true

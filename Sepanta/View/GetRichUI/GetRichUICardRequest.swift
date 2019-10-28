@@ -124,13 +124,11 @@ extension GetRichUI {
         //texts["mobileText"]
         
         (views["stateView"], texts["stateText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "map", Selectable: true, PlaceHolderText: "استان")
-        //texts["stateText"]!.text =  aProfileInfo.state
         texts["stateText"]?.addTarget(self, action: #selector(selectStateTapped), for: .touchDown)
         views["leftFormView"]?.addSubview(views["stateView"]!)
         cursurY += buttonHeight + marginY
         
         (views["cityView"], texts["cityText"]) = buildARowView(CGRect: CGRect(x: marginX, y: cursurY, width: textFieldWidth, height: buttonHeight), Image: "NOIMAGE", Selectable: true, PlaceHolderText: "شهر")
-        //texts["cityText"]!.text =  aProfileInfo.city
         texts["cityText"]?.addTarget(self, action: #selector(selectCityTapped), for: .touchDown)
         views["leftFormView"]?.addSubview(views["cityView"]!)
         cursurY += buttonHeight + marginY
@@ -240,9 +238,8 @@ extension GetRichUI {
         let formSize = CGSize(width: UIScreen.main.bounds.width, height: cursurY*1.2)
         self.delegate.scrollView.contentSize = formSize
         views["leftFormView"]?.frame = CGRect(x: 20, y: 20, width: UIScreen.main.bounds.width-40, height: cursurY+buttonHeight*0.5)
-        
-        self.fillEditProfileInfoForm(With: aProfileInfo)
-        //submitDispose = handleCardSubmitButtonEnableOrDisable()
+        getAndSubscribeToLastCard()
+        submitDispose = handleCardSubmitButtonEnableOrDisable()
         cardSubmitButton.isEnabled = true
         disposeList.append(submitDispose)
         
@@ -258,5 +255,84 @@ extension GetRichUI {
         cardSubmitButton.frame = CGRect(x: cardSubmitButton.frame.minX, y: cardSubmitButton.frame.minY-buttonHeight, width: cardSubmitButton.frame.width, height: cardSubmitButton.frame.height)
         views["cardNoView"]?.isHidden = true
         bankLogo.isHidden = true
+    }
+    
+    func handleCardSubmitButtonEnableOrDisable() -> Disposable {
+        let familtyTextValid = texts["familyText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        let nameTextValid = texts["nameText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        let nationalCodeValid = texts["nationalCodeText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        let birthDateTextValid = texts["birthCertCodeText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        let genderTextValid = texts["genderText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        let maritalStatusTextValid = texts["maritalStatusText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        let postalCodeTextValid = texts["postalCodeText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        let mobileTextValid = texts["mobileText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        let stateTextValid = texts["stateText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        let cityTextValid = texts["cityText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        //let regionTextValid = texts["regionText"]!.rx.text.map({!($0?.isEmpty ?? true)}).share(replay: 1, scope: .whileConnected)
+        
+        let enableSubmitButton = Observable.combineLatest([familtyTextValid,
+                                                           nameTextValid,
+                                                           nationalCodeValid,
+                                                           birthDateTextValid,
+                                                           genderTextValid,
+                                                           maritalStatusTextValid,
+                                                           postalCodeTextValid,
+                                                           mobileTextValid,
+                                                           stateTextValid,
+                                                           cityTextValid]) { (allChecks) -> Bool in
+                                                            print("ALL : ",allChecks)
+                                                            let reducedAllChecks = allChecks.reduce(true) { (accumulation: Bool, nextValue: Bool) -> Bool in
+                                                                return accumulation && nextValue
+                                                            }
+                                                            //print("   Reduced to \(reducedAllChecks)")
+                                                            //if self.texts["cardNoText"] == nil || self.texts["cardNoText"]?.text?.count != 16 { return false }
+                                                            return reducedAllChecks
+        }
+        return enableSubmitButton.bind(to: cardSubmitButton.rx.isEnabled)
+        
+    }
+    
+    @objc func cardRequestSubmitTapped(_ sender: Any) {
+        guard (self.cardRequestType.selectedItem.value == 0) || (self.texts["cardNoText"]?.text?.count == 16) else {
+            self.delegate.alert(Message: "لطفا شماره کارت را کامل وارد کنید")
+            return
+        }
+        var aCardType = CardType.Sepanta
+        let cardIdString = "\(self.cardId ?? 1)"
+        if cardRequestType.selectedItem.value == 1 { aCardType = CardType.Other }
+        let aParameter = [
+            "first_name": "\(texts["nameText"]?.text ?? "")",
+            "last_name": "\(texts["familyText"]?.text ?? "")",
+            "national_code": "\(texts["nationalCodeText"]?.text ?? "")",
+            "gender": "\(genderCode ?? "")",
+            "martial_status":"\(maritalStatusCode ?? "")",
+            "email":"\(texts["emailText"]?.text ?? "")",
+            "sh_code":"\(texts["birthCertCodeText"]?.text ?? "")",
+            "cellphone": "\(texts["mobileText"]?.text ?? "")",
+            "addres": "\(texts["addressText"]?.text ?? "")",
+            "birthdate": "\(texts["birthDateText"]?.text ?? "")",
+            "post_code": "\(texts["postalCodeText"]?.text ?? "")",
+            "city_code":"\(self.cityCode ?? "0")",
+            "state_code":"\(self.stateCode ?? "0")",
+            "cardnumber": "\(texts["cardNoText"]?.text ?? "")",
+            "card_id": cardIdString
+        ]
+        print("aParameter : \(aParameter)")
+        let cardRequestDisp = CardRequest(Parameter: aParameter).results()
+            .subscribe(onNext: {aNetworkResponse in
+                if aNetworkResponse.status == "error" {
+                    if let message = aNetworkResponse.message {
+                        self.delegate.alert(Message: message)
+                    } else {
+                        self.delegate.alert(Message: "خطا در ثبت کارت، مجدد تلاش بفرمایید")
+                    }
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                        self.delegate.coordinator?.pushPayment(CardId : cardIdString,Type: aCardType)
+                    })
+                }
+            }, onError: {_ in })
+        cardRequestDisp.disposed(by: myDisposeBag)
+        disposeList.append(cardRequestDisp)
     }
 }
