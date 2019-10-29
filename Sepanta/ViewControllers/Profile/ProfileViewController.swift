@@ -24,9 +24,9 @@ class ProfileViewController: UIViewControllerWithErrorBar, Storyboarded {
     @IBOutlet weak var paneView: UIView!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var descLabel: UILabel!
     @IBOutlet weak var profileScrollView: UIScrollView!
-
+    @IBOutlet weak var reagentCodeLabel: UILabel!
+    
     @IBAction func showScoreTapped(_ sender: Any) {
         self.coordinator!.pushScores(userPointsObs.value)
     }

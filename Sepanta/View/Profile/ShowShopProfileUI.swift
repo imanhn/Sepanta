@@ -382,7 +382,6 @@ class ShowShopProfileUI: NSObject, UICollectionViewDelegateFlowLayout {
                     }
                 }
                 self?.delegate.nameLabel.text =  aProfile.fullName
-                self?.delegate.descLabel.text = aProfile.bio
                 //self?.delegate.cupLabel
                 self?.delegate.clubNumLabel.text = "\(aProfile.follow_count ?? 0)"
                 //print("aProfile.content : ",aProfile.content)

@@ -389,27 +389,28 @@ class ShowUserProfileUI: NSObject, UICollectionViewDelegateFlowLayout {
 
     func getProfileData() {
         let profileDisp = GetProfileOfUser().results()
-            .subscribe(onNext: { [weak self] aProfile in
+            .subscribe(onNext: { [unowned self] aProfile in
                 if aProfile.image != nil && aProfile.image!.count > 0 {
                     let imageUrl = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_profile_image + aProfile.image!
                     print("Profile Picture : ", imageUrl)
                     let castedUrl = URL(string: imageUrl)
                     if castedUrl != nil {
-                        self?.delegate.profilePicture.setImageFromCache(PlaceHolderName: "icon_profile_img", Scale: 1, ImageURL: castedUrl!, ImageName: aProfile.image!)
-                        self?.delegate.profilePicture.layer.cornerRadius = (self?.delegate.profilePicture.frame.width ?? 50)/2
-                        self?.delegate.profilePicture.layer.masksToBounds = true
-                        self?.delegate.profilePicture.layer.borderColor = UIColor.white.cgColor
-                        self?.delegate.profilePicture.layer.borderWidth = 4
+                        self.delegate.profilePicture.setImageFromCache(PlaceHolderName: "icon_profile_img", Scale: 1, ImageURL: castedUrl!, ImageName: aProfile.image!)
+                        self.delegate.profilePicture.layer.cornerRadius = (self.delegate.profilePicture.frame.width ?? 50)/2
+                        self.delegate.profilePicture.layer.masksToBounds = true
+                        self.delegate.profilePicture.layer.borderColor = UIColor.white.cgColor
+                        self.delegate.profilePicture.layer.borderWidth = 4
                         
                     } else {
                         print("URL Can not be casted : ", imageUrl)
                     }
                 }
-                self?.delegate.nameLabel.text =  aProfile.fullName
-                self?.delegate.descLabel.text = aProfile.bio
-                self?.delegate.clubNumLabel.text = "\(aProfile.follow_count ?? 0)"
-                self?.shops.accept(aProfile.content)
-                self?.cards.accept(aProfile.cards)
+                print("aProfile.reagent_code : \(aProfile.reagent_code)")
+                self.delegate.reagentCodeLabel.text = aProfile.reagent_code ?? "معرف ندارد"
+                self.delegate.nameLabel.text =  aProfile.fullName
+                self.delegate.clubNumLabel.text = "\(aProfile.follow_count ?? 0)"
+                self.shops.accept(aProfile.content)
+                self.cards.accept(aProfile.cards)
             })
         profileDisp.disposed(by: myDisposeBag)
         self.disposeList.append(profileDisp)

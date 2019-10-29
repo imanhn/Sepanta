@@ -210,14 +210,20 @@
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" توضیحات و یا نمایش کد مشتری" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09R-Qn-Jpz" userLabel="Description">
-                                                        <rect key="frame" x="0.0" y="130" width="375" height="28"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="کد معرف" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09R-Qn-Jpz" userLabel="reagentCode">
+                                                        <rect key="frame" x="131.5" y="130" width="112.5" height="28"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="12"/>
-                                                        <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_share" translatesAutoresizingMaskIntoConstraints="NO" id="1ry-II-pWG" userLabel="reagentCodeIcon">
+                                                        <rect key="frame" x="117" y="137" width="14.5" height="14"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="1ry-II-pWG" secondAttribute="height" multiplier="1:1" id="TJX-0F-4n6"/>
+                                                        </constraints>
+                                                    </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="St5-ZT-mz4" userLabel="LeftView">
-                                                        <rect key="frame" x="0.0" y="168" width="187.5" height="93.5"/>
+                                                        <rect key="frame" x="0.0" y="178" width="187.5" height="93.5"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hRd-jc-eES" userLabel="clubButton">
                                                                 <rect key="frame" x="80" y="0.0" width="27.5" height="37.5"/>
@@ -255,7 +261,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oKo-Je-zjf" userLabel="RightView">
-                                                        <rect key="frame" x="187.5" y="168" width="187.5" height="93.5"/>
+                                                        <rect key="frame" x="187.5" y="178" width="187.5" height="93.5"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Po-rq-ccu" userLabel="cupButton">
                                                                 <rect key="frame" x="78" y="0.0" width="31.5" height="37.5"/>
@@ -293,7 +299,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yDK-di-fYi" userLabel="PaneView">
-                                                        <rect key="frame" x="0.0" y="261.5" width="375" height="281.5"/>
+                                                        <rect key="frame" x="0.0" y="271.5" width="375" height="281.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="yDK-di-fYi" secondAttribute="height" multiplier="1:0.75" id="TMG-pF-kyp"/>
                                                         </constraints>
@@ -306,12 +312,14 @@
                                                     <constraint firstItem="oKo-Je-zjf" firstAttribute="width" secondItem="wKB-DC-WiA" secondAttribute="width" multiplier="0.5" id="35P-Z1-nfR"/>
                                                     <constraint firstItem="OgY-zd-eaO" firstAttribute="height" secondItem="y76-8D-Kml" secondAttribute="height" multiplier="0.3" id="39g-Fm-EIb"/>
                                                     <constraint firstItem="y76-8D-Kml" firstAttribute="centerX" secondItem="wKB-DC-WiA" secondAttribute="centerX" id="4fM-ts-ogf"/>
-                                                    <constraint firstItem="09R-Qn-Jpz" firstAttribute="width" secondItem="OgY-zd-eaO" secondAttribute="width" id="8e5-LV-rui"/>
+                                                    <constraint firstItem="09R-Qn-Jpz" firstAttribute="width" secondItem="OgY-zd-eaO" secondAttribute="width" multiplier="0.3" id="8e5-LV-rui"/>
+                                                    <constraint firstItem="1ry-II-pWG" firstAttribute="height" secondItem="09R-Qn-Jpz" secondAttribute="height" multiplier="0.5" id="EI1-Oc-ShR"/>
                                                     <constraint firstItem="St5-ZT-mz4" firstAttribute="height" secondItem="oKo-Je-zjf" secondAttribute="height" id="K0H-Yj-7e5"/>
                                                     <constraint firstItem="St5-ZT-mz4" firstAttribute="width" secondItem="oKo-Je-zjf" secondAttribute="width" id="Myn-Di-Gvj"/>
                                                     <constraint firstItem="09R-Qn-Jpz" firstAttribute="height" secondItem="OgY-zd-eaO" secondAttribute="height" id="NVX-Jc-bkR"/>
-                                                    <constraint firstItem="oKo-Je-zjf" firstAttribute="top" secondItem="09R-Qn-Jpz" secondAttribute="bottom" constant="10" id="Q3S-u9-jqy"/>
+                                                    <constraint firstItem="oKo-Je-zjf" firstAttribute="top" secondItem="09R-Qn-Jpz" secondAttribute="bottom" constant="20" id="Q3S-u9-jqy"/>
                                                     <constraint firstItem="yDK-di-fYi" firstAttribute="width" secondItem="wKB-DC-WiA" secondAttribute="width" id="RvD-ac-dhr"/>
+                                                    <constraint firstItem="09R-Qn-Jpz" firstAttribute="leading" secondItem="1ry-II-pWG" secondAttribute="trailing" id="SD3-Ic-l7L"/>
                                                     <constraint firstItem="OgY-zd-eaO" firstAttribute="width" secondItem="wKB-DC-WiA" secondAttribute="width" id="Z0J-M6-igN"/>
                                                     <constraint firstAttribute="trailing" secondItem="oKo-Je-zjf" secondAttribute="trailing" id="ZcM-gm-gJH"/>
                                                     <constraint firstItem="y76-8D-Kml" firstAttribute="top" secondItem="wKB-DC-WiA" secondAttribute="top" constant="8" id="bJS-Ws-jek"/>
@@ -321,6 +329,7 @@
                                                     <constraint firstItem="St5-ZT-mz4" firstAttribute="centerY" secondItem="oKo-Je-zjf" secondAttribute="centerY" id="gpL-o4-6AX"/>
                                                     <constraint firstItem="yDK-di-fYi" firstAttribute="top" secondItem="St5-ZT-mz4" secondAttribute="bottom" id="hwE-q1-b2x"/>
                                                     <constraint firstItem="y76-8D-Kml" firstAttribute="width" secondItem="wKB-DC-WiA" secondAttribute="width" multiplier="0.25" id="mrg-y2-xQG"/>
+                                                    <constraint firstItem="1ry-II-pWG" firstAttribute="centerY" secondItem="09R-Qn-Jpz" secondAttribute="centerY" id="oHv-S9-HMr"/>
                                                     <constraint firstItem="St5-ZT-mz4" firstAttribute="leading" secondItem="wKB-DC-WiA" secondAttribute="leading" id="xVY-9f-m4j"/>
                                                     <constraint firstItem="09R-Qn-Jpz" firstAttribute="centerX" secondItem="OgY-zd-eaO" secondAttribute="centerX" id="yHb-Rk-E6V"/>
                                                 </constraints>
@@ -363,11 +372,11 @@
                         <outlet property="clubNumLabel" destination="yEB-ZQ-mng" id="XKb-aT-0cX"/>
                         <outlet property="cupLabel" destination="3vH-WJ-ntE" id="5pi-fH-xyP"/>
                         <outlet property="cupScoreLabel" destination="Vt9-D0-bm3" id="DQG-Jw-GI0"/>
-                        <outlet property="descLabel" destination="09R-Qn-Jpz" id="gME-Da-EPD"/>
                         <outlet property="nameLabel" destination="OgY-zd-eaO" id="Sxs-Zn-HsS"/>
                         <outlet property="paneView" destination="yDK-di-fYi" id="TSh-6r-Zpz"/>
                         <outlet property="profilePicture" destination="y76-8D-Kml" id="BOL-LE-EzW"/>
                         <outlet property="profileScrollView" destination="fPW-tw-tAd" id="j8F-ea-sJq"/>
+                        <outlet property="reagentCodeLabel" destination="09R-Qn-Jpz" id="4qu-he-dRf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8X2-c3-M8f" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -381,6 +390,7 @@
         <image name="icon_profile_cup" width="95" height="112"/>
         <image name="icon_profile_img" width="74" height="74"/>
         <image name="icon_profile_sepantaei" width="92" height="125"/>
+        <image name="icon_share" width="19" height="19"/>
         <image name="logo_home" width="86" height="25"/>
         <image name="plus" width="112" height="110"/>
     </resources>
