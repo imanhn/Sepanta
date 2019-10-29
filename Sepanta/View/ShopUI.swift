@@ -67,18 +67,13 @@ class ShopUI: NSObject, UICollectionViewDelegateFlowLayout {
     }
 
     @objc func cupTapped(sender: Any) {
-        if (NetworkManager.shared.userPointsObs.value.status ?? "").count == 0 {
-            NetworkManager.shared.run(API: "points-user", QueryString: "", Method: HTTPMethod.get, Parameters: nil, Header: nil, WithRetry: true)
-        }
-        let userDisp = NetworkManager.shared.userPointsObs
-            .filter({($0.status ?? "").count > 0})
-            .share(replay: 1, scope: .whileConnected)
-            .subscribe(onNext: { [unowned self] _ in
+        let pointScoreDisp = GetPointsScore().results()
+            .subscribe(onNext: { [unowned self] aUserPoint in
                 //print("Subscribed and Received : ",aUserPoint)
-                self.delegate.coordinator!.pushScores()
+                self.delegate.coordinator!.pushScores(aUserPoint)
             })
-        userDisp.disposed(by: myDisposeBag)
-        disposeList.append(userDisp)
+        pointScoreDisp.disposed(by: myDisposeBag)
+        self.disposeList.append(pointScoreDisp)
     }
 
     @objc func sepantaieTapped(sender: Any) {

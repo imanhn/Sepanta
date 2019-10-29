@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import RxSwift
+import RxCocoa
 
 class ScoreCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
@@ -19,6 +20,8 @@ class ScoresViewController: UIViewControllerWithErrorBar, XIBView, UITableViewDe
     @IBOutlet weak var ScoreTableView: UITableView!
     var myDisposeBag = DisposeBag()
     var disposeList = [Disposable]()
+    var userPointsElementsObs = BehaviorRelay<[PointElement]>(value: [PointElement]())
+    var totalPoint : Int!
     weak var coordinator: HomeCoordinator?
     @IBOutlet weak var totalNumLabel: UILabel!
 
@@ -39,7 +42,7 @@ class ScoresViewController: UIViewControllerWithErrorBar, XIBView, UITableViewDe
     }
 
     func bindScores() {
-        let scoreDisposable = NetworkManager.shared.pointsElementsObs.bind(to: ScoreTableView!.rx.items(cellIdentifier: "ScoreCell")) { _, aScore, cell in
+        let scoreDisposable = userPointsElementsObs.bind(to: ScoreTableView!.rx.items(cellIdentifier: "ScoreCell")) { _, aScore, cell in
             if let aCell = cell as? ScoreCell {
                 let model = aScore
                 aCell.titleLabel.text = model.key ?? ""
@@ -53,7 +56,7 @@ class ScoresViewController: UIViewControllerWithErrorBar, XIBView, UITableViewDe
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        totalNumLabel.text = "\(NetworkManager.shared.userPointsObs.value.points_total ?? 0)"
+        totalNumLabel.text = "\(totalPoint ?? 0)"
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         bindScores()
 

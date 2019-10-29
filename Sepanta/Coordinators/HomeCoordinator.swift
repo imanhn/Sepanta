@@ -386,11 +386,12 @@ class HomeCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
 
-
-    func pushScores() {
+    func pushScores(_ userPoints : UserPoints) {
         let storyboard = UIStoryboard(name: "Scores", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "ScoresViewController") as! ScoresViewController
         vc.coordinator = self
+        vc.userPointsElementsObs.accept(userPoints.points ?? [PointElement]())
+        vc.totalPoint = userPoints.points_total
         navigationController.delegate = self
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)

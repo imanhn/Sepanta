@@ -229,11 +229,6 @@ class JSONParser {
                 } else if (apiName == "card-request") && (aMethod == HTTPMethod.post) {
                     print("Starting card-request Parser...")
                     self.processCardRequest(Result: aDic)
-                } else if (apiName == "points-user") && (aMethod == HTTPMethod.get) {
-                    print("Starting points-user Parser...")
-                    let aUserPoint = self.processPoints(Result: aDic)
-                    NetworkManager.shared.userPointsObs.accept(aUserPoint)
-                    NetworkManager.shared.pointsElementsObs.accept(aUserPoint.points!)
                 } else if (apiName == "selling-request") && (aMethod == HTTPMethod.post) {
                     print("Starting selling-request Parser...")
                     self.processSellRequest(Result: aDic)

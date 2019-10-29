@@ -61,11 +61,12 @@ class GetRichViewController: UIViewControllerWithKeyboardNotificationWithErrorBa
         // is the card that is issued today.
         if loadLastCard == true {
             getRichUI!.showCardRequest(self)
-        }
-        if cardNo != nil {
-            getRichUI!.showCardRequest(self)
         } else {
-            getRichUI!.showResellerRequest(self)
+            if cardNo != nil {
+                getRichUI!.showCardRequest(self)
+            } else {
+                getRichUI!.showResellerRequest(self)
+            }
         }
         //resellerRequestTapped(nil)
 

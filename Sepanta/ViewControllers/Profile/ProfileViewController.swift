@@ -11,11 +11,13 @@ import UIKit
 import Alamofire
 import RxAlamofire
 import RxSwift
+import RxCocoa
 
 class ProfileViewController: UIViewControllerWithErrorBar, Storyboarded {
     weak var coordinator: HomeCoordinator?
     var showUserProfileUI: ShowUserProfileUI!
     var myDisposeBag = DisposeBag()
+    var userPointsObs = BehaviorRelay<UserPoints>(value: UserPoints())
     @IBOutlet weak var cupLabel: UILabel!
     @IBOutlet weak var cupScoreLabel: UILabel!
     @IBOutlet weak var clubNumLabel: UILabel!
@@ -24,8 +26,9 @@ class ProfileViewController: UIViewControllerWithErrorBar, Storyboarded {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var descLabel: UILabel!
     @IBOutlet weak var profileScrollView: UIScrollView!
+
     @IBAction func showScoreTapped(_ sender: Any) {
-        self.coordinator!.pushScores()
+        self.coordinator!.pushScores(userPointsObs.value)
     }
 
     @IBAction func favTapped(_ sender: Any) {

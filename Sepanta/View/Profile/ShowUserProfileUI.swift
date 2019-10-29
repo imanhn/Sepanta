@@ -359,6 +359,7 @@ class ShowUserProfileUI: NSObject, UICollectionViewDelegateFlowLayout {
         let pointScoreDisp = GetPointsScore().results()
             .subscribe(onNext: { [unowned self] aUserPoint in
                 //print("Subscribed and Received : ",aUserPoint)
+                self.delegate.userPointsObs.accept(aUserPoint)
                 self.delegate.cupScoreLabel.text = "\(aUserPoint.points_total ?? 0)"
             })
         pointScoreDisp.disposed(by: myDisposeBag)

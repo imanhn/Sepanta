@@ -78,7 +78,7 @@ class NetworkManager {
     var nationalCodeCityObs = BehaviorRelay<String>(value: "")
 
     var pollObs = BehaviorRelay<Int>(value: 0)
-    var userPointsObs = BehaviorRelay<UserPoints>(value: UserPoints())
+    
     var pointsElementsObs = BehaviorRelay<[PointElement]>(value: [PointElement]())
     var notificationForUserObs = BehaviorRelay<[NotificationForUser]>(value: [NotificationForUser]())
     var notificationForShopObs = BehaviorRelay<[NotificationForShop]>(value: [NotificationForShop]())
