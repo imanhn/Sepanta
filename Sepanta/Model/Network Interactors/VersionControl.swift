@@ -23,7 +23,7 @@ extension HomeViewController {
                           "os_mobile": "IOS"]
 
         let verDisp = AppVersionCheck(Parameter : aParameter).results()
-            .subscribe(onNext: { aVersionCheck in
+            .subscribe(onNext: { [unowned self] aVersionCheck in
                 if (aVersionCheck.force_update ?? false) {
                     // NEED Update
                     self.showAlertWithOK(Message: "برنامه نیاز به بروزرسانی دارد، ادامه عملیات ممکن نیست", OKLabel: "متوجه شدم", Completion: {fatalError()})

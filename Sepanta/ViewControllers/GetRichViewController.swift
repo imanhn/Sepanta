@@ -15,6 +15,7 @@ class GetRichViewController: UIViewControllerWithKeyboardNotificationWithErrorBa
    var myDisposeBag = DisposeBag()
     var profileInfo: ProfileInfo?
     var cardNo: String?
+    var loadLastCard : Bool!
     @IBOutlet weak var scrollView: NoDelayScrollView!
     var getRichUI: GetRichUI?
     weak var coordinator: HomeCoordinator?
@@ -55,6 +56,12 @@ class GetRichViewController: UIViewControllerWithKeyboardNotificationWithErrorBa
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         getRichUI = GetRichUI()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+
+        // This one is used by ProfileUI to Edit the last Card which
+        // is the card that is issued today.
+        if loadLastCard == true {
+            getRichUI!.showCardRequest(self)
+        }
         if cardNo != nil {
             getRichUI!.showCardRequest(self)
         } else {

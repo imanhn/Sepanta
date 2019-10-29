@@ -15,9 +15,11 @@ class RadioView : UIView {
     var checkButtons : [UIButton] = [UIButton]()
     var selectedItem = BehaviorRelay(value: 0)
     
-    init(frame: CGRect, items : [String]) {
+    init(frame: CGRect, items : [String],Default defaultSelectionItem : Int = 0) {
         super.init(frame: frame)
-        labels = items
+        labels = items        
+        checkButtons = Array<UIButton>(repeating: UIButton(type: .custom), count: items.count)
+        self.selectedItem.accept(defaultSelectionItem)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -52,7 +54,7 @@ class RadioView : UIView {
             let aCheckButton = UIButton(type: .custom)
             checkButtons.append(aCheckButton)
             aCheckButton.frame = CGRect(x: cursurX, y: cursurY, width: buttonDim, height: buttonDim)
-            if (i == 0) {
+            if (i == self.selectedItem.value) {
                 aCheckButton.setImage(UIImage(named: "radioChecked"), for: .normal)
             } else {
                 aCheckButton.setImage(UIImage(named: "radioUnChecked"), for: .normal)

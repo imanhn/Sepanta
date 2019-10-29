@@ -79,3 +79,23 @@ struct LastCardData: Codable {
         do { email = try container.decode(String.self, forKey: .email) } catch {}
     }
 }
+
+struct CardRequestResponse: Codable {
+    var card_id: Int?
+    var status: String?
+    var message: String?
+    
+    enum DecodingKeys: String, CodingKey {
+        case card_id
+        case status
+        case message
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: DecodingKeys.self)
+        
+        do { card_id = try container.decode(Int.self, forKey: .card_id)  } catch {}
+        do { status = try container.decode(String.self, forKey: .status) } catch {}
+        do { message = try container.decode(String.self, forKey: .message)  } catch {}
+    }
+}

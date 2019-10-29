@@ -156,8 +156,11 @@ extension GetRichUI {
         texts["postalCodeText"]?.keyboardType = UIKeyboardType.numberPad
         views["afterRegionView"]?.addSubview(views["postalCodeView"]!)
         animatedPartCursurY += buttonHeight + marginY
-
-        cardRequestType = RadioView(frame: CGRect(x: marginX, y: animatedPartCursurY, width: textFieldWidth, height: buttonHeight),items: ["درخواست کارت جدید","تعریف روی کارت دیگر"])
+        var defaultCardType = 0
+        if self.delegate.cardNo != nil {
+            defaultCardType = 1
+        }
+        cardRequestType = RadioView(frame: CGRect(x: marginX, y: animatedPartCursurY, width: textFieldWidth, height: buttonHeight),items: ["درخواست کارت جدید","تعریف روی کارت دیگر"],Default: defaultCardType)
         //views["leftFormView"]?.addSubview(cardRequestType)
         views["afterRegionView"]?.addSubview(cardRequestType)
         animatedPartCursurY += buttonHeight + marginY
@@ -220,8 +223,13 @@ extension GetRichUI {
         )
         cardDispose.disposed(by: self.delegate.myDisposeBag)
         disposeList.append(cardDispose)
-        views["cardNoView"]?.isHidden = true
-        bankLogo.isHidden = true
+        
+        if self.delegate.cardNo == nil {
+            views["cardNoView"]?.isHidden = true
+            bankLogo.isHidden = true
+        } else {
+            animatedPartCursurY += buttonHeight
+        }
         animatedPartCursurY += buttonHeight/2
         
         cardSubmitButton = SubmitButton(type: .custom)
@@ -242,7 +250,6 @@ extension GetRichUI {
         submitDispose = handleCardSubmitButtonEnableOrDisable()
         cardSubmitButton.isEnabled = true
         disposeList.append(submitDispose)
-        
     }
     
     func addCardRows() {
@@ -312,24 +319,30 @@ extension GetRichUI {
             "addres": "\(texts["addressText"]?.text ?? "")",
             "birthdate": "\(texts["birthDateText"]?.text ?? "")",
             "post_code": "\(texts["postalCodeText"]?.text ?? "")",
-            "city_code":"\(self.cityCode ?? "0")",
+            "city":"\(self.cityCode ?? "0")",
             "state_code":"\(self.stateCode ?? "0")",
             "cardnumber": "\(texts["cardNoText"]?.text ?? "")",
             "card_id": cardIdString
         ]
         print("aParameter : \(aParameter)")
         let cardRequestDisp = CardRequest(Parameter: aParameter).results()
-            .subscribe(onNext: {aNetworkResponse in
-                if aNetworkResponse.status == "error" {
-                    if let message = aNetworkResponse.message {
+            .subscribe(onNext: { [unowned self] aCardRequest in
+                if aCardRequest.status == "error" {
+                    if let message = aCardRequest.message {
                         self.delegate.alert(Message: message)
                     } else {
                         self.delegate.alert(Message: "خطا در ثبت کارت، مجدد تلاش بفرمایید")
                     }
                 } else {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-                        self.delegate.coordinator?.pushPayment(CardId : cardIdString,Type: aCardType)
-                    })
+                    if let newCardId = aCardRequest.card_id {
+                        self.delegate.alert(Message: aCardRequest.message ?? "کارت شما با موفقیت ثبت شد، لطفا عملیات پرداخت را تکمیل فرمایید")
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                            let newCardIdStr = "\(newCardId)"
+                            self.delegate.coordinator?.pushPayment(CardId : newCardIdStr,Type: aCardType)
+                        })
+                    } else {
+                        self.delegate.alert(Message: aCardRequest.message ?? "کارت قبلا ثبت شده است")
+                    }
                 }
             }, onError: {_ in })
         cardRequestDisp.disposed(by: myDisposeBag)

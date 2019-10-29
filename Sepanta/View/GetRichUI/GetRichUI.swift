@@ -471,7 +471,7 @@ class GetRichUI: NSObject, UITextFieldDelegate {
 
     func getAndSubscribeToLastCard() {
         let lastCardDisp = GetLastCard().results()
-            .subscribe(onNext: { aLastCard in
+            .subscribe(onNext: { [unowned self] aLastCard in
                 print("GET LAST CARD : \(aLastCard)")
                 self.fillForm(With: aLastCard)
             } , onError: {_ in })
@@ -509,7 +509,7 @@ class GetRichUI: NSObject, UITextFieldDelegate {
                 }
             }
             let statesDisp = GetStates().results()
-                .subscribe(onNext: { aSetOfStates in
+                .subscribe(onNext: { [unowned self] aSetOfStates in
                     let aStateName = aSetOfStates.getState(FromCode: Int(aLastCardData.state_code ?? "0")!)
                     self.stateCode = aLastCardData.state_code
                     if self.texts["stateText"] != nil {
@@ -517,7 +517,7 @@ class GetRichUI: NSObject, UITextFieldDelegate {
                         self.texts["stateText"]!.sendActions(for: .valueChanged)
                     }
                     let cityDisp = GetCities(StateCode : self.stateCode).results()
-                        .subscribe(onNext: { aSetOfCities in
+                        .subscribe(onNext: { [unowned self] aSetOfCities in
                             let aCityName = aSetOfCities.getCity(FromCode: Int(aLastCardData.city_code ?? "0")!)
                             if self.texts["cityText"] != nil {
                                 self.texts["cityText"]!.text = aCityName

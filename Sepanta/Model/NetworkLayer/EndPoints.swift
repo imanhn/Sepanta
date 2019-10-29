@@ -193,7 +193,7 @@ final class GetBankLink: Endpoints<BankLink> {
     }
 }
 
-final class CardRequest: Endpoints<GenericNetworkResponse> {
+final class CardRequest: Endpoints<CardRequestResponse> {
     init(Parameter aParam : [String : String]) {
         super.init(API: "card-request", Method: HTTPMethod.post, Parameters: aParam, Retry: 1, Timeout: 10)
     }

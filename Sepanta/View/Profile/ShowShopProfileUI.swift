@@ -308,7 +308,7 @@ class ShowShopProfileUI: NSObject, UICollectionViewDelegateFlowLayout {
         }
         if let aCardId = NetworkManager.shared.userProfileObs.value.cards[cardNumber].card_id {
             let deleteCardDisp = DeleteCard(CardID: "\(aCardId)").results()
-                .subscribe(onNext: { aGenericResponse in
+                .subscribe(onNext: { [unowned self] aGenericResponse in
                     print("aGenericResponse : \(aGenericResponse)")
                     if let aStatus = aGenericResponse.status {
                         if aStatus ==  "successful" {

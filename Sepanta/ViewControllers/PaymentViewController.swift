@@ -47,7 +47,7 @@ class PaymentViewController : UIViewControllerWithKeyboardNotificationWithErrorB
         let aDiscount : String = self.offText.text ?? ""
         let aServerBankLink = selectedGateway?.link
         let bankLinkDisp = GetBankLink(serverLink: aServerBankLink ?? "/api/v1/parsian", discountCode: aDiscount, cardId: cardId ?? "1").results()
-            .subscribe(onNext: { aBankLink in
+            .subscribe(onNext: { [unowned self] aBankLink in
                 // This is Shaparak (PSP) redirection
                 if let shaparakLink = aBankLink.link_bank {
                     //self.coordinator?.pushPaymentWKWebView(WebAddress: shaparakLink)
@@ -138,7 +138,7 @@ class PaymentViewController : UIViewControllerWithKeyboardNotificationWithErrorB
     
     func getGatewayList() {
         let paymentCallDisp = GetPaymentGatewayList().results()
-            .subscribe(onNext: { aPaymentGatewayList in
+            .subscribe(onNext: { [unowned self] aPaymentGatewayList in
                 if let gateways = aPaymentGatewayList.link {
                     self.gatewayListObs.accept(gateways)
                 }

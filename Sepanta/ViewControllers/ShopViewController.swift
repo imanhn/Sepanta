@@ -147,7 +147,7 @@ class ShopViewController: UIViewControllerWithErrorBar, Storyboarded {
             if let shop_id = self.shop.shop_id {
                 let toggleFavDisp = toggleFavorite(ShopId: "\(shop_id)")
                     .results()
-                    .subscribe(onNext: {makeFav in
+                    .subscribe(onNext: {[unowned self] makeFav in
                         if makeFav.isFave == "1" {
                             // Make favorite
                             self.favButton.setImage(UIImage(named: "icon_star_fav_dark"), for: .normal)

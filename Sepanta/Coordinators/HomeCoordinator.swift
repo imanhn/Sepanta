@@ -365,6 +365,7 @@ class HomeCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
+    
     func pushNewCard() {
         let storyboard = UIStoryboard(name: "NewCard", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "NewCardViewController") as! NewCardViewController
@@ -373,6 +374,18 @@ class HomeCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
+    
+    func pushLastCard() {
+        let storyboard = UIStoryboard(name: "GetRich", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "GetRichViewController") as! GetRichViewController
+        //let vc = GetRichViewController.instantiate()
+        vc.coordinator = self
+        vc.loadLastCard = true
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+
 
     func pushScores() {
         let storyboard = UIStoryboard(name: "Scores", bundle: Bundle.main)

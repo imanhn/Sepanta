@@ -44,7 +44,10 @@ class ShowUserProfileUI: NSObject, UICollectionViewDelegateFlowLayout {
     //Create Gradient on PageView
     func showMyClub() {
         
-        if views["leftFormView"] != nil && views["leftFormView"]?.superview != nil { views["leftFormView"]?.removeFromSuperview()}
+        if views["leftFormView"] != nil && views["leftFormView"]?.superview != nil {
+            views["leftFormView"]?.removeFromSuperview()
+            disposeList.forEach({$0.dispose()})
+        }
         var cursurY: CGFloat = 0
         let marginY: CGFloat = 10
         let marginX: CGFloat = 10
@@ -140,7 +143,10 @@ class ShowUserProfileUI: NSObject, UICollectionViewDelegateFlowLayout {
 
     @objc func showMyCards(_ sender : Any) {
         //print("Card Request  : ",views["rightFormView"]!,"  SuperView : ",views["rightFormView"]!.superview ?? "Nil")
-        if views["rightFormView"]?.superview != nil { views["rightFormView"]?.removeFromSuperview()}
+        if views["rightFormView"]?.superview != nil {
+            views["rightFormView"]?.removeFromSuperview()
+            disposeList.forEach({$0.dispose()})
+        }
         var cursurY: CGFloat = 0
         let marginY: CGFloat = 10
         let marginX: CGFloat = 10
@@ -168,76 +174,82 @@ class ShowUserProfileUI: NSObject, UICollectionViewDelegateFlowLayout {
         cursurY += buttonHeight + marginY
 
         scrollView = UIScrollView(frame: CGRect(x: 0, y: cursurY, width: views["leftFormView"]!.frame.width, height: views["leftFormView"]!.frame.height-cursurY-marginY))
-        let cardwidth = scrollView.frame.width - ( 4 * marginX)
-        let cardHeight = scrollView.frame.width/2
-        let cardMargin = cardHeight/4
-        var cardCursurY = marginY
-        var i = 0
-        for aCardData in self.cards {
-            let acard = CardView(frame: CGRect(x: 2*marginX, y: cardCursurY, width: cardwidth, height: cardHeight))
-            acard.cardNo1.text = aCardData.card_number?.slice(From: 0, To: 3)
-            acard.cardNo2.text = aCardData.card_number?.slice(From: 4, To: 7)
-            acard.cardNo3.text = aCardData.card_number?.slice(From: 8, To: 11)
-            acard.cardNo4.text = aCardData.card_number?.slice(From: 12, To: 15)
-            let bankPrefixNum = aCardData.card_number?.slice(From: 0, To: 5)
-            acard.menuButton.tag = i
-            acard.menuButton.addTarget(self, action: #selector(self.menuOnCardTapped(_:)), for: .touchUpInside)
-            print(" CARD Data : \(aCardData.bank_logo) \(aCardData.bank_name)")
-            if aCardData.bank_logo == nil || aCardData.bank_name == nil ||
-                aCardData.bank_logo == "" || aCardData.bank_name == "" {
-                print("Getting Bank Data : \(bankPrefixNum)")
-                //FIXME it doesn't work since acard is not the one when the route response!
-                CheckBank(SixDigitPrefix: bankPrefixNum!).results()
-                    .subscribe(onNext: { innerBank in
-                        print("Bank DATA : \(innerBank)")
-                        if innerBank.logo != nil {
-                            let imageUrl = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_bank_logo_image + (innerBank.logo ?? "")
-                            if let castedUrl = URL(string: imageUrl) {
-                                acard.bankLogo.af_setImage(withURL: castedUrl, placeholderImage: UIImage(named: "bank-building"))
-                                //acard.bankLogo.setImageFromCache(PlaceHolderName: "bank-building", Scale: 1, ImageURL: castedUrl, ImageName: innerBank.logo!)
-                            } else {
-                                print("ShowProfileUI : Bank Str -> URL Can not be casted ")
-                            }
-                        }
-                        print("innerBank.bank : \(innerBank.bank)")
-                        acard.nameLabel.text = (aCardData.first_name ?? "")  + " " + (aCardData.last_name ?? "")
-                    }).disposed(by: myDisposeBag)
-            } else {
-                if aCardData.bank_logo != nil {
-                    let imageUrl = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_bank_logo_image + (aCardData.bank_logo ?? "")
-                    print("BANK : ",imageUrl)
-                    
-                    if let castedUrl = URL(string: imageUrl) {
-                        acard.bankLogo.af_setImage(withURL: castedUrl, placeholderImage: UIImage(named: "bank-building"))
-                        //acard.bankLogo.setImageFromCache(PlaceHolderName: "bank-building", Scale: 1, ImageURL: castedUrl, ImageName: aCardData.bank_logo!)
-                    }
-                }
-                print("aCardData.bank_name : \(aCardData.bank_name)")
-                acard.nameLabel.text = (aCardData.first_name ?? "") + " " + (aCardData.last_name ?? "")
-            }
-            if aCardData.card_number == "0" {
-                // This is a sepanta card
-                print("Sepanta Card Detected")
-                acard.bankLogo.image = UIImage(named: "logo_shape")
-                acard.nameLabel.text = (aCardData.first_name ?? "") + " " + (aCardData.last_name ?? "")
-            }
-            scrollView.addSubview(acard)
-            cardCursurY += marginY + acard.frame.height + cardMargin
-            i += 1
-        }
-        let newCard = NewCardView(frame: CGRect(x: 2*marginX, y: cardCursurY, width: cardwidth, height: cardHeight))
-        scrollView.addSubview(newCard)
-        newCard.addButton.addTarget(self, action: #selector(addCardTapped), for: .touchUpInside)
-        cardCursurY += marginY + newCard.frame.height + cardMargin
 
-        scrollView.contentSize = CGSize(width: scrollView.contentSize.width, height: cardCursurY)
         views["leftFormView"]!.addSubview(scrollView)
         self.delegate.paneView.addSubview(views["leftFormView"]!)
-
+        bindCards()
     }
     
-    func bindCards(){
-        
+    func bindCards() {
+        let userCardsDisp = self.cards.subscribe(onNext: { [unowned self] userCards in
+            self.scrollView.subviews.forEach({$0.removeFromSuperview()})
+            let marginY: CGFloat = 10
+            let marginX: CGFloat = 10
+            let cardwidth = self.scrollView.frame.width - ( 4 * marginX)
+            let cardHeight = self.scrollView.frame.width/2
+            let cardMargin = cardHeight/4
+            var cardCursurY = marginY
+            var i = 0
+            for aCardData in userCards {
+                let acard = CardView(frame: CGRect(x: 2*marginX, y: cardCursurY, width: cardwidth, height: cardHeight))
+                acard.cardNo1.text = aCardData.card_number?.slice(From: 0, To: 3)
+                acard.cardNo2.text = aCardData.card_number?.slice(From: 4, To: 7)
+                acard.cardNo3.text = aCardData.card_number?.slice(From: 8, To: 11)
+                acard.cardNo4.text = aCardData.card_number?.slice(From: 12, To: 15)
+                let bankPrefixNum = aCardData.card_number?.slice(From: 0, To: 5)
+                acard.menuButton.tag = i
+                acard.menuButton.addTarget(self, action: #selector(self.menuOnCardTapped(_:)), for: .touchUpInside)
+                print(" CARD Data : \(String(describing: aCardData.bank_logo)) \(String(describing: aCardData.bank_name))")
+                if aCardData.bank_logo == nil || aCardData.bank_name == nil ||
+                    aCardData.bank_logo == "" || aCardData.bank_name == "" {
+                    print("Getting Bank Data : \(String(describing: bankPrefixNum))")
+                    //FIXME it doesn't work since acard is not the one when the route response!
+                    CheckBank(SixDigitPrefix: bankPrefixNum!).results()
+                        .subscribe(onNext: {  innerBank in
+                            print("Bank DATA : \(innerBank)")
+                            if innerBank.logo != nil {
+                                let imageUrl = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_bank_logo_image + (innerBank.logo ?? "")
+                                if let castedUrl = URL(string: imageUrl) {
+                                    acard.bankLogo.af_setImage(withURL: castedUrl, placeholderImage: UIImage(named: "bank-building"))
+                                    //acard.bankLogo.setImageFromCache(PlaceHolderName: "bank-building", Scale: 1, ImageURL: castedUrl, ImageName: innerBank.logo!)
+                                } else {
+                                    print("ShowProfileUI : Bank Str -> URL Can not be casted ")
+                                }
+                            }
+                            print("innerBank.bank : \(String(describing: innerBank.bank))")
+                            acard.nameLabel.text = (aCardData.first_name ?? "")  + " " + (aCardData.last_name ?? "")
+                        }).disposed(by: self.myDisposeBag)
+                } else {
+                    if aCardData.bank_logo != nil {
+                        let imageUrl = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_bank_logo_image + (aCardData.bank_logo ?? "")
+                        print("BANK : ",imageUrl)
+                        
+                        if let castedUrl = URL(string: imageUrl) {
+                            acard.bankLogo.af_setImage(withURL: castedUrl, placeholderImage: UIImage(named: "bank-building"))
+                            //acard.bankLogo.setImageFromCache(PlaceHolderName: "bank-building", Scale: 1, ImageURL: castedUrl, ImageName: aCardData.bank_logo!)
+                        }
+                    }
+                    print("aCardData.bank_name : \(String(describing: aCardData.bank_name))")
+                    acard.nameLabel.text = (aCardData.first_name ?? "") + " " + (aCardData.last_name ?? "")
+                }
+                if aCardData.card_number == "0" {
+                    // This is a sepanta card
+                    print("Sepanta Card Detected")
+                    acard.bankLogo.image = UIImage(named: "logo_shape")
+                    acard.nameLabel.text = (aCardData.first_name ?? "") + " " + (aCardData.last_name ?? "")
+                }
+                self.scrollView.addSubview(acard)
+                cardCursurY += marginY + acard.frame.height + cardMargin
+                i += 1
+            }
+            let newCard = NewCardView(frame: CGRect(x: 2*marginX, y: cardCursurY, width: cardwidth, height: cardHeight))
+            self.scrollView.addSubview(newCard)
+            newCard.addButton.addTarget(self, action: #selector(self.addCardTapped), for: .touchUpInside)
+            cardCursurY += marginY + newCard.frame.height + cardMargin
+            self.scrollView.contentSize = CGSize(width: self.scrollView.contentSize.width, height: cardCursurY)
+            }, onError: {_ in })
+        userCardsDisp.disposed(by: myDisposeBag)
+        disposeList.append(userCardsDisp)
     }
     
     @objc func menuOnCardTapped(_ sender: Any) {
@@ -245,28 +257,48 @@ class ShowUserProfileUI: NSObject, UICollectionViewDelegateFlowLayout {
         let del = "حذف کارت"
         let edit = "ویرایش کارت"
         //let close = "بستن منو"
-        let menuList = [del,edit]
+        var menuList = [del]
+        // Check if the card is created on the current day
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        formatter.locale = Locale(identifier: "fa_IR")
         
+        let currentDate = "\(Date(timeIntervalSinceNow: 0))".split(separator: " ").first
+        print("Current date : \(String(describing: currentDate)) ")
+        
+        if self.cards.value.count > menuButton.tag {
+            if let cardCreateCreatedTimeStamp = self.cards.value[menuButton.tag].created_at {
+                if cardCreateCreatedTimeStamp.split(separator: " ").count > 0 {
+                    let cardCreateDate = cardCreateCreatedTimeStamp.split(separator: " ").first
+                    if (cardCreateDate == currentDate) {
+                        menuList.append(edit)
+                    } else {
+                        print("*** Dates : \(String(describing: cardCreateDate)) vs  \(String(describing: currentDate))")
+                    }
+                }
+            }
+        }
+
         let controller = MenuLister(menuList) { (selectedOption) in
             switch selectedOption {
             case del : self.deleteCard(CardNumber: menuButton.tag)
-            case edit : self.editCard(CardNumber: menuButton.tag)
+            case edit : self.editCard()
             default :
                 print("Should not get here, but if it gets its fine! really!")
             }
         }
-        controller.preferredContentSize = CGSize(width: 150, height: 100)
+        controller.preferredContentSize = CGSize(width: 150, height: 50 * menuList.count)
         self.delegate.showPopup(controller, sourceView: menuButton)
     }
     
     func deleteCard(CardNumber cardNumber : Int) {
-        guard NetworkManager.shared.userProfileObs.value.cards.count > cardNumber else {
+        guard self.cards.value.count > cardNumber else {
             self.delegate.alert(Message: "عملیات با خطا مواجه گردید")
             return
         }
-        if let aCardId = NetworkManager.shared.userProfileObs.value.cards[cardNumber].card_id {
+        if let aCardId = self.cards.value[cardNumber].card_id {
             let deleteCardDisp = DeleteCard(CardID: "\(aCardId)").results()
-                .subscribe(onNext: { aGenericResponse in
+                .subscribe(onNext: { [unowned self] aGenericResponse in
                     print("aGenericResponse : \(aGenericResponse)")
                     if let aStatus = aGenericResponse.status {
                         if aStatus ==  "successful" {
@@ -286,8 +318,8 @@ class ShowUserProfileUI: NSObject, UICollectionViewDelegateFlowLayout {
         }
     }
     
-    func editCard(CardNumber cardNumber : Int) {
-        
+    func editCard() {
+        self.delegate.coordinator!.pushLastCard()
     }
 
     @objc func addCardTapped(_ sender: Any) {
