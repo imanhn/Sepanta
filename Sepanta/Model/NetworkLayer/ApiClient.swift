@@ -26,7 +26,7 @@ final class ApiClient {
             print("*** Method : ", aMethod)
             print("*** Encoding : ", URLEncoding.httpBody)
             print("*** Headers : ", self.headers)
-            print("*** Parameters : ", aParam)
+            print("*** Parameters : ", aParam as Any)
             Alamofire.request(NetworkConstants.baseURLString + "/" + anApiName, method: aMethod, parameters: aParam, encoding: URLEncoding.httpBody, headers: self.headers)
                 .validate(statusCode: 200..<600)
                 .responseJSON { response in
@@ -39,7 +39,7 @@ final class ApiClient {
                         do {                            
                             // print("Data : ", String(data: data, encoding: .utf8) ?? "")
                             let decodedData = try JSONDecoder().decode(T.self, from: data)
-                            //print("DecodedData : ", decodedData)
+                            print("DecodedData : ", decodedData)
                             observer.onNext(decodedData)
                         } catch {
                             print("ERROR in Decoding ", T.self, " from ", data.description)

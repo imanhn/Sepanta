@@ -36,10 +36,23 @@ class PaymentViewController : UIViewControllerWithKeyboardNotificationWithErrorB
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var applyOffButton: UIButton!
     var selectedGateway : PaymentGateway?
+    var withoutOffCost = BehaviorRelay(value: -1)
+    var offValue = BehaviorRelay(value: -1)
     var cardId : String!
     var cardType : CardType!
     
     @IBAction func applyOffTapped(_ sender: Any) {
+        if let anOffCode = offText.text {
+            let checkOffCodeDisp = CheckOffCode(OffCode: anOffCode, CardId: cardId).results()
+                .subscribe(onNext: {anOffCheckResult in
+                    if let beforeOff = anOffCheckResult.amount_real {self.withoutOffCost.accept(beforeOff)}
+                    if let offValue = anOffCheckResult.amount_discount {self.offValue.accept(offValue)}
+                })
+            checkOffCodeDisp.disposed(by: myDisposeBag)
+            disposeList.append(checkOffCodeDisp)
+        } else {
+            self.alert(Message: "کد تخفیف وارد نشده است")
+        }
     }
     
     @IBAction func payButtonTapped(_ sender: Any) {
@@ -139,6 +152,18 @@ class PaymentViewController : UIViewControllerWithKeyboardNotificationWithErrorB
     func getGatewayList() {
         let paymentCallDisp = GetPaymentGatewayList().results()
             .subscribe(onNext: { [unowned self] aPaymentGatewayList in
+                print("self.cardType : \(self.cardType)")
+                print("aPaymentGatewayList : \(aPaymentGatewayList)")
+                if self.cardType == CardType.Sepanta {
+                    print("Its a Sepanta card")
+                    self.withoutOffCost.accept(aPaymentGatewayList.sepanta_card ?? 1800000)
+                    self.offValue.accept(0)
+                } else {
+                    print("Its a Other card")
+                    self.withoutOffCost.accept(aPaymentGatewayList.other_cards ?? 1500000)
+                    self.offValue.accept(0)
+                }
+                
                 if let gateways = aPaymentGatewayList.link {
                     self.gatewayListObs.accept(gateways)
                 }
@@ -150,14 +175,26 @@ class PaymentViewController : UIViewControllerWithKeyboardNotificationWithErrorB
     override func viewWillAppear(_ animated: Bool) {
         getGatewayList()
     }
+ 
+    func bindPaySummary() {
+        let costUpdateDisp = Observable.zip(self.withoutOffCost, self.offValue, resultSelector: { [unowned self] (beforeCost, offVal) in
+            print("Before : \(beforeCost) off : \(offVal)")
+            self.withoutOffValueLabel.text = "\(beforeCost) ریال"
+            self.totalAmountValueLabel.text = "\(beforeCost-offVal) ریال"
+            self.offValueLabel.text = "\(offVal) ریال"
+            self.offPercentValueLabel.text = "\(Int(100 * offVal / beforeCost)) درصد"
+        }).subscribe()
+        costUpdateDisp.disposed(by: myDisposeBag)
+        disposeList.append(costUpdateDisp)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         self.collectionView.delegate = self
         self.collectionView.register(GatewayCell.self, forCellWithReuseIdentifier: "gatewayCellId")
-        
         bindCollectionView()
+        bindPaySummary()
     }
     
 }

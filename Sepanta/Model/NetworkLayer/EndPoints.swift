@@ -211,6 +211,12 @@ final class AppVersionCheck: Endpoints<AppUpdateCheck> {
     }
 }
 
+final class CheckOffCode: Endpoints<OffCode> {
+    init(OffCode anOffCode : String,CardId cardId : String) {
+        super.init(API: "is-valid-code", Method: HTTPMethod.post, Parameters: ["code":anOffCode,"card_id":cardId], Retry: 1, Timeout: 10)
+    }
+}
+
 final class getCatagoryShops: Endpoints<ShopList> {
 
     init(CategoryID: Int) {

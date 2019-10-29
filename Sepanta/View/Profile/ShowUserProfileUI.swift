@@ -232,9 +232,12 @@ class ShowUserProfileUI: NSObject, UICollectionViewDelegateFlowLayout {
                     print("aCardData.bank_name : \(String(describing: aCardData.bank_name))")
                     acard.nameLabel.text = (aCardData.first_name ?? "") + " " + (aCardData.last_name ?? "")
                 }
-                if aCardData.card_number == "0" {
+                if aCardData.card_number == nil || (aCardData.card_number ?? "").count < 16 {
                     // This is a sepanta card
-                    print("Sepanta Card Detected")
+                    //print("Sepanta Card Detected")
+                    acard.cardNo1.text = "سپنتا کارت"
+                    acard.cardNo1.font = UIFont(name: "Shabnam-FD", size: 13)
+                    
                     acard.bankLogo.image = UIImage(named: "logo_shape")
                     acard.nameLabel.text = (aCardData.first_name ?? "") + " " + (aCardData.last_name ?? "")
                 }
@@ -256,6 +259,7 @@ class ShowUserProfileUI: NSObject, UICollectionViewDelegateFlowLayout {
         let menuButton = (sender as! UIButton)
         let del = "حذف کارت"
         let edit = "ویرایش کارت"
+        let pay = "پرداخت"
         //let close = "بستن منو"
         var menuList = [del]
         // Check if the card is created on the current day
@@ -267,6 +271,7 @@ class ShowUserProfileUI: NSObject, UICollectionViewDelegateFlowLayout {
         print("Current date : \(String(describing: currentDate)) ")
         
         if self.cards.value.count > menuButton.tag {
+            // Check if Edit menu should be there (from current date and card issue date
             if let cardCreateCreatedTimeStamp = self.cards.value[menuButton.tag].created_at {
                 if cardCreateCreatedTimeStamp.split(separator: " ").count > 0 {
                     let cardCreateDate = cardCreateCreatedTimeStamp.split(separator: " ").first
@@ -277,18 +282,41 @@ class ShowUserProfileUI: NSObject, UICollectionViewDelegateFlowLayout {
                     }
                 }
             }
+            // Check if Pay menu should be there
+            if self.cards.value[menuButton.tag].status == 2 {
+                menuList.append(pay)
+            }
         }
 
         let controller = MenuLister(menuList) { (selectedOption) in
             switch selectedOption {
             case del : self.deleteCard(CardNumber: menuButton.tag)
             case edit : self.editCard()
+            case pay : self.payCard(CardNumber: menuButton.tag)
             default :
                 print("Should not get here, but if it gets its fine! really!")
             }
         }
         controller.preferredContentSize = CGSize(width: 150, height: 50 * menuList.count)
         self.delegate.showPopup(controller, sourceView: menuButton)
+    }
+    
+    func payCard(CardNumber cardNumber : Int) {
+        guard self.cards.value.count > cardNumber else {
+            self.delegate.alert(Message: "عملیات با خطا مواجه گردید")
+            return
+        }
+        let theCard = self.cards.value[cardNumber]
+        if let aCardId = theCard.card_id {
+            var cardType = CardType.Other
+            let aCardIdStr = "\(aCardId)"
+            if theCard.card_number == nil || (theCard.card_number ?? "").count < 16 { cardType = CardType.Sepanta}
+            print("cardType : \(cardType)")
+            self.delegate?.coordinator!.pushPayment(CardId: aCardIdStr,Type: cardType)
+        } else {
+            print("Error : card_id is nil ")
+            fatalError()
+        }
     }
     
     func deleteCard(CardNumber cardNumber : Int) {

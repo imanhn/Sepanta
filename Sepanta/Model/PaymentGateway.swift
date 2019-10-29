@@ -28,3 +28,11 @@ struct BankLink : Codable {
     var message : String?
     var link_bank : String?
 }
+
+struct OffCode : Codable {
+    var status : String?
+    var message : String?
+    var amount_real : Int?
+    var amount_discount : Int?
+    var amount_final : Int?
+}

@@ -238,7 +238,7 @@
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="لطفا کد تخفیف خود را وارد کنید" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uYA-PT-0Mf" userLabel="offCodeText">
                                                 <rect key="frame" x="95" y="0.0" width="248.5" height="78"/>
-                                                <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
