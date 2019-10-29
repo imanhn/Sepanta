@@ -19,7 +19,10 @@ class CardView: UIView {
     @IBOutlet weak var cardNo4: UILabel!
     @IBOutlet weak var expiryDate: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
-
+    @IBOutlet weak var badgeView: UIView!
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var badgeIcon: UIImageView!
+    
     let kContent_XIB_NAME = "CardView"
     var nib: [Any]?
     override init(frame: CGRect) {
@@ -43,7 +46,11 @@ class CardView: UIView {
         layer.shadowOpacity = 0.2
         layer.shadowOffset = CGSize(width: 3, height: 3)
         layer.shadowRadius = 2
-
+        badgeView.layer.cornerRadius = 5
+        badgeView.layer.shadowColor = UIColor.black.cgColor
+        badgeView.layer.shadowOpacity = 0.2
+        badgeView.layer.shadowOffset = CGSize(width: 3, height: 3)
+        badgeView.layer.shadowRadius = 2        
     }
 
 }

@@ -241,6 +241,39 @@ class ShowUserProfileUI: NSObject, UICollectionViewDelegateFlowLayout {
                     acard.bankLogo.image = UIImage(named: "logo_shape")
                     acard.nameLabel.text = (aCardData.first_name ?? "") + " " + (aCardData.last_name ?? "")
                 }
+                // Adjust Badge
+                switch aCardData.status {
+                case 1 : do {
+                    acard.badgeView.backgroundColor = UIColor(hex: 0x0066b2)
+                    acard.statusLabel.text = "درحال بررسی"
+                    acard.statusLabel.textColor = UIColor.black
+                    acard.badgeIcon.image = UIImage(named:"spinner")
+                    }
+                case 2 : do {
+                    acard.badgeView.backgroundColor = UIColor(hex: 0xFFCF00)
+                    acard.statusLabel.text = "پرداخت نشده"
+                    acard.statusLabel.textColor = UIColor.black
+                    acard.badgeIcon.image = UIImage(named:"credit-card-black")
+                    }
+                case 4 : do {
+                    acard.badgeView.backgroundColor = UIColor(hex: 0x0f723a)
+                    acard.statusLabel.text = "تایید شده"
+                    acard.statusLabel.textColor = UIColor.white
+                    acard.badgeIcon.image = UIImage(named:"icon_tick_white")
+                    }
+                case 5 : do {
+                    acard.badgeView.backgroundColor = UIColor(hex: 0xDA3A5C)
+                    acard.statusLabel.text = "تایید نشده"
+                    acard.statusLabel.textColor = UIColor.black
+                    acard.badgeIcon.image = UIImage(named:"icon_close_gray")
+                    }
+                default : do {
+                    acard.badgeView.backgroundColor = UIColor(hex: 0x515151)
+                    acard.statusLabel.text = "نا مشخص"
+                    acard.statusLabel.textColor = UIColor.black
+                    acard.badgeIcon.image = UIImage(named:"question")
+                    }
+                }
                 self.scrollView.addSubview(acard)
                 cardCursurY += marginY + acard.frame.height + cardMargin
                 i += 1
