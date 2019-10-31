@@ -51,7 +51,7 @@ extension NearestViewController: MKMapViewDelegate {
             view.calloutOffset = CGPoint(x: 0, y: 5)
             if let aMapAnnotation = (annotation as? MapAnnotation) {
                 if aMapAnnotation.logo_map_image == nil {
-                    view.image = UIImage(named: "map_pin_category")
+                    //view.image = UIImage(named: "map_pin_category")
                     let aSize = view.frame.size
                     let aScale = min(aSize.width/50, aSize.height/50)
                     view.frame.size = CGSize(width: aSize.width/aScale, height: aSize.height/aScale)
@@ -67,8 +67,6 @@ extension NearestViewController: MKMapViewDelegate {
                         let aScale = min(aSize.width/50, aSize.height/50)
                         view.frame.size = CGSize(width: aSize.width/aScale, height: aSize.height/aScale)
                     }
-
-                    //view.image = resizeMapLogo(Image: aMapAnnotation.logo_map_image!)
                 }
             }
         } else if  identifier ==  "SelectAnnotation" {
@@ -93,36 +91,6 @@ extension NearestViewController: MKMapViewDelegate {
             view.image = mixedImage
         }
         return view
-    }
-
-    func resizeMapLogo(Image anUIImage: UIImage) -> UIImage {
-
-        let size = CGSize(width: 50, height: 50)
-        UIGraphicsBeginImageContext(size)
-        anUIImage.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-        if let resizedImage = UIGraphicsGetImageFromCurrentImageContext() {
-            return resizedImage
-        } else {
-            return CreateBallonImage(Image: UIImage(named: "icon_mainmenu_04")!)
-        }
-    }
-
-    func CreateBallonImage(Image iconImage: UIImage) -> UIImage {
-
-        let backgroundImage = UIImage(named: "icon_place_map")
-        let annotationDim = UIScreen.main.bounds.width / 7
-        let size = CGSize(width: annotationDim*14/19, height: annotationDim)
-//        let size = CGSize(width: 35, height: 50)
-        UIGraphicsBeginImageContextWithOptions(size, false, 0)
-        let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        backgroundImage?.draw(in: areaSize)
-        let scale = (size.width/1.5)/max(iconImage.size.width, iconImage.size.height)
-        let iconSize = CGRect(x: (size.width/2)-(iconImage.size.width*scale/2), y: (size.height/2)-(iconImage.size.height*scale/1.5), width: iconImage.size.width*scale, height: iconImage.size.height*scale)
-        iconImage.draw(in: iconSize, blendMode: .normal, alpha: 1)
-        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        let shadowImage = newImage.addShadow()
-        return shadowImage
     }
 
     func CreateSelectPinPoint() -> UIImage {

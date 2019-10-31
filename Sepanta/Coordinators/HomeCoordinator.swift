@@ -95,6 +95,15 @@ class HomeCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         }
     }
 
+    func popHome(Message aMessage : String) {
+        while !navigationController.topViewController!.isKind(of: HomeViewController.self) {
+            print("Poping ", navigationController.topViewController ?? "Nil")
+            navigationController.topViewController?.willPop()
+            navigationController.popViewController(animated: false)
+        }
+        navigationController.topViewController?.alert(Message: aMessage)
+    }
+
     func popLogin(Set mobileNumber: String = "") {
         while !navigationController.topViewController!.isKind(of: LoginViewController.self) {
             print("popLogin is Poping ", navigationController.topViewController ?? "Nil")
@@ -250,7 +259,24 @@ class HomeCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
-
+    
+    func pushFavoriteList() {
+        let storyboard = UIStoryboard(name: "Shop", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ShopsListViewController") as! ShopsListViewController
+        //        let vc = ShopsListViewController.instantiate()
+        vc.coordinator = self
+        vc.fetchMechanism = { aShopListViewController in
+            let shopsDataSource = ShopsListDataSource(aShopListViewController as! ShopListOwners)
+            //shopsDataSource.getMyFollowingFromServer()
+            shopsDataSource.getShops(Api: "favorite", Method: HTTPMethod.get, Parameters: nil)
+            return shopsDataSource
+        }
+        vc.headerLabelToSet = "علاقه مندی ها"
+        navigationController.delegate = self
+        navigationController.pushViewController(vc, animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+    /*
     func pushFavoriteList() {
         let storyboard = UIStoryboard(name: "Shop", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "FavListViewController") as! FavListViewController
@@ -266,7 +292,7 @@ class HomeCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         navigationController.pushViewController(vc, animated: true)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
-
+*/
     func PushAPost(PostID aPostID: Int, OwnerUserID auserid: Int) {
         let storyboard = UIStoryboard(name: "Post", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "PostViewController") as! PostViewController

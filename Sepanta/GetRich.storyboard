@@ -108,7 +108,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uep-OI-HGh" userLabel="HomeLogo">
-                                        <rect key="frame" x="318" y="0.0" width="86" height="71.5"/>
+                                        <rect key="frame" x="388" y="0.0" width="16" height="71.5"/>
                                         <state key="normal" image="logo_home"/>
                                         <connections>
                                             <action selector="homeTapped:" destination="ACn-gj-UJN" eventType="touchUpInside" id="FDv-5T-W9P"/>
@@ -174,16 +174,16 @@
                                         <rect key="frame" x="0.0" y="156" width="414" height="195.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="لطفا درگاه خود را انتخاب کنید" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpi-Qh-fox" userLabel="SelectGateWayLabel">
-                                                <rect key="frame" x="0.0" y="18" width="414" height="21"/>
+                                                <rect key="frame" x="0.0" y="18" width="414" height="17.5"/>
                                                 <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="15"/>
                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MDn-rw-NdL" userLabel="gatewayView">
-                                                <rect key="frame" x="20.5" y="57" width="373" height="130.5"/>
+                                                <rect key="frame" x="20.5" y="53.5" width="373" height="134"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="EOE-Xv-Qrd" userLabel="gatewayCollectionView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="373" height="130.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="373" height="134"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="f9z-TB-0H8">
                                                             <size key="itemSize" width="50" height="50"/>
@@ -303,7 +303,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۶۰،۰۰۰ ریال" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="St8-CC-NYy" userLabel="withoutOffValueLabel">
-                                                        <rect key="frame" x="30" y="67" width="165.5" height="19"/>
+                                                        <rect key="frame" x="30" y="68.5" width="165.5" height="16.5"/>
                                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                         <color key="textColor" red="0.8565688776" green="0.2257254132" blue="0.36172668870000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>

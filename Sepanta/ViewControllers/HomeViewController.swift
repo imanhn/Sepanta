@@ -27,9 +27,9 @@ class HomeViewController: UIViewControllerWithErrorBar, Storyboarded, SFSafariVi
     @IBOutlet weak var currentImageView: AdImageView!
     @IBOutlet weak var leftImageView: AdImageView!
     @IBOutlet weak var rightImageView: AdImageView!
-    @IBOutlet weak var newShopsButton: UIButtonWithBadge!
-    @IBOutlet weak var notificationsButton: UIButtonWithBadge!
-    @IBOutlet weak var sepantaieButton: UIButtonWithBadge!
+    @IBOutlet weak var newShopsButton: UIButtonWithBadgeGreen!
+    @IBOutlet weak var notificationsButton: UIButtonWithBadgeRed!
+    @IBOutlet weak var sepantaieButton: UIButtonWithBadgeGreen!
     
     @IBOutlet weak var slideView: UIView!
 

@@ -14,10 +14,23 @@ import Alamofire
 import AlamofireImage
 import RxDataSources
 
-class ShopsListViewController: UIViewControllerWithErrorBar, Storyboarded, ShopListOwners, UITableViewDelegate {
+class ShopsListViewController: UIViewControllerWithErrorBar, Storyboarded, ShopListOwners, UITableViewDelegate,UITextFieldDelegate {
     var dataSource: RxTableViewSectionedAnimatedDataSource<SectionOfShopData>!
     var myDisposeBag = DisposeBag()
     var shopsObs = BehaviorRelay<[Shop]>(value: [Shop]())
+    typealias SortFunction = (Shop, Shop) -> Bool
+    typealias SearchFunction = (Shop) -> Bool
+    let byOff = "بیشترین تخفیف"
+    let byFollower = "بیشترین عضو"
+    let byNewest = "جدید ترین"
+    let byRate = "محبوب ترین"
+    let byName = "نام فروشگاه"
+    let searchOption = "جستجو"
+    let sortOption = "مرتب سازی با"
+    let noFilterOption = "بدون فیلتر"
+    var filterIsOpen = false
+    var filterView: FilterView!
+
     //typealias DataSourceFunc = (ShopsListViewController) -> ShopsListDataSource
     var fetchMechanism: DataSourceFunc!
     var shopDataSource: ShopsListDataSource!
@@ -28,7 +41,8 @@ class ShopsListViewController: UIViewControllerWithErrorBar, Storyboarded, ShopL
     @IBOutlet weak var headerLabel: UILabel!
     var headerLabelToSet: String = "فروشگاه ها"
     @IBOutlet weak var shopTable: UITableView!
-
+    @IBOutlet weak var headerView: UIView!
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         //print("WILL DISPLAY \(indexPath)")
         if !self.shopDataSource.isFetching && indexPath.row >= (self.shopsObs.value.count - 1) {
@@ -37,7 +51,10 @@ class ShopsListViewController: UIViewControllerWithErrorBar, Storyboarded, ShopL
                 print("Already at the Last page")
                 return
             }
-
+            if self.shopDataSource.last_page == nil {
+                print("shopDataSource last_page is nil, pagination not supported here.")
+                return
+            }
             let spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
                 spinner.activityIndicatorViewStyle = .gray
             spinner.startAnimating()
@@ -83,6 +100,7 @@ class ShopsListViewController: UIViewControllerWithErrorBar, Storyboarded, ShopL
         super.viewDidLoad()
         shopTable.delegate = self
         setHeaderName()
+        createFilterView()
         subscribeToInternetDisconnection().disposed(by: myDisposeBag)
         bindToTableView()
         shopDataSource = fetchMechanism(self)
@@ -90,5 +108,100 @@ class ShopsListViewController: UIViewControllerWithErrorBar, Storyboarded, ShopL
         //let newShopsDataSource = ShopsListDataSource(self)
         //newShopsDataSource.getNewShopsFromServer()
     }
-
+    func showPopup(_ controller: UIViewController, sourceView: UIView) {
+        let presentationController = AlwaysPresentAsPopover.configurePresentation(forController: controller)
+        presentationController.sourceView = sourceView
+        presentationController.sourceRect = sourceView.bounds
+        presentationController.permittedArrowDirections = [.down, .up]
+        self.present(controller, animated: true)
+    }
+    
+    @objc func applyFilterTapped(_ sender: UIButton) {
+        self.view.endEditing(true)
+        let aSearchFilter: SearchFunction = {
+            (ashop) -> Bool in
+            guard (self.filterView.searchFilter.text ?? "").count > 0 else {return true}
+            if let shopName = ashop.shop_name {
+                let searchSubString = (self.filterView.searchFilter.text ?? "").CRC()
+                if (shopName.contains(searchSubString)) { return true} else {return false}
+            } else {return false}
+        }
+        var sortFunc: SortFunction = { (ashop, bshop) in return true}
+        if (self.filterView.sortFilter.text ?? "") == byName {
+            sortFunc = { (ashop, bshop) in
+                if ((ashop.shop_name ?? "") < (bshop.shop_name ?? "")) {return true} else {return false}
+            }
+        } else if (self.filterView.sortFilter.text ?? "") == byRate {
+            sortFunc = { (ashop, bshop) in
+                if ((Int(ashop.rate ?? "0") ?? 0) > (Int(bshop.rate ?? "0") ?? 0)) {return true} else {return false}
+            }
+        } else if (self.filterView.sortFilter.text ?? "") == byOff {
+            sortFunc = { (ashop, bshop) in
+                if ((Int(ashop.shop_off ?? "0") ?? 0) > (Int(bshop.shop_off ?? "0") ?? 0) ) {return true} else {return false}
+            }
+        } else if (self.filterView.sortFilter.text ?? "") == byFollower {
+            sortFunc = { (ashop, bshop) in
+                if ((ashop.follower_count ?? 0) > (bshop.follower_count ?? 0)) {return true} else {return false}
+            }
+        }
+        let aSortedData = SectionOfShopData(original: self.sectionOfShops.value[0], items: self.shopsObs.value, sort: sortFunc, search: aSearchFilter )
+        sectionOfShops.accept([aSortedData])
+    }
+    @objc func sortFilterTapped(_ sender: Any) {
+        self.view.endEditing(true)
+        let allfilterValues = [byNewest, byName, byRate, byOff, byFollower]
+        let controller = ArrayChoiceTableViewController(allfilterValues) { (selectedFilter) in
+            self.filterView.sortFilter.text = selectedFilter
+        }
+        controller.preferredContentSize = CGSize(width: 250, height: allfilterValues.count*45)
+        Spinner.stop()
+        self.showPopup(controller, sourceView: filterView.sortFilter)
+    }
+    
+    @objc func searchFilterTapped(_ sender: Any) {
+    }
+    
+    func createFilterView() {
+        let frameOri = self.view.convert(headerView.frame.origin, to: self.view)
+        filterView = FilterView(frame: CGRect(x: self.view.frame.width, y: frameOri.y+headerView.frame.height, width: self.view.frame.width, height: UIScreen.main.bounds.height*0.25))
+        filterView.isHidden = true
+        self.view.addSubview(filterView)
+        
+        filterView.sortFilter.addTarget(self, action: #selector(sortFilterTapped(_:)), for: .allTouchEvents)
+        filterView.sortFilter.text = byRate
+        filterView.sortFilter.delegate = self
+        
+        //filterView.searchFilter.addTarget(self, action: #selector(searchFilterTapped(_:)), for: .allTouchEvents)
+        filterView.searchFilter.delegate = self
+        
+        filterView.submitButton.addTarget(self, action: #selector(applyFilterTapped), for: .touchUpInside)
+    }
+    
+    @IBAction func filterTapped(_ sender: Any) {
+        let frameOri = self.view.convert(headerView.frame.origin, to: self.view)
+        if filterIsOpen {
+            //self.groupHeaderTopCons.constant = 0
+            self.filterView.frame = CGRect(x: 0, y: frameOri.y+self.headerView.frame.height, width: self.view.frame.width, height: UIScreen.main.bounds.height*0.25)
+            filterView.isHidden = true
+            
+            UIView.animate(withDuration: 1.0) {
+                self.filterView.frame = CGRect(x: 0, y: frameOri.y+self.headerView.frame.height, width: self.view.frame.width, height: UIScreen.main.bounds.height*0.25)
+                //self.view.layoutIfNeeded()
+                //self.groupHeaderTopCons.constant = 0
+            }
+        } else {
+            filterView.isHidden = false
+            //self.groupHeaderTopCons.constant = UIScreen.main.bounds.height*0.25
+            self.filterView.frame = CGRect(x: 0, y: frameOri.y+self.headerView.frame.height, width: self.view.frame.width, height: UIScreen.main.bounds.height*0.25)
+            
+            UIView.animate(withDuration: 1.0) {
+                self.filterView.frame = CGRect(x: 0, y: frameOri.y+self.headerView.frame.height, width: self.view.frame.width, height: UIScreen.main.bounds.height*0.25)
+                //self.groupHeaderTopCons.constant = UIScreen.main.bounds.height*0.25
+                //self.view.layoutIfNeeded()
+                //self.filterView.filterType.text = self.searchOption
+            }
+            
+        }
+        filterIsOpen = !filterIsOpen
+    }
 }

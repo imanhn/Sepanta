@@ -60,7 +60,7 @@ extension GroupViewController {
             }
         } else if (self.filterView.sortFilter.text ?? "") == byOff {
             sortFunc = { (ashop, bshop) in
-                if ((ashop.shop_off ?? "0") > (bshop.shop_off ?? "0")) {return true} else {return false}
+                if ((Int(ashop.shop_off ?? "0") ?? 0) > (Int(bshop.shop_off ?? "0") ?? 0) ) {return true} else {return false}
             }
         } else if (self.filterView.sortFilter.text ?? "") == byFollower {
             sortFunc = { (ashop, bshop) in

@@ -48,7 +48,7 @@
                             <state key="normal" image="card_menu"/>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="melli" translatesAutoresizingMaskIntoConstraints="NO" id="oxQ-fM-axq" userLabel="BankLogo">
-                            <rect key="frame" x="298" y="8" width="65.000000000000114" height="64.500000000000114"/>
+                            <rect key="frame" x="298" y="8" width="65" height="64.5"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="oxQ-fM-axq" secondAttribute="height" multiplier="1:1" id="0E7-lH-RGk"/>
                             </constraints>
@@ -86,13 +86,13 @@
                             <rect key="frame" x="37" y="111" width="297" height="37"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="تاریخ انقضار ۰۰/۰۰" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cg-Cc-UnJ" userLabel="expireDate">
-                                    <rect key="frame" x="0.0" y="0.0" width="96" height="37"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="93" height="37"/>
                                     <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="13"/>
                                     <color key="textColor" red="0.53680429131093532" green="0.5386725544207015" blue="0.54427734374999992" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="سید ایمان حسینی نیا" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YtG-Ys-g2k" userLabel="nameLabel">
-                                    <rect key="frame" x="192" y="0.0" width="105" height="37"/>
+                                    <rect key="frame" x="205" y="0.0" width="92" height="37"/>
                                     <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="12"/>
                                     <color key="textColor" red="0.53680429131093532" green="0.5386725544207015" blue="0.54427734374999992" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>

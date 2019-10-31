@@ -22,7 +22,7 @@ enum CardType {
     case Other
 }
 
-class PaymentViewController : UIViewControllerWithKeyboardNotificationWithErrorBar, Storyboarded, UICollectionViewDelegateFlowLayout {
+class PaymentViewController : UIViewControllerWithKeyboardNotificationWithErrorBar, Storyboarded, UICollectionViewDelegateFlowLayout,UICollectionViewDelegate {
     var myDisposeBag = DisposeBag()
     var disposeList = [Disposable]()
     let numberOfCellsInARow : CGFloat = 4
@@ -36,6 +36,7 @@ class PaymentViewController : UIViewControllerWithKeyboardNotificationWithErrorB
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var applyOffButton: UIButton!
     var selectedGateway : PaymentGateway?
+    var gatewayButton : GatewayButton?
     var withoutOffCost = BehaviorRelay(value: -1)
     var offValue = BehaviorRelay(value: -1)
     var cardId : String!
@@ -105,12 +106,32 @@ class PaymentViewController : UIViewControllerWithKeyboardNotificationWithErrorB
         }
         gatewayCollectionViewDisp.disposed(by: myDisposeBag)
         disposeList.append(gatewayCollectionViewDisp)
-        
+        /*
+         _ = collectionView.rx.setDelegate(self)
+         let selectCellDisp = collectionView.rx.itemSelected.subscribe(onNext: { anIndexPath in
+         print("*** SELECT")
+         let cell = self.collectionView.cellForItem(at: anIndexPath)
+         cell?.layer.borderWidth = 2.0
+         cell?.layer.borderColor = UIColor.gray.cgColor
+         })
+         selectCellDisp.disposed(by: myDisposeBag)
+         disposeList.append(selectCellDisp)
+         */
+
     }
     
     @objc func selectGateway(_ sender : Any) {
-        if let gatewayButton = sender as? GatewayButton {
-            selectedGateway = gatewayButton.gateway
+        // Select and Unselect the selected gateway button
+        if gatewayButton != nil {
+            gatewayButton!.layer.borderWidth = 0.0
+            gatewayButton!.layer.borderColor = UIColor.white.cgColor
+        }
+
+        if let newGatewayButton = sender as? GatewayButton {
+            gatewayButton = newGatewayButton
+            selectedGateway = newGatewayButton.gateway
+            gatewayButton!.layer.borderWidth = 2.0
+            gatewayButton!.layer.borderColor = UIColor.gray.cgColor
         }
     }
     

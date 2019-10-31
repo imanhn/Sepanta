@@ -396,7 +396,7 @@ class ShowUserProfileUI: NSObject, UICollectionViewDelegateFlowLayout {
                     let castedUrl = URL(string: imageUrl)
                     if castedUrl != nil {
                         self.delegate.profilePicture.setImageFromCache(PlaceHolderName: "icon_profile_img", Scale: 1, ImageURL: castedUrl!, ImageName: aProfile.image!)
-                        self.delegate.profilePicture.layer.cornerRadius = (self.delegate.profilePicture.frame.width ?? 50)/2
+                        self.delegate.profilePicture.layer.cornerRadius = (self.delegate.profilePicture.frame.width)/2
                         self.delegate.profilePicture.layer.masksToBounds = true
                         self.delegate.profilePicture.layer.borderColor = UIColor.white.cgColor
                         self.delegate.profilePicture.layer.borderWidth = 4
@@ -405,7 +405,7 @@ class ShowUserProfileUI: NSObject, UICollectionViewDelegateFlowLayout {
                         print("URL Can not be casted : ", imageUrl)
                     }
                 }
-                print("aProfile.reagent_code : \(aProfile.reagent_code)")
+                //print("aProfile.reagent_code : \(aProfile.reagent_code)")
                 self.delegate.reagentCodeLabel.text = aProfile.reagent_code ?? "معرف ندارد"
                 self.delegate.nameLabel.text =  aProfile.fullName
                 self.delegate.clubNumLabel.text = "\(aProfile.follow_count ?? 0)"

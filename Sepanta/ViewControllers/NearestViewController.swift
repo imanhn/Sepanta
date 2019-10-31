@@ -177,19 +177,31 @@ class NearestViewController: UIViewControllerWithErrorBar, XIBView, CLLocationMa
             return
         }
         //print("MyLocation : ", myLocation)
-        let aParameter = ["lat": "\(myLocation!.coordinate.latitude)",
-                          "long": "\(myLocation!.coordinate.longitude)"]
+        let userLat = myLocation!.coordinate.latitude
+        let userLon = myLocation!.coordinate.longitude
+        let aParameter = ["lat": "\(userLat)",
+                          "long": "\(userLon)"]
         NetworkManager.shared.run(API: "shops-location", QueryString: "", Method: HTTPMethod.post, Parameters: aParameter, Header: nil, WithRetry: true)
 
         shopDisposable = NetworkManager.shared.shopObs
             .subscribe(onNext: { shops in
                 for ashop in shops {
-                    //print("ADDING ",(ashop as! Shop).user_id)
-                    //let aShopAnnotation = ShopAnnotation(WithShop: ashop as! Shop)
-                    let aShopAnnotation = MapAnnotation(WithShop: ashop)
-                    self.annotations[ashop.user_id!] = aShopAnnotation
-                    self.mapView.addAnnotation(aShopAnnotation)
-
+                    if let aLat = ashop.lat,
+                        let aLon = ashop.lon {
+                        let adist = sqrt( pow(aLat - userLat,2) + pow(aLon - userLon,2))
+                        if adist > 0.03 {continue}
+                    }
+                    let imageUrl = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_category_logo_map + (ashop.shop_logo_map ?? "sepanta.png")
+                    print("imageUrl  \(imageUrl)")
+                    print("ashop : \(ashop)")
+                    Alamofire.request(imageUrl).responseImage { [unowned self] response in
+                        if let image = response.result.value {
+                            //print("image downloaded: \(imageUrl)")
+                            let aShopAnnotation = MapAnnotation(WithShop: ashop,Logo: image)
+                            self.annotations[ashop.user_id!] = aShopAnnotation
+                            self.mapView.addAnnotation(aShopAnnotation)
+                        }
+                    }
                 }
             })
         shopDisposable.disposed(by: myDisposeBag)
@@ -205,14 +217,20 @@ class NearestViewController: UIViewControllerWithErrorBar, XIBView, CLLocationMa
     }
 
     func showSingleShop() {
-        //print("Single Mode : ",shopToShow)
+        //print("shopToShow  : \(shopToShow)")
         mapView.removeAnnotations(mapView.annotations)
         if shopToShow != nil {
-            let aShopAnnotation = MapAnnotation(WithShop: shopToShow!)
-            self.mapView.addAnnotation(aShopAnnotation)
-            self.annotations[shopToShow.user_id!] = aShopAnnotation
-            //print("Adding label : ",aShopAnnotation.coordinate)
-            centerMapOnLocation(Coordinate: aShopAnnotation.coordinate)
+            let imageUrl = NetworkManager.shared.websiteRootAddress + SlidesAndPaths.shared.path_category_logo_map + (shopToShow.shop_logo_map ?? "sepanta.png")
+            Alamofire.request(imageUrl).responseImage { [unowned self] response in
+                if let image = response.result.value {
+                    //print("image downloaded: \(imageUrl)")
+                    let aShopAnnotation = MapAnnotation(WithShop: self.shopToShow,Logo: image)
+                    self.annotations[self.shopToShow.user_id!] = aShopAnnotation
+                    self.mapView.addAnnotation(aShopAnnotation)
+                    self.centerMapOnLocation(Coordinate: aShopAnnotation.coordinate)
+                }
+            }
+            
         }
     }
 

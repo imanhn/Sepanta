@@ -78,7 +78,7 @@ class ProfileViewController: UIViewControllerWithErrorBar, Storyboarded {
 
     override func viewDidLayoutSubviews() {
         let viewWidth = self.view.frame.width
-        let calculatedHeight = viewWidth * ( 0.25 + 0.125 + 0.5 + 0.75 + 0.125 + 0.125)
+        let calculatedHeight = viewWidth * ( 0.25 + 0.125 + 0.5 + 1.25 + 0.125 + 0.125)
         //print("Calculated Height : ",calculatedHeight)
         profileScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: calculatedHeight)
 

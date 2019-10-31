@@ -49,7 +49,7 @@ class PaymentUIWebViewController : UIViewControllerWithErrorBar,UIWebViewDelegat
         if request.description.contains("status=1") {
             //do close window magic here!!
             print("status : ",request.description)
-            self.coordinator?.popOneLevel(Message: "عملیات پرداخت با موفقیت انجام شد")
+            self.coordinator?.popHome(Message: "عملیات پرداخت با موفقیت انجام شد")
             return false
         }
 

@@ -326,8 +326,7 @@ class TabbedButton: UIButton {
     }
 }
 
-class UIButtonWithBadge: UIButton {
-    
+class UIButtonWithBadgeRed: UIButton {
     
     func animateView( _ view: UIView) {
         let shakeAnimation = CABasicAnimation(keyPath: "position")
@@ -358,6 +357,78 @@ class UIButtonWithBadge: UIButton {
         lab.text = numStr
         lab.font = UIFont (name: "Shabnam FD", size: 20)!
         lab.textColor = UIColor.white
+        lab.textAlignment = .center
+        
+        lab.adjustsFontSizeToFitWidth = true
+        lab.drawText(in: textBox)
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+    
+    func addBadge(_ no: Int) {
+        let buttonDim = self.frame.width
+        let badgeDim: CGFloat = UIScreen.main.bounds.width/10 //buttonDim*0.75
+        let offsetX = (buttonDim - badgeDim)/2
+        let offsetY = -badgeDim/2
+        let badgeFrame = CGRect(x: offsetX, y: offsetY, width: badgeDim, height: badgeDim)
+        let badgeImageView = UIImageView(frame: badgeFrame)
+        badgeImageView.layer.shadowColor = UIColor.black.cgColor
+        badgeImageView.layer.shadowOffset = CGSize(width: 1, height: 2)
+        badgeImageView.layer.shadowRadius = 2
+        badgeImageView.layer.opacity = 0.9
+        badgeImageView.layer.shadowOpacity = 0.3
+        badgeImageView.image = self.createBadge(Number: no, Size: badgeFrame.size)
+        badgeImageView.tag = 123
+        //if self.superview == nil {fatalError("super view is unset for butoon with badge")}
+        self.addSubview(badgeImageView)
+        animateView(badgeImageView)
+    }
+    
+    func removeBadge() {
+        self.subviews.forEach({if $0.tag == 123 {$0.removeFromSuperview()} })
+    }
+    
+    func manageBadge(_ no: Int) {
+        if no == 0 {
+            self.removeBadge()
+        } else {
+            self.addBadge(no)
+        }
+    }
+}
+
+class UIButtonWithBadgeGreen: UIButton {
+    
+    func animateView( _ view: UIView) {
+        let shakeAnimation = CABasicAnimation(keyPath: "position")
+        shakeAnimation.duration = 0.05
+        shakeAnimation.repeatCount = 5
+        shakeAnimation.autoreverses = true
+        shakeAnimation.fromValue = NSValue(cgPoint: CGPoint(x: view.center.x - 5, y: view.center.y))
+        shakeAnimation.toValue = NSValue(cgPoint: CGPoint(x: view.center.x + 5, y: view.center.y))
+        view.layer.add(shakeAnimation, forKey: "position")
+    }
+    
+    func createBadge(Number anum: Int, Size size: CGSize) -> UIImage {
+        
+        UIGraphicsBeginImageContext(size)
+        var numStr = "E"
+        if (anum <= 9) {
+            numStr = "\(anum)".toPersianNumbers()
+        } else
+            if (anum > 2000) { numStr = "+2K"} else
+                if (anum > 1000) { numStr = "+1K"} else {
+                    numStr = "۹+"
+        }
+        let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        let emptyBadge = UIImage(named: "badgeGreen")
+        emptyBadge?.draw(in: areaSize)
+        let textBox = CGRect(x: size.width/4, y: size.height/4, width: size.width/2, height: size.height/2)
+        let lab = UILabel(frame: textBox)
+        lab.text = numStr
+        lab.font = UIFont (name: "Shabnam FD", size: 20)!
+        lab.textColor = UIColor(hex: 0x515152)
         lab.textAlignment = .center
         
         lab.adjustsFontSizeToFitWidth = true

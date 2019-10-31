@@ -804,7 +804,7 @@ class JSONParser {
             SlidesAndPaths.shared.path_category_logo_map = (aResult["path_category_logo_map"] as? String) ?? SlidesAndPaths.shared.path_category_logo_map
             SlidesAndPaths.shared.path_bank_logo_image = (aResult["path_bank_logo_image"] as? String) ?? SlidesAndPaths.shared.path_bank_logo_image
             SlidesAndPaths.shared.path_banner_image = (aResult["path_banner_image"] as? String) ?? SlidesAndPaths.shared.path_banner_image
-            SlidesAndPaths.shared.path_operator_image = (aResult["path_operator_image"] as? String) ?? SlidesAndPaths.shared.path_operator_image
+            SlidesAndPaths.shared.path_operator_image = (aResult["path_operator_image"] as? String) ?? SlidesAndPaths.shared.path_operator_image            
             if let notificationsCount = aResult["notifications_count"] as? Int {
                 //SlidesAndPaths.shared.notifications_count.accept(120)
                 SlidesAndPaths.shared.notifications_count.accept(notificationsCount)

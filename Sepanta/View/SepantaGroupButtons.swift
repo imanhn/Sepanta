@@ -141,7 +141,7 @@ class SepantaGroupButtons {
         let shopCountLabel = UILabel(frame: shopCountBox)
         shopCountLabel.text = "(\(aShopCount))"
         shopCountLabel.font = UIFont (name: "Shabnam FD", size: 14)!
-        shopCountLabel.textColor = textColor
+        shopCountLabel.textColor = UIColor(hex: 0x0f723a)
         shopCountLabel.textAlignment = .center
         shopCountLabel.adjustsFontSizeToFitWidth = true
         shopCountLabel.drawText(in: shopCountBox)

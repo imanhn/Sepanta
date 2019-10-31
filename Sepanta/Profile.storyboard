@@ -133,24 +133,24 @@
             <objects>
                 <viewController storyboardIdentifier="ProfileViewController" id="PJv-hw-O7z" userLabel="ProfileViewController" customClass="ProfileViewController" customModule="Sepanta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Df-Uk-88l" userLabel="TopView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="850"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="beg-re-W1R" userLabel="HeaderView">
-                                <rect key="frame" x="0.0" y="44" width="375" height="69.5"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="74"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaZ-gK-rUt" userLabel="HomeLogo">
-                                        <rect key="frame" x="279" y="0.0" width="86" height="69.5"/>
+                                        <rect key="frame" x="279" y="0.0" width="86" height="74"/>
                                         <state key="normal" image="logo_home"/>
                                         <connections>
                                             <action selector="homeTapped:" destination="PJv-hw-O7z" eventType="touchUpInside" id="qvq-sO-YLk"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vdo-ZU-Re4" userLabel="LeftButtonsStack">
-                                        <rect key="frame" x="8" y="0.0" width="123.5" height="69.5"/>
+                                        <rect key="frame" x="8" y="0.0" width="123.5" height="74"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7JQ-hR-Re6" userLabel="BackButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="46.5" height="69.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="49.5" height="74"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="7JQ-hR-Re6" secondAttribute="height" multiplier="1:1.5" id="q6b-u0-wx7"/>
                                                 </constraints>
@@ -160,7 +160,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ToL-5R-YTg" userLabel="editButton">
-                                                <rect key="frame" x="46.5" y="0.0" width="77" height="69.5"/>
+                                                <rect key="frame" x="49.5" y="0.0" width="74" height="74"/>
                                                 <state key="normal" image="icon_edit"/>
                                                 <connections>
                                                     <action selector="editTapped:" destination="PJv-hw-O7z" eventType="touchUpInside" id="ZJ4-uX-giE"/>
@@ -169,7 +169,7 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="پروفایل من" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pYe-na-BUg" userLabel="HeaderText">
-                                        <rect key="frame" x="131.5" y="0.0" width="112.5" height="69.5"/>
+                                        <rect key="frame" x="131.5" y="0.0" width="112.5" height="74"/>
                                         <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                         <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -190,13 +190,13 @@
                                 </constraints>
                             </view>
                             <view contentMode="top" translatesAutoresizingMaskIntoConstraints="NO" id="k9V-D5-nH3" userLabel="MainView">
-                                <rect key="frame" x="0.0" y="113.5" width="375" height="702.5"/>
+                                <rect key="frame" x="0.0" y="118" width="375" height="748"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" alwaysBounceVertical="YES" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPW-tw-tAd" userLabel="ProfileScrollView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="702.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="748"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wKB-DC-WiA" userLabel="ContentView">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="702.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="748"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_profile_img" translatesAutoresizingMaskIntoConstraints="NO" id="y76-8D-Kml" userLabel="ProfilePicture">
                                                         <rect key="frame" x="140.5" y="8" width="94" height="93.5"/>
@@ -299,9 +299,9 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yDK-di-fYi" userLabel="PaneView">
-                                                        <rect key="frame" x="0.0" y="271.5" width="375" height="281.5"/>
+                                                        <rect key="frame" x="0.0" y="271.5" width="375" height="469"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" secondItem="yDK-di-fYi" secondAttribute="height" multiplier="1:0.75" id="TMG-pF-kyp"/>
+                                                            <constraint firstAttribute="width" secondItem="yDK-di-fYi" secondAttribute="height" multiplier="1:1.25" id="TMG-pF-kyp"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -367,7 +367,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="THK-x2-ahk"/>
                     </view>
-                    <size key="freeformSize" width="375" height="850"/>
+                    <size key="freeformSize" width="375" height="900"/>
                     <connections>
                         <outlet property="clubNumLabel" destination="yEB-ZQ-mng" id="XKb-aT-0cX"/>
                         <outlet property="cupLabel" destination="3vH-WJ-ntE" id="5pi-fH-xyP"/>
