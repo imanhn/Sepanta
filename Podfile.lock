@@ -1,7 +1,7 @@
 PODS:
-  - Alamofire (4.8.2)
-  - AlamofireImage (3.5.2):
-    - Alamofire (~> 4.8)
+  - Alamofire (4.9.1)
+  - AlamofireImage (3.6.0):
+    - Alamofire (~> 4.9)
   - Differentiator (3.1.0)
   - RSKImageCropper (2.2.3)
   - RxAlamofire (4.4.1):
@@ -48,8 +48,8 @@ SPEC REPOS:
     - SwiftKeychainWrapper
 
 SPEC CHECKSUMS:
-  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   RSKImageCropper: a446db0e8444a036b34f3c43db01b2373baa4b2a
   RxAlamofire: ed65f451f5a9a59419b0b9e705043dc01410edd9
@@ -60,6 +60,6 @@ SPEC CHECKSUMS:
   RxTest: 3ccb66bfbace0bf7df1c43a7c75d046f8ce60372
   SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
 
-PODFILE CHECKSUM: 47e0760e81a5b5cc9c11aeecb4be0433e637924a
+PODFILE CHECKSUM: 31701bd550ed7fc1e422d7103335e6cb8ff9bc89
 
 COCOAPODS: 1.6.0

@@ -30,7 +30,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="62.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eej-KO-ASZ" userLabel="HomeLogo">
-                                        <rect key="frame" x="318" y="0.0" width="86" height="62.5"/>
+                                        <rect key="frame" x="388" y="0.0" width="16" height="62.5"/>
                                         <state key="normal" image="logo_home"/>
                                         <connections>
                                             <action selector="homeTapped:" destination="o1X-aR-AjK" eventType="touchUpInside" id="6A6-1W-ZwY"/>
@@ -140,7 +140,7 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="74"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaZ-gK-rUt" userLabel="HomeLogo">
-                                        <rect key="frame" x="279" y="0.0" width="86" height="74"/>
+                                        <rect key="frame" x="349" y="0.0" width="16" height="74"/>
                                         <state key="normal" image="logo_home"/>
                                         <connections>
                                             <action selector="homeTapped:" destination="PJv-hw-O7z" eventType="touchUpInside" id="qvq-sO-YLk"/>
@@ -236,13 +236,13 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEB-ZQ-mng" userLabel="ClubNumLabel">
-                                                                <rect key="frame" x="0.0" y="47.5" width="187.5" height="19.5"/>
+                                                                <rect key="frame" x="0.0" y="47.5" width="187.5" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="عضویت در باشگاه ها" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vH-WJ-ntE" userLabel="ClubLabel">
-                                                                <rect key="frame" x="0.0" y="67" width="187.5" height="14"/>
+                                                                <rect key="frame" x="0.0" y="64" width="187.5" height="12"/>
                                                                 <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="10"/>
                                                                 <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -274,13 +274,13 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vt9-D0-bm3" userLabel="cupScoreLabel">
-                                                                <rect key="frame" x="0.0" y="47.5" width="187.5" height="19.5"/>
+                                                                <rect key="frame" x="0.0" y="47.5" width="187.5" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="مجموع امتیازات" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXd-9M-9NL" userLabel="cupLabel">
-                                                                <rect key="frame" x="0.0" y="67" width="187.5" height="14"/>
+                                                                <rect key="frame" x="0.0" y="64" width="187.5" height="12"/>
                                                                 <fontDescription key="fontDescription" name="Shabnam-FD" family="Shabnam FD" pointSize="10"/>
                                                                 <color key="textColor" red="0.84004039119999996" green="0.84299000850000005" blue="0.85118985089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>

@@ -83,7 +83,8 @@ extension DataRequest {
     public class func imageResponseSerializer(
         imageScale: CGFloat = DataRequest.imageScale,
         inflateResponseImage: Bool = true)
-        -> DataResponseSerializer<Image> {
+        -> DataResponseSerializer<Image>
+    {
         return DataResponseSerializer { request, response, data, error in
             let result = serializeResponseData(response: response, data: data, error: error)
 
@@ -129,7 +130,8 @@ extension DataRequest {
         inflateResponseImage: Bool = true,
         queue: DispatchQueue? = nil,
         completionHandler: @escaping (DataResponse<Image>) -> Void)
-        -> Self {
+        -> Self
+    {
         return response(
             queue: queue,
             responseSerializer: DataRequest.imageResponseSerializer(
@@ -163,7 +165,8 @@ extension DataRequest {
         imageScale: CGFloat = DataRequest.imageScale,
         inflateResponseImage: Bool = true,
         completionHandler: @escaping (Image) -> Void)
-        -> Self {
+        -> Self
+    {
         var imageData = Data()
 
         return stream { chunkData in
@@ -183,7 +186,8 @@ extension DataRequest {
         from data: Data,
         imageScale: CGFloat = DataRequest.imageScale,
         inflateResponseImage: Bool = true)
-        -> UIImage? {
+        -> UIImage?
+    {
         guard data.count > 0 else { return nil }
 
         do {

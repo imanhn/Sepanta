@@ -208,6 +208,7 @@ class SlideController {
         if (sender.state == UIGestureRecognizerState.ended) {
             let tapLocation = sender.location(in: self.delegate.slideView)
             if isOnSlideView(tapLocation) {
+                guard SlidesAndPaths.shared.slides[adsPage].shop_id != nil else {return}
                 let ashop = Shop(shop_id: SlidesAndPaths.shared.slides[adsPage].shop_id,
                                  user_id: SlidesAndPaths.shared.slides[adsPage].user_id,
                                  shop_name: "",

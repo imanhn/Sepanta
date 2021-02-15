@@ -84,7 +84,8 @@ open class ImageDownloader {
             handlerID: String,
             receiptID: String,
             filter: ImageFilter?,
-            completion: CompletionHandler?) {
+            completion: CompletionHandler?)
+        {
             self.request = request
             self.urlID = ImageDownloader.urlIdentifier(for: request.request!)
             self.handlerID = handlerID
@@ -151,11 +152,28 @@ open class ImageDownloader {
     ///
     /// - returns: The default `URLCache` instance.
     open class func defaultURLCache() -> URLCache {
+        let memoryCapacity = 20 * 1024 * 1024
+        let diskCapacity = 150 * 1024 * 1024
+        let cacheDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
+        let imageDownloaderPath = "org.alamofire.imagedownloader"
+
+        #if targetEnvironment(macCatalyst)
         return URLCache(
-            memoryCapacity: 20 * 1024 * 1024, // 20 MB
-            diskCapacity: 150 * 1024 * 1024,  // 150 MB
-            diskPath: "org.alamofire.imagedownloader"
+            memoryCapacity: memoryCapacity,
+            diskCapacity: diskCapacity,
+            directory: cacheDirectory?.appendingPathComponent(imageDownloaderPath)
         )
+        #else
+        #if os(macOS)
+        return URLCache(memoryCapacity: memoryCapacity,
+                        diskCapacity: diskCapacity,
+                        diskPath: cacheDirectory?.appendingPathComponent(imageDownloaderPath).absoluteString)
+        #else
+        return URLCache(memoryCapacity: memoryCapacity,
+                        diskCapacity: diskCapacity,
+                        diskPath: imageDownloaderPath)
+        #endif
+        #endif
     }
 
     /// Initializes the `ImageDownloader` instance with the given configuration, download prioritization, maximum active
@@ -172,7 +190,8 @@ open class ImageDownloader {
         configuration: URLSessionConfiguration = ImageDownloader.defaultURLSessionConfiguration(),
         downloadPrioritization: DownloadPrioritization = .fifo,
         maximumActiveDownloads: Int = 4,
-        imageCache: ImageRequestCache? = AutoPurgingImageCache()) {
+        imageCache: ImageRequestCache? = AutoPurgingImageCache())
+    {
         self.sessionManager = SessionManager(configuration: configuration)
         self.sessionManager.startRequestsImmediately = false
 
@@ -194,7 +213,8 @@ open class ImageDownloader {
         sessionManager: SessionManager,
         downloadPrioritization: DownloadPrioritization = .fifo,
         maximumActiveDownloads: Int = 4,
-        imageCache: ImageRequestCache? = AutoPurgingImageCache()) {
+        imageCache: ImageRequestCache? = AutoPurgingImageCache())
+    {
         self.sessionManager = sessionManager
         self.sessionManager.startRequestsImmediately = false
 
@@ -213,7 +233,8 @@ open class ImageDownloader {
     open func addAuthentication(
         user: String,
         password: String,
-        persistence: URLCredential.Persistence = .forSession) {
+        persistence: URLCredential.Persistence = .forSession)
+    {
         let credential = URLCredential(user: user, password: password, persistence: persistence)
         addAuthentication(usingCredential: credential)
     }
@@ -262,7 +283,8 @@ open class ImageDownloader {
         progress: ProgressHandler? = nil,
         progressQueue: DispatchQueue = DispatchQueue.main,
         completion: CompletionHandler?)
-        -> RequestReceipt? {
+        -> RequestReceipt?
+    {
         var request: DataRequest!
 
         synchronizationQueue.sync {
@@ -429,7 +451,8 @@ open class ImageDownloader {
         progress: ProgressHandler? = nil,
         progressQueue: DispatchQueue = DispatchQueue.main,
         completion: CompletionHandler? = nil)
-        -> [RequestReceipt] {
+        -> [RequestReceipt]
+    {
         #if swift(>=4.1)
         return urlRequests.compactMap {
             download($0, filter: filter, progress: progress, progressQueue: progressQueue, completion: completion)
